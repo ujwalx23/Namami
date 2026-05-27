@@ -82,31 +82,109 @@ export function transliterateHindi(text: string): string {
 }
 
 export function splitTextIntoSegments(text: string): { text: string; isHindi: boolean }[] {
-  const segments: { text: string; isHindi: boolean }[] = [];
-  const regex = /(\[[^\]]+\]|\([^)]+\))/g;
-  const parts = text.split(regex);
+  const bracketRegex = /(\[[^\]]+\]|\([^)]+\))/g;
+  const bracketParts = text.split(bracketRegex);
   
-  for (const part of parts) {
-    if (!part.trim()) continue;
+  const rawSegments: { text: string; isHindi: boolean }[] = [];
+  
+  for (const part of bracketParts) {
+    if (!part) continue;
     
-    const isHindi = /[\u0900-\u097F]/.test(part);
+    // Check if it is a bracketed/parenthesized part
+    const isBracketed = (part.startsWith('[') && part.endsWith(']')) || 
+                        (part.startsWith('(') && part.endsWith(')'));
     
-    let cleanPart = part.trim();
-    if (cleanPart.startsWith('[') && cleanPart.endsWith(']')) {
-      cleanPart = cleanPart.substring(1, cleanPart.length - 1).trim();
-    } else if (cleanPart.startsWith('(') && cleanPart.endsWith(')')) {
-      cleanPart = cleanPart.substring(1, cleanPart.length - 1).trim();
+    if (isBracketed) {
+      const cleanPart = part.slice(1, -1).trim();
+      if (cleanPart) {
+        rawSegments.push({
+          text: cleanPart,
+          isHindi: isHindiText(cleanPart)
+        });
+      }
+    } else {
+      // Split by clause and sentence delimiters:
+      // । (Hindi danda), . (period), ! (exclamation), ? (question mark),
+      // \n (newline), | (pipe), —, -, /, :, ,, ;
+      const delimiterRegex = /([।\.!\?\n|—\-\/:,;]+)/g;
+      const subParts = part.split(delimiterRegex);
+      
+      let currentText = '';
+      let currentIsHindi: boolean | null = null;
+      
+      for (const subPart of subParts) {
+        if (!subPart) continue;
+        
+        // If it's only punctuation/whitespace, it's neutral delimiter
+        const isDelimiter = /^[।\.!\?\n|—\-\/:,;\s]+$/.test(subPart);
+        
+        if (isDelimiter) {
+          if (currentText) {
+            currentText += subPart;
+          } else {
+            // Append neutral delimiters to the last saved segment if exists
+            if (rawSegments.length > 0) {
+              rawSegments[rawSegments.length - 1].text += subPart;
+            } else {
+              currentText = subPart;
+              currentIsHindi = false;
+            }
+          }
+        } else {
+          const isHindi = isHindiText(subPart);
+          
+          if (currentIsHindi === null) {
+            currentText = subPart;
+            currentIsHindi = isHindi;
+          } else if (currentIsHindi === isHindi) {
+            currentText += subPart;
+          } else {
+            // Language switch occurred! Save current segment and start a new one
+            if (currentText.trim()) {
+              rawSegments.push({
+                text: currentText,
+                isHindi: currentIsHindi
+              });
+            }
+            currentText = subPart;
+            currentIsHindi = isHindi;
+          }
+        }
+      }
+      
+      if (currentText.trim()) {
+        rawSegments.push({
+          text: currentText,
+          isHindi: currentIsHindi ?? false
+        });
+      }
     }
+  }
+  
+  // Merge consecutive segments of the same language
+  const mergedSegments: { text: string; isHindi: boolean }[] = [];
+  
+  for (const seg of rawSegments) {
+    const trimmedText = seg.text.trim();
+    if (!trimmedText) continue;
     
-    if (cleanPart) {
-      segments.push({
-        text: cleanPart,
-        isHindi
+    if (mergedSegments.length > 0 && mergedSegments[mergedSegments.length - 1].isHindi === seg.isHindi) {
+      mergedSegments[mergedSegments.length - 1].text += ' ' + seg.text;
+    } else {
+      mergedSegments.push({
+        text: seg.text,
+        isHindi: seg.isHindi
       });
     }
   }
   
-  return segments;
+  // Final cleanup and formatting
+  return mergedSegments
+    .map(seg => ({
+      text: seg.text.trim().replace(/\s+/g, ' '),
+      isHindi: seg.isHindi
+    }))
+    .filter(seg => seg.text.length > 0);
 }
 
 // Global cache of voices to enable synchronous matching
@@ -313,6 +391,9 @@ export interface SpeakOptions {
 }
 
 let currentUtterance: SpeechSynthesisUtterance | null = null;
+let playbackQueue: { text: string; isHindi: boolean }[] = [];
+let currentQueueIndex = -1;
+let isPlaybackCancelled = false;
 
 /**
  * Helper to configure and trigger the utterance.
@@ -332,7 +413,8 @@ function speakWithVoices(
   });
 
   // Cancel any active speech first
-  synth.cancel();
+  stopSpeech();
+  isPlaybackCancelled = false;
 
   // Split text into Hindi and English segments
   const segments = splitTextIntoSegments(text);
@@ -342,24 +424,41 @@ function speakWithVoices(
   }
 
   console.log("[SpeechSynthesis] Split text into segments:", segments);
+  playbackQueue = segments;
+  currentQueueIndex = 0;
 
   let started = false;
   
   // Unblock frozen browser speech states
   synth.resume();
 
-  segments.forEach((seg, index) => {
+  function speakNext(): void {
+    if (isPlaybackCancelled) {
+      console.log("[SpeechSynthesis] Playback was cancelled. Stopping queue execution.");
+      return;
+    }
+
+    if (currentQueueIndex >= playbackQueue.length) {
+      console.log("[SpeechSynthesis] Speech synthesis completed successfully (all segments).");
+      currentUtterance = null;
+      playbackQueue = [];
+      currentQueueIndex = -1;
+      options?.onEnd?.();
+      return;
+    }
+
+    const seg = playbackQueue[currentQueueIndex];
     const isSegHindi = seg.isHindi;
     const selectedVoice = selectVoice(voices, seg.text);
     
-    console.log(`[SpeechSynthesis] Segment ${index} selected voice:`, selectedVoice ? `"${selectedVoice.name}" [${selectedVoice.lang}]` : "None");
+    console.log(`[SpeechSynthesis] Segment ${currentQueueIndex} selected voice:`, selectedVoice ? `"${selectedVoice.name}" [${selectedVoice.lang}]` : "None");
 
     let textToSpeak = seg.text;
     const isSelectedVoiceHindi = selectedVoice && selectedVoice.lang.toLowerCase().startsWith("hi");
     const hasHindiVoice = voices.some((v) => v.lang.toLowerCase().startsWith("hi"));
 
     if (isSegHindi && (!hasHindiVoice || (selectedVoice && !isSelectedVoiceHindi))) {
-      console.log(`[SpeechSynthesis] Segment ${index} Fallback: Transliterating to Roman script.`);
+      console.log(`[SpeechSynthesis] Segment ${currentQueueIndex} Fallback: Transliterating to Roman script.`);
       textToSpeak = transliterateHindi(seg.text);
     }
 
@@ -387,18 +486,16 @@ function speakWithVoices(
     };
 
     utterance.onend = () => {
-      console.log(`[SpeechSynthesis] Segment ${index} finished speaking.`);
-      if (index === segments.length - 1) {
-        console.log("[SpeechSynthesis] Speech synthesis completed successfully (last segment).");
-        currentUtterance = null;
-        options?.onEnd?.();
-      }
+      console.log(`[SpeechSynthesis] Segment ${currentQueueIndex} finished speaking.`);
+      currentQueueIndex++;
+      // Speak next segment in the next event loop tick to give TTS engine breathing room
+      setTimeout(speakNext, 50);
     };
 
     utterance.onerror = (event) => {
-      console.error(`[SpeechSynthesis] Segment ${index} error:`, event);
+      console.error(`[SpeechSynthesis] Segment ${currentQueueIndex} error:`, event);
       if (event.error === "interrupted" || event.error === "canceled") {
-        console.log(`[SpeechSynthesis] Segment ${index} was interrupted or canceled.`);
+        console.log(`[SpeechSynthesis] Segment ${currentQueueIndex} was interrupted or canceled.`);
         return;
       }
       options?.onError?.(new Error(event.error ? `Speech synthesis error: ${event.error}` : "Speech synthesis failed."));
@@ -406,7 +503,9 @@ function speakWithVoices(
 
     currentUtterance = utterance;
     synth.speak(utterance);
-  });
+  }
+
+  speakNext();
 }
 
 /**
@@ -466,6 +565,7 @@ export function speakText(text: string, options?: SpeakOptions): void {
  * Stops any current speech output in progress.
  */
 export function stopSpeech(): void {
+  isPlaybackCancelled = true;
   const synth = typeof window !== "undefined" ? window.speechSynthesis : null;
   if (synth) {
     if (synth.speaking || synth.pending) {
@@ -474,4 +574,6 @@ export function stopSpeech(): void {
     }
   }
   currentUtterance = null;
+  playbackQueue = [];
+  currentQueueIndex = -1;
 }

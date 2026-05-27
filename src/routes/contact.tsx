@@ -117,6 +117,10 @@ function ContactForm() {
         return toast.error(parsed.error.issues[0]?.message ?? "Invalid input");
       }
 
+      // Open a blank window synchronously inside the user gesture to avoid popup blockers
+      console.log("[ContactForm] Opening blank window for WhatsApp to prevent popup blocker...");
+      const whatsappWindow = window.open("", "_blank");
+
       setBusy(true);
       console.log("[ContactForm] Inserting message into Supabase 'contacts' table...");
 
@@ -125,10 +129,37 @@ function ContactForm() {
 
       if (error) {
         console.error("[ContactForm] Supabase insert failed:", error);
+        if (whatsappWindow) {
+          console.log("[ContactForm] Closing WhatsApp blank window due to insert failure.");
+          whatsappWindow.close();
+        }
         return toast.error(error.message);
       }
 
-      console.log("[ContactForm] Supabase insert succeeded.");
+      console.log("[ContactForm] Supabase insert succeeded. Redirecting to WhatsApp...");
+      
+      const name = parsed.data.name;
+      const email = parsed.data.email;
+      const phone = parsed.data.phone || "N/A";
+      const message = parsed.data.message;
+
+      const messageText = `Hello, I contacted you from the website.
+
+Name: ${name}
+Email: ${email}
+Phone: ${phone}
+Message: ${message}`;
+
+      const whatsappUrl = `https://wa.me/917977339435?text=${encodeURIComponent(messageText)}`;
+
+      if (whatsappWindow) {
+        whatsappWindow.location.href = whatsappUrl;
+        console.log("[ContactForm] Successfully redirected window to WhatsApp:", whatsappUrl);
+      } else {
+        console.warn("[ContactForm] WhatsApp window was not created beforehand, trying window.open now...");
+        window.open(whatsappUrl, "_blank");
+      }
+
       setSent(true);
       toast.success(t("ct.f.toast"));
 

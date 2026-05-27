@@ -111,66 +111,102 @@ function SandeshPage() {
 
     // 1. Draw traditional gradient background
     const bgGrad = ctx.createRadialGradient(540, 960, 100, 540, 960, 1100);
-    bgGrad.addColorStop(0, "#FFFDF6");
-    bgGrad.addColorStop(1, "#FFF4DD");
+    bgGrad.addColorStop(0, "#FFFDF9");
+    bgGrad.addColorStop(1, "#FFF6E5");
     ctx.fillStyle = bgGrad;
     ctx.fillRect(0, 0, 1080, 1920);
 
     // 2. Draw golden/saffron double border
-    ctx.strokeStyle = "#D9381E";
+    ctx.strokeStyle = "#D9381E"; // Red border
     ctx.lineWidth = 12;
     ctx.strokeRect(30, 30, 1020, 1860);
 
-    ctx.strokeStyle = "#D6A232";
+    ctx.strokeStyle = "#D6A232"; // Gold border
     ctx.lineWidth = 4;
     ctx.strokeRect(50, 50, 980, 1820);
 
-    // Draw traditional corner accents (corner lines)
-    const drawCorners = () => {
-      ctx.fillStyle = "#D9381E";
-      const corners = [
-        { x: 50, y: 50, dx: 1, dy: 1 },
-        { x: 1030, y: 50, dx: -1, dy: 1 },
-        { x: 50, y: 1870, dx: 1, dy: -1 },
-        { x: 1030, y: 1870, dx: -1, dy: -1 },
-      ];
-      corners.forEach((c) => {
-        ctx.beginPath();
-        ctx.arc(c.x, c.y, 40, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(217, 56, 30, 0.1)";
-        ctx.fill();
-        
-        ctx.strokeStyle = "#D9381E";
-        ctx.lineWidth = 4;
-        ctx.beginPath();
-        ctx.moveTo(c.x, c.y);
-        ctx.lineTo(c.x + c.dx * 80, c.y);
-        ctx.moveTo(c.x, c.y);
-        ctx.lineTo(c.x, c.y + c.dy * 80);
-        ctx.stroke();
-      });
-    };
-    drawCorners();
-
-    // 3. Draw a faded sacred sunburst/mandala in the background center
+    // 3. Draw faint diagonal watermarks
     ctx.save();
+    ctx.fillStyle = "rgba(214, 162, 50, 0.045)"; // Soft, low-opacity gold
+    ctx.font = "italic bold 32px sans-serif";
+    ctx.textAlign = "center";
     ctx.translate(540, 960);
-    ctx.strokeStyle = "rgba(214, 162, 50, 0.08)";
-    ctx.lineWidth = 2;
-    for (let i = 0; i < 36; i++) {
-      ctx.rotate((10 * Math.PI) / 180);
-      ctx.beginPath();
-      ctx.arc(0, 0, 350, 0, Math.PI / 6);
-      ctx.stroke();
+    ctx.rotate(-25 * Math.PI / 180);
+    const watermarkText = "namamivindhyavasini.in";
+    const stepX = 420;
+    const stepY = 160;
+    for (let x = -1500; x < 1500; x += stepX) {
+      for (let y = -1500; y < 1500; y += stepY) {
+        ctx.fillText(watermarkText, x, y);
+      }
     }
     ctx.restore();
 
-    // 4. Draw Header Box
+    // 4. Draw traditional quarter-mandala corner elements
+    const drawMandalaCorners = () => {
+      const corners = [
+        { x: 50, y: 50, startAngle: 0, endAngle: Math.PI / 2, dx: 1, dy: 1 },
+        { x: 1030, y: 50, startAngle: Math.PI / 2, endAngle: Math.PI, dx: -1, dy: 1 },
+        { x: 50, y: 1870, startAngle: 1.5 * Math.PI, endAngle: 2 * Math.PI, dx: 1, dy: -1 },
+        { x: 1030, y: 1870, startAngle: Math.PI, endAngle: 1.5 * Math.PI, dx: -1, dy: -1 },
+      ];
+      
+      corners.forEach((c) => {
+        ctx.save();
+        ctx.translate(c.x, c.y);
+        
+        // Draw gold concentric quarter arcs
+        ctx.strokeStyle = "rgba(214, 162, 50, 0.5)"; // Gold
+        ctx.lineWidth = 3;
+        
+        for (let r = 30; r <= 150; r += 30) {
+          ctx.beginPath();
+          ctx.arc(0, 0, r, c.startAngle, c.endAngle);
+          ctx.stroke();
+        }
+        
+        // Draw red radial petal loops pointing inward
+        ctx.strokeStyle = "rgba(217, 56, 30, 0.6)"; // Red
+        ctx.lineWidth = 2.5;
+        const steps = 6;
+        const angleDiff = c.endAngle - c.startAngle;
+        
+        for (let i = 0; i <= steps; i++) {
+          const angle = c.startAngle + (angleDiff * (i / steps));
+          const cos = Math.cos(angle);
+          const sin = Math.sin(angle);
+          
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.quadraticCurveTo(cos * 50, sin * 50, cos * 70, sin * 70);
+          ctx.quadraticCurveTo(cos * 90, sin * 90, cos * 100, sin * 100);
+          ctx.stroke();
+          
+          // Small dot at the end
+          ctx.fillStyle = "#D6A232";
+          ctx.beginPath();
+          ctx.arc(cos * 100, sin * 100, 5, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        
+        // Draw diagonal corner line accent
+        ctx.strokeStyle = "#D9381E";
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(c.dx * 120, 0);
+        ctx.lineTo(0, c.dy * 120);
+        ctx.stroke();
+        
+        ctx.restore();
+      });
+    };
+    drawMandalaCorners();
+
+    // 5. Draw Header Box
     const headGrad = ctx.createLinearGradient(140, 0, 940, 0);
     headGrad.addColorStop(0, "#D9381E");
     headGrad.addColorStop(1, "#FF5E36");
     ctx.fillStyle = headGrad;
-    // Draw top header pill
     ctx.beginPath();
     ctx.roundRect(140, 160, 800, 120, 60);
     ctx.fill();
@@ -189,25 +225,33 @@ function SandeshPage() {
     ctx.font = "bold 44px Georgia, serif";
     ctx.fillText("॥ दैनिक संदेश ॥", 540, 220);
 
-    // 5. Draw the Quote Marks
-    ctx.fillStyle = "rgba(214, 162, 50, 0.25)";
-    ctx.font = "bold 240px Georgia, serif";
-    ctx.fillText("“", 540, 600);
+    // 6. Draw the Quotation Mark Icon
+    ctx.fillStyle = "rgba(214, 162, 50, 0.09)"; // Subtle gold
+    ctx.font = "bold 400px Georgia, serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("“", 540, 820);
 
-    // 6. Draw Wrapped Quote Text
-    ctx.fillStyle = "#5E1914";
-    ctx.font = "52px Georgia, serif";
-    ctx.textBaseline = "top";
+    // 7. Draw Wrapped Quote Text
+    ctx.fillStyle = "#5E1914"; // Dark brown
+    ctx.textAlign = "center";
+    
+    // Dynamically adjust font size based on text length to prevent overflow
+    let fontSize = 52;
+    if (message.length > 300) {
+      fontSize = 38;
+    } else if (message.length > 150) {
+      fontSize = 44;
+    }
+    
+    const lineHeight = fontSize * 1.5;
+    ctx.font = `bold ${fontSize}px Georgia, serif`;
     
     const maxTextWidth = 840;
-    const lineHeight = 75;
-    
-    // Simple text wrapping helper
     const words = message.split(" ");
     let line = "";
     const lines: string[] = [];
     
-    // Group words into lines based on canvas width measurements
     for (let n = 0; n < words.length; n++) {
       let testLine = line + words[n] + " ";
       let metrics = ctx.measureText(testLine);
@@ -221,30 +265,33 @@ function SandeshPage() {
     }
     lines.push(line.trim());
 
-    // Draw each line centered
     const totalTextHeight = lines.length * lineHeight;
-    let startY = 960 - (totalTextHeight / 2) + 60; // Offset slightly down to balance layout
+    const startY = 900 - (totalTextHeight / 2);
     
+    ctx.textBaseline = "top";
     lines.forEach((l, idx) => {
       ctx.fillText(l, 540, startY + idx * lineHeight);
     });
 
-    // 7. Draw Author
-    ctx.fillStyle = "#D9381E";
-    ctx.font = "italic 38px Georgia, serif";
-    ctx.fillText(`— ${author}`, 540, startY + totalTextHeight + 90);
-
-    // 8. Draw Bottom Footer Block
+    // 8. Draw Bottom Footer Block (Red button capsule)
     ctx.fillStyle = "#D9381E";
     ctx.beginPath();
-    ctx.roundRect(240, 1680, 600, 80, 40);
+    ctx.roundRect(240, 1560, 600, 80, 40);
     ctx.fill();
 
     ctx.fillStyle = "#FFFDF6";
     ctx.font = "bold 28px sans-serif";
-    ctx.fillText("namamivindhyavasini.in", 540, 1720);
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("namamivindhyavasini.in", 540, 1600);
 
-    // 9. Trigger Web Share or Download
+    // 9. Draw Author Name (below the red button)
+    ctx.fillStyle = "#D9381E";
+    ctx.font = "italic 38px Georgia, serif";
+    ctx.textBaseline = "top";
+    ctx.fillText(`— ${author}`, 540, 1680);
+
+    // 10. Trigger Web Share or Download
     try {
       const dataUrl = canvas.toDataURL("image/png");
       const blob = await (await fetch(dataUrl)).blob();
