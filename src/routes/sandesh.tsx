@@ -242,7 +242,7 @@ function SandeshPage() {
 
     ctx.fillStyle = "#FFFDF6";
     ctx.font = "bold 28px sans-serif";
-    ctx.fillText("namamivindhyavasini.org", 540, 1720);
+    ctx.fillText("namamivindhyavasini.in", 540, 1720);
 
     // 9. Trigger Web Share or Download
     try {
@@ -253,8 +253,7 @@ function SandeshPage() {
       if (navigator.canShare && navigator.canShare({ files: [file] })) {
         await navigator.share({
           files: [file],
-          title: "Maa Vindhyavasini Daily Sandesh",
-          text: "जय श्री राम! आज का दिव्य संदेश।"
+          title: "Maa Vindhyavasini Daily Sandesh"
         });
         console.log("[Sandesh] Shared successfully via Web Share API.");
       } else {

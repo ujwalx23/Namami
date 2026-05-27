@@ -167,6 +167,13 @@ export const translations = {
     hi: "नमामि विन्ध्यवासिनी संस्थान पूज्य गुरुजी की दिव्य प्रेरणा से स्थापित एक भक्तिमय न्यास है, जिसका उद्देश्य माँ विन्ध्यवासिनी की पावन परम्पराओं की रक्षा और प्रत्येक शरणागत भक्त की सेवा करना है। हम सत्संग, अन्नकूट भंडारा, विद्या दान और सेवा गतिविधियों का आयोजन करते हैं — जिससे यह मंदिर भक्ति का एक जीवंत केंद्र बनता है।"
   },
 
+  "about.values.vision.t": { en: "Vision", hi: "दृष्टि" },
+  "about.values.vision.v": { en: "A world rooted in dharma, devotion and seva.", hi: "धर्म, भक्ति और सेवा में रचा-बसा एक संसार।" },
+  "about.values.mission.t": { en: "Mission", hi: "ध्येय" },
+  "about.values.mission.v": { en: "To preserve sacred traditions and serve devotees with bhakti and humility.", hi: "पवित्र परम्पराओं की रक्षा तथा विनम्रता एवं भक्ति से भक्तों की सेवा।" },
+  "about.values.values.t": { en: "Values", hi: "मूल्य" },
+  "about.values.values.v": { en: "Shraddha • Seva • Satsang • Sanskar • Shanti", hi: "श्रद्धा • सेवा • सत्संग • संस्कार • शान्ति" },
+
   "reviews.sanskrit": { en: "॥ भक्त वाणी ॥", hi: "॥ भक्त वाणी ॥" },
   "reviews.title": { en: "Devotee Reviews & Feedback", hi: "भक्तों के विचार और अनुभव" },
   "reviews.subtitle": { en: "Read what devotees say about their experience and share your own feedback with the trust.", hi: "भक्तों के पावन अनुभव पढ़ें और संस्थान के साथ अपने विचार साझा करें।" },
