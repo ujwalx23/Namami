@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell, PageHero } from "@/components/PageShell";
 import { Sun, Moon, Star, Sunrise, Sunset, Clock, Sparkles, CalendarDays, ChevronLeft, ChevronRight, Calendar } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 export const Route = createFileRoute("/panchang")({
   head: () => ({
@@ -180,13 +180,21 @@ function formatFest(date: string) {
   });
 }
 
+function localDateKey(date: Date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
 function PanchangPage() {
   const [selectedDate, setSelectedDate] = useState(() => new Date());
   const [isManuallyChanged, setIsManuallyChanged] = useState(false);
   const [live, setLive] = useState<Record<string, string>>({});
   const [loadingLive, setLoadingLive] = useState(false);
 
-  const dateString = selectedDate.toDateString();
+  const dateKey = localDateKey(selectedDate);
+  const dateString = selectedDate.toLocaleDateString("en-IN", { year: "numeric", month: "2-digit", day: "2-digit" });
 
   // Keep the page updated to "today" if the tab is left open and the day transitions
   useEffect(() => {
@@ -212,14 +220,14 @@ function PanchangPage() {
     return { sunrise, sunset, p, m, dateLabel, samvat };
   }, [dateString]);
 
-  // Scrape Drik Panchang via reliable proxies
+  // Fetch live Panchang values from reliable internet sources and fall back to site scraping when needed.
   useEffect(() => {
     setLive({});
     setLoadingLive(true);
-    
-    const formattedDate = `${selectedDate.getDate()}/${selectedDate.getMonth() + 1}/${selectedDate.getFullYear()}`;
-    const target = `https://www.drikpanchang.com/panchang/day-panchang.html?geoname-id=1262995&date=${formattedDate}`;
-    
+
+    const dateIso = dateKey;
+    const sunriseApi = `https://api.sunrise-sunset.org/json?lat=${LAT}&lng=${LON}&date=${dateIso}&formatted=0`;
+    const target = `https://www.drikpanchang.com/panchang/day-panchang.html?geoname-id=1262995&date=${selectedDate.getDate()}/${selectedDate.getMonth() + 1}/${selectedDate.getFullYear()}`;
     const proxies = [
       "https://api.allorigins.win/raw?url=",
       "https://corsproxy.io/?",
@@ -227,21 +235,40 @@ function PanchangPage() {
 
     let active = true;
 
+    const parseTimezoneDate = (dateString: string) => {
+      const date = new Date(dateString);
+      return fmtTime(new Date(date.toLocaleString("en-US", { timeZone: "Asia/Kolkata" })));
+    };
+
     async function attemptFetch() {
+      const out: Record<string, string> = {};
+
+      try {
+        console.log(`[Panchang] Fetching sunrise/sunset from internet for ${dateIso}`);
+        const res = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(sunriseApi)}`);
+        if (res.ok) {
+          const body = await res.json();
+          if (body.status === "OK" && body.results) {
+            out["Sunrise"] = parseTimezoneDate(body.results.sunrise);
+            out["Sunset"] = parseTimezoneDate(body.results.sunset);
+          }
+        }
+      } catch (err) {
+        console.warn("[Panchang] Sunrise API fetch failed:", err);
+      }
+
       for (const proxy of proxies) {
         if (!active) return;
         try {
           const url = proxy + encodeURIComponent(target);
-          console.log(`[Panchang] Fetching live data for ${formattedDate} via proxy: ${proxy}`);
-          
+          console.log(`[Panchang] Fetching fallback live data for ${target} via proxy: ${proxy}`);
+
           const res = await fetch(url);
           if (!res.ok) continue;
-          
+
           const html = await res.text();
           const doc = new DOMParser().parseFromString(html, "text/html");
-          const out: Record<string, string> = {};
 
-          // Method 1: Parse nested .dpTableCell structures
           const cells = doc.querySelectorAll(".dpTableCell");
           cells.forEach((cell) => {
             const keyEl = cell.querySelector(".dpTableKey");
@@ -253,7 +280,6 @@ function PanchangPage() {
             }
           });
 
-          // Method 2: Sibling elements
           const keys = doc.querySelectorAll(".dpTableKey");
           keys.forEach((keyEl) => {
             const key = (keyEl.textContent ?? "").replace(/\s+/g, " ").trim();
@@ -266,7 +292,6 @@ function PanchangPage() {
             }
           });
 
-          // Method 3: Cards & headers (Sunrise/Sunset / Rahu Kalam)
           const headers = doc.querySelectorAll(".dpPHeader, .dpPanchangHeader, .dpTableTitle, .dpCardTitle");
           headers.forEach((h) => {
             const key = (h.textContent ?? "").replace(/\s+/g, " ").trim();
@@ -278,24 +303,27 @@ function PanchangPage() {
           });
 
           if (Object.keys(out).length > 0) {
-            console.log("[Panchang] Scraped successfully:", out);
+            console.log("[Panchang] Fallback scraped data:", out);
             if (active) {
               setLive(out);
               setLoadingLive(false);
-              return; // Success, stop trying other proxies
+              return;
             }
           }
         } catch (err) {
           console.warn(`[Panchang] Proxy ${proxy} failed:`, err);
         }
       }
+
       if (active) {
+        if (Object.keys(out).length > 0) {
+          setLive(out);
+        }
         setLoadingLive(false);
       }
     }
 
     attemptFetch();
-
     return () => {
       active = false;
     };
@@ -303,7 +331,7 @@ function PanchangPage() {
 
   const pick = (k: string, fallback: string) => live[k] || fallback;
 
-  const todayKey = selectedDate.toISOString().slice(0, 10);
+  const todayKey = dateKey;
   
   // Find current and next festivals
   const todayFestival = festivals2026.find((f) => f.date === todayKey);
@@ -344,10 +372,20 @@ function PanchangPage() {
     setIsManuallyChanged(true);
   };
 
+  const dateInputRef = useRef<HTMLInputElement | null>(null);
+
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value) {
-      setSelectedDate(new Date(e.target.value));
+      const [year, month, day] = e.target.value.split("-").map(Number);
+      setSelectedDate(new Date(year, month - 1, day));
       setIsManuallyChanged(true);
+    }
+  };
+
+  const openDatePicker = () => {
+    if (dateInputRef.current) {
+      dateInputRef.current.showPicker?.();
+      dateInputRef.current.focus();
     }
   };
 
@@ -387,12 +425,20 @@ function PanchangPage() {
             <label htmlFor="panchang-datepicker" className="sr-only">Choose Date</label>
             <input 
               id="panchang-datepicker"
+              ref={dateInputRef}
               type="date"
-              value={selectedDate.toISOString().split("T")[0]}
+              value={dateKey}
               onChange={handleDateChange}
-              className="px-4 py-2 rounded-lg border border-gold/30 bg-background text-maroon text-sm font-medium focus:outline-none focus:ring-1 focus:ring-gold w-full sm:w-44 cursor-pointer"
+              className="hide-native-date-icon px-4 py-2 rounded-lg border border-gold/30 bg-background text-maroon text-sm font-medium focus:outline-none focus:ring-1 focus:ring-gold w-full sm:w-44 cursor-pointer"
             />
-            <Calendar size={16} className="absolute right-3 text-gold/80 pointer-events-none hidden sm:block" />
+            <button
+              type="button"
+              onClick={openDatePicker}
+              className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full p-2 text-gold/80 hover:bg-gold/10 transition"
+              aria-label="Open date picker"
+            >
+              <Calendar size={16} />
+            </button>
           </div>
         </div>
 

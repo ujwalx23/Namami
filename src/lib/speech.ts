@@ -367,8 +367,11 @@ function speakWithVoices(
     if (selectedVoice) {
       utterance.voice = selectedVoice;
       utterance.lang = selectedVoice.lang;
+    } else if (voices.length > 0) {
+      utterance.voice = voices[0];
+      utterance.lang = voices[0].lang;
     } else {
-      utterance.lang = isSegHindi ? (hasHindiVoice ? "hi-IN" : "en-IN") : "en-IN";
+      utterance.lang = isSegHindi ? "hi-IN" : "en-US";
     }
 
     // Normal speaking pacing
@@ -428,9 +431,9 @@ export function speakText(text: string, options?: SpeakOptions): void {
   const currentVoices = synth.getVoices() || [];
   const voicesToUse = currentVoices.length > 0 ? currentVoices : cachedVoices;
 
-  const speakImmediately = () => {
+  const speakImmediately = (voices: SpeechSynthesisVoice[]) => {
     try {
-      speakWithVoices(synth, voicesToUse, text, isHindi, options);
+      speakWithVoices(synth, voices, text, isHindi, options);
     } catch (err) {
       const error = err instanceof Error ? err : new Error(String(err));
       console.error("[SpeechSynthesis] speech error:", error);
@@ -439,14 +442,23 @@ export function speakText(text: string, options?: SpeakOptions): void {
   };
 
   if (voicesToUse.length > 0) {
-    speakImmediately();
+    speakImmediately(voicesToUse);
   } else {
-    console.log("[SpeechSynthesis] Cached/Direct voices empty. Starting speech immediately with fallback voice.");
-    speakImmediately();
-    getVoicesAsync().catch((err) => {
-      const error = err instanceof Error ? err : new Error(String(err));
-      console.warn("[SpeechSynthesis] Could not preload voices:", error);
-    });
+    console.log("[SpeechSynthesis] Voices not loaded yet. Waiting for available voices before speaking.");
+    getVoicesAsync()
+      .then((voices) => {
+        if (voices.length > 0) {
+          speakImmediately(voices);
+        } else {
+          console.warn("[SpeechSynthesis] No voices available after load; speaking with fallback settings.");
+          speakImmediately([]);
+        }
+      })
+      .catch((err) => {
+        const error = err instanceof Error ? err : new Error(String(err));
+        console.warn("[SpeechSynthesis] Could not preload voices:", error);
+        speakImmediately([]);
+      });
   }
 }
 

@@ -132,6 +132,19 @@
     background-image: radial-gradient(circle at 20% 20%, oklch(0.78 0.16 80 / 0.08) 0%, transparent 40%),
                       radial-gradient(circle at 80% 80%, oklch(0.72 0.19 55 / 0.08) 0%, transparent 40%);
   }
+  .hide-native-date-icon::-webkit-calendar-picker-indicator,
+  .hide-native-date-icon::-webkit-inner-spin-button,
+  .hide-native-date-icon::-webkit-clear-button {
+    display: none;
+  }
+  .hide-native-date-icon::-moz-calendar-picker-indicator {
+    display: none;
+  }
+  .hide-native-date-icon {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
 }
 
 @keyframes float {
