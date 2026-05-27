@@ -264,6 +264,25 @@ export const translations = {
   "sandesh.api_key_missing": { en: "ElevenLabs API key is missing. Please set VITE_ELEVENLABS_API_KEY.", hi: "ElevenLabs API कुंजी अनुपलब्ध है। कृपया VITE_ELEVENLABS_API_KEY सेट करें।" },
   "sandesh.audio_error": { en: "Failed to generate or play audio.", hi: "ऑडियो उत्पन्न करने या बजाने में विफल।" },
 
+  // ---- Events page ----
+  "events.sanskrit": { en: "॥ उत्सव हर भक्त का अधिकार है ॥", hi: "॥ उत्सव प्रत्येक भक्त का अधिकार है ॥" },
+  "events.title": { en: "Temple Events", hi: "मंदिर के कार्यक्रम" },
+  "events.subtitle": { en: "Festivals, satsang and seva programmes — join us in devotion.", hi: "उत्सव, सत्संग एवं सेवा कार्यक्रम — भक्ति में हमारे साथ जुड़ें।" },
+  "events.upcoming": { en: "Upcoming Events", hi: "आगामी कार्यक्रम" },
+  "events.past": { en: "Past Events", hi: "पूर्व कार्यक्रम" },
+  "events.empty.up": { en: "No upcoming events scheduled. Please check back soon.", hi: "अभी कोई आगामी कार्यक्रम निर्धारित नहीं है।" },
+  "events.empty.past": { en: "No past events yet.", hi: "अभी कोई पूर्व कार्यक्रम नहीं।" },
+  "events.error": { en: "Could not load events.", hi: "कार्यक्रम लोड नहीं हो सके।" },
+
+  // ---- Videos page ----
+  "videos.sanskrit": { en: "॥ ज्ञानं परमं ध्येयम् ॥", hi: "॥ ज्ञानं परमं ध्येयम् ॥" },
+  "videos.title": { en: "Videos", hi: "वीडियो" },
+  "videos.subtitle": { en: "Watch our latest darshan, kirtan and pravachan from Vindhyachal Dham.", hi: "विन्ध्याचल धाम से नवीनतम दर्शन, कीर्तन एवं प्रवचन देखिये।" },
+  "videos.tab.videos": { en: "Videos", hi: "वीडियो" },
+  "videos.tab.shorts": { en: "Shorts", hi: "शॉर्ट्स" },
+  "videos.featured": { en: "Featured Videos", hi: "मुख्य वीडियो" },
+  "videos.shorts": { en: "Shorts", hi: "शॉर्ट्स" },
+
   // ---- Trikona Parikrama page ----
   "nav.parikrama": { en: "Parikrama Map", hi: "परिक्रमा मार्ग" },
   "parikrama.sanskrit": { en: "॥ त्रिगुणात्मिकायै नमः ॥", hi: "॥ त्रिगुणात्मिकायै नमः ॥" },
