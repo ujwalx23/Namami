@@ -260,7 +260,7 @@ export const translations = {
   "sandesh.sanskrit": { en: "॥ गुरुर्ब्रह्मा गुरुर्विष्णुः ॥", hi: "॥ गुरुर्ब्रह्मा गुरुर्विष्णुः ॥" },
   "sandesh.title": { en: "Sandesh", hi: "संदेश" },
   "sandesh.subtitle": { en: "Daily wisdom, blessings and reflections.", hi: "दैनिक प्रेरणा, आशीर्वाद और चिन्तन।" },
-  "sandesh.today": { en: "Today's Sandesh", hi: "आज का संदेश" },
+  "sandesh.today": { en: "Sandesh", hi: "संदेश" },
   "sandesh.another": { en: "Show another", hi: "एक और दिखायें" },
   "sandesh.listen": { en: "Listen", hi: "सुनें" },
   "sandesh.stop": { en: "Stop", hi: "रोकें" },

@@ -348,65 +348,62 @@ function speakWithVoices(
   // Unblock frozen browser speech states
   synth.resume();
 
-  // Delay starting speech slightly after cancel to prevent Chrome/Edge playback glitches
-  setTimeout(() => {
-    segments.forEach((seg, index) => {
-      const isSegHindi = seg.isHindi;
-      const selectedVoice = selectVoice(voices, seg.text);
-      
-      console.log(`[SpeechSynthesis] Segment ${index} selected voice:`, selectedVoice ? `"${selectedVoice.name}" [${selectedVoice.lang}]` : "None");
+  segments.forEach((seg, index) => {
+    const isSegHindi = seg.isHindi;
+    const selectedVoice = selectVoice(voices, seg.text);
+    
+    console.log(`[SpeechSynthesis] Segment ${index} selected voice:`, selectedVoice ? `"${selectedVoice.name}" [${selectedVoice.lang}]` : "None");
 
-      let textToSpeak = seg.text;
-      const isSelectedVoiceHindi = selectedVoice && selectedVoice.lang.toLowerCase().startsWith("hi");
-      const hasHindiVoice = voices.some((v) => v.lang.toLowerCase().startsWith("hi"));
+    let textToSpeak = seg.text;
+    const isSelectedVoiceHindi = selectedVoice && selectedVoice.lang.toLowerCase().startsWith("hi");
+    const hasHindiVoice = voices.some((v) => v.lang.toLowerCase().startsWith("hi"));
 
-      if (isSegHindi && (!hasHindiVoice || (selectedVoice && !isSelectedVoiceHindi))) {
-        console.log(`[SpeechSynthesis] Segment ${index} Fallback: Transliterating to Roman script.`);
-        textToSpeak = transliterateHindi(seg.text);
+    if (isSegHindi && (!hasHindiVoice || (selectedVoice && !isSelectedVoiceHindi))) {
+      console.log(`[SpeechSynthesis] Segment ${index} Fallback: Transliterating to Roman script.`);
+      textToSpeak = transliterateHindi(seg.text);
+    }
+
+    const utterance = new SpeechSynthesisUtterance(textToSpeak);
+    if (selectedVoice) {
+      utterance.voice = selectedVoice;
+      utterance.lang = selectedVoice.lang;
+    } else {
+      utterance.lang = isSegHindi ? (hasHindiVoice ? "hi-IN" : "en-IN") : "en-IN";
+    }
+
+    // Normal speaking pacing
+    utterance.rate = 0.95;
+    utterance.pitch = 1.0;
+
+    utterance.onstart = () => {
+      if (!started) {
+        started = true;
+        console.log("[SpeechSynthesis] speech start");
+        options?.onStart?.();
       }
+    };
 
-      const utterance = new SpeechSynthesisUtterance(textToSpeak);
-      if (selectedVoice) {
-        utterance.voice = selectedVoice;
-        utterance.lang = selectedVoice.lang;
-      } else {
-        utterance.lang = isSegHindi ? (hasHindiVoice ? "hi-IN" : "en-IN") : "en-IN";
+    utterance.onend = () => {
+      console.log(`[SpeechSynthesis] Segment ${index} finished speaking.`);
+      if (index === segments.length - 1) {
+        console.log("[SpeechSynthesis] Speech synthesis completed successfully (last segment).");
+        currentUtterance = null;
+        options?.onEnd?.();
       }
+    };
 
-      // Normal speaking pacing
-      utterance.rate = 0.95;
-      utterance.pitch = 1.0;
+    utterance.onerror = (event) => {
+      console.error(`[SpeechSynthesis] Segment ${index} error:`, event);
+      if (event.error === "interrupted" || event.error === "canceled") {
+        console.log(`[SpeechSynthesis] Segment ${index} was interrupted or canceled.`);
+        return;
+      }
+      options?.onError?.(new Error(event.error ? `Speech synthesis error: ${event.error}` : "Speech synthesis failed."));
+    };
 
-      utterance.onstart = () => {
-        if (!started) {
-          started = true;
-          console.log("[SpeechSynthesis] speech start");
-          options?.onStart?.();
-        }
-      };
-
-      utterance.onend = () => {
-        console.log(`[SpeechSynthesis] Segment ${index} finished speaking.`);
-        if (index === segments.length - 1) {
-          console.log("[SpeechSynthesis] Speech synthesis completed successfully (last segment).");
-          currentUtterance = null;
-          options?.onEnd?.();
-        }
-      };
-
-      utterance.onerror = (event) => {
-        console.error(`[SpeechSynthesis] Segment ${index} error:`, event);
-        if (event.error === "interrupted" || event.error === "canceled") {
-          console.log(`[SpeechSynthesis] Segment ${index} was interrupted or canceled.`);
-          return;
-        }
-        options?.onError?.(new Error(event.error ? `Speech synthesis error: ${event.error}` : "Speech synthesis failed."));
-      };
-
-      currentUtterance = utterance;
-      synth.speak(utterance);
-    });
-  }, 100);
+    currentUtterance = utterance;
+    synth.speak(utterance);
+  });
 }
 
 /**
@@ -431,7 +428,7 @@ export function speakText(text: string, options?: SpeakOptions): void {
   const currentVoices = synth.getVoices() || [];
   const voicesToUse = currentVoices.length > 0 ? currentVoices : cachedVoices;
 
-  if (voicesToUse.length > 0) {
+  const speakImmediately = () => {
     try {
       speakWithVoices(synth, voicesToUse, text, isHindi, options);
     } catch (err) {
@@ -439,21 +436,17 @@ export function speakText(text: string, options?: SpeakOptions): void {
       console.error("[SpeechSynthesis] speech error:", error);
       options?.onError?.(error);
     }
+  };
+
+  if (voicesToUse.length > 0) {
+    speakImmediately();
   } else {
-    // Asynchronous path (fallback for initial load)
-    console.log("[SpeechSynthesis] Cached/Direct voices empty. Loading asynchronously...");
-    getVoicesAsync()
-      .then((voices) => {
-        if (voices.length === 0) {
-          throw new Error("No system voices found or loaded.");
-        }
-        speakWithVoices(synth, voices, text, isHindi, options);
-      })
-      .catch((err) => {
-        const error = err instanceof Error ? err : new Error(String(err));
-        console.error("[SpeechSynthesis] speech error:", error);
-        options?.onError?.(error);
-      });
+    console.log("[SpeechSynthesis] Cached/Direct voices empty. Starting speech immediately with fallback voice.");
+    speakImmediately();
+    getVoicesAsync().catch((err) => {
+      const error = err instanceof Error ? err : new Error(String(err));
+      console.warn("[SpeechSynthesis] Could not preload voices:", error);
+    });
   }
 }
 
