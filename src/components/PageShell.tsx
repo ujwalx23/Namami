@@ -12,7 +12,15 @@ export function PageShell({ children }: { children: ReactNode }) {
   );
 }
 
-export function PageHero({ title, subtitle, sanskrit }: { title: string; subtitle?: string; sanskrit?: string }) {
+export function PageHero({
+  title,
+  subtitle,
+  sanskrit,
+}: {
+  title: string;
+  subtitle?: string;
+  sanskrit?: string;
+}) {
   return (
     <section className="relative bg-gradient-divine border-b border-border/60 overflow-hidden">
       <div className="absolute inset-0 mandala-bg opacity-60" />

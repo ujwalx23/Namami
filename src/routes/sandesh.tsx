@@ -6,6 +6,7 @@ import type { Tables } from "@/integrations/supabase/types";
 import { useCallback, useEffect, useState } from "react";
 import { useLang } from "@/i18n/LangProvider";
 import { speakText, stopSpeech } from "@/lib/speech";
+import { toast } from "sonner";
 
 type Sandesh = Tables<"sandesh">;
 
@@ -13,7 +14,11 @@ export const Route = createFileRoute("/sandesh")({
   head: () => ({
     meta: [
       { title: "Sandesh — Daily Spiritual Message" },
-      { name: "description", content: "Daily spiritual sandesh and quotes — wisdom and blessings for devotees of Maa Vindhyavasini." },
+      {
+        name: "description",
+        content:
+          "Daily spiritual sandesh and quotes — wisdom and blessings for devotees of Maa Vindhyavasini.",
+      },
       { property: "og:title", content: "Sandesh — Daily Message" },
       { property: "og:description", content: "Daily spiritual wisdom from Pujya Guru Ji." },
     ],
@@ -30,17 +35,37 @@ export const Route = createFileRoute("/sandesh")({
   errorComponent: ({ error }) => (
     <PageShell>
       <PageHero title="Sandesh" subtitle="Could not load sandesh." />
-      <div className="container mx-auto px-6 py-10 text-center text-muted-foreground">{error.message}</div>
+      <div className="container mx-auto px-6 py-10 text-center text-muted-foreground">
+        {error.message}
+      </div>
     </PageShell>
   ),
   notFoundComponent: () => (
-    <PageShell><PageHero title="Not found" /></PageShell>
+    <PageShell>
+      <PageHero title="Not found" />
+    </PageShell>
   ),
   component: SandeshPage,
 });
 
+function dataURLtoFile(dataurl: string, filename: string): File {
+  const arr = dataurl.split(",");
+  const mime = arr[0].match(/:(.*?);/)![1];
+  const bstr = atob(arr[1]);
+  let n = bstr.length;
+  const u8arr = new Uint8Array(n);
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new File([u8arr], filename, { type: mime });
+}
+
 function formatDate(d: string) {
-  return new Date(d).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" });
+  return new Date(d).toLocaleDateString("en-IN", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
 }
 
 function SandeshPage() {
@@ -109,113 +134,90 @@ function SandeshPage() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    // Helper for rounded rectangles (compatibility fallback)
+    const drawRoundRect = (x: number, y: number, w: number, h: number, r: number) => {
+      if (typeof ctx.roundRect === "function") {
+        ctx.roundRect(x, y, w, h, r);
+      } else {
+        ctx.moveTo(x + r, y);
+        ctx.arcTo(x + w, y, x + w, y + h, r);
+        ctx.arcTo(x + w, y + h, x, y + h, r);
+        ctx.arcTo(x, y + h, x, y, r);
+        ctx.arcTo(x, y, x + w, y, r);
+      }
+    };
+
     // 1. Draw traditional gradient background
     const bgGrad = ctx.createRadialGradient(540, 960, 100, 540, 960, 1100);
-    bgGrad.addColorStop(0, "#FFFDF9");
-    bgGrad.addColorStop(1, "#FFF6E5");
+    bgGrad.addColorStop(0, "#FFFDF6");
+    bgGrad.addColorStop(1, "#FFF4DD");
     ctx.fillStyle = bgGrad;
     ctx.fillRect(0, 0, 1080, 1920);
 
     // 2. Draw golden/saffron double border
-    ctx.strokeStyle = "#D9381E"; // Red border
+    ctx.strokeStyle = "#D9381E";
     ctx.lineWidth = 12;
     ctx.strokeRect(30, 30, 1020, 1860);
 
-    ctx.strokeStyle = "#D6A232"; // Gold border
+    ctx.strokeStyle = "#D6A232";
     ctx.lineWidth = 4;
     ctx.strokeRect(50, 50, 980, 1820);
 
-    // 3. Draw faint diagonal watermarks
+    // Draw traditional corner accents (corner lines)
+    const drawCorners = () => {
+      ctx.fillStyle = "#D9381E";
+      const corners = [
+        { x: 50, y: 50, dx: 1, dy: 1 },
+        { x: 1030, y: 50, dx: -1, dy: 1 },
+        { x: 50, y: 1870, dx: 1, dy: -1 },
+        { x: 1030, y: 1870, dx: -1, dy: -1 },
+      ];
+      corners.forEach((c) => {
+        ctx.beginPath();
+        ctx.arc(c.x, c.y, 40, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(217, 56, 30, 0.1)";
+        ctx.fill();
+
+        ctx.strokeStyle = "#D9381E";
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(c.x, c.y);
+        ctx.lineTo(c.x + c.dx * 80, c.y);
+        ctx.moveTo(c.x, c.y);
+        ctx.lineTo(c.x, c.y + c.dy * 80);
+        ctx.stroke();
+      });
+    };
+    drawCorners();
+
+    // 3. Draw a faded sacred sunburst/mandala in the background center
     ctx.save();
-    ctx.fillStyle = "rgba(214, 162, 50, 0.045)"; // Soft, low-opacity gold
-    ctx.font = "italic bold 32px sans-serif";
-    ctx.textAlign = "center";
     ctx.translate(540, 960);
-    ctx.rotate(-25 * Math.PI / 180);
-    const watermarkText = "namamivindhyavasini.in";
-    const stepX = 420;
-    const stepY = 160;
-    for (let x = -1500; x < 1500; x += stepX) {
-      for (let y = -1500; y < 1500; y += stepY) {
-        ctx.fillText(watermarkText, x, y);
-      }
+    ctx.strokeStyle = "rgba(214, 162, 50, 0.08)";
+    ctx.lineWidth = 2;
+    for (let i = 0; i < 36; i++) {
+      ctx.rotate((10 * Math.PI) / 180);
+      ctx.beginPath();
+      ctx.arc(0, 0, 350, 0, Math.PI / 6);
+      ctx.stroke();
     }
     ctx.restore();
 
-    // 4. Draw traditional quarter-mandala corner elements
-    const drawMandalaCorners = () => {
-      const corners = [
-        { x: 50, y: 50, startAngle: 0, endAngle: Math.PI / 2, dx: 1, dy: 1 },
-        { x: 1030, y: 50, startAngle: Math.PI / 2, endAngle: Math.PI, dx: -1, dy: 1 },
-        { x: 50, y: 1870, startAngle: 1.5 * Math.PI, endAngle: 2 * Math.PI, dx: 1, dy: -1 },
-        { x: 1030, y: 1870, startAngle: Math.PI, endAngle: 1.5 * Math.PI, dx: -1, dy: -1 },
-      ];
-      
-      corners.forEach((c) => {
-        ctx.save();
-        ctx.translate(c.x, c.y);
-        
-        // Draw gold concentric quarter arcs
-        ctx.strokeStyle = "rgba(214, 162, 50, 0.5)"; // Gold
-        ctx.lineWidth = 3;
-        
-        for (let r = 30; r <= 150; r += 30) {
-          ctx.beginPath();
-          ctx.arc(0, 0, r, c.startAngle, c.endAngle);
-          ctx.stroke();
-        }
-        
-        // Draw red radial petal loops pointing inward
-        ctx.strokeStyle = "rgba(217, 56, 30, 0.6)"; // Red
-        ctx.lineWidth = 2.5;
-        const steps = 6;
-        const angleDiff = c.endAngle - c.startAngle;
-        
-        for (let i = 0; i <= steps; i++) {
-          const angle = c.startAngle + (angleDiff * (i / steps));
-          const cos = Math.cos(angle);
-          const sin = Math.sin(angle);
-          
-          ctx.beginPath();
-          ctx.moveTo(0, 0);
-          ctx.quadraticCurveTo(cos * 50, sin * 50, cos * 70, sin * 70);
-          ctx.quadraticCurveTo(cos * 90, sin * 90, cos * 100, sin * 100);
-          ctx.stroke();
-          
-          // Small dot at the end
-          ctx.fillStyle = "#D6A232";
-          ctx.beginPath();
-          ctx.arc(cos * 100, sin * 100, 5, 0, Math.PI * 2);
-          ctx.fill();
-        }
-        
-        // Draw diagonal corner line accent
-        ctx.strokeStyle = "#D9381E";
-        ctx.lineWidth = 3;
-        ctx.beginPath();
-        ctx.moveTo(c.dx * 120, 0);
-        ctx.lineTo(0, c.dy * 120);
-        ctx.stroke();
-        
-        ctx.restore();
-      });
-    };
-    drawMandalaCorners();
-
-    // 5. Draw Header Box
+    // 4. Draw Header Box
     const headGrad = ctx.createLinearGradient(140, 0, 940, 0);
     headGrad.addColorStop(0, "#D9381E");
     headGrad.addColorStop(1, "#FF5E36");
     ctx.fillStyle = headGrad;
+    // Draw top header pill
     ctx.beginPath();
-    ctx.roundRect(140, 160, 800, 120, 60);
+    drawRoundRect(140, 160, 800, 120, 60);
     ctx.fill();
-    
+
     // Header golden outline
     ctx.strokeStyle = "#D6A232";
     ctx.lineWidth = 3;
     ctx.beginPath();
-    ctx.roundRect(145, 165, 790, 110, 55);
+    drawRoundRect(145, 165, 790, 110, 55);
     ctx.stroke();
 
     // Header Text
@@ -225,37 +227,29 @@ function SandeshPage() {
     ctx.font = "bold 44px Georgia, serif";
     ctx.fillText("॥ दैनिक संदेश ॥", 540, 220);
 
-    // 6. Draw the Quotation Mark Icon
-    ctx.fillStyle = "rgba(214, 162, 50, 0.09)"; // Subtle gold
-    ctx.font = "bold 400px Georgia, serif";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillText("“", 540, 820);
+    // 5. Draw the Quote Marks
+    ctx.fillStyle = "rgba(214, 162, 50, 0.25)";
+    ctx.font = "bold 240px Georgia, serif";
+    ctx.fillText("“", 540, 600);
 
-    // 7. Draw Wrapped Quote Text
-    ctx.fillStyle = "#5E1914"; // Dark brown
-    ctx.textAlign = "center";
-    
-    // Dynamically adjust font size based on text length to prevent overflow
-    let fontSize = 52;
-    if (message.length > 300) {
-      fontSize = 38;
-    } else if (message.length > 150) {
-      fontSize = 44;
-    }
-    
-    const lineHeight = fontSize * 1.5;
-    ctx.font = `bold ${fontSize}px Georgia, serif`;
-    
+    // 6. Draw Wrapped Quote Text
+    ctx.fillStyle = "#5E1914";
+    ctx.font = "52px Georgia, serif";
+    ctx.textBaseline = "top";
+
     const maxTextWidth = 840;
+    const lineHeight = 75;
+
+    // Simple text wrapping helper
     const words = message.split(" ");
     let line = "";
     const lines: string[] = [];
-    
+
+    // Group words into lines based on canvas width measurements
     for (let n = 0; n < words.length; n++) {
-      let testLine = line + words[n] + " ";
-      let metrics = ctx.measureText(testLine);
-      let testWidth = metrics.width;
+      const testLine = line + words[n] + " ";
+      const metrics = ctx.measureText(testLine);
+      const testWidth = metrics.width;
       if (testWidth > maxTextWidth && n > 0) {
         lines.push(line.trim());
         line = words[n] + " ";
@@ -265,56 +259,73 @@ function SandeshPage() {
     }
     lines.push(line.trim());
 
+    // Draw each line centered
     const totalTextHeight = lines.length * lineHeight;
-    const startY = 900 - (totalTextHeight / 2);
-    
-    ctx.textBaseline = "top";
+    const startY = 960 - totalTextHeight / 2 + 60; // Offset slightly down to balance layout
+
     lines.forEach((l, idx) => {
       ctx.fillText(l, 540, startY + idx * lineHeight);
     });
 
-    // 8. Draw Bottom Footer Block (Red button capsule)
+    // 7. Draw Author
+    ctx.fillStyle = "#D9381E";
+    ctx.font = "italic 38px Georgia, serif";
+    ctx.fillText(`— ${author}`, 540, startY + totalTextHeight + 90);
+
+    // 8. Draw Bottom Footer Block
     ctx.fillStyle = "#D9381E";
     ctx.beginPath();
-    ctx.roundRect(240, 1560, 600, 80, 40);
+    drawRoundRect(240, 1680, 600, 80, 40);
     ctx.fill();
 
     ctx.fillStyle = "#FFFDF6";
     ctx.font = "bold 28px sans-serif";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillText("namamivindhyavasini.in", 540, 1600);
+    ctx.fillText("namamivindhyavasini.in", 540, 1720);
 
-    // 9. Draw Author Name (below the red button)
-    ctx.fillStyle = "#D9381E";
-    ctx.font = "italic 38px Georgia, serif";
-    ctx.textBaseline = "top";
-    ctx.fillText(`— ${author}`, 540, 1680);
+    const dataUrl = canvas.toDataURL("image/png");
+    const file = dataURLtoFile(dataUrl, `sandesh_${new Date().toISOString().split("T")[0]}.png`);
 
-    // 10. Trigger Web Share or Download
+    // Helper to trigger direct download
+    const triggerDownload = () => {
+      const link = document.createElement("a");
+      link.download = `sandesh_${new Date().toISOString().split("T")[0]}.png`;
+      link.href = dataUrl;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      console.log("[Sandesh] Download triggered.");
+      toast.success("Image download started!");
+    };
+
+    // 9. Trigger Web Share or Download
     try {
-      const dataUrl = canvas.toDataURL("image/png");
-      const blob = await (await fetch(dataUrl)).blob();
-      const file = new File([blob], `sandesh_${new Date().toISOString().split("T")[0]}.png`, { type: "image/png" });
-
       if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        await navigator.share({
-          files: [file],
-          title: "Maa Vindhyavasini Daily Sandesh"
-        });
-        console.log("[Sandesh] Shared successfully via Web Share API.");
+        try {
+          await navigator.share({
+            files: [file],
+            title: "Maa Vindhyavasini Daily Sandesh",
+          });
+          console.log("[Sandesh] Shared successfully via Web Share API.");
+          toast.success("Image shared successfully!");
+        } catch (shareErr) {
+          // If the user cancelled the share, do not display error or force download
+          if (shareErr instanceof Error && shareErr.name === "AbortError") {
+            console.log("[Sandesh] Share cancelled by user.");
+            return;
+          }
+          // For other errors (like "earlier share not completed"), fallback to download
+          console.warn("[Sandesh] navigator.share failed, falling back to download:", shareErr);
+          triggerDownload();
+        }
       } else {
         // Fallback: Direct Download
-        const link = document.createElement("a");
-        link.download = `sandesh_${new Date().toISOString().split("T")[0]}.png`;
-        link.href = dataUrl;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        console.log("[Sandesh] Download triggered as fallback.");
+        triggerDownload();
       }
     } catch (err) {
       console.error("[Sandesh] Failed to share or download image:", err);
+      toast.error(
+        "Failed to share or download image: " + (err instanceof Error ? err.message : String(err)),
+      );
     }
   };
 
@@ -351,7 +362,9 @@ function SandeshPage() {
           <div className="max-w-3xl mx-auto rounded-3xl bg-gradient-sacred p-1 shadow-sacred mb-14">
             <div className="rounded-[1.4rem] bg-card p-10 md:p-14 text-center relative">
               <Quote className="mx-auto text-gold mb-4" size={32} />
-              <div className={`text-xs uppercase tracking-[0.3em] text-saffron mb-3 ${dev}`}>{t("sandesh.today")}</div>
+              <div className={`text-xs uppercase tracking-[0.3em] text-saffron mb-3 ${dev}`}>
+                {t("sandesh.today")}
+              </div>
               <p className={`font-display text-2xl md:text-3xl text-maroon leading-relaxed ${dev}`}>
                 "{today.message}"
               </p>
@@ -373,8 +386,8 @@ function SandeshPage() {
                   {loadingId === today.id
                     ? t("sandesh.loading")
                     : speakingId === today.id
-                    ? t("sandesh.stop")
-                    : t("sandesh.listen")}
+                      ? t("sandesh.stop")
+                      : t("sandesh.listen")}
                 </button>
                 <button
                   onClick={() => shareSandesh(today.message, today.author)}
@@ -405,8 +418,13 @@ function SandeshPage() {
             <h2 className={`font-display text-3xl text-maroon mb-6 ${dev}`}>{t("sandesh.more")}</h2>
             <div className="space-y-4">
               {archive.map((s: Sandesh) => (
-                <div key={s.id} className="p-6 rounded-2xl bg-card border border-border hover:border-gold/50 transition">
-                  <div className="text-xs uppercase tracking-[0.25em] text-saffron mb-2">{formatDate(s.publish_date)}</div>
+                <div
+                  key={s.id}
+                  className="p-6 rounded-2xl bg-card border border-border hover:border-gold/50 transition"
+                >
+                  <div className="text-xs uppercase tracking-[0.25em] text-saffron mb-2">
+                    {formatDate(s.publish_date)}
+                  </div>
                   <p className={`text-foreground/85 leading-relaxed mb-4 ${dev}`}>"{s.message}"</p>
                   <div className="flex flex-wrap items-center justify-between gap-4">
                     <div className={`text-xs text-muted-foreground ${dev}`}>— {s.author}</div>
@@ -427,8 +445,8 @@ function SandeshPage() {
                         {loadingId === s.id
                           ? t("sandesh.loading")
                           : speakingId === s.id
-                          ? t("sandesh.stop")
-                          : t("sandesh.listen")}
+                            ? t("sandesh.stop")
+                            : t("sandesh.listen")}
                       </button>
                       <button
                         onClick={() => shareSandesh(s.message, s.author)}

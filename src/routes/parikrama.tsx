@@ -18,7 +18,7 @@ import {
   Bell,
   Heart,
   Download,
-  Info
+  Info,
 } from "lucide-react";
 
 import vindhyavasiniImg from "@/assets/maa-vindhyavasini.png";
@@ -30,9 +30,16 @@ export const Route = createFileRoute("/parikrama")({
   head: () => ({
     meta: [
       { title: "Trikona Parikrama — Sacred Pilgrim Guide" },
-      { name: "description", content: "Experience the sacred triangular pilgrimage of Vindhyachal Dham. Perform virtual rituals and receive your completion blessing certificate." },
+      {
+        name: "description",
+        content:
+          "Experience the sacred triangular pilgrimage of Vindhyachal Dham. Perform virtual rituals and receive your completion blessing certificate.",
+      },
       { property: "og:title", content: "Trikona Parikrama — Vindhyachal Dham" },
-      { property: "og:description", content: "Start your virtual spiritual journey of Vindhyachal Trikona Parikrama." },
+      {
+        property: "og:description",
+        content: "Start your virtual spiritual journey of Vindhyachal Trikona Parikrama.",
+      },
     ],
   }),
   component: ParikramaPage,
@@ -41,7 +48,12 @@ export const Route = createFileRoute("/parikrama")({
 // Synthesized Audio Effects using Web Audio API
 const playBellSound = () => {
   try {
-    const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+    const AudioCtor =
+      window.AudioContext ||
+      ((window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext ??
+        null);
+    if (!AudioCtor) return;
+    const audioCtx = new AudioCtor();
     const osc1 = audioCtx.createOscillator();
     const osc2 = audioCtx.createOscillator();
     const gainNode = audioCtx.createGain();
@@ -72,7 +84,12 @@ const playBellSound = () => {
 
 const playSplashSound = () => {
   try {
-    const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+    const AudioCtor =
+      window.AudioContext ||
+      ((window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext ??
+        null);
+    if (!AudioCtor) return;
+    const audioCtx = new AudioCtor();
     const osc = audioCtx.createOscillator();
     const gainNode = audioCtx.createGain();
 
@@ -97,9 +114,14 @@ const playSplashSound = () => {
 
 const playChimeSound = () => {
   try {
-    const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+    const AudioCtor =
+      window.AudioContext ||
+      ((window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext ??
+        null);
+    if (!AudioCtor) return;
+    const audioCtx = new AudioCtor();
     const now = audioCtx.currentTime;
-    const frequencies = [587.33, 659.25, 783.99, 880.00, 1174.66]; // D5, E5, G5, A5, D6 arpeggio
+    const frequencies = [587.33, 659.25, 783.99, 880.0, 1174.66]; // D5, E5, G5, A5, D6 arpeggio
 
     frequencies.forEach((f, idx) => {
       const osc = audioCtx.createOscillator();
@@ -173,19 +195,22 @@ function ParikramaPage() {
   }, [activeStep]);
 
   // Audio Guide Toggle
-  const toggleNarration = useCallback((stepIdx: number, text: string) => {
-    if (speakingStep === stepIdx) {
-      stopSpeech();
-      setSpeakingStep(null);
-    } else {
-      stopSpeech();
-      setSpeakingStep(stepIdx);
-      speakText(text, {
-        onEnd: () => setSpeakingStep(null),
-        onError: () => setSpeakingStep(null),
-      });
-    }
-  }, [speakingStep]);
+  const toggleNarration = useCallback(
+    (stepIdx: number, text: string) => {
+      if (speakingStep === stepIdx) {
+        stopSpeech();
+        setSpeakingStep(null);
+      } else {
+        stopSpeech();
+        setSpeakingStep(stepIdx);
+        speakText(text, {
+          onEnd: () => setSpeakingStep(null),
+          onError: () => setSpeakingStep(null),
+        });
+      }
+    },
+    [speakingStep],
+  );
 
   // Spawning falling flowers (Particles)
   const spawnFlowerShower = useCallback(() => {
@@ -272,9 +297,10 @@ function ParikramaPage() {
       subKey: "parikrama.stage0.subtitle" as const,
       textKey: "parikrama.stage0.text" as const,
       image: gangaGhatImg,
-      audioText: lang === "hi" 
-        ? "प्रथम चरण: गंगा स्नान। हम अपनी त्रिकोण परिक्रमा की शुरुआत पतित पावनि गंगा नदी में पवित्र स्नान के साथ करते हैं। अनुभव करें कि यह दिव्य जल आपके तन और मन को पवित्र कर रहा है। बोलें, ॐ नमो गंगायै विश्वरूपिण्यै नारायण्यै नमो नमः।"
-        : "Stage 1: Ganga Snan. We begin our Trikona Parikrama by taking a holy dip in the sacred River Ganges. Feel the pure waters purify your body and soul. Chant, Om Namo Gangayei Vishwarupinyei Narayanyei Namo Namah."
+      audioText:
+        lang === "hi"
+          ? "प्रथम चरण: गंगा स्नान। हम अपनी त्रिकोण परिक्रमा की शुरुआत पतित पावनि गंगा नदी में पवित्र स्नान के साथ करते हैं। अनुभव करें कि यह दिव्य जल आपके तन और मन को पवित्र कर रहा है। बोलें, ॐ नमो गंगायै विश्वरूपिण्यै नारायण्यै नमो नमः।"
+          : "Stage 1: Ganga Snan. We begin our Trikona Parikrama by taking a holy dip in the sacred River Ganges. Feel the pure waters purify your body and soul. Chant, Om Namo Gangayei Vishwarupinyei Narayanyei Namo Namah.",
     },
     {
       id: 1,
@@ -282,9 +308,10 @@ function ParikramaPage() {
       subKey: "parikrama.stage1.subtitle" as const,
       textKey: "parikrama.stage1.text" as const,
       image: vindhyavasiniImg,
-      audioText: lang === "hi"
-        ? "द्वितीय चरण: माँ विन्ध्यवासिनी मंदिर। अब, मुख्य मंदिर माँ विन्ध्यवासिनी के चरणों में पधारें, जो गंगा तट पर महालक्ष्मी के रूप में विराजमान हैं। मंदिर का घंटा बजायें और माँ को लाल पुष्प अर्पित करें। वे यशोदा की वही योगमाया पुत्री हैं, जिन्होंने कंस के विनाश की घोषणा की थी।"
-        : "Stage 2: Maa Vindhyavasini Mandir. Now, arrive at the main temple of Maa Vindhyavasini, who sits on the banks of Ganga as Maha Lakshmi. Ring the bell and offer red flowers to the Mother. She is the Yogmaya child of Yashoda, who declared the doom of demon Kansa."
+      audioText:
+        lang === "hi"
+          ? "द्वितीय चरण: माँ विन्ध्यवासिनी मंदिर। अब, मुख्य मंदिर माँ विन्ध्यवासिनी के चरणों में पधारें, जो गंगा तट पर महालक्ष्मी के रूप में विराजमान हैं। मंदिर का घंटा बजायें और माँ को लाल पुष्प अर्पित करें। वे यशोदा की वही योगमाया पुत्री हैं, जिन्होंने कंस के विनाश की घोषणा की थी।"
+          : "Stage 2: Maa Vindhyavasini Mandir. Now, arrive at the main temple of Maa Vindhyavasini, who sits on the banks of Ganga as Maha Lakshmi. Ring the bell and offer red flowers to the Mother. She is the Yogmaya child of Yashoda, who declared the doom of demon Kansa.",
     },
     {
       id: 2,
@@ -292,9 +319,10 @@ function ParikramaPage() {
       subKey: "parikrama.stage2.subtitle" as const,
       textKey: "parikrama.stage2.text" as const,
       image: kaliKohImg,
-      audioText: lang === "hi"
-        ? "तृतीय चरण: काली खोह मंदिर। विन्ध्य की तलहटी में स्थित महाकाली की गुफा काली खोह की ओर बढ़ें। यहाँ चामुण्डा देवी विराजमान हैं, जिन्होंने चण्ड और मुण्ड का संहार किया था। मौन होकर प्रणाम करें और अपनी भक्ति अर्पित करें।"
-        : "Stage 3: Kali Khoh Cave Temple. Proceed to Kali Khoh, the cave temple of Maha Kali, nestled in the Vindhya foothills. It is here that Chamunda Devi resides, having destroyed the demons Chanda and Munda. Bow down in silence and offer your devotion."
+      audioText:
+        lang === "hi"
+          ? "तृतीय चरण: काली खोह मंदिर। विन्ध्य की तलहटी में स्थित महाकाली की गुफा काली खोह की ओर बढ़ें। यहाँ चामुण्डा देवी विराजमान हैं, जिन्होंने चण्ड और मुण्ड का संहार किया था। मौन होकर प्रणाम करें और अपनी भक्ति अर्पित करें।"
+          : "Stage 3: Kali Khoh Cave Temple. Proceed to Kali Khoh, the cave temple of Maha Kali, nestled in the Vindhya foothills. It is here that Chamunda Devi resides, having destroyed the demons Chanda and Munda. Bow down in silence and offer your devotion.",
     },
     {
       id: 3,
@@ -302,10 +330,11 @@ function ParikramaPage() {
       subKey: "parikrama.stage3.subtitle" as const,
       textKey: "parikrama.stage3.text" as const,
       image: ashtabhujaImg,
-      audioText: lang === "hi"
-        ? "चतुर्थ चरण: माँ अष्टभुजा मंदिर। पहाड़ी पर स्थित अष्टभुजा देवी मंदिर की ओर प्रस्थान करें, जो महासरस्वती को समर्पित है। वे अष्टभुज धारिणी देवी हैं जो इस पवित्र क्षेत्र की रक्षा करती हैं। यहाँ वृक्ष पर लाल रक्षा सूत्र बाँधें, और अपना आध्यात्मिक संकल्प लें।"
-        : "Stage 4: Maa Ashtabhuja Temple. Climb up to Ashtabhuja temple on the hill, dedicated to Maha Saraswati. She is the eighth-armed goddess who guards the holy region. Tie a sacred red thread on the tree, and make your spiritual vow."
-    }
+      audioText:
+        lang === "hi"
+          ? "चतुर्थ चरण: माँ अष्टभुजा मंदिर। पहाड़ी पर स्थित अष्टभुजा देवी मंदिर की ओर प्रस्थान करें, जो महासरस्वती को समर्पित है। वे अष्टभुज धारिणी देवी हैं जो इस पवित्र क्षेत्र की रक्षा करती हैं। यहाँ वृक्ष पर लाल रक्षा सूत्र बाँधें, और अपना आध्यात्मिक संकल्प लें।"
+          : "Stage 4: Maa Ashtabhuja Temple. Climb up to Ashtabhuja temple on the hill, dedicated to Maha Saraswati. She is the eighth-armed goddess who guards the holy region. Tie a sacred red thread on the tree, and make your spiritual vow.",
+    },
   ];
 
   // Draw Completion Certificate
@@ -419,21 +448,27 @@ function ParikramaPage() {
       // Body Text
       ctx.fillStyle = "#5E1914";
       ctx.font = "22px sans-serif";
-      const descLine1 = "has successfully completed the sacred Trikona Parikrama of Vindhyachal Dham.";
-      const descLine2 = "ने विन्ध्याचल धाम की पावन त्रिकोण परिक्रमा (गंगा स्नान, महालक्ष्मी, महाकाली, महासरस्वती) पूर्ण कर ली है।";
+      const descLine1 =
+        "has successfully completed the sacred Trikona Parikrama of Vindhyachal Dham.";
+      const descLine2 =
+        "ने विन्ध्याचल धाम की पावन त्रिकोण परिक्रमा (गंगा स्नान, महालक्ष्मी, महाकाली, महासरस्वती) पूर्ण कर ली है।";
       ctx.fillText(descLine1, 600, 535);
       ctx.fillText(descLine2, 600, 575);
 
       // Blessing
       ctx.fillStyle = "#D6A232";
       ctx.font = "bold italic 22px Georgia, serif";
-      ctx.fillText("“महालक्ष्मी, महाकाली एवं महासरस्वती का दिव्य आशीर्वाद सदैव आपके साथ बना रहे।”", 600, 640);
+      ctx.fillText(
+        "“महालक्ष्मी, महाकाली एवं महासरस्वती का दिव्य आशीर्वाद सदैव आपके साथ बना रहे।”",
+        600,
+        640,
+      );
 
       // Footer Date & Signature
       const today = new Date().toLocaleDateString("en-IN", {
         day: "numeric",
         month: "long",
-        year: "numeric"
+        year: "numeric",
       });
       ctx.fillStyle = "#7F6D50";
       ctx.font = "18px sans-serif";
@@ -461,7 +496,6 @@ function ParikramaPage() {
       ctx.textBaseline = "middle";
       ctx.fillText("पारित", 0, 0);
       ctx.restore();
-
     }, 100);
   }, [devoteeName]);
 
@@ -490,16 +524,15 @@ function ParikramaPage() {
 
       <div className="container mx-auto px-6 py-10 relative">
         {/* Flower shower overlay canvas */}
-        <canvas
-          ref={canvasRef}
-          className="absolute inset-0 pointer-events-none z-40"
-        />
+        <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none z-40" />
 
         {activeStep === null ? (
           /* MAP VIEW */
           <div className="grid lg:grid-cols-3 gap-8 items-start">
             <div className="lg:col-span-2 rounded-3xl bg-card border border-gold/30 shadow-sacred p-6">
-              <h3 className={`font-display text-2xl text-maroon mb-2 flex items-center gap-2 ${dev}`}>
+              <h3
+                className={`font-display text-2xl text-maroon mb-2 flex items-center gap-2 ${dev}`}
+              >
                 <Compass className="text-saffron" size={24} />
                 {t("parikrama.map.title")}
               </h3>
@@ -529,7 +562,11 @@ function ParikramaPage() {
                     stroke="rgba(59, 130, 246, 0.25)"
                     strokeWidth="2"
                   />
-                  <text x="350" y="32" className="fill-blue-500/60 font-serif italic text-xs tracking-widest font-semibold">
+                  <text
+                    x="350"
+                    y="32"
+                    className="fill-blue-500/60 font-serif italic text-xs tracking-widest font-semibold"
+                  >
                     RIVER GANGES / पवित्र गंगा
                   </text>
 
@@ -537,24 +574,44 @@ function ParikramaPage() {
                   <g>
                     {/* Path 1: Ganga Ghat to Vindhyavasini */}
                     <line
-                      x1="400" y1="120" x2="220" y2="200"
-                      stroke="#D6A232" strokeWidth="3" strokeDasharray="6 4"
+                      x1="400"
+                      y1="120"
+                      x2="220"
+                      y2="200"
+                      stroke="#D6A232"
+                      strokeWidth="3"
+                      strokeDasharray="6 4"
                       className="animate-pulse"
                     />
                     {/* Path 2: Vindhyavasini to Kali Khoh */}
                     <line
-                      x1="220" y1="200" x2="400" y2="400"
-                      stroke="#D6A232" strokeWidth="3" strokeDasharray="6 4"
+                      x1="220"
+                      y1="200"
+                      x2="400"
+                      y2="400"
+                      stroke="#D6A232"
+                      strokeWidth="3"
+                      strokeDasharray="6 4"
                     />
                     {/* Path 3: Kali Khoh to Ashtabhuja */}
                     <line
-                      x1="400" y1="400" x2="580" y2="200"
-                      stroke="#D6A232" strokeWidth="3" strokeDasharray="6 4"
+                      x1="400"
+                      y1="400"
+                      x2="580"
+                      y2="200"
+                      stroke="#D6A232"
+                      strokeWidth="3"
+                      strokeDasharray="6 4"
                     />
                     {/* Path 4: Ashtabhuja back to Ganga Ghat */}
                     <line
-                      x1="580" y1="200" x2="400" y2="120"
-                      stroke="#D6A232" strokeWidth="3" strokeDasharray="6 4"
+                      x1="580"
+                      y1="200"
+                      x2="400"
+                      y2="120"
+                      stroke="#D6A232"
+                      strokeWidth="3"
+                      strokeDasharray="6 4"
                     />
 
                     {/* Arrowheads/Indicators on Paths */}
@@ -574,10 +631,35 @@ function ParikramaPage() {
                       playSplashSound();
                     }}
                   >
-                    <circle cx="400" cy="120" r="16" fill="#D9381E" className="opacity-25 animate-ping" />
-                    <circle cx="400" cy="120" r="12" fill={selectedMapNode === 0 ? "#FF5E36" : "#D9381E"} className="stroke-gold stroke-2 transition-all duration-300" />
-                    <text x="400" y="124" textAnchor="middle" fill="#FFFDF6" className="font-bold text-xs">1</text>
-                    <text x="400" y="95" textAnchor="middle" className={`fill-maroon font-semibold text-xs transition-colors duration-300 ${selectedMapNode === 0 ? "fill-saffron" : ""}`}>
+                    <circle
+                      cx="400"
+                      cy="120"
+                      r="16"
+                      fill="#D9381E"
+                      className="opacity-25 animate-ping"
+                    />
+                    <circle
+                      cx="400"
+                      cy="120"
+                      r="12"
+                      fill={selectedMapNode === 0 ? "#FF5E36" : "#D9381E"}
+                      className="stroke-gold stroke-2 transition-all duration-300"
+                    />
+                    <text
+                      x="400"
+                      y="124"
+                      textAnchor="middle"
+                      fill="#FFFDF6"
+                      className="font-bold text-xs"
+                    >
+                      1
+                    </text>
+                    <text
+                      x="400"
+                      y="95"
+                      textAnchor="middle"
+                      className={`fill-maroon font-semibold text-xs transition-colors duration-300 ${selectedMapNode === 0 ? "fill-saffron" : ""}`}
+                    >
                       {lang === "hi" ? "गंगा घाट" : "Ganga Snan"}
                     </text>
                   </g>
@@ -590,10 +672,35 @@ function ParikramaPage() {
                       playBellSound();
                     }}
                   >
-                    <circle cx="220" cy="200" r="16" fill="#D9381E" className="opacity-25 animate-ping" />
-                    <circle cx="220" cy="200" r="12" fill={selectedMapNode === 1 ? "#FF5E36" : "#D9381E"} className="stroke-gold stroke-2 transition-all" />
-                    <text x="220" y="204" textAnchor="middle" fill="#FFFDF6" className="font-bold text-xs">2</text>
-                    <text x="220" y="175" textAnchor="middle" className={`fill-maroon font-semibold text-xs ${selectedMapNode === 1 ? "fill-saffron" : ""}`}>
+                    <circle
+                      cx="220"
+                      cy="200"
+                      r="16"
+                      fill="#D9381E"
+                      className="opacity-25 animate-ping"
+                    />
+                    <circle
+                      cx="220"
+                      cy="200"
+                      r="12"
+                      fill={selectedMapNode === 1 ? "#FF5E36" : "#D9381E"}
+                      className="stroke-gold stroke-2 transition-all"
+                    />
+                    <text
+                      x="220"
+                      y="204"
+                      textAnchor="middle"
+                      fill="#FFFDF6"
+                      className="font-bold text-xs"
+                    >
+                      2
+                    </text>
+                    <text
+                      x="220"
+                      y="175"
+                      textAnchor="middle"
+                      className={`fill-maroon font-semibold text-xs ${selectedMapNode === 1 ? "fill-saffron" : ""}`}
+                    >
                       {lang === "hi" ? "विन्ध्यवासिनी" : "Maa Vindhyavasini"}
                     </text>
                   </g>
@@ -606,10 +713,35 @@ function ParikramaPage() {
                       playBellSound();
                     }}
                   >
-                    <circle cx="400" cy="400" r="16" fill="#D9381E" className="opacity-25 animate-ping" />
-                    <circle cx="400" cy="400" r="12" fill={selectedMapNode === 2 ? "#FF5E36" : "#D9381E"} className="stroke-gold stroke-2 transition-all" />
-                    <text x="400" y="404" textAnchor="middle" fill="#FFFDF6" className="font-bold text-xs">3</text>
-                    <text x="400" y="430" textAnchor="middle" className={`fill-maroon font-semibold text-xs ${selectedMapNode === 2 ? "fill-saffron" : ""}`}>
+                    <circle
+                      cx="400"
+                      cy="400"
+                      r="16"
+                      fill="#D9381E"
+                      className="opacity-25 animate-ping"
+                    />
+                    <circle
+                      cx="400"
+                      cy="400"
+                      r="12"
+                      fill={selectedMapNode === 2 ? "#FF5E36" : "#D9381E"}
+                      className="stroke-gold stroke-2 transition-all"
+                    />
+                    <text
+                      x="400"
+                      y="404"
+                      textAnchor="middle"
+                      fill="#FFFDF6"
+                      className="font-bold text-xs"
+                    >
+                      3
+                    </text>
+                    <text
+                      x="400"
+                      y="430"
+                      textAnchor="middle"
+                      className={`fill-maroon font-semibold text-xs ${selectedMapNode === 2 ? "fill-saffron" : ""}`}
+                    >
                       {lang === "hi" ? "काली खोह" : "Kali Khoh"}
                     </text>
                   </g>
@@ -622,10 +754,35 @@ function ParikramaPage() {
                       playBellSound();
                     }}
                   >
-                    <circle cx="580" cy="200" r="16" fill="#D9381E" className="opacity-25 animate-ping" />
-                    <circle cx="580" cy="200" r="12" fill={selectedMapNode === 3 ? "#FF5E36" : "#D9381E"} className="stroke-gold stroke-2 transition-all" />
-                    <text x="580" y="204" textAnchor="middle" fill="#FFFDF6" className="font-bold text-xs">4</text>
-                    <text x="580" y="175" textAnchor="middle" className={`fill-maroon font-semibold text-xs ${selectedMapNode === 3 ? "fill-saffron" : ""}`}>
+                    <circle
+                      cx="580"
+                      cy="200"
+                      r="16"
+                      fill="#D9381E"
+                      className="opacity-25 animate-ping"
+                    />
+                    <circle
+                      cx="580"
+                      cy="200"
+                      r="12"
+                      fill={selectedMapNode === 3 ? "#FF5E36" : "#D9381E"}
+                      className="stroke-gold stroke-2 transition-all"
+                    />
+                    <text
+                      x="580"
+                      y="204"
+                      textAnchor="middle"
+                      fill="#FFFDF6"
+                      className="font-bold text-xs"
+                    >
+                      4
+                    </text>
+                    <text
+                      x="580"
+                      y="175"
+                      textAnchor="middle"
+                      className={`fill-maroon font-semibold text-xs ${selectedMapNode === 3 ? "fill-saffron" : ""}`}
+                    >
                       {lang === "hi" ? "अष्टभुजा" : "Ashtabhuja Devi"}
                     </text>
                   </g>
@@ -633,9 +790,20 @@ function ParikramaPage() {
 
                 {/* Legend overlay */}
                 <div className="absolute bottom-4 left-4 right-4 bg-background/95 backdrop-blur border border-gold/25 rounded-xl p-3 flex gap-4 text-xs shadow-md">
-                  <div className="flex items-center gap-1.5"><div className="w-3 h-3 rounded-full bg-blue-400 opacity-70" /> {lang === "hi" ? "पवित्र गंगा" : "River Ganges"}</div>
-                  <div className="flex items-center gap-1.5"><div className="w-3 h-3 rounded-full bg-gold border border-maroon" /> {lang === "hi" ? "त्रिकोण मार्ग" : "Trikona Route (12 km)"}</div>
-                  <div className="flex items-center gap-1.5"><Info size={14} className="text-saffron shrink-0" /> {lang === "hi" ? "परिक्रमा क्रम: १ → २ → ३ → ४" : "Pilgrim order: 1 → 2 → 3 → 4"}</div>
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-3 h-3 rounded-full bg-blue-400 opacity-70" />{" "}
+                    {lang === "hi" ? "पवित्र गंगा" : "River Ganges"}
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-3 h-3 rounded-full bg-gold border border-maroon" />{" "}
+                    {lang === "hi" ? "त्रिकोण मार्ग" : "Trikona Route (12 km)"}
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <Info size={14} className="text-saffron shrink-0" />{" "}
+                    {lang === "hi"
+                      ? "परिक्रमा क्रम: १ → २ → ३ → ४"
+                      : "Pilgrim order: 1 → 2 → 3 → 4"}
+                  </div>
                 </div>
               </div>
             </div>
@@ -652,7 +820,9 @@ function ParikramaPage() {
                     />
                     <div className="absolute inset-0 bg-gradient-overlay" />
                     <div className="absolute bottom-3 left-3 bg-gradient-sacred text-cream text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded border border-gold/40">
-                      {lang === "hi" ? `स्थान ${selectedMapNode + 1}` : `Location ${selectedMapNode + 1}`}
+                      {lang === "hi"
+                        ? `स्थान ${selectedMapNode + 1}`
+                        : `Location ${selectedMapNode + 1}`}
                     </div>
                   </div>
 
@@ -675,7 +845,9 @@ function ParikramaPage() {
                     {lang === "hi" ? "त्रिकोण मार्ग का अन्वेषण करें" : "Explore the Trikona Route"}
                   </h4>
                   <p className="text-xs text-muted-foreground mt-1 max-w-[200px]">
-                    {lang === "hi" ? "मानचित्र पर किसी भी तीर्थ स्थल को चुनें" : "Tap on any pilgrim spot on the map to begin exploration"}
+                    {lang === "hi"
+                      ? "मानचित्र पर किसी भी तीर्थ स्थल को चुनें"
+                      : "Tap on any pilgrim spot on the map to begin exploration"}
                   </p>
                 </div>
               )}
@@ -683,7 +855,9 @@ function ParikramaPage() {
               <div className="mt-6 border-t border-gold/10 pt-4 flex flex-col gap-3">
                 {selectedMapNode !== null && (
                   <button
-                    onClick={() => toggleNarration(selectedMapNode, stages[selectedMapNode].audioText)}
+                    onClick={() =>
+                      toggleNarration(selectedMapNode, stages[selectedMapNode].audioText)
+                    }
                     className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-saffron/40 text-saffron font-medium text-sm hover:bg-saffron/10 transition"
                   >
                     {speakingStep === selectedMapNode ? (
@@ -763,15 +937,17 @@ function ParikramaPage() {
                           st.id === activeStep
                             ? "bg-saffron shadow-gold"
                             : st.id < activeStep
-                            ? "bg-maroon"
-                            : "bg-cream border border-gold/20"
+                              ? "bg-maroon"
+                              : "bg-cream border border-gold/20"
                         }`}
                       />
                     ))}
                     {/* Final step slot for certificate */}
                     <div
                       className={`h-2 rounded-full transition-all flex-1 ${
-                        activeStep === 4 ? "bg-saffron shadow-gold" : "bg-cream border border-gold/20"
+                        activeStep === 4
+                          ? "bg-saffron shadow-gold"
+                          : "bg-cream border border-gold/20"
                       }`}
                     />
                   </div>
@@ -805,7 +981,9 @@ function ParikramaPage() {
 
                 {/* RITUAL ACTIONS SECTION */}
                 <div className="my-8 p-5 rounded-2xl bg-cream/25 border border-gold/20 shadow-inner">
-                  <h4 className={`text-xs uppercase tracking-widest text-maroon font-bold mb-3 flex items-center gap-1.5 ${dev}`}>
+                  <h4
+                    className={`text-xs uppercase tracking-widest text-maroon font-bold mb-3 flex items-center gap-1.5 ${dev}`}
+                  >
                     <Sparkles size={14} className="text-saffron" />
                     {lang === "hi" ? "आध्यात्मिक अनुष्ठान" : "Sacred Ritual Activity"}
                   </h4>
@@ -860,7 +1038,9 @@ function ParikramaPage() {
                             setTimeout(() => setIsBellShaking(false), 800);
                           }}
                           className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition ${
-                            ritualBellRung ? "bg-amber-600 text-cream" : "bg-cream border-2 border-gold text-maroon hover:bg-gold/15"
+                            ritualBellRung
+                              ? "bg-amber-600 text-cream"
+                              : "bg-cream border-2 border-gold text-maroon hover:bg-gold/15"
                           }`}
                         >
                           <Bell size={16} className={isBellShaking ? "animate-bounce" : ""} />
@@ -882,7 +1062,9 @@ function ParikramaPage() {
 
                       {(ritualBellRung || ritualFlowersOffered) && (
                         <div className="text-xs text-saffron font-bold italic animate-pulse">
-                          {lang === "hi" ? "॥ जय माँ विन्ध्यवासिनी - भक्ति अर्पण स्वीकार हुआ ॥" : "॥ Jai Maa Vindhyavasini - Devotion Offered ॥"}
+                          {lang === "hi"
+                            ? "॥ जय माँ विन्ध्यवासिनी - भक्ति अर्पण स्वीकार हुआ ॥"
+                            : "॥ Jai Maa Vindhyavasini - Devotion Offered ॥"}
                         </div>
                       )}
                     </div>
@@ -949,7 +1131,9 @@ function ParikramaPage() {
 
                         {ritualThreadTied && (
                           <span className="text-xs text-amber-700 font-bold italic animate-pulse">
-                            {lang === "hi" ? "संकल्प पूर्ण हुआ! माँ कल्याण करेंगी।" : "Sankalpa Sealed! Maa protects always."}
+                            {lang === "hi"
+                              ? "संकल्प पूर्ण हुआ! माँ कल्याण करेंगी।"
+                              : "Sankalpa Sealed! Maa protects always."}
                           </span>
                         )}
                       </div>
@@ -1034,12 +1218,7 @@ function ParikramaPage() {
             ) : (
               <div className="mb-6 flex flex-col items-center">
                 {/* Real hidden Canvas for exporting */}
-                <canvas
-                  ref={certCanvasRef}
-                  width="1200"
-                  height="850"
-                  className="hidden"
-                />
+                <canvas ref={certCanvasRef} width="1200" height="850" className="hidden" />
 
                 {/* Styled Preview Container */}
                 <div className="w-full max-w-xl aspect-[1200/850] rounded-xl border-2 border-gold/40 shadow-lg overflow-hidden bg-background relative mb-6">
@@ -1071,15 +1250,11 @@ function ParikramaPage() {
                       </div>
 
                       <div className="flex justify-between items-end text-[8px] text-muted-foreground px-4">
-                        <div>
-                          Date: {new Date().toLocaleDateString("en-IN")}
-                        </div>
+                        <div>Date: {new Date().toLocaleDateString("en-IN")}</div>
                         <div className="w-8 h-8 rounded-full bg-gold/50 flex items-center justify-center text-[7px] text-maroon font-bold border border-maroon">
                           SEAL
                         </div>
-                        <div>
-                          By: Pujya Guru Ji
-                        </div>
+                        <div>By: Pujya Guru Ji</div>
                       </div>
                     </div>
                   </div>

@@ -15,13 +15,19 @@ export function LangProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     try {
-      const saved = (localStorage.getItem("nv_lang") as Lang | null);
+      const saved = localStorage.getItem("nv_lang") as Lang | null;
       if (saved === "en" || saved === "hi") setLangState(saved);
-    } catch {}
+    } catch (error) {
+      console.warn("LangProvider: failed to read nv_lang from localStorage", error);
+    }
   }, []);
 
   useEffect(() => {
-    try { localStorage.setItem("nv_lang", lang); } catch {}
+    try {
+      localStorage.setItem("nv_lang", lang);
+    } catch (error) {
+      console.warn("LangProvider: failed to write nv_lang to localStorage", error);
+    }
     if (typeof document !== "undefined") {
       document.documentElement.lang = lang === "hi" ? "hi" : "en";
     }
@@ -29,11 +35,14 @@ export function LangProvider({ children }: { children: ReactNode }) {
 
   const setLang = useCallback((l: Lang) => setLangState(l), []);
   const toggle = useCallback(() => setLangState((p) => (p === "en" ? "hi" : "en")), []);
-  const t = useCallback((key: TKey) => {
-    const entry = translations[key];
-    if (!entry) return key;
-    return entry[lang] ?? entry.en ?? key;
-  }, [lang]);
+  const t = useCallback(
+    (key: TKey) => {
+      const entry = translations[key];
+      if (!entry) return key;
+      return entry[lang] ?? entry.en ?? key;
+    },
+    [lang],
+  );
 
   return <LangCtx.Provider value={{ lang, setLang, toggle, t }}>{children}</LangCtx.Provider>;
 }

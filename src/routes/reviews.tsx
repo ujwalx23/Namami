@@ -12,9 +12,16 @@ export const Route = createFileRoute("/reviews")({
   head: () => ({
     meta: [
       { title: "Reviews & Comments — Namami Vindhyavasini" },
-      { name: "description", content: "Read what devotees say about their experience and share your own feedback with the trust." },
+      {
+        name: "description",
+        content:
+          "Read what devotees say about their experience and share your own feedback with the trust.",
+      },
       { property: "og:title", content: "Devotee Reviews & Feedback" },
-      { property: "og:description", content: "Share your experience with Namami Vindhyavasini Sansthan." },
+      {
+        property: "og:description",
+        content: "Share your experience with Namami Vindhyavasini Sansthan.",
+      },
     ],
   }),
   loader: async () => {
@@ -27,11 +34,18 @@ export const Route = createFileRoute("/reviews")({
     return { reviews: (data ?? []) as Review[] };
   },
   errorComponent: ({ error }) => (
-    <PageShell><PageHero title="Reviews" subtitle="Could not load reviews." />
-      <div className="container mx-auto px-6 py-10 text-center text-muted-foreground">{error.message}</div>
+    <PageShell>
+      <PageHero title="Reviews" subtitle="Could not load reviews." />
+      <div className="container mx-auto px-6 py-10 text-center text-muted-foreground">
+        {error.message}
+      </div>
     </PageShell>
   ),
-  notFoundComponent: () => <PageShell><PageHero title="Not found" /></PageShell>,
+  notFoundComponent: () => (
+    <PageShell>
+      <PageHero title="Not found" />
+    </PageShell>
+  ),
   component: ReviewsPage,
 });
 
@@ -44,7 +58,11 @@ function timeAgo(iso: string) {
   if (h < 24) return `${h}h ago`;
   const d = Math.floor(h / 24);
   if (d < 30) return `${d}d ago`;
-  return new Date(iso).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+  return new Date(iso).toLocaleDateString("en-IN", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
 }
 
 function ReviewsPage() {
@@ -83,10 +101,15 @@ function ReviewsPage() {
         subtitle={t("reviews.subtitle")}
       />
       <section className="container mx-auto px-6 py-16 grid lg:grid-cols-5 gap-10">
-        <form onSubmit={submit} className="lg:col-span-2 p-7 rounded-2xl bg-card border border-border shadow-gold/30 h-fit">
+        <form
+          onSubmit={submit}
+          className="lg:col-span-2 p-7 rounded-2xl bg-card border border-border shadow-gold/30 h-fit"
+        >
           <h2 className={`font-display text-2xl text-maroon mb-5 ${dev}`}>{t("reviews.leave")}</h2>
           <label className="block mb-4">
-            <span className={`text-sm font-medium text-foreground/80 ${dev}`}>{t("reviews.name")}</span>
+            <span className={`text-sm font-medium text-foreground/80 ${dev}`}>
+              {t("reviews.name")}
+            </span>
             <input
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -97,7 +120,9 @@ function ReviewsPage() {
             />
           </label>
           <label className="block mb-5">
-            <span className={`text-sm font-medium text-foreground/80 ${dev}`}>{t("reviews.comment")}</span>
+            <span className={`text-sm font-medium text-foreground/80 ${dev}`}>
+              {t("reviews.comment")}
+            </span>
             <textarea
               value={comment}
               onChange={(e) => setComment(e.target.value)}
@@ -124,7 +149,10 @@ function ReviewsPage() {
             <p className={`text-muted-foreground ${dev}`}>{t("reviews.first")}</p>
           )}
           {reviews.map((r: Review) => (
-            <article key={r.id} className="p-6 rounded-2xl bg-card border border-border hover:border-gold/50 transition">
+            <article
+              key={r.id}
+              className="p-6 rounded-2xl bg-card border border-border hover:border-gold/50 transition"
+            >
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-10 h-10 rounded-full bg-gradient-sacred flex items-center justify-center text-cream font-display">
                   {r.name.charAt(0).toUpperCase()}

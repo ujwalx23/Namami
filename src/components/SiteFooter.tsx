@@ -27,7 +27,9 @@ export function SiteFooter() {
             </div>
             <div>
               <div className="font-display text-xl text-gold">{t("brand.name")}</div>
-              <div className="text-xs uppercase tracking-[0.2em] text-cream/60">{t("brand.tag")}</div>
+              <div className="text-xs uppercase tracking-[0.2em] text-cream/60">
+                {t("brand.tag")}
+              </div>
             </div>
           </div>
           <p className="text-sm text-cream/70 max-w-md leading-relaxed">{t("footer.tagline")}</p>
@@ -51,7 +53,11 @@ export function SiteFooter() {
           <h4 className="font-display text-gold text-lg mb-4">{t("footer.quick")}</h4>
           <ul className="space-y-2 text-sm">
             {quickLinks.map((l) => (
-              <li key={l.to}><Link to={l.to} className="hover:text-gold">{t(l.key)}</Link></li>
+              <li key={l.to}>
+                <Link to={l.to} className="hover:text-gold">
+                  {t(l.key)}
+                </Link>
+              </li>
             ))}
           </ul>
         </div>
@@ -59,9 +65,18 @@ export function SiteFooter() {
         <div>
           <h4 className="font-display text-gold text-lg mb-4">{t("footer.reach")}</h4>
           <ul className="space-y-3 text-sm text-cream/80">
-            <li className="flex items-start gap-2"><MapPin size={16} className="mt-0.5 text-gold" /><span>{t("footer.address")}</span></li>
-            <li className="flex items-center gap-2"><Phone size={16} className="text-gold" /><a href="tel:+919334339505">+91 93343 39505</a></li>
-            <li className="flex items-center gap-2"><Mail size={16} className="text-gold" /><a href="mailto:info@namamivindhyavasini.org">info@namamivindhyavasini.org</a></li>
+            <li className="flex items-start gap-2">
+              <MapPin size={16} className="mt-0.5 text-gold" />
+              <span>{t("footer.address")}</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <Phone size={16} className="text-gold" />
+              <a href="tel:+919334339505">+91 93343 39505</a>
+            </li>
+            <li className="flex items-center gap-2">
+              <Mail size={16} className="text-gold" />
+              <a href="mailto:info@namamivindhyavasini.org">info@namamivindhyavasini.org</a>
+            </li>
           </ul>
         </div>
       </div>

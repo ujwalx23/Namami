@@ -27,8 +27,14 @@ export function SiteHeader() {
             <span className="text-cream font-display text-lg">ॐ</span>
           </div>
           <div className="leading-tight">
-            <div className={`font-display text-lg text-maroon ${lang === "hi" ? "font-devanagari" : ""}`}>{t("brand.name")}</div>
-            <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{t("brand.tag")}</div>
+            <div
+              className={`font-display text-lg text-maroon ${lang === "hi" ? "font-devanagari" : ""}`}
+            >
+              {t("brand.name")}
+            </div>
+            <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+              {t("brand.tag")}
+            </div>
           </div>
         </Link>
 
@@ -70,7 +76,11 @@ export function SiteHeader() {
           >
             <Languages size={12} /> {t("lang.toggle")}
           </button>
-          <button onClick={() => setOpen(!open)} className="p-2 text-maroon" aria-label={t("nav.menu")}>
+          <button
+            onClick={() => setOpen(!open)}
+            className="p-2 text-maroon"
+            aria-label={t("nav.menu")}
+          >
             {open ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>

@@ -28,8 +28,14 @@ export const translations = {
   },
   "footer.quick": { en: "Quick Links", hi: "त्वरित लिंक" },
   "footer.reach": { en: "Reach Us", hi: "हमसे संपर्क" },
-  "footer.address": { en: "Vindhyachal Dham, Mirzapur, UP", hi: "विन्ध्याचल धाम, मिर्जापुर, उ.प्र." },
-  "footer.copy": { en: "Namami Vindhyavasini Sansthan ✦ Jai Maa Vindhyavasini", hi: "नमामि विन्ध्यवासिनी संस्थान ✦ जय माँ विन्ध्यवासिनी" },
+  "footer.address": {
+    en: "Vindhyachal Dham, Mirzapur, UP",
+    hi: "विन्ध्याचल धाम, मिर्जापुर, उ.प्र.",
+  },
+  "footer.copy": {
+    en: "Namami Vindhyavasini Sansthan ✦ Jai Maa Vindhyavasini",
+    hi: "नमामि विन्ध्यवासिनी संस्थान ✦ जय माँ विन्ध्यवासिनी",
+  },
 
   // ---- Home page ----
   "home.badge": { en: "Jai Maa Vindhyavasini", hi: "जय माँ विन्ध्यवासिनी" },
@@ -132,17 +138,29 @@ export const translations = {
     hi: "विन्ध्याचल भारत के ५१/१०८ शक्तिपीठों में परिगणित है। यह उन विरले स्थलों में से एक है जहाँ देवी तीन जीवन्त रूपों में पूजित हैं — मुख्य मंदिर में महालक्ष्मी, काली खोह में महाकाली एवं अष्टभुजा रूप में महासरस्वती। त्रिकोण परिक्रमा को चार धाम यात्रा के समान फलदायी माना गया है। यह धाम श्रीविद्या परम्परा के साधक, तांत्रिक उपासक, शास्त्रीय कवि एवं गायक (कजरी महोत्सव ने अनगिनत लोक-कवियों को जन्म दिया है), तथा सन्तान, समृद्धि, विद्या एवं रक्षा की कामना से आये करोड़ों गृहस्थ भक्तों को आकर्षित करता है।",
   },
 
-  "about.trikona.title": { en: "Trikona Parikrama — The Sacred Triangle", hi: "त्रिकोण परिक्रमा — पावन त्रिकोण" },
+  "about.trikona.title": {
+    en: "Trikona Parikrama — The Sacred Triangle",
+    hi: "त्रिकोण परिक्रमा — पावन त्रिकोण",
+  },
   "about.trikona.text": {
     en: "Vindhyachal is unique because three forms of the Devi are worshipped here as the Maha Trishakti — Maha Lakshmi, Maha Kali and Maha Saraswati. Devotees complete the Trikona Parikrama by visiting all three temples in one circuit.",
     hi: "विन्ध्याचल इसलिए अद्वितीय है क्योंकि यहाँ देवी के तीन रूपों — महालक्ष्मी, महाकाली एवं महासरस्वती — की महात्रिशक्ति के रूप में उपासना होती है। भक्तगण तीनों मंदिरों के दर्शन कर त्रिकोण परिक्रमा सम्पन्न करते हैं।",
   },
   "about.tri.1.title": { en: "Vindhyavasini Mandir", hi: "विन्ध्यवासिनी मंदिर" },
-  "about.tri.1.text": { en: "Main shrine — Devi as Maha Lakshmi / Yogmaya, on the bank of the Ganga.", hi: "मुख्य मंदिर — गंगा तट पर देवी महालक्ष्मी / योगमाया के रूप में।" },
+  "about.tri.1.text": {
+    en: "Main shrine — Devi as Maha Lakshmi / Yogmaya, on the bank of the Ganga.",
+    hi: "मुख्य मंदिर — गंगा तट पर देवी महालक्ष्मी / योगमाया के रूप में।",
+  },
   "about.tri.2.title": { en: "Kali Khoh Mandir", hi: "काली खोह मंदिर" },
-  "about.tri.2.text": { en: "Ancient cave shrine, ~6 km away — Devi as Maha Kali, slayer of Raktabeeja.", hi: "प्राचीन गुफा मंदिर, लगभग ६ किमी दूर — रक्तबीज के संहारक रूप में देवी महाकाली।" },
+  "about.tri.2.text": {
+    en: "Ancient cave shrine, ~6 km away — Devi as Maha Kali, slayer of Raktabeeja.",
+    hi: "प्राचीन गुफा मंदिर, लगभग ६ किमी दूर — रक्तबीज के संहारक रूप में देवी महाकाली।",
+  },
   "about.tri.3.title": { en: "Ashtabhuja Devi Mandir", hi: "अष्टभुजा देवी मंदिर" },
-  "about.tri.3.text": { en: "Hilltop shrine, ~8 km away — Devi as Maha Saraswati, eight-armed form.", hi: "पर्वत-शिखर मंदिर, लगभग ८ किमी दूर — अष्टभुज रूप में देवी महासरस्वती।" },
+  "about.tri.3.text": {
+    en: "Hilltop shrine, ~8 km away — Devi as Maha Saraswati, eight-armed form.",
+    hi: "पर्वत-शिखर मंदिर, लगभग ८ किमी दूर — अष्टभुज रूप में देवी महासरस्वती।",
+  },
 
   "about.corridor.title": { en: "Vindhya Corridor", hi: "विन्ध्य कॉरिडोर" },
   "about.corridor.text": {
@@ -157,42 +175,78 @@ export const translations = {
   },
 
   "about.access.title": { en: "How to Reach", hi: "कैसे पहुँचें" },
-  "about.access.air": { en: "Air: Lal Bahadur Shastri Airport, Varanasi (~72 km).", hi: "वायुमार्ग: लाल बहादुर शास्त्री हवाई अड्डा, वाराणसी (~७२ किमी)।" },
-  "about.access.rail": { en: "Rail: Vindhyachal Railway Station (BDL) ~1 km, Mirzapur (MZP) ~9 km.", hi: "रेलमार्ग: विन्ध्याचल रेलवे स्टेशन (BDL) ~१ किमी, मिर्जापुर (MZP) ~९ किमी।" },
-  "about.access.road": { en: "Road: Connected via NH-2; state buses, taxis and local cars available.", hi: "सड़क मार्ग: NH-2 से जुड़ा; राज्य परिवहन की बसें, टैक्सी एवं स्थानीय वाहन उपलब्ध।" },
+  "about.access.air": {
+    en: "Air: Lal Bahadur Shastri Airport, Varanasi (~72 km).",
+    hi: "वायुमार्ग: लाल बहादुर शास्त्री हवाई अड्डा, वाराणसी (~७२ किमी)।",
+  },
+  "about.access.rail": {
+    en: "Rail: Vindhyachal Railway Station (BDL) ~1 km, Mirzapur (MZP) ~9 km.",
+    hi: "रेलमार्ग: विन्ध्याचल रेलवे स्टेशन (BDL) ~१ किमी, मिर्जापुर (MZP) ~९ किमी।",
+  },
+  "about.access.road": {
+    en: "Road: Connected via NH-2; state buses, taxis and local cars available.",
+    hi: "सड़क मार्ग: NH-2 से जुड़ा; राज्य परिवहन की बसें, टैक्सी एवं स्थानीय वाहन उपलब्ध।",
+  },
 
   "about.sansthan.title": { en: "Our Sansthan", hi: "हमारा संस्थान" },
   "about.sansthan.text": {
     en: "Namami Vindhyavasini Sansthan is a devotional trust established under the divine inspiration of Pujya Guru Ji to preserve the sacred rituals of Maa Vindhyavasini and to serve every devotee who seeks her refuge. We organise satsang, annakut bhandara, vidya daan and seva activities — making the temple a living centre of bhakti.",
-    hi: "नमामि विन्ध्यवासिनी संस्थान पूज्य गुरुजी की दिव्य प्रेरणा से स्थापित एक भक्तिमय न्यास है, जिसका उद्देश्य माँ विन्ध्यवासिनी की पावन परम्पराओं की रक्षा और प्रत्येक शरणागत भक्त की सेवा करना है। हम सत्संग, अन्नकूट भंडारा, विद्या दान और सेवा गतिविधियों का आयोजन करते हैं — जिससे यह मंदिर भक्ति का एक जीवंत केंद्र बनता है।"
+    hi: "नमामि विन्ध्यवासिनी संस्थान पूज्य गुरुजी की दिव्य प्रेरणा से स्थापित एक भक्तिमय न्यास है, जिसका उद्देश्य माँ विन्ध्यवासिनी की पावन परम्पराओं की रक्षा और प्रत्येक शरणागत भक्त की सेवा करना है। हम सत्संग, अन्नकूट भंडारा, विद्या दान और सेवा गतिविधियों का आयोजन करते हैं — जिससे यह मंदिर भक्ति का एक जीवंत केंद्र बनता है।",
   },
 
   "about.values.vision.t": { en: "Vision", hi: "दृष्टि" },
-  "about.values.vision.v": { en: "A world rooted in dharma, devotion and seva.", hi: "धर्म, भक्ति और सेवा में रचा-बसा एक संसार।" },
+  "about.values.vision.v": {
+    en: "A world rooted in dharma, devotion and seva.",
+    hi: "धर्म, भक्ति और सेवा में रचा-बसा एक संसार।",
+  },
   "about.values.mission.t": { en: "Mission", hi: "ध्येय" },
-  "about.values.mission.v": { en: "To preserve sacred traditions and serve devotees with bhakti and humility.", hi: "पवित्र परम्पराओं की रक्षा तथा विनम्रता एवं भक्ति से भक्तों की सेवा।" },
+  "about.values.mission.v": {
+    en: "To preserve sacred traditions and serve devotees with bhakti and humility.",
+    hi: "पवित्र परम्पराओं की रक्षा तथा विनम्रता एवं भक्ति से भक्तों की सेवा।",
+  },
   "about.values.values.t": { en: "Values", hi: "मूल्य" },
-  "about.values.values.v": { en: "Shraddha • Seva • Satsang • Sanskar • Shanti", hi: "श्रद्धा • सेवा • सत्संग • संस्कार • शान्ति" },
+  "about.values.values.v": {
+    en: "Shraddha • Seva • Satsang • Sanskar • Shanti",
+    hi: "श्रद्धा • सेवा • सत्संग • संस्कार • शान्ति",
+  },
 
   "reviews.sanskrit": { en: "॥ भक्त वाणी ॥", hi: "॥ भक्त वाणी ॥" },
   "reviews.title": { en: "Devotee Reviews & Feedback", hi: "भक्तों के विचार और अनुभव" },
-  "reviews.subtitle": { en: "Read what devotees say about their experience and share your own feedback with the trust.", hi: "भक्तों के पावन अनुभव पढ़ें और संस्थान के साथ अपने विचार साझा करें।" },
+  "reviews.subtitle": {
+    en: "Read what devotees say about their experience and share your own feedback with the trust.",
+    hi: "भक्तों के पावन अनुभव पढ़ें और संस्थान के साथ अपने विचार साझा करें।",
+  },
   "reviews.leave": { en: "Leave a Comment", hi: "टिप्पणी दीजिये" },
   "reviews.name": { en: "Your Name", hi: "आपका नाम" },
   "reviews.name.ph": { en: "Devotee name", hi: "भक्त का नाम" },
   "reviews.comment": { en: "Your Comment", hi: "आपकी टिप्पणी" },
-  "reviews.comment.ph": { en: "Share your blessings, feedback or experience...", hi: "अपना अनुभव, आशीर्वाद या प्रतिक्रिया साझा करें..." },
+  "reviews.comment.ph": {
+    en: "Share your blessings, feedback or experience...",
+    hi: "अपना अनुभव, आशीर्वाद या प्रतिक्रिया साझा करें...",
+  },
   "reviews.submit": { en: "Submit Comment", hi: "टिप्पणी भेजें" },
   "reviews.submitting": { en: "Submitting...", hi: "भेज रहे हैं..." },
   "reviews.what": { en: "What Devotees Say", hi: "भक्त क्या कहते हैं" },
-  "reviews.first": { en: "Be the first to share your experience.", hi: "अनुभव साझा करने वाले प्रथम बनें।" },
-  "reviews.thanks": { en: "Dhanyavaad! Your comment has been received.", hi: "धन्यवाद! आपकी टिप्पणी प्राप्त हो गयी है।" },
-  "reviews.error": { en: "Could not submit your comment. Please try again.", hi: "टिप्पणी सबमिट नहीं हो सकी। कृपया पुनः प्रयास करें।" },
+  "reviews.first": {
+    en: "Be the first to share your experience.",
+    hi: "अनुभव साझा करने वाले प्रथम बनें।",
+  },
+  "reviews.thanks": {
+    en: "Dhanyavaad! Your comment has been received.",
+    hi: "धन्यवाद! आपकी टिप्पणी प्राप्त हो गयी है।",
+  },
+  "reviews.error": {
+    en: "Could not submit your comment. Please try again.",
+    hi: "टिप्पणी सबमिट नहीं हो सकी। कृपया पुनः प्रयास करें।",
+  },
 
   // ---- Donation ----
   "don.sanskrit": { en: "॥ दानं परम धर्मः ॥", hi: "॥ दानं परम धर्मः ॥" },
   "don.title": { en: "Donation & Seva", hi: "दान एवं सेवा" },
-  "don.subtitle": { en: "Your contribution is a sacred offering at the lotus feet of Maa Vindhyavasini.", hi: "आपका योगदान माँ विन्ध्यवासिनी के चरणकमलों पर एक पावन अर्पण है।" },
+  "don.subtitle": {
+    en: "Your contribution is a sacred offering at the lotus feet of Maa Vindhyavasini.",
+    hi: "आपका योगदान माँ विन्ध्यवासिनी के चरणकमलों पर एक पावन अर्पण है।",
+  },
   "don.bless": { en: "Bless this Seva", hi: "इस सेवा को आशीर्वाद दें" },
   "don.kicker": { en: "Daan Punya", hi: "दान-पुण्य" },
   "don.h2": { en: "Be Part of the Seva", hi: "सेवा का अंग बनें" },
@@ -201,26 +255,47 @@ export const translations = {
     hi: "आपका दिया हुआ हर रुपया माँ के चरणों में पुष्प बन जाता है — जिससे भक्तों को भोजन, दीप प्रज्वलन, बच्चों की शिक्षा और परम्पराओं की रक्षा होती है। दान हेतु बैंक/UPI विवरण के लिए कृपया हमसे सीधे सम्पर्क करें।",
   },
   "don.quick": { en: "Quick Donate", hi: "त्वरित दान" },
-  "don.quick.bank": { en: "Bank / UPI details available on request", hi: "बैंक / UPI विवरण अनुरोध पर उपलब्ध" },
+  "don.quick.bank": {
+    en: "Bank / UPI details available on request",
+    hi: "बैंक / UPI विवरण अनुरोध पर उपलब्ध",
+  },
   "don.contactbtn": { en: "Contact for Donation", hi: "दान हेतु संपर्क" },
   "don.where": { en: "Where Your Contribution Goes", hi: "आपका योगदान कहाँ लगता है" },
   "don.cause.1.t": { en: "Mandir Seva", hi: "मंदिर सेवा" },
-  "don.cause.1.x": { en: "Daily aarti, decoration, lighting and upkeep of the temple.", hi: "दैनिक आरती, श्रृंगार, प्रकाश एवं मंदिर का रख-रखाव।" },
+  "don.cause.1.x": {
+    en: "Daily aarti, decoration, lighting and upkeep of the temple.",
+    hi: "दैनिक आरती, श्रृंगार, प्रकाश एवं मंदिर का रख-रखाव।",
+  },
   "don.cause.2.t": { en: "Annadanam / Bhandara", hi: "अन्नदानम / भण्डारा" },
-  "don.cause.2.x": { en: "Sponsor prasad and meals for devotees and the needy.", hi: "भक्तों एवं ज़रूरतमंदों के लिए प्रसाद एवं भोजन का सहयोग।" },
+  "don.cause.2.x": {
+    en: "Sponsor prasad and meals for devotees and the needy.",
+    hi: "भक्तों एवं ज़रूरतमंदों के लिए प्रसाद एवं भोजन का सहयोग।",
+  },
   "don.cause.3.t": { en: "Vidya Daan", hi: "विद्या दान" },
-  "don.cause.3.x": { en: "Support free Vedic, Sanskrit and value education for children.", hi: "बच्चों हेतु निःशुल्क वैदिक, संस्कृत एवं मूल्य-शिक्षा का सहयोग।" },
+  "don.cause.3.x": {
+    en: "Support free Vedic, Sanskrit and value education for children.",
+    hi: "बच्चों हेतु निःशुल्क वैदिक, संस्कृत एवं मूल्य-शिक्षा का सहयोग।",
+  },
   "don.cause.4.t": { en: "Festival Mahotsav", hi: "उत्सव महोत्सव" },
-  "don.cause.4.x": { en: "Help organise Navratri, Janmashtami and other utsavas.", hi: "नवरात्रि, जन्माष्टमी एवं अन्य उत्सवों के आयोजन में सहयोग।" },
+  "don.cause.4.x": {
+    en: "Help organise Navratri, Janmashtami and other utsavas.",
+    hi: "नवरात्रि, जन्माष्टमी एवं अन्य उत्सवों के आयोजन में सहयोग।",
+  },
 
   // ---- Contact ----
   "ct.sanskrit": { en: "॥ अतिथि देवो भव ॥", hi: "॥ अतिथि देवो भव ॥" },
   "ct.title": { en: "Contact & Appointment", hi: "संपर्क एवं समय" },
-  "ct.subtitle": { en: "Reach out, write to us, or book a personal sitting with Pujya Guru Ji.", hi: "हमसे संपर्क करें, पत्र लिखें, या पूज्य गुरुजी से व्यक्तिगत भेंट का समय लें।" },
+  "ct.subtitle": {
+    en: "Reach out, write to us, or book a personal sitting with Pujya Guru Ji.",
+    hi: "हमसे संपर्क करें, पत्र लिखें, या पूज्य गुरुजी से व्यक्तिगत भेंट का समय लें।",
+  },
   "ct.visit": { en: "Visit", hi: "दर्शन" },
   "ct.call": { en: "Call", hi: "फ़ोन" },
   "ct.email": { en: "Email", hi: "ईमेल" },
-  "ct.address": { en: "Vindhyachal Dham, Mirzapur, Uttar Pradesh 231307", hi: "विन्ध्याचल धाम, मिर्जापुर, उत्तर प्रदेश २३१३०७" },
+  "ct.address": {
+    en: "Vindhyachal Dham, Mirzapur, Uttar Pradesh 231307",
+    hi: "विन्ध्याचल धाम, मिर्जापुर, उत्तर प्रदेश २३१३०७",
+  },
   "ct.send.title": { en: "Send a Message", hi: "संदेश भेजें" },
   "ct.f.name": { en: "Your Name", hi: "आपका नाम" },
   "ct.f.email": { en: "Email Address", hi: "ईमेल पता" },
@@ -236,12 +311,21 @@ export const translations = {
   "ct.appt.email": { en: "Email (optional)", hi: "ईमेल (वैकल्पिक)" },
   "ct.appt.date": { en: "Date", hi: "तिथि" },
   "ct.appt.slot": { en: "Time slot", hi: "समय" },
-  "ct.appt.purpose": { en: "Purpose of meeting (darshan, blessings, guidance...)", hi: "भेंट का उद्देश्य (दर्शन, आशीर्वाद, मार्गदर्शन...)" },
+  "ct.appt.purpose": {
+    en: "Purpose of meeting (darshan, blessings, guidance...)",
+    hi: "भेंट का उद्देश्य (दर्शन, आशीर्वाद, मार्गदर्शन...)",
+  },
   "ct.appt.submit": { en: "Request Appointment", hi: "समय की अर्ज़" },
   "ct.appt.submitting": { en: "Submitting…", hi: "भेज रहे हैं…" },
   "ct.appt.thanksH": { en: "शुभ संकल्प 🙏", hi: "शुभ संकल्प 🙏" },
-  "ct.appt.thanks": { en: "Your appointment request was received.", hi: "आपकी अर्ज़ प्राप्त हो गयी है।" },
-  "ct.appt.confirm": { en: "We will confirm via phone or email soon.", hi: "हम शीघ्र ही फ़ोन या ईमेल से पुष्टि करेंगे।" },
+  "ct.appt.thanks": {
+    en: "Your appointment request was received.",
+    hi: "आपकी अर्ज़ प्राप्त हो गयी है।",
+  },
+  "ct.appt.confirm": {
+    en: "We will confirm via phone or email soon.",
+    hi: "हम शीघ्र ही फ़ोन या ईमेल से पुष्टि करेंगे।",
+  },
   "ct.appt.toast": { en: "Appointment requested 🙏", hi: "समय की अर्ज़ प्राप्त 🙏" },
   "ct.slot.morning": { en: "Morning (8–10 AM)", hi: "प्रातः (८–१० बजे)" },
   "ct.slot.late": { en: "Late Morning (10 AM–12 PM)", hi: "पूर्वाह्न (१०–१२ बजे)" },
@@ -257,34 +341,61 @@ export const translations = {
   "home.panch.full": { en: "View full Panchang", hi: "पूर्ण पंचांग देखें" },
 
   // ---- Sandesh page ----
-  "sandesh.sanskrit": { en: "॥ गुरुर्ब्रह्मा गुरुर्विष्णुः ॥", hi: "॥ गुरुर्ब्रह्मा गुरुर्विष्णुः ॥" },
+  "sandesh.sanskrit": {
+    en: "॥ गुरुर्ब्रह्मा गुरुर्विष्णुः ॥",
+    hi: "॥ गुरुर्ब्रह्मा गुरुर्विष्णुः ॥",
+  },
   "sandesh.title": { en: "Sandesh", hi: "संदेश" },
-  "sandesh.subtitle": { en: "Daily wisdom, blessings and reflections.", hi: "दैनिक प्रेरणा, आशीर्वाद और चिन्तन।" },
+  "sandesh.subtitle": {
+    en: "Daily wisdom, blessings and reflections.",
+    hi: "दैनिक प्रेरणा, आशीर्वाद और चिन्तन।",
+  },
   "sandesh.today": { en: "Sandesh", hi: "संदेश" },
   "sandesh.another": { en: "Show another", hi: "एक और दिखायें" },
   "sandesh.listen": { en: "Listen", hi: "सुनें" },
   "sandesh.stop": { en: "Stop", hi: "रोकें" },
-  "sandesh.empty": { en: "No sandesh available yet. Please check back soon.", hi: "अभी कोई संदेश उपलब्ध नहीं है। कृपया शीघ्र पुनः पधारें।" },
+  "sandesh.empty": {
+    en: "No sandesh available yet. Please check back soon.",
+    hi: "अभी कोई संदेश उपलब्ध नहीं है। कृपया शीघ्र पुनः पधारें।",
+  },
   "sandesh.more": { en: "More Sandesh", hi: "अन्य संदेश" },
   "sandesh.error": { en: "Could not load sandesh.", hi: "संदेश लोड नहीं हो सके।" },
   "sandesh.loading": { en: "Loading...", hi: "लोड हो रहा है..." },
-  "sandesh.api_key_missing": { en: "ElevenLabs API key is missing. Please set VITE_ELEVENLABS_API_KEY.", hi: "ElevenLabs API कुंजी अनुपलब्ध है। कृपया VITE_ELEVENLABS_API_KEY सेट करें।" },
-  "sandesh.audio_error": { en: "Failed to generate or play audio.", hi: "ऑडियो उत्पन्न करने या बजाने में विफल।" },
+  "sandesh.api_key_missing": {
+    en: "ElevenLabs API key is missing. Please set VITE_ELEVENLABS_API_KEY.",
+    hi: "ElevenLabs API कुंजी अनुपलब्ध है। कृपया VITE_ELEVENLABS_API_KEY सेट करें।",
+  },
+  "sandesh.audio_error": {
+    en: "Failed to generate or play audio.",
+    hi: "ऑडियो उत्पन्न करने या बजाने में विफल।",
+  },
 
   // ---- Events page ----
-  "events.sanskrit": { en: "॥ उत्सव हर भक्त का अधिकार है ॥", hi: "॥ उत्सव प्रत्येक भक्त का अधिकार है ॥" },
+  "events.sanskrit": {
+    en: "॥ उत्सव हर भक्त का अधिकार है ॥",
+    hi: "॥ उत्सव प्रत्येक भक्त का अधिकार है ॥",
+  },
   "events.title": { en: "Temple Events", hi: "मंदिर के कार्यक्रम" },
-  "events.subtitle": { en: "Festivals, satsang and seva programmes — join us in devotion.", hi: "उत्सव, सत्संग एवं सेवा कार्यक्रम — भक्ति में हमारे साथ जुड़ें।" },
+  "events.subtitle": {
+    en: "Festivals, satsang and seva programmes — join us in devotion.",
+    hi: "उत्सव, सत्संग एवं सेवा कार्यक्रम — भक्ति में हमारे साथ जुड़ें।",
+  },
   "events.upcoming": { en: "Upcoming Events", hi: "आगामी कार्यक्रम" },
   "events.past": { en: "Past Events", hi: "पूर्व कार्यक्रम" },
-  "events.empty.up": { en: "No upcoming events scheduled. Please check back soon.", hi: "अभी कोई आगामी कार्यक्रम निर्धारित नहीं है।" },
+  "events.empty.up": {
+    en: "No upcoming events scheduled. Please check back soon.",
+    hi: "अभी कोई आगामी कार्यक्रम निर्धारित नहीं है।",
+  },
   "events.empty.past": { en: "No past events yet.", hi: "अभी कोई पूर्व कार्यक्रम नहीं।" },
   "events.error": { en: "Could not load events.", hi: "कार्यक्रम लोड नहीं हो सके।" },
 
   // ---- Videos page ----
   "videos.sanskrit": { en: "॥ ज्ञानं परमं ध्येयम् ॥", hi: "॥ ज्ञानं परमं ध्येयम् ॥" },
   "videos.title": { en: "Videos", hi: "वीडियो" },
-  "videos.subtitle": { en: "Watch our latest darshan, kirtan and pravachan from Vindhyachal Dham.", hi: "विन्ध्याचल धाम से नवीनतम दर्शन, कीर्तन एवं प्रवचन देखिये।" },
+  "videos.subtitle": {
+    en: "Watch our latest darshan, kirtan and pravachan from Vindhyachal Dham.",
+    hi: "विन्ध्याचल धाम से नवीनतम दर्शन, कीर्तन एवं प्रवचन देखिये।",
+  },
   "videos.tab.videos": { en: "Videos", hi: "वीडियो" },
   "videos.tab.shorts": { en: "Shorts", hi: "शॉर्ट्स" },
   "videos.featured": { en: "Featured Videos", hi: "मुख्य वीडियो" },
@@ -296,12 +407,12 @@ export const translations = {
   "parikrama.title": { en: "Trikona Parikrama", hi: "त्रिकोण परिक्रमा" },
   "parikrama.subtitle": {
     en: "Experience the sacred triangular pilgrim path of Vindhyachal Dham, linking the Maha Trishakti temples.",
-    hi: "महात्रिशक्ति मंदिरों को जोड़ने वाले विन्ध्याचल धाम के पावन त्रिकोणीय तीर्थ मार्ग का अनुभव करें।"
+    hi: "महात्रिशक्ति मंदिरों को जोड़ने वाले विन्ध्याचल धाम के पावन त्रिकोणीय तीर्थ मार्ग का अनुभव करें।",
   },
   "parikrama.map.title": { en: "Sacred Pilgrim Circuit Map", hi: "पावन तीर्थ परिक्रमा मानचित्र" },
   "parikrama.map.info": {
     en: "Tap on any location marker to view details and listen to the sacred history of that spot.",
-    hi: "विवरण देखने और उस स्थान के पावन इतिहास को सुनने के लिए किसी भी स्थान के मार्कर पर टैप करें।"
+    hi: "विवरण देखने और उस स्थान के पावन इतिहास को सुनने के लिए किसी भी स्थान के मार्कर पर टैप करें।",
   },
   "parikrama.start": { en: "Start Virtual Parikrama", hi: "परिक्रमा आरम्भ करें" },
   "parikrama.reset": { en: "Restart Parikrama", hi: "पुनः आरम्भ करें" },
@@ -310,51 +421,84 @@ export const translations = {
   "parikrama.next": { en: "Next Stage", hi: "अगला चरण" },
   "parikrama.prev": { en: "Previous Stage", hi: "पिछला चरण" },
   "parikrama.complete": { en: "Complete Parikrama", hi: "परिक्रमा पूर्ण करें" },
-  
+
   // Stages & Rituals
   "parikrama.stage0.title": { en: "Stage 1: Ganga Snan", hi: "प्रथम चरण: गंगा स्नान" },
-  "parikrama.stage0.subtitle": { en: "Sacred Purification at Ram Gaya Ghat", hi: "राम गया घाट पर पावन स्नान" },
+  "parikrama.stage0.subtitle": {
+    en: "Sacred Purification at Ram Gaya Ghat",
+    hi: "राम गया घाट पर पावन स्नान",
+  },
   "parikrama.stage0.text": {
     en: "We begin our Trikona Parikrama by taking a holy dip in the sacred River Ganges. Feel the pure waters purify your body and soul. Chant, Om Namo Gangayei Vishwarupinyei Narayanyei Namo Namah.",
-    hi: "हम अपनी त्रिकोण परिक्रमा की शुरुआत पतित पावनि गंगा नदी में पवित्र स्नान के साथ करते हैं। अनुभव करें कि यह दिव्य जल आपके तन और मन को पवित्र कर रहा है। बोलें, ॐ नमो गंगायै विश्वरूपिण्यै नारायण्यै नमो नमः।"
+    hi: "हम अपनी त्रिकोण परिक्रमा की शुरुआत पतित पावनि गंगा नदी में पवित्र स्नान के साथ करते हैं। अनुभव करें कि यह दिव्य जल आपके तन और मन को पवित्र कर रहा है। बोलें, ॐ नमो गंगायै विश्वरूपिण्यै नारायण्यै नमो नमः।",
   },
   "parikrama.stage0.btn": { en: "Take Holy Dip", hi: "गंगा स्नान करें" },
-  "parikrama.stage0.action_done": { en: "Purification Complete! You are ready.", hi: "स्नान संपन्न हुआ! आप परिक्रमा के लिए तैयार हैं।" },
+  "parikrama.stage0.action_done": {
+    en: "Purification Complete! You are ready.",
+    hi: "स्नान संपन्न हुआ! आप परिक्रमा के लिए तैयार हैं।",
+  },
 
-  "parikrama.stage1.title": { en: "Stage 2: Maa Vindhyavasini Mandir", hi: "द्वितीय चरण: माँ विन्ध्यवासिनी मंदिर" },
-  "parikrama.stage1.subtitle": { en: "Maha Lakshmi Swaroop — The Main Shrine", hi: "महालक्ष्मी स्वरूप — मुख्य मंदिर" },
+  "parikrama.stage1.title": {
+    en: "Stage 2: Maa Vindhyavasini Mandir",
+    hi: "द्वितीय चरण: माँ विन्ध्यवासिनी मंदिर",
+  },
+  "parikrama.stage1.subtitle": {
+    en: "Maha Lakshmi Swaroop — The Main Shrine",
+    hi: "महालक्ष्मी स्वरूप — मुख्य मंदिर",
+  },
   "parikrama.stage1.text": {
     en: "Now, arrive at the main temple of Maa Vindhyavasini, who sits on the banks of Ganga as Maha Lakshmi. Ring the bell and offer red flowers to the Mother. She is the Yogmaya child of Yashoda, who declared the doom of demon Kansa.",
-    hi: "अब, मुख्य मंदिर माँ विन्ध्यवासिनी के चरणों में पधारें, जो गंगा तट पर महालक्ष्मी के रूप में विराजमान हैं। मंदिर का घंटा बजायें और माँ को लाल पुष्प अर्पित करें। वे यशोदा की वही योगमाया पुत्री हैं, जिन्होंने कंस के विनाश की घोषणा की थी।"
+    hi: "अब, मुख्य मंदिर माँ विन्ध्यवासिनी के चरणों में पधारें, जो गंगा तट पर महालक्ष्मी के रूप में विराजमान हैं। मंदिर का घंटा बजायें और माँ को लाल पुष्प अर्पित करें। वे यशोदा की वही योगमाया पुत्री हैं, जिन्होंने कंस के विनाश की घोषणा की थी।",
   },
   "parikrama.stage1.btn_bell": { en: "Ring Temple Bell", hi: "मंदिर का घंटा बजायें" },
   "parikrama.stage1.btn_flower": { en: "Offer Red Flowers", hi: "लाल पुष्प अर्पित करें" },
 
-  "parikrama.stage2.title": { en: "Stage 3: Kali Khoh Cave Temple", hi: "तृतीय चरण: काली खोह मंदिर" },
-  "parikrama.stage2.subtitle": { en: "Maha Kali Swaroop — The Cave Shrine", hi: "महाकाली स्वरूप — गुफा मंदिर" },
+  "parikrama.stage2.title": {
+    en: "Stage 3: Kali Khoh Cave Temple",
+    hi: "तृतीय चरण: काली खोह मंदिर",
+  },
+  "parikrama.stage2.subtitle": {
+    en: "Maha Kali Swaroop — The Cave Shrine",
+    hi: "महाकाली स्वरूप — गुफा मंदिर",
+  },
   "parikrama.stage2.text": {
     en: "Proceed to Kali Khoh, the cave temple of Maha Kali, nestled in the Vindhya foothills. It is here that Chamunda Devi resides, having destroyed the demons Chanda and Munda. Bow down in silence and offer your devotion.",
-    hi: "विन्ध्य की तलहटी में स्थित महाकाली की गुफा काली खोह की ओर बढ़ें। यहाँ चामुण्डा देवी विराजमान हैं, जिन्होंने चण्ड और मुण्ड का संहार किया था। मौन होकर प्रणाम करें और अपनी भक्ति अर्पित करें।"
+    hi: "विन्ध्य की तलहटी में स्थित महाकाली की गुफा काली खोह की ओर बढ़ें। यहाँ चामुण्डा देवी विराजमान हैं, जिन्होंने चण्ड और मुण्ड का संहार किया था। मौन होकर प्रणाम करें और अपनी भक्ति अर्पित करें।",
   },
   "parikrama.stage2.btn": { en: "Offer Hibiscus (Gudhal)", hi: "गुड़हल का फूल चढ़ाएं" },
 
-  "parikrama.stage3.title": { en: "Stage 4: Maa Ashtabhuja Temple", hi: "चतुर्थ चरण: माँ अष्टभुजा मंदिर" },
-  "parikrama.stage3.subtitle": { en: "Maha Saraswati Swaroop — Hilltop Shrine", hi: "महासरस्वती स्वरूप — पर्वत मंदिर" },
+  "parikrama.stage3.title": {
+    en: "Stage 4: Maa Ashtabhuja Temple",
+    hi: "चतुर्थ चरण: माँ अष्टभुजा मंदिर",
+  },
+  "parikrama.stage3.subtitle": {
+    en: "Maha Saraswati Swaroop — Hilltop Shrine",
+    hi: "महासरस्वती स्वरूप — पर्वत मंदिर",
+  },
   "parikrama.stage3.text": {
     en: "Climb up to Ashtabhuja temple on the hill, dedicated to Maha Saraswati. She is the eighth-armed goddess who guards the holy region. Tie a sacred red thread on the tree, and make your spiritual vow.",
-    hi: "पहाड़ी पर स्थित अष्टभुजा देवी मंदिर की ओर प्रस्थान करें, जो महासरस्वती को समर्पित है। वे अष्टभुज धारिणी देवी हैं जो इस पवित्र क्षेत्र की रक्षा करती हैं। यहाँ वृक्ष पर लाल रक्षा सूत्र बाँधें, और अपना आध्यात्मिक संकल्प लें।"
+    hi: "पहाड़ी पर स्थित अष्टभुजा देवी मंदिर की ओर प्रस्थान करें, जो महासरस्वती को समर्पित है। वे अष्टभुज धारिणी देवी हैं जो इस पवित्र क्षेत्र की रक्षा करती हैं। यहाँ वृक्ष पर लाल रक्षा सूत्र बाँधें, और अपना आध्यात्मिक संकल्प लें।",
   },
-  "parikrama.stage3.btn": { en: "Tie Sacred Thread (Mannat)", hi: "रक्षा सूत्र (मन्नत धागा) बांधें" },
+  "parikrama.stage3.btn": {
+    en: "Tie Sacred Thread (Mannat)",
+    hi: "रक्षा सूत्र (मन्नत धागा) बांधें",
+  },
 
   // Certificate Section
   "parikrama.cert.title": { en: "Sacred Completion", hi: "परिक्रमा पूर्णता" },
-  "parikrama.cert.subtitle": { en: "Receive Your Trikona Parikrama Certificate", hi: "त्रिकोण परिक्रमा का प्रमाणपत्र प्राप्त करें" },
+  "parikrama.cert.subtitle": {
+    en: "Receive Your Trikona Parikrama Certificate",
+    hi: "त्रिकोण परिक्रमा का प्रमाणपत्र प्राप्त करें",
+  },
   "parikrama.cert.desc": {
     en: "Enter your name to generate and download a personalized Blessing Certificate of Trikona Parikrama from Namami Vindhyavasini Sansthan.",
-    hi: "नमामि विन्ध्यवासिनी संस्थान से त्रिकोण परिक्रमा का अपना व्यक्तिगत आशीर्वाद प्रमाणपत्र प्राप्त करने के लिए अपना नाम दर्ज करें।"
+    hi: "नमामि विन्ध्यवासिनी संस्थान से त्रिकोण परिक्रमा का अपना व्यक्तिगत आशीर्वाद प्रमाणपत्र प्राप्त करने के लिए अपना नाम दर्ज करें।",
   },
   "parikrama.cert.input_ph": { en: "Enter Devotee Name", hi: "श्रद्धालु का नाम दर्ज करें" },
-  "parikrama.cert.generate": { en: "Generate Blessing Certificate", hi: "आशीर्वाद प्रमाणपत्र बनायें" },
+  "parikrama.cert.generate": {
+    en: "Generate Blessing Certificate",
+    hi: "आशीर्वाद प्रमाणपत्र बनायें",
+  },
   "parikrama.cert.download": { en: "Download Certificate", hi: "प्रमाणपत्र डाउनलोड करें" },
 } as const;
 

@@ -33,29 +33,33 @@ const DEFAULT_TRACKS: Track[] = [
     title: "Maa Vindhyavasini Aarti",
     artist: "Traditional Aarti",
     url: "/audio/maa_vindhyavasini_aarti.webm",
-    cover: "https://images.unsplash.com/photo-1545128485-c400e7702796?auto=format&fit=crop&q=80&w=400",
+    cover:
+      "https://images.unsplash.com/photo-1545128485-c400e7702796?auto=format&fit=crop&q=80&w=400",
   },
   {
     id: "2",
     title: "Gayatri Mantra",
     artist: "Devotional Chant",
     url: "/audio/gayatri_mantra.webm",
-    cover: "https://images.unsplash.com/photo-1609137144814-6db3501726a4?auto=format&fit=crop&q=80&w=400",
+    cover:
+      "https://images.unsplash.com/photo-1609137144814-6db3501726a4?auto=format&fit=crop&q=80&w=400",
   },
   {
     id: "3",
     title: "Ganesh Mantra",
     artist: "Obstacle Remover",
     url: "/audio/ganesh_mantra.webm",
-    cover: "https://images.unsplash.com/photo-1597523011884-4a3001228005?auto=format&fit=crop&q=80&w=400",
+    cover:
+      "https://images.unsplash.com/photo-1597523011884-4a3001228005?auto=format&fit=crop&q=80&w=400",
   },
   {
     id: "4",
     title: "Ramayan Chaupai",
     artist: "Kumar Vishu",
     url: "/audio/ramayan_chaupai.webm",
-    cover: "https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?auto=format&fit=crop&q=80&w=400",
-  }
+    cover:
+      "https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?auto=format&fit=crop&q=80&w=400",
+  },
 ];
 
 const AudioContext = createContext<AudioContextType | undefined>(undefined);
@@ -110,7 +114,10 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const isSameTrack = currentTrack?.id === track.id;
     if (isSameTrack) {
       if (!isPlaying) {
-        audioRef.current.play().then(() => setIsPlaying(true)).catch(console.error);
+        audioRef.current
+          .play()
+          .then(() => setIsPlaying(true))
+          .catch(console.error);
       }
       return;
     }
@@ -120,9 +127,10 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setCurrentTrack(track);
     audioRef.current.src = track.url;
     audioRef.current.load();
-    
+
     // Play new
-    audioRef.current.play()
+    audioRef.current
+      .play()
       .then(() => {
         setIsPlaying(true);
       })
@@ -147,7 +155,10 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     if (isPlaying) {
       pauseTrack();
     } else {
-      audioRef.current?.play().then(() => setIsPlaying(true)).catch(console.error);
+      audioRef.current
+        ?.play()
+        .then(() => setIsPlaying(true))
+        .catch(console.error);
     }
   };
 

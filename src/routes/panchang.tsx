@@ -1,15 +1,34 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell, PageHero } from "@/components/PageShell";
-import { Sun, Moon, Star, Sunrise, Sunset, Clock, Sparkles, CalendarDays, ChevronLeft, ChevronRight, Calendar } from "lucide-react";
+import {
+  Sun,
+  Moon,
+  Star,
+  Sunrise,
+  Sunset,
+  Clock,
+  Sparkles,
+  CalendarDays,
+  ChevronLeft,
+  ChevronRight,
+  Calendar,
+} from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 export const Route = createFileRoute("/panchang")({
   head: () => ({
     meta: [
       { title: "Daily Panchang & Festival Calendar — Namami Vindhyavasini" },
-      { name: "description", content: "Auto-updating daily Panchang for Vindhyachal Dham — Tithi, Nakshatra, sunrise & sunset, plus the complete Hindu festival calendar." },
+      {
+        name: "description",
+        content:
+          "Auto-updating daily Panchang for Vindhyachal Dham — Tithi, Nakshatra, sunrise & sunset, plus the complete Hindu festival calendar.",
+      },
       { property: "og:title", content: "Daily Panchang & Festival Calendar" },
-      { property: "og:description", content: "Daily Panchang and Hindu festival dates from Vindhyachal Dham." },
+      {
+        property: "og:description",
+        content: "Daily Panchang and Hindu festival dates from Vindhyachal Dham.",
+      },
     ],
   }),
   component: PanchangPage,
@@ -22,24 +41,118 @@ const LON = 82.5;
 const TZ_OFFSET = 5.5; // IST
 
 const TITHIS = [
-  "Pratipada", "Dwitiya", "Tritiya", "Chaturthi", "Panchami", "Shashti", "Saptami",
-  "Ashtami", "Navami", "Dashami", "Ekadashi", "Dwadashi", "Trayodashi", "Chaturdashi", "Purnima/Amavasya",
+  "Pratipada",
+  "Dwitiya",
+  "Tritiya",
+  "Chaturthi",
+  "Panchami",
+  "Shashti",
+  "Saptami",
+  "Ashtami",
+  "Navami",
+  "Dashami",
+  "Ekadashi",
+  "Dwadashi",
+  "Trayodashi",
+  "Chaturdashi",
+  "Purnima/Amavasya",
 ];
 const NAKSHATRAS = [
-  "Ashwini", "Bharani", "Krittika", "Rohini", "Mrigashira", "Ardra", "Punarvasu", "Pushya", "Ashlesha",
-  "Magha", "Purva Phalguni", "Uttara Phalguni", "Hasta", "Chitra", "Swati", "Vishakha", "Anuradha",
-  "Jyeshtha", "Mula", "Purva Ashadha", "Uttara Ashadha", "Shravana", "Dhanishta", "Shatabhisha",
-  "Purva Bhadrapada", "Uttara Bhadrapada", "Revati",
+  "Ashwini",
+  "Bharani",
+  "Krittika",
+  "Rohini",
+  "Mrigashira",
+  "Ardra",
+  "Punarvasu",
+  "Pushya",
+  "Ashlesha",
+  "Magha",
+  "Purva Phalguni",
+  "Uttara Phalguni",
+  "Hasta",
+  "Chitra",
+  "Swati",
+  "Vishakha",
+  "Anuradha",
+  "Jyeshtha",
+  "Mula",
+  "Purva Ashadha",
+  "Uttara Ashadha",
+  "Shravana",
+  "Dhanishta",
+  "Shatabhisha",
+  "Purva Bhadrapada",
+  "Uttara Bhadrapada",
+  "Revati",
 ];
 const YOGAS = [
-  "Vishkambha", "Priti", "Ayushman", "Saubhagya", "Shobhana", "Atiganda", "Sukarma", "Dhriti", "Shoola",
-  "Ganda", "Vriddhi", "Dhruva", "Vyaghata", "Harshana", "Vajra", "Siddhi", "Vyatipata", "Variyana",
-  "Parigha", "Shiva", "Siddha", "Sadhya", "Shubha", "Shukla", "Brahma", "Indra", "Vaidhriti",
+  "Vishkambha",
+  "Priti",
+  "Ayushman",
+  "Saubhagya",
+  "Shobhana",
+  "Atiganda",
+  "Sukarma",
+  "Dhriti",
+  "Shoola",
+  "Ganda",
+  "Vriddhi",
+  "Dhruva",
+  "Vyaghata",
+  "Harshana",
+  "Vajra",
+  "Siddhi",
+  "Vyatipata",
+  "Variyana",
+  "Parigha",
+  "Shiva",
+  "Siddha",
+  "Sadhya",
+  "Shubha",
+  "Shukla",
+  "Brahma",
+  "Indra",
+  "Vaidhriti",
 ];
 const KARANAS = ["Bava", "Balava", "Kaulava", "Taitila", "Garaja", "Vanija", "Vishti"];
-const VARAS = ["Raviwara (Sunday)", "Somwara (Monday)", "Mangalwara (Tuesday)", "Budhwara (Wednesday)", "Guruwara (Thursday)", "Shukrawara (Friday)", "Shaniwara (Saturday)"];
-const RASHIS = ["Mesha", "Vrishabha", "Mithuna", "Karka", "Simha", "Kanya", "Tula", "Vrishchika", "Dhanu", "Makara", "Kumbha", "Meena"];
-const HINDU_MONTHS = ["Chaitra", "Vaishakha", "Jyeshtha", "Ashadha", "Shravana", "Bhadrapada", "Ashwina", "Kartika", "Margashirsha", "Pausha", "Magha", "Phalguna"];
+const VARAS = [
+  "Raviwara (Sunday)",
+  "Somwara (Monday)",
+  "Mangalwara (Tuesday)",
+  "Budhwara (Wednesday)",
+  "Guruwara (Thursday)",
+  "Shukrawara (Friday)",
+  "Shaniwara (Saturday)",
+];
+const RASHIS = [
+  "Mesha",
+  "Vrishabha",
+  "Mithuna",
+  "Karka",
+  "Simha",
+  "Kanya",
+  "Tula",
+  "Vrishchika",
+  "Dhanu",
+  "Makara",
+  "Kumbha",
+  "Meena",
+];
+const HINDU_MONTHS = [
+  "Chaitra",
+  "Vaishakha",
+  "Jyeshtha",
+  "Ashadha",
+  "Shravana",
+  "Bhadrapada",
+  "Ashwina",
+  "Kartika",
+  "Margashirsha",
+  "Pausha",
+  "Magha",
+  "Phalguna",
+];
 
 // Julian Day from date
 function julian(d: Date): number {
@@ -59,24 +172,31 @@ function sunRiseSet(date: Date, lat: number, lon: number): [Date, Date] {
   const Jtransit = 2451545.0 + Jstar + 0.0053 * Math.sin(Mrad) - 0.0069 * Math.sin(2 * lambdaRad);
   const decl = Math.asin(Math.sin(lambdaRad) * Math.sin((23.44 * Math.PI) / 180));
   const latRad = (lat * Math.PI) / 180;
-  const cosH = (Math.sin((-0.83 * Math.PI) / 180) - Math.sin(latRad) * Math.sin(decl)) / (Math.cos(latRad) * Math.cos(decl));
-  const H = Math.acos(Math.max(-1, Math.min(1, cosH))) * 180 / Math.PI;
+  const cosH =
+    (Math.sin((-0.83 * Math.PI) / 180) - Math.sin(latRad) * Math.sin(decl)) /
+    (Math.cos(latRad) * Math.cos(decl));
+  const H = (Math.acos(Math.max(-1, Math.min(1, cosH))) * 180) / Math.PI;
   const Jset = Jtransit + H / 360;
   const Jrise = Jtransit - H / 360;
   return [new Date((Jrise - 2440587.5) * 86400000), new Date((Jset - 2440587.5) * 86400000)];
 }
 
 function fmtTime(d: Date): string {
-  return d.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit", hour12: true, timeZone: "Asia/Kolkata" });
+  return d.toLocaleTimeString("en-IN", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+    timeZone: "Asia/Kolkata",
+  });
 }
 
 // Approximate sun ecliptic longitude (degrees) for a given Date
 function sunLongitude(d: Date): number {
   const jd = julian(d);
   const n = jd - 2451545.0;
-  const L = (280.460 + 0.9856474 * n) % 360;
-  const g = ((357.528 + 0.9856003 * n) % 360) * Math.PI / 180;
-  return ((L + 1.915 * Math.sin(g) + 0.020 * Math.sin(2 * g)) + 360) % 360;
+  const L = (280.46 + 0.9856474 * n) % 360;
+  const g = (((357.528 + 0.9856003 * n) % 360) * Math.PI) / 180;
+  return (L + 1.915 * Math.sin(g) + 0.02 * Math.sin(2 * g) + 360) % 360;
 }
 
 // Approximate moon ecliptic longitude (degrees)
@@ -84,12 +204,14 @@ function moonLongitude(d: Date): number {
   const jd = julian(d);
   const T = (jd - 2451545.0) / 36525;
   const L = (218.316 + 481267.8813 * T) % 360;
-  const M = ((134.963 + 477198.8676 * T) % 360) * Math.PI / 180;
-  return ((L + 6.289 * Math.sin(M)) + 360) % 360;
+  const M = (((134.963 + 477198.8676 * T) % 360) * Math.PI) / 180;
+  return (L + 6.289 * Math.sin(M) + 360) % 360;
 }
 
 function panchangFor(date: Date) {
-  const noon = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), 12 - TZ_OFFSET, 0, 0));
+  const noon = new Date(
+    Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), 12 - TZ_OFFSET, 0, 0),
+  );
   const sunLon = sunLongitude(noon);
   const moonLon = moonLongitude(noon);
   const ayan = 24.13;
@@ -145,14 +267,26 @@ const festivals2026: Festival[] = [
   { date: "2026-01-14", name: "Makar Sankranti", desc: "Sun's transit into Capricorn." },
   { date: "2026-02-15", name: "Maha Shivaratri", desc: "Great night of Lord Shiva." },
   { date: "2026-03-04", name: "Holi", desc: "Festival of colours." },
-  { date: "2026-03-19", name: "Chaitra Navratri Begins", desc: "Hindu New Year, nine nights of Devi." },
+  {
+    date: "2026-03-19",
+    name: "Chaitra Navratri Begins",
+    desc: "Hindu New Year, nine nights of Devi.",
+  },
   { date: "2026-03-26", name: "Rama Navami", desc: "Birth of Lord Rama." },
   { date: "2026-04-02", name: "Hanuman Jayanti", desc: "Birth of Lord Hanuman." },
   { date: "2026-04-19", name: "Akshaya Tritiya", desc: "Most auspicious day for new ventures." },
   { date: "2026-04-25", name: "Sita Navami", desc: "Birth of Goddess Sita." },
   { date: "2026-05-01", name: "Buddha Purnima", desc: "Birth of Lord Buddha." },
-  { date: "2026-06-25", name: "Nirjala Ekadashi", desc: "Most rigorous Ekadashi — waterless fast." },
-  { date: "2026-07-16", name: "Jagannath Rath Yatra", desc: "Grand chariot festival of Lord Jagannath." },
+  {
+    date: "2026-06-25",
+    name: "Nirjala Ekadashi",
+    desc: "Most rigorous Ekadashi — waterless fast.",
+  },
+  {
+    date: "2026-07-16",
+    name: "Jagannath Rath Yatra",
+    desc: "Grand chariot festival of Lord Jagannath.",
+  },
   { date: "2026-07-29", name: "Guru Purnima", desc: "Honouring spiritual teachers." },
   { date: "2026-08-15", name: "Hariyali Teej", desc: "Monsoon festival for women." },
   { date: "2026-08-17", name: "Nag Panchami", desc: "Worship of serpent deities." },
@@ -160,7 +294,11 @@ const festivals2026: Festival[] = [
   { date: "2026-09-04", name: "Krishna Janmashtami", desc: "Birth of Lord Krishna." },
   { date: "2026-09-14", name: "Ganesh Chaturthi", desc: "Welcoming Lord Ganesha." },
   { date: "2026-09-25", name: "Anant Chaturdashi", desc: "Ganesh Visarjan." },
-  { date: "2026-10-11", name: "Sharad Navratri Begins", desc: "Nine nights of Goddess Durga — special darshan at Vindhyachal." },
+  {
+    date: "2026-10-11",
+    name: "Sharad Navratri Begins",
+    desc: "Nine nights of Goddess Durga — special darshan at Vindhyachal.",
+  },
   { date: "2026-10-19", name: "Durga Ashtami", desc: "Sandhi Puja and Kanya Pujan." },
   { date: "2026-10-20", name: "Vijayadashami / Dussehra", desc: "Victory of good over evil." },
   { date: "2026-10-25", name: "Sharad Purnima", desc: "Lakshmi Puja under full moon." },
@@ -170,13 +308,20 @@ const festivals2026: Festival[] = [
   { date: "2026-11-10", name: "Govardhan Puja", desc: "Worship of Govardhan hill." },
   { date: "2026-11-11", name: "Bhai Dooj", desc: "Sister-brother bond celebration." },
   { date: "2026-11-15", name: "Chhath Puja", desc: "Four-day festival of Sun God." },
-  { date: "2026-11-24", name: "Kartika Purnima / Dev Diwali", desc: "Most sacred Purnima — lights at Kashi ghats." },
+  {
+    date: "2026-11-24",
+    name: "Kartika Purnima / Dev Diwali",
+    desc: "Most sacred Purnima — lights at Kashi ghats.",
+  },
   { date: "2026-12-20", name: "Gita Jayanti", desc: "Day Bhagavad Gita was revealed." },
 ];
 
 function formatFest(date: string) {
   return new Date(date + "T00:00:00").toLocaleDateString("en-IN", {
-    weekday: "short", day: "2-digit", month: "short", year: "numeric",
+    weekday: "short",
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
   });
 }
 
@@ -194,7 +339,11 @@ function PanchangPage() {
   const [loadingLive, setLoadingLive] = useState(false);
 
   const dateKey = localDateKey(selectedDate);
-  const dateString = selectedDate.toLocaleDateString("en-IN", { year: "numeric", month: "2-digit", day: "2-digit" });
+  const dateString = selectedDate.toLocaleDateString("en-IN", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
 
   // Keep the page updated to "today" if the tab is left open and the day transitions
   useEffect(() => {
@@ -215,7 +364,13 @@ function PanchangPage() {
     const [sunrise, sunset] = sunRiseSet(selectedDate, LAT, LON);
     const p = panchangFor(selectedDate);
     const m = muhuratFor(sunrise, sunset);
-    const dateLabel = selectedDate.toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long", year: "numeric" }) + " · Vindhyachal Dham";
+    const dateLabel =
+      selectedDate.toLocaleDateString("en-IN", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      }) + " · Vindhyachal Dham";
     const samvat = selectedDate.getFullYear() + 57;
     return { sunrise, sunset, p, m, dateLabel, samvat };
   }, [dateString]);
@@ -228,10 +383,7 @@ function PanchangPage() {
     const dateIso = dateKey;
     const sunriseApi = `https://api.sunrise-sunset.org/json?lat=${LAT}&lng=${LON}&date=${dateIso}&formatted=0`;
     const target = `https://www.drikpanchang.com/panchang/day-panchang.html?geoname-id=1262995&date=${selectedDate.getDate()}/${selectedDate.getMonth() + 1}/${selectedDate.getFullYear()}`;
-    const proxies = [
-      "https://api.allorigins.win/raw?url=",
-      "https://corsproxy.io/?",
-    ];
+    const proxies = ["https://api.allorigins.win/raw?url=", "https://corsproxy.io/?"];
 
     let active = true;
 
@@ -245,7 +397,9 @@ function PanchangPage() {
 
       try {
         console.log(`[Panchang] Fetching sunrise/sunset from internet for ${dateIso}`);
-        const res = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(sunriseApi)}`);
+        const res = await fetch(
+          `https://api.allorigins.win/raw?url=${encodeURIComponent(sunriseApi)}`,
+        );
         if (res.ok) {
           const body = await res.json();
           if (body.status === "OK" && body.results) {
@@ -292,7 +446,9 @@ function PanchangPage() {
             }
           });
 
-          const headers = doc.querySelectorAll(".dpPHeader, .dpPanchangHeader, .dpTableTitle, .dpCardTitle");
+          const headers = doc.querySelectorAll(
+            ".dpPHeader, .dpPanchangHeader, .dpTableTitle, .dpCardTitle",
+          );
           headers.forEach((h) => {
             const key = (h.textContent ?? "").replace(/\s+/g, " ").trim();
             const next = h.nextElementSibling;
@@ -332,13 +488,12 @@ function PanchangPage() {
   const pick = (k: string, fallback: string) => live[k] || fallback;
 
   const todayKey = dateKey;
-  
+
   // Find current and next festivals
   const todayFestival = festivals2026.find((f) => f.date === todayKey);
   const upcoming = useMemo(() => {
     return festivals2026.find((f) => f.date >= todayKey) || festivals2026[0];
   }, [todayKey]);
-
 
   const panchangRows = [
     { icon: Sunrise, label: "Sunrise", value: pick("Sunrise", fmtTime(data.sunrise)) },
@@ -398,32 +553,37 @@ function PanchangPage() {
       />
 
       <section className="container mx-auto px-6 py-12 space-y-12 select-none">
-        
         {/* Date Selector & Navigation controls */}
         <div className="max-w-xl mx-auto rounded-2xl border border-gold/30 bg-card p-5 shadow-sacred flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2 w-full sm:w-auto justify-between">
-            <button 
-              onClick={() => changeDate(-1)} 
+            <button
+              onClick={() => changeDate(-1)}
               className="flex h-10 w-10 items-center justify-center rounded-full border border-gold/40 text-maroon hover:bg-gold/10 transition"
               title="Previous Day"
             >
               <ChevronLeft size={20} />
             </button>
             <span className="font-display font-semibold text-maroon text-center px-4">
-              {selectedDate.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
+              {selectedDate.toLocaleDateString("en-IN", {
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+              })}
             </span>
-            <button 
-              onClick={() => changeDate(1)} 
+            <button
+              onClick={() => changeDate(1)}
               className="flex h-10 w-10 items-center justify-center rounded-full border border-gold/40 text-maroon hover:bg-gold/10 transition"
               title="Next Day"
             >
               <ChevronRight size={20} />
             </button>
           </div>
-          
+
           <div className="relative w-full sm:w-auto shrink-0 flex items-center justify-center">
-            <label htmlFor="panchang-datepicker" className="sr-only">Choose Date</label>
-            <input 
+            <label htmlFor="panchang-datepicker" className="sr-only">
+              Choose Date
+            </label>
+            <input
               id="panchang-datepicker"
               ref={dateInputRef}
               type="date"
@@ -445,16 +605,24 @@ function PanchangPage() {
         {/* Today's Festival highlight */}
         <div className="rounded-2xl bg-gradient-sacred text-cream p-6 md:p-8 shadow-sacred flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <div className="text-xs uppercase tracking-widest text-gold font-bold">Selected Date</div>
+            <div className="text-xs uppercase tracking-widest text-gold font-bold">
+              Selected Date
+            </div>
             <h3 className="font-display text-2xl md:text-3xl mt-1 text-cream">
-              {todayFestival ? todayFestival.name : `${pick("Tithi", `${data.p.paksha} ${data.p.tithiName}`)}`}
+              {todayFestival
+                ? todayFestival.name
+                : `${pick("Tithi", `${data.p.paksha} ${data.p.tithiName}`)}`}
             </h3>
             <p className="text-cream/90 text-sm mt-1">
-              {todayFestival ? todayFestival.desc : `${pick("Nakshatra", data.p.nakshatra)} Nakshatra · ${pick("Yoga", data.p.yoga)} Yoga`}
+              {todayFestival
+                ? todayFestival.desc
+                : `${pick("Nakshatra", data.p.nakshatra)} Nakshatra · ${pick("Yoga", data.p.yoga)} Yoga`}
             </p>
           </div>
           <div className="text-left md:text-right border-t border-cream/20 md:border-t-0 pt-4 md:pt-0">
-            <div className="text-xs uppercase tracking-widest text-gold font-bold">Upcoming Festival</div>
+            <div className="text-xs uppercase tracking-widest text-gold font-bold">
+              Upcoming Festival
+            </div>
             <div className="font-display text-xl mt-1 text-cream">{upcoming.name}</div>
             <div className="text-cream/90 text-sm">{formatFest(upcoming.date)}</div>
           </div>
@@ -473,12 +641,17 @@ function PanchangPage() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {panchangRows.map((row) => (
-              <div key={row.label} className="rounded-xl bg-gradient-divine border border-gold/40 p-4 shadow-gold flex items-center justify-between gap-3">
+              <div
+                key={row.label}
+                className="rounded-xl bg-gradient-divine border border-gold/40 p-4 shadow-gold flex items-center justify-between gap-3"
+              >
                 <span className="flex items-center gap-3 text-foreground/80 shrink-0">
                   <row.icon size={18} className="text-saffron" />
                   <span className="text-sm font-medium">{row.label}</span>
                 </span>
-                <span className="font-semibold text-maroon text-right text-xs truncate max-w-[180px]">{row.value}</span>
+                <span className="font-semibold text-maroon text-right text-xs truncate max-w-[180px]">
+                  {row.value}
+                </span>
               </div>
             ))}
           </div>
@@ -527,10 +700,13 @@ function PanchangPage() {
         <div className="pt-8 border-t-2 border-gold/20">
           <div className="flex items-center gap-3 mb-2">
             <CalendarDays className="text-saffron" size={28} />
-            <h2 className="font-display text-2xl md:text-3xl text-maroon">Hindu Festival Calendar (2026)</h2>
+            <h2 className="font-display text-2xl md:text-3xl text-maroon">
+              Hindu Festival Calendar (2026)
+            </h2>
           </div>
           <p className="text-muted-foreground mb-6 max-w-2xl text-sm">
-            Major Hindu festivals, vrats and auspicious days. Plan your darshan at Vindhyachal Dham in advance.
+            Major Hindu festivals, vrats and auspicious days. Plan your darshan at Vindhyachal Dham
+            in advance.
           </p>
 
           <div className="rounded-2xl border-2 border-gold/40 overflow-hidden shadow-sacred">
@@ -540,7 +716,9 @@ function PanchangPage() {
                   <tr>
                     <th className="px-5 py-4 font-display text-sm md:text-base">Date</th>
                     <th className="px-5 py-4 font-display text-sm md:text-base">Festival</th>
-                    <th className="px-5 py-4 font-display text-sm md:text-base hidden md:table-cell">Significance</th>
+                    <th className="px-5 py-4 font-display text-sm md:text-base hidden md:table-cell">
+                      Significance
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border">
@@ -548,14 +726,14 @@ function PanchangPage() {
                     const isPast = f.date < selectedDate.toISOString().slice(0, 10);
                     const isToday = f.date === selectedDate.toISOString().slice(0, 10);
                     return (
-                      <tr 
-                        key={f.date + f.name} 
+                      <tr
+                        key={f.date + f.name}
                         className={`${
-                          isToday 
-                            ? "bg-gold/10 text-maroon font-semibold" 
-                            : i % 2 === 0 
-                            ? "bg-cream/10" 
-                            : "bg-background"
+                          isToday
+                            ? "bg-gold/10 text-maroon font-semibold"
+                            : i % 2 === 0
+                              ? "bg-cream/10"
+                              : "bg-background"
                         } ${isPast && !isToday ? "opacity-60" : ""} hover:bg-gold/5 transition`}
                       >
                         <td className="px-5 py-4 text-xs md:text-sm font-medium text-maroon whitespace-nowrap">
@@ -567,7 +745,9 @@ function PanchangPage() {
                           )}
                         </td>
                         <td className="px-5 py-4 text-xs md:text-sm text-foreground">{f.name}</td>
-                        <td className="px-5 py-4 text-xs text-muted-foreground hidden md:table-cell">{f.desc}</td>
+                        <td className="px-5 py-4 text-xs text-muted-foreground hidden md:table-cell">
+                          {f.desc}
+                        </td>
                       </tr>
                     );
                   })}
@@ -575,9 +755,10 @@ function PanchangPage() {
               </table>
             </div>
           </div>
-          
+
           <p className="mt-4 text-[10px] text-muted-foreground italic text-center md:text-left">
-            Panchang parameters calculated using local coordinates for Vindhyachal Dham (25.15°N, 82.5°E) and synchronized in real-time with verified Panchang records.
+            Panchang parameters calculated using local coordinates for Vindhyachal Dham (25.15°N,
+            82.5°E) and synchronized in real-time with verified Panchang records.
           </p>
         </div>
       </section>

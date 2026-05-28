@@ -7,184 +7,155 @@ export function isHindiText(text: string): boolean {
 }
 
 const VOWELS: Record<string, string> = {
-  'अ': 'a', 'आ': 'aa', 'इ': 'i', 'ई': 'ee', 'उ': 'u', 'ऊ': 'oo', 'ऋ': 'ri',
-  'ए': 'e', 'ऐ': 'ai', 'ओ': 'o', 'औ': 'au', 'अं': 'an', 'अः': 'ah', 'ॐ': 'om'
+  अ: "a",
+  आ: "aa",
+  इ: "i",
+  ई: "ee",
+  उ: "u",
+  ऊ: "oo",
+  ऋ: "ri",
+  ए: "e",
+  ऐ: "ai",
+  ओ: "o",
+  औ: "au",
+  अं: "an",
+  अः: "ah",
+  ॐ: "om",
 };
 
 const CONSONANTS: Record<string, string> = {
-  'क': 'k', 'ख': 'kh', 'ग': 'g', 'घ': 'gh', 'ङ': 'ng',
-  'च': 'ch', 'छ': 'chh', 'ज': 'j', 'झ': 'jh', 'ञ': 'ny',
-  'ट': 't', 'ठ': 'th', 'ड': 'd', 'ढ': 'dh', 'ण': 'n',
-  'त': 't', 'थ': 'th', 'द': 'd', 'ध': 'dh', 'न': 'n',
-  'प': 'p', 'फ': 'ph', 'ब': 'b', 'भ': 'bh', 'म': 'm',
-  'य': 'y', 'र': 'r', 'ल': 'l', 'व': 'v', 'श': 'sh', 'ष': 'sh', 'स': 's', 'ह': 'h',
-  'क़': 'q', 'ख़': 'kh', 'ग़': 'g', 'ज़': 'z', 'ड़': 'd', 'ढ़': 'dh', 'फ़': 'f'
+  क: "k",
+  ख: "kh",
+  ग: "g",
+  घ: "gh",
+  ङ: "ng",
+  च: "ch",
+  छ: "chh",
+  ज: "j",
+  झ: "jh",
+  ञ: "ny",
+  ट: "t",
+  ठ: "th",
+  ड: "d",
+  ढ: "dh",
+  ण: "n",
+  त: "t",
+  थ: "th",
+  द: "d",
+  ध: "dh",
+  न: "n",
+  प: "p",
+  फ: "ph",
+  ब: "b",
+  भ: "bh",
+  म: "m",
+  य: "y",
+  र: "r",
+  ल: "l",
+  व: "v",
+  श: "sh",
+  ष: "sh",
+  स: "s",
+  ह: "h",
+  क़: "q",
+  ख़: "kh",
+  ग़: "g",
+  ज़: "z",
+  ड़: "d",
+  ढ़: "dh",
+  फ़: "f",
 };
 
 const MATRAS: Record<string, string> = {
-  'ा': 'aa', 'ि': 'i', 'ी': 'ee', 'ु': 'u', 'ू': 'oo', 'ृ': 'ri',
-  'े': 'e', 'ै': 'ai', 'ो': 'o', 'ौ': 'au', 'ं': 'an', 'ँ': 'an', 'ः': 'h', 'ॅ': 'e', 'ॉ': 'o', '्': ''
+  "ा": "aa",
+  "ि": "i",
+  "ी": "ee",
+  "ु": "u",
+  "ू": "oo",
+  "ृ": "ri",
+  "े": "e",
+  "ै": "ai",
+  "ो": "o",
+  "ौ": "au",
+  "ं": "an",
+  "ँ": "an",
+  "ः": "h",
+  "ॅ": "e",
+  "ॉ": "o",
+  "्": "",
 };
 
 export function transliterateHindi(text: string): string {
-  let result = '';
+  let result = "";
   let i = 0;
-  
+
   while (i < text.length) {
     const char = text[i];
-    
+
     if (VOWELS[char]) {
       result += VOWELS[char];
       i++;
-    } 
-    else if (CONSONANTS[char]) {
+    } else if (CONSONANTS[char]) {
       const baseConsonant = CONSONANTS[char];
-      
+
       if (i + 1 < text.length) {
         const nextChar = text[i + 1];
-        
-        if (nextChar === '्') {
+
+        if (nextChar === "्") {
           result += baseConsonant;
           i += 2;
-        }
-        else if (MATRAS[nextChar] !== undefined) {
+        } else if (MATRAS[nextChar] !== undefined) {
           result += baseConsonant + MATRAS[nextChar];
           i += 2;
-        }
-        else if (nextChar === ' ' || nextChar === '\n' || !/[\u0900-\u097F]/.test(nextChar)) {
+        } else if (nextChar === " " || nextChar === "\n" || !/[\u0900-\u097F]/.test(nextChar)) {
           result += baseConsonant;
           i++;
-        }
-        else {
-          result += baseConsonant + 'a';
+        } else {
+          result += baseConsonant + "a";
           i++;
         }
       } else {
         result += baseConsonant;
         i++;
       }
-    }
-    else if (MATRAS[char] !== undefined) {
+    } else if (MATRAS[char] !== undefined) {
       result += MATRAS[char];
       i++;
-    }
-    else {
+    } else {
       result += char;
       i++;
     }
   }
-  
-  return result
-    .replace(/aa/g, 'a')
-    .replace(/ee/g, 'i')
-    .replace(/oo/g, 'u')
-    .replace(/\s+/g, ' ');
+
+  return result.replace(/aa/g, "a").replace(/ee/g, "i").replace(/oo/g, "u").replace(/\s+/g, " ");
 }
 
 export function splitTextIntoSegments(text: string): { text: string; isHindi: boolean }[] {
-  const bracketRegex = /(\[[^\]]+\]|\([^)]+\))/g;
-  const bracketParts = text.split(bracketRegex);
-  
-  const rawSegments: { text: string; isHindi: boolean }[] = [];
-  
-  for (const part of bracketParts) {
-    if (!part) continue;
-    
-    // Check if it is a bracketed/parenthesized part
-    const isBracketed = (part.startsWith('[') && part.endsWith(']')) || 
-                        (part.startsWith('(') && part.endsWith(')'));
-    
-    if (isBracketed) {
-      const cleanPart = part.slice(1, -1).trim();
-      if (cleanPart) {
-        rawSegments.push({
-          text: cleanPart,
-          isHindi: isHindiText(cleanPart)
-        });
-      }
-    } else {
-      // Split by clause and sentence delimiters:
-      // । (Hindi danda), . (period), ! (exclamation), ? (question mark),
-      // \n (newline), | (pipe), —, -, /, :, ,, ;
-      const delimiterRegex = /([।\.!\?\n|—\-\/:,;]+)/g;
-      const subParts = part.split(delimiterRegex);
-      
-      let currentText = '';
-      let currentIsHindi: boolean | null = null;
-      
-      for (const subPart of subParts) {
-        if (!subPart) continue;
-        
-        // If it's only punctuation/whitespace, it's neutral delimiter
-        const isDelimiter = /^[।\.!\?\n|—\-\/:,;\s]+$/.test(subPart);
-        
-        if (isDelimiter) {
-          if (currentText) {
-            currentText += subPart;
-          } else {
-            // Append neutral delimiters to the last saved segment if exists
-            if (rawSegments.length > 0) {
-              rawSegments[rawSegments.length - 1].text += subPart;
-            } else {
-              currentText = subPart;
-              currentIsHindi = false;
-            }
-          }
-        } else {
-          const isHindi = isHindiText(subPart);
-          
-          if (currentIsHindi === null) {
-            currentText = subPart;
-            currentIsHindi = isHindi;
-          } else if (currentIsHindi === isHindi) {
-            currentText += subPart;
-          } else {
-            // Language switch occurred! Save current segment and start a new one
-            if (currentText.trim()) {
-              rawSegments.push({
-                text: currentText,
-                isHindi: currentIsHindi
-              });
-            }
-            currentText = subPart;
-            currentIsHindi = isHindi;
-          }
-        }
-      }
-      
-      if (currentText.trim()) {
-        rawSegments.push({
-          text: currentText,
-          isHindi: currentIsHindi ?? false
-        });
-      }
+  const segments: { text: string; isHindi: boolean }[] = [];
+  const regex = /(\[[^\]]+\]|\([^)]+\))/g;
+  const parts = text.split(regex);
+
+  for (const part of parts) {
+    if (!part.trim()) continue;
+
+    const isHindi = /[\u0900-\u097F]/.test(part);
+
+    let cleanPart = part.trim();
+    if (cleanPart.startsWith("[") && cleanPart.endsWith("]")) {
+      cleanPart = cleanPart.substring(1, cleanPart.length - 1).trim();
+    } else if (cleanPart.startsWith("(") && cleanPart.endsWith(")")) {
+      cleanPart = cleanPart.substring(1, cleanPart.length - 1).trim();
     }
-  }
-  
-  // Merge consecutive segments of the same language
-  const mergedSegments: { text: string; isHindi: boolean }[] = [];
-  
-  for (const seg of rawSegments) {
-    const trimmedText = seg.text.trim();
-    if (!trimmedText) continue;
-    
-    if (mergedSegments.length > 0 && mergedSegments[mergedSegments.length - 1].isHindi === seg.isHindi) {
-      mergedSegments[mergedSegments.length - 1].text += ' ' + seg.text;
-    } else {
-      mergedSegments.push({
-        text: seg.text,
-        isHindi: seg.isHindi
+
+    if (cleanPart) {
+      segments.push({
+        text: cleanPart,
+        isHindi,
       });
     }
   }
-  
-  // Final cleanup and formatting
-  return mergedSegments
-    .map(seg => ({
-      text: seg.text.trim().replace(/\s+/g, ' '),
-      isHindi: seg.isHindi
-    }))
-    .filter(seg => seg.text.length > 0);
+
+  return segments;
 }
 
 // Global cache of voices to enable synchronous matching
@@ -265,24 +236,21 @@ export function getVoicesAsync(): Promise<SpeechSynthesisVoice[]> {
  * Selects the best matching voice based on the text language (Hindi vs. English/Hinglish)
  * and the user-specified priority requirements.
  */
-export function selectVoice(voices: SpeechSynthesisVoice[], text: string): SpeechSynthesisVoice | null {
+export function selectVoice(
+  voices: SpeechSynthesisVoice[],
+  text: string,
+): SpeechSynthesisVoice | null {
   const isHindi = isHindiText(text);
 
   // Female Hindi voice priority list
-  const hindiFemalePatterns = [
-    "google हिन्दी",
-    "swara",
-    "kalpana",
-    "heera",
-    "lekha"
-  ];
+  const hindiFemalePatterns = ["google हिन्दी", "swara", "kalpana", "heera", "lekha"];
 
   // Female Indian English voice priority list
   const englishIndiaFemalePatterns = [
     "neerja",
     "veena",
     "google english (india) female",
-    "google english (india)"
+    "google english (india)",
   ];
 
   if (isHindi) {
@@ -291,10 +259,14 @@ export function selectVoice(voices: SpeechSynthesisVoice[], text: string): Speec
       const matched = voices.find((v) => {
         const nameLower = v.name.toLowerCase();
         const langLower = v.lang.toLowerCase().replace("_", "-");
-        return nameLower.includes(pattern) && (langLower.startsWith("hi") || langLower.startsWith("hin"));
+        return (
+          nameLower.includes(pattern) && (langLower.startsWith("hi") || langLower.startsWith("hin"))
+        );
       });
       if (matched) {
-        console.log(`[SpeechSynthesis] Selected female Hindi voice: "${matched.name}" [${matched.lang}]`);
+        console.log(
+          `[SpeechSynthesis] Selected female Hindi voice: "${matched.name}" [${matched.lang}]`,
+        );
         return matched;
       }
     }
@@ -305,7 +277,9 @@ export function selectVoice(voices: SpeechSynthesisVoice[], text: string): Speec
       return lang.startsWith("hi") || lang.startsWith("hin");
     });
     if (anyHiVoice) {
-      console.log(`[SpeechSynthesis] Selected Hindi voice fallback: "${anyHiVoice.name}" [${anyHiVoice.lang}]`);
+      console.log(
+        `[SpeechSynthesis] Selected Hindi voice fallback: "${anyHiVoice.name}" [${anyHiVoice.lang}]`,
+      );
       return anyHiVoice;
     }
 
@@ -314,10 +288,14 @@ export function selectVoice(voices: SpeechSynthesisVoice[], text: string): Speec
       const matched = voices.find((v) => {
         const nameLower = v.name.toLowerCase();
         const langLower = v.lang.toLowerCase().replace("_", "-");
-        return nameLower.includes(pattern) && (langLower === "en-in" || langLower.startsWith("en-in"));
+        return (
+          nameLower.includes(pattern) && (langLower === "en-in" || langLower.startsWith("en-in"))
+        );
       });
       if (matched) {
-        console.warn(`[SpeechSynthesis] Hindi voice not found. Selecting female Indian English fallback: "${matched.name}" [${matched.lang}]`);
+        console.warn(
+          `[SpeechSynthesis] Hindi voice not found. Selecting female Indian English fallback: "${matched.name}" [${matched.lang}]`,
+        );
         return matched;
       }
     }
@@ -337,7 +315,9 @@ export function selectVoice(voices: SpeechSynthesisVoice[], text: string): Speec
       );
     });
     if (anyEnInVoice) {
-      console.warn(`[SpeechSynthesis] Hindi voice not found. Selecting Indian English fallback: "${anyEnInVoice.name}" [${anyEnInVoice.lang}]`);
+      console.warn(
+        `[SpeechSynthesis] Hindi voice not found. Selecting Indian English fallback: "${anyEnInVoice.name}" [${anyEnInVoice.lang}]`,
+      );
       return anyEnInVoice;
     }
   } else {
@@ -346,7 +326,9 @@ export function selectVoice(voices: SpeechSynthesisVoice[], text: string): Speec
       const matched = voices.find((v) => {
         const nameLower = v.name.toLowerCase();
         const langLower = v.lang.toLowerCase().replace("_", "-");
-        return nameLower.includes(pattern) && (langLower === "en-in" || langLower.startsWith("en-in"));
+        return (
+          nameLower.includes(pattern) && (langLower === "en-in" || langLower.startsWith("en-in"))
+        );
       });
       if (matched) {
         return matched;
@@ -380,7 +362,10 @@ export function selectVoice(voices: SpeechSynthesisVoice[], text: string): Speec
 
   // Final fallback to default voice or first available
   const defaultVoice = voices.find((v) => v.default) || voices[0] || null;
-  console.log("[SpeechSynthesis] Fallback to default voice:", defaultVoice ? `"${defaultVoice.name}" [${defaultVoice.lang}]` : "None");
+  console.log(
+    "[SpeechSynthesis] Fallback to default voice:",
+    defaultVoice ? `"${defaultVoice.name}" [${defaultVoice.lang}]` : "None",
+  );
   return defaultVoice;
 }
 
@@ -391,9 +376,6 @@ export interface SpeakOptions {
 }
 
 let currentUtterance: SpeechSynthesisUtterance | null = null;
-let playbackQueue: { text: string; isHindi: boolean }[] = [];
-let currentQueueIndex = -1;
-let isPlaybackCancelled = false;
 
 /**
  * Helper to configure and trigger the utterance.
@@ -404,7 +386,7 @@ function speakWithVoices(
   voices: SpeechSynthesisVoice[],
   text: string,
   isHindi: boolean,
-  options?: SpeakOptions
+  options?: SpeakOptions,
 ): void {
   // Console logs required:
   console.log("[SpeechSynthesis] available voices:");
@@ -413,8 +395,7 @@ function speakWithVoices(
   });
 
   // Cancel any active speech first
-  stopSpeech();
-  isPlaybackCancelled = false;
+  synth.cancel();
 
   // Split text into Hindi and English segments
   const segments = splitTextIntoSegments(text);
@@ -424,41 +405,27 @@ function speakWithVoices(
   }
 
   console.log("[SpeechSynthesis] Split text into segments:", segments);
-  playbackQueue = segments;
-  currentQueueIndex = 0;
 
   let started = false;
-  
+
   // Unblock frozen browser speech states
   synth.resume();
 
-  function speakNext(): void {
-    if (isPlaybackCancelled) {
-      console.log("[SpeechSynthesis] Playback was cancelled. Stopping queue execution.");
-      return;
-    }
-
-    if (currentQueueIndex >= playbackQueue.length) {
-      console.log("[SpeechSynthesis] Speech synthesis completed successfully (all segments).");
-      currentUtterance = null;
-      playbackQueue = [];
-      currentQueueIndex = -1;
-      options?.onEnd?.();
-      return;
-    }
-
-    const seg = playbackQueue[currentQueueIndex];
+  segments.forEach((seg, index) => {
     const isSegHindi = seg.isHindi;
     const selectedVoice = selectVoice(voices, seg.text);
-    
-    console.log(`[SpeechSynthesis] Segment ${currentQueueIndex} selected voice:`, selectedVoice ? `"${selectedVoice.name}" [${selectedVoice.lang}]` : "None");
+
+    console.log(
+      `[SpeechSynthesis] Segment ${index} selected voice:`,
+      selectedVoice ? `"${selectedVoice.name}" [${selectedVoice.lang}]` : "None",
+    );
 
     let textToSpeak = seg.text;
     const isSelectedVoiceHindi = selectedVoice && selectedVoice.lang.toLowerCase().startsWith("hi");
     const hasHindiVoice = voices.some((v) => v.lang.toLowerCase().startsWith("hi"));
 
     if (isSegHindi && (!hasHindiVoice || (selectedVoice && !isSelectedVoiceHindi))) {
-      console.log(`[SpeechSynthesis] Segment ${currentQueueIndex} Fallback: Transliterating to Roman script.`);
+      console.log(`[SpeechSynthesis] Segment ${index} Fallback: Transliterating to Roman script.`);
       textToSpeak = transliterateHindi(seg.text);
     }
 
@@ -486,26 +453,30 @@ function speakWithVoices(
     };
 
     utterance.onend = () => {
-      console.log(`[SpeechSynthesis] Segment ${currentQueueIndex} finished speaking.`);
-      currentQueueIndex++;
-      // Speak next segment in the next event loop tick to give TTS engine breathing room
-      setTimeout(speakNext, 50);
+      console.log(`[SpeechSynthesis] Segment ${index} finished speaking.`);
+      if (index === segments.length - 1) {
+        console.log("[SpeechSynthesis] Speech synthesis completed successfully (last segment).");
+        currentUtterance = null;
+        options?.onEnd?.();
+      }
     };
 
     utterance.onerror = (event) => {
-      console.error(`[SpeechSynthesis] Segment ${currentQueueIndex} error:`, event);
+      console.error(`[SpeechSynthesis] Segment ${index} error:`, event);
       if (event.error === "interrupted" || event.error === "canceled") {
-        console.log(`[SpeechSynthesis] Segment ${currentQueueIndex} was interrupted or canceled.`);
+        console.log(`[SpeechSynthesis] Segment ${index} was interrupted or canceled.`);
         return;
       }
-      options?.onError?.(new Error(event.error ? `Speech synthesis error: ${event.error}` : "Speech synthesis failed."));
+      options?.onError?.(
+        new Error(
+          event.error ? `Speech synthesis error: ${event.error}` : "Speech synthesis failed.",
+        ),
+      );
     };
 
     currentUtterance = utterance;
     synth.speak(utterance);
-  }
-
-  speakNext();
+  });
 }
 
 /**
@@ -543,13 +514,17 @@ export function speakText(text: string, options?: SpeakOptions): void {
   if (voicesToUse.length > 0) {
     speakImmediately(voicesToUse);
   } else {
-    console.log("[SpeechSynthesis] Voices not loaded yet. Waiting for available voices before speaking.");
+    console.log(
+      "[SpeechSynthesis] Voices not loaded yet. Waiting for available voices before speaking.",
+    );
     getVoicesAsync()
       .then((voices) => {
         if (voices.length > 0) {
           speakImmediately(voices);
         } else {
-          console.warn("[SpeechSynthesis] No voices available after load; speaking with fallback settings.");
+          console.warn(
+            "[SpeechSynthesis] No voices available after load; speaking with fallback settings.",
+          );
           speakImmediately([]);
         }
       })
@@ -565,7 +540,6 @@ export function speakText(text: string, options?: SpeakOptions): void {
  * Stops any current speech output in progress.
  */
 export function stopSpeech(): void {
-  isPlaybackCancelled = true;
   const synth = typeof window !== "undefined" ? window.speechSynthesis : null;
   if (synth) {
     if (synth.speaking || synth.pending) {
@@ -574,6 +548,4 @@ export function stopSpeech(): void {
     }
   }
   currentUtterance = null;
-  playbackQueue = [];
-  currentQueueIndex = -1;
 }
