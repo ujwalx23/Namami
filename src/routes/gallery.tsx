@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { PageShell, PageHero } from "@/components/PageShell";
 import { supabase } from "@/integrations/supabase/client";
 import { useLang } from "@/i18n/LangProvider";
+import { Download, X } from "lucide-react";
 import maaImg from "@/assets/maa-vindhyavasini.png";
 import maaImg2 from "@/assets/maa-vindhyavasini-2.jpg";
 import maaImg3 from "@/assets/maa-vindhyavasini-3.jpg";
@@ -66,6 +67,31 @@ function GalleryPage() {
     ...defaults.map((d) => ({ src: d.src, cap: hi ? d.cap_hi : d.cap_en })),
   ];
 
+  const handleDownload = async (url: string, title: string) => {
+    try {
+      const filename = `${title.toLowerCase().replace(/\s+/g, "_")}.png`;
+      const response = await fetch(url);
+      const blob = await response.blob();
+      const blobUrl = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(blobUrl);
+    } catch (err) {
+      console.warn("Direct blob download failed, falling back to window.open", err);
+      const link = document.createElement("a");
+      link.href = url;
+      link.target = "_blank";
+      link.download = `${title.toLowerCase().replace(/\s+/g, "_")}.png`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
+
   return (
     <PageShell>
       <PageHero
@@ -98,6 +124,19 @@ function GalleryPage() {
               >
                 {p.cap}
               </figcaption>
+
+              {/* Download Button Overlay */}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDownload(p.src, p.cap || `darshan_${i + 1}`);
+                }}
+                className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-cream/90 text-maroon hover:bg-gold hover:text-cream flex items-center justify-center shadow-lg transition-all duration-300 md:opacity-0 md:group-hover:opacity-100"
+                title="Download image"
+                aria-label="Download image"
+              >
+                <Download size={16} />
+              </button>
             </figure>
           ))}
         </div>
@@ -105,14 +144,40 @@ function GalleryPage() {
 
       {lightbox && (
         <div
-          className="fixed inset-0 z-[60] bg-black/90 flex items-center justify-center p-4 cursor-zoom-out"
+          className="fixed inset-0 z-[60] bg-black/95 flex flex-col items-center justify-center p-4"
           onClick={() => setLightbox(null)}
         >
-          <img
-            src={lightbox}
-            alt="Darshan"
-            className="max-h-full max-w-full rounded-xl shadow-2xl"
-          />
+          {/* Close button */}
+          <button
+            onClick={() => setLightbox(null)}
+            className="absolute top-4 right-4 z-50 p-2.5 rounded-full bg-cream/10 text-cream hover:bg-cream/20 transition-colors"
+            aria-label="Close lightbox"
+          >
+            <X size={24} />
+          </button>
+
+          <div
+            className="relative max-h-[80vh] max-w-full flex flex-col items-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={lightbox}
+              alt="Darshan"
+              className="max-h-[75vh] max-w-full rounded-xl shadow-2xl object-contain border border-gold/25"
+            />
+            
+            {/* Download Button in Lightbox */}
+            <button
+              onClick={() => {
+                const item = items.find((it) => it.src === lightbox);
+                handleDownload(lightbox, item?.cap || "darshan_vigraha");
+              }}
+              className="mt-4 inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-gradient-sacred text-cream font-medium shadow-gold hover:scale-[1.03] transition-transform duration-300 text-sm"
+            >
+              <Download size={14} />
+              {hi ? "डाउनलोड करें" : "Download Darshan"}
+            </button>
+          </div>
         </div>
       )}
     </PageShell>

@@ -362,6 +362,15 @@ export function selectVoice(
 
   // Final fallback to default voice or first available
   const defaultVoice = voices.find((v) => v.default) || voices[0] || null;
+
+  if (defaultVoice) {
+    const isVoiceHindi = defaultVoice.lang.toLowerCase().startsWith("hi");
+    if (!isHindi && isVoiceHindi) {
+      console.log("[SpeechSynthesis] Avoiding Hindi voice fallback for English text.");
+      return null;
+    }
+  }
+
   console.log(
     "[SpeechSynthesis] Fallback to default voice:",
     defaultVoice ? `"${defaultVoice.name}" [${defaultVoice.lang}]` : "None",
@@ -433,9 +442,6 @@ function speakWithVoices(
     if (selectedVoice) {
       utterance.voice = selectedVoice;
       utterance.lang = selectedVoice.lang;
-    } else if (voices.length > 0) {
-      utterance.voice = voices[0];
-      utterance.lang = voices[0].lang;
     } else {
       utterance.lang = isSegHindi ? "hi-IN" : "en-US";
     }

@@ -159,14 +159,19 @@ function julian(d: Date): number {
   return d.getTime() / 86400000 + 2440587.5;
 }
 
+function getAyanamsha(jdVal: number) {
+  const yearsSince1900 = (jdVal - 2415020.0) / 365.2422;
+  return 22.466 + yearsSince1900 * (50.29 / 3600);
+}
+
 // Sunrise/Sunset using NOAA approximation. Returns [sunrise, sunset] as Date objects in local time.
 function sunRiseSet(date: Date, lat: number, lon: number): [Date, Date] {
-  const jd = Math.floor(julian(date) - 0.5) + 0.5;
-  const n = jd - 2451545.0 + 0.0008;
+  const jdVal = Math.floor(julian(date) - 0.5) + 0.5;
+  const n = Math.round(jdVal - 2451545.0 + 0.0008);
   const Jstar = n - lon / 360;
   const M = (357.5291 + 0.98560028 * Jstar) % 360;
   const Mrad = (M * Math.PI) / 180;
-  const C = 1.9148 * Math.sin(Mrad) + 0.02 * Math.sin(2 * Mrad) + 0.0003 * Math.sin(3 * Mrad);
+  const C = 1.9148 * Math.sin(Mrad) + 0.02 * Math.sin(2 * Mrad) + 0.0003 * Math.sin(3 * Math.PI / 180); // simplified perturbation
   const lambda = (M + C + 180 + 102.9372) % 360;
   const lambdaRad = (lambda * Math.PI) / 180;
   const Jtransit = 2451545.0 + Jstar + 0.0053 * Math.sin(Mrad) - 0.0069 * Math.sin(2 * lambdaRad);
@@ -192,20 +197,51 @@ function fmtTime(d: Date): string {
 
 // Approximate sun ecliptic longitude (degrees) for a given Date
 function sunLongitude(d: Date): number {
-  const jd = julian(d);
-  const n = jd - 2451545.0;
-  const L = (280.46 + 0.9856474 * n) % 360;
+  const jdVal = julian(d);
+  const n = jdVal - 2451545.0;
+  const L = (280.460 + 0.9856474 * n) % 360;
   const g = (((357.528 + 0.9856003 * n) % 360) * Math.PI) / 180;
   return (L + 1.915 * Math.sin(g) + 0.02 * Math.sin(2 * g) + 360) % 360;
 }
 
 // Approximate moon ecliptic longitude (degrees)
 function moonLongitude(d: Date): number {
-  const jd = julian(d);
-  const T = (jd - 2451545.0) / 36525;
-  const L = (218.316 + 481267.8813 * T) % 360;
-  const M = (((134.963 + 477198.8676 * T) % 360) * Math.PI) / 180;
-  return (L + 6.289 * Math.sin(M) + 360) % 360;
+  const jdVal = julian(d);
+  const T = (jdVal - 2451545.0) / 36525;
+  const L_prime = (218.3164 + 481267.8812 * T) % 360;
+  const D = (297.8502 + 445267.1114 * T) % 360;
+  const M = (134.9634 + 477198.8675 * T) % 360;
+  const M_prime = (357.5291 + 35999.0503 * T) % 360;
+  const F = (93.2721 + 483202.0175 * T) % 360;
+
+  const D_rad = D * Math.PI / 180;
+  const M_rad = M * Math.PI / 180;
+  const Mp_rad = M_prime * Math.PI / 180;
+  const F_rad = F * Math.PI / 180;
+
+  let dL = 0;
+  dL += 6.288774 * Math.sin(M_rad);
+  dL += 1.274027 * Math.sin(2 * D_rad - M_rad);
+  dL += 0.658309 * Math.sin(2 * D_rad);
+  dL += 0.213618 * Math.sin(2 * M_rad);
+  dL += -0.185116 * Math.sin(Mp_rad);
+  dL += -0.114332 * Math.sin(2 * F_rad);
+  dL += 0.058793 * Math.sin(2 * D_rad - 2 * M_rad);
+  dL += 0.057066 * Math.sin(2 * D_rad - M_rad - Mp_rad);
+  dL += 0.053322 * Math.sin(2 * D_rad + M_rad);
+  dL += 0.045758 * Math.sin(2 * D_rad - Mp_rad);
+  dL += -0.041023 * Math.sin(M_rad - Mp_rad);
+  dL += -0.034720 * Math.sin(D_rad);
+  dL += -0.030465 * Math.sin(M_rad + Mp_rad);
+  dL += 0.015327 * Math.sin(2 * D_rad - 2 * F_rad);
+  dL += -0.012528 * Math.sin(2 * D_rad + Mp_rad);
+  dL += -0.009756 * Math.sin(2 * D_rad - M_rad + Mp_rad);
+  dL += 0.008034 * Math.sin(2 * D_rad - 2 * M_rad - Mp_rad);
+  dL += -0.007684 * Math.sin(2 * D_rad - 2 * M_rad + Mp_rad);
+  dL += 0.006322 * Math.sin(2 * M_rad - 2 * D_rad);
+  dL += -0.005877 * Math.sin(M_rad - 2 * D_rad);
+
+  return (L_prime + dL + 360) % 360;
 }
 
 function panchangFor(date: Date) {
@@ -214,7 +250,7 @@ function panchangFor(date: Date) {
   );
   const sunLon = sunLongitude(noon);
   const moonLon = moonLongitude(noon);
-  const ayan = 24.13;
+  const ayan = getAyanamsha(julian(noon));
   const sunSid = (sunLon - ayan + 360) % 360;
   const moonSid = (moonLon - ayan + 360) % 360;
   const diff = (moonLon - sunLon + 360) % 360;
@@ -382,8 +418,13 @@ function PanchangPage() {
 
     const dateIso = dateKey;
     const sunriseApi = `https://api.sunrise-sunset.org/json?lat=${LAT}&lng=${LON}&date=${dateIso}&formatted=0`;
-    const target = `https://www.drikpanchang.com/panchang/day-panchang.html?geoname-id=1262995&date=${selectedDate.getDate()}/${selectedDate.getMonth() + 1}/${selectedDate.getFullYear()}`;
-    const proxies = ["https://api.allorigins.win/raw?url=", "https://corsproxy.io/?"];
+    
+    const MONTH_NAMES = [
+      "january", "february", "march", "april", "may", "june",
+      "july", "august", "september", "october", "november", "december"
+    ];
+    const target = `https://www.prokerala.com/astrology/panchang/${selectedDate.getFullYear()}-${MONTH_NAMES[selectedDate.getMonth()]}-${selectedDate.getDate()}.html`;
+    const proxies = ["https://api.allorigins.win/raw?url="];
 
     let active = true;
 
@@ -415,51 +456,119 @@ function PanchangPage() {
         if (!active) return;
         try {
           const url = proxy + encodeURIComponent(target);
-          console.log(`[Panchang] Fetching fallback live data for ${target} via proxy: ${proxy}`);
+          console.log(`[Panchang] Fetching live data for ${target} via proxy: ${proxy}`);
 
           const res = await fetch(url);
           if (!res.ok) continue;
 
           const html = await res.text();
-          const doc = new DOMParser().parseFromString(html, "text/html");
+          
+          const cleanText = (text: string) => {
+            if (!text) return "";
+            return text
+              .replace(/<[^>]+>/g, " ")
+              .replace(/&nbsp;/gi, " ")
+              .replace(/&ndash;/gi, "–")
+              .replace(/&mdash;/gi, "—")
+              .replace(/&amp;/gi, "&")
+              .replace(/\s+/g, " ")
+              .trim();
+          };
 
-          const cells = doc.querySelectorAll(".dpTableCell");
-          cells.forEach((cell) => {
-            const keyEl = cell.querySelector(".dpTableKey");
-            const valEl = cell.querySelector(".dpTableValue");
-            if (keyEl && valEl) {
-              const key = (keyEl.textContent ?? "").replace(/\s+/g, " ").trim();
-              const val = (valEl.textContent ?? "").replace(/\s+/g, " ").trim();
-              if (key && val) out[key] = val;
+          const parseBlockItems = (blockClass: string) => {
+            const regex = new RegExp(`<div class="panchang-box-data-block[^"]*${blockClass}[^"]*">([\\s\\S]*?)<\\/div>`, 'i');
+            const match = html.match(regex);
+            if (!match) return [];
+            
+            const blockContent = match[1];
+            const items: string[] = [];
+            const liRegex = /<li[^>]*>([\s\S]*?)<\/li>/gi;
+            let liMatch;
+            while ((liMatch = liRegex.exec(blockContent)) !== null) {
+              items.push(cleanText(liMatch[1]));
             }
-          });
+            return items;
+          };
 
-          const keys = doc.querySelectorAll(".dpTableKey");
-          keys.forEach((keyEl) => {
-            const key = (keyEl.textContent ?? "").replace(/\s+/g, " ").trim();
-            if (!out[key]) {
-              const valEl = keyEl.nextElementSibling;
-              if (valEl && valEl.classList.contains("dpTableValue")) {
-                const val = (valEl.textContent ?? "").replace(/\s+/g, " ").trim();
-                if (val) out[key] = val;
-              }
-            }
-          });
+          // 1. Tithi
+          const tithis = parseBlockItems("panchang-data-tithi");
+          if (tithis.length > 0) out["Tithi"] = tithis.join(" | ");
 
-          const headers = doc.querySelectorAll(
-            ".dpPHeader, .dpPanchangHeader, .dpTableTitle, .dpCardTitle",
-          );
-          headers.forEach((h) => {
-            const key = (h.textContent ?? "").replace(/\s+/g, " ").trim();
-            const next = h.nextElementSibling;
-            if (next) {
-              const val = (next.textContent ?? "").replace(/\s+/g, " ").trim();
-              if (key && val && val.length < 200) out[key] = val;
+          // 2. Nakshatra
+          const nakshatras = parseBlockItems("panchang-data-nakshatra");
+          if (nakshatras.length > 0) out["Nakshatra"] = nakshatras.join(" | ");
+
+          // 3. Yoga
+          const yogas = parseBlockItems("panchang-data-yoga");
+          if (yogas.length > 0) out["Yoga"] = yogas.join(" | ");
+
+          // 4. Karana
+          const karanas = parseBlockItems("panchang-data-karana");
+          if (karanas.length > 0) out["Karana"] = karanas.join(" | ");
+
+          // 5. Weekday
+          const varas = parseBlockItems("panchang-data-vaasara");
+          if (varas.length > 0) out["Weekday"] = varas[0];
+
+          // 6. Vikram Samvat
+          const dayItems = parseBlockItems("panchang-data-day");
+          for (const item of dayItems) {
+            if (item.includes("Vikram Samvat")) {
+              out["Vikram Samvat"] = item.replace("Vikram Samvat -", "").trim();
             }
-          });
+          }
+
+          // 7. Chandramasa
+          const lunarItems = parseBlockItems("panchang-data-lunar-month");
+          for (const item of lunarItems) {
+            if (item.includes("Purnimanta")) {
+              out["Chandramasa"] = item.replace("Purnimanta -", "").trim();
+            }
+          }
+
+          // 8. Sun & Moon timings
+          const timings = parseBlockItems("panchang-data-sun_moon_timing");
+          for (const t of timings) {
+            if (t.includes("Sunrise")) out["Sunrise"] = t.replace("Sunrise -", "").trim();
+            if (t.includes("Sunset")) out["Sunset"] = t.replace("Sunset -", "").trim();
+            if (t.includes("Moonrise")) out["Moonrise"] = t.replace("Moonrise -", "").trim();
+            if (t.includes("Moonset")) out["Moonset"] = t.replace("Moonset -", "").trim();
+          }
+
+          // 9. Rashi
+          const suryaRasi = parseBlockItems("panchang-data-soorya-rasi");
+          if (suryaRasi.length > 0) {
+            out["Sunsign"] = suryaRasi[0].replace("Sun in ", "").trim();
+          }
+          const chandraRasi = parseBlockItems("panchang-data-chandra-rasi");
+          if (chandraRasi.length > 0) {
+            out["Moonsign"] = chandraRasi[0].replace("Moon travels through ", "").replace("Moon in ", "").trim();
+          }
+
+          // 10. Auspicious periods
+          const auspicious = parseBlockItems("panchang-data-auspicious-period");
+          for (const item of auspicious) {
+            if (item.includes("Abhijit Muhurat")) out["Abhijit"] = item.replace("Abhijit Muhurat -", "").trim();
+            if (item.includes("Brahma Muhurat")) out["Brahma Muhurta"] = item.replace("Brahma Muhurat -", "").trim();
+          }
+
+          // 11. Inauspicious periods
+          const inauspicious = parseBlockItems("panchang-data-inauspicious-period");
+          for (const item of inauspicious) {
+            if (item.includes("Rahu")) out["Rahu Kalam"] = item.replace("Rahu -", "").trim();
+            if (item.includes("Yamaganda")) out["Yamaganda"] = item.replace("Yamaganda -", "").trim();
+            if (item.includes("Gulika")) out["Gulikai Kalam"] = item.replace("Gulika -", "").trim();
+          }
+
+          // 12. Paksha
+          if (html.toLowerCase().includes("sukla paksha")) {
+            out["Paksha"] = "Sukla Paksha";
+          } else if (html.toLowerCase().includes("krishna paksha")) {
+            out["Paksha"] = "Krishna Paksha";
+          }
 
           if (Object.keys(out).length > 0) {
-            console.log("[Panchang] Fallback scraped data:", out);
+            console.log("[Panchang] Live Prokerala data loaded:", out);
             if (active) {
               setLive(out);
               setLoadingLive(false);

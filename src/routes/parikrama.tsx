@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { PageShell, PageHero } from "@/components/PageShell";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useLang } from "@/i18n/LangProvider";
-import { speakText, stopSpeech } from "@/lib/speech";
+import { speakText, stopSpeech, isHindiText } from "@/lib/speech";
 import {
   MapPin,
   Volume2,
@@ -853,7 +853,7 @@ function ParikramaPage() {
               )}
 
               <div className="mt-6 border-t border-gold/10 pt-4 flex flex-col gap-3">
-                {selectedMapNode !== null && (
+                {selectedMapNode !== null && isHindiText(stages[selectedMapNode].audioText) && (
                   <button
                     onClick={() =>
                       toggleNarration(selectedMapNode, stages[selectedMapNode].audioText)
@@ -958,20 +958,22 @@ function ParikramaPage() {
                       {lang === "hi" ? `चरण ${activeStep + 1} / ४` : `Stage ${activeStep + 1} of 4`}
                     </span>
 
-                    <button
-                      onClick={() => toggleNarration(activeStep, stages[activeStep].audioText)}
-                      className="inline-flex items-center gap-1.5 text-xs text-saffron hover:text-maroon font-semibold transition"
-                    >
-                      {speakingStep === activeStep ? (
-                        <>
-                          <VolumeX size={14} /> {t("parikrama.stop")}
-                        </>
-                      ) : (
-                        <>
-                          <Volume2 size={14} /> {t("parikrama.listen")}
-                        </>
-                      )}
-                    </button>
+                    {isHindiText(stages[activeStep].audioText) && (
+                      <button
+                        onClick={() => toggleNarration(activeStep, stages[activeStep].audioText)}
+                        className="inline-flex items-center gap-1.5 text-xs text-saffron hover:text-maroon font-semibold transition"
+                      >
+                        {speakingStep === activeStep ? (
+                          <>
+                            <VolumeX size={14} /> {t("parikrama.stop")}
+                          </>
+                        ) : (
+                          <>
+                            <Volume2 size={14} /> {t("parikrama.listen")}
+                          </>
+                        )}
+                      </button>
+                    )}
                   </div>
 
                   <p className={`text-base text-foreground/80 leading-relaxed ${dev}`}>

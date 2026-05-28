@@ -3,6 +3,7 @@ import { PageShell, PageHero } from "@/components/PageShell";
 import { useState } from "react";
 import { useLang } from "@/i18n/LangProvider";
 import { Play, Smartphone } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/videos")({
   head: () => ({
@@ -16,6 +17,20 @@ export const Route = createFileRoute("/videos")({
       { property: "og:description", content: "Latest darshan, kirtan and pravachan videos." },
     ],
   }),
+  loader: async () => {
+    try {
+      const { data, error } = await supabase
+        .from("youtube_videos")
+        .select("id,title,type,embed")
+        .order("created_at", { ascending: false });
+      if (!error && data && data.length > 0) {
+        return { fetchedVideos: data as Video[] };
+      }
+    } catch (e) {
+      console.warn("Failed to load videos from database, will fallback to static list", e);
+    }
+    return { fetchedVideos: null };
+  },
   component: VideosPage,
 });
 
@@ -178,10 +193,13 @@ const videos: Video[] = [
 ];
 
 function VideosPage() {
+  const { fetchedVideos } = Route.useLoaderData();
   const { t, lang } = useLang();
   const dev = lang === "hi" ? "font-devanagari" : "";
   const [tab, setTab] = useState<"video" | "short">("video");
-  const list = videos.filter((v) => v.type === tab);
+  
+  const activeVideos = fetchedVideos && fetchedVideos.length > 0 ? fetchedVideos : videos;
+  const list = activeVideos.filter((v) => v.type === tab);
 
   return (
     <PageShell>

@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import type { Tables } from "@/integrations/supabase/types";
 import { useCallback, useEffect, useState } from "react";
 import { useLang } from "@/i18n/LangProvider";
-import { speakText, stopSpeech } from "@/lib/speech";
+import { speakText, stopSpeech, isHindiText } from "@/lib/speech";
 import { toast } from "sonner";
 
 type Sandesh = Tables<"sandesh">;
@@ -370,25 +370,27 @@ function SandeshPage() {
               </p>
               <div className={`mt-6 text-sm text-muted-foreground ${dev}`}>— {today.author}</div>
               <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
-                <button
-                  onClick={() => toggleSpeak(today.message, today.id)}
-                  className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gold/50 text-maroon hover:bg-gold/10 disabled:opacity-50 disabled:cursor-not-allowed transition text-sm ${dev}`}
-                  disabled={loadingId !== null && loadingId !== today.id}
-                  aria-label="Listen to Sandesh"
-                >
-                  {loadingId === today.id ? (
-                    <Loader2 size={14} className="animate-spin" />
-                  ) : speakingId === today.id ? (
-                    <Square size={14} />
-                  ) : (
-                    <Play size={14} />
-                  )}
-                  {loadingId === today.id
-                    ? t("sandesh.loading")
-                    : speakingId === today.id
-                      ? t("sandesh.stop")
-                      : t("sandesh.listen")}
-                </button>
+                {isHindiText(today.message) && (
+                  <button
+                    onClick={() => toggleSpeak(today.message, today.id)}
+                    className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gold/50 text-maroon hover:bg-gold/10 disabled:opacity-50 disabled:cursor-not-allowed transition text-sm ${dev}`}
+                    disabled={loadingId !== null && loadingId !== today.id}
+                    aria-label="Listen to Sandesh"
+                  >
+                    {loadingId === today.id ? (
+                      <Loader2 size={14} className="animate-spin" />
+                    ) : speakingId === today.id ? (
+                      <Square size={14} />
+                    ) : (
+                      <Play size={14} />
+                    )}
+                    {loadingId === today.id
+                      ? t("sandesh.loading")
+                      : speakingId === today.id
+                        ? t("sandesh.stop")
+                        : t("sandesh.listen")}
+                  </button>
+                )}
                 <button
                   onClick={() => shareSandesh(today.message, today.author)}
                   className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border border-saffron/50 text-saffron hover:bg-saffron/10 transition text-sm ${dev}`}
@@ -429,25 +431,27 @@ function SandeshPage() {
                   <div className="flex flex-wrap items-center justify-between gap-4">
                     <div className={`text-xs text-muted-foreground ${dev}`}>— {s.author}</div>
                     <div className="flex gap-2">
-                      <button
-                        onClick={() => toggleSpeak(s.message, s.id)}
-                        className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-gold/50 text-maroon hover:bg-gold/10 disabled:opacity-50 disabled:cursor-not-allowed transition text-xs ${dev}`}
-                        disabled={loadingId !== null && loadingId !== s.id}
-                        aria-label="Listen to Sandesh"
-                      >
-                        {loadingId === s.id ? (
-                          <Loader2 size={12} className="animate-spin" />
-                        ) : speakingId === s.id ? (
-                          <Square size={12} />
-                        ) : (
-                          <Play size={12} />
-                        )}
-                        {loadingId === s.id
-                          ? t("sandesh.loading")
-                          : speakingId === s.id
-                            ? t("sandesh.stop")
-                            : t("sandesh.listen")}
-                      </button>
+                      {isHindiText(s.message) && (
+                        <button
+                          onClick={() => toggleSpeak(s.message, s.id)}
+                          className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-gold/50 text-maroon hover:bg-gold/10 disabled:opacity-50 disabled:cursor-not-allowed transition text-xs ${dev}`}
+                          disabled={loadingId !== null && loadingId !== s.id}
+                          aria-label="Listen to Sandesh"
+                        >
+                          {loadingId === s.id ? (
+                            <Loader2 size={12} className="animate-spin" />
+                          ) : speakingId === s.id ? (
+                            <Square size={12} />
+                          ) : (
+                            <Play size={12} />
+                          )}
+                          {loadingId === s.id
+                            ? t("sandesh.loading")
+                            : speakingId === s.id
+                              ? t("sandesh.stop")
+                              : t("sandesh.listen")}
+                        </button>
+                      )}
                       <button
                         onClick={() => shareSandesh(s.message, s.author)}
                         className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-saffron/50 text-saffron hover:bg-saffron/10 transition text-xs ${dev}`}
