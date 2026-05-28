@@ -1304,34 +1304,24 @@ function AnalyticsAdmin() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [liveCount, setLiveCount] = useState(0);
-  const [livePages, setLivePages] = useState<Record<string, number>>({});
 
+  // Poll visitor heartbeats every 15 s — sessions active in last 2 min = "live"
   useEffect(() => {
-    // 1. Subscribe to the live presence channel
-    const channel = supabase.channel("live_visitors");
-
-    channel
-      .on("presence", { event: "sync" }, () => {
-        const state = channel.presenceState();
-        let totalCount = 0;
-        const pageDistribution: Record<string, number> = {};
-
-        Object.values(state).forEach((presences: any) => {
-          presences.forEach((presence: any) => {
-            totalCount++;
-            const pPath = presence.page || "/";
-            pageDistribution[pPath] = (pageDistribution[pPath] || 0) + 1;
-          });
-        });
-
-        setLiveCount(totalCount);
-        setLivePages(pageDistribution);
-      })
-      .subscribe();
-
-    return () => {
-      void channel.unsubscribe();
+    const fetchLive = async () => {
+      try {
+        const twoMinAgo = new Date(Date.now() - 2 * 60 * 1000).toISOString();
+        const { count } = await supabase
+          .from("visitor_heartbeats" as any)
+          .select("session_id", { count: "exact", head: true })
+          .gte("last_seen", twoMinAgo);
+        setLiveCount(count ?? 0);
+      } catch {
+        // silently ignore — table may not exist yet
+      }
     };
+    void fetchLive();
+    const iv = setInterval(() => void fetchLive(), 15_000);
+    return () => clearInterval(iv);
   }, []);
 
   async function load() {

@@ -42,34 +42,41 @@ function RootComponent() {
     document.title = "Namami Vindhyavasini Sansthan";
   }, []);
 
-  // Track page views
+  // Track page views and live visitors via heartbeat table
   useEffect(() => {
     const path = location.pathname;
     const isAdmin = path.startsWith("/admin");
 
-    // Skip analytics for admin pages
-    if (isAdmin) return;
+    // 1. Page view tracking — skip admin to keep stats clean
+    if (!isAdmin) {
+      void supabase.from("page_views" as any).insert({ page_path: path } as any);
+    }
 
-    // Page View Tracking
-    const trackPageView = async () => {
-      try {
-        await supabase
-          .from("page_views" as any)
-          .insert({ page_path: path } as any)
-          .catch((err) => {
-            console.warn("Failed to track page view:", err?.message || err);
-          });
-      } catch (err) {
-        console.warn("Page view tracking error:", err instanceof Error ? err.message : "Unknown error");
+    // 2. Heartbeat — upsert a row every 30s so admin can count
+    //    sessions active in last 2 min. Works everywhere, no Realtime needed.
+    let sessionId = "";
+    try {
+      sessionId = localStorage.getItem("__vis_sid") ?? "";
+      if (!sessionId) {
+        sessionId =
+          Math.random().toString(36).substring(2) +
+          Date.now().toString(36);
+        localStorage.setItem("__vis_sid", sessionId);
       }
-    };
+    } catch {
+      sessionId = Math.random().toString(36).substring(2) + Date.now().toString(36);
+    }
 
-    // Debounce tracking to avoid duplicate requests
-    const timer = setTimeout(() => {
-      void trackPageView();
-    }, 500);
+    const beat = () =>
+      void supabase.from("visitor_heartbeats" as any).upsert(
+        { session_id: sessionId, last_seen: new Date().toISOString(), page_path: path } as any,
+        { onConflict: "session_id" }
+      );
 
-    return () => clearTimeout(timer);
+    beat(); // immediate on navigation
+    const iv = setInterval(beat, 30_000); // keep-alive every 30 s
+
+    return () => clearInterval(iv);
   }, [location.pathname]);
 
   return (
