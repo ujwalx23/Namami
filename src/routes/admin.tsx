@@ -6,7 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import type { Tables } from "@/integrations/supabase/types";
 
-const ADMIN_PASSCODE = "vindhyavasini2026";
+const ADMIN_PASSCODE = "23rsnamamiweb&omi!";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
@@ -23,7 +23,9 @@ type EventRow = Tables<"events">;
 type Review = Tables<"reviews">;
 type Appointment = Tables<"appointments">;
 type Contact = Tables<"contacts">;
-type Video = Tables<"videos"> | { id: string; title: string; embed: string; type: "video" | "short" };
+type Video =
+  | Tables<"videos">
+  | { id: string; title: string; embed: string; type: "video" | "short" };
 
 function AdminPage() {
   const [authed, setAuthed] = useState(false);
@@ -35,10 +37,7 @@ function AdminPage() {
   if (!authed) {
     return (
       <PageShell>
-        <PageHero
-          title="Admin Access"
-          subtitle="Enter the passcode to manage the website."
-        />
+        <PageHero title="Admin Access" subtitle="Enter the passcode to manage the website." />
         <section className="container mx-auto px-6 py-16 max-w-md">
           <form
             onSubmit={(e) => {
@@ -308,16 +307,6 @@ function ReviewAdmin() {
     await load();
   }
 
-  async function toggleApprove(id: string, current: boolean) {
-    const { error } = await supabase
-      .from("reviews")
-      .update({ is_approved: !current })
-      .eq("id", id);
-    if (error) return toast.error(error.message);
-    toast.success(!current ? "Approved" : "Unapproved");
-    await load();
-  }
-
   return (
     <div>
       <h3 className="font-display text-2xl text-maroon mb-4">Reviews</h3>
@@ -335,26 +324,10 @@ function ReviewAdmin() {
                   {r.name} · {new Date(r.created_at).toLocaleDateString()}
                 </div>
                 <div className="text-sm mt-1">{r.comment}</div>
-                <div className="text-xs text-muted-foreground mt-2">
-                  Status: {r.is_approved ? "Approved ✓" : "Pending"}
-                </div>
               </div>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => toggleApprove(r.id, r.is_approved)}
-                  className={`p-2 rounded-lg transition ${
-                    r.is_approved
-                      ? "bg-green-500/20 text-green-700"
-                      : "bg-yellow-500/20 text-yellow-700 hover:bg-green-500/20"
-                  }`}
-                  title={r.is_approved ? "Click to unapprove" : "Click to approve"}
-                >
-                  <Check size={16} />
-                </button>
-                <button onClick={() => del(r.id)} className="text-destructive p-2">
-                  <Trash2 size={16} />
-                </button>
-              </div>
+              <button onClick={() => del(r.id)} className="text-destructive p-2">
+                <Trash2 size={16} />
+              </button>
             </div>
           ))}
         </div>
@@ -365,6 +338,14 @@ function ReviewAdmin() {
 
 function AppointmentAdmin() {
   const [list, setList] = useState<Appointment[]>([]);
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    appointment_date: "",
+    time_slot: "",
+    purpose: "",
+  });
   const [loaded, setLoaded] = useState(false);
 
   async function load() {
@@ -377,6 +358,30 @@ function AppointmentAdmin() {
   }
   if (!loaded) load();
 
+  async function add(e: React.FormEvent) {
+    e.preventDefault();
+    if (
+      !form.name.trim() ||
+      !form.phone.trim() ||
+      !form.appointment_date ||
+      !form.time_slot ||
+      !form.purpose.trim()
+    )
+      return toast.error("All fields required");
+    const { error } = await supabase.from("appointments").insert({
+      name: form.name.trim(),
+      email: form.email.trim() || null,
+      phone: form.phone.trim(),
+      appointment_date: form.appointment_date,
+      time_slot: form.time_slot,
+      purpose: form.purpose.trim(),
+    });
+    if (error) return toast.error(error.message);
+    toast.success("Appointment added");
+    setForm({ name: "", email: "", phone: "", appointment_date: "", time_slot: "", purpose: "" });
+    await load();
+  }
+
   async function del(id: string) {
     const { error } = await supabase.from("appointments").delete().eq("id", id);
     if (error) return toast.error(error.message);
@@ -387,6 +392,49 @@ function AppointmentAdmin() {
   return (
     <div>
       <h3 className="font-display text-2xl text-maroon mb-4">Appointments</h3>
+      <form onSubmit={add} className="p-5 rounded-2xl bg-card border border-border space-y-3 mb-6">
+        <input
+          value={form.name}
+          onChange={(e) => setForm({ ...form, name: e.target.value })}
+          placeholder="Name"
+          className="w-full px-4 py-2 rounded-lg border border-input bg-background"
+        />
+        <input
+          value={form.email}
+          onChange={(e) => setForm({ ...form, email: e.target.value })}
+          type="email"
+          placeholder="Email (optional)"
+          className="w-full px-4 py-2 rounded-lg border border-input bg-background"
+        />
+        <input
+          value={form.phone}
+          onChange={(e) => setForm({ ...form, phone: e.target.value })}
+          placeholder="Phone"
+          className="w-full px-4 py-2 rounded-lg border border-input bg-background"
+        />
+        <input
+          type="date"
+          value={form.appointment_date}
+          onChange={(e) => setForm({ ...form, appointment_date: e.target.value })}
+          className="w-full px-4 py-2 rounded-lg border border-input bg-background"
+        />
+        <input
+          type="time"
+          value={form.time_slot}
+          onChange={(e) => setForm({ ...form, time_slot: e.target.value })}
+          className="w-full px-4 py-2 rounded-lg border border-input bg-background"
+        />
+        <textarea
+          value={form.purpose}
+          onChange={(e) => setForm({ ...form, purpose: e.target.value })}
+          placeholder="Purpose"
+          rows={2}
+          className="w-full px-4 py-2 rounded-lg border border-input bg-background"
+        />
+        <button className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-sacred text-cream text-sm">
+          <Plus size={14} /> Add Appointment
+        </button>
+      </form>
       {list.length === 0 ? (
         <p className="text-muted-foreground">No appointments yet.</p>
       ) : (
@@ -423,6 +471,12 @@ function AppointmentAdmin() {
 
 function ContactAdmin() {
   const [list, setList] = useState<Contact[]>([]);
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
   const [loaded, setLoaded] = useState(false);
 
   async function load() {
@@ -435,6 +489,22 @@ function ContactAdmin() {
   }
   if (!loaded) load();
 
+  async function add(e: React.FormEvent) {
+    e.preventDefault();
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim())
+      return toast.error("Name, email, and message required");
+    const { error } = await supabase.from("contacts").insert({
+      name: form.name.trim(),
+      email: form.email.trim(),
+      phone: form.phone.trim() || null,
+      message: form.message.trim(),
+    });
+    if (error) return toast.error(error.message);
+    toast.success("Contact added");
+    setForm({ name: "", email: "", phone: "", message: "" });
+    await load();
+  }
+
   async function del(id: string) {
     const { error } = await supabase.from("contacts").delete().eq("id", id);
     if (error) return toast.error(error.message);
@@ -445,6 +515,37 @@ function ContactAdmin() {
   return (
     <div>
       <h3 className="font-display text-2xl text-maroon mb-4">Contact Messages</h3>
+      <form onSubmit={add} className="p-5 rounded-2xl bg-card border border-border space-y-3 mb-6">
+        <input
+          value={form.name}
+          onChange={(e) => setForm({ ...form, name: e.target.value })}
+          placeholder="Name"
+          className="w-full px-4 py-2 rounded-lg border border-input bg-background"
+        />
+        <input
+          value={form.email}
+          onChange={(e) => setForm({ ...form, email: e.target.value })}
+          type="email"
+          placeholder="Email"
+          className="w-full px-4 py-2 rounded-lg border border-input bg-background"
+        />
+        <input
+          value={form.phone}
+          onChange={(e) => setForm({ ...form, phone: e.target.value })}
+          placeholder="Phone (optional)"
+          className="w-full px-4 py-2 rounded-lg border border-input bg-background"
+        />
+        <textarea
+          value={form.message}
+          onChange={(e) => setForm({ ...form, message: e.target.value })}
+          placeholder="Message"
+          rows={3}
+          className="w-full px-4 py-2 rounded-lg border border-input bg-background"
+        />
+        <button className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-sacred text-cream text-sm">
+          <Plus size={14} /> Add Contact
+        </button>
+      </form>
       {list.length === 0 ? (
         <p className="text-muted-foreground">No contact messages yet.</p>
       ) : (
@@ -478,6 +579,12 @@ function ContactAdmin() {
 function VideoAdmin() {
   const [list, setList] = useState<Video[]>([]);
   const [form, setForm] = useState({ title: "", embed: "", type: "video" as "video" | "short" });
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editForm, setEditForm] = useState({
+    title: "",
+    embed: "",
+    type: "video" as "video" | "short",
+  });
   const [loaded, setLoaded] = useState(false);
 
   async function load() {
@@ -502,6 +609,23 @@ function VideoAdmin() {
     if (error) return toast.error(error.message);
     toast.success("Video added");
     setForm({ title: "", embed: "", type: "video" });
+    await load();
+  }
+
+  async function update(id: string) {
+    if (!editForm.title.trim() || !editForm.embed.trim())
+      return toast.error("Title and embed URL required");
+    const { error } = await supabase
+      .from("videos")
+      .update({
+        title: editForm.title.trim(),
+        embed: editForm.embed.trim(),
+        type: editForm.type,
+      })
+      .eq("id", id);
+    if (error) return toast.error(error.message);
+    toast.success("Video updated");
+    setEditingId(null);
     await load();
   }
 
@@ -556,23 +680,101 @@ function VideoAdmin() {
         <p className="text-muted-foreground">No videos yet.</p>
       ) : (
         <div className="space-y-3">
-          {list.map((v) => (
-            <div
-              key={v.id}
-              className="p-4 rounded-xl bg-card border border-border flex justify-between gap-3"
-            >
-              <div>
-                <div className="text-xs text-saffron uppercase tracking-wider">
-                  {v.type === "short" ? "📱 Short" : "🎥 Video"}
+          {list.map((v) =>
+            editingId === v.id ? (
+              <div key={v.id} className="p-4 rounded-xl bg-card border border-border space-y-3">
+                <input
+                  value={editForm.title}
+                  onChange={(e) => setEditForm({ ...editForm, title: e.target.value })}
+                  placeholder="Video title"
+                  className="w-full px-4 py-2 rounded-lg border border-input bg-background"
+                />
+                <input
+                  value={editForm.embed}
+                  onChange={(e) => setEditForm({ ...editForm, embed: e.target.value })}
+                  placeholder="YouTube embed URL"
+                  className="w-full px-4 py-2 rounded-lg border border-input bg-background text-xs"
+                />
+                <div className="flex gap-4">
+                  <label className="flex items-center gap-2 text-sm">
+                    <input
+                      type="radio"
+                      value="video"
+                      checked={editForm.type === "video"}
+                      onChange={(e) =>
+                        setEditForm({ ...editForm, type: e.target.value as "video" | "short" })
+                      }
+                    />
+                    Video
+                  </label>
+                  <label className="flex items-center gap-2 text-sm">
+                    <input
+                      type="radio"
+                      value="short"
+                      checked={editForm.type === "short"}
+                      onChange={(e) =>
+                        setEditForm({ ...editForm, type: e.target.value as "video" | "short" })
+                      }
+                    />
+                    Short
+                  </label>
                 </div>
-                <div className="font-medium text-maroon">{v.title}</div>
-                <div className="text-xs text-muted-foreground mt-1 break-all">{v.embed}</div>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => update(v.id)}
+                    className="flex-1 px-4 py-2 rounded-lg bg-green-500/20 text-green-700 hover:bg-green-500/30 transition"
+                  >
+                    Save
+                  </button>
+                  <button
+                    onClick={() => setEditingId(null)}
+                    className="flex-1 px-4 py-2 rounded-lg bg-muted/50 text-foreground hover:bg-muted transition"
+                  >
+                    Cancel
+                  </button>
+                </div>
               </div>
-              <button onClick={() => del(v.id)} className="text-destructive p-2">
-                <Trash2 size={16} />
-              </button>
-            </div>
-          ))}
+            ) : (
+              <div key={v.id} className="p-4 rounded-xl bg-card border border-border space-y-3">
+                <div className="flex justify-between items-start gap-3">
+                  <div>
+                    <div className="text-xs text-saffron uppercase tracking-wider">
+                      {v.type === "short" ? "📱 Short" : "🎥 Video"}
+                    </div>
+                    <div className="font-medium text-maroon">{v.title}</div>
+                    <div className="text-xs text-muted-foreground mt-1 break-all">{v.embed}</div>
+                  </div>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => {
+                        setEditingId(v.id);
+                        setEditForm({
+                          title: v.title,
+                          embed: v.embed,
+                          type: v.type as "video" | "short",
+                        });
+                      }}
+                      className="px-3 py-1 rounded-lg bg-blue-500/20 text-blue-700 hover:bg-blue-500/30 transition text-sm"
+                    >
+                      Edit
+                    </button>
+                    <button onClick={() => del(v.id)} className="text-destructive p-2">
+                      <Trash2 size={16} />
+                    </button>
+                  </div>
+                </div>
+                <div className="aspect-video bg-black rounded-lg overflow-hidden">
+                  <iframe
+                    className="w-full h-full"
+                    src={v.embed}
+                    title={v.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+              </div>
+            ),
+          )}
         </div>
       )}
     </div>
