@@ -42,80 +42,34 @@ function RootComponent() {
     document.title = "Namami Vindhyavasini Sansthan";
   }, []);
 
-  // Track page views and presence for live visitor count
+  // Track page views
   useEffect(() => {
     const path = location.pathname;
     const isAdmin = path.startsWith("/admin");
 
-    // 1. Page View Tracking — skip admin to keep analytics clean
-    if (!isAdmin) {
-      const trackPageView = async () => {
-        try {
-          const { error } = await supabase.from("page_views" as any).insert({ page_path: path } as any);
-          if (error) {
-            console.warn("Failed to track page view:", error.message);
-          }
-        } catch (err) {
-          console.warn("Page view tracking error:", err instanceof Error ? err.message : "Unknown error");
-        }
-      };
-      void trackPageView();
-    }
+    // Skip analytics for admin pages
+    if (isAdmin) return;
 
-    // 2. Live Presence Tracking — always track ALL pages including admin
-    //    so the admin shows up in the live visitor count too
-    let sessionKey = Math.random().toString(36).substring(2, 15);
-    let channel: any = null;
-    let unsubscribeTimeout: NodeJS.Timeout;
-
-    try {
-      if (typeof window !== "undefined" && window.sessionStorage) {
-        const stored = sessionStorage.getItem("visitor_presence_key");
-        if (stored) {
-          sessionKey = stored;
-        } else {
-          sessionStorage.setItem("visitor_presence_key", sessionKey);
-        }
+    // Page View Tracking
+    const trackPageView = async () => {
+      try {
+        await supabase
+          .from("page_views" as any)
+          .insert({ page_path: path } as any)
+          .catch((err) => {
+            console.warn("Failed to track page view:", err?.message || err);
+          });
+      } catch (err) {
+        console.warn("Page view tracking error:", err instanceof Error ? err.message : "Unknown error");
       }
-    } catch (e) {
-      console.warn("sessionStorage not accessible:", e instanceof Error ? e.message : "Unknown error");
-    }
-
-    try {
-      channel = supabase.channel("live_visitors", {
-        config: {
-          presence: {
-            key: sessionKey,
-          },
-        },
-      });
-
-      channel.subscribe(async (status: string) => {
-        if (status === "SUBSCRIBED") {
-          try {
-            await channel.track({
-              online_at: new Date().toISOString(),
-              page: path,
-            });
-          } catch (err) {
-            console.warn("Failed to track presence:", err instanceof Error ? err.message : "Unknown error");
-          }
-        }
-      });
-    } catch (err) {
-      console.warn("Presence channel initialization error:", err instanceof Error ? err.message : "Unknown error");
-    }
-
-    return () => {
-      if (channel) {
-        try {
-          void channel.unsubscribe();
-        } catch (err) {
-          console.warn("Error unsubscribing from channel:", err instanceof Error ? err.message : "Unknown error");
-        }
-      }
-      if (unsubscribeTimeout) clearTimeout(unsubscribeTimeout);
     };
+
+    // Debounce tracking to avoid duplicate requests
+    const timer = setTimeout(() => {
+      void trackPageView();
+    }, 500);
+
+    return () => clearTimeout(timer);
   }, [location.pathname]);
 
   return (
