@@ -567,10 +567,12 @@ function HomePage() {
               </div>
               <div className="font-devanagari text-saffron text-xl mb-3">॥ नमामि विन्ध्यवासिनी ॥</div>
               <h1
-                className={`font-display text-5xl md:text-6xl lg:text-7xl text-maroon leading-[1.05] mb-6 ${dev}`}
+                className={`text-5xl md:text-6xl lg:text-7xl text-maroon mb-6 ${
+                  hi ? "leading-[1.4] font-devanagari py-2" : "font-display leading-[1.05]"
+                }`}
               >
                 {t("home.hero.title1")}{" "}
-                <span className="text-gradient-gold italic">{t("home.hero.title2")}</span>
+                <span className={`text-gradient-gold ${hi ? "not-italic" : "italic"}`}>{t("home.hero.title2")}</span>
               </h1>
               <p
                 className={`text-lg text-foreground/75 max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed ${dev}`}

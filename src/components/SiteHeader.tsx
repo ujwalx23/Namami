@@ -10,7 +10,6 @@ const links: { to: string; key: TKey }[] = [
   { to: "/sandesh", key: "nav.sandesh" },
   { to: "/events", key: "nav.events" },
   { to: "/videos", key: "nav.videos" },
-  { to: "/shorts", key: "nav.shorts" },
   { to: "/panchang", key: "nav.panchang" },
   { to: "/reviews", key: "nav.reviews" },
   { to: "/gallery", key: "nav.gallery" },

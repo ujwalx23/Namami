@@ -1,10 +1,11 @@
-import { Outlet, Link, createRootRoute } from "@tanstack/react-router";
+import { Outlet, Link, createRootRoute, useLocation } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { LangProvider } from "@/i18n/LangProvider";
 import { AudioProvider } from "@/lib/AudioContext";
 import { FloatingPlayer } from "@/components/FloatingPlayer";
 import { InboxProvider } from "@/lib/InboxContext";
+import { supabase } from "@/integrations/supabase/client";
 
 function NotFoundComponent() {
   return (
@@ -34,9 +35,50 @@ export const Route = createRootRoute({
 });
 
 function RootComponent() {
+  const location = useLocation();
+
   useEffect(() => {
     document.title = "Namami Vindhyavasini Sansthan";
   }, []);
+
+  // Track page views and presence for live visitor count
+  useEffect(() => {
+    const path = location.pathname;
+    
+    // Don't track admin pages for visitor counts/page views to avoid clutter
+    if (path.startsWith("/admin")) return;
+
+    // 1. Page View Tracking
+    const trackPageView = async () => {
+      const { error } = await supabase.from("page_views" as any).insert({ page_path: path } as any);
+      if (error) {
+        console.error("Failed to track page view:", error);
+      }
+    };
+    void trackPageView();
+
+    // 2. Live Presence Tracking
+    const channel = supabase.channel("live_visitors", {
+      config: {
+        presence: {
+          key: Math.random().toString(36).substring(2, 15), // Unique session key
+        },
+      },
+    });
+
+    channel.subscribe(async (status) => {
+      if (status === "SUBSCRIBED") {
+        await channel.track({
+          online_at: new Date().toISOString(),
+          page: path,
+        });
+      }
+    });
+
+    return () => {
+      void channel.unsubscribe();
+    };
+  }, [location.pathname]);
 
   return (
     <LangProvider>
