@@ -1279,6 +1279,26 @@ function buildDailyActivity(
   return days;
 }
 
+function formatAnalyticsCount(num: number): string {
+  if (num < 1000) {
+    return num.toString();
+  }
+  if (num < 1000000) {
+    const val = num / 1000;
+    let str = val < 10 ? val.toFixed(2) : val.toFixed(1);
+    if (str.includes(".")) {
+      str = str.replace(/0+$/, "").replace(/\.$/, "");
+    }
+    return str + "k";
+  }
+  const val = num / 1000000;
+  let str = val < 10 ? val.toFixed(2) : val.toFixed(1);
+  if (str.includes(".")) {
+    str = str.replace(/0+$/, "").replace(/\.$/, "");
+  }
+  return str + "M";
+}
+
 function AnalyticsAdmin() {
   const [data, setData] = useState<AnalyticsSnapshot | null>(null);
   const [loading, setLoading] = useState(true);
@@ -1474,27 +1494,27 @@ function AnalyticsAdmin() {
     {
       icon: Activity,
       label: "Live Visitors (online)",
-      value: liveCount,
+      value: formatAnalyticsCount(liveCount),
     },
-    { icon: Eye, label: "Total Page Views", value: data.pageViewsTotal },
-    { icon: MessageSquare, label: "Sandesh (total)", value: data.sandesh },
-    { icon: Calendar, label: "Events", value: data.eventsTotal, sub: `${data.eventsUpcoming} upcoming` },
-    { icon: Users, label: "Reviews (total)", value: data.reviews },
+    { icon: Eye, label: "Total Page Views", value: formatAnalyticsCount(data.pageViewsTotal) },
+    { icon: MessageSquare, label: "Sandesh (total)", value: formatAnalyticsCount(data.sandesh) },
+    { icon: Calendar, label: "Events", value: formatAnalyticsCount(data.eventsTotal), sub: `${formatAnalyticsCount(data.eventsUpcoming)} upcoming` },
+    { icon: Users, label: "Reviews (total)", value: formatAnalyticsCount(data.reviews) },
     {
       icon: Calendar,
       label: "Appointments",
-      value: data.appointmentsTotal,
-      sub: `${data.appointmentsPending} pending`,
+      value: formatAnalyticsCount(data.appointmentsTotal),
+      sub: `${formatAnalyticsCount(data.appointmentsPending)} pending`,
     },
-    { icon: MessageSquare, label: "Contacts (total)", value: data.contacts },
-    { icon: Video, label: "Videos (long-form)", value: data.videos },
-    { icon: Video, label: "Shorts (vertical)", value: data.shorts },
-    { icon: Inbox, label: "Inbox Broadcasts", value: data.inboxTotal },
+    { icon: MessageSquare, label: "Contacts (total)", value: formatAnalyticsCount(data.contacts) },
+    { icon: Video, label: "Videos (long-form)", value: formatAnalyticsCount(data.videos) },
+    { icon: Video, label: "Shorts (vertical)", value: formatAnalyticsCount(data.shorts) },
+    { icon: Inbox, label: "Inbox Broadcasts", value: formatAnalyticsCount(data.inboxTotal) },
     {
       icon: Image,
       label: "Gallery Images",
-      value: data.gallery + 9,
-      sub: `9 local (GitHub) + ${data.gallery} custom (Admin)`,
+      value: formatAnalyticsCount(data.gallery + 9),
+      sub: `9 local (GitHub) + ${formatAnalyticsCount(data.gallery)} custom (Admin)`,
     },
   ];
 
@@ -1537,10 +1557,10 @@ function AnalyticsAdmin() {
         <div className="px-5 py-4 bg-gradient-divine border-b border-gold/20">
           <h4 className="font-display text-lg text-maroon">Activity by day (last 7 days)</h4>
           <p className="text-xs text-muted-foreground mt-1">
-            Page Views {last7Totals.pageViews} · Reviews {last7Totals.reviews} · Contacts {last7Totals.contacts} · Appointments{" "}
-            {last7Totals.appointments} · Sandesh {last7Totals.sandesh} · Videos{" "}
-            {last7Totals.videos} · Shorts {last7Totals.shorts} · Events{" "}
-            {last7Totals.events} · Inbox Broadcasts {last7Totals.inbox}
+            Page Views {formatAnalyticsCount(last7Totals.pageViews)} · Reviews {formatAnalyticsCount(last7Totals.reviews)} · Contacts {formatAnalyticsCount(last7Totals.contacts)} · Appointments{" "}
+            {formatAnalyticsCount(last7Totals.appointments)} · Sandesh {formatAnalyticsCount(last7Totals.sandesh)} · Videos{" "}
+            {formatAnalyticsCount(last7Totals.videos)} · Shorts {formatAnalyticsCount(last7Totals.shorts)} · Events{" "}
+            {formatAnalyticsCount(last7Totals.events)} · Inbox Broadcasts {formatAnalyticsCount(last7Totals.inbox)}
           </p>
         </div>
         <div className="overflow-x-auto">
@@ -1577,15 +1597,15 @@ function AnalyticsAdmin() {
                     className={`border-b border-border/60 ${total > 0 ? "bg-saffron/5" : ""}`}
                   >
                     <td className="px-4 py-3 font-medium text-foreground">{day.label}</td>
-                    <td className="px-4 py-3 font-semibold text-saffron">{day.pageViews}</td>
-                    <td className="px-4 py-3">{day.reviews}</td>
-                    <td className="px-4 py-3">{day.contacts}</td>
-                    <td className="px-4 py-3">{day.appointments}</td>
-                    <td className="px-4 py-3">{day.sandesh}</td>
-                    <td className="px-4 py-3">{day.videos}</td>
-                    <td className="px-4 py-3">{day.shorts}</td>
-                    <td className="px-4 py-3">{day.events}</td>
-                    <td className="px-4 py-3">{day.inbox}</td>
+                    <td className="px-4 py-3 font-semibold text-saffron">{formatAnalyticsCount(day.pageViews)}</td>
+                    <td className="px-4 py-3">{formatAnalyticsCount(day.reviews)}</td>
+                    <td className="px-4 py-3">{formatAnalyticsCount(day.contacts)}</td>
+                    <td className="px-4 py-3">{formatAnalyticsCount(day.appointments)}</td>
+                    <td className="px-4 py-3">{formatAnalyticsCount(day.sandesh)}</td>
+                    <td className="px-4 py-3">{formatAnalyticsCount(day.videos)}</td>
+                    <td className="px-4 py-3">{formatAnalyticsCount(day.shorts)}</td>
+                    <td className="px-4 py-3">{formatAnalyticsCount(day.events)}</td>
+                    <td className="px-4 py-3">{formatAnalyticsCount(day.inbox)}</td>
                   </tr>
                 );
               })}

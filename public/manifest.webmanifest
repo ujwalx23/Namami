@@ -1,14 +1,15 @@
 {
   "name": "Namami Vindhyavasini Sansthan",
   "short_name": "Namami Vindhyavasini",
-  "description": "Devotional trust dedicated to Maa Vindhyavasini at Vindhyachal Dham.",
+  "description": "Devotional trust dedicated to Maa Vindhyavasini at Vindhyachal Dham. Daily Sandesh, Panchang, events and seva.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#fdf6e9",
   "theme_color": "#7a1e1e",
   "orientation": "portrait",
   "icons": [
-    { "src": "/favicon.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "/favicon.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    { "src": "/favicon.png",  "sizes": "any",     "type": "image/png", "purpose": "any" },
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
   ]
 }

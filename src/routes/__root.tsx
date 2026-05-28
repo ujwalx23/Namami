@@ -5,6 +5,7 @@ import { LangProvider } from "@/i18n/LangProvider";
 import { AudioProvider } from "@/lib/AudioContext";
 import { FloatingPlayer } from "@/components/FloatingPlayer";
 import { InboxProvider } from "@/lib/InboxContext";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { supabase } from "@/integrations/supabase/client";
 
 function NotFoundComponent() {
@@ -44,51 +45,90 @@ function RootComponent() {
   // Track page views and presence for live visitor count
   useEffect(() => {
     const path = location.pathname;
-    
-    // Don't track admin pages for visitor counts/page views to avoid clutter
-    if (path.startsWith("/admin")) return;
+    const isAdmin = path.startsWith("/admin");
 
-    // 1. Page View Tracking
-    const trackPageView = async () => {
-      const { error } = await supabase.from("page_views" as any).insert({ page_path: path } as any);
-      if (error) {
-        console.error("Failed to track page view:", error);
+    // 1. Page View Tracking — skip admin to keep analytics clean
+    if (!isAdmin) {
+      const trackPageView = async () => {
+        try {
+          const { error } = await supabase.from("page_views" as any).insert({ page_path: path } as any);
+          if (error) {
+            console.warn("Failed to track page view:", error.message);
+          }
+        } catch (err) {
+          console.warn("Page view tracking error:", err instanceof Error ? err.message : "Unknown error");
+        }
+      };
+      void trackPageView();
+    }
+
+    // 2. Live Presence Tracking — always track ALL pages including admin
+    //    so the admin shows up in the live visitor count too
+    let sessionKey = Math.random().toString(36).substring(2, 15);
+    let channel: any = null;
+    let unsubscribeTimeout: NodeJS.Timeout;
+
+    try {
+      if (typeof window !== "undefined" && window.sessionStorage) {
+        const stored = sessionStorage.getItem("visitor_presence_key");
+        if (stored) {
+          sessionKey = stored;
+        } else {
+          sessionStorage.setItem("visitor_presence_key", sessionKey);
+        }
       }
-    };
-    void trackPageView();
+    } catch (e) {
+      console.warn("sessionStorage not accessible:", e instanceof Error ? e.message : "Unknown error");
+    }
 
-    // 2. Live Presence Tracking
-    const channel = supabase.channel("live_visitors", {
-      config: {
-        presence: {
-          key: Math.random().toString(36).substring(2, 15), // Unique session key
+    try {
+      channel = supabase.channel("live_visitors", {
+        config: {
+          presence: {
+            key: sessionKey,
+          },
         },
-      },
-    });
+      });
 
-    channel.subscribe(async (status) => {
-      if (status === "SUBSCRIBED") {
-        await channel.track({
-          online_at: new Date().toISOString(),
-          page: path,
-        });
-      }
-    });
+      channel.subscribe(async (status: string) => {
+        if (status === "SUBSCRIBED") {
+          try {
+            await channel.track({
+              online_at: new Date().toISOString(),
+              page: path,
+            });
+          } catch (err) {
+            console.warn("Failed to track presence:", err instanceof Error ? err.message : "Unknown error");
+          }
+        }
+      });
+    } catch (err) {
+      console.warn("Presence channel initialization error:", err instanceof Error ? err.message : "Unknown error");
+    }
 
     return () => {
-      void channel.unsubscribe();
+      if (channel) {
+        try {
+          void channel.unsubscribe();
+        } catch (err) {
+          console.warn("Error unsubscribing from channel:", err instanceof Error ? err.message : "Unknown error");
+        }
+      }
+      if (unsubscribeTimeout) clearTimeout(unsubscribeTimeout);
     };
   }, [location.pathname]);
 
   return (
-    <LangProvider>
-      <InboxProvider>
-        <AudioProvider>
-          <Outlet />
-          <FloatingPlayer />
-          <Toaster richColors position="top-center" />
-        </AudioProvider>
-      </InboxProvider>
-    </LangProvider>
+    <ErrorBoundary>
+      <LangProvider>
+        <InboxProvider>
+          <AudioProvider>
+            <Outlet />
+            <FloatingPlayer />
+            <Toaster richColors position="top-center" />
+          </AudioProvider>
+        </InboxProvider>
+      </LangProvider>
+    </ErrorBoundary>
   );
 }
