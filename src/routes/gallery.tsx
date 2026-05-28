@@ -54,18 +54,17 @@ function GalleryPage() {
   useEffect(() => {
     void (async () => {
       const { data } = await supabase
-        .from<GalleryRow>("gallery")
+        .from("gallery")
         .select("id,image_url,caption,created_at")
         .order("created_at", { ascending: false });
 
-      if (data) setExtra(data);
+      if (data) setExtra(data as GalleryRow[]);
     })();
   }, []);
 
-  const items = [
-    ...extra.map((r) => ({ src: r.image_url, cap: r.caption ?? "" })),
-    ...defaults.map((d) => ({ src: d.src, cap: hi ? d.cap_hi : d.cap_en })),
-  ];
+  const items = extra.length > 0
+    ? extra.map((r) => ({ src: r.image_url, cap: r.caption ?? "" }))
+    : defaults.map((d) => ({ src: d.src, cap: hi ? d.cap_hi : d.cap_en }));
 
   const handleDownload = async (url: string, title: string) => {
     try {

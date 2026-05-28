@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VideosRouteImport } from './routes/videos'
+import { Route as ShortsRouteImport } from './routes/shorts'
 import { Route as SandeshRouteImport } from './routes/sandesh'
 import { Route as ReviewsRouteImport } from './routes/reviews'
 import { Route as ParikramaRouteImport } from './routes/parikrama'
@@ -25,6 +26,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const VideosRoute = VideosRouteImport.update({
   id: '/videos',
   path: '/videos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShortsRoute = ShortsRouteImport.update({
+  id: '/shorts',
+  path: '/shorts',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SandeshRoute = SandeshRouteImport.update({
@@ -95,6 +101,7 @@ export interface FileRoutesByFullPath {
   '/parikrama': typeof ParikramaRoute
   '/reviews': typeof ReviewsRoute
   '/sandesh': typeof SandeshRoute
+  '/shorts': typeof ShortsRoute
   '/videos': typeof VideosRoute
 }
 export interface FileRoutesByTo {
@@ -109,6 +116,7 @@ export interface FileRoutesByTo {
   '/parikrama': typeof ParikramaRoute
   '/reviews': typeof ReviewsRoute
   '/sandesh': typeof SandeshRoute
+  '/shorts': typeof ShortsRoute
   '/videos': typeof VideosRoute
 }
 export interface FileRoutesById {
@@ -124,6 +132,7 @@ export interface FileRoutesById {
   '/parikrama': typeof ParikramaRoute
   '/reviews': typeof ReviewsRoute
   '/sandesh': typeof SandeshRoute
+  '/shorts': typeof ShortsRoute
   '/videos': typeof VideosRoute
 }
 export interface FileRouteTypes {
@@ -140,6 +149,7 @@ export interface FileRouteTypes {
     | '/parikrama'
     | '/reviews'
     | '/sandesh'
+    | '/shorts'
     | '/videos'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -154,6 +164,7 @@ export interface FileRouteTypes {
     | '/parikrama'
     | '/reviews'
     | '/sandesh'
+    | '/shorts'
     | '/videos'
   id:
     | '__root__'
@@ -168,6 +179,7 @@ export interface FileRouteTypes {
     | '/parikrama'
     | '/reviews'
     | '/sandesh'
+    | '/shorts'
     | '/videos'
   fileRoutesById: FileRoutesById
 }
@@ -183,6 +195,7 @@ export interface RootRouteChildren {
   ParikramaRoute: typeof ParikramaRoute
   ReviewsRoute: typeof ReviewsRoute
   SandeshRoute: typeof SandeshRoute
+  ShortsRoute: typeof ShortsRoute
   VideosRoute: typeof VideosRoute
 }
 
@@ -193,6 +206,13 @@ declare module '@tanstack/react-router' {
       path: '/videos'
       fullPath: '/videos'
       preLoaderRoute: typeof VideosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shorts': {
+      id: '/shorts'
+      path: '/shorts'
+      fullPath: '/shorts'
+      preLoaderRoute: typeof ShortsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sandesh': {
@@ -287,6 +307,7 @@ const rootRouteChildren: RootRouteChildren = {
   ParikramaRoute: ParikramaRoute,
   ReviewsRoute: ReviewsRoute,
   SandeshRoute: SandeshRoute,
+  ShortsRoute: ShortsRoute,
   VideosRoute: VideosRoute,
 }
 export const routeTree = rootRouteImport

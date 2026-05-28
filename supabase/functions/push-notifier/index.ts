@@ -22,31 +22,39 @@ serve(async (req) => {
       Deno.env.get("VAPID_PRIVATE_KEY") ?? ""
     );
 
-    const { record, table, type } = await req.json();
-    if (type !== "INSERT") {
-      return new Response(JSON.stringify({ status: "skipped" }), { headers: corsHeaders });
-    }
+    const bodyJson = await req.json();
+    const { record, table, type } = bodyJson;
 
     let title = "Jai Maa Vindhyavasini";
     let body = "New content added.";
     let url = "/";
 
-    if (table === "sandesh") {
-      title = "आज का संदेश (Daily Sandesh)";
-      body = record.message.substring(0, 100) + "...";
-      url = "/sandesh";
-    } else if (table === "events") {
-      title = `Upcoming Event: ${record.title}`;
-      body = record.description.substring(0, 100) + "...";
-      url = "/events";
-    } else if (table === "youtube_videos") {
-      title = record.type === "short" ? "New YouTube Short" : "New Devotional Video";
-      body = record.title;
-      url = "/videos";
-    } else if (table === "gallery") {
-      title = "Maa ka Divya Shringar";
-      body = record.caption || "New darshan photo added to gallery.";
-      url = "/gallery";
+    if (type === "MANUAL") {
+      title = bodyJson.title || title;
+      body = bodyJson.body || body;
+      url = bodyJson.url || url;
+    } else {
+      if (type !== "INSERT") {
+        return new Response(JSON.stringify({ status: "skipped" }), { headers: corsHeaders });
+      }
+
+      if (table === "sandesh") {
+        title = "आज का संदेश (Daily Sandesh)";
+        body = record.message.substring(0, 100) + "...";
+        url = "/sandesh";
+      } else if (table === "events") {
+        title = `Upcoming Event: ${record.title}`;
+        body = record.description.substring(0, 100) + "...";
+        url = "/events";
+      } else if (table === "youtube_videos") {
+        title = record.type === "short" ? "New YouTube Short" : "New Devotional Video";
+        body = record.title;
+        url = "/videos";
+      } else if (table === "gallery") {
+        title = "Maa ka Divya Shringar";
+        body = record.caption || "New darshan photo added to gallery.";
+        url = "/gallery";
+      }
     }
 
     const payload = JSON.stringify({ title, body, url });

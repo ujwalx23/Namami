@@ -149,6 +149,75 @@ export type Database = {
         };
         Relationships: [];
       };
+      gallery: {
+        Row: {
+          caption: string | null;
+          created_at: string;
+          id: string;
+          image_url: string;
+        };
+        Insert: {
+          caption?: string | null;
+          created_at?: string;
+          id?: string;
+          image_url: string;
+        };
+        Update: {
+          caption?: string | null;
+          created_at?: string;
+          id?: string;
+          image_url?: string;
+        };
+        Relationships: [];
+      };
+      youtube_videos: {
+        Row: {
+          created_at: string;
+          embed: string;
+          id: string;
+          title: string;
+          type: string;
+        };
+        Insert: {
+          created_at?: string;
+          embed: string;
+          id: string;
+          title: string;
+          type: string;
+        };
+        Update: {
+          created_at?: string;
+          embed?: string;
+          id?: string;
+          title?: string;
+          type?: string;
+        };
+        Relationships: [];
+      };
+      push_subscriptions: {
+        Row: {
+          auth: string;
+          created_at: string;
+          endpoint: string;
+          id: string;
+          p256dh: string;
+        };
+        Insert: {
+          auth: string;
+          created_at?: string;
+          endpoint: string;
+          id?: string;
+          p256dh: string;
+        };
+        Update: {
+          auth?: string;
+          created_at?: string;
+          endpoint?: string;
+          id?: string;
+          p256dh?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: {
       [_ in never]: never;

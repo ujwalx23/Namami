@@ -13,6 +13,7 @@ export const translations = {
   "nav.sandesh": { en: "Sandesh", hi: "संदेश" },
   "nav.events": { en: "Events", hi: "कार्यक्रम" },
   "nav.videos": { en: "Videos", hi: "वीडियो" },
+  "nav.shorts": { en: "Shorts", hi: "शॉर्ट्स" },
   "nav.panchang": { en: "Panchang", hi: "पंचांग" },
   "nav.reviews": { en: "Reviews", hi: "समीक्षा" },
   "nav.gallery": { en: "Gallery", hi: "गैलरी" },
@@ -400,6 +401,14 @@ export const translations = {
   "videos.tab.shorts": { en: "Shorts", hi: "शॉर्ट्स" },
   "videos.featured": { en: "Featured Videos", hi: "मुख्य वीडियो" },
   "videos.shorts": { en: "Shorts", hi: "शॉर्ट्स" },
+
+  // ---- Shorts page ----
+  "shorts.sanskrit": { en: "॥ दिव्य लीला दर्शनम् ॥", hi: "॥ दिव्य लीला दर्शनम् ॥" },
+  "shorts.title": { en: "Shorts", hi: "शॉर्ट्स" },
+  "shorts.subtitle": {
+    en: "Watch quick divine moments and devotional shorts from Vindhyachal Dham.",
+    hi: "विन्ध्याचल धाम से त्वरित दिव्य क्षण एवं भक्तिमय शॉर्ट्स देखिये।",
+  },
 
   // ---- Trikona Parikrama page ----
   "nav.parikrama": { en: "Parikrama Map", hi: "परिक्रमा मार्ग" },
