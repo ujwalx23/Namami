@@ -11,16 +11,27 @@ serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
 
   try {
+    const vapidPublic = Deno.env.get("VAPID_PUBLIC_KEY") ?? "";
+    const vapidPrivate = Deno.env.get("VAPID_PRIVATE_KEY") ?? "";
+    if (!vapidPublic || !vapidPrivate) {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: "VAPID_PUBLIC_KEY and VAPID_PRIVATE_KEY must be set in Edge Function secrets.",
+          sent: 0,
+          failed: 0,
+          subscribers: 0,
+        }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 500 },
+      );
+    }
+
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
     );
 
-    webpush.setVapidDetails(
-      "mailto:info@namamivindhyavasini.org",
-      Deno.env.get("VAPID_PUBLIC_KEY") ?? "",
-      Deno.env.get("VAPID_PRIVATE_KEY") ?? ""
-    );
+    webpush.setVapidDetails("mailto:info@namamivindhyavasini.org", vapidPublic, vapidPrivate);
 
     const bodyJson = await req.json();
     const { record, table, type } = bodyJson;
@@ -35,7 +46,9 @@ serve(async (req) => {
       url = bodyJson.url || url;
     } else {
       if (type !== "INSERT") {
-        return new Response(JSON.stringify({ status: "skipped" }), { headers: corsHeaders });
+        return new Response(JSON.stringify({ status: "skipped", sent: 0, failed: 0, subscribers: 0 }), {
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
       }
 
       if (table === "sandesh") {
@@ -49,7 +62,7 @@ serve(async (req) => {
       } else if (table === "youtube_videos") {
         title = record.type === "short" ? "New YouTube Short" : "New Devotional Video";
         body = record.title;
-        url = "/videos";
+        url = record.type === "short" ? "/shorts" : "/videos";
       } else if (table === "gallery") {
         title = "Maa ka Divya Shringar";
         body = record.caption || "New darshan photo added to gallery.";
@@ -59,15 +72,27 @@ serve(async (req) => {
 
     const payload = JSON.stringify({ title, body, url });
 
-    const { data: subs } = await supabase.from("push_subscriptions").select("id, endpoint, p256dh, auth");
+    const { data: subs, error: subsError } = await supabase
+      .from("push_subscriptions")
+      .select("id, endpoint, p256dh, auth");
+
+    if (subsError) {
+      throw new Error(subsError.message);
+    }
+
+    const subscribers = subs?.length ?? 0;
+    let sent = 0;
+    let failed = 0;
 
     const promises = (subs || []).map(async (sub) => {
       try {
         await webpush.sendNotification(
           { endpoint: sub.endpoint, keys: { p256dh: sub.p256dh, auth: sub.auth } },
-          payload
+          payload,
         );
+        sent += 1;
       } catch (err: any) {
+        failed += 1;
         if (err.statusCode === 410 || err.statusCode === 404) {
           await supabase.from("push_subscriptions").delete().eq("id", sub.id);
         }
@@ -75,8 +100,15 @@ serve(async (req) => {
     });
 
     await Promise.all(promises);
-    return new Response(JSON.stringify({ success: true }), { headers: corsHeaders });
+
+    return new Response(
+      JSON.stringify({ success: true, sent, failed, subscribers }),
+      { headers: { ...corsHeaders, "Content-Type": "application/json" } },
+    );
   } catch (err: any) {
-    return new Response(JSON.stringify({ error: err.message }), { headers: corsHeaders, status: 500 });
+    return new Response(JSON.stringify({ error: err.message, success: false, sent: 0, failed: 0, subscribers: 0 }), {
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+      status: 500,
+    });
   }
 });

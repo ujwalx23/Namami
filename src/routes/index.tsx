@@ -27,8 +27,11 @@ import {
   Smartphone,
   WifiOff,
   X,
+  Bell,
 } from "lucide-react";
 import { useLang } from "@/i18n/LangProvider";
+import { subscribeToNotifications, isPushConfigured } from "@/lib/push";
+import { toast } from "sonner";
 import type { TKey } from "@/i18n/translations";
 import { ScrollReveal } from "@/components/ScrollReveal";
 
@@ -394,6 +397,27 @@ function PWAInstallCard() {
             ? "अब आप बिना इंटरनेट के भी माँ विन्ध्यवासिनी की परिक्रमा, संदेश एवं पंचांग देख सकते हैं।"
             : "You can now access the virtual Parikrama, daily Sandesh, and Panchang offline."}
         </p>
+        {isPushConfigured() && (
+          <button
+            type="button"
+            onClick={async () => {
+              const ok = await subscribeToNotifications();
+              toast[ok ? "success" : "error"](
+                ok
+                  ? lang === "hi"
+                    ? "फ़ोन पर सूचनाएँ चालू हो गईं।"
+                    : "Phone notifications enabled."
+                  : lang === "hi"
+                    ? "सूचना अनुमति अस्वीकार या उपलब्ध नहीं।"
+                    : "Could not enable notifications. Check browser permission.",
+              );
+            }}
+            className="mt-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-sacred text-cream text-sm font-medium"
+          >
+            <Bell size={14} />
+            {lang === "hi" ? "सूचनाएँ चालू करें" : "Enable phone notifications"}
+          </button>
+        )}
       </div>
     );
   }

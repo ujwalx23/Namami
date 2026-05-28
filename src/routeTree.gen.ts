@@ -15,6 +15,7 @@ import { Route as SandeshRouteImport } from './routes/sandesh'
 import { Route as ReviewsRouteImport } from './routes/reviews'
 import { Route as ParikramaRouteImport } from './routes/parikrama'
 import { Route as PanchangRouteImport } from './routes/panchang'
+import { Route as InboxRouteImport } from './routes/inbox'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as DonationRouteImport } from './routes/donation'
@@ -51,6 +52,11 @@ const ParikramaRoute = ParikramaRouteImport.update({
 const PanchangRoute = PanchangRouteImport.update({
   id: '/panchang',
   path: '/panchang',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InboxRoute = InboxRouteImport.update({
+  id: '/inbox',
+  path: '/inbox',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GalleryRoute = GalleryRouteImport.update({
@@ -97,6 +103,7 @@ export interface FileRoutesByFullPath {
   '/donation': typeof DonationRoute
   '/events': typeof EventsRoute
   '/gallery': typeof GalleryRoute
+  '/inbox': typeof InboxRoute
   '/panchang': typeof PanchangRoute
   '/parikrama': typeof ParikramaRoute
   '/reviews': typeof ReviewsRoute
@@ -112,6 +119,7 @@ export interface FileRoutesByTo {
   '/donation': typeof DonationRoute
   '/events': typeof EventsRoute
   '/gallery': typeof GalleryRoute
+  '/inbox': typeof InboxRoute
   '/panchang': typeof PanchangRoute
   '/parikrama': typeof ParikramaRoute
   '/reviews': typeof ReviewsRoute
@@ -128,6 +136,7 @@ export interface FileRoutesById {
   '/donation': typeof DonationRoute
   '/events': typeof EventsRoute
   '/gallery': typeof GalleryRoute
+  '/inbox': typeof InboxRoute
   '/panchang': typeof PanchangRoute
   '/parikrama': typeof ParikramaRoute
   '/reviews': typeof ReviewsRoute
@@ -145,6 +154,7 @@ export interface FileRouteTypes {
     | '/donation'
     | '/events'
     | '/gallery'
+    | '/inbox'
     | '/panchang'
     | '/parikrama'
     | '/reviews'
@@ -160,6 +170,7 @@ export interface FileRouteTypes {
     | '/donation'
     | '/events'
     | '/gallery'
+    | '/inbox'
     | '/panchang'
     | '/parikrama'
     | '/reviews'
@@ -175,6 +186,7 @@ export interface FileRouteTypes {
     | '/donation'
     | '/events'
     | '/gallery'
+    | '/inbox'
     | '/panchang'
     | '/parikrama'
     | '/reviews'
@@ -191,6 +203,7 @@ export interface RootRouteChildren {
   DonationRoute: typeof DonationRoute
   EventsRoute: typeof EventsRoute
   GalleryRoute: typeof GalleryRoute
+  InboxRoute: typeof InboxRoute
   PanchangRoute: typeof PanchangRoute
   ParikramaRoute: typeof ParikramaRoute
   ReviewsRoute: typeof ReviewsRoute
@@ -241,6 +254,13 @@ declare module '@tanstack/react-router' {
       path: '/panchang'
       fullPath: '/panchang'
       preLoaderRoute: typeof PanchangRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inbox': {
+      id: '/inbox'
+      path: '/inbox'
+      fullPath: '/inbox'
+      preLoaderRoute: typeof InboxRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/gallery': {
@@ -303,6 +323,7 @@ const rootRouteChildren: RootRouteChildren = {
   DonationRoute: DonationRoute,
   EventsRoute: EventsRoute,
   GalleryRoute: GalleryRoute,
+  InboxRoute: InboxRoute,
   PanchangRoute: PanchangRoute,
   ParikramaRoute: ParikramaRoute,
   ReviewsRoute: ReviewsRoute,

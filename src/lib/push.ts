@@ -1,6 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
 
-// Helper to convert VAPID Key format
 function urlBase64ToUint8Array(base64String: string) {
   const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
   const base64 = (base64String + padding).replace(/-/g, "+").replace(/_/g, "/");
@@ -12,60 +11,71 @@ function urlBase64ToUint8Array(base64String: string) {
   return outputArray;
 }
 
-export async function subscribeToNotifications() {
-  if (!("serviceWorker" in navigator) || !("PushManager" in window)) {
-    console.warn("Push messaging is not supported in this browser.");
-    return;
+async function saveSubscriptionToDb(subscription: PushSubscription) {
+  const subscriptionJson = subscription.toJSON();
+  if (!subscriptionJson.endpoint || !subscriptionJson.keys?.p256dh || !subscriptionJson.keys?.auth) {
+    throw new Error("Invalid push subscription object.");
   }
 
-  try {
-    // 1. Request permission
-    const permission = await Notification.requestPermission();
-    if (permission !== "granted") {
-      console.log("Notification permission denied.");
-      return;
-    }
-
-    // 2. Get active service worker registration
-    const registration = await navigator.serviceWorker.ready;
-
-    // 3. Check if already subscribed
-    const existingSubscription = await registration.pushManager.getSubscription();
-    if (existingSubscription) {
-      console.log("Already subscribed to push notifications.");
-      return;
-    }
-
-    // 4. Subscribe with VAPID Public Key
-    const vapidPublicKey = import.meta.env.VITE_VAPID_PUBLIC_KEY;
-    if (!vapidPublicKey) {
-      console.warn("VITE_VAPID_PUBLIC_KEY is not defined in environment variables. Skipping subscription.");
-      return;
-    }
-
-    const subscription = await registration.pushManager.subscribe({
-      userVisibleOnly: true,
-      applicationServerKey: urlBase64ToUint8Array(vapidPublicKey),
-    });
-
-    const subscriptionJson = subscription.toJSON();
-    if (!subscriptionJson.endpoint || !subscriptionJson.keys?.p256dh || !subscriptionJson.keys?.auth) {
-      throw new Error("Invalid subscription object generated.");
-    }
-
-    // 5. Store subscription in Supabase push_subscriptions table
-    const { error } = await supabase.from("push_subscriptions").insert({
+  const { error } = await supabase.from("push_subscriptions").upsert(
+    {
       endpoint: subscriptionJson.endpoint,
       p256dh: subscriptionJson.keys.p256dh,
       auth: subscriptionJson.keys.auth,
-    });
+    },
+    { onConflict: "endpoint" },
+  );
 
-    if (error) {
-      console.error("Failed to save push subscription to Supabase:", error.message);
-    } else {
-      console.log("Successfully subscribed to background push notifications!");
+  if (error) {
+    console.error("Failed to save push subscription:", error.message);
+    return false;
+  }
+  return true;
+}
+
+/** Subscribe device for background push (PWA / installed app). */
+export async function subscribeToNotifications(): Promise<boolean> {
+  if (!("serviceWorker" in navigator) || !("PushManager" in window)) {
+    console.warn("Push messaging is not supported in this browser.");
+    return false;
+  }
+
+  const vapidPublicKey = import.meta.env.VITE_VAPID_PUBLIC_KEY;
+  if (!vapidPublicKey) {
+    console.warn(
+      "VITE_VAPID_PUBLIC_KEY is missing. Add VAPID keys to .env and Supabase Edge Function secrets for phone notifications.",
+    );
+    return false;
+  }
+
+  try {
+    const permission = await Notification.requestPermission();
+    if (permission !== "granted") {
+      console.log("Notification permission denied.");
+      return false;
     }
+
+    const registration = await navigator.serviceWorker.ready;
+    let subscription = await registration.pushManager.getSubscription();
+
+    if (!subscription) {
+      subscription = await registration.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array(vapidPublicKey),
+      });
+    }
+
+    const saved = await saveSubscriptionToDb(subscription);
+    if (saved) {
+      console.log("Push notifications enabled for this device.");
+    }
+    return saved;
   } catch (err) {
     console.error("Error subscribing to push notifications:", err);
+    return false;
   }
+}
+
+export function isPushConfigured(): boolean {
+  return Boolean(import.meta.env.VITE_VAPID_PUBLIC_KEY);
 }

@@ -1,11 +1,10 @@
-import { Outlet, Link, createRootRoute, useRouter } from "@tanstack/react-router";
+import { Outlet, Link, createRootRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { Toaster } from "@/components/ui/sonner";
-import { toast } from "sonner";
 import { LangProvider } from "@/i18n/LangProvider";
 import { AudioProvider } from "@/lib/AudioContext";
 import { FloatingPlayer } from "@/components/FloatingPlayer";
-import { supabase } from "@/integrations/supabase/client";
+import { InboxProvider } from "@/lib/InboxContext";
 
 function NotFoundComponent() {
   return (
@@ -35,45 +34,19 @@ export const Route = createRootRoute({
 });
 
 function RootComponent() {
-  const router = useRouter();
-
-  // SPA: set the document title once on mount. Per-route titles can override.
   useEffect(() => {
     document.title = "Namami Vindhyavasini Sansthan";
   }, []);
 
-  // Listen for global site push notification broadcasts
-  useEffect(() => {
-    const channel = supabase.channel("site-notifications");
-
-    channel
-      .on("broadcast", { event: "notification" }, ({ payload }) => {
-        console.log("[Realtime Notification] Received broadcast:", payload);
-        toast.info(payload.title, {
-          description: payload.body,
-          duration: 8000,
-          action: payload.url ? {
-            label: "View",
-            onClick: () => {
-              void router.navigate({ to: payload.url });
-            },
-          } : undefined,
-        });
-      })
-      .subscribe();
-
-    return () => {
-      void supabase.removeChannel(channel);
-    };
-  }, [router]);
-
   return (
     <LangProvider>
-      <AudioProvider>
-        <Outlet />
-        <FloatingPlayer />
-        <Toaster richColors position="top-center" />
-      </AudioProvider>
+      <InboxProvider>
+        <AudioProvider>
+          <Outlet />
+          <FloatingPlayer />
+          <Toaster richColors position="top-center" />
+        </AudioProvider>
+      </InboxProvider>
     </LangProvider>
   );
 }

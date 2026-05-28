@@ -1,7 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell, PageHero } from "@/components/PageShell";
 import { useState, useEffect } from "react";
-import { Lock, Trash2, Plus, Check, X } from "lucide-react";
+import {
+  Lock,
+  Trash2,
+  Plus,
+  BarChart3,
+  Users,
+  MessageSquare,
+  Calendar,
+  Video,
+  Inbox,
+  Image,
+  Edit3,
+} from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import type { Tables } from "@/integrations/supabase/types";
@@ -40,7 +52,15 @@ function AdminPage() {
   });
   const [pass, setPass] = useState("");
   const [activeTab, setActiveTab] = useState<
-    "sandesh" | "events" | "reviews" | "appointments" | "contacts" | "videos" | "notifications"
+    | "sandesh"
+    | "events"
+    | "reviews"
+    | "appointments"
+    | "contacts"
+    | "videos"
+    | "notifications"
+    | "gallery"
+    | "analytics"
   >("sandesh");
 
   const [counts, setCounts] = useState({ reviews: 0, appointments: 0, contacts: 0 });
@@ -111,7 +131,9 @@ function AdminPage() {
     { id: "appointments", label: "Appointments" },
     { id: "contacts", label: "Contacts" },
     { id: "videos", label: "Videos & Shorts" },
-    { id: "notifications", label: "Push Notification" },
+    { id: "notifications", label: "Inbox Broadcast" },
+    { id: "gallery", label: "Gallery Manager" },
+    { id: "analytics", label: "Analytics" },
   ];
 
   const getBadge = (tabId: typeof activeTab) => {
@@ -149,6 +171,8 @@ function AdminPage() {
           {activeTab === "contacts" && <ContactAdmin onUpdate={loadCounts} />}
           {activeTab === "videos" && <VideoAdmin />}
           {activeTab === "notifications" && <NotificationAdmin />}
+          {activeTab === "gallery" && <GalleryAdmin />}
+          {activeTab === "analytics" && <AnalyticsAdmin />}
         </div>
       </section>
     </PageShell>
@@ -169,6 +193,7 @@ function SandeshAdmin() {
   const [message, setMessage] = useState("");
   const [author, setAuthor] = useState("Pujya Guru Ji");
   const [loaded, setLoaded] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
 
   async function load() {
     const { data } = await supabase
@@ -181,15 +206,27 @@ function SandeshAdmin() {
   if (!loaded) load();
   if (!loaded) return <AdminTabLoader />;
 
-  async function add(e: React.FormEvent) {
+  async function save(e: React.FormEvent) {
     e.preventDefault();
     if (!message.trim()) return;
-    const { error } = await supabase
-      .from("sandesh")
-      .insert({ message: message.trim(), author: author.trim() || "Pujya Guru Ji" });
-    if (error) return toast.error(error.message);
-    toast.success("Sandesh added");
+    
+    if (editingId) {
+      const { error } = await supabase
+        .from("sandesh")
+        .update({ message: message.trim(), author: author.trim() || "Pujya Guru Ji" })
+        .eq("id", editingId);
+      if (error) return toast.error(error.message);
+      toast.success("Sandesh updated");
+      setEditingId(null);
+    } else {
+      const { error } = await supabase
+        .from("sandesh")
+        .insert({ message: message.trim(), author: author.trim() || "Pujya Guru Ji" });
+      if (error) return toast.error(error.message);
+      toast.success("Sandesh added");
+    }
     setMessage("");
+    setAuthor("Pujya Guru Ji");
     await load();
   }
 
@@ -197,19 +234,34 @@ function SandeshAdmin() {
     const { error } = await supabase.from("sandesh").delete().eq("id", id);
     if (error) return toast.error(error.message);
     toast.success("Deleted");
+    if (editingId === id) {
+      setEditingId(null);
+      setMessage("");
+      setAuthor("Pujya Guru Ji");
+    }
     await load();
+  }
+
+  function startEdit(item: Sandesh) {
+    setEditingId(item.id);
+    setMessage(item.message);
+    setAuthor(item.author);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   return (
     <div>
-      <h3 className="font-display text-2xl text-maroon mb-4">Sandesh / Quotes</h3>
-      <form onSubmit={add} className="p-5 rounded-2xl bg-card border border-border space-y-3 mb-6">
+      <h3 className="font-display text-2xl text-maroon mb-4">
+        {editingId ? "Edit Sandesh / Quote" : "Sandesh / Quotes"}
+      </h3>
+      <form onSubmit={save} className="p-5 rounded-2xl bg-card border border-border space-y-3 mb-6">
         <textarea
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           rows={3}
           placeholder="Quote / sandesh message"
           className="w-full px-4 py-3 rounded-lg border border-input bg-background"
+          required
         />
         <input
           value={author}
@@ -217,23 +269,53 @@ function SandeshAdmin() {
           placeholder="Author"
           className="w-full px-4 py-3 rounded-lg border border-input bg-background"
         />
-        <button className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-sacred text-cream text-sm">
-          <Plus size={14} /> Add Sandesh
-        </button>
+        <div className="flex gap-2">
+          <button className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-sacred text-cream text-sm font-medium transition">
+            {editingId ? "Update Sandesh" : "Add Sandesh"}
+          </button>
+          {editingId && (
+            <button
+              type="button"
+              onClick={() => {
+                setEditingId(null);
+                setMessage("");
+                setAuthor("Pujya Guru Ji");
+              }}
+              className="px-5 py-2 rounded-full border border-border text-muted-foreground text-sm font-medium transition hover:bg-muted/10"
+            >
+              Cancel
+            </button>
+          )}
+        </div>
       </form>
       <div className="space-y-3">
         {list.map((s) => (
           <div
             key={s.id}
-            className="p-4 rounded-xl bg-card border border-border flex justify-between gap-3"
+            className="p-4 rounded-xl bg-card border border-border flex justify-between items-center gap-3"
           >
             <div>
-              <div className="text-xs text-saffron uppercase tracking-wider">{s.publish_date}</div>
+              <div className="text-xs text-saffron uppercase tracking-wider mb-1">
+                {s.publish_date} &middot; {s.author}
+              </div>
               <div className="text-sm">{s.message}</div>
             </div>
-            <button onClick={() => del(s.id)} className="text-destructive p-2">
-              <Trash2 size={16} />
-            </button>
+            <div className="flex gap-1">
+              <button
+                onClick={() => startEdit(s)}
+                className="text-saffron p-2 hover:bg-saffron/5 rounded transition"
+                aria-label="Edit sandesh"
+              >
+                <Edit3 size={16} />
+              </button>
+              <button
+                onClick={() => del(s.id)}
+                className="text-destructive p-2 hover:bg-destructive/5 rounded transition"
+                aria-label="Delete sandesh"
+              >
+                <Trash2 size={16} />
+              </button>
+            </div>
           </div>
         ))}
       </div>
@@ -893,9 +975,34 @@ function VideoAdmin() {
 
 
 
+type InboxRow = {
+  id: string;
+  title: string;
+  body: string;
+  url: string;
+  created_at: string;
+};
+
 function NotificationAdmin() {
   const [form, setForm] = useState({ title: "", body: "" });
   const [loading, setLoading] = useState(false);
+  const [history, setHistory] = useState<InboxRow[]>([]);
+  const [historyLoaded, setHistoryLoaded] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
+
+  async function loadHistory() {
+    const { data, error } = await supabase
+      .from("inbox_messages")
+      .select("id, title, body, url, created_at")
+      .order("created_at", { ascending: false })
+      .limit(30);
+    if (!error && data) setHistory(data as InboxRow[]);
+    setHistoryLoaded(true);
+  }
+
+  useEffect(() => {
+    void loadHistory();
+  }, []);
 
   async function send(e: React.FormEvent) {
     e.preventDefault();
@@ -903,65 +1010,99 @@ function NotificationAdmin() {
       return toast.error("Title and message body are required");
     }
     setLoading(true);
-    
+
     const titleText = form.title.trim();
     const bodyText = form.body.trim();
 
     try {
-      // 1. Broadcast in Realtime (Non-blocking, runs in background to prevent websocket connection hangs)
-      const channel = supabase.channel("site-notifications");
-      channel.subscribe((status) => {
-        if (status === "SUBSCRIBED") {
-          channel.send({
-            type: "broadcast",
-            event: "notification",
-            payload: {
-              title: titleText,
-              body: bodyText,
-              url: "/",
-            },
-          }).then(() => {
-            void supabase.removeChannel(channel);
-          }).catch((err) => {
-            console.error("Realtime broadcast send error:", err);
-          });
-        }
-      });
-
-      // 2. Invoke push-notifier edge function (for offline PWA push notifications)
-      try {
-        await supabase.functions.invoke("push-notifier", {
-          body: {
-            type: "MANUAL",
+      if (editingId) {
+        const { error: updateError } = await supabase
+          .from("inbox_messages")
+          .update({
             title: titleText,
             body: bodyText,
-            url: "/",
-          },
-        });
-      } catch (pushErr) {
-        console.warn("Push notification edge function failed/timed out:", pushErr);
-      }
+          })
+          .eq("id", editingId);
 
-      toast.success("Notification broadcasted successfully!");
+        if (updateError) {
+          toast.error("Could not update: " + updateError.message);
+          setLoading(false);
+          return;
+        }
+
+        toast.success("Message updated!");
+        setEditingId(null);
+      } else {
+        const { error: insertError } = await supabase.from("inbox_messages").insert({
+          title: titleText,
+          body: bodyText,
+          url: "/",
+        });
+
+        if (insertError) {
+          toast.error(
+            "Could not send: " +
+              insertError.message +
+              ". Run migration 20260528200000_inbox_messages.sql in Supabase SQL Editor.",
+          );
+          setLoading(false);
+          return;
+        }
+
+        toast.success("Message sent!");
+      }
       setForm({ title: "", body: "" });
-    } catch (err: any) {
-      toast.error("Failed to broadcast: " + err.message);
+      await loadHistory();
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Unknown error";
+      toast.error("Failed to save: " + message);
     } finally {
       setLoading(false);
     }
   }
 
+  async function delMessage(id: string) {
+    const { error } = await supabase.from("inbox_messages").delete().eq("id", id);
+    if (error) return toast.error(error.message);
+    toast.success("Message removed from inbox");
+    if (editingId === id) {
+      setEditingId(null);
+      setForm({ title: "", body: "" });
+    }
+    await loadHistory();
+  }
+
+  function startEdit(item: InboxRow) {
+    setEditingId(item.id);
+    setForm({ title: item.title, body: item.body });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  const historyByDay = new Map<string, InboxRow[]>();
+  for (const row of history) {
+    const day = new Date(row.created_at).toLocaleDateString("en-IN", {
+      weekday: "short",
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    });
+    const list = historyByDay.get(day) ?? [];
+    list.push(row);
+    historyByDay.set(day, list);
+  }
+
   return (
-    <div>
-      <div className="flex justify-between items-center mb-6">
-        <h3 className="font-display text-2xl text-maroon">Push Notifications</h3>
+    <div className="space-y-8">
+      <div className="flex justify-between items-center">
+        <h3 className="font-display text-2xl text-maroon flex items-center gap-2">
+          <Inbox size={22} /> Site Inbox Broadcast
+        </h3>
       </div>
 
       <form onSubmit={send} className="p-6 rounded-2xl bg-card border border-border space-y-4 max-w-2xl">
-        <h4 className="font-semibold text-maroon text-sm">Send Broadcast Message</h4>
-        <p className="text-xs text-muted-foreground">
-          This message will be instantly sent as a popup to active website users and as a push notification to PWA installations.
-        </p>
+        <h4 className="font-semibold text-maroon text-sm">
+          {editingId ? "Edit inbox message" : "New inbox message"}
+        </h4>
         
         <div className="space-y-1">
           <label className="text-xs font-semibold text-muted-foreground uppercase">Notification Title</label>
@@ -986,14 +1127,563 @@ function NotificationAdmin() {
           />
         </div>
 
+        <div className="flex gap-2">
+          <button
+            type="submit"
+            disabled={loading}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-sacred text-cream font-medium shadow-gold disabled:opacity-50 transition"
+          >
+            {loading ? "Saving..." : editingId ? "Update message" : "Send to inbox"}
+          </button>
+          {editingId && (
+            <button
+              type="button"
+              onClick={() => {
+                setEditingId(null);
+                setForm({ title: "", body: "" });
+              }}
+              className="px-6 py-3 rounded-full border border-border text-muted-foreground font-medium transition hover:bg-muted/10"
+            >
+              Cancel
+            </button>
+          )}
+        </div>
+      </form>
+
+      <div>
+        <h4 className="font-semibold text-maroon mb-4">Sent messages (by day)</h4>
+        {!historyLoaded ? (
+          <AdminTabLoader />
+        ) : history.length === 0 ? (
+          <p className="text-sm text-muted-foreground">No inbox messages yet.</p>
+        ) : (
+          <div className="space-y-6 max-w-2xl">
+            {[...historyByDay.entries()].map(([day, rows]) => (
+              <div key={day}>
+                <div className="text-xs uppercase tracking-wider text-saffron mb-2">{day}</div>
+                <div className="space-y-2">
+                  {rows.map((row) => (
+                    <div
+                      key={row.id}
+                      className="p-4 rounded-xl bg-card border border-border flex justify-between gap-3"
+                    >
+                      <div>
+                        <div className="font-medium text-maroon">{row.title}</div>
+                        <p className="text-sm text-muted-foreground mt-1">{row.body}</p>
+                        <p className="text-[10px] text-muted-foreground mt-1">
+                          {new Date(row.created_at).toLocaleTimeString("en-IN")}
+                        </p>
+                      </div>
+                      <div className="flex gap-1 items-start">
+                        <button
+                          type="button"
+                          onClick={() => startEdit(row)}
+                          className="text-saffron p-2 hover:bg-saffron/5 rounded transition"
+                          aria-label="Edit message"
+                        >
+                          <Edit3 size={16} />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => void delMessage(row.id)}
+                          className="text-destructive p-2 hover:bg-destructive/5 rounded transition"
+                          aria-label="Delete message"
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+type DayActivity = {
+  date: string;
+  label: string;
+  reviews: number;
+  contacts: number;
+  appointments: number;
+  sandesh: number;
+  videos: number;
+  shorts: number;
+  events: number;
+  inbox: number;
+};
+
+type AnalyticsSnapshot = {
+  sandesh: number;
+  eventsTotal: number;
+  eventsUpcoming: number;
+  reviews: number;
+  appointmentsTotal: number;
+  appointmentsPending: number;
+  contacts: number;
+  videos: number;
+  shorts: number;
+  gallery: number;
+  inboxTotal: number;
+  dailyActivity: DayActivity[];
+};
+
+function buildDailyActivity(
+  reviews: { created_at: string }[],
+  contacts: { created_at: string }[],
+  appointments: { created_at: string }[],
+  sandesh: { created_at: string }[],
+  videos: { created_at: string; type: string }[],
+  events: { created_at: string }[],
+  inbox: { created_at: string }[],
+): DayActivity[] {
+  const days: DayActivity[] = [];
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    d.setHours(0, 0, 0, 0);
+    const iso = d.toISOString().slice(0, 10);
+    const next = new Date(d);
+    next.setDate(next.getDate() + 1);
+    const inDay = (ts: string) => {
+      const t = new Date(ts).getTime();
+      return t >= d.getTime() && t < next.getTime();
+    };
+    days.push({
+      date: iso,
+      label: d.toLocaleDateString("en-IN", {
+        weekday: "short",
+        day: "numeric",
+        month: "short",
+      }),
+      reviews: reviews.filter((r) => inDay(r.created_at)).length,
+      contacts: contacts.filter((c) => inDay(c.created_at)).length,
+      appointments: appointments.filter((a) => inDay(a.created_at)).length,
+      sandesh: sandesh.filter((s) => inDay(s.created_at)).length,
+      videos: videos.filter((v) => v.type === "video" && inDay(v.created_at)).length,
+      shorts: videos.filter((v) => v.type === "short" && inDay(v.created_at)).length,
+      events: events.filter((e) => inDay(e.created_at)).length,
+      inbox: inbox.filter((inb) => inDay(inb.created_at)).length,
+    });
+  }
+  return days;
+}
+
+function AnalyticsAdmin() {
+  const [data, setData] = useState<AnalyticsSnapshot | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  async function load() {
+    setLoading(true);
+    setError(null);
+    const today = new Date().toISOString().slice(0, 10);
+    const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+
+    try {
+      const [
+        sandeshRes,
+        eventsTotalRes,
+        eventsUpcomingRes,
+        reviewsRes,
+        appointmentsTotalRes,
+        appointmentsPendingRes,
+        contactsRes,
+        videosRes,
+        shortsRes,
+        galleryRes,
+        inboxTotalRes,
+        reviewsDailyRes,
+        contactsDailyRes,
+        appointmentsDailyRes,
+        sandeshDailyRes,
+        videosDailyRes,
+        eventsDailyRes,
+        inboxDailyRes,
+      ] = await Promise.all([
+        supabase.from("sandesh").select("id", { count: "exact", head: true }),
+        supabase.from("events").select("id", { count: "exact", head: true }),
+        supabase
+          .from("events")
+          .select("id", { count: "exact", head: true })
+          .gte("event_date", today),
+        supabase.from("reviews").select("id", { count: "exact", head: true }),
+        supabase.from("appointments").select("id", { count: "exact", head: true }),
+        supabase
+          .from("appointments")
+          .select("id", { count: "exact", head: true })
+          .eq("status", "pending"),
+        supabase.from("contacts").select("id", { count: "exact", head: true }),
+        supabase.from("youtube_videos").select("id", { count: "exact", head: true }).eq("type", "video"),
+        supabase.from("youtube_videos").select("id", { count: "exact", head: true }).eq("type", "short"),
+        supabase.from("gallery").select("id", { count: "exact", head: true }),
+        supabase.from("inbox_messages").select("id", { count: "exact", head: true }),
+        supabase.from("reviews").select("created_at").gte("created_at", sevenDaysAgo),
+        supabase.from("contacts").select("created_at").gte("created_at", sevenDaysAgo),
+        supabase.from("appointments").select("created_at").gte("created_at", sevenDaysAgo),
+        supabase.from("sandesh").select("created_at").gte("created_at", sevenDaysAgo),
+        supabase.from("youtube_videos").select("created_at, type").gte("created_at", sevenDaysAgo),
+        supabase.from("events").select("created_at").gte("created_at", sevenDaysAgo),
+        supabase.from("inbox_messages").select("created_at").gte("created_at", sevenDaysAgo),
+      ]);
+
+      const firstError =
+        sandeshRes.error ||
+        eventsTotalRes.error ||
+        reviewsRes.error ||
+        appointmentsTotalRes.error ||
+        contactsRes.error ||
+        videosRes.error ||
+        shortsRes.error;
+
+      if (firstError) {
+        throw new Error(firstError.message);
+      }
+
+      const dailyActivity = buildDailyActivity(
+        reviewsDailyRes.data ?? [],
+        contactsDailyRes.data ?? [],
+        appointmentsDailyRes.data ?? [],
+        sandeshDailyRes.data ?? [],
+        (videosDailyRes.data as { created_at: string; type: string }[]) ?? [],
+        eventsDailyRes.data ?? [],
+        inboxDailyRes.data ?? [],
+      );
+
+      setData({
+        sandesh: sandeshRes.count ?? 0,
+        eventsTotal: eventsTotalRes.count ?? 0,
+        eventsUpcoming: eventsUpcomingRes.count ?? 0,
+        reviews: reviewsRes.count ?? 0,
+        appointmentsTotal: appointmentsTotalRes.count ?? 0,
+        appointmentsPending: appointmentsPendingRes.count ?? 0,
+        contacts: contactsRes.count ?? 0,
+        videos: videosRes.count ?? 0,
+        shorts: shortsRes.count ?? 0,
+        gallery: galleryRes.error ? 0 : (galleryRes.count ?? 0),
+        inboxTotal: inboxTotalRes.error ? 0 : (inboxTotalRes.count ?? 0),
+        dailyActivity,
+      });
+    } catch (e: unknown) {
+      const message = e instanceof Error ? e.message : "Failed to load analytics";
+      setError(message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    void load();
+  }, []);
+
+  if (loading) return <AdminTabLoader />;
+
+  if (error || !data) {
+    return (
+      <div className="p-6 rounded-2xl bg-card border border-border text-center space-y-3">
+        <p className="text-destructive">{error ?? "Could not load analytics"}</p>
+        <button
+          onClick={() => void load()}
+          className="px-5 py-2 rounded-full bg-gradient-sacred text-cream text-sm"
+        >
+          Retry
+        </button>
+      </div>
+    );
+  }
+
+  const last7Totals = data.dailyActivity.reduce(
+    (acc, d) => ({
+      reviews: acc.reviews + d.reviews,
+      contacts: acc.contacts + d.contacts,
+      appointments: acc.appointments + d.appointments,
+      sandesh: acc.sandesh + d.sandesh,
+      videos: acc.videos + d.videos,
+      shorts: acc.shorts + d.shorts,
+      events: acc.events + d.events,
+      inbox: acc.inbox + d.inbox,
+    }),
+    { reviews: 0, contacts: 0, appointments: 0, sandesh: 0, videos: 0, shorts: 0, events: 0, inbox: 0 },
+  );
+
+  const statCards = [
+    { icon: MessageSquare, label: "Sandesh (total)", value: data.sandesh },
+    { icon: Calendar, label: "Events", value: data.eventsTotal, sub: `${data.eventsUpcoming} upcoming` },
+    { icon: Users, label: "Reviews (total)", value: data.reviews },
+    {
+      icon: Calendar,
+      label: "Appointments",
+      value: data.appointmentsTotal,
+      sub: `${data.appointmentsPending} pending`,
+    },
+    { icon: MessageSquare, label: "Contacts (total)", value: data.contacts },
+    { icon: Video, label: "Videos (long-form)", value: data.videos },
+    { icon: Video, label: "Shorts (vertical)", value: data.shorts },
+    { icon: Inbox, label: "Inbox Broadcasts", value: data.inboxTotal },
+    {
+      icon: Image,
+      label: "Gallery Images",
+      value: data.gallery + 9,
+      sub: `9 local (GitHub) + ${data.gallery} custom (Admin)`,
+    },
+  ];
+
+  return (
+    <div className="space-y-8">
+      <div className="flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <h3 className="font-display text-2xl text-maroon flex items-center gap-2">
+            <BarChart3 size={22} /> Analytics Dashboard
+          </h3>
+          <p className="text-sm text-muted-foreground mt-1 max-w-2xl">
+            Accurate database counts only. Daily breakdown uses real submission timestamps from the last
+            7 days.
+          </p>
+        </div>
+        <button
+          onClick={() => void load()}
+          className="px-5 py-2 rounded-full border border-gold/40 text-maroon text-sm hover:bg-cream/50"
+        >
+          Refresh
+        </button>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {statCards.map((card) => (
+          <div
+            key={card.label}
+            className="p-5 rounded-2xl bg-card border border-border hover:border-gold/40 transition"
+          >
+            <div className="flex items-center gap-2 text-saffron mb-2">
+              <card.icon size={16} />
+              <span className="text-xs uppercase tracking-wider font-medium">{card.label}</span>
+            </div>
+            <div className="font-display text-3xl text-maroon">{card.value}</div>
+            {card.sub && <div className="text-xs text-muted-foreground mt-1">{card.sub}</div>}
+          </div>
+        ))}
+      </div>
+
+      <div className="rounded-2xl border border-border overflow-hidden">
+        <div className="px-5 py-4 bg-gradient-divine border-b border-gold/20">
+          <h4 className="font-display text-lg text-maroon">Activity by day (last 7 days)</h4>
+          <p className="text-xs text-muted-foreground mt-1">
+            Reviews {last7Totals.reviews} · Contacts {last7Totals.contacts} · Appointments{" "}
+            {last7Totals.appointments} · Sandesh {last7Totals.sandesh} · Videos{" "}
+            {last7Totals.videos} · Shorts {last7Totals.shorts} · Events{" "}
+            {last7Totals.events} · Inbox Broadcasts {last7Totals.inbox}
+          </p>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-border bg-cream/30 text-left">
+                <th className="px-4 py-3 font-medium text-maroon">Day</th>
+                <th className="px-4 py-3 font-medium text-maroon">Reviews</th>
+                <th className="px-4 py-3 font-medium text-maroon">Contacts</th>
+                <th className="px-4 py-3 font-medium text-maroon">Appointments</th>
+                <th className="px-4 py-3 font-medium text-maroon">Sandesh</th>
+                <th className="px-4 py-3 font-medium text-maroon">Videos</th>
+                <th className="px-4 py-3 font-medium text-maroon">Shorts</th>
+                <th className="px-4 py-3 font-medium text-maroon">Events</th>
+                <th className="px-4 py-3 font-medium text-maroon">Inbox</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.dailyActivity.map((day) => {
+                const total =
+                  day.reviews +
+                  day.contacts +
+                  day.appointments +
+                  day.sandesh +
+                  day.videos +
+                  day.shorts +
+                  day.events +
+                  day.inbox;
+                return (
+                  <tr
+                    key={day.date}
+                    className={`border-b border-border/60 ${total > 0 ? "bg-saffron/5" : ""}`}
+                  >
+                    <td className="px-4 py-3 font-medium text-foreground">{day.label}</td>
+                    <td className="px-4 py-3">{day.reviews}</td>
+                    <td className="px-4 py-3">{day.contacts}</td>
+                    <td className="px-4 py-3">{day.appointments}</td>
+                    <td className="px-4 py-3">{day.sandesh}</td>
+                    <td className="px-4 py-3">{day.videos}</td>
+                    <td className="px-4 py-3">{day.shorts}</td>
+                    <td className="px-4 py-3">{day.events}</td>
+                    <td className="px-4 py-3">{day.inbox}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div className="p-4 rounded-xl bg-cream/30 border border-gold/20 text-xs text-muted-foreground">
+        <strong className="text-maroon">Not tracked:</strong> page views and live visitor count.
+      </div>
+    </div>
+  );
+}
+
+type GalleryRow = {
+  id: string;
+  image_url: string;
+  caption: string;
+  created_at: string;
+};
+
+function GalleryAdmin() {
+  const [form, setForm] = useState({ image_url: "", caption: "" });
+  const [loading, setLoading] = useState(false);
+  const [list, setList] = useState<GalleryRow[]>([]);
+  const [listLoaded, setListLoaded] = useState(false);
+
+  async function load() {
+    const { data, error } = await supabase
+      .from("gallery")
+      .select("id, image_url, caption, created_at")
+      .order("created_at", { ascending: false });
+    if (!error && data) setList(data as GalleryRow[]);
+    setListLoaded(true);
+  }
+
+  useEffect(() => {
+    void load();
+  }, []);
+
+  async function add(e: React.FormEvent) {
+    e.preventDefault();
+    if (!form.image_url.trim() || !form.caption.trim()) {
+      return toast.error("Image URL and caption are required");
+    }
+    setLoading(true);
+
+    try {
+      const { error } = await supabase.from("gallery").insert({
+        image_url: form.image_url.trim(),
+        caption: form.caption.trim(),
+      });
+
+      if (error) {
+        toast.error(
+          "Could not add: " +
+            error.message +
+            ". Run the gallery table SQL migration in your Supabase SQL Editor.",
+        );
+        setLoading(false);
+        return;
+      }
+
+      toast.success("Image added to gallery!");
+      setForm({ image_url: "", caption: "" });
+      await load();
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Unknown error";
+      toast.error("Failed to add: " + message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function del(id: string) {
+    const { error } = await supabase.from("gallery").delete().eq("id", id);
+    if (error) return toast.error(error.message);
+    toast.success("Image removed from gallery");
+    await load();
+  }
+
+  return (
+    <div className="space-y-8">
+      <div className="flex justify-between items-center">
+        <h3 className="font-display text-2xl text-maroon flex items-center gap-2">
+          <Image size={22} /> Gallery Manager
+        </h3>
+      </div>
+
+      <form onSubmit={add} className="p-6 rounded-2xl bg-card border border-border space-y-4 max-w-2xl">
+        <h4 className="font-semibold text-maroon text-sm">Add New Image</h4>
+        
+        <div className="space-y-1">
+          <label className="text-xs font-semibold text-muted-foreground uppercase">Image Title / Caption</label>
+          <input
+            value={form.caption}
+            onChange={(e) => setForm({ ...form, caption: e.target.value })}
+            placeholder="e.g. Swarna Shringar (स्वर्ण श्रृंगार)"
+            className="w-full px-4 py-2.5 rounded-lg border border-input bg-background text-sm"
+            required
+          />
+        </div>
+
+        <div className="space-y-1">
+          <label className="text-xs font-semibold text-muted-foreground uppercase">Image URL (Link)</label>
+          <input
+            value={form.image_url}
+            onChange={(e) => setForm({ ...form, image_url: e.target.value })}
+            placeholder="e.g. https://images.unsplash.com/photo-..."
+            className="w-full px-4 py-2.5 rounded-lg border border-input bg-background text-sm"
+            required
+          />
+        </div>
+
         <button
           type="submit"
           disabled={loading}
           className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-sacred text-cream font-medium shadow-gold disabled:opacity-50 transition"
         >
-          {loading ? "Sending..." : "Broadcast Notification"}
+          {loading ? "Adding..." : "Add to Gallery"}
         </button>
       </form>
+
+      <div>
+        <h4 className="font-semibold text-maroon mb-4">Uploaded Images</h4>
+        {!listLoaded ? (
+          <AdminTabLoader />
+        ) : list.length === 0 ? (
+          <p className="text-sm text-muted-foreground">No custom gallery images uploaded yet.</p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {list.map((item) => (
+              <div
+                key={item.id}
+                className="group relative rounded-2xl overflow-hidden border border-border flex flex-col shadow-sm hover:shadow-md transition"
+              >
+                <div className="aspect-[3/4] w-full overflow-hidden bg-transparent flex items-center justify-center">
+                  <img
+                    src={item.image_url}
+                    alt={item.caption}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-3 flex items-center justify-between gap-2 border-t border-border/60">
+                  <div className="min-w-0 flex-1">
+                    <h5 className="font-semibold text-maroon text-sm truncate">{item.caption}</h5>
+                    <time className="text-[10px] text-muted-foreground/80 mt-0.5 block">
+                      {new Date(item.created_at).toLocaleDateString("en-IN")}
+                    </time>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => void del(item.id)}
+                    className="text-destructive p-1.5 hover:bg-destructive/10 rounded-lg transition shrink-0"
+                    aria-label="Delete image"
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

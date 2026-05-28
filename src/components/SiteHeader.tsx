@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X, Languages } from "lucide-react";
 import { useLang } from "@/i18n/LangProvider";
+import { SiteInbox } from "@/components/SiteInbox";
 import type { TKey } from "@/i18n/translations";
 const links: { to: string; key: TKey }[] = [
   { to: "/", key: "nav.home" },
@@ -53,7 +54,8 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-3">
+        <div className="hidden lg:flex items-center gap-3 ml-8 shrink-0">
+          <SiteInbox />
           <button
             onClick={toggle}
             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-maroon/30 text-maroon text-xs font-medium hover:bg-maroon hover:text-cream transition"
@@ -70,6 +72,7 @@ export function SiteHeader() {
         </div>
 
         <div className="flex items-center gap-2 lg:hidden">
+          <SiteInbox />
           <button
             onClick={toggle}
             className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full border border-maroon/30 text-maroon text-xs font-medium"

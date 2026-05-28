@@ -62,9 +62,9 @@ function GalleryPage() {
     })();
   }, []);
 
-  const items = extra.length > 0
-    ? extra.map((r) => ({ src: r.image_url, cap: r.caption ?? "" }))
-    : defaults.map((d) => ({ src: d.src, cap: hi ? d.cap_hi : d.cap_en }));
+  const dbItems = extra.map((r) => ({ src: r.image_url, cap: r.caption ?? "" }));
+  const defaultItems = defaults.map((d) => ({ src: d.src, cap: hi ? d.cap_hi : d.cap_en }));
+  const items = [...dbItems, ...defaultItems];
 
   const handleDownload = async (url: string, title: string) => {
     try {
@@ -109,7 +109,7 @@ function GalleryPage() {
             <figure
               key={i}
               onClick={() => setLightbox(p.src)}
-              className="group relative aspect-[3/4] rounded-2xl overflow-hidden border-2 border-gold/40 shadow-sacred hover:shadow-gold transition-all hover:-translate-y-1 cursor-pointer"
+              className="group relative aspect-[3/4] rounded-2xl overflow-hidden border-2 border-gold/40 shadow-sacred hover:shadow-gold transition-all hover:-translate-y-1 cursor-pointer bg-cream/10 flex items-center justify-center"
             >
               <img
                 src={p.src}
@@ -143,7 +143,7 @@ function GalleryPage() {
 
       {lightbox && (
         <div
-          className="fixed inset-0 z-[60] bg-black/95 flex flex-col items-center justify-center p-4"
+          className="fixed inset-0 z-[60] bg-black/95 flex flex-col items-center justify-center p-2 sm:p-4"
           onClick={() => setLightbox(null)}
         >
           {/* Close button */}
@@ -156,13 +156,13 @@ function GalleryPage() {
           </button>
 
           <div
-            className="relative max-h-[80vh] max-w-full flex flex-col items-center"
+            className="relative max-w-full max-h-[calc(100vh-30px)] flex flex-col items-center justify-center"
             onClick={(e) => e.stopPropagation()}
           >
             <img
               src={lightbox}
               alt="Darshan"
-              className="max-h-[75vh] max-w-full rounded-xl shadow-2xl object-contain border border-gold/25"
+              className="max-h-[calc(100vh-120px)] max-w-[95vw] rounded-xl shadow-2xl object-contain border border-gold/25"
             />
             
             {/* Download Button in Lightbox */}
@@ -171,7 +171,7 @@ function GalleryPage() {
                 const item = items.find((it) => it.src === lightbox);
                 handleDownload(lightbox, item?.cap || "darshan_vigraha");
               }}
-              className="mt-4 inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-gradient-sacred text-cream font-medium shadow-gold hover:scale-[1.03] transition-transform duration-300 text-sm"
+              className="mt-3 shrink-0 inline-flex items-center gap-2 px-6 py-2 rounded-full bg-gradient-sacred text-cream font-medium shadow-gold hover:scale-[1.03] transition-transform duration-300 text-sm"
             >
               <Download size={14} />
               {hi ? "डाउनलोड करें" : "Download Darshan"}

@@ -31,9 +31,9 @@ if (typeof window !== "undefined") {
   });
 
   window.addEventListener("appinstalled", () => {
-    // Clear deferred prompt reference
     (window as any).deferredPrompt = null;
     console.log("[PWA] App was successfully installed.");
+    void subscribeToNotifications();
   });
 }
 

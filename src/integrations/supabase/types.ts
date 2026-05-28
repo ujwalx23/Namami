@@ -194,6 +194,30 @@ export type Database = {
         };
         Relationships: [];
       };
+      inbox_messages: {
+        Row: {
+          body: string;
+          created_at: string;
+          id: string;
+          title: string;
+          url: string;
+        };
+        Insert: {
+          body: string;
+          created_at?: string;
+          id?: string;
+          title: string;
+          url?: string;
+        };
+        Update: {
+          body?: string;
+          created_at?: string;
+          id?: string;
+          title?: string;
+          url?: string;
+        };
+        Relationships: [];
+      };
       push_subscriptions: {
         Row: {
           auth: string;
