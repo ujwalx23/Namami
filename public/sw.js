@@ -1,5 +1,12 @@
 const CACHE_NAME = "vindhyavasini-sansthan-v1";
-const ASSETS_TO_CACHE = ["/", "/index.html", "/manifest.webmanifest", "/favicon.png"];
+const ASSETS_TO_CACHE = [
+  "/",
+  "/index.html",
+  "/manifest.webmanifest",
+  "/favicon.png",
+  "/icon-192.png",
+  "/icon-512.png"
+];
 
 // Install Event
 self.addEventListener("install", (event) => {
@@ -35,6 +42,28 @@ self.addEventListener("fetch", (event) => {
 
   // Only handle GET requests and local origins
   if (event.request.method !== "GET" || requestUrl.origin !== self.location.origin) {
+    return;
+  }
+
+  // Handle SPA navigation requests - fallback to cached /index.html if offline
+  if (event.request.mode === "navigate") {
+    event.respondWith(
+      caches.match("/index.html").then((cachedResponse) => {
+        const fetchPromise = fetch(event.request)
+          .then((networkResponse) => {
+            if (networkResponse && networkResponse.status === 200) {
+              caches.open(CACHE_NAME).then((cache) => {
+                cache.put("/index.html", networkResponse.clone());
+              });
+            }
+            return networkResponse;
+          })
+          .catch(() => {
+            return cachedResponse;
+          });
+        return cachedResponse || fetchPromise;
+      })
+    );
     return;
   }
 
