@@ -15,9 +15,7 @@ export const Route = createFileRoute("/auth/callback")({
 
 function AuthCallbackPage() {
   const navigate = useNavigate();
-  const [status, setStatus] = useState<"loading" | "success" | "error">(
-    "loading",
-  );
+  const [status, setStatus] = useState<"loading" | "success" | "error">("loading");
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -35,16 +33,12 @@ function AuthCallbackPage() {
         }
 
         // Exchange code for session
-        const { data, error } = await supabase.auth.exchangeCodeForSession(
-          code,
-        );
+        const { data, error } = await supabase.auth.exchangeCodeForSession(code);
 
         if (error) {
           console.error("Auth exchange failed:", error);
           setStatus("error");
-          setMessage(
-            error.message || "Authentication failed. Please try again.",
-          );
+          setMessage(error.message || "Authentication failed. Please try again.");
           setTimeout(() => navigate({ to: "/" }), 3000);
           return;
         }
@@ -64,11 +58,7 @@ function AuthCallbackPage() {
       } catch (error) {
         console.error("Unexpected error during auth callback:", error);
         setStatus("error");
-        setMessage(
-          error instanceof Error
-            ? error.message
-            : "An unexpected error occurred.",
-        );
+        setMessage(error instanceof Error ? error.message : "An unexpected error occurred.");
         setTimeout(() => navigate({ to: "/" }), 3000);
       }
     };
@@ -84,9 +74,7 @@ function AuthCallbackPage() {
             <div className="flex justify-center">
               <Loader2 className="w-8 h-8 text-primary animate-spin" />
             </div>
-            <h1 className="text-2xl font-bold text-foreground">
-              Authenticating...
-            </h1>
+            <h1 className="text-2xl font-bold text-foreground">Authenticating...</h1>
             <p className="text-sm text-muted-foreground">
               Please wait while we complete your sign-in.
             </p>
@@ -100,9 +88,7 @@ function AuthCallbackPage() {
                 <span className="text-2xl">✓</span>
               </div>
             </div>
-            <h1 className="text-2xl font-bold text-foreground">
-              Success!
-            </h1>
+            <h1 className="text-2xl font-bold text-foreground">Success!</h1>
             <p className="text-sm text-muted-foreground">{message}</p>
           </>
         )}
@@ -114,13 +100,9 @@ function AuthCallbackPage() {
                 <span className="text-2xl">✕</span>
               </div>
             </div>
-            <h1 className="text-2xl font-bold text-red-600">
-              Authentication Failed
-            </h1>
+            <h1 className="text-2xl font-bold text-red-600">Authentication Failed</h1>
             <p className="text-sm text-muted-foreground">{message}</p>
-            <p className="text-xs text-muted-foreground">
-              Redirecting to home page...
-            </p>
+            <p className="text-xs text-muted-foreground">Redirecting to home page...</p>
           </>
         )}
       </div>

@@ -9,58 +9,63 @@ Hindi Text-to-Speech is fully configured using the browser's native **Web Speech
 ## 📋 What Was Verified & Finalized
 
 ### 1. **ElevenLabs Code Removal - VERIFIED ✅**
-   - ✅ All ElevenLabs API references removed from `sandesh.tsx`
-   - ✅ No API key dependencies remaining
-   - ✅ Removed all fetch calls to ElevenLabs
-   - ✅ Removed audio blob URL management from ElevenLabs
-   - ✅ Removed AbortController for API calls
-   - ✅ Confirmed: Using browser Web Speech API only
+
+- ✅ All ElevenLabs API references removed from `sandesh.tsx`
+- ✅ No API key dependencies remaining
+- ✅ Removed all fetch calls to ElevenLabs
+- ✅ Removed audio blob URL management from ElevenLabs
+- ✅ Removed AbortController for API calls
+- ✅ Confirmed: Using browser Web Speech API only
 
 ### 2. **Production-Ready Speech Synthesis Implementation - VERIFIED ✅**
-   - **File**: [src/lib/speech.ts](src/lib/speech.ts)
-   - **Core Features**:
-     - ✅ Browser `SpeechSynthesisUtterance` API only
-     - ✅ Automatic Hindi/Devanagari text detection using Unicode ranges
-     - ✅ Voice prioritization system:
-       1. Google हिन्दी (preferred)
-       2. Microsoft Heera
-       3. Hindi
-       4. hi-IN language code
-       5. Fallback to English India (en-IN)
-     - ✅ Proper voice loading with `speechSynthesis.onvoiceschanged` event
-     - ✅ 3-second timeout for voice loading
-     - ✅ Comprehensive console logging with `[SpeechSynthesis]` prefix
-     - ✅ Production-ready error handling
-     - ✅ Mobile responsive (no device-specific restrictions)
-     - ✅ Stop previous speech before starting new
-     - ✅ Singleton pattern for voice management
-     - ✅ Handles interruption/cancellation gracefully
+
+- **File**: [src/lib/speech.ts](src/lib/speech.ts)
+- **Core Features**:
+  - ✅ Browser `SpeechSynthesisUtterance` API only
+  - ✅ Automatic Hindi/Devanagari text detection using Unicode ranges
+  - ✅ Voice prioritization system:
+    1.  Google हिन्दी (preferred)
+    2.  Microsoft Heera
+    3.  Hindi
+    4.  hi-IN language code
+    5.  Fallback to English India (en-IN)
+  - ✅ Proper voice loading with `speechSynthesis.onvoiceschanged` event
+  - ✅ 3-second timeout for voice loading
+  - ✅ Comprehensive console logging with `[SpeechSynthesis]` prefix
+  - ✅ Production-ready error handling
+  - ✅ Mobile responsive (no device-specific restrictions)
+  - ✅ Stop previous speech before starting new
+  - ✅ Singleton pattern for voice management
+  - ✅ Handles interruption/cancellation gracefully
 
 ### 3. **Updated Sandesh Component - VERIFIED ✅**
-   - **File**: [src/routes/sandesh.tsx](src/routes/sandesh.tsx)
-   - **Status**:
-     - ✅ Imports `speakText`, `stopSpeech` from `@/lib/speech`
-     - ✅ Uses simplified API with options object: `{ onStart, onEnd, onError }`
-     - ✅ Proper state management for loading/speaking
-     - ✅ Better error display with user-friendly messages
-     - ✅ Proper cleanup on component unmount
-     - ✅ All button states working correctly:
-       - Play icon when idle
-       - Loader spinner when loading
-       - Stop icon when playing
-       - All other buttons disabled while speaking
+
+- **File**: [src/routes/sandesh.tsx](src/routes/sandesh.tsx)
+- **Status**:
+  - ✅ Imports `speakText`, `stopSpeech` from `@/lib/speech`
+  - ✅ Uses simplified API with options object: `{ onStart, onEnd, onError }`
+  - ✅ Proper state management for loading/speaking
+  - ✅ Better error display with user-friendly messages
+  - ✅ Proper cleanup on component unmount
+  - ✅ All button states working correctly:
+    - Play icon when idle
+    - Loader spinner when loading
+    - Stop icon when playing
+    - All other buttons disabled while speaking
 
 ### 4. **Translations Updated - VERIFIED ✅**
-   - **File**: [src/i18n/translations.ts](src/i18n/translations.ts)
-   - **Changes**:
-     - ✅ Removed ElevenLabs API key error message
-     - ✅ Updated `sandesh.audio_error` to be generic for Web Speech API
+
+- **File**: [src/i18n/translations.ts](src/i18n/translations.ts)
+- **Changes**:
+  - ✅ Removed ElevenLabs API key error message
+  - ✅ Updated `sandesh.audio_error` to be generic for Web Speech API
 
 ---
 
 ## 🎤 Voice Detection & Selection - VERIFIED ✅
 
 ### Automatic Language Detection
+
 ```typescript
 export function isHindiText(text: string): boolean {
   // Detects Devanagari script (U+0900 to U+097F)
@@ -68,12 +73,13 @@ export function isHindiText(text: string): boolean {
 }
 
 // Examples:
-isHindiText("जय श्री राम")                                    // → true
-isHindiText("Welcome everyone")                              // → false
-isHindiText("Namaste dosto, kal mandir mein maha aarti") // → false (Hinglish)
+isHindiText("जय श्री राम"); // → true
+isHindiText("Welcome everyone"); // → false
+isHindiText("Namaste dosto, kal mandir mein maha aarti"); // → false (Hinglish)
 ```
 
 ### Voice Prioritization Algorithm - VERIFIED ✅
+
 1. **Hindi Detection**: Text contains Devanagari characters?
    - YES → Search for Hindi voices in priority order
    - NO → Search for English voices
@@ -95,8 +101,9 @@ isHindiText("Namaste dosto, kal mandir mein maha aarti") // → false (Hinglish)
 ## 🗣️ API Usage - VERIFIED ✅
 
 ### Simple Usage
+
 ```typescript
-import { speakText, stopSpeech } from '@/lib/speech';
+import { speakText, stopSpeech } from "@/lib/speech";
 
 // Speak with callbacks
 await speakText("नमस्ते! कल मंदिर में आरती होगी।", {
@@ -110,6 +117,7 @@ stopSpeech();
 ```
 
 ### Advanced Usage in Component
+
 ```typescript
 async function toggleSpeak(text: string, id: string | number) {
   // Stop any previous speech
@@ -166,6 +174,7 @@ When speech synthesis runs, console logs appear with `[SpeechSynthesis]` prefix:
 ## 🧪 Test Cases - VERIFIED ✅
 
 ### ✅ Hindi Text Test
+
 ```
 Input: "जय श्री राम। कल मंदिर में भजन संध्या होगी।"
 Language Detected: Hindi (Devanagari detected)
@@ -174,6 +183,7 @@ Result: ✅ Speaks correctly in Hindi
 ```
 
 ### ✅ English Text Test
+
 ```
 Input: "Welcome everyone to the temple."
 Language Detected: English (No Devanagari)
@@ -182,6 +192,7 @@ Result: ✅ Speaks clearly in English
 ```
 
 ### ✅ Hinglish Text Test
+
 ```
 Input: "Namaste dosto, kal mandir mein maha aarti hogi."
 Language Detected: English (No Devanagari detected)
@@ -191,6 +202,7 @@ Note: Pure English pronunciation since script is Latin
 ```
 
 ### ✅ UI/UX Behavior Tests
+
 - ✅ Button shows loading spinner while voices are loading
 - ✅ Button shows stop icon while speaking
 - ✅ Button returns to play icon when complete
@@ -206,8 +218,8 @@ Note: Pure English pronunciation since script is Latin
 ## ⚙️ Speech Settings - VERIFIED ✅
 
 ```typescript
-utterance.rate = 0.95;  // Slightly slower for clarity
-utterance.pitch = 1.0;  // Normal pitch
+utterance.rate = 0.95; // Slightly slower for clarity
+utterance.pitch = 1.0; // Normal pitch
 utterance.lang = isHindiText(text) ? "hi-IN" : "en-IN";
 ```
 
@@ -215,13 +227,13 @@ utterance.lang = isHindiText(text) ? "hi-IN" : "en-IN";
 
 ## 📱 Browser Compatibility - VERIFIED ✅
 
-| Browser | Support | Status |
-|---------|---------|--------|
+| Browser | Support | Status         |
+| ------- | ------- | -------------- |
 | Chrome  | ✅ Full | Tested working |
-| Firefox | ✅ Full | Should work |
-| Safari  | ✅ Full | Should work |
-| Edge    | ✅ Full | Should work |
-| IE 11   | ❌ None | Not supported |
+| Firefox | ✅ Full | Should work    |
+| Safari  | ✅ Full | Should work    |
+| Edge    | ✅ Full | Should work    |
+| IE 11   | ❌ None | Not supported  |
 
 ---
 
@@ -231,11 +243,11 @@ All error scenarios handled gracefully:
 
 ```typescript
 if (!synth) {
-  error: "Speech synthesis is not supported in this browser."
+  error: "Speech synthesis is not supported in this browser.";
 }
 
 if (voices.length === 0) {
-  error: "No text-to-speech voices are available on your system."
+  error: "No text-to-speech voices are available on your system.";
 }
 
 if (event.error === "interrupted" || event.error === "canceled") {
@@ -269,6 +281,7 @@ if (event.error === "interrupted" || event.error === "canceled") {
 ## 📚 Implementation Details
 
 ### File Structure
+
 ```
 src/
 ├── lib/
@@ -280,6 +293,7 @@ src/
 ```
 
 ### Key Functions in speech.ts
+
 - `isHindiText(text)` - Detects Devanagari script
 - `getVoicesAsync()` - Loads voices with onvoiceschanged
 - `selectVoice(voices, text)` - Chooses best voice
@@ -287,6 +301,7 @@ src/
 - `stopSpeech()` - Stops current speech
 
 ### Component Integration (sandesh.tsx)
+
 - Proper state management (speakingId, loadingId, error)
 - Button UI shows correct icons/text based on state
 - Error display with user-friendly messages
@@ -324,54 +339,59 @@ The browser speech synthesis is now fully verified, tested, and production-ready
 **No external services required. No API keys needed. 100% Free.**
 
 ### Test It Now:
+
 Visit the [Sandesh page](/sandesh) and click "Listen to Sandesh" on any message!
 
-   - **Features**:
-     - ✅ Browser `SpeechSynthesisUtterance` API only
-     - ✅ Automatic Hindi/Devanagari text detection (30% threshold)
-     - ✅ Voice prioritization system:
-       1. Google हिन्दी (preferred)
-       2. Microsoft Heera
-       3. Hindi
-       4. hi-IN language code
-       5. Fallback to English India (en-IN)
-     - ✅ Proper voice loading with `speechSynthesis.onvoiceschanged` event
-     - ✅ 3-second timeout for voice loading
-     - ✅ Comprehensive console logging for debugging
-     - ✅ Production-ready error handling
-     - ✅ Mobile responsive (no device-specific restrictions)
-     - ✅ Stop previous speech before starting new
-     - ✅ Singleton pattern for voice management
+- **Features**:
+  - ✅ Browser `SpeechSynthesisUtterance` API only
+  - ✅ Automatic Hindi/Devanagari text detection (30% threshold)
+  - ✅ Voice prioritization system:
+    1.  Google हिन्दी (preferred)
+    2.  Microsoft Heera
+    3.  Hindi
+    4.  hi-IN language code
+    5.  Fallback to English India (en-IN)
+  - ✅ Proper voice loading with `speechSynthesis.onvoiceschanged` event
+  - ✅ 3-second timeout for voice loading
+  - ✅ Comprehensive console logging for debugging
+  - ✅ Production-ready error handling
+  - ✅ Mobile responsive (no device-specific restrictions)
+  - ✅ Stop previous speech before starting new
+  - ✅ Singleton pattern for voice management
 
 ### 3. **Updated Sandesh Component**
-   - **File**: [src/routes/sandesh.tsx](src/routes/sandesh.tsx)
-   - **Changes**:
-     - ✅ Imported `speakText`, `stopSpeech`, `ensureVoicesLoaded` from speech utility
-     - ✅ Removed all ElevenLabs API logic
-     - ✅ Simplified state management (no more URL/controller refs)
-     - ✅ Added voice initialization on component mount
-     - ✅ Better error handling with user-friendly messages
-     - ✅ Proper cleanup on component unmount
+
+- **File**: [src/routes/sandesh.tsx](src/routes/sandesh.tsx)
+- **Changes**:
+  - ✅ Imported `speakText`, `stopSpeech`, `ensureVoicesLoaded` from speech utility
+  - ✅ Removed all ElevenLabs API logic
+  - ✅ Simplified state management (no more URL/controller refs)
+  - ✅ Added voice initialization on component mount
+  - ✅ Better error handling with user-friendly messages
+  - ✅ Proper cleanup on component unmount
 
 ### 4. **Updated Translations**
-   - **File**: [src/i18n/translations.ts](src/i18n/translations.ts)
-   - **Changes**:
-     - ✅ Removed ElevenLabs API key error message
-     - ✅ Updated `sandesh.audio_error` for generic Web Speech API
+
+- **File**: [src/i18n/translations.ts](src/i18n/translations.ts)
+- **Changes**:
+  - ✅ Removed ElevenLabs API key error message
+  - ✅ Updated `sandesh.audio_error` for generic Web Speech API
 
 ---
 
 ## 🎤 Voice Detection & Selection
 
 ### Automatic Language Detection
+
 ```typescript
 // Detects Devanagari script (Hindi) if 30%+ of text uses U+0900-U+097F Unicode range
-isHindiText("जय श्री राम") // → true
-isHindiText("Welcome everyone") // → false
-isHindiText("Namaste dosto, kal mandir mein") // → false (Hinglish - uses English characters)
+isHindiText("जय श्री राम"); // → true
+isHindiText("Welcome everyone"); // → false
+isHindiText("Namaste dosto, kal mandir mein"); // → false (Hinglish - uses English characters)
 ```
 
 ### Voice Prioritization Algorithm
+
 1. **Hindi Detection**: Text contains 30%+ Devanagari characters?
    - YES → Search for Hindi voices in priority order
    - NO → Search for English voices
@@ -393,14 +413,15 @@ isHindiText("Namaste dosto, kal mandir mein") // → false (Hinglish - uses Engl
 ## 🗣️ How to Use the API
 
 ### Basic Usage
+
 ```typescript
-import { speakText, stopSpeech } from '@/lib/speech-synthesis';
+import { speakText, stopSpeech } from "@/lib/speech-synthesis";
 
 // Speak text with callbacks
 await speakText(
   "नमस्ते! कल मंदिर में आरती होगी।",
   () => console.log("Speech finished"),
-  (error) => console.error("Speech error:", error)
+  (error) => console.error("Speech error:", error),
 );
 
 // Stop current speech
@@ -408,14 +429,15 @@ stopSpeech();
 ```
 
 ### Advanced Usage
+
 ```typescript
-import { 
-  speakText, 
-  stopSpeech, 
-  isSpeaking, 
+import {
+  speakText,
+  stopSpeech,
+  isSpeaking,
   ensureVoicesLoaded,
-  getAvailableVoices 
-} from '@/lib/speech-synthesis';
+  getAvailableVoices,
+} from "@/lib/speech-synthesis";
 
 // Ensure voices are loaded before speaking
 await ensureVoicesLoaded();
@@ -434,7 +456,7 @@ try {
   await speakText(
     "जय श्री राम। कल मंदिर में भजन संध्या होगी।",
     () => setSpeakingId(null),
-    (error) => setError(error)
+    (error) => setError(error),
   );
   setSpeakingId(messageId);
 } catch (err) {
@@ -473,6 +495,7 @@ The implementation includes comprehensive console logs for debugging:
 ## 🧪 Test Cases Verified
 
 ### ✅ Hindi Text
+
 ```
 Input: "जय श्री राम। कल मंदिर में भजन संध्या होगी।"
 Language Detected: Hindi (Devanagari)
@@ -481,6 +504,7 @@ Behavior: Speaks correctly in Hindi
 ```
 
 ### ✅ English Text
+
 ```
 Input: "Welcome everyone to the temple."
 Language Detected: English
@@ -489,6 +513,7 @@ Behavior: Speaks clearly in English
 ```
 
 ### ✅ Hinglish Text (Mixed Script)
+
 ```
 Input: "Namaste dosto, kal mandir mein maha aarti hogi."
 Language Detected: English (≤30% Devanagari)
@@ -499,6 +524,7 @@ but script detection opts for English as per implementation
 ```
 
 ### ✅ UI/UX Behavior
+
 - ✅ Button shows "Loading..." while voice is loading
 - ✅ Button shows "Stop" icon while speaking
 - ✅ Button returns to "Listen" when complete
@@ -513,14 +539,16 @@ but script detection opts for English as per implementation
 ## 🔧 Configuration
 
 ### Speech Synthesis Settings
+
 ```typescript
 utterance.lang = isHindi ? "hi-IN" : "en-IN";
-utterance.rate = 0.9;    // Slightly slower for clarity
-utterance.pitch = 1;     // Normal pitch
-utterance.volume = 1;    // Full volume
+utterance.rate = 0.9; // Slightly slower for clarity
+utterance.pitch = 1; // Normal pitch
+utterance.volume = 1; // Full volume
 ```
 
 ### Voice Loading
+
 ```typescript
 // Automatic voice loading on app start
 - Listens for speechSynthesis.onvoiceschanged event
@@ -543,19 +571,20 @@ utterance.volume = 1;    // Full volume
 
 ## ⚙️ Browser Compatibility
 
-| Browser | Support | Notes |
-|---------|---------|-------|
+| Browser | Support | Notes            |
+| ------- | ------- | ---------------- |
 | Chrome  | ✅ Full | Built-in support |
 | Firefox | ✅ Full | Built-in support |
 | Safari  | ✅ Full | Built-in support |
 | Edge    | ✅ Full | Built-in support |
-| IE 11   | ❌ None | Not supported |
+| IE 11   | ❌ None | Not supported    |
 
 ---
 
 ## 🛡️ Error Handling
 
 All errors are handled gracefully:
+
 - No silent failures
 - User-friendly error messages
 - Console logging for debugging
@@ -590,16 +619,18 @@ All errors are handled gracefully:
 ## 📝 Migration from ElevenLabs
 
 ### What Changed
-| Aspect | Before | After |
-|--------|--------|-------|
-| API | ElevenLabs Cloud | Browser Web Speech API |
-| Cost | $$ Monthly | Free (native browser) |
-| Latency | ~1-2s | Immediate (device voices) |
-| Languages | Any | Device-dependent voices |
-| Error Handling | API errors | Browser errors |
-| Speed | Network dependent | Local processing |
+
+| Aspect         | Before            | After                     |
+| -------------- | ----------------- | ------------------------- |
+| API            | ElevenLabs Cloud  | Browser Web Speech API    |
+| Cost           | $$ Monthly        | Free (native browser)     |
+| Latency        | ~1-2s             | Immediate (device voices) |
+| Languages      | Any               | Device-dependent voices   |
+| Error Handling | API errors        | Browser errors            |
+| Speed          | Network dependent | Local processing          |
 
 ### No Breaking Changes
+
 - ✅ Same button UI/UX
 - ✅ Same error messages
 - ✅ Same translation strings

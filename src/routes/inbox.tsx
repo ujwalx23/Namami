@@ -33,7 +33,7 @@ function InboxPage() {
   // Parse location hash to scroll to specific message
   useEffect(() => {
     if (loading || messages.length === 0) return;
-    
+
     const hash = window.location.hash; // e.g. #msg-UUID
     if (hash && hash.startsWith("#msg-")) {
       const msgId = hash.slice(5);
@@ -59,7 +59,11 @@ function InboxPage() {
       <PageHero
         sanskrit="॥ शुभ संदेश कल्याणम् ॥"
         title={hi ? "संदेश इनबॉक्स" : "Message Inbox"}
-        subtitle={hi ? "संगठन से महत्वपूर्ण सूचनाएँ और अपडेट" : "Updates and notifications from the Sansthan"}
+        subtitle={
+          hi
+            ? "संगठन से महत्वपूर्ण सूचनाएँ और अपडेट"
+            : "Updates and notifications from the Sansthan"
+        }
       />
 
       <section className="container mx-auto px-6 py-10 max-w-3xl">
@@ -92,7 +96,9 @@ function InboxPage() {
               {hi ? "कोई संदेश नहीं" : "No messages yet"}
             </h3>
             <p className={`text-sm text-muted-foreground mt-1 ${dev}`}>
-              {hi ? "अभी आपके इनबॉक्स में कोई सूचना उपलब्ध नहीं है।" : "Updates from the Sansthan will appear here."}
+              {hi
+                ? "अभी आपके इनबॉक्स में कोई सूचना उपलब्ध नहीं है।"
+                : "Updates from the Sansthan will appear here."}
             </p>
           </div>
         ) : (
@@ -130,7 +136,9 @@ function InboxPage() {
                                 {msg.title}
                               </h4>
                             </div>
-                            <p className={`text-sm text-foreground/80 leading-relaxed whitespace-pre-wrap ${dev}`}>
+                            <p
+                              className={`text-sm text-foreground/80 leading-relaxed whitespace-pre-wrap ${dev}`}
+                            >
                               {msg.body}
                             </p>
                             <div className="flex items-center justify-between pt-2">

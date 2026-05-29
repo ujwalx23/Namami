@@ -14,6 +14,7 @@ import {
   Image,
   Edit3,
   Eye,
+  EyeOff,
   Activity,
   RotateCw,
   MapPin,
@@ -50,6 +51,7 @@ function AdminPage() {
   const [loadingSession, setLoadingSession] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [loggingIn, setLoggingIn] = useState(false);
 
   const [activeTab, setActiveTab] = useState<
@@ -70,7 +72,10 @@ function AdminPage() {
     try {
       const [rRes, aRes, cRes] = await Promise.all([
         supabase.from("reviews").select("id", { count: "exact", head: true }),
-        supabase.from("appointments").select("id", { count: "exact", head: true }).eq("status", "pending"),
+        supabase
+          .from("appointments")
+          .select("id", { count: "exact", head: true })
+          .eq("status", "pending"),
         supabase.from("contacts").select("id", { count: "exact", head: true }),
       ]);
       setCounts({
@@ -148,9 +153,11 @@ function AdminPage() {
               <Lock size={20} className="text-saffron animate-pulse" />
               <h3 className="font-display text-2xl font-semibold">Admin Credentials</h3>
             </div>
-            
+
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-muted-foreground uppercase">Email Address</label>
+              <label className="text-xs font-semibold text-muted-foreground uppercase">
+                Email Address
+              </label>
               <input
                 type="email"
                 value={email}
@@ -162,15 +169,27 @@ function AdminPage() {
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-muted-foreground uppercase">Password</label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter your password"
-                className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold"
-                required
-              />
+              <label className="text-xs font-semibold text-muted-foreground uppercase">
+                Password
+              </label>
+              <div className="relative flex items-center">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter your password"
+                  className="w-full pl-4 pr-11 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 p-1.5 rounded-md hover:bg-muted/15 text-muted-foreground hover:text-foreground transition-colors cursor-pointer flex items-center justify-center"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                </button>
+              </div>
             </div>
 
             <button
@@ -296,7 +315,7 @@ function SandeshAdmin() {
   async function save(e: React.FormEvent) {
     e.preventDefault();
     if (!message.trim()) return;
-    
+
     if (editingId) {
       const { data, error } = await supabase
         .from("sandesh")
@@ -305,7 +324,9 @@ function SandeshAdmin() {
         .select();
       if (error) return toast.error(error.message);
       if (!data || data.length === 0) {
-        return toast.error("Update failed. Row not found or RLS policy blocked the update. Run migration/SQL query in Supabase dashboard to enable UPDATE permissions.");
+        return toast.error(
+          "Update failed. Row not found or RLS policy blocked the update. Run migration/SQL query in Supabase dashboard to enable UPDATE permissions.",
+        );
       }
       toast.success("Sandesh updated");
       setEditingId(null);
@@ -436,8 +457,8 @@ function EventAdmin() {
   // Calculate local today date string
   const today = new Date();
   const year = today.getFullYear();
-  const month = String(today.getMonth() + 1).padStart(2, '0');
-  const day = String(today.getDate()).padStart(2, '0');
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const day = String(today.getDate()).padStart(2, "0");
   const todayIso = `${year}-${month}-${day}`;
 
   async function load() {
@@ -471,10 +492,16 @@ function EventAdmin() {
       is_upcoming: eventDate.trim() >= todayIso,
     };
     if (editingId) {
-      const { data, error } = await supabase.from("events").update(payload).eq("id", editingId).select();
+      const { data, error } = await supabase
+        .from("events")
+        .update(payload)
+        .eq("id", editingId)
+        .select();
       if (error) return toast.error(error.message);
       if (!data || data.length === 0) {
-        return toast.error("Update failed. Row not found or RLS policy blocked the update. Run migration/SQL query in Supabase dashboard to enable UPDATE permissions.");
+        return toast.error(
+          "Update failed. Row not found or RLS policy blocked the update. Run migration/SQL query in Supabase dashboard to enable UPDATE permissions.",
+        );
       }
       toast.success("Event updated");
       setEditingId(null);
@@ -597,7 +624,7 @@ function EventAdmin() {
                   <span className="text-[10px] font-semibold text-saffron bg-saffron/10 px-2 py-0.5 rounded">
                     {ev.event_date}
                   </span>
-                  
+
                   {isLive ? (
                     <span className="inline-flex items-center gap-1 bg-red-500/10 text-red-600 border border-red-200 dark:bg-red-950/30 dark:text-red-400 dark:border-red-900/50 px-2 py-0.5 rounded-full text-[10px] font-bold animate-pulse">
                       <span className="relative flex h-1.5 w-1.5">
@@ -751,17 +778,21 @@ function AppointmentAdmin({ onUpdate }: { onUpdate?: () => void }) {
       .update({ status: nextStatus })
       .eq("id", id)
       .select();
-    
+
     if (error) {
       console.error("[toggleStatus] Error:", error);
       return toast.error(error.message);
     }
-    
+
     if (!data || data.length === 0) {
-      console.warn("[toggleStatus] No rows updated. This is likely due to missing Supabase RLS UPDATE policy.");
-      return toast.error("Update failed. Please run the SQL migration query in your Supabase dashboard to enable UPDATE permissions.");
+      console.warn(
+        "[toggleStatus] No rows updated. This is likely due to missing Supabase RLS UPDATE policy.",
+      );
+      return toast.error(
+        "Update failed. Please run the SQL migration query in your Supabase dashboard to enable UPDATE permissions.",
+      );
     }
-    
+
     toast.success(`Status updated to ${nextStatus}`);
     await load();
     if (onUpdate) onUpdate();
@@ -796,7 +827,10 @@ function AppointmentAdmin({ onUpdate }: { onUpdate?: () => void }) {
                 <div className="flex justify-between items-start gap-3 mb-4">
                   <div>
                     <h4 className="font-semibold text-lg text-maroon">{a.name}</h4>
-                    <p className="text-xs text-muted-foreground truncate max-w-[200px]" title={a.email || ""}>
+                    <p
+                      className="text-xs text-muted-foreground truncate max-w-[200px]"
+                      title={a.email || ""}
+                    >
                       {a.email || "No email provided"}
                     </p>
                     <p className="text-xs text-muted-foreground">{a.phone}</p>
@@ -821,7 +855,9 @@ function AppointmentAdmin({ onUpdate }: { onUpdate?: () => void }) {
                     <span>{a.time_slot}</span>
                   </div>
                   <div className="mt-2">
-                    <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-0.5">Purpose:</div>
+                    <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-0.5">
+                      Purpose:
+                    </div>
                     <p className="text-sm bg-background/50 p-2.5 rounded-lg border border-border/40 italic whitespace-pre-wrap">
                       "{a.purpose}"
                     </p>
@@ -897,7 +933,10 @@ function ContactAdmin({ onUpdate }: { onUpdate?: () => void }) {
                 <div className="flex justify-between items-start gap-3 mb-4">
                   <div>
                     <h4 className="font-semibold text-lg text-maroon">{c.name}</h4>
-                    <p className="text-xs text-muted-foreground truncate max-w-[200px]" title={c.email}>
+                    <p
+                      className="text-xs text-muted-foreground truncate max-w-[200px]"
+                      title={c.email}
+                    >
                       {c.email}
                     </p>
                     {c.phone && <p className="text-xs text-muted-foreground">{c.phone}</p>}
@@ -912,7 +951,9 @@ function ContactAdmin({ onUpdate }: { onUpdate?: () => void }) {
                 </div>
 
                 <div className="border-t border-border/60 my-3 pt-3">
-                  <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">Message:</div>
+                  <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">
+                    Message:
+                  </div>
                   <p className="text-sm bg-background/50 p-3 rounded-lg border border-border/40 text-foreground/90 whitespace-pre-wrap">
                     {c.message}
                   </p>
@@ -977,9 +1018,23 @@ function VideoAdmin() {
     if (!form.title.trim() || !form.embed.trim())
       return toast.error("Title and video link/ID required");
 
+    const isShortsLink = form.embed.toLowerCase().includes("shorts");
+    if (videoTab === "short" && !isShortsLink) {
+      return toast.error(
+        "Only YouTube Shorts links (containing 'shorts') are allowed in this section.",
+      );
+    }
+    if (videoTab === "video" && isShortsLink) {
+      return toast.error(
+        "YouTube Shorts links must be added under the Shorts tab, not the Videos section.",
+      );
+    }
+
     const youtubeId = extractYoutubeId(form.embed);
     if (!youtubeId) {
-      return toast.error("Invalid YouTube URL or Video ID. Please enter a valid YouTube link or 11-char ID.");
+      return toast.error(
+        "Invalid YouTube URL or Video ID. Please enter a valid YouTube link or 11-char ID.",
+      );
     }
     const embedUrl = `https://www.youtube.com/embed/${youtubeId}`;
 
@@ -999,16 +1054,30 @@ function VideoAdmin() {
     if (!editForm.title.trim() || !editForm.embed.trim())
       return toast.error("Title and video link/ID required");
 
+    const isShortsLink = editForm.embed.toLowerCase().includes("shorts");
+    if (editForm.type === "short" && !isShortsLink) {
+      return toast.error(
+        "Only YouTube Shorts links (containing 'shorts') are allowed in this section.",
+      );
+    }
+    if (editForm.type === "video" && isShortsLink) {
+      return toast.error(
+        "YouTube Shorts links must be added under the Shorts tab, not the Videos section.",
+      );
+    }
+
     const youtubeId = extractYoutubeId(editForm.embed);
     if (!youtubeId) {
-      return toast.error("Invalid YouTube URL or Video ID. Please enter a valid YouTube link or 11-char ID.");
+      return toast.error(
+        "Invalid YouTube URL or Video ID. Please enter a valid YouTube link or 11-char ID.",
+      );
     }
     const embedUrl = `https://www.youtube.com/embed/${youtubeId}`;
 
     if (youtubeId !== id) {
       const { error: delError } = await supabase.from("youtube_videos").delete().eq("id", id);
       if (delError) return toast.error(delError.message);
-      
+
       const { error: insError } = await supabase.from("youtube_videos").insert({
         id: youtubeId,
         title: editForm.title.trim(),
@@ -1119,7 +1188,9 @@ function VideoAdmin() {
 
       {/* Grid of items */}
       {filteredList.length === 0 ? (
-        <p className="text-muted-foreground">No {videoTab === "short" ? "shorts" : "videos"} yet.</p>
+        <p className="text-muted-foreground">
+          No {videoTab === "short" ? "shorts" : "videos"} yet.
+        </p>
       ) : (
         <div
           className={
@@ -1130,9 +1201,14 @@ function VideoAdmin() {
         >
           {filteredList.map((v) =>
             editingId === v.id ? (
-              <div key={v.id} className="p-4 rounded-xl bg-card border border-border space-y-3 flex flex-col justify-between">
+              <div
+                key={v.id}
+                className="p-4 rounded-xl bg-card border border-border space-y-3 flex flex-col justify-between"
+              >
                 <div className="space-y-3">
-                  <div className="text-xs font-semibold text-maroon">Editing {v.type === "short" ? "Short" : "Video"}</div>
+                  <div className="text-xs font-semibold text-maroon">
+                    Editing {v.type === "short" ? "Short" : "Video"}
+                  </div>
                   <input
                     value={editForm.title}
                     onChange={(e) => setEditForm({ ...editForm, title: e.target.value })}
@@ -1186,7 +1262,10 @@ function VideoAdmin() {
                 </div>
               </div>
             ) : (
-              <div key={v.id} className="p-4 rounded-xl bg-card border border-border space-y-3 flex flex-col justify-between">
+              <div
+                key={v.id}
+                className="p-4 rounded-xl bg-card border border-border space-y-3 flex flex-col justify-between"
+              >
                 <div>
                   <div className="flex justify-between items-start gap-3 mb-2">
                     <div className="flex-1 min-w-0">
@@ -1241,8 +1320,6 @@ function VideoAdmin() {
     </div>
   );
 }
-
-
 
 type InboxRow = {
   id: string;
@@ -1308,7 +1385,9 @@ function NotificationAdmin() {
         }
 
         if (!data || data.length === 0) {
-          toast.error("Update failed. Row not found or RLS policy blocked the update. Run migration/SQL query in Supabase dashboard to enable UPDATE permissions.");
+          toast.error(
+            "Update failed. Row not found or RLS policy blocked the update. Run migration/SQL query in Supabase dashboard to enable UPDATE permissions.",
+          );
           setLoading(false);
           return;
         }
@@ -1389,13 +1468,18 @@ function NotificationAdmin() {
         </button>
       </div>
 
-      <form onSubmit={send} className="p-6 rounded-2xl bg-card border border-border space-y-4 max-w-2xl">
+      <form
+        onSubmit={send}
+        className="p-6 rounded-2xl bg-card border border-border space-y-4 max-w-2xl"
+      >
         <h4 className="font-semibold text-maroon text-sm">
           {editingId ? "Edit inbox message" : "New inbox message"}
         </h4>
-        
+
         <div className="space-y-1">
-          <label className="text-xs font-semibold text-muted-foreground uppercase">Notification Title</label>
+          <label className="text-xs font-semibold text-muted-foreground uppercase">
+            Notification Title
+          </label>
           <input
             value={form.title}
             onChange={(e) => setForm({ ...form, title: e.target.value })}
@@ -1406,7 +1490,9 @@ function NotificationAdmin() {
         </div>
 
         <div className="space-y-1">
-          <label className="text-xs font-semibold text-muted-foreground uppercase">Message Body</label>
+          <label className="text-xs font-semibold text-muted-foreground uppercase">
+            Message Body
+          </label>
           <textarea
             value={form.body}
             onChange={(e) => setForm({ ...form, body: e.target.value })}
@@ -1629,7 +1715,7 @@ function AnalyticsAdmin() {
         (payload) => {
           console.log("[Realtime] Heartbeat change detected:", payload);
           void fetchLive();
-        }
+        },
       )
       .subscribe((status) => {
         console.log("[Realtime] Heartbeat channel status:", status);
@@ -1647,7 +1733,6 @@ function AnalyticsAdmin() {
       clearInterval(iv);
     };
   }, []);
-
 
   async function load() {
     setLoading(true);
@@ -1689,8 +1774,14 @@ function AnalyticsAdmin() {
           .select("id", { count: "exact", head: true })
           .eq("status", "pending"),
         supabase.from("contacts").select("id", { count: "exact", head: true }),
-        supabase.from("youtube_videos").select("id", { count: "exact", head: true }).eq("type", "video"),
-        supabase.from("youtube_videos").select("id", { count: "exact", head: true }).eq("type", "short"),
+        supabase
+          .from("youtube_videos")
+          .select("id", { count: "exact", head: true })
+          .eq("type", "video"),
+        supabase
+          .from("youtube_videos")
+          .select("id", { count: "exact", head: true })
+          .eq("type", "short"),
         supabase.from("gallery").select("id", { count: "exact", head: true }),
         supabase.from("inbox_messages").select("id", { count: "exact", head: true }),
         supabase.from("reviews").select("created_at").gte("created_at", sevenDaysAgo),
@@ -1778,7 +1869,16 @@ function AnalyticsAdmin() {
       events: acc.events + d.events,
       inbox: acc.inbox + d.inbox,
     }),
-    { reviews: 0, contacts: 0, appointments: 0, sandesh: 0, videos: 0, shorts: 0, events: 0, inbox: 0 },
+    {
+      reviews: 0,
+      contacts: 0,
+      appointments: 0,
+      sandesh: 0,
+      videos: 0,
+      shorts: 0,
+      events: 0,
+      inbox: 0,
+    },
   );
 
   const statCards = [
@@ -1788,7 +1888,12 @@ function AnalyticsAdmin() {
       value: formatAnalyticsCount(liveCount),
     },
     { icon: MessageSquare, label: "Sandesh (total)", value: formatAnalyticsCount(data.sandesh) },
-    { icon: Calendar, label: "Events", value: formatAnalyticsCount(data.eventsTotal), sub: `${formatAnalyticsCount(data.eventsUpcoming)} upcoming` },
+    {
+      icon: Calendar,
+      label: "Events",
+      value: formatAnalyticsCount(data.eventsTotal),
+      sub: `${formatAnalyticsCount(data.eventsUpcoming)} upcoming`,
+    },
     { icon: Users, label: "Reviews (total)", value: formatAnalyticsCount(data.reviews) },
     {
       icon: Calendar,
@@ -1816,7 +1921,8 @@ function AnalyticsAdmin() {
             <BarChart3 size={22} /> Analytics Dashboard
           </h3>
           <p className="text-sm text-muted-foreground mt-1 max-w-2xl">
-            Accurate database counts and realtime sessions. Daily breakdown uses real submission timestamps from the last 7 days.
+            Accurate database counts and realtime sessions. Daily breakdown uses real submission
+            timestamps from the last 7 days.
           </p>
         </div>
         <button
@@ -1848,10 +1954,14 @@ function AnalyticsAdmin() {
         <div className="px-5 py-4 bg-gradient-divine border-b border-gold/20">
           <h4 className="font-display text-lg text-maroon">Activity by day (last 7 days)</h4>
           <p className="text-xs text-muted-foreground mt-1">
-            Reviews {formatAnalyticsCount(last7Totals.reviews)} · Contacts {formatAnalyticsCount(last7Totals.contacts)} · Appointments{" "}
-            {formatAnalyticsCount(last7Totals.appointments)} · Sandesh {formatAnalyticsCount(last7Totals.sandesh)} · Videos{" "}
-            {formatAnalyticsCount(last7Totals.videos)} · Shorts {formatAnalyticsCount(last7Totals.shorts)} · Events{" "}
-            {formatAnalyticsCount(last7Totals.events)} · Inbox Broadcasts {formatAnalyticsCount(last7Totals.inbox)}
+            Reviews {formatAnalyticsCount(last7Totals.reviews)} · Contacts{" "}
+            {formatAnalyticsCount(last7Totals.contacts)} · Appointments{" "}
+            {formatAnalyticsCount(last7Totals.appointments)} · Sandesh{" "}
+            {formatAnalyticsCount(last7Totals.sandesh)} · Videos{" "}
+            {formatAnalyticsCount(last7Totals.videos)} · Shorts{" "}
+            {formatAnalyticsCount(last7Totals.shorts)} · Events{" "}
+            {formatAnalyticsCount(last7Totals.events)} · Inbox Broadcasts{" "}
+            {formatAnalyticsCount(last7Totals.inbox)}
           </p>
         </div>
         <div className="overflow-x-auto">
@@ -1903,7 +2013,8 @@ function AnalyticsAdmin() {
       </div>
 
       <div className="p-4 rounded-xl bg-cream/30 border border-gold/20 text-xs text-muted-foreground">
-        <strong className="text-maroon">Realtime Tracking:</strong> Active live user sessions are captured automatically.
+        <strong className="text-maroon">Realtime Tracking:</strong> Active live user sessions are
+        captured automatically.
       </div>
     </div>
   );
@@ -1998,11 +2109,16 @@ function GalleryAdmin() {
         </button>
       </div>
 
-      <form onSubmit={add} className="p-6 rounded-2xl bg-card border border-border space-y-4 max-w-2xl">
+      <form
+        onSubmit={add}
+        className="p-6 rounded-2xl bg-card border border-border space-y-4 max-w-2xl"
+      >
         <h4 className="font-semibold text-maroon text-sm">Add New Image</h4>
-        
+
         <div className="space-y-1">
-          <label className="text-xs font-semibold text-muted-foreground uppercase">Image Title / Caption</label>
+          <label className="text-xs font-semibold text-muted-foreground uppercase">
+            Image Title / Caption
+          </label>
           <input
             value={form.caption}
             onChange={(e) => setForm({ ...form, caption: e.target.value })}
@@ -2013,7 +2129,9 @@ function GalleryAdmin() {
         </div>
 
         <div className="space-y-1">
-          <label className="text-xs font-semibold text-muted-foreground uppercase">Image URL (Link)</label>
+          <label className="text-xs font-semibold text-muted-foreground uppercase">
+            Image URL (Link)
+          </label>
           <input
             value={form.image_url}
             onChange={(e) => setForm({ ...form, image_url: e.target.value })}

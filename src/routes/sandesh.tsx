@@ -367,7 +367,9 @@ function SandeshPage() {
                 <div className={`text-xs uppercase tracking-[0.3em] text-saffron mb-3 ${dev}`}>
                   {t("sandesh.today")}
                 </div>
-                <p className={`font-display text-2xl md:text-3xl text-maroon leading-relaxed ${dev}`}>
+                <p
+                  className={`font-display text-2xl md:text-3xl text-maroon leading-relaxed ${dev}`}
+                >
                   "{today.message}"
                 </p>
                 <div className={`mt-6 text-sm text-muted-foreground ${dev}`}>— {today.author}</div>
@@ -421,18 +423,20 @@ function SandeshPage() {
         {archive.length > 0 && (
           <div className="max-w-3xl mx-auto">
             <ScrollReveal direction="up" duration={800}>
-              <h2 className={`font-display text-3xl text-maroon mb-6 ${dev}`}>{t("sandesh.more")}</h2>
+              <h2 className={`font-display text-3xl text-maroon mb-6 ${dev}`}>
+                {t("sandesh.more")}
+              </h2>
             </ScrollReveal>
             <div className="space-y-4">
               {archive.map((s: Sandesh, idx) => (
                 <ScrollReveal key={s.id} direction="up" delay={(idx % 4) * 80} duration={750}>
-                  <div
-                    className="p-6 rounded-2xl bg-card border border-border hover:border-gold/50 transition"
-                  >
+                  <div className="p-6 rounded-2xl bg-card border border-border hover:border-gold/50 transition">
                     <div className="text-xs uppercase tracking-[0.25em] text-saffron mb-2">
                       {formatDate(s.publish_date)}
                     </div>
-                    <p className={`text-foreground/85 leading-relaxed mb-4 ${dev}`}>"{s.message}"</p>
+                    <p className={`text-foreground/85 leading-relaxed mb-4 ${dev}`}>
+                      "{s.message}"
+                    </p>
                     <div className="flex flex-wrap items-center justify-between gap-4">
                       <div className={`text-xs text-muted-foreground ${dev}`}>— {s.author}</div>
                       <div className="flex gap-2">

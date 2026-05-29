@@ -46,9 +46,12 @@ serve(async (req) => {
       url = bodyJson.url || url;
     } else {
       if (type !== "INSERT") {
-        return new Response(JSON.stringify({ status: "skipped", sent: 0, failed: 0, subscribers: 0 }), {
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        });
+        return new Response(
+          JSON.stringify({ status: "skipped", sent: 0, failed: 0, subscribers: 0 }),
+          {
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          },
+        );
       }
 
       if (table === "sandesh") {
@@ -101,14 +104,16 @@ serve(async (req) => {
 
     await Promise.all(promises);
 
-    return new Response(
-      JSON.stringify({ success: true, sent, failed, subscribers }),
-      { headers: { ...corsHeaders, "Content-Type": "application/json" } },
-    );
-  } catch (err: any) {
-    return new Response(JSON.stringify({ error: err.message, success: false, sent: 0, failed: 0, subscribers: 0 }), {
+    return new Response(JSON.stringify({ success: true, sent, failed, subscribers }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 500,
     });
+  } catch (err: any) {
+    return new Response(
+      JSON.stringify({ error: err.message, success: false, sent: 0, failed: 0, subscribers: 0 }),
+      {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 500,
+      },
+    );
   }
 });

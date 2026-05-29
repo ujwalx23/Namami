@@ -50,9 +50,7 @@ function RootComponent() {
     try {
       sessionId = sessionStorage.getItem("__vis_sid") ?? "";
       if (!sessionId) {
-        sessionId =
-          Math.random().toString(36).substring(2) +
-          Date.now().toString(36);
+        sessionId = Math.random().toString(36).substring(2) + Date.now().toString(36);
         sessionStorage.setItem("__vis_sid", sessionId);
       }
     } catch {
@@ -65,7 +63,7 @@ function RootComponent() {
         .from("visitor_heartbeats" as any)
         .upsert(
           { session_id: sessionId, last_seen: new Date().toISOString(), page_path: path } as any,
-          { onConflict: "session_id" }
+          { onConflict: "session_id" },
         )
         .then(({ error }) => {
           if (error) {
@@ -79,7 +77,9 @@ function RootComponent() {
     const cleanUpSession = () => {
       console.log("[Heartbeat] Performing instant cleanup for session:", sessionId);
       const baseUrl = (supabase as any).supabaseUrl || "https://avmemxowlunhlyfntiqu.supabase.co";
-      const key = (supabase as any).supabaseKey || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF2bWVteG93bHVuaGx5Zm50aXF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk2OTIyOTMsImV4cCI6MjA5NTI2ODI5M30.R5DwGPSWZH_PXmsEnUntYu7WyHK6VHXsEUkq8zISRkw";
+      const key =
+        (supabase as any).supabaseKey ||
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF2bWVteG93bHVuaGx5Zm50aXF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk2OTIyOTMsImV4cCI6MjA5NTI2ODI5M30.R5DwGPSWZH_PXmsEnUntYu7WyHK6VHXsEUkq8zISRkw";
       const url = `${baseUrl}/rest/v1/visitor_heartbeats?session_id=eq.${sessionId}`;
       void fetch(url, {
         method: "DELETE",

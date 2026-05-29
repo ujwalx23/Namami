@@ -18,6 +18,7 @@ Use this checklist before deploying to production to ensure all pages work corre
 Test each page individually and verify it loads:
 
 **Main Pages:**
+
 - [ ] `/` - Home page
 - [ ] `/about` - About page
 - [ ] `/events` - Events page
@@ -32,11 +33,13 @@ Test each page individually and verify it loads:
 - [ ] `/inbox` - Inbox page
 
 **Admin:**
+
 - [ ] `/admin` - Admin panel accessible with passcode
 
 ### ✅ 3. Error Handling
 
 **Test error recovery:**
+
 - [ ] Go offline (DevTools → Network → Offline)
 - [ ] Try to load a page → should show graceful error
 - [ ] Try API call → should not crash
@@ -46,6 +49,7 @@ Test each page individually and verify it loads:
 ### ✅ 4. Authentication (SSO)
 
 **After setting up Google OAuth:**
+
 - [ ] Google login button appears
 - [ ] Clicking it redirects to Google
 - [ ] Can sign in with Google account
@@ -74,6 +78,7 @@ Test each page individually and verify it loads:
 ### ✅ 7. Mobile Testing
 
 Test on mobile devices:
+
 - [ ] iPhone Safari
 - [ ] Android Chrome
 - [ ] Responsive menu works
@@ -83,6 +88,7 @@ Test on mobile devices:
 ### ✅ 8. Browser Testing
 
 Test in multiple browsers:
+
 - [ ] Google Chrome
 - [ ] Mozilla Firefox
 - [ ] Safari (macOS/iOS)
@@ -124,23 +130,27 @@ Test in multiple browsers:
 ## Running Automated Checks
 
 ### Build Check
+
 ```bash
 npm run build
 # Should complete without errors
 ```
 
 ### Type Check
+
 ```bash
 # TypeScript should show no errors
 ```
 
 ### Lint Check
+
 ```bash
 npm run lint
 # Should pass without warnings
 ```
 
 ### Format Check
+
 ```bash
 npm run format
 # Code should be properly formatted
@@ -151,12 +161,14 @@ npm run format
 ## Local Development Testing
 
 ### Start Development Server
+
 ```bash
 npm run dev
 # Server should start at http://localhost:8080
 ```
 
 ### Simulate Production Build
+
 ```bash
 npm run build
 npm run preview
@@ -164,6 +176,7 @@ npm run preview
 ```
 
 ### Test Network Errors
+
 1. Open DevTools (F12)
 2. Go to Network tab
 3. Click the throttling dropdown → set to "Offline"
@@ -172,6 +185,7 @@ npm run preview
 6. Go back online → should resume working
 
 ### Check Console for Errors
+
 ```bash
 # Open DevTools Console (F12 → Console)
 # Should show no red errors
@@ -183,6 +197,7 @@ npm run preview
 ## Performance Testing
 
 ### Lighthouse Score
+
 1. Open DevTools (F12)
 2. Go to Lighthouse tab
 3. Click "Analyze page load"
@@ -193,7 +208,9 @@ npm run preview
    - SEO: > 90
 
 ### Network Performance
+
 In DevTools Network tab:
+
 - Reduce to "Slow 3G" or "Fast 3G"
 - Load pages
 - Should still be functional
@@ -222,6 +239,7 @@ Before deploying to Vercel/production:
 ## Troubleshooting Guide
 
 ### Page shows blank screen
+
 1. Open DevTools Console (F12)
 2. Check for error messages
 3. Check Network tab for failed requests
@@ -229,24 +247,28 @@ Before deploying to Vercel/production:
 5. Try in incognito mode
 
 ### Forms don't submit
+
 1. Check Network tab → see if request is sent
 2. Check database RLS policies
 3. Check browser console for errors
 4. Verify Supabase connection
 
 ### Icons don't appear
+
 1. Check `public/` folder has icon files
 2. Clear browser cache completely
 3. Check DevTools → Application → Manifest
 4. Verify file names match exactly
 
 ### SSO doesn't work
+
 1. Check Google OAuth credentials
 2. Verify redirect URL matches exactly
 3. Check browser console for auth errors
 4. Ensure cookies are enabled
 
 ### Database connection fails
+
 1. Check Supabase URL and key
 2. Verify RLS policies allow access
 3. Check network connection
@@ -257,6 +279,7 @@ Before deploying to Vercel/production:
 ## Performance Optimization Tips
 
 1. **Lazy Load Images:**
+
    ```tsx
    <img loading="lazy" src="..." />
    ```

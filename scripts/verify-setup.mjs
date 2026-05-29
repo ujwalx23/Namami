@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 /**
  * Website Verification Script
- * 
+ *
  * Checks that all improvements are properly installed and configured.
  * Run this after making changes to verify everything is set up correctly.
- * 
+ *
  * Usage: node scripts/verify-setup.mjs
  */
 
@@ -106,9 +106,7 @@ function main() {
   console.log("\n" + "=".repeat(50));
 
   // Summary
-  const allIconsPresent = icons.every((icon) =>
-    fs.existsSync(path.join(rootDir, icon)),
-  );
+  const allIconsPresent = icons.every((icon) => fs.existsSync(path.join(rootDir, icon)));
   const filesPresent = checks.errors.length === 0;
 
   console.log("\n📊 Summary:");
@@ -164,9 +162,7 @@ function main() {
 
   // Exit with appropriate code
   if (checks.errors.length > 0 || !allIconsPresent) {
-    console.log(
-      "⚠️  Some setup steps remain. See above for details.\n",
-    );
+    console.log("⚠️  Some setup steps remain. See above for details.\n");
     process.exit(1);
   } else {
     console.log("🎉 Setup verified! Ready to test and deploy.\n");

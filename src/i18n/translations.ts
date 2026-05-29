@@ -110,7 +110,10 @@ export const translations = {
   "home.cta2.contact": { en: "Contact Us", hi: "हमसे संपर्क" },
 
   // ---- About page ----
-  "about.sanskrit": { en: "॥ महालक्ष्मी महाकाली महासरस्वती स्वरूपिण्यै नमः ॥", hi: "॥ महालक्ष्मी महाकाली महासरस्वती स्वरूपिण्यै नमः ॥" },
+  "about.sanskrit": {
+    en: "॥ महालक्ष्मी महाकाली महासरस्वती स्वरूपिण्यै नमः ॥",
+    hi: "॥ महालक्ष्मी महाकाली महासरस्वती स्वरूपिण्यै नमः ॥",
+  },
   "about.title": { en: "Maa Vindhyavasini Dham", hi: "माँ विन्ध्यवासिनी धाम" },
   "about.subtitle": {
     en: "One of the most ancient Shakti Pithas of Bharat, serving as the abode of Devi Durga in the Vindhya hills.",
@@ -118,32 +121,50 @@ export const translations = {
   },
   "about.deity.title": {
     en: "The Divine Descent of Yogmaya",
-    hi: "योगमाया का दिव्य अवतरण"
+    hi: "योगमाया का दिव्य अवतरण",
   },
   "about.deity.text": {
     en: "Devi Vindhyavasini is the ultimate manifestation of Adi Parashakti, who descended as Yogmaya. Scriptural tradition states that she took birth from the womb of Yashoda in Nanda Gokul on the same night Sri Krishna was born in Mathura. To save the divine infant, Vasudeva exchanged Krishna with Yogmaya. When the tyrant king Kansa attempted to kill her by dashing her against a stone, she slipped from his grasp, ascended majestically into the sky, and assumed her magnificent eight-armed form (Ashtabhuja). She proclaimed Kansa's impending destruction before choosing the sacred Vindhya hills as her eternal residence, where she continues to bless and protect her devotees.",
-    hi: "देवी विन्ध्यवासिनी आदिशक्ति का साक्षात स्वरूप हैं, जो योगमाया के रूप में अवतरित हुईं। शास्त्रों के अनुसार, उनका जन्म नन्द गोकुल में यशोदा के गर्भ से उसी रात्रि को हुआ था जिस रात्रि मथुरा में भगवान श्रीकृष्ण का जन्म हुआ था। कंस से नवजात शिशु की रक्षा के लिए वासुदेव ने कृष्ण को योगमाया से बदल दिया। जब अत्याचारी राजा कंस ने शिला पर पटक कर इस कन्या का वध करना चाहा, तो वह उसके हाथों से फिसलकर आकाश में विलीन हो गईं और अपने भव्य अष्टभुज (अष्टभुजा) रूप में प्रकट हुईं। कंस के विनाश की घोषणा करने के पश्चात उन्होंने पावन विन्ध्य पर्वतमाला को अपने सनातन निवास के रूप में चुना, जहाँ वे आज भी अपने भक्तों पर निरंतर कृपा बरसाती हैं।"
+    hi: "देवी विन्ध्यवासिनी आदिशक्ति का साक्षात स्वरूप हैं, जो योगमाया के रूप में अवतरित हुईं। शास्त्रों के अनुसार, उनका जन्म नन्द गोकुल में यशोदा के गर्भ से उसी रात्रि को हुआ था जिस रात्रि मथुरा में भगवान श्रीकृष्ण का जन्म हुआ था। कंस से नवजात शिशु की रक्षा के लिए वासुदेव ने कृष्ण को योगमाया से बदल दिया। जब अत्याचारी राजा कंस ने शिला पर पटक कर इस कन्या का वध करना चाहा, तो वह उसके हाथों से फिसलकर आकाश में विलीन हो गईं और अपने भव्य अष्टभुज (अष्टभुजा) रूप में प्रकट हुईं। कंस के विनाश की घोषणा करने के पश्चात उन्होंने पावन विन्ध्य पर्वतमाला को अपने सनातन निवास के रूप में चुना, जहाँ वे आज भी अपने भक्तों पर निरंतर कृपा बरसाती हैं।",
   },
   "about.kajari.title": {
     en: "Kajari Folk Music Tradition",
-    hi: "कजरी लोक संगीत और सांस्कृतिक धरोहर"
+    hi: "कजरी लोक संगीत और सांस्कृतिक धरोहर",
   },
   "about.kajari.text": {
     en: "Vindhyachal is the birth-cradle of Kajari (Kajali), the sublime monsoon folk music tradition of India. Etymologically linked to 'Kajal' (kohl) and the monsoon clouds, it directly celebrates Devi Vindhyavasini's dark-skinned, rainfall-bestowing form as Kajali Devi. During the holy month of Shravana, local classical and folk singers perform Kajari melodies in the temple premises. This beautiful music expresses the deep longing, spiritual devotion, and joyous celebrations of the local community, keeping the divine feminine energy alive in every home.",
-    hi: "विन्ध्याचल भारत की प्रसिद्ध वर्षाकालीन लोक संगीत परंपरा 'कजरी' (कजली) का उद्गम स्थल है। कजरी शब्द का सीधा संबंध 'काजल' और वर्षा ऋतु के श्याम मेघों से है, जो सीधे माँ विन्ध्यवासिनी के मेघ-श्याम रूप (कजली देवी) की महिमा और वर्षा प्रदान करने वाले स्वरूप की स्तुति करता है। श्रावण के पवित्र महीने में, स्थानीय शास्त्रीय और लोक गायक मंदिर परिसर में कजरी की तान छेड़ते हैं। यह सुंदर संगीत विरह, आध्यात्मिक भक्ति और प्रकृति के उल्लास को व्यक्त करता है, जिससे माँ की दिव्य ऊर्जा जन-जन के हृदय में प्रवाहित होती है।"
+    hi: "विन्ध्याचल भारत की प्रसिद्ध वर्षाकालीन लोक संगीत परंपरा 'कजरी' (कजली) का उद्गम स्थल है। कजरी शब्द का सीधा संबंध 'काजल' और वर्षा ऋतु के श्याम मेघों से है, जो सीधे माँ विन्ध्यवासिनी के मेघ-श्याम रूप (कजली देवी) की महिमा और वर्षा प्रदान करने वाले स्वरूप की स्तुति करता है। श्रावण के पवित्र महीने में, स्थानीय शास्त्रीय और लोक गायक मंदिर परिसर में कजरी की तान छेड़ते हैं। यह सुंदर संगीत विरह, आध्यात्मिक भक्ति और प्रकृति के उल्लास को व्यक्त करता है, जिससे माँ की दिव्य ऊर्जा जन-जन के हृदय में प्रवाहित होती है।",
   },
   "about.fact.deity.label": { en: "Primary Deity", hi: "मुख्य विग्रह" },
-  "about.fact.deity.value": { en: "Maa Vindhyavasini (Maha Lakshmi / Yogmaya)", hi: "माँ विन्ध्यवासिनी (महालक्ष्मी / योगमाया)" },
+  "about.fact.deity.value": {
+    en: "Maa Vindhyavasini (Maha Lakshmi / Yogmaya)",
+    hi: "माँ विन्ध्यवासिनी (महालक्ष्मी / योगमाया)",
+  },
   "about.fact.location.label": { en: "Location", hi: "भौगोलिक स्थिति" },
-  "about.fact.location.value": { en: "Vindhyachal, Mirzapur, Uttar Pradesh", hi: "विन्ध्याचल, मिर्जापुर, उत्तर प्रदेश" },
+  "about.fact.location.value": {
+    en: "Vindhyachal, Mirzapur, Uttar Pradesh",
+    hi: "विन्ध्याचल, मिर्जापुर, उत्तर प्रदेश",
+  },
   "about.fact.river.label": { en: "Sacred River", hi: "पाวน नदी" },
-  "about.fact.river.value": { en: "Uttar Vahini Ganga (Holy Ganges)", hi: "उत्तरवाहिनी गंगा (पतित पावनी गंगा)" },
+  "about.fact.river.value": {
+    en: "Uttar Vahini Ganga (Holy Ganges)",
+    hi: "उत्तरवाहिनी गंगा (पतित पावनी गंगा)",
+  },
   "about.fact.scriptures.label": { en: "Scriptural Mentions", hi: "शास्त्रों में उल्लेख" },
-  "about.fact.scriptures.value": { en: "Durga Saptashati, Markandeya Purana, Devi Bhagavata", hi: "दुर्गा सप्तशती, मार्कण्डेय पुराण, देवी भागवत पुराण" },
+  "about.fact.scriptures.value": {
+    en: "Durga Saptashati, Markandeya Purana, Devi Bhagavata",
+    hi: "दुर्गा सप्तशती, मार्कण्डेय पुराण, देवी भागवत पुराण",
+  },
   "about.fact.architecture.label": { en: "Architectural Style", hi: "स्थापत्य शैली" },
-  "about.fact.architecture.value": { en: "Nagara Style (Vindhya Corridor Phase)", hi: "नागर शैली (विन्ध्य कॉरिडोर स्वरूप)" },
+  "about.fact.architecture.value": {
+    en: "Nagara Style (Vindhya Corridor Phase)",
+    hi: "नागर शैली (विन्ध्य कॉरिडोर स्वरूप)",
+  },
   "about.fact.status.label": { en: "Temple Status", hi: "मंदिर की स्थिति" },
-  "about.fact.status.value": { en: "Ancient Shakti Pitha (Active Worship)", hi: "अति प्राचीन शक्तिपीठ (सक्रिय उपासना)" },
+  "about.fact.status.value": {
+    en: "Ancient Shakti Pitha (Active Worship)",
+    hi: "अति प्राचीन शक्तिपीठ (सक्रिय उपासना)",
+  },
   "about.intro": {
     en: "Maa Vindhyavasini Temple at Vindhyachal is a celebrated Hindu shrine dedicated to the mother goddess Vindhyavasini, situated on the holy banks of the Uttar Vahini Ganga in Mirzapur, Uttar Pradesh. Revered as one of the most powerful Shakti Pithas of Bharat, the Goddess is also lovingly worshipped as Kajari Devi, symbolizing her deep kohl-dark monsoon complexion that brings protection and blessings to all devotees.",
     hi: "विन्ध्याचल में स्थित माँ विन्ध्यवासिनी मंदिर उत्तर प्रदेश के मिर्जापुर में पवित्र उत्तरवाहिनी गंगा के तट पर स्थापित एक अत्यंत पूजनीय हिंदू तीर्थ है। भारत के सबसे प्रतापी शक्तिपीठों में से एक के रूप में पूजित, माँ को यहाँ श्रद्धालु प्रेमपूर्वक कजरी देवी के रूप में भी पूजते हैं, जो उनके वर्षाकालीन श्याम-मेघ वर्ण और भक्तों पर उनकी निरंतर बरसती कृपा का प्रतीक है।",
@@ -211,7 +232,10 @@ export const translations = {
     hi: "पर्वत-शिखर मंदिर, जो लगभग ८ किमी दूर है और अष्टभुज रूप में देवी महासरस्वती को समर्पित है।",
   },
 
-  "about.legend.title": { en: "The Legend of Mahishasura Mardini", hi: "महिषासुर मर्दिनी की पावन कथा" },
+  "about.legend.title": {
+    en: "The Legend of Mahishasura Mardini",
+    hi: "महिषासुर मर्दिनी की पावन कथा",
+  },
   "about.legend.text": {
     en: "Vindhyachal is the sacred land where Adi Parashakti manifested to destroy the tyrant demon king Mahishasura. After a fierce battle described in the Puranas, the Devi vanquished his army and restored cosmic order. Celebrating her victory, she established her permanent seat in the Vindhyas, choosing to dwell here eternally for the protection of all creation.",
     hi: "विन्ध्याचल वह पावन सिद्धपीठ है जहाँ आदिशक्ति ने अत्याचारी असुर महिषासुर का संहार करने के लिए अवतार लिया था। पुराणों में वर्णित एक भीषण युद्ध में देवी ने महिषासुर का अंत कर ब्रह्मांडीय संतुलन बहाल किया। अपनी इस विजय के पश्चात, उन्होंने चराचर जगत के कल्याण और रक्षा के लिए विन्ध्य पर्वत श्रृंखला को अपना शाश्वत निवास बनाया।",

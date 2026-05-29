@@ -44,7 +44,7 @@ function VideosPage() {
   const { t, lang } = useLang();
   const dev = lang === "hi" ? "font-devanagari" : "";
   const [activeTab, setActiveTab] = useState<"video" | "short">("video");
-  
+
   const activeVideos: Video[] = (fetchedVideos as Video[]) || [];
   const list = activeVideos.filter((v) => v.type === activeTab);
 
@@ -116,7 +116,9 @@ function VideosPage() {
                       allowFullScreen
                     />
                   </div>
-                  <p className={`mt-3 text-muted-foreground text-sm text-center ${dev}`}>{s.title}</p>
+                  <p className={`mt-3 text-muted-foreground text-sm text-center ${dev}`}>
+                    {s.title}
+                  </p>
                 </div>
               </ScrollReveal>
             ))}

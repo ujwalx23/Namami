@@ -24,7 +24,7 @@ export function PageHero({
   return (
     <section className="relative bg-gradient-divine border-b border-border/60 overflow-hidden">
       <div className="absolute inset-0 mandala-bg opacity-60" />
-      
+
       {/* Rotating Background Mandala Watermarks */}
       <svg
         className="absolute -left-16 -top-16 md:-left-24 md:-top-24 w-64 h-64 md:w-96 md:h-96 opacity-10 text-gold/30 animate-spin-reverse-slow pointer-events-none select-none"
@@ -49,7 +49,7 @@ export function PageHero({
         <circle cx="15" cy="60" r="3" fill="currentColor" />
         <circle cx="105" cy="60" r="3" fill="currentColor" />
       </svg>
-      
+
       <svg
         className="absolute -right-16 -bottom-16 md:-right-24 md:-bottom-24 w-64 h-64 md:w-96 md:h-96 opacity-15 text-gold/40 animate-spin-slow pointer-events-none select-none"
         viewBox="0 0 120 120"
@@ -75,9 +75,19 @@ export function PageHero({
       </svg>
 
       <div className="container mx-auto px-6 py-20 relative text-center">
-        {sanskrit && <div className="font-devanagari text-saffron text-base md:text-lg mb-3 break-words leading-relaxed">{sanskrit}</div>}
-        <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-maroon mb-4 break-words leading-tight">{title}</h1>
-        {subtitle && <p className="text-muted-foreground max-w-2xl mx-auto text-base md:text-lg break-words leading-relaxed">{subtitle}</p>}
+        {sanskrit && (
+          <div className="font-devanagari text-saffron text-base md:text-lg mb-3 break-words leading-relaxed">
+            {sanskrit}
+          </div>
+        )}
+        <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-maroon mb-4 break-words leading-tight">
+          {title}
+        </h1>
+        {subtitle && (
+          <p className="text-muted-foreground max-w-2xl mx-auto text-base md:text-lg break-words leading-relaxed">
+            {subtitle}
+          </p>
+        )}
         <div className="mx-auto mt-6 w-24 h-[2px] bg-gradient-sacred rounded-full" />
       </div>
     </section>

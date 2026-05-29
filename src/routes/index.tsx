@@ -93,7 +93,11 @@ function HeroSlider() {
             key={idx}
             className={`absolute inset-0 transition-opacity duration-1000 ${idx === i ? "opacity-100" : "opacity-0"}`}
           >
-            <img src={s.img} alt={t(s.titleKey)} className={`w-full h-full object-cover ${idx === i ? "animate-kenburns" : ""}`} />
+            <img
+              src={s.img}
+              alt={t(s.titleKey)}
+              className={`w-full h-full object-cover ${idx === i ? "animate-kenburns" : ""}`}
+            />
             <div className="absolute inset-0 bg-gradient-overlay" />
             <div className="absolute bottom-6 left-6 right-6 text-center text-cream">
               <div className="font-devanagari text-gold text-sm">{s.sanskrit}</div>
@@ -189,7 +193,9 @@ function PWAInstallCard() {
           <Smartphone size={24} />
         </div>
         <h3 className={`font-display text-xl text-maroon mb-1 ${dev}`}>
-          {lang === "hi" ? "ऐप सफलतापूर्वक इंस्टॉल हो गया है!" : "Application Installed Successfully!"}
+          {lang === "hi"
+            ? "ऐप सफलतापूर्वक इंस्टॉल हो गया है!"
+            : "Application Installed Successfully!"}
         </h3>
         <p className="text-sm text-muted-foreground">
           {lang === "hi"
@@ -333,29 +339,35 @@ function HomePage() {
     ? [
         {
           name: "प्रिया शर्मा",
-          comment: "मैं प्रभावित हुई कि सबकुछ कितना व्यवस्थित था। मंदिर की जानकारी, दर्शन विवरण और विचारशील संदेश खंड ने मूल्यवान मार्गदर्शन और प्रेरणा प्रदान की। दर्शन की योजना बनाने वाले भक्तों के लिए अत्यंत अनुशंसित। 🌺🙏",
+          comment:
+            "मैं प्रभावित हुई कि सबकुछ कितना व्यवस्थित था। मंदिर की जानकारी, दर्शन विवरण और विचारशील संदेश खंड ने मूल्यवान मार्गदर्शन और प्रेरणा प्रदान की। दर्शन की योजना बनाने वाले भक्तों के लिए अत्यंत अनुशंसित। 🌺🙏",
         },
         {
           name: "राजेश मिश्रा",
-          comment: "एक सुंदर और आध्यात्मिक रूप से उन्नत करने वाला स्थान। व्यवस्थाएं उत्कृष्ट थीं, और पूरा अनुभव सहज और यादगार रहा। मैं परिवार के साथ दर्शन करने की अत्यधिक सलाह देता हूँ।",
+          comment:
+            "एक सुंदर और आध्यात्मिक रूप से उन्नत करने वाला स्थान। व्यवस्थाएं उत्कृष्ट थीं, और पूरा अनुभव सहज और यादगार रहा। मैं परिवार के साथ दर्शन करने की अत्यधिक सलाह देता हूँ।",
         },
         {
           name: "मनिष तिवारी",
-          comment: "एक अद्भुत पहल जो भक्तों को सनातन धर्म की शिक्षाओं, परंपराओं और मूल्यों से जोड़े रखने में मदद करती है।",
+          comment:
+            "एक अद्भुत पहल जो भक्तों को सनातन धर्म की शिक्षाओं, परंपराओं और मूल्यों से जोड़े रखने में मदद करती है।",
         },
       ]
     : [
         {
           name: "Priya Sharma",
-          comment: "I was impressed by how well-organized everything was. The temple information, darshan details, and Sandesh section were very helpful. Highly valuable resource for devotees and visitors. 🌺🙏",
+          comment:
+            "I was impressed by how well-organized everything was. The temple information, darshan details, and Sandesh section were very helpful. Highly valuable resource for devotees and visitors. 🌺🙏",
         },
         {
           name: "Rajesh Mishra",
-          comment: "A beautiful and spiritually uplifting place. The arrangements were excellent, and the entire experience was smooth and memorable. I highly recommend visiting with family.",
+          comment:
+            "A beautiful and spiritually uplifting place. The arrangements were excellent, and the entire experience was smooth and memorable. I highly recommend visiting with family.",
         },
         {
           name: "Manish Tiwari",
-          comment: "A wonderful initiative that helps devotees stay connected with the teachings, traditions, and values of Sanatan Dharma.",
+          comment:
+            "A wonderful initiative that helps devotees stay connected with the teachings, traditions, and values of Sanatan Dharma.",
         },
       ];
 
@@ -366,7 +378,7 @@ function HomePage() {
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-divine" />
         <div className="absolute inset-0 mandala-bg" />
-        
+
         {/* Decorative Rotating Mandala Background Watermark */}
         <svg
           className="absolute -right-24 -top-24 w-80 h-80 md:w-[480px] md:h-[480px] opacity-10 text-gold/30 animate-spin-slow pointer-events-none select-none"
@@ -398,14 +410,18 @@ function HomePage() {
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cream border border-gold/40 text-maroon text-xs uppercase tracking-[0.25em] mb-6">
                 <Sparkles size={12} className="text-saffron" /> {t("home.badge")}
               </div>
-              <div className="font-devanagari text-saffron text-xl mb-3">॥ नमामि विन्ध्यवासिनी ॥</div>
+              <div className="font-devanagari text-saffron text-xl mb-3">
+                ॥ नमामि विन्ध्यवासिनी ॥
+              </div>
               <h1
                 className={`text-5xl md:text-6xl lg:text-7xl text-maroon mb-6 ${
                   hi ? "leading-[1.4] font-devanagari py-2" : "font-display leading-[1.05]"
                 }`}
               >
                 {t("home.hero.title1")}{" "}
-                <span className={`text-gradient-gold ${hi ? "not-italic" : "italic"}`}>{t("home.hero.title2")}</span>
+                <span className={`text-gradient-gold ${hi ? "not-italic" : "italic"}`}>
+                  {t("home.hero.title2")}
+                </span>
               </h1>
               <p
                 className={`text-lg text-foreground/75 max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed ${dev}`}
@@ -446,7 +462,11 @@ function HomePage() {
                   <s.icon size={24} />
                 </div>
                 <div>
-                  <div className={`font-display text-2xl text-maroon group-hover:text-saffron transition-colors duration-300 ${dev}`}>{s.n}</div>
+                  <div
+                    className={`font-display text-2xl text-maroon group-hover:text-saffron transition-colors duration-300 ${dev}`}
+                  >
+                    {s.n}
+                  </div>
                   <div className={`text-sm text-muted-foreground ${dev}`}>{s.s}</div>
                 </div>
               </div>
@@ -454,9 +474,6 @@ function HomePage() {
           </div>
         </ScrollReveal>
       </section>
-
-
-
 
       {/* INTRO */}
       <section className="container mx-auto px-6 py-16">
@@ -475,14 +492,20 @@ function HomePage() {
         <div className="grid md:grid-cols-3 gap-6">
           {intro.map((c, idx) => (
             <ScrollReveal key={c.tk} direction="up" delay={idx * 150} duration={800}>
-              <div
-                className="group tilt-card-hover p-8 rounded-2xl bg-card/75 backdrop-blur-md border border-gold/30 hover:border-gold hover:shadow-[0_10px_35px_rgba(212,175,55,0.15)] transition-premium h-full"
-              >
+              <div className="group tilt-card-hover p-8 rounded-2xl bg-card/75 backdrop-blur-md border border-gold/30 hover:border-gold hover:shadow-[0_10px_35px_rgba(212,175,55,0.15)] transition-premium h-full">
                 <div className="w-12 h-12 rounded-xl bg-gradient-sacred flex items-center justify-center text-cream mb-5 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-md">
                   <c.icon size={20} />
                 </div>
-                <h3 className={`font-display text-2xl text-maroon mb-2 group-hover:text-saffron transition-colors duration-300 ${dev}`}>{t(c.tk)}</h3>
-                <p className={`text-muted-foreground/90 leading-relaxed text-sm md:text-base ${dev}`}>{t(c.xk)}</p>
+                <h3
+                  className={`font-display text-2xl text-maroon mb-2 group-hover:text-saffron transition-colors duration-300 ${dev}`}
+                >
+                  {t(c.tk)}
+                </h3>
+                <p
+                  className={`text-muted-foreground/90 leading-relaxed text-sm md:text-base ${dev}`}
+                >
+                  {t(c.xk)}
+                </p>
               </div>
             </ScrollReveal>
           ))}
@@ -495,7 +518,11 @@ function HomePage() {
           <div className="relative order-2 lg:order-1">
             <ScrollReveal direction="right" duration={900}>
               <div className="aspect-[4/5] max-w-md mx-auto rounded-[2rem] overflow-hidden shadow-sacred border-4 border-gold/60 hover:shadow-gold transition-shadow duration-500">
-                <img src={maaImg2} alt="Maa Vindhyavasini" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+                <img
+                  src={maaImg2}
+                  alt="Maa Vindhyavasini"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                />
               </div>
             </ScrollReveal>
           </div>
@@ -658,14 +685,14 @@ function HomePage() {
         <div className="grid grid-cols-1 md:grid-cols-3 md:items-start gap-4 md:gap-6">
           {devoteeReviews.map((r, idx) => (
             <ScrollReveal key={r.name} direction="up" delay={idx * 150} duration={800}>
-              <article
-                className="relative rounded-2xl p-5 md:p-6 bg-card border border-gold/30 hover:border-gold/60 hover:shadow-sacred hover:-translate-y-1 transition-premium group"
-              >
+              <article className="relative rounded-2xl p-5 md:p-6 bg-card border border-gold/30 hover:border-gold/60 hover:shadow-sacred hover:-translate-y-1 transition-premium group">
                 <div className="absolute top-4 right-4 text-gold/10 group-hover:text-gold/20 transition-colors">
                   <Quote size={36} strokeWidth={1.5} />
                 </div>
 
-                <p className={`relative text-foreground/80 leading-relaxed italic mb-4 text-sm ${dev}`}>
+                <p
+                  className={`relative text-foreground/80 leading-relaxed italic mb-4 text-sm ${dev}`}
+                >
                   "{r.comment}"
                 </p>
 
@@ -687,7 +714,9 @@ function HomePage() {
           <div className="rounded-3xl bg-gradient-sacred p-10 md:p-16 text-center text-cream shadow-sacred relative overflow-hidden group">
             <div className="absolute inset-0 mandala-bg opacity-30 group-hover:scale-105 transition-transform duration-[10s]" />
             <div className="relative">
-              <div className="font-devanagari text-gold text-lg mb-3">{t("home.cta2.sanskrit")}</div>
+              <div className="font-devanagari text-gold text-lg mb-3">
+                {t("home.cta2.sanskrit")}
+              </div>
               <h2 className={`font-display text-4xl md:text-5xl mb-4 ${dev}`}>
                 {t("home.cta2.title")}
               </h2>
@@ -741,7 +770,7 @@ function HomePage() {
               alt="Darshan"
               className="max-h-[75vh] max-w-full rounded-xl shadow-2xl object-contain border border-gold/25 hover:scale-[1.01] transition-transform duration-300"
             />
-            
+
             {/* Download Button in Lightbox */}
             <button
               onClick={() => {

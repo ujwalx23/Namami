@@ -95,14 +95,16 @@ export function SiteInbox() {
                             <div className={`font-medium text-sm text-maroon ${dev}`}>
                               {msg.title}
                             </div>
-                            <p className={`text-xs text-muted-foreground mt-0.5 line-clamp-2 ${dev}`}>
+                            <p
+                              className={`text-xs text-muted-foreground mt-0.5 line-clamp-2 ${dev}`}
+                            >
                               {msg.body}
                             </p>
                             <time className="text-[10px] text-muted-foreground/80 mt-1 block">
-                              {new Date(msg.created_at).toLocaleTimeString(
-                                hi ? "hi-IN" : "en-IN",
-                                { hour: "2-digit", minute: "2-digit" },
-                              )}
+                              {new Date(msg.created_at).toLocaleTimeString(hi ? "hi-IN" : "en-IN", {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                              })}
                             </time>
                           </div>
                         </div>

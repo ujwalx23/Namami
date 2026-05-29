@@ -7,10 +7,7 @@ export type SiteNotificationPayload = {
   url?: string;
 };
 
-export function showSiteNotification(
-  payload: SiteNotificationPayload,
-  router?: Router<any>,
-) {
+export function showSiteNotification(payload: SiteNotificationPayload, router?: Router<any>) {
   const title = payload.title?.trim() || "Namami Vindhyavasini";
   const body = payload.body?.trim() || "";
   const url = payload.url?.trim() || "/";

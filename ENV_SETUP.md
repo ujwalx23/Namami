@@ -82,16 +82,17 @@ console.log(import.meta.env.VITE_SUPABASE_URL)
 3. Go to **Settings** → **Environment Variables**
 4. Add these variables:
 
-| Name | Value | Environments |
-|------|-------|--------------|
-| `VITE_SUPABASE_URL` | `https://your-project.supabase.co` | Production, Preview, Development |
-| `VITE_SUPABASE_PUBLISHABLE_KEY` | `eyJhbGc...` | Production, Preview, Development |
-| `VITE_SUPABASE_AUTH_REDIRECT_URL` | `https://yourdomain.com/auth/callback` | Production, Preview |
-| `VITE_SUPABASE_AUTH_REDIRECT_URL` | `http://localhost:8080/auth/callback` | Development |
+| Name                              | Value                                  | Environments                     |
+| --------------------------------- | -------------------------------------- | -------------------------------- |
+| `VITE_SUPABASE_URL`               | `https://your-project.supabase.co`     | Production, Preview, Development |
+| `VITE_SUPABASE_PUBLISHABLE_KEY`   | `eyJhbGc...`                           | Production, Preview, Development |
+| `VITE_SUPABASE_AUTH_REDIRECT_URL` | `https://yourdomain.com/auth/callback` | Production, Preview              |
+| `VITE_SUPABASE_AUTH_REDIRECT_URL` | `http://localhost:8080/auth/callback`  | Development                      |
 
 **Important:** Use your actual domain for production!
 
 Example for `VITE_SUPABASE_AUTH_REDIRECT_URL`:
+
 - Development: `http://localhost:8080/auth/callback`
 - Preview/Staging: `https://preview.yourdomain.com/auth/callback`
 - Production: `https://yourdomain.com/auth/callback`
@@ -113,11 +114,11 @@ Consult their documentation for setting environment variables. The variables mus
 
 ### Required Variables
 
-| Variable | Purpose | Example |
-|----------|---------|---------|
-| `VITE_SUPABASE_URL` | Your Supabase project URL | `https://abc123.supabase.co` |
-| `VITE_SUPABASE_PUBLISHABLE_KEY` | Public API key (anon key) | `eyJhbGc...` |
-| `VITE_SUPABASE_AUTH_REDIRECT_URL` | OAuth callback URL | `http://localhost:8080/auth/callback` |
+| Variable                          | Purpose                   | Example                               |
+| --------------------------------- | ------------------------- | ------------------------------------- |
+| `VITE_SUPABASE_URL`               | Your Supabase project URL | `https://abc123.supabase.co`          |
+| `VITE_SUPABASE_PUBLISHABLE_KEY`   | Public API key (anon key) | `eyJhbGc...`                          |
+| `VITE_SUPABASE_AUTH_REDIRECT_URL` | OAuth callback URL        | `http://localhost:8080/auth/callback` |
 
 ### Optional Variables
 
@@ -136,11 +137,13 @@ VITE_ANALYTICS_ID=your-id
 ## Important Security Notes
 
 ### ✅ Safe to Expose (prefix with `VITE_`)
+
 - Supabase URL
 - Supabase Publishable Key (anon key)
 - These are only for public/anonymous access
 
 ### ❌ Never Expose (no `VITE_` prefix)
+
 - Supabase Service Role Key
 - Database passwords
 - Admin API keys
@@ -157,6 +160,7 @@ VITE_ANALYTICS_ID=your-id
 **Problem:** Your variables aren't set up.
 
 **Solution:**
+
 1. Create `.env.local` in project root
 2. Add `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY`
 3. Restart dev server (`npm run dev`)
@@ -166,6 +170,7 @@ VITE_ANALYTICS_ID=your-id
 **Problem:** Variables not being read.
 
 **Solution:**
+
 1. Restart dev server
 2. Check spelling of variable names (must start with `VITE_`)
 3. Check file is named `.env.local` (not `.env`)
@@ -176,6 +181,7 @@ VITE_ANALYTICS_ID=your-id
 **Problem:** Production variables not set.
 
 **Solution:**
+
 1. Go to your hosting platform (Vercel, Netlify, etc.)
 2. Add environment variables there too
 3. Redeploy after adding variables
@@ -186,6 +192,7 @@ VITE_ANALYTICS_ID=your-id
 **Problem:** Auth redirect URL mismatch.
 
 **Solution:**
+
 1. Check `VITE_SUPABASE_AUTH_REDIRECT_URL` matches your domain exactly
 2. For example, if site is `https://mysite.com`, use `https://mysite.com/auth/callback`
 3. Don't include trailing slashes: ❌ `/auth/callback/` → ✅ `/auth/callback`
@@ -234,6 +241,7 @@ Where users are sent after Google OAuth
 ## Example Complete Setup
 
 ### `.env.local` (Development):
+
 ```env
 VITE_SUPABASE_URL=https://kfazptmwxyzabc.supabase.co
 VITE_SUPABASE_PUBLISHABLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtmYXpwdG13eHl6YWJjIiwicm9sZSI6ImFub24iLCJpYXQiOjE2MzAwMDAwMDAsImV4cCI6MTk5OTk5OTk5OX0.secretkeyhash...
@@ -241,6 +249,7 @@ VITE_SUPABASE_AUTH_REDIRECT_URL=http://localhost:8080/auth/callback
 ```
 
 ### Vercel (Production):
+
 ```
 VITE_SUPABASE_URL = https://kfazptmwxyzabc.supabase.co
 VITE_SUPABASE_PUBLISHABLE_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
@@ -267,6 +276,7 @@ Before deploying:
 ## Testing Variables Are Set
 
 ### Development:
+
 ```bash
 # Start dev server
 npm run dev
@@ -281,6 +291,7 @@ console.log('Redirect:', import.meta.env.VITE_SUPABASE_AUTH_REDIRECT_URL)
 ```
 
 ### Production:
+
 ```bash
 # Visit your production site
 # Open browser console (F12)
@@ -304,6 +315,7 @@ console.log('Redirect:', import.meta.env.VITE_SUPABASE_AUTH_REDIRECT_URL)
 ## Support
 
 If you have issues:
+
 1. Check [Supabase Docs](https://supabase.com/docs)
 2. Check your hosting platform docs
 3. Review the error message in browser console (F12)

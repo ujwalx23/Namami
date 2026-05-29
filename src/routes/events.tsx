@@ -59,13 +59,15 @@ function formatDate(d: string) {
 function EventCard({ e, accent }: { e: EventRow; accent: "gold" | "muted" | "live" }) {
   return (
     <article className="rounded-2xl overflow-hidden bg-card border border-border hover:-translate-y-1.5 hover:shadow-gold transition-all duration-300 relative">
-      <div className={`h-1.5 ${
-        accent === "live" 
-          ? "bg-gradient-to-r from-red-500 to-orange-500" 
-          : accent === "gold" 
-            ? "bg-gradient-sacred" 
-            : "bg-muted"
-      }`} />
+      <div
+        className={`h-1.5 ${
+          accent === "live"
+            ? "bg-gradient-to-r from-red-500 to-orange-500"
+            : accent === "gold"
+              ? "bg-gradient-sacred"
+              : "bg-muted"
+        }`}
+      />
       <div className="p-7">
         <div className="flex justify-between items-start gap-4 mb-3">
           <h3 className="font-display text-2xl text-maroon">{e.title}</h3>
@@ -97,12 +99,12 @@ function EventsPage() {
   const { events } = Route.useLoaderData();
   const { t, lang } = useLang();
   const dev = lang === "hi" ? "font-devanagari" : "";
-  
+
   // Calculate todayIso using local timezone date formatting
   const today = new Date();
   const year = today.getFullYear();
-  const month = String(today.getMonth() + 1).padStart(2, '0');
-  const day = String(today.getDate()).padStart(2, '0');
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const day = String(today.getDate()).padStart(2, "0");
   const todayIso = `${year}-${month}-${day}`;
 
   const todayEvents = events.filter((e: EventRow) => e.event_date === todayIso);
@@ -119,7 +121,9 @@ function EventsPage() {
       <section className="container mx-auto px-6 py-16">
         {todayEvents.length > 0 && (
           <div className="mb-16">
-            <h2 className={`font-display text-3xl text-red-600 mb-8 flex items-center gap-3 ${dev}`}>
+            <h2
+              className={`font-display text-3xl text-red-600 mb-8 flex items-center gap-3 ${dev}`}
+            >
               <span className="relative flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>

@@ -3,6 +3,7 @@
 ## Overview
 
 Your website has been enhanced with:
+
 1. ✅ **Favicon & App Icon Setup** - Using your deity image
 2. ✅ **SSO Authentication** - Google OAuth + Email/Password
 3. ✅ **Error Handling** - Graceful error recovery and user-friendly messages
@@ -55,6 +56,7 @@ Your website has been enhanced with:
 You have two options:
 
 **Option A: Using Python (Easier)**
+
 ```bash
 # 1. Install Pillow
 pip install Pillow
@@ -65,6 +67,7 @@ python scripts/setup_icons.py public/deity-icon.png
 ```
 
 **Option B: Using TypeScript/Node.js**
+
 ```bash
 # 1. Install sharp
 npm install -D sharp
@@ -75,6 +78,7 @@ npx tsx scripts/generate-icons.ts
 ```
 
 This will create:
+
 - `public/favicon.png`
 - `public/icon-192.png`
 - `public/icon-512.png`
@@ -94,6 +98,7 @@ See **`SSO_QUICK_START.md`** for detailed steps.
 ### Step 3: Set Environment Variables
 
 Create `.env.local` (for development):
+
 ```env
 VITE_SUPABASE_URL=your_url
 VITE_SUPABASE_PUBLISHABLE_KEY=your_key
@@ -124,11 +129,13 @@ npm run dev
 ## 📚 Documentation Files
 
 ### Setup Guides
+
 - **`SETUP_GUIDE.md`** - Complete setup for icons, SSO, and stability
 - **`SSO_QUICK_START.md`** - Quick reference for Google OAuth setup
 - **`STABILITY_CHECKLIST.md`** - Testing checklist before deployment
 
 ### Reference
+
 - **`src/integrations/supabase/auth.ts`** - All auth functions with docs
 - **`src/lib/errorHandler.ts`** - Error handling utilities with examples
 
@@ -137,22 +144,26 @@ npm run dev
 ## 🔑 Key Features Added
 
 ### 1. Favicon & App Icons ✅
+
 - Automatic icon generation from any image
 - Supports iOS, Android, Web, and PWA
 - Proper sizing for all devices
 
 ### 2. Google SSO ✅
+
 - One-click Google login
 - OAuth 2.0 PKCE flow (most secure)
 - Automatic session persistence
 - Token refresh on expiry
 
 ### 3. Email Authentication ✅
+
 - Traditional email/password login
 - Secure password handling via Supabase
 - Session management
 
 ### 4. Error Handling ✅
+
 - Visual error boundary component
 - Graceful error recovery
 - User-friendly error messages
@@ -160,6 +171,7 @@ npm run dev
 - Server error handling
 
 ### 5. Stability Improvements ✅
+
 - Better connection error recovery
 - Protected async operations
 - Proper cleanup of subscriptions
@@ -170,6 +182,7 @@ npm run dev
 ## 🧪 Testing
 
 ### Local Testing
+
 ```bash
 # 1. Start dev server
 npm run dev
@@ -191,7 +204,9 @@ npm run dev
 ```
 
 ### Production Testing
+
 Before deploying, check:
+
 - [ ] `npm run build` succeeds
 - [ ] No TypeScript errors: `npx tsc --noEmit`
 - [ ] All pages load without errors
@@ -203,23 +218,27 @@ Before deploying, check:
 ## 🐛 Troubleshooting
 
 ### Icons not appearing?
+
 1. Check files exist: `ls public/icon-*.png public/favicon.png`
 2. Clear browser cache (Ctrl+Shift+Del)
 3. Check DevTools → Application → Manifest
 
 ### SSO not working?
+
 1. Check Google OAuth credentials in Supabase
 2. Verify redirect URL matches exactly
 3. Check browser console for errors (F12)
 4. Ensure cookies are enabled
 
 ### Pages crashing?
+
 1. Open DevTools Console (F12)
 2. Look for red error messages
 3. Check Network tab for failed requests
 4. Check Supabase connection status
 
 ### Build errors?
+
 ```bash
 # Clear and rebuild
 rm -rf dist node_modules
@@ -232,6 +251,7 @@ npm run build
 ## 📦 Dependencies
 
 ### Already Included
+
 - React 19
 - Vite
 - Supabase JS Client
@@ -241,7 +261,9 @@ npm run build
 - Lucide React (Icons)
 
 ### Optional Additions
+
 For icon generation:
+
 - `sharp` (for TypeScript script)
 - `Pillow` (for Python script)
 
@@ -333,6 +355,7 @@ project-root/
 - **Authentication:** Check `src/integrations/supabase/auth.ts` comments
 
 ## External Resources
+
 - [Supabase Auth Docs](https://supabase.com/docs/guides/auth)
 - [Google OAuth Setup](https://developers.google.com/identity/protocols/oauth2)
 - [PWA Icons Guide](https://web.dev/add-manifest/)
@@ -343,6 +366,7 @@ project-root/
 ## ✨ Summary
 
 Your website now has:
+
 - ✅ Professional favicon & app icons for all devices
 - ✅ Secure Google OAuth SSO
 - ✅ Proper error handling with recovery

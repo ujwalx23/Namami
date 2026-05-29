@@ -4,7 +4,20 @@ import { PageShell, PageHero } from "@/components/PageShell";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { useLang } from "@/i18n/LangProvider";
 import type { TKey } from "@/i18n/translations";
-import { Mountain, Compass, Plane, Train, Bus, Sparkles, Calendar, Quote, Building, Music, ArrowRight, Heart } from "lucide-react";
+import {
+  Mountain,
+  Compass,
+  Plane,
+  Train,
+  Bus,
+  Sparkles,
+  Calendar,
+  Quote,
+  Building,
+  Music,
+  ArrowRight,
+  Heart,
+} from "lucide-react";
 import maaImg3 from "@/assets/maa-vindhyavasini-3.jpg";
 
 export const Route = createFileRoute("/about")({
@@ -41,7 +54,9 @@ function Section({
   return (
     <section className={className}>
       <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-5">
-        <h2 className={`font-display text-2xl md:text-3xl lg:text-4xl text-maroon ${dev}`}>{title}</h2>
+        <h2 className={`font-display text-2xl md:text-3xl lg:text-4xl text-maroon ${dev}`}>
+          {title}
+        </h2>
         <div className="h-[1.5px] flex-grow bg-gradient-to-r from-gold/50 via-gold/25 to-transparent rounded-full hidden sm:block" />
       </div>
       <div className="space-y-4">{children}</div>
@@ -88,12 +103,14 @@ function AboutPage() {
   const scripturalQuote = hi
     ? {
         sanskrit: "॥ शरणागतदीनार्तपरित्राणपरायणे । सर्वस्यार्तिहरे देवि नारायणि नमोऽस्तु ते ॥",
-        translation: "“शरण में आए हुए दीन-दुखियों की रक्षा में तत्पर, सबकी पीड़ा दूर करने वाली हे नारायणी देवी! आपको नमस्कार है।”",
+        translation:
+          "“शरण में आए हुए दीन-दुखियों की रक्षा में तत्पर, सबकी पीड़ा दूर करने वाली हे नारायणी देवी! आपको नमस्कार है।”",
         source: "— श्री दुर्गा सप्तशती (11.12)",
       }
     : {
         sanskrit: "॥ शरणागतदीनार्तपरित्राणपरायणे । सर्वस्यार्तिहरे देवि नारायणि नमोऽस्तु ते ॥",
-        translation: "“O Goddess, who art intent on saving the dejected and distressed who take refuge in Thee, O remover of all suffering, salutations to Thee, Narayani!”",
+        translation:
+          "“O Goddess, who art intent on saving the dejected and distressed who take refuge in Thee, O remover of all suffering, salutations to Thee, Narayani!”",
         source: "— Sri Durga Saptashati (11.12)",
       };
 
@@ -131,7 +148,15 @@ function AboutPage() {
                       onClick={() => setIsHistoryExpanded(!isHistoryExpanded)}
                       className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-sacred/10 border border-gold/30 hover:border-gold text-saffron hover:text-maroon font-semibold transition-all duration-300 shadow-sm active:scale-95 text-sm"
                     >
-                      <span>{isHistoryExpanded ? (hi ? "कम पढ़ें" : "Read Less") : (hi ? "विस्तृत इतिहास पढ़ें" : "Read Full History")}</span>
+                      <span>
+                        {isHistoryExpanded
+                          ? hi
+                            ? "कम पढ़ें"
+                            : "Read Less"
+                          : hi
+                            ? "विस्तृत इतिहास पढ़ें"
+                            : "Read Full History"}
+                      </span>
                       <ArrowRight
                         size={14}
                         className={`transform transition-transform duration-300 ${isHistoryExpanded ? "rotate-90" : ""}`}
@@ -142,29 +167,39 @@ function AboutPage() {
                   {/* Detailed History Paragraphs */}
                   <div
                     className={`grid transition-all duration-500 ease-in-out overflow-hidden ${
-                      isHistoryExpanded ? "grid-rows-[1fr] opacity-100 mt-4" : "grid-rows-[0fr] opacity-0"
+                      isHistoryExpanded
+                        ? "grid-rows-[1fr] opacity-100 mt-4"
+                        : "grid-rows-[0fr] opacity-0"
                     }`}
                   >
                     <div className="overflow-hidden space-y-4">
-                      <p className={`text-foreground/80 leading-relaxed text-base md:text-lg border-l-2 border-gold/40 pl-4 ${dev}`}>
+                      <p
+                        className={`text-foreground/80 leading-relaxed text-base md:text-lg border-l-2 border-gold/40 pl-4 ${dev}`}
+                      >
                         {t("about.history.detailed.p1")}
                       </p>
-                      <p className={`text-foreground/80 leading-relaxed text-base md:text-lg border-l-2 border-gold/40 pl-4 ${dev}`}>
+                      <p
+                        className={`text-foreground/80 leading-relaxed text-base md:text-lg border-l-2 border-gold/40 pl-4 ${dev}`}
+                      >
                         {t("about.history.detailed.p2")}
                       </p>
-                      <p className={`text-foreground/80 leading-relaxed text-base md:text-lg border-l-2 border-gold/40 pl-4 ${dev}`}>
+                      <p
+                        className={`text-foreground/80 leading-relaxed text-base md:text-lg border-l-2 border-gold/40 pl-4 ${dev}`}
+                      >
                         {t("about.history.detailed.p3")}
                       </p>
                     </div>
                   </div>
                 </div>
-                
+
                 {/* Scriptural Quote Block */}
                 <div className="p-6 rounded-2xl bg-card/60 backdrop-blur border-l-4 border-gold/80 border border-border mt-6 space-y-3 relative shadow-sm">
                   <p className="font-devanagari text-base md:text-lg lg:text-xl text-maroon text-center font-semibold leading-relaxed break-words">
                     {scripturalQuote.sanskrit}
                   </p>
-                  <p className={`text-sm text-muted-foreground text-center italic leading-relaxed ${dev}`}>
+                  <p
+                    className={`text-sm text-muted-foreground text-center italic leading-relaxed ${dev}`}
+                  >
                     {scripturalQuote.translation}
                   </p>
                   <p className="text-right text-xs font-semibold text-saffron tracking-wider">
@@ -186,7 +221,7 @@ function AboutPage() {
             </p>
           </Section>
         </ScrollReveal>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
           {trikona.map((item, idx) => (
             <ScrollReveal key={item.tk} direction="up" delay={idx * 100} duration={700}>
@@ -197,7 +232,9 @@ function AboutPage() {
                   <div className="w-14 h-14 rounded-2xl bg-gradient-sacred flex items-center justify-center text-cream shadow-md">
                     <item.icon size={24} />
                   </div>
-                  <span className={`text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full border border-gold/30 bg-gold/10 text-saffron ${dev}`}>
+                  <span
+                    className={`text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full border border-gold/30 bg-gold/10 text-saffron ${dev}`}
+                  >
                     {item.badge}
                   </span>
                 </div>
@@ -222,29 +259,41 @@ function AboutPage() {
                 </div>
                 <div className="p-6 rounded-2xl bg-card border border-border text-center space-y-4 shadow-sacred relative overflow-hidden">
                   <div className="absolute top-0 left-0 w-full h-[4px] bg-gradient-sacred" />
-                  <div className={`text-xs uppercase tracking-[0.25em] text-saffron font-bold ${dev}`}>
+                  <div
+                    className={`text-xs uppercase tracking-[0.25em] text-saffron font-bold ${dev}`}
+                  >
                     {hi ? "नित्य आरती समय" : "Daily Aarti Schedule"}
                   </div>
                   <div className="space-y-3">
                     <div className="flex justify-between border-b border-border pb-2">
-                      <span className={`text-sm text-muted-foreground ${dev}`}>{hi ? "मंगला आरती (प्रातः)" : "Mangala Aarti (Morning)"}</span>
+                      <span className={`text-sm text-muted-foreground ${dev}`}>
+                        {hi ? "मंगला आरती (प्रातः)" : "Mangala Aarti (Morning)"}
+                      </span>
                       <span className="text-sm font-semibold text-maroon">04:00 AM</span>
                     </div>
                     <div className="flex justify-between border-b border-border pb-2">
-                      <span className={`text-sm text-muted-foreground ${dev}`}>{hi ? "मध्याह्न आरती (दोपहर)" : "Madhyahna Aarti (Noon)"}</span>
+                      <span className={`text-sm text-muted-foreground ${dev}`}>
+                        {hi ? "मध्याह्न आरती (दोपहर)" : "Madhyahna Aarti (Noon)"}
+                      </span>
                       <span className="text-sm font-semibold text-maroon">12:00 PM</span>
                     </div>
                     <div className="flex justify-between border-b border-border pb-2">
-                      <span className={`text-sm text-muted-foreground ${dev}`}>{hi ? "सन्ध्या आरती (सायं)" : "Sandhya Aarti (Evening)"}</span>
+                      <span className={`text-sm text-muted-foreground ${dev}`}>
+                        {hi ? "सन्ध्या आरती (सायं)" : "Sandhya Aarti (Evening)"}
+                      </span>
                       <span className="text-sm font-semibold text-maroon">07:00 PM</span>
                     </div>
                     <div className="flex justify-between last:border-0 pb-1">
-                      <span className={`text-sm text-muted-foreground ${dev}`}>{hi ? "शयन आरती (रात्रि)" : "Shayan Aarti (Night)"}</span>
+                      <span className={`text-sm text-muted-foreground ${dev}`}>
+                        {hi ? "शयन आरती (रात्रि)" : "Shayan Aarti (Night)"}
+                      </span>
                       <span className="text-sm font-semibold text-maroon">09:30 PM</span>
                     </div>
                   </div>
                   <div className="text-[10px] text-muted-foreground italic">
-                    {hi ? "* समय त्योहारों के अनुसार बदल सकता है" : "* Timings may vary on festive days"}
+                    {hi
+                      ? "* समय त्योहारों के अनुसार बदल सकता है"
+                      : "* Timings may vary on festive days"}
                   </div>
                 </div>
               </div>
@@ -271,9 +320,21 @@ function AboutPage() {
             <Section title={t("about.access.title")}>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
                 {[
-                  { icon: Plane, txt: t("about.access.air"), title: hi ? "हवाई मार्ग" : "Air Access" },
-                  { icon: Train, txt: t("about.access.rail"), title: hi ? "रेल मार्ग" : "Rail Access" },
-                  { icon: Bus, txt: t("about.access.road"), title: hi ? "सड़क मार्ग" : "Road Access" },
+                  {
+                    icon: Plane,
+                    txt: t("about.access.air"),
+                    title: hi ? "हवाई मार्ग" : "Air Access",
+                  },
+                  {
+                    icon: Train,
+                    txt: t("about.access.rail"),
+                    title: hi ? "रेल मार्ग" : "Rail Access",
+                  },
+                  {
+                    icon: Bus,
+                    txt: t("about.access.road"),
+                    title: hi ? "सड़क मार्ग" : "Road Access",
+                  },
                 ].map((r, i) => (
                   <div
                     key={i}
@@ -285,7 +346,9 @@ function AboutPage() {
                       </div>
                       <h4 className={`font-display text-lg text-maroon ${dev}`}>{r.title}</h4>
                     </div>
-                    <p className={`text-muted-foreground leading-relaxed text-sm ${dev}`}>{r.txt}</p>
+                    <p className={`text-muted-foreground leading-relaxed text-sm ${dev}`}>
+                      {r.txt}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -315,9 +378,13 @@ function AboutPage() {
                   <div className="w-12 h-12 rounded-xl bg-gradient-sacred flex items-center justify-center text-cream">
                     <Sparkles size={20} />
                   </div>
-                  <h3 className={`font-display text-2xl text-maroon ${dev}`}>{t("about.legend.title")}</h3>
+                  <h3 className={`font-display text-2xl text-maroon ${dev}`}>
+                    {t("about.legend.title")}
+                  </h3>
                 </div>
-                <p className={`text-foreground/80 leading-relaxed ${dev}`}>{t("about.legend.text")}</p>
+                <p className={`text-foreground/80 leading-relaxed ${dev}`}>
+                  {t("about.legend.text")}
+                </p>
               </div>
               <div className="mt-8 pt-4 border-t border-gold/10 flex items-center justify-between text-xs text-saffron font-semibold">
                 <span>{hi ? "महिषासुर मर्दिनी" : "Slayer of Mahishasura"}</span>
@@ -333,9 +400,13 @@ function AboutPage() {
                   <div className="w-12 h-12 rounded-xl bg-gradient-sacred flex items-center justify-center text-cream">
                     <Music size={20} />
                   </div>
-                  <h3 className={`font-display text-2xl text-maroon ${dev}`}>{t("about.kajari.title")}</h3>
+                  <h3 className={`font-display text-2xl text-maroon ${dev}`}>
+                    {t("about.kajari.title")}
+                  </h3>
                 </div>
-                <p className={`text-foreground/80 leading-relaxed ${dev}`}>{t("about.kajari.text")}</p>
+                <p className={`text-foreground/80 leading-relaxed ${dev}`}>
+                  {t("about.kajari.text")}
+                </p>
               </div>
               <div className="mt-8 pt-4 border-t border-gold/10 flex items-center justify-between text-xs text-saffron font-semibold">
                 <span>{hi ? "श्रावण मास संगीत उत्सव" : "Shravana Month Music Festival"}</span>
@@ -355,7 +426,7 @@ function AboutPage() {
             </p>
           </Section>
         </ScrollReveal>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
           {[
             {
@@ -374,9 +445,7 @@ function AboutPage() {
             },
           ].map((f, idx) => (
             <ScrollReveal key={f.n} direction="up" delay={idx * 100} duration={700}>
-              <div
-                className="p-6 rounded-2xl bg-gradient-divine border border-gold/30 hover:border-gold flex items-center gap-5 hover:shadow-gold transition-all duration-300 h-full"
-              >
+              <div className="p-6 rounded-2xl bg-gradient-divine border border-gold/30 hover:border-gold flex items-center gap-5 hover:shadow-gold transition-all duration-300 h-full">
                 <div className="w-14 h-14 rounded-2xl bg-gradient-sacred flex items-center justify-center text-cream shrink-0 shadow-md">
                   <f.icon size={24} />
                 </div>
@@ -390,8 +459,6 @@ function AboutPage() {
         </div>
       </section>
 
-
-
       {/* OUR SANSTHAN & TRUST VALUES */}
       <section className="container mx-auto px-6 py-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
         <div className="lg:col-span-7">
@@ -403,14 +470,18 @@ function AboutPage() {
             </Section>
           </ScrollReveal>
         </div>
-        
+
         <div className="lg:col-span-5 space-y-4">
           {(
             [
               { tk: "about.values.vision.t", vk: "about.values.vision.v", icon: Heart },
               { tk: "about.values.mission.t", vk: "about.values.mission.v", icon: Sparkles },
               { tk: "about.values.values.t", vk: "about.values.values.v", icon: Mountain },
-            ] as { tk: TKey; vk: TKey; icon: React.ComponentType<{ size?: number; className?: string }> }[]
+            ] as {
+              tk: TKey;
+              vk: TKey;
+              icon: React.ComponentType<{ size?: number; className?: string }>;
+            }[]
           ).map((v, idx) => (
             <ScrollReveal key={v.tk} direction="up" delay={idx * 100} duration={700}>
               <div className="p-6 rounded-2xl bg-card border border-border hover:border-gold/30 transition-all duration-300 flex items-start gap-4 h-full shadow-sm">
@@ -418,11 +489,17 @@ function AboutPage() {
                   <v.icon size={20} />
                 </div>
                 <div>
-                  <div className={`text-xs uppercase tracking-[0.25em] text-saffron font-bold mb-1 ${dev}`}>
+                  <div
+                    className={`text-xs uppercase tracking-[0.25em] text-saffron font-bold mb-1 ${dev}`}
+                  >
                     {t(v.tk)}
                   </div>
-                  <p className={`text-foreground leading-snug font-medium text-lg mb-1 ${dev}`}>{t(v.tk)}</p>
-                  <p className={`text-muted-foreground text-sm leading-relaxed ${dev}`}>{t(v.vk)}</p>
+                  <p className={`text-foreground leading-snug font-medium text-lg mb-1 ${dev}`}>
+                    {t(v.tk)}
+                  </p>
+                  <p className={`text-muted-foreground text-sm leading-relaxed ${dev}`}>
+                    {t(v.vk)}
+                  </p>
                 </div>
               </div>
             </ScrollReveal>

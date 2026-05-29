@@ -1,13 +1,13 @@
 /**
  * Network Error Handler Utility
- * 
+ *
  * Provides consistent error handling for network requests, database queries,
  * and API calls throughout the application.
- * 
+ *
  * Usage:
  * ```tsx
  * import { handleError, isNetworkError, isServerError } from "@/lib/errorHandler";
- * 
+ *
  * try {
  *   const { data, error } = await supabase.from('table').select();
  *   if (error) {
@@ -44,7 +44,7 @@ export function isNetworkError(error: any): boolean {
     code.includes("econnrefused") ||
     code.includes("enotfound") ||
     error.status === 0 ||
-    (error.response?.status === 0)
+    error.response?.status === 0
   );
 }
 
@@ -129,10 +129,7 @@ export function getUserFriendlyMessage(error: any): string {
 /**
  * Log error with context (for debugging)
  */
-export function logError(
-  error: any,
-  context: ErrorContext = {},
-) {
+export function logError(error: any, context: ErrorContext = {}) {
   const errorData = {
     message: error?.message || "Unknown error",
     code: error?.code,
@@ -152,11 +149,7 @@ export function logError(
 /**
  * Handle error with automatic toast notification
  */
-export function handleError(
-  error: any,
-  userMessage?: string,
-  context?: ErrorContext,
-) {
+export function handleError(error: any, userMessage?: string, context?: ErrorContext) {
   // Log the error
   logError(error, context);
 

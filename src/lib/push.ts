@@ -13,7 +13,11 @@ function urlBase64ToUint8Array(base64String: string) {
 
 async function saveSubscriptionToDb(subscription: PushSubscription) {
   const subscriptionJson = subscription.toJSON();
-  if (!subscriptionJson.endpoint || !subscriptionJson.keys?.p256dh || !subscriptionJson.keys?.auth) {
+  if (
+    !subscriptionJson.endpoint ||
+    !subscriptionJson.keys?.p256dh ||
+    !subscriptionJson.keys?.auth
+  ) {
     throw new Error("Invalid push subscription object.");
   }
 

@@ -1,6 +1,6 @@
 /**
  * Improved Supabase Authentication Setup with SSO Support
- * 
+ *
  * Features:
  * - Google OAuth / SSO support
  * - Session persistence and refresh
@@ -151,9 +151,7 @@ export async function signOut() {
 /**
  * Listen to auth state changes
  */
-export function onAuthStateChange(
-  callback: (event: string, session: any) => void,
-) {
+export function onAuthStateChange(callback: (event: string, session: any) => void) {
   return supabase.auth.onAuthStateChange((event, session) => {
     callback(event, session);
   });

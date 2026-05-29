@@ -64,7 +64,10 @@ export function FloatingPlayer() {
         className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full border border-gold/30 bg-card/90 shadow-sacred backdrop-blur-md text-maroon hover:text-saffron hover:scale-110 active:scale-95 animate-ripple transition-all duration-300 cursor-pointer"
         aria-label="Open Devotional Player"
       >
-        <Music className="animate-pulse hover:rotate-12 transition-transform duration-300" size={24} />
+        <Music
+          className="animate-pulse hover:rotate-12 transition-transform duration-300"
+          size={24}
+        />
       </button>
     );
   }
@@ -188,7 +191,10 @@ export function FloatingPlayer() {
             <div className="h-44 overflow-y-auto pr-1 space-y-2 mb-4 scrollbar-thin">
               <div className="flex items-center justify-between text-xs text-muted-foreground px-2 mb-1">
                 <span>Select Track</span>
-                <button onClick={() => setIsPlaylistOpen(false)} className="hover:text-maroon cursor-pointer">
+                <button
+                  onClick={() => setIsPlaylistOpen(false)}
+                  className="hover:text-maroon cursor-pointer"
+                >
                   Back
                 </button>
               </div>

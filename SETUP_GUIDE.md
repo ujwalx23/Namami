@@ -3,6 +3,7 @@
 ## 1. Favicon and App Icon Setup
 
 Your website is now configured to use custom icons at these paths in the `public/` folder:
+
 - `favicon.png` - Website favicon (32x32)
 - `icon-192.png` - Android app icon and PWA (192x192)
 - `icon-512.png` - PWA splash screen (512x512)
@@ -13,12 +14,14 @@ Your website is now configured to use custom icons at these paths in the `public
 If you have the deity image, follow these steps:
 
 1. **Save your image to the public folder:**
+
    ```bash
    # Copy your deity image to public/deity-icon.png
    cp /path/to/your/image.png public/deity-icon.png
    ```
 
 2. **Install sharp (image processing library):**
+
    ```bash
    npm install -D sharp
    ```
@@ -123,6 +126,7 @@ Your app now has:
 ### Testing SSO
 
 1. **Local Development:**
+
    ```bash
    npm run dev
    # Visit http://localhost:8080
@@ -251,24 +255,28 @@ Before deploying to production:
 ## 5. Troubleshooting
 
 ### Icons not appearing
+
 - Clear browser cache completely
 - Check that files exist in `public/` folder
 - Verify file names match exactly (case-sensitive)
 - Check browser DevTools → Application → Manifest
 
 ### SSO not working
+
 - Verify Google OAuth credentials in Supabase
 - Check redirect URL matches your domain
 - Check browser console for auth errors
 - Ensure cookies are enabled
 
 ### Pages crashing
+
 - Open browser DevTools (F12)
 - Check Console tab for errors
 - Check Network tab for failed API calls
 - Check that Supabase connection is working
 
 ### Session not persisting
+
 - Check localStorage is enabled
 - Verify auth token is being stored
 - Check that `persistSession: true` is set (already configured)
@@ -278,6 +286,7 @@ Before deploying to production:
 ## 6. File Changes Summary
 
 New/Modified Files:
+
 - `public/favicon.png` - Website favicon (needs to be added)
 - `public/icon-192.png` - Android icon (needs to be added)
 - `public/icon-512.png` - PWA icon (needs to be added)
@@ -289,6 +298,7 @@ New/Modified Files:
 - `src/routes/__root.tsx` - Updated with error boundary and better error handling
 
 Configuration Already Set (in manifest and HTML):
+
 - `public/manifest.webmanifest` - PWA manifest
 - `index.html` - Meta tags for icons and PWA
 
@@ -297,6 +307,7 @@ Configuration Already Set (in manifest and HTML):
 ## Questions?
 
 For more info:
+
 - Supabase Auth: https://supabase.com/docs/guides/auth
 - PWA Icons: https://web.dev/add-manifest/
 - Error Boundaries: https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary

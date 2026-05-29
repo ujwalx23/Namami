@@ -3,8 +3,9 @@
 ## What's New?
 
 Your website now supports:
+
 - ✅ Google OAuth login
-- ✅ Email/password authentication  
+- ✅ Email/password authentication
 - ✅ Session persistence
 - ✅ Automatic token refresh
 - ✅ Secure OAuth callback handling
@@ -62,7 +63,7 @@ export function LoginButton() {
   };
 
   return (
-    <button 
+    <button
       onClick={handleGoogleLogin}
       className="px-4 py-2 bg-white border border-gray-300 rounded-lg"
     >
@@ -83,7 +84,9 @@ export function UserProfile() {
 
   useEffect(() => {
     const getUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
       setUser(user);
     };
 
@@ -138,7 +141,9 @@ export function ProtectedRoute({ children }) {
 
   useEffect(() => {
     const checkAuth = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
       if (!user) {
         navigate({ to: "/login" });
       }
@@ -169,19 +174,24 @@ npm run dev
 ## 7. Common Issues
 
 ### Issue: "Redirect URI mismatch"
+
 **Fix:** Ensure the redirect URI in Google Console matches exactly:
+
 ```
 Google Console: http://localhost:8080/auth/callback
 Your .env: VITE_SUPABASE_AUTH_REDIRECT_URL=http://localhost:8080/auth/callback
 ```
 
 ### Issue: "Invalid client" error
+
 **Fix:** Double-check Client ID and Secret in Supabase are correct
 
 ### Issue: Cookies not being set
+
 **Fix:** Ensure your domain allows third-party cookies, or configure PKCE flow (already configured)
 
 ### Issue: Session not persisting after refresh
+
 **Fix:** Check that localStorage is enabled in browser
 
 ## 8. File Reference

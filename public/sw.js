@@ -1,10 +1,5 @@
 const CACHE_NAME = "vindhyavasini-sansthan-v1";
-const ASSETS_TO_CACHE = [
-  "/",
-  "/index.html",
-  "/manifest.webmanifest",
-  "/favicon.png"
-];
+const ASSETS_TO_CACHE = ["/", "/index.html", "/manifest.webmanifest", "/favicon.png"];
 
 // Install Event
 self.addEventListener("install", (event) => {
@@ -12,7 +7,7 @@ self.addEventListener("install", (event) => {
     caches.open(CACHE_NAME).then((cache) => {
       console.log("[Service Worker] Pre-caching offline app shell");
       return cache.addAll(ASSETS_TO_CACHE);
-    })
+    }),
   );
   self.skipWaiting();
 });
@@ -27,9 +22,9 @@ self.addEventListener("activate", (event) => {
             console.log("[Service Worker] Removing old cache:", cache);
             return caches.delete(cache);
           }
-        })
+        }),
       );
-    })
+    }),
   );
   self.clients.claim();
 });
@@ -39,10 +34,7 @@ self.addEventListener("fetch", (event) => {
   const requestUrl = new URL(event.request.url);
 
   // Only handle GET requests and local origins
-  if (
-    event.request.method !== "GET" ||
-    requestUrl.origin !== self.location.origin
-  ) {
+  if (event.request.method !== "GET" || requestUrl.origin !== self.location.origin) {
     return;
   }
 
@@ -67,7 +59,11 @@ self.addEventListener("fetch", (event) => {
 
       // Network Fallback
       return fetch(event.request).then((networkResponse) => {
-        if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== "basic") {
+        if (
+          !networkResponse ||
+          networkResponse.status !== 200 ||
+          networkResponse.type !== "basic"
+        ) {
           return networkResponse;
         }
 
@@ -78,7 +74,7 @@ self.addEventListener("fetch", (event) => {
 
         return networkResponse;
       });
-    })
+    }),
   );
 });
 
@@ -98,17 +94,15 @@ self.addEventListener("push", (event) => {
       vibrate: [100, 50, 100],
     };
 
-    event.waitUntil(
-      self.registration.showNotification(title || "Jai Maa Vindhyavasini", options)
-    );
+    event.waitUntil(self.registration.showNotification(title || "Jai Maa Vindhyavasini", options));
   } catch (err) {
     const text = event.data.text();
     event.waitUntil(
       self.registration.showNotification("Jai Maa Vindhyavasini", {
         body: text,
         icon: "/favicon.png",
-        data: { url: "/" }
-      })
+        data: { url: "/" },
+      }),
     );
   }
 });
@@ -137,4 +131,3 @@ self.addEventListener("notificationclick", (event) => {
     }),
   );
 });
-

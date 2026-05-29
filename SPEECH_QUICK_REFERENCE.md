@@ -3,7 +3,7 @@
 ## 🚀 Quick Start
 
 ```typescript
-import { speakText, stopSpeech } from '@/lib/speech';
+import { speakText, stopSpeech } from "@/lib/speech";
 
 // Speak Hindi text
 await speakText("जय श्री राम", {
@@ -25,11 +25,11 @@ stopSpeech();
 
 ## 🎤 Voice Selection
 
-| Text Type | Language Detected | Voice Priority | Voice Used |
-|-----------|-------------------|-----------------|-----------|
-| जय श्री राम | Hindi (Devanagari) | Google हिन्दी → Microsoft Heera → hi-IN | Hindi voice |
-| Welcome here | English (Latin) | en-IN → en-US → any English | English India |
-| Namaste dosto | English (Latin) | en-IN → en-US → any English | English (Hinglish) |
+| Text Type     | Language Detected  | Voice Priority                          | Voice Used         |
+| ------------- | ------------------ | --------------------------------------- | ------------------ |
+| जय श्री राम   | Hindi (Devanagari) | Google हिन्दी → Microsoft Heera → hi-IN | Hindi voice        |
+| Welcome here  | English (Latin)    | en-IN → en-US → any English             | English India      |
+| Namaste dosto | English (Latin)    | en-IN → en-US → any English             | English (Hinglish) |
 
 ---
 
@@ -52,11 +52,12 @@ stopSpeech();
 ## 🔧 API Reference
 
 ### speakText(text, options)
+
 ```typescript
 interface SpeakOptions {
-  onStart?: () => void;        // Called when speech starts
-  onEnd?: () => void;          // Called when speech ends
-  onError?: (err: Error) => void;  // Called on error
+  onStart?: () => void; // Called when speech starts
+  onEnd?: () => void; // Called when speech ends
+  onError?: (err: Error) => void; // Called on error
 }
 
 // Usage
@@ -68,6 +69,7 @@ await speakText("नमस्ते", {
 ```
 
 ### stopSpeech()
+
 ```typescript
 // Stops current speech immediately
 stopSpeech();
@@ -78,9 +80,10 @@ stopSpeech();
 ## ✅ Testing
 
 ### Test in Browser Console
+
 ```javascript
 // Import and test (in component)
-import { speakText, stopSpeech } from '@/lib/speech';
+import { speakText, stopSpeech } from "@/lib/speech";
 
 // Test 1: Hindi
 await speakText("जय श्री राम। कल मंदिर में भजन संध्या होगी।");
@@ -96,6 +99,7 @@ stopSpeech();
 ```
 
 ### Visit Page
+
 1. Open: http://localhost:8080/sandesh
 2. Click "Listen to Sandesh" button
 3. Check browser console for [SpeechSynthesis] logs
@@ -105,13 +109,13 @@ stopSpeech();
 
 ## 🛠️ Troubleshooting
 
-| Issue | Solution |
-|-------|----------|
-| No sound | Check browser volume, verify voices loaded |
-| Wrong voice | Check console for selected voice, verify Windows has Hindi TTS |
-| Slow speech | Normal - rate set to 0.95 for clarity |
-| Text not detected as Hindi | Ensure using Devanagari characters (not Latin) |
-| Error in console | Check error message, verify browser supports Web Speech API |
+| Issue                      | Solution                                                       |
+| -------------------------- | -------------------------------------------------------------- |
+| No sound                   | Check browser volume, verify voices loaded                     |
+| Wrong voice                | Check console for selected voice, verify Windows has Hindi TTS |
+| Slow speech                | Normal - rate set to 0.95 for clarity                          |
+| Text not detected as Hindi | Ensure using Devanagari characters (not Latin)                 |
+| Error in console           | Check error message, verify browser supports Web Speech API    |
 
 ---
 
@@ -127,9 +131,10 @@ stopSpeech();
 ## ⚙️ Configuration
 
 **Current Settings**:
+
 ```typescript
-utterance.rate = 0.95;    // Slightly slower for clarity
-utterance.pitch = 1.0;    // Normal pitch
+utterance.rate = 0.95; // Slightly slower for clarity
+utterance.pitch = 1.0; // Normal pitch
 utterance.lang = isHindi ? "hi-IN" : "en-IN";
 ```
 
@@ -153,11 +158,13 @@ To change, edit `src/lib/speech.ts` around line 165-170.
 ## 📞 Support
 
 All functionality is built on **Web Speech API** (browser native).
+
 - Works offline
 - No API keys needed
 - No monthly costs
 - Voice quality depends on system TTS voices
 
 For voice quality, ensure Windows has:
+
 - Google हिन्दी TTS installed (or)
 - Microsoft Heera TTS installed

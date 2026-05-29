@@ -14,7 +14,7 @@ import {
   Image,
   Heart,
   Phone,
-  ArrowRight
+  ArrowRight,
 } from "lucide-react";
 import { useLang } from "@/i18n/LangProvider";
 import { SiteInbox } from "@/components/SiteInbox";
@@ -69,18 +69,18 @@ export function SiteHeader() {
         <div className="scroll-progress-container">
           <div className="scroll-progress-bar" style={{ width: `${scrollPercent}%` }} />
         </div>
-        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-full bg-gradient-sacred flex items-center justify-center shadow-gold group-hover:scale-105 transition-transform duration-300">
-              <span className="text-cream font-display text-lg">ॐ</span>
+        <div className="site-header-container mx-auto">
+          <Link to="/" className="flex items-center gap-1.5 xs:gap-2.5 group min-w-0 shrink">
+            <div className="w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-sacred flex items-center justify-center shadow-gold group-hover:scale-105 transition-transform duration-300 shrink-0">
+              <span className="text-cream font-display text-base xs:text-lg">ॐ</span>
             </div>
-            <div className="leading-tight">
+            <div className="leading-tight min-w-0 shrink">
               <div
-                className={`font-display text-lg text-maroon ${lang === "hi" ? "font-devanagari" : ""}`}
+                className={`font-display text-sm xs:text-base sm:text-lg text-maroon truncate ${lang === "hi" ? "font-devanagari" : ""}`}
               >
                 {t("brand.name")}
               </div>
-              <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+              <div className="text-[8px] xs:text-[9px] sm:text-[10px] uppercase tracking-[0.1em] xs:tracking-[0.2em] text-muted-foreground truncate">
                 {t("brand.tag")}
               </div>
             </div>
@@ -104,10 +104,14 @@ export function SiteHeader() {
             <SiteInbox />
             <button
               onClick={toggle}
-              className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-maroon/30 text-maroon text-xs font-medium hover:bg-maroon hover:text-cream transition-all duration-300 active:scale-95 cursor-pointer"
+              className="group inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-maroon/30 text-maroon text-xs font-medium hover:bg-maroon hover:text-cream transition-all duration-300 active:scale-95 cursor-pointer"
               aria-label="Switch language"
             >
-              <Languages size={14} className="group-hover:rotate-180 transition-transform duration-500" /> {t("lang.toggle")}
+              <Languages
+                size={14}
+                className="group-hover:rotate-180 transition-transform duration-500"
+              />{" "}
+              {t("lang.toggle")}
             </button>
             <Link
               to="/donation"
@@ -117,21 +121,35 @@ export function SiteHeader() {
             </Link>
           </div>
 
-          <div className="flex items-center gap-3 lg:hidden">
+          <div className="flex items-center gap-1.5 xs:gap-2 sm:gap-3 lg:hidden shrink-0">
             <SiteInbox />
             <button
               onClick={toggle}
-              className="group inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-full border border-maroon/30 text-maroon text-xs font-medium min-h-[44px] hover:bg-maroon/5 active:bg-maroon/10 active:scale-95 transition-all duration-300 cursor-pointer"
+              className="group inline-flex items-center justify-center gap-1 px-2.5 py-1.5 xs:gap-1.5 xs:px-3 py-2 rounded-full border border-maroon/30 text-maroon text-xs font-medium min-h-[38px] xs:min-h-[44px] hover:bg-maroon/5 active:bg-maroon/10 active:scale-95 transition-all duration-300 cursor-pointer shrink-0"
               aria-label="Switch language"
             >
-              <Languages size={14} className="group-hover:rotate-180 transition-transform duration-500" /> {t("lang.toggle")}
+              <Languages
+                size={14}
+                className="group-hover:rotate-180 transition-transform duration-500 shrink-0"
+              />
+              <span className="hidden xs:inline">{t("lang.toggle")}</span>
             </button>
+            <Link
+              to="/donation"
+              className="hidden sm:inline-flex items-center px-4 py-2 rounded-full bg-gradient-sacred text-cream font-medium text-xs shadow-gold hover:opacity-95 hover:scale-[1.03] active:scale-95 transition-all duration-300 shrink-0"
+            >
+              {t("nav.donate_btn")}
+            </Link>
             <button
               onClick={() => setOpen(!open)}
-              className="p-3 text-maroon hover:bg-maroon/5 active:bg-maroon/10 rounded-full transition-all duration-300 active:scale-90 inline-flex items-center justify-center min-w-[44px] min-h-[44px] cursor-pointer"
+              className="p-2 xs:p-3 text-maroon hover:bg-maroon/5 active:bg-maroon/10 rounded-full transition-all duration-300 active:scale-90 inline-flex items-center justify-center min-w-[38px] min-h-[38px] xs:min-w-[44px] xs:min-h-[44px] cursor-pointer shrink-0"
               aria-label={t("nav.menu")}
             >
-              {open ? <X size={22} className="rotate-90 transition-transform duration-300" /> : <Menu size={22} className="rotate-0 transition-transform duration-300" />}
+              {open ? (
+                <X size={22} className="rotate-90 transition-transform duration-300" />
+              ) : (
+                <Menu size={22} className="rotate-0 transition-transform duration-300" />
+              )}
             </button>
           </div>
         </div>
@@ -151,7 +169,9 @@ export function SiteHeader() {
       >
         <div className="p-5 border-b border-gold/20 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="text-maroon font-display text-lg">ॐ {lang === "hi" ? "मेनू" : "Navigation"}</span>
+            <span className="text-maroon font-display text-lg">
+              ॐ {lang === "hi" ? "मेनू" : "Navigation"}
+            </span>
           </div>
           <button
             onClick={() => setOpen(false)}
@@ -173,14 +193,19 @@ export function SiteHeader() {
                 className={`group flex items-center gap-3.5 px-4 py-2.5 rounded-xl text-foreground/80 hover:text-maroon hover:bg-gold/5 active:scale-[0.98] transition-all duration-300 ${
                   lang === "hi" ? "font-devanagari text-base" : "text-sm"
                 }`}
-                activeProps={{ className: "text-maroon font-semibold bg-gold/10 border-r-4 border-maroon" }}
+                activeProps={{
+                  className: "text-maroon font-semibold bg-gold/10 border-r-4 border-maroon",
+                }}
                 activeOptions={{ exact: l.to === "/" }}
               >
                 <div className="w-8 h-8 rounded-lg bg-gradient-sacred/10 text-saffron flex items-center justify-center shrink-0">
                   <Icon size={16} />
                 </div>
                 <span>{t(l.key)}</span>
-                <ArrowRight size={12} className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-gold" />
+                <ArrowRight
+                  size={12}
+                  className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-gold"
+                />
               </Link>
             );
           })}

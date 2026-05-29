@@ -1,9 +1,11 @@
 # 🚨 Production Site Error - Fix Guide
 
 ## Problem
+
 Your website at `https://vnamami.vercel.app` shows: "Something went wrong"
 
 ## Root Cause
+
 The Error Boundary component is catching an error during initialization (likely Supabase connection or missing environment variables).
 
 ---
@@ -43,6 +45,7 @@ Environments: Development
 ### 2. Redeploy After Adding Variables
 
 After adding environment variables to Vercel:
+
 1. Go to **Deployments**
 2. Click the 3-dot menu on the latest deployment
 3. Select **Redeploy**
@@ -50,6 +53,7 @@ After adding environment variables to Vercel:
 5. Visit your site
 
 **OR manually trigger:**
+
 ```bash
 git push origin main
 ```
@@ -59,12 +63,15 @@ git push origin main
 ## 🔍 How to Debug the Error
 
 ### 1. Check Browser Console
+
 Open the live site and press **F12** to open DevTools
+
 - Go to **Console** tab
 - Look for detailed error messages (they will be shown)
 - Screenshot and share the error
 
 ### 2. Check Vercel Build Logs
+
 1. Go to **Vercel Dashboard**
 2. Select your project
 3. Go to **Deployments**
@@ -73,6 +80,7 @@ Open the live site and press **F12** to open DevTools
 6. Look for error messages during build
 
 ### 3. Test Local Build
+
 ```bash
 # Simulate production build locally
 npm run build
@@ -87,18 +95,22 @@ npm run preview
 ## 🔧 Common Issues & Fixes
 
 ### Issue: "Missing Supabase environment variables"
+
 **Cause:** Environment variables not set in Vercel  
 **Fix:** Add them in Vercel Settings → Environment Variables
 
 ### Issue: "Cannot read property 'from' of undefined"
+
 **Cause:** Supabase not initialized (wrong URL/key)  
 **Fix:** Verify VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY are correct
 
 ### Issue: "Auth redirect URL mismatch"
+
 **Cause:** VITE_SUPABASE_AUTH_REDIRECT_URL doesn't match Supabase settings  
 **Fix:** Make sure it's exactly `https://vnamami.vercel.app/auth/callback`
 
 ### Issue: "localhost vs production URL"
+
 **Cause:** Using wrong URL for wrong environment  
 **Fix:** Use `http://localhost:8080` for dev, `https://vnamami.vercel.app` for prod
 
@@ -134,6 +146,7 @@ Before deployment, verify:
 ## 🚀 Step-by-Step Production Fix
 
 ### Step 1: Get Supabase Credentials
+
 ```
 Supabase Dashboard:
   1. Login to https://supabase.com
@@ -144,6 +157,7 @@ Supabase Dashboard:
 ```
 
 ### Step 2: Add to Vercel
+
 ```
 Vercel Dashboard:
   1. Go to your project
@@ -152,21 +166,25 @@ Vercel Dashboard:
 ```
 
 **Variable 1:**
+
 - Name: `VITE_SUPABASE_URL`
 - Value: [Paste Project URL from step 1]
 - Environments: ✓ Production ✓ Preview ✓ Development
 
 **Variable 2:**
+
 - Name: `VITE_SUPABASE_PUBLISHABLE_KEY`
 - Value: [Paste anon key from step 1]
 - Environments: ✓ Production ✓ Preview ✓ Development
 
 **Variable 3:**
+
 - Name: `VITE_SUPABASE_AUTH_REDIRECT_URL`
 - Value: `https://vnamami.vercel.app/auth/callback`
 - Environments: ✓ Production ✓ Preview
 
 ### Step 3: Redeploy
+
 ```
 Vercel Dashboard:
   1. Go to Deployments
@@ -177,6 +195,7 @@ Vercel Dashboard:
 ```
 
 ### Step 4: Verify
+
 - [ ] Site loads without "Something went wrong"
 - [ ] Navigation works
 - [ ] Press F12 → Console → No red errors
@@ -209,6 +228,7 @@ Vercel Dashboard:
 ## ✅ Success Signs
 
 When fixed, you should see:
+
 - ✅ Site loads with no error
 - ✅ Can navigate between pages
 - ✅ No red errors in console (F12)

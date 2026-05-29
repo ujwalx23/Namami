@@ -166,7 +166,7 @@ function GalleryPage() {
               alt="Darshan"
               className="max-h-[calc(100vh-120px)] max-w-[95vw] rounded-xl shadow-2xl object-contain border border-gold/25 hover:scale-[1.01] transition-transform duration-300"
             />
-            
+
             {/* Download Button in Lightbox */}
             <button
               onClick={() => {

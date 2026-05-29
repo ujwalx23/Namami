@@ -14,7 +14,7 @@ serve(async (req) => {
   try {
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
     );
 
     const apiKey = Deno.env.get("YOUTUBE_API_KEY");
@@ -24,7 +24,7 @@ serve(async (req) => {
 
     // 1. Resolve handle to get channel details
     const channelRes = await fetch(
-      `https://www.googleapis.com/youtube/v3/channels?key=${apiKey}&forHandle=${handle}&part=contentDetails`
+      `https://www.googleapis.com/youtube/v3/channels?key=${apiKey}&forHandle=${handle}&part=contentDetails`,
     );
     const channelData = await channelRes.json();
     const uploadsPlaylistId = channelData.items?.[0]?.contentDetails?.relatedPlaylists?.uploads;
@@ -32,7 +32,7 @@ serve(async (req) => {
 
     // 2. Fetch latest 50 items from the uploads playlist
     const playlistRes = await fetch(
-      `https://www.googleapis.com/youtube/v3/playlistItems?key=${apiKey}&playlistId=${uploadsPlaylistId}&part=snippet&maxResults=50`
+      `https://www.googleapis.com/youtube/v3/playlistItems?key=${apiKey}&playlistId=${uploadsPlaylistId}&part=snippet&maxResults=50`,
     );
     const playlistData = await playlistRes.json();
 
@@ -46,7 +46,8 @@ serve(async (req) => {
       const description = item.snippet?.description || "";
       if (!videoId) continue;
 
-      const isShort = title.toLowerCase().includes("#shorts") || description.toLowerCase().includes("#short");
+      const isShort =
+        title.toLowerCase().includes("#shorts") || description.toLowerCase().includes("#short");
       const videoType = isShort ? "short" : "video";
 
       const { data, error } = await supabase
@@ -58,7 +59,7 @@ serve(async (req) => {
             type: videoType,
             embed: `https://www.youtube.com/embed/${videoId}`,
           },
-          { onConflict: "id" }
+          { onConflict: "id" },
         )
         .select()
         .single();

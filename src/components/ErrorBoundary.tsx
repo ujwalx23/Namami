@@ -18,10 +18,7 @@ interface ErrorBoundaryState {
   errorInfo: React.ErrorInfo | null;
 }
 
-export class ErrorBoundary extends React.Component<
-  ErrorBoundaryProps,
-  ErrorBoundaryState
-> {
+export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = {
@@ -76,9 +73,7 @@ export class ErrorBoundary extends React.Component<
 
               {/* Error Message */}
               <div className="text-center space-y-2">
-                <h1 className="text-2xl font-bold text-foreground">
-                  Oops! Something went wrong
-                </h1>
+                <h1 className="text-2xl font-bold text-foreground">Oops! Something went wrong</h1>
                 <p className="text-sm text-muted-foreground">
                   We encountered an unexpected error. Please try the options below.
                 </p>
@@ -92,9 +87,7 @@ export class ErrorBoundary extends React.Component<
                   </p>
                   {this.state.errorInfo?.componentStack && (
                     <details className="text-xs text-muted-foreground">
-                      <summary className="cursor-pointer font-medium mb-2">
-                        Stack Trace
-                      </summary>
+                      <summary className="cursor-pointer font-medium mb-2">Stack Trace</summary>
                       <pre className="overflow-auto max-h-40 text-xs whitespace-pre-wrap break-words">
                         {this.state.errorInfo.componentStack}
                       </pre>

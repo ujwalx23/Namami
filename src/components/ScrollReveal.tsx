@@ -31,7 +31,7 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
       {
         threshold: 0.05, // trigger when 5% of element is visible
         rootMargin: "0px 0px -40px 0px", // trigger slightly early
-      }
+      },
     );
 
     if (ref.current) {

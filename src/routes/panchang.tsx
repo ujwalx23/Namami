@@ -171,7 +171,8 @@ function sunRiseSet(date: Date, lat: number, lon: number): [Date, Date] {
   const Jstar = n - lon / 360;
   const M = (357.5291 + 0.98560028 * Jstar) % 360;
   const Mrad = (M * Math.PI) / 180;
-  const C = 1.9148 * Math.sin(Mrad) + 0.02 * Math.sin(2 * Mrad) + 0.0003 * Math.sin(3 * Math.PI / 180); // simplified perturbation
+  const C =
+    1.9148 * Math.sin(Mrad) + 0.02 * Math.sin(2 * Mrad) + 0.0003 * Math.sin((3 * Math.PI) / 180); // simplified perturbation
   const lambda = (M + C + 180 + 102.9372) % 360;
   const lambdaRad = (lambda * Math.PI) / 180;
   const Jtransit = 2451545.0 + Jstar + 0.0053 * Math.sin(Mrad) - 0.0069 * Math.sin(2 * lambdaRad);
@@ -199,7 +200,7 @@ function fmtTime(d: Date): string {
 function sunLongitude(d: Date): number {
   const jdVal = julian(d);
   const n = jdVal - 2451545.0;
-  const L = (280.460 + 0.9856474 * n) % 360;
+  const L = (280.46 + 0.9856474 * n) % 360;
   const g = (((357.528 + 0.9856003 * n) % 360) * Math.PI) / 180;
   return (L + 1.915 * Math.sin(g) + 0.02 * Math.sin(2 * g) + 360) % 360;
 }
@@ -214,10 +215,10 @@ function moonLongitude(d: Date): number {
   const M_prime = (357.5291 + 35999.0503 * T) % 360;
   const F = (93.2721 + 483202.0175 * T) % 360;
 
-  const D_rad = D * Math.PI / 180;
-  const M_rad = M * Math.PI / 180;
-  const Mp_rad = M_prime * Math.PI / 180;
-  const F_rad = F * Math.PI / 180;
+  const D_rad = (D * Math.PI) / 180;
+  const M_rad = (M * Math.PI) / 180;
+  const Mp_rad = (M_prime * Math.PI) / 180;
+  const F_rad = (F * Math.PI) / 180;
 
   let dL = 0;
   dL += 6.288774 * Math.sin(M_rad);
@@ -231,7 +232,7 @@ function moonLongitude(d: Date): number {
   dL += 0.053322 * Math.sin(2 * D_rad + M_rad);
   dL += 0.045758 * Math.sin(2 * D_rad - Mp_rad);
   dL += -0.041023 * Math.sin(M_rad - Mp_rad);
-  dL += -0.034720 * Math.sin(D_rad);
+  dL += -0.03472 * Math.sin(D_rad);
   dL += -0.030465 * Math.sin(M_rad + Mp_rad);
   dL += 0.015327 * Math.sin(2 * D_rad - 2 * F_rad);
   dL += -0.012528 * Math.sin(2 * D_rad + Mp_rad);
@@ -418,10 +419,20 @@ function PanchangPage() {
 
     const dateIso = dateKey;
     const sunriseApi = `https://api.sunrise-sunset.org/json?lat=${LAT}&lng=${LON}&date=${dateIso}&formatted=0`;
-    
+
     const MONTH_NAMES = [
-      "january", "february", "march", "april", "may", "june",
-      "july", "august", "september", "october", "november", "december"
+      "january",
+      "february",
+      "march",
+      "april",
+      "may",
+      "june",
+      "july",
+      "august",
+      "september",
+      "october",
+      "november",
+      "december",
     ];
     const target = `https://www.prokerala.com/astrology/panchang/${selectedDate.getFullYear()}-${MONTH_NAMES[selectedDate.getMonth()]}-${selectedDate.getDate()}.html`;
     const proxies = ["https://api.allorigins.win/raw?url="];
@@ -462,7 +473,7 @@ function PanchangPage() {
           if (!res.ok) continue;
 
           const html = await res.text();
-          
+
           const cleanText = (text: string) => {
             if (!text) return "";
             return text
@@ -476,10 +487,13 @@ function PanchangPage() {
           };
 
           const parseBlockItems = (blockClass: string) => {
-            const regex = new RegExp(`<div class="panchang-box-data-block[^"]*${blockClass}[^"]*">([\\s\\S]*?)<\\/div>`, 'i');
+            const regex = new RegExp(
+              `<div class="panchang-box-data-block[^"]*${blockClass}[^"]*">([\\s\\S]*?)<\\/div>`,
+              "i",
+            );
             const match = html.match(regex);
             if (!match) return [];
-            
+
             const blockContent = match[1];
             const items: string[] = [];
             const liRegex = /<li[^>]*>([\s\S]*?)<\/li>/gi;
@@ -542,21 +556,27 @@ function PanchangPage() {
           }
           const chandraRasi = parseBlockItems("panchang-data-chandra-rasi");
           if (chandraRasi.length > 0) {
-            out["Moonsign"] = chandraRasi[0].replace("Moon travels through ", "").replace("Moon in ", "").trim();
+            out["Moonsign"] = chandraRasi[0]
+              .replace("Moon travels through ", "")
+              .replace("Moon in ", "")
+              .trim();
           }
 
           // 10. Auspicious periods
           const auspicious = parseBlockItems("panchang-data-auspicious-period");
           for (const item of auspicious) {
-            if (item.includes("Abhijit Muhurat")) out["Abhijit"] = item.replace("Abhijit Muhurat -", "").trim();
-            if (item.includes("Brahma Muhurat")) out["Brahma Muhurta"] = item.replace("Brahma Muhurat -", "").trim();
+            if (item.includes("Abhijit Muhurat"))
+              out["Abhijit"] = item.replace("Abhijit Muhurat -", "").trim();
+            if (item.includes("Brahma Muhurat"))
+              out["Brahma Muhurta"] = item.replace("Brahma Muhurat -", "").trim();
           }
 
           // 11. Inauspicious periods
           const inauspicious = parseBlockItems("panchang-data-inauspicious-period");
           for (const item of inauspicious) {
             if (item.includes("Rahu")) out["Rahu Kalam"] = item.replace("Rahu -", "").trim();
-            if (item.includes("Yamaganda")) out["Yamaganda"] = item.replace("Yamaganda -", "").trim();
+            if (item.includes("Yamaganda"))
+              out["Yamaganda"] = item.replace("Yamaganda -", "").trim();
             if (item.includes("Gulika")) out["Gulikai Kalam"] = item.replace("Gulika -", "").trim();
           }
 
@@ -712,7 +732,10 @@ function PanchangPage() {
         </div>
 
         {/* Today's Festival highlight */}
-        <div key={dateKey + "_fest"} className="animate-fade-in rounded-2xl bg-gradient-sacred text-cream p-6 md:p-8 shadow-sacred flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div
+          key={dateKey + "_fest"}
+          className="animate-fade-in rounded-2xl bg-gradient-sacred text-cream p-6 md:p-8 shadow-sacred flex flex-col md:flex-row md:items-center justify-between gap-4"
+        >
           <div>
             <div className="text-xs uppercase tracking-widest text-gold font-bold">
               Selected Date
