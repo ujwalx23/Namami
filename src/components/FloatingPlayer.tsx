@@ -61,10 +61,10 @@ export function FloatingPlayer() {
             playTrack(trackList[0]);
           }
         }}
-        className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full border border-gold/30 bg-card/90 shadow-sacred backdrop-blur-md text-maroon hover:text-saffron hover:scale-105 transition-all duration-300"
+        className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full border border-gold/30 bg-card/90 shadow-sacred backdrop-blur-md text-maroon hover:text-saffron hover:scale-110 active:scale-95 animate-ripple transition-all duration-300 cursor-pointer"
         aria-label="Open Devotional Player"
       >
-        <Music className="animate-pulse" size={24} />
+        <Music className="animate-pulse hover:rotate-12 transition-transform duration-300" size={24} />
       </button>
     );
   }
@@ -75,7 +75,7 @@ export function FloatingPlayer() {
       {!isExpanded && currentTrack && (
         <div
           onClick={() => setIsExpanded(true)}
-          className="flex items-center gap-3 px-4 py-2.5 rounded-full border border-gold/30 bg-card/95 shadow-sacred backdrop-blur-md cursor-pointer hover:border-gold/60 transition-all duration-300"
+          className={`animate-fade-in flex items-center gap-3 px-4 py-2.5 rounded-full border border-gold/30 bg-card/95 shadow-sacred backdrop-blur-md cursor-pointer hover:border-gold/60 hover:scale-[1.02] active:scale-95 transition-all duration-300 ${isPlaying ? "shadow-gold border-gold/50 animate-glow" : ""}`}
         >
           {/* Spin disk */}
           <div
@@ -92,18 +92,36 @@ export function FloatingPlayer() {
             />
             <div className="absolute inset-0 m-auto h-3 w-3 rounded-full bg-card border border-gold/50"></div>
           </div>
-          <div className="max-w-[120px] md:max-w-[180px]">
-            <p className="truncate text-xs font-semibold text-maroon">{currentTrack.title}</p>
-            <p className="truncate text-[10px] text-muted-foreground">
-              {isPlaying ? "Playing..." : "Paused"}
-            </p>
+          <div className="flex items-center gap-2 shrink-0">
+            <div className="max-w-[90px] md:max-w-[140px] leading-tight">
+              <p className="truncate text-xs font-semibold text-maroon">{currentTrack.title}</p>
+              <p className="truncate text-[10px] text-muted-foreground">
+                {isPlaying ? "Playing..." : "Paused"}
+              </p>
+            </div>
+            {isPlaying && (
+              <span className="flex gap-0.5 h-3.5 items-end pb-0.5 shrink-0">
+                <span
+                  className="w-0.5 bg-saffron rounded-full animate-bar-grow"
+                  style={{ animationDelay: "0.1s", animationDuration: "1s" }}
+                ></span>
+                <span
+                  className="w-0.5 bg-saffron rounded-full animate-bar-grow"
+                  style={{ animationDelay: "0.3s", animationDuration: "0.7s" }}
+                ></span>
+                <span
+                  className="w-0.5 bg-saffron rounded-full animate-bar-grow"
+                  style={{ animationDelay: "0.2s", animationDuration: "1.2s" }}
+                ></span>
+              </span>
+            )}
           </div>
           <button
             onClick={(e) => {
               e.stopPropagation();
               togglePlay();
             }}
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-sacred text-cream shadow hover:opacity-90 transition shrink-0"
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-sacred text-cream shadow hover:opacity-90 hover:scale-105 active:scale-90 transition-transform duration-300 shrink-0 cursor-pointer"
           >
             {isPlaying ? <Pause size={12} /> : <Play size={12} className="ml-0.5" />}
           </button>
@@ -112,7 +130,7 @@ export function FloatingPlayer() {
 
       {/* Expanded Player View */}
       {isExpanded && currentTrack && (
-        <div className="w-[calc(100vw-32px)] max-w-[360px] rounded-3xl border border-gold/30 bg-card/95 p-5 md:p-6 shadow-sacred backdrop-blur-md transition-all duration-300">
+        <div className="animate-fade-in w-[calc(100vw-32px)] max-w-[360px] rounded-3xl border border-gold/30 bg-card/95 p-5 md:p-6 shadow-sacred backdrop-blur-md transition-all duration-500 ease-expo">
           {/* Header */}
           <div className="flex items-center justify-between border-b border-border pb-3 mb-4">
             <span className="text-xs uppercase tracking-wider text-saffron font-bold">
@@ -142,7 +160,7 @@ export function FloatingPlayer() {
               {/* Disc Visualizer */}
               <div className="flex justify-center mb-4">
                 <div
-                  className={`relative h-28 w-28 overflow-hidden rounded-full border-4 border-gold/50 bg-gradient-sacred shadow-sacred ${isPlaying ? "animate-spin" : ""}`}
+                  className={`relative h-28 w-28 overflow-hidden rounded-full border-4 border-gold/50 bg-gradient-sacred shadow-sacred transition-all duration-500 ${isPlaying ? "animate-spin animate-ripple" : ""}`}
                   style={{ animationDuration: "10s" }}
                 >
                   <img
@@ -170,7 +188,7 @@ export function FloatingPlayer() {
             <div className="h-44 overflow-y-auto pr-1 space-y-2 mb-4 scrollbar-thin">
               <div className="flex items-center justify-between text-xs text-muted-foreground px-2 mb-1">
                 <span>Select Track</span>
-                <button onClick={() => setIsPlaylistOpen(false)} className="hover:text-maroon">
+                <button onClick={() => setIsPlaylistOpen(false)} className="hover:text-maroon cursor-pointer">
                   Back
                 </button>
               </div>
@@ -195,18 +213,22 @@ export function FloatingPlayer() {
                     <p className="text-[10px] text-muted-foreground truncate">{track.artist}</p>
                   </div>
                   {currentTrack.id === track.id && isPlaying && (
-                    <span className="flex gap-0.5 h-3 items-end pb-0.5 shrink-0">
+                    <span className="flex gap-0.5 h-4 items-end pb-0.5 shrink-0">
                       <span
-                        className="w-0.5 h-2 bg-saffron animate-bounce"
-                        style={{ animationDelay: "0.1s" }}
+                        className="w-0.5 bg-saffron rounded-full animate-bar-grow"
+                        style={{ animationDelay: "0.1s", animationDuration: "1s" }}
                       ></span>
                       <span
-                        className="w-0.5 h-3 bg-saffron animate-bounce"
-                        style={{ animationDelay: "0.3s" }}
+                        className="w-0.5 bg-saffron rounded-full animate-bar-grow"
+                        style={{ animationDelay: "0.4s", animationDuration: "0.7s" }}
                       ></span>
                       <span
-                        className="w-0.5 h-1 bg-saffron animate-bounce"
-                        style={{ animationDelay: "0.2s" }}
+                        className="w-0.5 bg-saffron rounded-full animate-bar-grow"
+                        style={{ animationDelay: "0.2s", animationDuration: "1.2s" }}
+                      ></span>
+                      <span
+                        className="w-0.5 bg-saffron rounded-full animate-bar-grow"
+                        style={{ animationDelay: "0.5s", animationDuration: "0.9s" }}
                       ></span>
                     </span>
                   )}
@@ -235,21 +257,21 @@ export function FloatingPlayer() {
           <div className="flex items-center justify-center gap-6 my-4">
             <button
               onClick={playPrevious}
-              className="text-maroon/80 hover:text-saffron hover:scale-105 transition"
+              className="text-maroon/80 hover:text-saffron hover:scale-125 active:scale-90 transition-transform duration-300 cursor-pointer"
               title="Previous Track"
             >
               <SkipBack size={20} />
             </button>
             <button
               onClick={togglePlay}
-              className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-sacred text-cream shadow-gold hover:opacity-95 hover:scale-105 transition duration-300"
+              className={`flex h-12 w-12 items-center justify-center rounded-full bg-gradient-sacred text-cream shadow-gold hover:opacity-95 hover:scale-115 active:scale-90 transition-transform duration-300 cursor-pointer ${isPlaying ? "animate-ripple" : ""}`}
               title={isPlaying ? "Pause" : "Play"}
             >
               {isPlaying ? <Pause size={18} /> : <Play size={18} className="ml-1" />}
             </button>
             <button
               onClick={playNext}
-              className="text-maroon/80 hover:text-saffron hover:scale-105 transition"
+              className="text-maroon/80 hover:text-saffron hover:scale-125 active:scale-90 transition-transform duration-300 cursor-pointer"
               title="Next Track"
             >
               <SkipForward size={20} />

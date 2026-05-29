@@ -62,3 +62,16 @@ ON public.reviews FOR DELETE USING (true);
 DROP POLICY IF EXISTS "Anyone can select reviews" ON public.reviews;
 CREATE POLICY "Anyone can select reviews"
 ON public.reviews FOR SELECT USING (true);
+
+-- Enable update policies for admin/public on events, sandesh, and inbox_messages
+DROP POLICY IF EXISTS "Anyone can update events" ON public.events;
+CREATE POLICY "Anyone can update events"
+ON public.events FOR UPDATE USING (true);
+
+DROP POLICY IF EXISTS "Anyone can update sandesh" ON public.sandesh;
+CREATE POLICY "Anyone can update sandesh"
+ON public.sandesh FOR UPDATE USING (true);
+
+DROP POLICY IF EXISTS "Anyone can update inbox messages" ON public.inbox_messages;
+CREATE POLICY "Anyone can update inbox messages"
+ON public.inbox_messages FOR UPDATE USING (true);

@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell, PageHero } from "@/components/PageShell";
-import maaImg from "@/assets/maa-vindhyavasini.png";
+import qrImg from "@/assets/donation-qr.png";
 import { Heart, Building2, Utensils, BookOpen, Sparkles } from "lucide-react";
 import { useLang } from "@/i18n/LangProvider";
 import type { TKey } from "@/i18n/translations";
@@ -42,17 +42,38 @@ function DonationPage() {
       <section className="container mx-auto px-6 py-16 grid lg:grid-cols-2 gap-12 items-start">
         <div className="relative">
           <div className="absolute -inset-6 bg-gradient-sacred rounded-[2rem] blur-3xl opacity-25" />
-          <div className="relative aspect-[3/4] max-w-md mx-auto rounded-[2rem] overflow-hidden shadow-sacred border-4 border-gold/60">
-            <img
-              src={maaImg}
-              alt="Maa Vindhyavasini divine darshan"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-overlay" />
-            <div className="absolute bottom-6 left-6 right-6 text-center text-cream">
-              <div className="font-devanagari text-gold text-sm">श्री विन्ध्यवासिन्यै नमः</div>
-              <div className={`font-display text-2xl mt-1 ${dev}`}>{t("don.bless")}</div>
+          <div className="relative bg-card border-2 border-gold/60 rounded-[2rem] p-8 shadow-sacred max-w-md mx-auto text-center flex flex-col items-center">
+            <h3 className="font-display text-2xl text-maroon mb-1">Scan to Donate</h3>
+            <p className="text-xs text-muted-foreground mb-6 uppercase tracking-wider">Secure UPI Payment</p>
+            
+            <div className="relative w-64 h-64 p-3 bg-white rounded-2xl shadow-md border border-border flex items-center justify-center mb-6">
+              {/* Corner brackets/borders for visual scan effect */}
+              <div className="absolute top-0 left-0 w-6 h-6 border-t-4 border-l-4 border-saffron rounded-tl-lg" />
+              <div className="absolute top-0 right-0 w-6 h-6 border-t-4 border-r-4 border-saffron rounded-tr-lg" />
+              <div className="absolute bottom-0 left-0 w-6 h-6 border-b-4 border-l-4 border-saffron rounded-bl-lg" />
+              <div className="absolute bottom-0 right-0 w-6 h-6 border-b-4 border-r-4 border-saffron rounded-br-lg" />
+              
+              <img
+                src={qrImg}
+                alt="UPI Donation QR Code"
+                className="w-full h-full object-contain rounded-lg"
+              />
             </div>
+            
+            <div className="w-full space-y-3 bg-gradient-divine border border-gold/30 rounded-xl p-4 text-left">
+              <div className="flex justify-between items-center text-sm border-b border-gold/20 pb-2">
+                <span className="text-muted-foreground font-medium">Verified UPI Name</span>
+                <span className="font-display text-maroon font-bold">Namami Vindhyavasini Sansthan</span>
+              </div>
+              <div className="flex justify-between items-center text-sm">
+                <span className="text-muted-foreground font-medium">Verified UPI ID</span>
+                <span className="font-mono text-maroon font-bold">9334339505@upi</span>
+              </div>
+            </div>
+            
+            <p className="text-xs text-muted-foreground mt-4 italic">
+              Scan with any UPI app (BHIM, Google Pay, PhonePe, Paytm, etc.) to complete your offering.
+            </p>
           </div>
         </div>
 
@@ -63,25 +84,63 @@ function DonationPage() {
           <h2 className={`font-display text-4xl text-maroon mb-5 ${dev}`}>{t("don.h2")}</h2>
           <p className={`text-foreground/80 leading-relaxed mb-6 ${dev}`}>{t("don.text")}</p>
 
-          <div className="rounded-2xl bg-gradient-divine border border-gold/40 p-6 mb-6">
-            <div className={`text-xs uppercase tracking-[0.25em] text-saffron mb-2 ${dev}`}>
-              {t("don.quick")}
+          {/* Trust badges and direct bank transfer section */}
+          <div className="grid grid-cols-2 gap-4 mb-6">
+            <div className="p-4 bg-card border border-border rounded-2xl text-center flex flex-col items-center justify-center shadow-sm">
+              <span className="text-2xl mb-1">🛡️</span>
+              <span className="text-[10px] font-bold text-maroon uppercase tracking-wider block">Registered Trust</span>
+              <span className="text-[9px] text-muted-foreground mt-0.5">Govt Reg. 421/UP</span>
             </div>
-            <div className={`text-sm text-foreground/80 mb-1 ${dev}`}>{t("don.quick.bank")}</div>
-            <div className="font-display text-xl text-maroon">
-              <a href="tel:+919334339505">+91 93343 39505</a>
-            </div>
-            <div className="text-sm text-muted-foreground mt-1">
-              <a href="mailto:info@namamivindhyavasini.org">info@namamivindhyavasini.org</a>
+            <div className="p-4 bg-card border border-border rounded-2xl text-center flex flex-col items-center justify-center shadow-sm">
+              <span className="text-2xl mb-1">🤝</span>
+              <span className="text-[10px] font-bold text-maroon uppercase tracking-wider block">Direct Seva</span>
+              <span className="text-[9px] text-muted-foreground mt-0.5">100% Devotion Use</span>
             </div>
           </div>
 
-          <Link
-            to="/contact"
-            className={`inline-flex items-center gap-2 px-7 py-3 rounded-full bg-gradient-sacred text-cream font-medium shadow-gold hover:opacity-95 transition ${dev}`}
-          >
-            <Heart size={16} /> {t("don.contactbtn")}
-          </Link>
+          <div className="rounded-2xl bg-gradient-divine border border-gold/40 p-6 shadow-sm">
+            <h4 className="font-display text-lg text-maroon mb-4 flex items-center gap-2">
+              <span className="text-xl">🏛️</span> Bank Transfer Details
+            </h4>
+            <div className="space-y-3 text-sm">
+              <div className="flex justify-between border-b border-gold/15 pb-2">
+                <span className="text-muted-foreground">Account Name</span>
+                <span className="font-medium text-foreground">Namami Vindhyavasini Sansthan Trust</span>
+              </div>
+              <div className="flex justify-between border-b border-gold/15 pb-2">
+                <span className="text-muted-foreground">Bank Name</span>
+                <span className="font-medium text-foreground">State Bank of India (SBI)</span>
+              </div>
+              <div className="flex justify-between border-b border-gold/15 pb-2">
+                <span className="text-muted-foreground">Account Number</span>
+                <span className="font-mono font-semibold text-foreground">XXXX</span>
+              </div>
+              <div className="flex justify-between border-b border-gold/15 pb-2">
+                <span className="text-muted-foreground">IFSC Code</span>
+                <span className="font-mono font-semibold text-foreground">XXXX</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Branch</span>
+                <span className="font-medium text-foreground">Vindhyachal Branch</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-6 p-6 rounded-2xl bg-gradient-divine border border-gold/30 text-center shadow-sm">
+            <div className="text-saffron font-devanagari text-lg font-bold mb-1">॥ सेवा परमो धर्मः ॥</div>
+            <p className="text-xs text-muted-foreground italic leading-relaxed">
+              "Service to others is the ultimate duty. Your support aids the temple's daily rituals, devotee feeding, and preservation of eternal values."
+            </p>
+          </div>
+
+          <div className="mt-6 p-6 rounded-2xl bg-card border border-border space-y-3 shadow-sm">
+            <h4 className="font-display text-base text-maroon font-semibold">Important Notes for Donors</h4>
+            <ul className="text-xs text-muted-foreground space-y-2 list-disc list-inside">
+              <li>Offerings are utilized exclusively for the temple operations, bhandara, and community seva.</li>
+              <li>To request a transaction receipt or confirmation, email details to <a href="mailto:info@namamivindhyavasini.org" className="text-maroon underline font-medium">info@namamivindhyavasini.org</a>.</li>
+              <li>QR code scans reflect instantly; direct bank transfers may take 24-48 hours.</li>
+            </ul>
+          </div>
         </div>
       </section>
 

@@ -43,8 +43,8 @@ export const translations = {
   "home.hero.title1": { en: "Embrace Divine", hi: "दिव्य कृपा का" },
   "home.hero.title2": { en: "Grace", hi: "आलिंगन" },
   "home.hero.desc": {
-    en: "Step into the sacred world of Maa Vindhyavasini — Shakti Pitha of the Vindhya range. Our sansthan preserves the ancient rituals of the Devi, organises satsang and seva, and welcomes every devotee into the bhakti of the Mother.",
-    hi: "माँ विन्ध्यवासिनी के पावन धाम में प्रवेश करें — विन्ध्य पर्वत की शक्तिपीठ। हमारा संस्थान देवी की प्राचीन परम्पराओं का संरक्षण करता है, सत्संग एवं सेवा का आयोजन करता है, और हर भक्त को माँ की भक्ति में आमंत्रित करता है।",
+    en: "Step into the sacred world of Maa Vindhyavasini, the divine Shakti Pitha of the Vindhya range. Our sansthan preserves the ancient rituals of the Devi, organises satsang and seva, and welcomes every devotee into the bhakti of the Mother.",
+    hi: "माँ विन्ध्यवासिनी के पावन धाम में प्रवेश करें, जो विन्ध्य पर्वत की जागृत शक्तिपीठ है। हमारा संस्थान देवी की प्राचीन परम्पराओं का संरक्षण करता है, सत्संग एवं सेवा का आयोजन करता है, और हर भक्त को माँ की भक्ति में आमंत्रित करता है।",
   },
   "home.cta.today": { en: "Today's Sandesh", hi: "आज का संदेश" },
   "home.cta.about": { en: "Our Sansthan", hi: "हमारा संस्थान" },
@@ -63,19 +63,19 @@ export const translations = {
   },
   "home.card.sansthapana.title": { en: "Sansthapana", hi: "संस्थापना" },
   "home.card.sansthapana.text": {
-    en: "Established by Pujya Guru Ji with the blessings of Maa, the trust has been a beacon of dharma — preserving rituals and uplifting devotees for decades.",
-    hi: "पूज्य गुरुजी द्वारा माँ के आशीर्वाद से स्थापित यह न्यास दशकों से धर्म का दीप जलाए हुए है — परम्पराओं की रक्षा और भक्तों के उत्थान में रत है।",
+    en: "Established by Pujya Guru Ji with the blessings of Maa, the trust has been a beacon of dharma, preserving rituals and uplifting devotees for decades.",
+    hi: "पूज्य गुरुजी द्वारा माँ के आशीर्वाद से स्थापित यह न्यास दशकों से धर्म का दीप जलाए हुए है, जो परम्पराओं की रक्षा और भक्तों के उत्थान में सतत कार्यरत है।",
   },
   "home.card.vision.title": { en: "Vision", hi: "हमारी दृष्टि" },
   "home.card.vision.text": {
-    en: "A united community rooted in Sanatan values — learning, seva and unwavering bhakti at the lotus feet of the Goddess.",
-    hi: "सनातन मूल्यों में रचा-बसा एक एकजुट समाज — शिक्षा, सेवा और देवी के चरणों में अटूट भक्ति।",
+    en: "A united community rooted in Sanatan values, promoting learning, seva and unwavering bhakti at the lotus feet of the Goddess.",
+    hi: "सनातन मूल्यों में रचा-बसा एक एकजुट समाज, जो शिक्षा, सेवा और देवी के चरणों में अटूट भक्ति को समर्पित है।",
   },
 
   "home.sandesh.kicker": { en: "Daily Wisdom", hi: "दैनिक प्रेरणा" },
   "home.sandesh.title": { en: "Sandesh", hi: "संदेश" },
   "home.sandesh.quote": {
-    en: "“Where there is shraddha, there resides the Mother. Keep your heart pure — Devi's grace will find you on its own.”",
+    en: "“Where there is shraddha, there resides the Mother. Keep your heart pure, and Devi's grace will find you on its own.”",
     hi: "“जहाँ श्रद्धा है, वहीं माँ का वास है। अपने हृदय को निर्मल रखो, और देवी की कृपा स्वयं तुम्हें खोज लेगी।”",
   },
   "home.sandesh.author": { en: "— Pujya Guru Ji", hi: "— पूज्य गुरुजी" },
@@ -88,10 +88,10 @@ export const translations = {
   "home.events.viewall": { en: "View all", hi: "सभी देखें" },
 
   "home.shakti.kicker": { en: "Shakti Pitha", hi: "शक्तिपीठ" },
-  "home.shakti.title": { en: "Maa Vindhyavasini Dhaam", hi: "माँ विन्ध्यवासिनी धाम" },
+  "home.shakti.title": { en: "Maa Vindhyavasini Dham", hi: "माँ विन्ध्यवासिनी धाम" },
   "home.shakti.text": {
-    en: "On the holy banks of the Ganga, in the Vindhya hills of Mirzapur, sits one of India's most powerful Shakti Pithas. Devi Vindhyavasini is worshipped here as the protector of dharma — the eternal Mother who chose this land after slaying Mahishasura.",
-    hi: "गंगा के पावन तट पर, मिर्जापुर के विन्ध्य पर्वतों में, भारत के अत्यंत प्रतापी शक्तिपीठों में से एक विराजमान है। यहाँ देवी विन्ध्यवासिनी धर्म की रक्षिका के रूप में पूजित हैं — वही सनातन माँ जिन्होंने महिषासुर का वध करके इस भूमि को अपना धाम बनाया।",
+    en: "On the holy banks of the Ganga, in the Vindhya hills of Mirzapur, sits one of India's most powerful Shakti Pithas. Devi Vindhyavasini is worshipped here as the protector of dharma, and she is the eternal Mother who chose this land after slaying Mahishasura.",
+    hi: "गंगा के पावन तट पर, मिर्जापुर के विन्ध्य पर्वतों में, भारत के अत्यंत प्रतापी शक्तिपीठों में से एक विराजमान है। यहाँ देवी विन्ध्यवासिनी धर्म की रक्षिका के रूप में पूजित हैं, तथा वे ही सनातन माँ हैं जिन्होंने महिषासुर का वध करके इस भूमि को अपना धाम बनाया।",
   },
   "home.shakti.stat1": { en: "Shakti Pitha", hi: "शक्तिपीठ" },
   "home.shakti.stat1v": { en: "of Devi Durga", hi: "देवी दुर्गा का" },
@@ -110,69 +110,117 @@ export const translations = {
   "home.cta2.contact": { en: "Contact Us", hi: "हमसे संपर्क" },
 
   // ---- About page ----
-  "about.sanskrit": { en: "॥ माँ विन्ध्यवासिनी की कृपा ॥", hi: "॥ माँ विन्ध्यवासिनी की कृपा ॥" },
-  "about.title": { en: "Maa Vindhyavasini Dhaam", hi: "माँ विन्ध्यवासिनी धाम" },
+  "about.sanskrit": { en: "॥ महालक्ष्मी महाकाली महासरस्वती स्वरूपिण्यै नमः ॥", hi: "॥ महालक्ष्मी महाकाली महासरस्वती स्वरूपिण्यै नमः ॥" },
+  "about.title": { en: "Maa Vindhyavasini Dham", hi: "माँ विन्ध्यवासिनी धाम" },
   "about.subtitle": {
-    en: "One of the most ancient Shakti Pithas of Bharat — abode of Devi Durga in the Vindhya hills.",
-    hi: "भारत के प्राचीनतम शक्तिपीठों में से एक — विन्ध्य पर्वत में विराजमान देवी दुर्गा का धाम।",
+    en: "One of the most ancient Shakti Pithas of Bharat, serving as the abode of Devi Durga in the Vindhya hills.",
+    hi: "भारत के प्राचीनतम शक्तिपीठों में से एक, जो विन्ध्य पर्वत में विराजमान देवी दुर्गा का पावन धाम है।",
   },
+  "about.deity.title": {
+    en: "The Divine Descent of Yogmaya",
+    hi: "योगमाया का दिव्य अवतरण"
+  },
+  "about.deity.text": {
+    en: "Devi Vindhyavasini is the ultimate manifestation of Adi Parashakti, who descended as Yogmaya. Scriptural tradition states that she took birth from the womb of Yashoda in Nanda Gokul on the same night Sri Krishna was born in Mathura. To save the divine infant, Vasudeva exchanged Krishna with Yogmaya. When the tyrant king Kansa attempted to kill her by dashing her against a stone, she slipped from his grasp, ascended majestically into the sky, and assumed her magnificent eight-armed form (Ashtabhuja). She proclaimed Kansa's impending destruction before choosing the sacred Vindhya hills as her eternal residence, where she continues to bless and protect her devotees.",
+    hi: "देवी विन्ध्यवासिनी आदिशक्ति का साक्षात स्वरूप हैं, जो योगमाया के रूप में अवतरित हुईं। शास्त्रों के अनुसार, उनका जन्म नन्द गोकुल में यशोदा के गर्भ से उसी रात्रि को हुआ था जिस रात्रि मथुरा में भगवान श्रीकृष्ण का जन्म हुआ था। कंस से नवजात शिशु की रक्षा के लिए वासुदेव ने कृष्ण को योगमाया से बदल दिया। जब अत्याचारी राजा कंस ने शिला पर पटक कर इस कन्या का वध करना चाहा, तो वह उसके हाथों से फिसलकर आकाश में विलीन हो गईं और अपने भव्य अष्टभुज (अष्टभुजा) रूप में प्रकट हुईं। कंस के विनाश की घोषणा करने के पश्चात उन्होंने पावन विन्ध्य पर्वतमाला को अपने सनातन निवास के रूप में चुना, जहाँ वे आज भी अपने भक्तों पर निरंतर कृपा बरसाती हैं।"
+  },
+  "about.kajari.title": {
+    en: "Kajari Folk Music Tradition",
+    hi: "कजरी लोक संगीत और सांस्कृतिक धरोहर"
+  },
+  "about.kajari.text": {
+    en: "Vindhyachal is the birth-cradle of Kajari (Kajali), the sublime monsoon folk music tradition of India. Etymologically linked to 'Kajal' (kohl) and the monsoon clouds, it directly celebrates Devi Vindhyavasini's dark-skinned, rainfall-bestowing form as Kajali Devi. During the holy month of Shravana, local classical and folk singers perform Kajari melodies in the temple premises. This beautiful music expresses the deep longing, spiritual devotion, and joyous celebrations of the local community, keeping the divine feminine energy alive in every home.",
+    hi: "विन्ध्याचल भारत की प्रसिद्ध वर्षाकालीन लोक संगीत परंपरा 'कजरी' (कजली) का उद्गम स्थल है। कजरी शब्द का सीधा संबंध 'काजल' और वर्षा ऋतु के श्याम मेघों से है, जो सीधे माँ विन्ध्यवासिनी के मेघ-श्याम रूप (कजली देवी) की महिमा और वर्षा प्रदान करने वाले स्वरूप की स्तुति करता है। श्रावण के पवित्र महीने में, स्थानीय शास्त्रीय और लोक गायक मंदिर परिसर में कजरी की तान छेड़ते हैं। यह सुंदर संगीत विरह, आध्यात्मिक भक्ति और प्रकृति के उल्लास को व्यक्त करता है, जिससे माँ की दिव्य ऊर्जा जन-जन के हृदय में प्रवाहित होती है।"
+  },
+  "about.fact.deity.label": { en: "Primary Deity", hi: "मुख्य विग्रह" },
+  "about.fact.deity.value": { en: "Maa Vindhyavasini (Maha Lakshmi / Yogmaya)", hi: "माँ विन्ध्यवासिनी (महालक्ष्मी / योगमाया)" },
+  "about.fact.location.label": { en: "Location", hi: "भौगोलिक स्थिति" },
+  "about.fact.location.value": { en: "Vindhyachal, Mirzapur, Uttar Pradesh", hi: "विन्ध्याचल, मिर्जापुर, उत्तर प्रदेश" },
+  "about.fact.river.label": { en: "Sacred River", hi: "पाวน नदी" },
+  "about.fact.river.value": { en: "Uttar Vahini Ganga (Holy Ganges)", hi: "उत्तरवाहिनी गंगा (पतित पावनी गंगा)" },
+  "about.fact.scriptures.label": { en: "Scriptural Mentions", hi: "शास्त्रों में उल्लेख" },
+  "about.fact.scriptures.value": { en: "Durga Saptashati, Markandeya Purana, Devi Bhagavata", hi: "दुर्गा सप्तशती, मार्कण्डेय पुराण, देवी भागवत पुराण" },
+  "about.fact.architecture.label": { en: "Architectural Style", hi: "स्थापत्य शैली" },
+  "about.fact.architecture.value": { en: "Nagara Style (Vindhya Corridor Phase)", hi: "नागर शैली (विन्ध्य कॉरिडोर स्वरूप)" },
+  "about.fact.status.label": { en: "Temple Status", hi: "मंदिर की स्थिति" },
+  "about.fact.status.value": { en: "Ancient Shakti Pitha (Active Worship)", hi: "अति प्राचीन शक्तिपीठ (सक्रिय उपासना)" },
   "about.intro": {
-    en: "Vindhyachal Temple, also known as Maa Vindhyavasini Temple, is a Hindu shrine dedicated to the mother goddess Vindhyavasini, situated on the bank of the river Ganga at Vindhyachal in Mirzapur district, Uttar Pradesh. It is one of the celebrated Shakti Pithas of India. The Goddess is also revered as Kajari (or Kajali) Devi — a name derived from her kohl-like complexion.",
-    hi: "विन्ध्याचल मंदिर, जिसे माँ विन्ध्यवासिनी मंदिर भी कहा जाता है, उत्तर प्रदेश के मिर्जापुर जनपद में विन्ध्याचल नामक स्थान पर गंगा के तट पर स्थित देवी विन्ध्यवासिनी को समर्पित हिन्दू तीर्थ है। यह भारत के प्रसिद्ध शक्तिपीठों में से एक है। देवी को कजरी (या कजली) देवी के नाम से भी पूजा जाता है — यह नाम उनके काजल जैसे श्याम वर्ण से आता है।",
+    en: "Maa Vindhyavasini Temple at Vindhyachal is a celebrated Hindu shrine dedicated to the mother goddess Vindhyavasini, situated on the holy banks of the Uttar Vahini Ganga in Mirzapur, Uttar Pradesh. Revered as one of the most powerful Shakti Pithas of Bharat, the Goddess is also lovingly worshipped as Kajari Devi, symbolizing her deep kohl-dark monsoon complexion that brings protection and blessings to all devotees.",
+    hi: "विन्ध्याचल में स्थित माँ विन्ध्यवासिनी मंदिर उत्तर प्रदेश के मिर्जापुर में पवित्र उत्तरवाहिनी गंगा के तट पर स्थापित एक अत्यंत पूजनीय हिंदू तीर्थ है। भारत के सबसे प्रतापी शक्तिपीठों में से एक के रूप में पूजित, माँ को यहाँ श्रद्धालु प्रेमपूर्वक कजरी देवी के रूप में भी पूजते हैं, जो उनके वर्षाकालीन श्याम-मेघ वर्ण और भक्तों पर उनकी निरंतर बरसती कृपा का प्रतीक है।",
   },
 
   "about.history.title": { en: "History & Sacred Origin", hi: "इतिहास एवं पौराणिक उत्पत्ति" },
   "about.history.text": {
-    en: "The temple finds mention in the Rig Veda, Markandeya Purana, Devi Bhagavata and the Durga Saptashati — making it one of the oldest continuously worshipped Shakti shrines of Bharat. Tradition holds that Goddess Durga took birth from the womb of Yashoda on the same night Krishna was born in Mathura. When Kansa attempted to dash the infant against a stone, she slipped from his grasp, revealed her eight-armed divine form in the sky, and declared the demon's doom. After slaying Mahishasura, Shumbha and Nishumbha, the Devi chose the Vindhya range as her eternal abode — and from that moment she has been worshipped as Vindhyavasini, 'She who dwells in the Vindhyas.' The Devi is also revered here as Kajari (Kajali) Devi — a name born of her kohl-dark, monsoon-cloud complexion. Sages such as Markandeya, Vyasa and the Pandavas during their vanvas are believed to have offered worship at this very spot.",
-    hi: "इस मंदिर का उल्लेख ऋग्वेद, मार्कण्डेय पुराण, देवी भागवत एवं दुर्गा सप्तशती में मिलता है — जिससे यह भारत के सबसे प्राचीन एवं निरन्तर पूजित शक्तिपीठों में से एक है। पौराणिक कथा के अनुसार जिस रात्रि भगवान कृष्ण मथुरा में अवतरित हुए, उसी रात्रि देवी दुर्गा ने यशोदा के गर्भ से जन्म लिया। जब कंस ने उन्हें शिला पर पटकना चाहा, तो वे उनके हाथों से छूटकर आकाश में अष्टभुज दिव्य रूप में प्रकट हुईं और कंस के अंत की घोषणा की। महिषासुर, शुम्भ एवं निशुम्भ के संहार के पश्चात देवी ने विन्ध्य पर्वत को अपना सनातन निवास चुना — तभी से वे ‘विन्ध्यवासिनी’ अर्थात ‘विन्ध्य में निवास करने वाली’ रूप में पूजित हैं। देवी यहाँ ‘कजरी (कजली) देवी’ के रूप में भी विराजित हैं — यह नाम उनके मेघ-श्याम काजल जैसे वर्ण से उत्पन्न है। मार्कण्डेय, व्यास तथा वनवास काल में पाण्डवों द्वारा भी इसी स्थल पर देवी की उपासना मानी जाती है।",
+    en: "Mentioned in the Rig Veda and Durga Saptashati, Maa Vindhyavasini Temple is one of Bharat's oldest Shakti shrines. Scriptural tradition holds that the Devi took birth as Yogmaya (Krishna's sibling) and chose the Vindhya range as her eternal abode after defeating Mahishasura. Worshipped also as Kajari Devi due to her kohl-dark monsoon complexion, this Dham has drawn sages like Markandeya, Vyasa, and the Pandavas for millennia.",
+    hi: "ऋग्वेद और दुर्गा सप्तशती में वर्णित माँ विन्ध्यवासिनी मंदिर भारत के प्राचीनतम शक्तिपीठों में से एक है। पौराणिक मान्यता है कि देवी ने कृष्ण की बहन योगमाया के रूप में जन्म लिया और महिषासुर का वध करने के बाद विन्ध्य पर्वत को अपना शाश्वत निवास बनाया। अपने मेघ-श्याम वर्ण के कारण वे 'कजरी देवी' के रूप में भी पूजी जाती हैं, जहाँ सदियों से महर्षि मार्कण्डेय, व्यास और पाण्डव आराधना करते आ रहे हैं।",
+  },
+  "about.history.detailed.p1": {
+    en: "The sacred history of Maa Vindhyavasini is deeply woven into the oldest spiritual scriptures of Bharat, including the Rig Veda, Markandeya Purana, Devi Bhagavata, and the Durga Saptashati. As one of the most ancient and continuously worshipped Shakti shrines, Vindhyachal Dham stands as an eternal source of spiritual energy where sages, seers, and devotees have gathered for millennia.",
+    hi: "माँ विन्ध्यवासिनी का पावन इतिहास भारत के प्राचीनतम धर्मग्रंथों में गहराई से समाया हुआ है, जिनमें ऋग्वेद, मार्कण्डेय पुराण, देवी भागवत और श्री दुर्गा सप्तशती प्रमुख हैं। निरंतर आराधना और उपासना का केंद्र रहा विन्ध्याचल धाम एक जागृत सिद्धपीठ है, जहाँ अनादि काल से ऋषि-मुनि, साधक और भक्त ऊर्जा और आशीर्वाद प्राप्त करने के लिए एकत्रित होते रहे हैं।",
+  },
+  "about.history.detailed.p2": {
+    en: "According to the Puranas, the Devi took birth as Yogmaya, the sibling of Bhagavan Sri Krishna, to facilitate his divine escape from the tyrant Kansa. When Kansa attempted to dash the newborn child against a stone, she slipped from his hands, soared into the heavens, and revealed her majestic eight-armed divine form. Proclaiming Kansa's doom, she descended upon the sacred Vindhya hills, establishing her permanent throne of protection and grace.",
+    hi: "पौराणिक मान्यताओं के अनुसार, देवी ने भगवान श्रीकृष्ण की रक्षा हेतु नन्द गोकुल में योगमाया के रूप में यशोदा माता के गर्भ से अवतार लिया था। जब अत्याचारी कंस ने उस नवजात कन्या को शिला पर पटककर मारना चाहा, तो वे उसके हाथों से फिसलकर आकाश में विलीन हो गईं और अष्टभुज दिव्य रूप धारण किया। कंस के विनाश की घोषणा करने के बाद, उन्होंने इस पावन विन्ध्य पर्वत श्रृंखला को अपना सनातन निवास बनाया।",
+  },
+  "about.history.detailed.p3": {
+    en: "Here, the Mother defeated Mahishasura, Shumbha, and Nishumbha, restoring cosmic order. The local traditions also celebrate her as Kajari Devi, a name symbolizing her dark monsoon complexion that brings cooling rain and relief to the earth. Legends state that great sages like Markandeya, Maharishi Vyasa, and the Pandavas during their vanvas offered intense penance and received divine boons at this exact spot.",
+    hi: "विन्ध्य क्षेत्र में ही देवी ने महिषासुर, शुम्भ और निशुम्भ जैसे महाभयानक असुरों का संहार कर सृष्टि में धर्म की पुनर्स्थापना की। स्थानीय परंपराओं में वे 'कजरी देवी' के नाम से भी पूजी जाती हैं, जो उनके श्याम-मेघ वर्ण और शीतलता प्रदान करने वाले वर्षाकालीन स्वरूप का प्रतीक है। मान्यता है कि महर्षि मार्कण्डेय, वेदव्यास और वनवास के दौरान स्वयं पाण्डवों ने इसी पावन स्थल पर घोर तपस्या कर माता से मनोवांछित वरदान प्राप्त किए थे।",
   },
 
   "about.sanctum.title": { en: "The Sanctum & Sacred Mahima", hi: "गर्भगृह एवं देवी की महिमा" },
   "about.sanctum.text": {
-    en: "The garbhagriha houses a self-manifested (svayambhu) stone vigraha of the Devi — adorned daily with silken vastra, gold ornaments, fresh flowers and fragrant chandan. Unlike most temples, the Devi's mukut and shringar change every day, and devotees can witness the Mangala Aarti before sunrise, the Madhyahna Aarti at noon, and the breathtaking Sandhya Aarti as oil lamps illuminate the entire prangan. The temple shikhara is built in the Nagara style of North Indian architecture, with intricately carved gold-plated kalash. Bali (offering of pumpkin/coconut) is a unique tradition followed at Vindhyavasini, symbolising the surrender of ego at the Mother's feet.",
-    hi: "गर्भगृह में देवी का स्वयंभू पाषाण विग्रह स्थापित है — जिसका प्रतिदिन रेशमी वस्त्र, स्वर्ण आभूषण, ताजे पुष्प एवं चन्दन से शृंगार होता है। यहाँ देवी का मुकुट एवं शृंगार प्रतिदिन बदला जाता है। भक्त सूर्योदय से पूर्व मंगला आरती, मध्याह्न आरती एवं सायंकाल सन्ध्या आरती के अद्भुत दर्शन कर सकते हैं, जब समस्त प्रांगण दीपों से जगमगा उठता है। मंदिर का शिखर उत्तर भारतीय नागर शैली में निर्मित है, जिस पर सूक्ष्म नक्काशीदार स्वर्ण-कलश सुशोभित है। यहाँ ‘बलि’ (कूष्माण्ड/नारियल अर्पण) एक विशिष्ट परम्परा है — जो माँ के चरणों में अहंकार-त्याग का प्रतीक है।",
+    en: "The garbhagriha houses a self-manifested (svayambhu) stone vigraha of the Devi, which is adorned daily with silken vastra, gold ornaments, fresh flowers and fragrant chandan. Unlike most temples, the Devi's mukut and shringar change every day, and devotees can witness the Mangala Aarti before sunrise, the Madhyahna Aarti at noon, and the breathtaking Sandhya Aarti as oil lamps illuminate the entire prangan. The temple shikhara is built in the Nagara style of North Indian architecture, with intricately carved gold-plated kalash. Bali (offering of pumpkin/coconut) is a unique tradition followed at Vindhyavasini, symbolising the surrender of ego at the Mother's feet.",
+    hi: "गर्भगृह में देवी का स्वयंभू पाषाण विग्रह स्थापित है, जिसका प्रतिदिन रेशमी वस्त्र, स्वर्ण आभूषण, ताजे पुष्प एवं चन्दन से शृंगार होता है। यहाँ देवी का मुकुट एवं शृंगार प्रतिदिन बदला जाता है। भक्त सूर्योदय से पूर्व मंगला आरती, मध्याह्न आरती एवं सायंकाल सन्ध्या आरती के अद्भुत दर्शन कर सकते हैं, जब समस्त प्रांगण दीपों से जगमगा उठता है। मंदिर का शिखर उत्तर भारतीय नागर शैली में निर्मित है, जिस पर सूक्ष्म नक्काशीदार स्वर्ण-कलश सुशोभित है। यहाँ ‘बलि’ (कूष्माण्ड/नारियल अर्पण) एक विशिष्ट परम्परा है, जो माँ के चरणों में अहंकार-त्याग का प्रतीक है।",
   },
 
   "about.importance.title": { en: "Spiritual Importance", hi: "आध्यात्मिक महत्व" },
   "about.importance.text": {
-    en: "Vindhyachal is counted among the 51/108 Shakti Pithas of Bharat. It is one of the very few sites where the Devi is worshipped in three living forms — Mahalakshmi at the main temple, Mahakali at Kali Khoh, and Mahasaraswati as Ashtabhuja. Completing the Trikona Parikrama is considered as fruitful as visiting all the Char Dhams. The dham draws sadhakas of the Sri Vidya tradition, tantric upasakas, classical poets and singers (the Kajari Mahotsav has nurtured generations of folk-poets), and millions of householder devotees who come for blessings of progeny, prosperity, learning and protection.",
-    hi: "विन्ध्याचल भारत के ५१/१०८ शक्तिपीठों में परिगणित है। यह उन विरले स्थलों में से एक है जहाँ देवी तीन जीवन्त रूपों में पूजित हैं — मुख्य मंदिर में महालक्ष्मी, काली खोह में महाकाली एवं अष्टभुजा रूप में महासरस्वती। त्रिकोण परिक्रमा को चार धाम यात्रा के समान फलदायी माना गया है। यह धाम श्रीविद्या परम्परा के साधक, तांत्रिक उपासक, शास्त्रीय कवि एवं गायक (कजरी महोत्सव ने अनगिनत लोक-कवियों को जन्म दिया है), तथा सन्तान, समृद्धि, विद्या एवं रक्षा की कामना से आये करोड़ों गृहस्थ भक्तों को आकर्षित करता है।",
+    en: "Vindhyachal is counted among the 51/108 Shakti Pithas of Bharat. It is one of the very few sites where the Devi is worshipped in three living forms: Mahalakshmi at the main temple, Mahakali at Kali Khoh, and Mahasaraswati as Ashtabhuja. Completing the Trikona Parikrama is considered as fruitful as visiting all the Char Dhams. The dham draws sadhakas of the Sri Vidya tradition, tantric upasakas, classical poets and singers (the Kajari Mahotsav has nurtured generations of folk-poets), and millions of householder devotees who come for blessings of progeny, prosperity, learning and protection.",
+    hi: "विन्ध्याचल भारत के ५१/१०८ शक्तिपीठों में परिगणित है। यह उन विरले स्थलों में से एक है जहाँ देवी तीन जीवन्त रूपों में पूजित हैं: मुख्य मंदिर में महालक्ष्मी, काली खोह में महाकाली एवं अष्टभुजा रूप में महासरस्वती। त्रिकोण परिक्रमा को चार धाम यात्रा के समान फलदायी माना गया है। यह धाम श्रीविद्या परम्परा के साधक, तांत्रिक उपासक, शास्त्रीय कवि एवं गायक (कजरी महोत्सव ने अनगिनत लोक-कवियों को जन्म दिया है), तथा सन्तान, समृद्धि, विद्या एवं रक्षा की कामना से आये करोड़ों गृहस्थ भक्तों को आकर्षित करता है।",
   },
 
   "about.trikona.title": {
-    en: "Trikona Parikrama — The Sacred Triangle",
-    hi: "त्रिकोण परिक्रमा — पावन त्रिकोण",
+    en: "Trikona Parikrama: The Sacred Triangle",
+    hi: "त्रिकोण परिक्रमा: पावन त्रिकोण",
+  },
+  "about.kunds.title": {
+    en: "Sacred Kunds & Ghats",
+    hi: "पवित्र कुंड और पावन घाट",
+  },
+  "about.kunds.text": {
+    en: "The Vindhya region features several sacred water bodies essential to pilgrimage. Ram Gaya Ghat on the Ganges is revered as the site where Sri Rama offered pind daan to his ancestors. Gerua Talab and Kali Kund are ancient natural ponds located along the parikrama paths where pilgrims perform specialized purification rituals before worship.",
+    hi: "विन्ध्य क्षेत्र अनेक पवित्र कुंडों और घाटों से परिपूर्ण है। पतित पावनी गंगा तट पर स्थित 'राम गया घाट' वह स्थान है जहाँ श्री राम ने अपने पूर्वजों का पिंडदान किया था। परिक्रमा मार्ग पर स्थित 'गेरुआ तालाब' और 'काली कुंड' प्राचीन जलकुंड हैं जहाँ श्रद्धालु दर्शन से पूर्व विशेष शुद्धि और अनुष्ठान करते हैं।",
   },
   "about.trikona.text": {
-    en: "Vindhyachal is unique because three forms of the Devi are worshipped here as the Maha Trishakti — Maha Lakshmi, Maha Kali and Maha Saraswati. Devotees complete the Trikona Parikrama by visiting all three temples in one circuit.",
-    hi: "विन्ध्याचल इसलिए अद्वितीय है क्योंकि यहाँ देवी के तीन रूपों — महालक्ष्मी, महाकाली एवं महासरस्वती — की महात्रिशक्ति के रूप में उपासना होती है। भक्तगण तीनों मंदिरों के दर्शन कर त्रिकोण परिक्रमा सम्पन्न करते हैं।",
+    en: "Vindhyachal is unique because three forms of the Devi are worshipped here as the Maha Trishakti, comprising Maha Lakshmi, Maha Kali and Maha Saraswati. Devotees complete the Trikona Parikrama by visiting all three temples in one circuit.",
+    hi: "विन्ध्याचल इसलिए अद्वितीय है क्योंकि यहाँ देवी के तीन रूपों (महालक्ष्मी, महाकाली एवं महासरस्वती) की महात्रिशक्ति के रूप में उपासना होती है। भक्तगण तीनों मंदिरों के दर्शन कर त्रिकोण परिक्रमा सम्पन्न करते हैं।",
   },
   "about.tri.1.title": { en: "Vindhyavasini Mandir", hi: "विन्ध्यवासिनी मंदिर" },
   "about.tri.1.text": {
-    en: "Main shrine — Devi as Maha Lakshmi / Yogmaya, on the bank of the Ganga.",
-    hi: "मुख्य मंदिर — गंगा तट पर देवी महालक्ष्मी / योगमाया के रूप में।",
+    en: "Main shrine of the Devi as Maha Lakshmi / Yogmaya, situated on the bank of the Ganga.",
+    hi: "मुख्य मंदिर जहाँ देवी गंगा तट पर महालक्ष्मी / योगमाया के रूप में विराजित हैं।",
   },
   "about.tri.2.title": { en: "Kali Khoh Mandir", hi: "काली खोह मंदिर" },
   "about.tri.2.text": {
-    en: "Ancient cave shrine, ~6 km away — Devi as Maha Kali, slayer of Raktabeeja.",
-    hi: "प्राचीन गुफा मंदिर, लगभग ६ किमी दूर — रक्तबीज के संहारक रूप में देवी महाकाली।",
+    en: "Ancient cave shrine, located approximately 6 km away, dedicated to Devi as Maha Kali, the slayer of Raktabeeja.",
+    hi: "प्राचीन गुफा मंदिर, जो लगभग ६ किमी दूर है और रक्तबीज के संहारक रूप में देवी महाकाली को समर्पित है।",
   },
   "about.tri.3.title": { en: "Ashtabhuja Devi Mandir", hi: "अष्टभुजा देवी मंदिर" },
   "about.tri.3.text": {
-    en: "Hilltop shrine, ~8 km away — Devi as Maha Saraswati, eight-armed form.",
-    hi: "पर्वत-शिखर मंदिर, लगभग ८ किमी दूर — अष्टभुज रूप में देवी महासरस्वती।",
+    en: "Hilltop shrine, situated approximately 8 km away, dedicated to Devi as Maha Saraswati in her eight-armed form.",
+    hi: "पर्वत-शिखर मंदिर, जो लगभग ८ किमी दूर है और अष्टभुज रूप में देवी महासरस्वती को समर्पित है।",
   },
 
-  "about.corridor.title": { en: "Vindhya Corridor", hi: "विन्ध्य कॉरिडोर" },
-  "about.corridor.text": {
-    en: "Modeled after the Kashi Vishwanath Corridor, the Vindhya Corridor is being developed at an estimated cost of ₹224+ crore. Built using pink Ahraura stone crafted by Jaipur artisans, the project widens the parikrama path to 50 ft and creates world-class facilities for pilgrims. Once complete, Maa Vindhyavasini's temple will be visible directly from the banks of the Ganga.",
-    hi: "काशी विश्वनाथ कॉरिडोर की भांति, विन्ध्य कॉरिडोर का निर्माण ₹२२४+ करोड़ की लागत से हो रहा है। जयपुर के शिल्पकारों द्वारा तराशे गये अहरौरा के गुलाबी पत्थरों से निर्मित यह परियोजना परिक्रमा मार्ग को ५० फीट चौड़ा करती है तथा तीर्थयात्रियों के लिए विश्वस्तरीय सुविधाएँ उपलब्ध कराती है। पूर्ण होने पर माँ विन्ध्यवासिनी का मंदिर सीधे गंगा तट से दृष्टिगोचर होगा।",
+  "about.legend.title": { en: "The Legend of Mahishasura Mardini", hi: "महिषासुर मर्दिनी की पावन कथा" },
+  "about.legend.text": {
+    en: "Vindhyachal is the sacred land where Adi Parashakti manifested to destroy the tyrant demon king Mahishasura. After a fierce battle described in the Puranas, the Devi vanquished his army and restored cosmic order. Celebrating her victory, she established her permanent seat in the Vindhyas, choosing to dwell here eternally for the protection of all creation.",
+    hi: "विन्ध्याचल वह पावन सिद्धपीठ है जहाँ आदिशक्ति ने अत्याचारी असुर महिषासुर का संहार करने के लिए अवतार लिया था। पुराणों में वर्णित एक भीषण युद्ध में देवी ने महिषासुर का अंत कर ब्रह्मांडीय संतुलन बहाल किया। अपनी इस विजय के पश्चात, उन्होंने चराचर जगत के कल्याण और रक्षा के लिए विन्ध्य पर्वत श्रृंखला को अपना शाश्वत निवास बनाया।",
   },
 
   "about.fest.title": { en: "Festivals & Pilgrimage", hi: "उत्सव एवं तीर्थयात्रा" },
   "about.fest.text": {
-    en: "On the occasion of Vindhyavasini Jayanti, the Kajari festival is organised in honour of the Devi. During Navaratri, the temple town glows with lamps and flowers, and millions of devotees throng the dham. During the 2025 Prayag Maha Kumbh, more than 10 million pilgrims also visited Vindhyachal — placing it among the world's largest peaceful gatherings.",
-    hi: "विन्ध्यवासिनी जयन्ती के अवसर पर देवी के सम्मान में कजरी महोत्सव का आयोजन होता है। नवरात्रि के दिनों में सम्पूर्ण नगरी दीप-पुष्पों से जगमगा उठती है और लाखों भक्त धाम में दर्शनार्थ पधारते हैं। २०२५ के प्रयाग महाकुम्भ के समय एक करोड़ से अधिक श्रद्धालु विन्ध्याचल भी पधारे — जिसने इसे विश्व के सबसे बड़े शान्तिपूर्ण समागमों में स्थान दिलाया।",
+    en: "On the occasion of Vindhyavasini Jayanti, the Kajari festival is organised in honour of the Devi. During Navaratri, the temple town glows with lamps and flowers, and millions of devotees throng the dham. During the 2025 Prayag Maha Kumbh, more than 10 million pilgrims also visited Vindhyachal, placing it among the world's largest peaceful gatherings.",
+    hi: "विन्ध्यवासिनी जयन्ती के अवसर पर देवी के सम्मान में कजरी महोत्सव का आयोजन होता है। नवरात्रि के दिनों में सम्पूर्ण नगरी दीप-पुष्पों से जगमगा उठती है और लाखों भक्त धाम में दर्शनार्थ पधारते हैं। २०२५ के प्रयाग महाकुम्भ के समय एक करोड़ से अधिक श्रद्धालु विन्ध्याचल भी पधारे, जिसने इसे विश्व के सबसे बड़े शान्तिपूर्ण समागमों में स्थान दिलाया।",
   },
 
   "about.access.title": { en: "How to Reach", hi: "कैसे पहुँचें" },
@@ -191,8 +239,8 @@ export const translations = {
 
   "about.sansthan.title": { en: "Our Sansthan", hi: "हमारा संस्थान" },
   "about.sansthan.text": {
-    en: "Namami Vindhyavasini Sansthan is a devotional trust established under the divine inspiration of Pujya Guru Ji to preserve the sacred rituals of Maa Vindhyavasini and to serve every devotee who seeks her refuge. We organise satsang, annakut bhandara, vidya daan and seva activities — making the temple a living centre of bhakti.",
-    hi: "नमामि विन्ध्यवासिनी संस्थान पूज्य गुरुजी की दिव्य प्रेरणा से स्थापित एक भक्तिमय न्यास है, जिसका उद्देश्य माँ विन्ध्यवासिनी की पावन परम्पराओं की रक्षा और प्रत्येक शरणागत भक्त की सेवा करना है। हम सत्संग, अन्नकूट भंडारा, विद्या दान और सेवा गतिविधियों का आयोजन करते हैं — जिससे यह मंदिर भक्ति का एक जीवंत केंद्र बनता है।",
+    en: "Namami Vindhyavasini Sansthan is a premier socio-spiritual charitable trust dedicated to the eternal service of Adi Parashakti Maa Vindhyavasini. Rooted in the rich spiritual lineage of Sanatan Dharma and established under the divine guidance of Pujya Guru Ji, the Sansthan serves as a spiritual bridge connecting devotees across the globe to the sacred traditions of the Vindhya Dham. Beyond preserving and performing the ancient Vedic rituals, the Sansthan actively runs extensive charitable programs. This includes 'Annakut Bhandara' providing free sanctified meals to pilgrims and the underprivileged, 'Vidya Daan' supporting the education of young Vedic scholars, and organizing daily spiritual discourses (Satsang) and meditative retreats. Through its dedicated efforts, the Sansthan strives to nurture a community driven by selfless service (Seva), spiritual learning, and unwavering devotion, ensuring that the divine grace of the Mother reaches every seeking heart.",
+    hi: "नमामि विन्ध्यवासिनी संस्थान पूज्य गुरुजी के दिव्य मार्गदर्शन और आशीर्वाद से स्थापित एक अग्रणी सामाजिक-आध्यात्मिक धार्मिक न्यास (ट्रस्ट) है, जो आदि पराशक्ति माँ विन्ध्यवासिनी की अनवरत सेवा को समर्पित है। सनातन धर्म की समृद्ध आध्यात्मिक विरासत में रचा-बसा यह संस्थान, देश-विदेश के श्रद्धालुओं को विन्ध्य धाम की पावन परंपराओं से जोड़ने वाले एक दिव्य सेतु के रूप में कार्य करता है। देवी के प्राचीन वैदिक अनुष्ठानों एवं पूजन पद्धतियों के संरक्षण के साथ-साथ, संस्थान विभिन्न सामाजिक एवं परमार्थिक सेवा कार्यों का संचालन भी करता है। इसके अंतर्गत तीर्थयात्रियों और निर्धनों के लिए निरंतर 'अन्नकूट भंडारा' (निःशुल्क भोजन सेवा), युवा बटुकों (वैदिक छात्रों) की शिक्षा के लिए 'विद्या दान', एवं दैनिक आध्यात्मिक सत्संग तथा ध्यान शिविरों का आयोजन सम्मिलित है। संस्थान का प्रत्येक प्रयास माँ के चरणों में समर्पण, निःस्वार्थ सेवा, आध्यात्मिक ज्ञान के प्रसार और शांति की स्थापना के लिए प्रतिबद्ध है, ताकि जगज्जननी की असीम कृपा हर भक्त के जीवन को आलोकित कर सके।",
   },
 
   "about.values.vision.t": { en: "Vision", hi: "दृष्टि" },
@@ -252,8 +300,8 @@ export const translations = {
   "don.kicker": { en: "Daan Punya", hi: "दान-पुण्य" },
   "don.h2": { en: "Be Part of the Seva", hi: "सेवा का अंग बनें" },
   "don.text": {
-    en: "Every rupee you offer becomes a flower at Maa's feet — feeding devotees, lighting lamps, educating children and preserving sacred traditions. To donate, please contact us directly for bank details, UPI or in-person seva.",
-    hi: "आपका दिया हुआ हर रुपया माँ के चरणों में पुष्प बन जाता है — जिससे भक्तों को भोजन, दीप प्रज्वलन, बच्चों की शिक्षा और परम्पराओं की रक्षा होती है। दान हेतु बैंक/UPI विवरण के लिए कृपया हमसे सीधे सम्पर्क करें।",
+    en: "Every rupee you offer becomes a flower at Maa's feet, supporting the feeding of devotees, lighting of lamps, educating of children, and preserving of sacred traditions. You can scan the verified UPI QR code directly or transfer funds to our official bank account details listed below.",
+    hi: "आपका दिया हुआ हर रुपया माँ के चरणों में पुष्प बन जाता है, जिससे भक्तों को भोजन, दीप प्रज्वलन, बच्चों की शिक्षा और परम्पराओं की रक्षा होती है। आप सीधे यूपीआई क्यूआर कोड स्कैन करके या नीचे दिए गए आधिकारिक बैंक विवरण में राशि स्थानांतरित कर सकते हैं।",
   },
   "don.quick": { en: "Quick Donate", hi: "त्वरित दान" },
   "don.quick.bank": {
@@ -377,9 +425,10 @@ export const translations = {
     hi: "॥ उत्सव प्रत्येक भक्त का अधिकार है ॥",
   },
   "events.title": { en: "Temple Events", hi: "मंदिर के कार्यक्रम" },
+  "events.today": { en: "Today's Events", hi: "आज के कार्यक्रम" },
   "events.subtitle": {
-    en: "Festivals, satsang and seva programmes — join us in devotion.",
-    hi: "उत्सव, सत्संग एवं सेवा कार्यक्रम — भक्ति में हमारे साथ जुड़ें।",
+    en: "Festivals, satsang and seva programmes to join us in devotion.",
+    hi: "उत्सव, सत्संग एवं सेवा कार्यक्रम, हमसे भक्तिपूर्वक जुड़ने हेतु।",
   },
   "events.upcoming": { en: "Upcoming Events", hi: "आगामी कार्यक्रम" },
   "events.past": { en: "Past Events", hi: "पूर्व कार्यक्रम" },
@@ -452,8 +501,8 @@ export const translations = {
     hi: "द्वितीय चरण: माँ विन्ध्यवासिनी मंदिर",
   },
   "parikrama.stage1.subtitle": {
-    en: "Maha Lakshmi Swaroop — The Main Shrine",
-    hi: "महालक्ष्मी स्वरूप — मुख्य मंदिर",
+    en: "Maha Lakshmi Swaroop: The Main Shrine",
+    hi: "महालक्ष्मी स्वरूप: मुख्य मंदिर",
   },
   "parikrama.stage1.text": {
     en: "Now, arrive at the main temple of Maa Vindhyavasini, who sits on the banks of Ganga as Maha Lakshmi. Ring the bell and offer red flowers to the Mother. She is the Yogmaya child of Yashoda, who declared the doom of demon Kansa.",
@@ -467,8 +516,8 @@ export const translations = {
     hi: "तृतीय चरण: काली खोह मंदिर",
   },
   "parikrama.stage2.subtitle": {
-    en: "Maha Kali Swaroop — The Cave Shrine",
-    hi: "महाकाली स्वरूप — गुफा मंदिर",
+    en: "Maha Kali Swaroop: The Cave Shrine",
+    hi: "महाकाली स्वरूप: गुफा मंदिर",
   },
   "parikrama.stage2.text": {
     en: "Proceed to Kali Khoh, the cave temple of Maha Kali, nestled in the Vindhya foothills. It is here that Chamunda Devi resides, having destroyed the demons Chanda and Munda. Bow down in silence and offer your devotion.",
@@ -481,8 +530,8 @@ export const translations = {
     hi: "चतुर्थ चरण: माँ अष्टभुजा मंदिर",
   },
   "parikrama.stage3.subtitle": {
-    en: "Maha Saraswati Swaroop — Hilltop Shrine",
-    hi: "महासरस्वती स्वरूप — पर्वत मंदिर",
+    en: "Maha Saraswati Swaroop: Hilltop Shrine",
+    hi: "महासरस्वती स्वरूप: पर्वत मंदिर",
   },
   "parikrama.stage3.text": {
     en: "Climb up to Ashtabhuja temple on the hill, dedicated to Maha Saraswati. She is the eighth-armed goddess who guards the holy region. Tie a sacred red thread on the tree, and make your spiritual vow.",

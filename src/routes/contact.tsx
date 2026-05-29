@@ -156,28 +156,6 @@ function ContactForm() {
       setSent(true);
       toast.success(t("ct.f.toast"));
 
-      // Open WhatsApp in new tab after successful insert
-      const waNumber = "917977339435";
-      const messageText = `Hello, I contacted you from the website.
-
-Name: ${parsed.data.name}
-Email: ${parsed.data.email}
-Phone: ${parsed.data.phone || ""}
-Message: ${parsed.data.message} and run`;
-
-      const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(messageText)}`;
-      console.log("[ContactForm] Opening WhatsApp in new tab with URL:", url);
-
-      // Ensure browser popup is not blocked: using window.open(url, "_blank")
-      const popup = window.open(url, "_blank");
-      if (popup) {
-        console.log("[ContactForm] WhatsApp window opened successfully.");
-      } else {
-        console.warn(
-          "[ContactForm] WhatsApp window.open returned null. Popup blocker might be enabled.",
-        );
-      }
-
       // Send Telegram notification
       try {
         const telegramToken = "8613225182:AAGGEGLpjlicL-rE_vzIfIMCt757_Umpn_U";
@@ -223,36 +201,36 @@ Message: ${parsed.data.message} and run`;
           <div className={`font-display text-xl text-maroon ${dev}`}>{t("ct.f.thanks")}</div>
         </div>
       ) : (
-        <div className="space-y-3">
+        <div className="space-y-3 animate-fade-in">
           <input
             name="name"
             required
             placeholder={t("ct.f.name")}
-            className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold"
+            className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none input-focus-spring"
           />
           <input
             name="email"
             required
             type="email"
             placeholder={t("ct.f.email")}
-            className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold"
+            className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none input-focus-spring"
           />
           <input
             name="phone"
             placeholder={t("ct.f.phone")}
-            className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold"
+            className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none input-focus-spring"
           />
           <textarea
             name="message"
             required
             rows={4}
             placeholder={t("ct.f.msg")}
-            className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold resize-none"
+            className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none input-focus-spring resize-none"
           />
           <button
             disabled={busy}
             type="submit"
-            className={`w-full px-6 py-3 rounded-full bg-gradient-sacred text-cream font-medium shadow-gold hover:opacity-95 transition disabled:opacity-60 ${dev}`}
+            className={`w-full px-6 py-3 rounded-full bg-gradient-sacred text-cream font-medium shadow-gold hover:opacity-95 hover:scale-[1.02] active:scale-95 transition-all duration-300 disabled:opacity-60 cursor-pointer ${dev}`}
           >
             {busy ? t("ct.f.sending") : t("ct.f.send")}
           </button>
@@ -267,7 +245,9 @@ function AppointmentForm() {
   const dev = lang === "hi" ? "font-devanagari" : "";
   const [sent, setSent] = useState(false);
   const [busy, setBusy] = useState(false);
-  const today = new Date().toISOString().split("T")[0];
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const tomorrowStr = tomorrow.toISOString().split("T")[0];
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -355,25 +335,25 @@ function AppointmentForm() {
           <p className={`text-sm text-muted-foreground mt-2 ${dev}`}>{t("ct.appt.confirm")}</p>
         </div>
       ) : (
-        <div className="space-y-3">
+        <div className="space-y-3 animate-fade-in">
           <input
             name="name"
             required
             placeholder={t("ct.f.name")}
-            className="w-full px-4 py-3 rounded-lg border border-input bg-background"
+            className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none input-focus-spring"
           />
           <div className="grid sm:grid-cols-2 gap-3">
             <input
               name="phone"
               required
               placeholder={t("ct.appt.phone")}
-              className="w-full px-4 py-3 rounded-lg border border-input bg-background"
+              className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none input-focus-spring"
             />
             <input
               name="email"
               type="email"
               placeholder={t("ct.appt.email")}
-              className="w-full px-4 py-3 rounded-lg border border-input bg-background"
+              className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none input-focus-spring"
             />
           </div>
           <div className="grid sm:grid-cols-2 gap-3">
@@ -381,14 +361,14 @@ function AppointmentForm() {
               name="appointment_date"
               required
               type="date"
-              min={today}
-              className="w-full px-4 py-3 rounded-lg border border-input bg-background"
+              min={tomorrowStr}
+              className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none input-focus-spring"
             />
             <select
               name="time_slot"
               required
               defaultValue=""
-              className="w-full px-4 py-3 rounded-lg border border-input bg-background"
+              className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none input-focus-spring"
             >
               <option value="" disabled>
                 {t("ct.appt.slot")}
@@ -405,12 +385,12 @@ function AppointmentForm() {
             required
             rows={3}
             placeholder={t("ct.appt.purpose")}
-            className="w-full px-4 py-3 rounded-lg border border-input bg-background resize-none"
+            className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none input-focus-spring resize-none"
           />
           <button
             disabled={busy}
             type="submit"
-            className={`w-full px-6 py-3 rounded-full bg-gradient-sacred text-cream font-medium shadow-gold disabled:opacity-60 ${dev}`}
+            className={`w-full px-6 py-3 rounded-full bg-gradient-sacred text-cream font-medium shadow-gold hover:opacity-95 hover:scale-[1.02] active:scale-95 transition-all duration-300 disabled:opacity-60 cursor-pointer ${dev}`}
           >
             {busy ? t("ct.appt.submitting") : t("ct.appt.submit")}
           </button>

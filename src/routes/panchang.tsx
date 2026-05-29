@@ -712,7 +712,7 @@ function PanchangPage() {
         </div>
 
         {/* Today's Festival highlight */}
-        <div className="rounded-2xl bg-gradient-sacred text-cream p-6 md:p-8 shadow-sacred flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div key={dateKey + "_fest"} className="animate-fade-in rounded-2xl bg-gradient-sacred text-cream p-6 md:p-8 shadow-sacred flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div className="text-xs uppercase tracking-widest text-gold font-bold">
               Selected Date
@@ -738,7 +738,7 @@ function PanchangPage() {
         </div>
 
         {/* Today's Panchang Grid */}
-        <div>
+        <div key={dateKey + "_details"} className="animate-fade-in">
           <div className="flex items-center gap-3 mb-6">
             <Clock className="text-saffron" size={28} />
             <h2 className="font-display text-2xl md:text-3xl text-maroon">Panchang Details</h2>
@@ -752,7 +752,7 @@ function PanchangPage() {
             {panchangRows.map((row) => (
               <div
                 key={row.label}
-                className="rounded-xl bg-gradient-divine border border-gold/40 p-4 shadow-gold flex items-center justify-between gap-3"
+                className="rounded-xl bg-gradient-divine border border-gold/40 p-4 shadow-gold flex items-center justify-between gap-3 hover:-translate-y-1 hover:shadow-sacred transition-all duration-300"
               >
                 <span className="flex items-center gap-3 text-foreground/80 shrink-0">
                   <row.icon size={18} className="text-saffron" />
@@ -767,7 +767,7 @@ function PanchangPage() {
         </div>
 
         {/* Muhurat & Inauspicious */}
-        <div className="grid lg:grid-cols-2 gap-6">
+        <div key={dateKey + "_muhurats"} className="animate-fade-in grid lg:grid-cols-2 gap-6">
           <div className="rounded-2xl border border-gold/30 bg-cream/20 p-6 shadow-sacred">
             <h3 className="font-display text-xl text-maroon mb-4 flex items-center gap-2 border-b border-gold/20 pb-2">
               <Sparkles className="text-saffron" size={20} /> Auspicious Muhurats

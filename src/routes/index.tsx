@@ -96,7 +96,7 @@ function HeroSlider() {
             key={idx}
             className={`absolute inset-0 transition-opacity duration-1000 ${idx === i ? "opacity-100" : "opacity-0"}`}
           >
-            <img src={s.img} alt={t(s.titleKey)} className="w-full h-full object-cover" />
+            <img src={s.img} alt={t(s.titleKey)} className={`w-full h-full object-cover ${idx === i ? "animate-kenburns" : ""}`} />
             <div className="absolute inset-0 bg-gradient-overlay" />
             <div className="absolute bottom-6 left-6 right-6 text-center text-cream">
               <div className="font-devanagari text-gold text-sm">{s.sanskrit}</div>
@@ -608,13 +608,14 @@ function HomePage() {
               <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
                 <Link
                   to="/sandesh"
-                  className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-gradient-sacred text-cream font-medium shadow-gold hover:opacity-95 hover:scale-[1.03] transition-all duration-300"
+                  className="group relative overflow-hidden inline-flex items-center gap-2 px-7 py-3 rounded-full bg-gradient-sacred text-cream font-medium shadow-gold hover:opacity-95 hover:scale-[1.03] active:scale-95 transition-all duration-300"
                 >
+                  <span className="btn-shine-overlay" />
                   {t("home.cta.today")} <ArrowRight size={16} />
                 </Link>
                 <Link
                   to="/about"
-                  className="inline-flex items-center px-7 py-3 rounded-full border-2 border-maroon text-maroon font-medium hover:bg-maroon hover:text-cream hover:scale-[1.03] transition-all duration-300"
+                  className="inline-flex items-center px-7 py-3 rounded-full border-2 border-maroon text-maroon font-medium hover:bg-maroon hover:text-cream hover:scale-[1.03] active:scale-95 transition-all duration-300"
                 >
                   {t("home.cta.about")}
                 </Link>
@@ -625,6 +626,14 @@ function HomePage() {
           <ScrollReveal direction="left" duration={1000}>
             <HeroSlider />
           </ScrollReveal>
+        </div>
+
+        {/* Scroll Guide Indicator */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-1 text-maroon/60 pointer-events-none select-none">
+          <span className="text-[10px] uppercase tracking-[0.25em] font-semibold">Scroll Down</span>
+          <div className="w-5 h-8 rounded-full border-2 border-maroon/40 flex justify-center p-1">
+            <div className="w-1 h-2 rounded-full bg-maroon/60 animate-scroll-bounce" />
+          </div>
         </div>
       </section>
 
@@ -665,7 +674,7 @@ function HomePage() {
           {intro.map((c, idx) => (
             <ScrollReveal key={c.tk} direction="up" delay={idx * 150} duration={800}>
               <div
-                className="group p-8 rounded-2xl bg-card border border-border hover:border-gold/60 hover:shadow-gold hover:-translate-y-2 transition-all duration-300 h-full"
+                className="group tilt-card-hover p-8 rounded-2xl bg-card border border-border hover:border-gold/60 h-full"
               >
                 <div className="w-12 h-12 rounded-xl bg-gradient-sacred flex items-center justify-center text-cream mb-5 group-hover:scale-110 transition-transform duration-300">
                   <c.icon size={20} />
@@ -910,26 +919,26 @@ function HomePage() {
 
       {lightbox && (
         <div
-          className="fixed inset-0 z-[60] bg-black/95 flex flex-col items-center justify-center p-4"
+          className="fixed inset-0 z-[60] bg-black/95 flex flex-col items-center justify-center p-4 transition-all duration-300 animate-fade-in"
           onClick={() => setLightbox(null)}
         >
           {/* Close button */}
           <button
             onClick={() => setLightbox(null)}
-            className="absolute top-4 right-4 z-50 p-2.5 rounded-full bg-cream/10 text-cream hover:bg-cream/20 transition-colors"
+            className="absolute top-4 right-4 z-50 p-2.5 rounded-full bg-cream/10 text-cream hover:bg-cream/20 hover:rotate-90 transition-all duration-300 cursor-pointer"
             aria-label="Close lightbox"
           >
             <X size={24} />
           </button>
 
           <div
-            className="relative max-h-[80vh] max-w-full flex flex-col items-center"
+            className="relative max-h-[80vh] max-w-full flex flex-col items-center transition-all duration-500 ease-spring animate-fade-in"
             onClick={(e) => e.stopPropagation()}
           >
             <img
               src={lightbox}
               alt="Darshan"
-              className="max-h-[75vh] max-w-full rounded-xl shadow-2xl object-contain border border-gold/25"
+              className="max-h-[75vh] max-w-full rounded-xl shadow-2xl object-contain border border-gold/25 hover:scale-[1.01] transition-transform duration-300"
             />
             
             {/* Download Button in Lightbox */}
@@ -946,7 +955,7 @@ function HomePage() {
                 const item = itemsList.find((it) => it.src === lightbox);
                 handleDownload(lightbox, item?.cap || "darshan_vigraha");
               }}
-              className="mt-4 inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-gradient-sacred text-cream font-medium shadow-gold hover:scale-[1.03] transition-transform duration-300 text-sm"
+              className="mt-4 inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-gradient-sacred text-cream font-medium shadow-gold hover:scale-[1.03] active:scale-95 transition-all duration-300 text-sm cursor-pointer"
             >
               <Download size={14} />
               {hi ? "डाउनलोड करें" : "Download Darshan"}

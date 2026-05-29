@@ -528,7 +528,7 @@ function ParikramaPage() {
 
         {activeStep === null ? (
           /* MAP VIEW */
-          <div className="grid lg:grid-cols-3 gap-8 items-start">
+          <div className="animate-fade-in grid lg:grid-cols-3 gap-8 items-start">
             <div className="lg:col-span-2 rounded-3xl bg-card border border-gold/30 shadow-sacred p-6">
               <h3
                 className={`font-display text-2xl text-maroon mb-2 flex items-center gap-2 ${dev}`}
@@ -625,7 +625,7 @@ function ParikramaPage() {
 
                   {/* Node 0: Ganga Snan / Ram Gaya Ghat */}
                   <g
-                    className="cursor-pointer group"
+                    className="cursor-pointer group transition-all duration-300 hover:scale-110 active:scale-95 origin-[400px_120px]"
                     onClick={() => {
                       setSelectedMapNode(0);
                       playSplashSound();
@@ -643,7 +643,7 @@ function ParikramaPage() {
                       cy="120"
                       r="12"
                       fill={selectedMapNode === 0 ? "#FF5E36" : "#D9381E"}
-                      className="stroke-gold stroke-2 transition-all duration-300"
+                      className="stroke-gold stroke-2 transition-all duration-300 group-hover:stroke-saffron"
                     />
                     <text
                       x="400"
@@ -666,7 +666,7 @@ function ParikramaPage() {
 
                   {/* Node 1: Vindhyavasini Mandir */}
                   <g
-                    className="cursor-pointer group"
+                    className="cursor-pointer group transition-all duration-300 hover:scale-110 active:scale-95 origin-[220px_200px]"
                     onClick={() => {
                       setSelectedMapNode(1);
                       playBellSound();
@@ -684,7 +684,7 @@ function ParikramaPage() {
                       cy="200"
                       r="12"
                       fill={selectedMapNode === 1 ? "#FF5E36" : "#D9381E"}
-                      className="stroke-gold stroke-2 transition-all"
+                      className="stroke-gold stroke-2 transition-all duration-300 group-hover:stroke-saffron"
                     />
                     <text
                       x="220"
@@ -707,7 +707,7 @@ function ParikramaPage() {
 
                   {/* Node 2: Kali Khoh Cave */}
                   <g
-                    className="cursor-pointer group"
+                    className="cursor-pointer group transition-all duration-300 hover:scale-110 active:scale-95 origin-[400px_400px]"
                     onClick={() => {
                       setSelectedMapNode(2);
                       playBellSound();
@@ -725,7 +725,7 @@ function ParikramaPage() {
                       cy="400"
                       r="12"
                       fill={selectedMapNode === 2 ? "#FF5E36" : "#D9381E"}
-                      className="stroke-gold stroke-2 transition-all"
+                      className="stroke-gold stroke-2 transition-all duration-300 group-hover:stroke-saffron"
                     />
                     <text
                       x="400"
@@ -748,7 +748,7 @@ function ParikramaPage() {
 
                   {/* Node 3: Ashtabhuja Mandir */}
                   <g
-                    className="cursor-pointer group"
+                    className="cursor-pointer group transition-all duration-300 hover:scale-110 active:scale-95 origin-[580px_200px]"
                     onClick={() => {
                       setSelectedMapNode(3);
                       playBellSound();
@@ -766,7 +766,7 @@ function ParikramaPage() {
                       cy="200"
                       r="12"
                       fill={selectedMapNode === 3 ? "#FF5E36" : "#D9381E"}
-                      className="stroke-gold stroke-2 transition-all"
+                      className="stroke-gold stroke-2 transition-all duration-300 group-hover:stroke-saffron"
                     />
                     <text
                       x="580"
@@ -889,7 +889,7 @@ function ParikramaPage() {
           </div>
         ) : activeStep >= 0 && activeStep <= 3 ? (
           /* STEP GUIDED TOUR */
-          <div className="max-w-4xl mx-auto rounded-3xl bg-card border-2 border-gold/40 shadow-sacred overflow-hidden relative">
+          <div key={activeStep} className="animate-fade-in max-w-4xl mx-auto rounded-3xl bg-card border-2 border-gold/40 shadow-sacred overflow-hidden relative">
             <div className="absolute top-4 right-4 z-20 flex gap-2">
               {/* Persist/Exit button */}
               <button
@@ -1183,7 +1183,7 @@ function ParikramaPage() {
           </div>
         ) : (
           /* CERTIFICATE OF COMPLETION STAGE */
-          <div className="max-w-3xl mx-auto rounded-3xl bg-card border border-gold/40 shadow-sacred p-8 text-center">
+          <div className="animate-fade-in max-w-3xl mx-auto rounded-3xl bg-card border border-gold/40 shadow-sacred p-8 text-center">
             <div className="w-16 h-16 rounded-full bg-gradient-sacred flex items-center justify-center text-cream mx-auto mb-4 shadow-gold animate-bounce">
               <Award size={32} />
             </div>

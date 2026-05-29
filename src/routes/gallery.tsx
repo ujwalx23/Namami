@@ -145,26 +145,26 @@ function GalleryPage() {
 
       {lightbox && (
         <div
-          className="fixed inset-0 z-[60] bg-black/95 flex flex-col items-center justify-center p-2 sm:p-4"
+          className="fixed inset-0 z-[60] bg-black/95 flex flex-col items-center justify-center p-2 sm:p-4 transition-all duration-300 animate-fade-in"
           onClick={() => setLightbox(null)}
         >
           {/* Close button */}
           <button
             onClick={() => setLightbox(null)}
-            className="absolute top-4 right-4 z-50 p-2.5 rounded-full bg-cream/10 text-cream hover:bg-cream/20 transition-colors"
+            className="absolute top-4 right-4 z-50 p-2.5 rounded-full bg-cream/10 text-cream hover:bg-cream/20 hover:rotate-90 transition-all duration-300 cursor-pointer"
             aria-label="Close lightbox"
           >
             <X size={24} />
           </button>
 
           <div
-            className="relative max-w-full max-h-[calc(100vh-30px)] flex flex-col items-center justify-center"
+            className="relative max-w-full max-h-[calc(100vh-30px)] flex flex-col items-center justify-center transition-all duration-500 ease-spring animate-fade-in"
             onClick={(e) => e.stopPropagation()}
           >
             <img
               src={lightbox}
               alt="Darshan"
-              className="max-h-[calc(100vh-120px)] max-w-[95vw] rounded-xl shadow-2xl object-contain border border-gold/25"
+              className="max-h-[calc(100vh-120px)] max-w-[95vw] rounded-xl shadow-2xl object-contain border border-gold/25 hover:scale-[1.01] transition-transform duration-300"
             />
             
             {/* Download Button in Lightbox */}
@@ -173,7 +173,7 @@ function GalleryPage() {
                 const item = items.find((it) => it.src === lightbox);
                 handleDownload(lightbox, item?.cap || "darshan_vigraha");
               }}
-              className="mt-3 shrink-0 inline-flex items-center gap-2 px-6 py-2 rounded-full bg-gradient-sacred text-cream font-medium shadow-gold hover:scale-[1.03] transition-transform duration-300 text-sm"
+              className="mt-3 shrink-0 inline-flex items-center gap-2 px-6 py-2 rounded-full bg-gradient-sacred text-cream font-medium shadow-gold hover:scale-[1.03] active:scale-95 transition-all duration-300 text-sm cursor-pointer"
             >
               <Download size={14} />
               {hi ? "डाउनलोड करें" : "Download Darshan"}

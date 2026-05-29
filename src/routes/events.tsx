@@ -56,12 +56,29 @@ function formatDate(d: string) {
   });
 }
 
-function EventCard({ e, accent }: { e: EventRow; accent: "gold" | "muted" }) {
+function EventCard({ e, accent }: { e: EventRow; accent: "gold" | "muted" | "live" }) {
   return (
-    <article className="rounded-2xl overflow-hidden bg-card border border-border hover:-translate-y-1.5 hover:shadow-gold transition-all duration-300">
-      <div className={`h-1.5 ${accent === "gold" ? "bg-gradient-sacred" : "bg-muted"}`} />
+    <article className="rounded-2xl overflow-hidden bg-card border border-border hover:-translate-y-1.5 hover:shadow-gold transition-all duration-300 relative">
+      <div className={`h-1.5 ${
+        accent === "live" 
+          ? "bg-gradient-to-r from-red-500 to-orange-500" 
+          : accent === "gold" 
+            ? "bg-gradient-sacred" 
+            : "bg-muted"
+      }`} />
       <div className="p-7">
-        <h3 className="font-display text-2xl text-maroon mb-3">{e.title}</h3>
+        <div className="flex justify-between items-start gap-4 mb-3">
+          <h3 className="font-display text-2xl text-maroon">{e.title}</h3>
+          {accent === "live" && (
+            <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-red-50 text-red-600 border border-red-200 dark:bg-red-950/30 dark:text-red-400 dark:border-red-900/50 shrink-0">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+              </span>
+              LIVE
+            </span>
+          )}
+        </div>
         <div className="flex flex-col gap-1.5 text-sm text-muted-foreground mb-4">
           <span className="flex items-center gap-2">
             <Calendar size={14} className="text-gold" /> {formatDate(e.event_date)}
@@ -80,8 +97,16 @@ function EventsPage() {
   const { events } = Route.useLoaderData();
   const { t, lang } = useLang();
   const dev = lang === "hi" ? "font-devanagari" : "";
-  const todayIso = new Date().toISOString().slice(0, 10);
-  const upcoming = events.filter((e: EventRow) => e.event_date >= todayIso);
+  
+  // Calculate todayIso using local timezone date formatting
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  const todayIso = `${year}-${month}-${day}`;
+
+  const todayEvents = events.filter((e: EventRow) => e.event_date === todayIso);
+  const upcoming = events.filter((e: EventRow) => e.event_date > todayIso);
   const past = events.filter((e: EventRow) => e.event_date < todayIso);
 
   return (
@@ -92,6 +117,25 @@ function EventsPage() {
         subtitle={t("events.subtitle")}
       />
       <section className="container mx-auto px-6 py-16">
+        {todayEvents.length > 0 && (
+          <div className="mb-16">
+            <h2 className={`font-display text-3xl text-red-600 mb-8 flex items-center gap-3 ${dev}`}>
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+              </span>
+              {t("events.today")}
+            </h2>
+            <div className="grid md:grid-cols-3 gap-6">
+              {todayEvents.map((e: EventRow, idx) => (
+                <ScrollReveal key={e.id} direction="up" delay={idx * 120} duration={800}>
+                  <EventCard e={e} accent="live" />
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
+        )}
+
         <h2 className={`font-display text-3xl text-maroon mb-8 ${dev}`}>{t("events.upcoming")}</h2>
         {upcoming.length === 0 ? (
           <p className={`text-muted-foreground mb-12 ${dev}`}>{t("events.empty.up")}</p>

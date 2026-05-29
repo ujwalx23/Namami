@@ -15,12 +15,12 @@ import {
   Edit3,
   Eye,
   Activity,
+  RotateCw,
+  MapPin,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import type { Tables } from "@/integrations/supabase/types";
-
-const ADMIN_PASSCODE = "23rsnamamiweb&omi!";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
@@ -46,13 +46,12 @@ type Video = {
 };
 
 function AdminPage() {
-  const [authed, setAuthed] = useState(() => {
-    if (typeof window !== "undefined") {
-      return sessionStorage.getItem("admin_authed") === "true";
-    }
-    return false;
-  });
-  const [pass, setPass] = useState("");
+  const [session, setSession] = useState<any>(null);
+  const [loadingSession, setLoadingSession] = useState(true);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loggingIn, setLoggingIn] = useState(false);
+
   const [activeTab, setActiveTab] = useState<
     | "sandesh"
     | "events"
@@ -85,40 +84,100 @@ function AdminPage() {
   }
 
   useEffect(() => {
-    if (authed) {
+    // Get initial session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setLoadingSession(false);
+    });
+
+    // Listen for auth state changes
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    if (session) {
       loadCounts();
     }
-  }, [authed]);
+  }, [session]);
 
-  if (!authed) {
+  if (loadingSession) {
     return (
       <PageShell>
-        <PageHero title="Admin Access" subtitle="Enter the passcode to manage the website." />
+        <PageHero title="Admin Access" subtitle="Verifying authentication session..." />
+        <div className="container mx-auto px-6 py-20 flex justify-center">
+          <AdminTabLoader />
+        </div>
+      </PageShell>
+    );
+  }
+
+  if (!session) {
+    async function handleLogin(e: React.FormEvent) {
+      e.preventDefault();
+      if (!email.trim() || !password.trim()) {
+        return toast.error("Please enter email and password");
+      }
+      setLoggingIn(true);
+      const { error } = await supabase.auth.signInWithPassword({
+        email: email.trim(),
+        password: password.trim(),
+      });
+      setLoggingIn(false);
+      if (error) {
+        toast.error(error.message);
+      } else {
+        toast.success("Welcome back, Administrator!");
+      }
+    }
+
+    return (
+      <PageShell>
+        <PageHero title="Admin Login" subtitle="Sign in to manage the website content." />
         <section className="container mx-auto px-6 py-16 max-w-md">
           <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              if (pass === ADMIN_PASSCODE) {
-                setAuthed(true);
-                sessionStorage.setItem("admin_authed", "true");
-              } else {
-                toast.error("Wrong passcode");
-              }
-            }}
-            className="p-8 rounded-2xl bg-card border border-border space-y-4"
+            onSubmit={handleLogin}
+            className="p-8 rounded-2xl bg-card border border-border space-y-4 shadow-sacred animate-fade-in"
           >
-            <div className="flex items-center gap-2 text-maroon">
-              <Lock size={18} /> <span className="font-medium">Passcode</span>
+            <div className="flex items-center gap-2 text-maroon mb-2 justify-center">
+              <Lock size={20} className="text-saffron animate-pulse" />
+              <h3 className="font-display text-2xl font-semibold">Admin Credentials</h3>
             </div>
-            <input
-              type="password"
-              value={pass}
-              onChange={(e) => setPass(e.target.value)}
-              placeholder="Enter admin passcode"
-              className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold"
-            />
-            <button className="w-full px-6 py-3 rounded-full bg-gradient-sacred text-cream font-medium shadow-gold">
-              Unlock
+            
+            <div className="space-y-1">
+              <label className="text-xs font-semibold text-muted-foreground uppercase">Email Address</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="admin@namamivindhyavasini.org"
+                className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold"
+                required
+              />
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-xs font-semibold text-muted-foreground uppercase">Password</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter your password"
+                className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold"
+                required
+              />
+            </div>
+
+            <button
+              disabled={loggingIn}
+              className="w-full px-6 py-3 rounded-full bg-gradient-sacred text-cream font-medium shadow-gold hover:opacity-95 hover:scale-[1.01] transition-all disabled:opacity-50 cursor-pointer"
+            >
+              {loggingIn ? "Signing In..." : "Sign In"}
             </button>
           </form>
         </section>
@@ -138,28 +197,46 @@ function AdminPage() {
     { id: "analytics", label: "Analytics" },
   ];
 
-  const getBadge = (tabId: typeof activeTab) => {
-    return null;
-  };
-
   return (
     <PageShell>
       <PageHero title="Admin Panel" subtitle="Manage all website content." />
       <section className="container mx-auto px-6 py-10">
-        {/* Tab Navigation */}
-        <div className="flex flex-wrap gap-2 mb-8 border-b border-border pb-4">
+        {/* Admin Meta Header with Session details and Sign Out */}
+        <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-3 p-4 mb-8 bg-card border border-border rounded-2xl shadow-sm">
+          <div className="flex items-center gap-2.5">
+            <div className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse shrink-0" />
+            <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider truncate">
+              Session active &middot; {session?.user?.email || "Administrator"}
+            </span>
+          </div>
+          <button
+            onClick={async () => {
+              const { error } = await supabase.auth.signOut();
+              if (error) {
+                toast.error(error.message);
+              } else {
+                toast.success("Signed out successfully");
+              }
+            }}
+            className="px-4 py-1.5 rounded-full text-xs font-semibold border border-destructive/30 text-destructive bg-destructive/5 hover:bg-destructive/10 active:scale-95 transition-all cursor-pointer flex items-center gap-1.5 self-end sm:self-auto shrink-0 animate-fade-in"
+          >
+            Sign Out
+          </button>
+        </div>
+
+        {/* Tab Navigation (3-Column Grid on Mobile, Flex Wrap on Desktop) */}
+        <div className="grid grid-cols-3 gap-2 lg:flex lg:flex-wrap mb-8 border-b border-border pb-4">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-5 py-2.5 rounded-lg font-medium transition flex items-center ${
+              className={`w-full lg:w-auto px-2 py-2 lg:px-5 lg:py-2.5 rounded-lg font-medium text-[11px] sm:text-xs lg:text-sm transition flex items-center justify-center text-center leading-tight shrink-0 lg:shrink cursor-pointer ${
                 activeTab === tab.id
-                  ? "bg-gradient-sacred text-cream shadow-gold"
+                  ? "bg-gradient-sacred text-cream shadow-gold font-semibold"
                   : "text-muted-foreground hover:bg-card"
               }`}
             >
               {tab.label}
-              {getBadge(tab.id)}
             </button>
           ))}
         </div>
@@ -196,6 +273,7 @@ function SandeshAdmin() {
   const [author, setAuthor] = useState("Pujya Guru Ji");
   const [loaded, setLoaded] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [refreshing, setRefreshing] = useState(false);
 
   async function load() {
     const { data } = await supabase
@@ -205,6 +283,13 @@ function SandeshAdmin() {
     setList((data as Sandesh[]) ?? []);
     setLoaded(true);
   }
+
+  async function handleRefresh() {
+    setRefreshing(true);
+    await load();
+    setTimeout(() => setRefreshing(false), 600);
+  }
+
   if (!loaded) load();
   if (!loaded) return <AdminTabLoader />;
 
@@ -213,11 +298,15 @@ function SandeshAdmin() {
     if (!message.trim()) return;
     
     if (editingId) {
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from("sandesh")
         .update({ message: message.trim(), author: author.trim() || "Pujya Guru Ji" })
-        .eq("id", editingId);
+        .eq("id", editingId)
+        .select();
       if (error) return toast.error(error.message);
+      if (!data || data.length === 0) {
+        return toast.error("Update failed. Row not found or RLS policy blocked the update. Run migration/SQL query in Supabase dashboard to enable UPDATE permissions.");
+      }
       toast.success("Sandesh updated");
       setEditingId(null);
     } else {
@@ -253,9 +342,18 @@ function SandeshAdmin() {
 
   return (
     <div>
-      <h3 className="font-display text-2xl text-maroon mb-4">
-        {editingId ? "Edit Sandesh / Quote" : "Sandesh / Quotes"}
-      </h3>
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="font-display text-2xl text-maroon mb-0">
+          {editingId ? "Edit Sandesh / Quote" : "Sandesh / Quotes"}
+        </h3>
+        <button
+          onClick={handleRefresh}
+          disabled={refreshing}
+          className="px-4 py-1.5 rounded-full border border-gold/45 text-maroon text-xs font-medium hover:bg-cream/50 transition cursor-pointer flex items-center gap-1.5 disabled:opacity-60 active:scale-95"
+        >
+          <RotateCw size={12} className={refreshing ? "animate-spin" : ""} /> Refresh
+        </button>
+      </div>
       <form onSubmit={save} className="p-5 rounded-2xl bg-card border border-border space-y-3 mb-6">
         <textarea
           value={message}
@@ -327,38 +425,68 @@ function SandeshAdmin() {
 
 function EventAdmin() {
   const [list, setList] = useState<EventRow[]>([]);
-  const [form, setForm] = useState({
-    title: "",
-    description: "",
-    event_date: "",
-    location: "",
-  });
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [eventDate, setEventDate] = useState("");
+  const [location, setLocation] = useState("");
+  const [editingId, setEditingId] = useState<string | null>(null);
   const [loaded, setLoaded] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+
+  // Calculate local today date string
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  const todayIso = `${year}-${month}-${day}`;
 
   async function load() {
-    const { data } = await supabase.from("events").select("*").order("event_date");
+    const { data } = await supabase
+      .from("events")
+      .select("*")
+      .order("event_date", { ascending: false });
     setList((data as EventRow[]) ?? []);
     setLoaded(true);
   }
+
+  async function handleRefresh() {
+    setRefreshing(true);
+    await load();
+    setTimeout(() => setRefreshing(false), 600);
+  }
+
   if (!loaded) load();
   if (!loaded) return <AdminTabLoader />;
 
-  async function add(e: React.FormEvent) {
+  async function save(e: React.FormEvent) {
     e.preventDefault();
-    if (!form.title || !form.event_date || !form.location || !form.description)
-      return toast.error("All fields required");
-      
-    const todayIso = new Date().toISOString().slice(0, 10);
-    const { error } = await supabase.from("events").insert({
-      title: form.title,
-      description: form.description,
-      event_date: form.event_date,
-      location: form.location,
-      is_upcoming: form.event_date >= todayIso,
-    });
-    if (error) return toast.error(error.message);
-    toast.success("Event added");
-    setForm({ title: "", description: "", event_date: "", location: "" });
+    if (!title.trim() || !eventDate.trim() || !location.trim() || !description.trim()) {
+      return toast.error("All fields are required");
+    }
+    const payload = {
+      title: title.trim(),
+      description: description.trim(),
+      event_date: eventDate.trim(),
+      location: location.trim(),
+      is_upcoming: eventDate.trim() >= todayIso,
+    };
+    if (editingId) {
+      const { data, error } = await supabase.from("events").update(payload).eq("id", editingId).select();
+      if (error) return toast.error(error.message);
+      if (!data || data.length === 0) {
+        return toast.error("Update failed. Row not found or RLS policy blocked the update. Run migration/SQL query in Supabase dashboard to enable UPDATE permissions.");
+      }
+      toast.success("Event updated");
+      setEditingId(null);
+    } else {
+      const { error } = await supabase.from("events").insert(payload);
+      if (error) return toast.error(error.message);
+      toast.success("Event added");
+    }
+    setTitle("");
+    setDescription("");
+    setEventDate("");
+    setLocation("");
     await load();
   }
 
@@ -366,61 +494,150 @@ function EventAdmin() {
     const { error } = await supabase.from("events").delete().eq("id", id);
     if (error) return toast.error(error.message);
     toast.success("Deleted");
+    if (editingId === id) {
+      setEditingId(null);
+      setTitle("");
+      setDescription("");
+      setEventDate("");
+      setLocation("");
+    }
     await load();
+  }
+
+  function startEdit(ev: EventRow) {
+    setEditingId(ev.id);
+    setTitle(ev.title);
+    setDescription(ev.description);
+    setEventDate(ev.event_date);
+    setLocation(ev.location);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   return (
     <div>
-      <h3 className="font-display text-2xl text-maroon mb-4">Events</h3>
-      <form onSubmit={add} className="p-5 rounded-2xl bg-card border border-border space-y-3 mb-6">
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="font-display text-2xl text-maroon mb-0">
+          {editingId ? "Edit Event" : "Events Manager"}
+        </h3>
+        <button
+          onClick={handleRefresh}
+          disabled={refreshing}
+          className="px-4 py-1.5 rounded-full border border-gold/45 text-maroon text-xs font-medium hover:bg-cream/50 transition cursor-pointer flex items-center gap-1.5 disabled:opacity-60 active:scale-95"
+        >
+          <RotateCw size={12} className={refreshing ? "animate-spin" : ""} /> Refresh
+        </button>
+      </div>
+
+      <form onSubmit={save} className="p-5 rounded-2xl bg-card border border-border space-y-3 mb-6">
         <input
-          value={form.title}
-          onChange={(e) => setForm({ ...form, title: e.target.value })}
-          placeholder="Title"
-          className="w-full px-4 py-2 rounded-lg border border-input bg-background"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Event Title"
+          className="w-full px-4 py-2.5 rounded-lg border border-input bg-background"
+          required
         />
         <textarea
-          value={form.description}
-          onChange={(e) => setForm({ ...form, description: e.target.value })}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
           placeholder="Description"
           rows={2}
-          className="w-full px-4 py-2 rounded-lg border border-input bg-background"
+          className="w-full px-4 py-2.5 rounded-lg border border-input bg-background"
+          required
         />
-        <input
-          type="date"
-          value={form.event_date}
-          onChange={(e) => setForm({ ...form, event_date: e.target.value })}
-          className="w-full px-4 py-2 rounded-lg border border-input bg-background"
-        />
-        <input
-          value={form.location}
-          onChange={(e) => setForm({ ...form, location: e.target.value })}
-          placeholder="Location"
-          className="w-full px-4 py-2 rounded-lg border border-input bg-background"
-        />
-        <button className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-sacred text-cream text-sm">
-          <Plus size={14} /> Add Event
-        </button>
+        <div className="grid sm:grid-cols-2 gap-3">
+          <input
+            type="date"
+            value={eventDate}
+            onChange={(e) => setEventDate(e.target.value)}
+            className="w-full px-4 py-2.5 rounded-lg border border-input bg-background"
+            required
+          />
+          <input
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            placeholder="Location"
+            className="w-full px-4 py-2.5 rounded-lg border border-input bg-background"
+            required
+          />
+        </div>
+        <div className="flex gap-2 pt-1">
+          <button className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-sacred text-cream text-sm font-medium transition shadow-gold hover:opacity-95 cursor-pointer">
+            {editingId ? "Update Event" : "Add Event"}
+          </button>
+          {editingId && (
+            <button
+              type="button"
+              onClick={() => {
+                setEditingId(null);
+                setTitle("");
+                setDescription("");
+                setEventDate("");
+                setLocation("");
+              }}
+              className="px-5 py-2 rounded-full border border-border text-muted-foreground text-sm font-medium transition hover:bg-muted/10"
+            >
+              Cancel
+            </button>
+          )}
+        </div>
       </form>
+
       <div className="space-y-3">
         {list.map((ev) => {
-          const todayIso = new Date().toISOString().slice(0, 10);
-          const isUpcoming = ev.event_date >= todayIso;
+          const isLive = ev.event_date === todayIso;
+          const isFuture = ev.event_date > todayIso;
+
           return (
             <div
               key={ev.id}
-              className="p-4 rounded-xl bg-card border border-border flex justify-between gap-3"
+              className="p-4 rounded-xl bg-card border border-border flex justify-between items-center gap-3"
             >
               <div>
-                <div className="text-xs text-saffron uppercase tracking-wider">
-                  {ev.event_date} · {isUpcoming ? "Upcoming" : "Past"}
+                <div className="flex items-center gap-2 flex-wrap mb-1">
+                  <span className="text-[10px] font-semibold text-saffron bg-saffron/10 px-2 py-0.5 rounded">
+                    {ev.event_date}
+                  </span>
+                  
+                  {isLive ? (
+                    <span className="inline-flex items-center gap-1 bg-red-500/10 text-red-600 border border-red-200 dark:bg-red-950/30 dark:text-red-400 dark:border-red-900/50 px-2 py-0.5 rounded-full text-[10px] font-bold animate-pulse">
+                      <span className="relative flex h-1.5 w-1.5">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span>
+                      </span>
+                      LIVE
+                    </span>
+                  ) : isFuture ? (
+                    <span className="inline-flex items-center gap-1 bg-green-500/10 text-green-700 border border-green-200 dark:bg-green-950/30 dark:text-green-400 dark:border-green-900/50 px-2 py-0.5 rounded-full text-[10px] font-bold">
+                      Upcoming
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center gap-1 bg-muted/40 text-muted-foreground border border-border px-2 py-0.5 rounded-full text-[10px] font-bold">
+                      Past
+                    </span>
+                  )}
                 </div>
-                <div className="font-medium text-maroon">{ev.title}</div>
-                <div className="text-sm text-muted-foreground">{ev.location}</div>
+                <div className="font-semibold text-maroon text-sm">{ev.title}</div>
+                <div className="text-xs text-muted-foreground mt-0.5 flex items-center gap-1">
+                  <MapPin size={10} className="text-gold" /> {ev.location}
+                </div>
+                <p className="text-xs text-foreground/80 mt-1 line-clamp-2">{ev.description}</p>
               </div>
-              <button onClick={() => del(ev.id)} className="text-destructive p-2">
-                <Trash2 size={16} />
-              </button>
+              <div className="flex gap-1 shrink-0">
+                <button
+                  onClick={() => startEdit(ev)}
+                  className="text-saffron p-2 hover:bg-saffron/5 rounded transition"
+                  aria-label="Edit event"
+                >
+                  <Edit3 size={16} />
+                </button>
+                <button
+                  onClick={() => del(ev.id)}
+                  className="text-destructive p-2 hover:bg-destructive/5 rounded transition"
+                  aria-label="Delete event"
+                >
+                  <Trash2 size={16} />
+                </button>
+              </div>
             </div>
           );
         })}
@@ -432,6 +649,7 @@ function EventAdmin() {
 function ReviewAdmin({ onUpdate }: { onUpdate?: () => void }) {
   const [list, setList] = useState<Review[]>([]);
   const [loaded, setLoaded] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
   async function load() {
     const { data } = await supabase
@@ -442,6 +660,12 @@ function ReviewAdmin({ onUpdate }: { onUpdate?: () => void }) {
     setLoaded(true);
   }
   if (!loaded) load();
+
+  async function handleRefresh() {
+    setRefreshing(true);
+    await load();
+    setTimeout(() => setRefreshing(false), 600);
+  }
 
   async function del(id: string) {
     const { error } = await supabase.from("reviews").delete().eq("id", id);
@@ -454,7 +678,16 @@ function ReviewAdmin({ onUpdate }: { onUpdate?: () => void }) {
 
   return (
     <div>
-      <h3 className="font-display text-2xl text-maroon mb-4">Reviews</h3>
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="font-display text-2xl text-maroon mb-0">Reviews</h3>
+        <button
+          onClick={handleRefresh}
+          disabled={refreshing}
+          className="px-4 py-1.5 rounded-full border border-gold/45 text-maroon text-xs font-medium hover:bg-cream/50 transition cursor-pointer flex items-center gap-1.5 disabled:opacity-60 active:scale-95"
+        >
+          <RotateCw size={12} className={refreshing ? "animate-spin" : ""} /> Refresh
+        </button>
+      </div>
       {list.length === 0 ? (
         <p className="text-muted-foreground">No reviews yet.</p>
       ) : (
@@ -484,6 +717,7 @@ function ReviewAdmin({ onUpdate }: { onUpdate?: () => void }) {
 function AppointmentAdmin({ onUpdate }: { onUpdate?: () => void }) {
   const [list, setList] = useState<Appointment[]>([]);
   const [loaded, setLoaded] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
   async function load() {
     const { data } = await supabase
@@ -494,6 +728,12 @@ function AppointmentAdmin({ onUpdate }: { onUpdate?: () => void }) {
     setLoaded(true);
   }
   if (!loaded) load();
+
+  async function handleRefresh() {
+    setRefreshing(true);
+    await load();
+    setTimeout(() => setRefreshing(false), 600);
+  }
 
   async function del(id: string) {
     const { error } = await supabase.from("appointments").delete().eq("id", id);
@@ -531,7 +771,14 @@ function AppointmentAdmin({ onUpdate }: { onUpdate?: () => void }) {
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h3 className="font-display text-2xl text-maroon">Appointment Requests</h3>
+        <h3 className="font-display text-2xl text-maroon mb-0">Appointment Requests</h3>
+        <button
+          onClick={handleRefresh}
+          disabled={refreshing}
+          className="px-4 py-1.5 rounded-full border border-gold/45 text-maroon text-xs font-medium hover:bg-cream/50 transition cursor-pointer flex items-center gap-1.5 disabled:opacity-60 active:scale-95"
+        >
+          <RotateCw size={12} className={refreshing ? "animate-spin" : ""} /> Refresh
+        </button>
       </div>
 
       {list.length === 0 ? (
@@ -605,6 +852,7 @@ function AppointmentAdmin({ onUpdate }: { onUpdate?: () => void }) {
 function ContactAdmin({ onUpdate }: { onUpdate?: () => void }) {
   const [list, setList] = useState<Contact[]>([]);
   const [loaded, setLoaded] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
   async function load() {
     const { data } = await supabase
@@ -615,6 +863,12 @@ function ContactAdmin({ onUpdate }: { onUpdate?: () => void }) {
     setLoaded(true);
   }
   if (!loaded) load();
+
+  async function handleRefresh() {
+    setRefreshing(true);
+    await load();
+    setTimeout(() => setRefreshing(false), 600);
+  }
 
   async function del(id: string) {
     const { error } = await supabase.from("contacts").delete().eq("id", id);
@@ -628,7 +882,14 @@ function ContactAdmin({ onUpdate }: { onUpdate?: () => void }) {
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h3 className="font-display text-2xl text-maroon">Contact Messages</h3>
+        <h3 className="font-display text-2xl text-maroon mb-0">Contact Messages</h3>
+        <button
+          onClick={handleRefresh}
+          disabled={refreshing}
+          className="px-4 py-1.5 rounded-full border border-gold/45 text-maroon text-xs font-medium hover:bg-cream/50 transition cursor-pointer flex items-center gap-1.5 disabled:opacity-60 active:scale-95"
+        >
+          <RotateCw size={12} className={refreshing ? "animate-spin" : ""} /> Refresh
+        </button>
       </div>
 
       {list.length === 0 ? (
@@ -702,6 +963,7 @@ function VideoAdmin() {
     type: "video" as "video" | "short",
   });
   const [loaded, setLoaded] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
   async function load() {
     const { data } = await supabase
@@ -712,6 +974,12 @@ function VideoAdmin() {
     setLoaded(true);
   }
   if (!loaded) load();
+
+  async function handleRefresh() {
+    setRefreshing(true);
+    await load();
+    setTimeout(() => setRefreshing(false), 600);
+  }
   if (!loaded) return <AdminTabLoader />;
 
   async function add(e: React.FormEvent) {
@@ -795,32 +1063,41 @@ function VideoAdmin() {
   return (
     <div>
       {/* Sub-Tabs for Videos and Shorts */}
-      <div className="flex gap-4 border-b border-border pb-3 mb-6">
+      <div className="flex justify-between items-center border-b border-border pb-3 mb-6">
+        <div className="flex gap-4">
+          <button
+            onClick={() => {
+              setVideoTab("video");
+              setEditingId(null);
+            }}
+            className={`pb-2 px-1 font-medium border-b-2 transition ${
+              videoTab === "video"
+                ? "border-maroon text-maroon font-semibold"
+                : "border-transparent text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            🎥 Videos
+          </button>
+          <button
+            onClick={() => {
+              setVideoTab("short");
+              setEditingId(null);
+            }}
+            className={`pb-2 px-1 font-medium border-b-2 transition ${
+              videoTab === "short"
+                ? "border-maroon text-maroon font-semibold"
+                : "border-transparent text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            📱 Shorts
+          </button>
+        </div>
         <button
-          onClick={() => {
-            setVideoTab("video");
-            setEditingId(null);
-          }}
-          className={`pb-2 px-1 font-medium border-b-2 transition ${
-            videoTab === "video"
-              ? "border-maroon text-maroon font-semibold"
-              : "border-transparent text-muted-foreground hover:text-foreground"
-          }`}
+          onClick={handleRefresh}
+          disabled={refreshing}
+          className="px-4 py-1.5 rounded-full border border-gold/45 text-maroon text-xs font-medium hover:bg-cream/50 transition cursor-pointer flex items-center gap-1.5 disabled:opacity-60 active:scale-95"
         >
-          🎥 Videos
-        </button>
-        <button
-          onClick={() => {
-            setVideoTab("short");
-            setEditingId(null);
-          }}
-          className={`pb-2 px-1 font-medium border-b-2 transition ${
-            videoTab === "short"
-              ? "border-maroon text-maroon font-semibold"
-              : "border-transparent text-muted-foreground hover:text-foreground"
-          }`}
-        >
-          📱 Shorts
+          <RotateCw size={12} className={refreshing ? "animate-spin" : ""} /> Refresh
         </button>
       </div>
 
@@ -991,6 +1268,7 @@ function NotificationAdmin() {
   const [history, setHistory] = useState<InboxRow[]>([]);
   const [historyLoaded, setHistoryLoaded] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [refreshing, setRefreshing] = useState(false);
 
   async function loadHistory() {
     const { data, error } = await supabase
@@ -1000,6 +1278,12 @@ function NotificationAdmin() {
       .limit(30);
     if (!error && data) setHistory(data as InboxRow[]);
     setHistoryLoaded(true);
+  }
+
+  async function handleRefresh() {
+    setRefreshing(true);
+    await loadHistory();
+    setTimeout(() => setRefreshing(false), 600);
   }
 
   useEffect(() => {
@@ -1018,16 +1302,23 @@ function NotificationAdmin() {
 
     try {
       if (editingId) {
-        const { error: updateError } = await supabase
+        const { data, error: updateError } = await supabase
           .from("inbox_messages")
           .update({
             title: titleText,
             body: bodyText,
           })
-          .eq("id", editingId);
+          .eq("id", editingId)
+          .select();
 
         if (updateError) {
           toast.error("Could not update: " + updateError.message);
+          setLoading(false);
+          return;
+        }
+
+        if (!data || data.length === 0) {
+          toast.error("Update failed. Row not found or RLS policy blocked the update. Run migration/SQL query in Supabase dashboard to enable UPDATE permissions.");
           setLoading(false);
           return;
         }
@@ -1096,9 +1387,16 @@ function NotificationAdmin() {
   return (
     <div className="space-y-8">
       <div className="flex justify-between items-center">
-        <h3 className="font-display text-2xl text-maroon flex items-center gap-2">
+        <h3 className="font-display text-2xl text-maroon flex items-center gap-2 mb-0">
           <Inbox size={22} /> Site Inbox Broadcast
         </h3>
+        <button
+          onClick={handleRefresh}
+          disabled={refreshing}
+          className="px-4 py-1.5 rounded-full border border-gold/45 text-maroon text-xs font-medium hover:bg-cream/50 transition cursor-pointer flex items-center gap-1.5 disabled:opacity-60 active:scale-95"
+        >
+          <RotateCw size={12} className={refreshing ? "animate-spin" : ""} /> Refresh
+        </button>
       </div>
 
       <form onSubmit={send} className="p-6 rounded-2xl bg-card border border-border space-y-4 max-w-2xl">
@@ -1300,6 +1598,13 @@ function AnalyticsAdmin() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [liveCount, setLiveCount] = useState(0);
+  const [refreshing, setRefreshing] = useState(false);
+
+  async function handleRefresh() {
+    setRefreshing(true);
+    await load();
+    setTimeout(() => setRefreshing(false), 600);
+  }
 
   // Realtime updates for live visitors and page views
   useEffect(() => {
@@ -1525,10 +1830,11 @@ function AnalyticsAdmin() {
           </p>
         </div>
         <button
-          onClick={() => void load()}
-          className="px-5 py-2 rounded-full border border-gold/40 text-maroon text-sm hover:bg-cream/50"
+          onClick={handleRefresh}
+          disabled={refreshing}
+          className="px-5 py-2 rounded-full border border-gold/40 text-maroon text-sm hover:bg-cream/50 transition cursor-pointer flex items-center gap-1.5 disabled:opacity-60 active:scale-95"
         >
-          Refresh
+          <RotateCw size={14} className={refreshing ? "animate-spin" : ""} /> Refresh
         </button>
       </div>
 
@@ -1625,6 +1931,7 @@ function GalleryAdmin() {
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState<GalleryRow[]>([]);
   const [listLoaded, setListLoaded] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
   async function load() {
     const { data, error } = await supabase
@@ -1633,6 +1940,12 @@ function GalleryAdmin() {
       .order("created_at", { ascending: false });
     if (!error && data) setList(data as GalleryRow[]);
     setListLoaded(true);
+  }
+
+  async function handleRefresh() {
+    setRefreshing(true);
+    await load();
+    setTimeout(() => setRefreshing(false), 600);
   }
 
   useEffect(() => {
@@ -1683,9 +1996,16 @@ function GalleryAdmin() {
   return (
     <div className="space-y-8">
       <div className="flex justify-between items-center">
-        <h3 className="font-display text-2xl text-maroon flex items-center gap-2">
+        <h3 className="font-display text-2xl text-maroon flex items-center gap-2 mb-0">
           <Image size={22} /> Gallery Manager
         </h3>
+        <button
+          onClick={handleRefresh}
+          disabled={refreshing}
+          className="px-4 py-1.5 rounded-full border border-gold/45 text-maroon text-xs font-medium hover:bg-cream/50 transition cursor-pointer flex items-center gap-1.5 disabled:opacity-60 active:scale-95"
+        >
+          <RotateCw size={12} className={refreshing ? "animate-spin" : ""} /> Refresh
+        </button>
       </div>
 
       <form onSubmit={add} className="p-6 rounded-2xl bg-card border border-border space-y-4 max-w-2xl">

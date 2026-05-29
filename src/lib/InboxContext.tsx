@@ -119,12 +119,26 @@ export function InboxProvider({ children }: { children: ReactNode }) {
     });
   }, [messages]);
 
-  const unreadCount = useMemo(
-    () => messages.filter((m) => !readIds.has(m.id)).length,
+  const unreadCount = useMemo(() => {
+    const cutoff = Date.now() - 6 * 60 * 60 * 1000;
+    return messages.filter((m) => {
+      if (readIds.has(m.id)) return false;
+      const createdTime = new Date(m.created_at).getTime();
+      return createdTime > cutoff;
+    }).length;
+  }, [messages, readIds]);
+
+  const isUnread = useCallback(
+    (id: string) => {
+      if (readIds.has(id)) return false;
+      const msg = messages.find((m) => m.id === id);
+      if (!msg) return false;
+      const createdTime = new Date(msg.created_at).getTime();
+      const cutoff = Date.now() - 6 * 60 * 60 * 1000;
+      return createdTime > cutoff;
+    },
     [messages, readIds],
   );
-
-  const isUnread = useCallback((id: string) => !readIds.has(id), [readIds]);
 
   const value = useMemo(
     () => ({
