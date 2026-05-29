@@ -325,8 +325,8 @@ function GalleryPage() {
         }
       />
 
-      <section className="container mx-auto px-6 py-16">
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+      <section className="container mx-auto px-3 sm:px-6 py-12">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6">
           {items.map((p, i) => (
             <ScrollReveal key={i} direction="up" delay={(i % 3) * 100} duration={800}>
               <figure
@@ -379,13 +379,13 @@ function GalleryPage() {
 
       {lightbox && (
         <div
-          className="fixed inset-0 z-[60] bg-black/95 flex flex-col items-center justify-center p-4 transition-all duration-300 animate-fade-in"
+          className="fixed inset-0 z-[100] bg-black/95 flex flex-col items-center justify-center p-4 transition-all duration-300 animate-fade-in"
           onClick={() => setLightbox(null)}
         >
           {/* Close button */}
           <button
             onClick={() => setLightbox(null)}
-            className="absolute top-4 right-4 z-50 p-2.5 rounded-full bg-cream/10 text-cream hover:bg-cream/20 hover:rotate-90 transition-all duration-300 cursor-pointer"
+            className="absolute top-4 right-4 z-[110] p-3 rounded-full bg-black/60 text-white hover:bg-black/80 hover:scale-105 border border-white/20 shadow-lg transition-all duration-300 cursor-pointer"
             aria-label="Close lightbox"
           >
             <X size={24} />

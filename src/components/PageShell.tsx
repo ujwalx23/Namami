@@ -6,7 +6,7 @@ export function PageShell({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen flex flex-col mandala-bg overflow-x-hidden">
       <SiteHeader />
-      <main className="flex-1 animate-fade-in">{children}</main>
+      <main className="flex-1">{children}</main>
       <SiteFooter />
     </div>
   );
