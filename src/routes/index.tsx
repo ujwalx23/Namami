@@ -296,7 +296,6 @@ function HomePage() {
   const { t, lang } = useLang();
   const hi = lang === "hi";
   const dev = hi ? "font-devanagari" : "";
-  const [lightbox, setLightbox] = useState<string | null>(null);
 
   const handleDownload = async (url: string, title: string) => {
     try {
@@ -626,8 +625,7 @@ function HomePage() {
             ].map((p, i) => (
               <ScrollReveal key={i} direction="up" delay={(i % 3) * 120} duration={850}>
                 <figure
-                  onClick={() => setLightbox(p.src)}
-                  className="group golden-sweep-container relative aspect-[3/4] rounded-2xl overflow-hidden border-2 border-gold/40 shadow-sacred hover:shadow-gold transition-all duration-500 hover:-translate-y-2 cursor-pointer"
+                  className="group golden-sweep-container relative aspect-[3/4] rounded-2xl overflow-hidden border-2 border-gold/40 shadow-sacred hover:shadow-gold transition-all duration-500 hover:-translate-y-2"
                 >
                   <img
                     src={p.src}
@@ -738,34 +736,7 @@ function HomePage() {
         </ScrollReveal>
       </section>
 
-      {lightbox && (
-        <div
-          className="fixed inset-0 z-[60] bg-black/95 flex flex-col items-center justify-center p-4 transition-all duration-300 animate-fade-in"
-          onClick={() => setLightbox(null)}
-        >
-          {/* Close button */}
-          <button
-            onClick={() => setLightbox(null)}
-            className="absolute top-4 right-4 z-50 p-2.5 rounded-full bg-cream/10 text-cream hover:bg-cream/20 hover:rotate-90 transition-all duration-300 cursor-pointer"
-            aria-label="Close lightbox"
-          >
-            <X size={24} />
-          </button>
 
-          <div
-            className="relative max-h-[80vh] max-w-full flex flex-col items-center transition-all duration-500 ease-spring animate-fade-in"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <img
-              src={lightbox}
-              alt="Darshan"
-              className="max-h-[75vh] max-w-full rounded-xl shadow-2xl object-contain border border-gold/25 hover:scale-[1.01] transition-transform duration-300"
-            />
-
-
-          </div>
-        </div>
-      )}
     </PageShell>
   );
 }
