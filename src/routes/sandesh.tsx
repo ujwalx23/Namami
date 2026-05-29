@@ -204,6 +204,22 @@ function SandeshPage() {
     }
     ctx.restore();
 
+    // 3.5 Draw background watermark "namamivindhyavasini.in" repeated diagonally
+    ctx.save();
+    ctx.rotate(-25 * Math.PI / 180);
+    ctx.fillStyle = "rgba(217, 56, 30, 0.035)"; // Very light saffron/red
+    ctx.font = "bold 32px sans-serif";
+    ctx.textAlign = "left";
+    const stepX = 450;
+    const stepY = 200;
+    for (let y = -1000; y < 2500; y += stepY) {
+      const xOffset = (y / stepY) % 2 === 0 ? 0 : stepX / 2;
+      for (let x = -1000; x < 2500; x += stepX) {
+        ctx.fillText("namamivindhyavasini.in", x + xOffset, y);
+      }
+    }
+    ctx.restore();
+
     // 4. Draw Header Box
     const headGrad = ctx.createLinearGradient(140, 0, 940, 0);
     headGrad.addColorStop(0, "#D9381E");
