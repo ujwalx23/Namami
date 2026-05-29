@@ -1,10 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { PageShell, PageHero } from "@/components/PageShell";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { supabase } from "@/integrations/supabase/client";
 import { useLang } from "@/i18n/LangProvider";
-import { Download, X, Share2 } from "lucide-react";
+import { Download, X, Share2, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
 import maaImg from "@/assets/maa-vindhyavasini.png";
 import maaImg2 from "@/assets/maa-vindhyavasini-2.jpg";
@@ -64,6 +65,30 @@ function GalleryPage() {
   const dev = hi ? "font-devanagari" : "";
   const [extra, setExtra] = useState<GalleryRow[]>([]);
   const [lightbox, setLightbox] = useState<string | null>(null);
+
+  const openLightbox = (src: string) => {
+    setLightbox(src);
+    window.history.pushState({ lightbox: true }, "");
+  };
+
+  const closeLightbox = () => {
+    setLightbox(null);
+    if (window.history.state?.lightbox) {
+      window.history.back();
+    }
+  };
+
+  useEffect(() => {
+    const handlePopState = (e: PopStateEvent) => {
+      if (lightbox) {
+        setLightbox(null);
+      }
+    };
+    window.addEventListener("popstate", handlePopState);
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, [lightbox]);
 
   useEffect(() => {
     void (async () => {
@@ -325,12 +350,12 @@ function GalleryPage() {
         }
       />
 
-      <section className="container mx-auto px-3 sm:px-6 py-12">
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6">
+      <section className="w-full max-w-7xl mx-auto px-1.5 sm:px-6 py-12">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-2.5 sm:gap-6">
           {items.map((p, i) => (
             <ScrollReveal key={i} direction="up" delay={(i % 3) * 100} duration={800}>
               <figure
-                onClick={() => setLightbox(p.src)}
+                onClick={() => openLightbox(p.src)}
                 className="group relative aspect-[3/4] rounded-2xl overflow-hidden border-2 border-gold/40 shadow-sacred hover:shadow-gold transition-all hover:-translate-y-1 cursor-pointer bg-cream/10 flex items-center justify-center h-full"
               >
                 <img
@@ -377,19 +402,36 @@ function GalleryPage() {
         </div>
       </section>
 
-      {lightbox && (
+      {lightbox && createPortal(
         <div
-          className="fixed inset-0 z-[100] bg-black/95 flex flex-col items-center justify-center p-4 transition-all duration-300 animate-fade-in"
-          onClick={() => setLightbox(null)}
+          className="fixed inset-0 z-[100] bg-black/95 flex flex-col items-center justify-center p-4 overflow-hidden select-none transition-all duration-300 animate-fade-in"
+          onClick={closeLightbox}
         >
-          {/* Close button */}
-          <button
-            onClick={() => setLightbox(null)}
-            className="absolute top-4 right-4 z-[110] p-3 rounded-full bg-black/60 text-white hover:bg-black/80 hover:scale-105 border border-white/20 shadow-lg transition-all duration-300 cursor-pointer"
-            aria-label="Close lightbox"
-          >
-            <X size={24} />
-          </button>
+          {/* Top navigation/close bar for mobile & desktop */}
+          <div className="absolute top-4 left-4 right-4 flex justify-between items-center z-[110] pointer-events-none">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                closeLightbox();
+              }}
+              className="pointer-events-auto flex items-center gap-2 px-4 py-2.5 rounded-full bg-black/60 text-white hover:bg-black/80 hover:scale-105 border border-white/20 shadow-lg transition-all duration-300 cursor-pointer text-sm font-semibold select-none"
+              aria-label="Go back"
+            >
+              <ArrowLeft size={18} />
+              <span>{hi ? "वापस" : "Back"}</span>
+            </button>
+            
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                closeLightbox();
+              }}
+              className="pointer-events-auto p-2.5 rounded-full bg-black/60 text-white hover:bg-black/80 hover:scale-105 border border-white/20 shadow-lg transition-all duration-300 cursor-pointer select-none"
+              aria-label="Close lightbox"
+            >
+              <X size={20} />
+            </button>
+          </div>
 
           <div
             className="relative w-full max-w-lg md:max-w-2xl px-4 flex flex-col items-center justify-center transition-all duration-500 ease-spring animate-fade-in"
@@ -398,7 +440,7 @@ function GalleryPage() {
             <img
               src={lightbox}
               alt="Darshan"
-              className="max-h-[60vh] sm:max-h-[75vh] md:max-h-[80vh] max-w-full rounded-xl shadow-2xl object-contain border border-gold/25 hover:scale-[1.01] transition-transform duration-300"
+              className="max-h-[calc(100dvh-180px)] md:max-h-[calc(100vh-220px)] max-w-full rounded-xl shadow-2xl object-contain border border-gold/25 hover:scale-[1.01] transition-transform duration-300"
             />
 
             <div className="mt-4 flex flex-wrap justify-center gap-3 shrink-0">
@@ -427,7 +469,8 @@ function GalleryPage() {
               </button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </PageShell>
   );

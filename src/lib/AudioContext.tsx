@@ -36,30 +36,6 @@ const DEFAULT_TRACKS: Track[] = [
     cover:
       "https://images.unsplash.com/photo-1545128485-c400e7702796?auto=format&fit=crop&q=80&w=400",
   },
-  {
-    id: "2",
-    title: "Gayatri Mantra",
-    artist: "Devotional Chant",
-    url: "/audio/gayatri_mantra.webm",
-    cover:
-      "https://images.unsplash.com/photo-1609137144814-6db3501726a4?auto=format&fit=crop&q=80&w=400",
-  },
-  {
-    id: "3",
-    title: "Ganesh Mantra",
-    artist: "Obstacle Remover",
-    url: "/audio/ganesh_mantra.webm",
-    cover:
-      "https://images.unsplash.com/photo-1597523011884-4a3001228005?auto=format&fit=crop&q=80&w=400",
-  },
-  {
-    id: "4",
-    title: "Ramayan Chaupai",
-    artist: "Kumar Vishu",
-    url: "/audio/ramayan_chaupai.webm",
-    cover:
-      "https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?auto=format&fit=crop&q=80&w=400",
-  },
 ];
 
 const AudioContext = createContext<AudioContextType | undefined>(undefined);
