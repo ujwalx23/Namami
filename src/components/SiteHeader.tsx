@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import {
   Menu,
   X,
-  Languages,
   Home,
   Info,
   Sparkles,
@@ -107,10 +106,9 @@ export function SiteHeader() {
               className="group inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-maroon/30 text-maroon text-xs font-medium hover:bg-maroon hover:text-cream transition-all duration-300 active:scale-95 cursor-pointer"
               aria-label="Switch language"
             >
-              <Languages
-                size={14}
-                className="group-hover:rotate-180 transition-transform duration-500"
-              />{" "}
+              <span className="w-5 h-5 rounded-full bg-maroon/10 text-maroon font-semibold text-[9px] flex items-center justify-center border border-maroon/20 group-hover:bg-cream group-hover:text-maroon transition-all duration-300 shrink-0">
+                अ/A
+              </span>{" "}
               {t("lang.toggle")}
             </button>
             <Link
@@ -128,10 +126,9 @@ export function SiteHeader() {
               className="group inline-flex items-center justify-center gap-1 px-2.5 py-1.5 xs:gap-1.5 xs:px-3 py-2 rounded-full border border-maroon/30 text-maroon text-xs font-medium min-h-[38px] xs:min-h-[44px] hover:bg-maroon/5 active:bg-maroon/10 active:scale-95 transition-all duration-300 cursor-pointer shrink-0"
               aria-label="Switch language"
             >
-              <Languages
-                size={14}
-                className="group-hover:rotate-180 transition-transform duration-500 shrink-0"
-              />
+              <span className="w-5 h-5 rounded-full bg-maroon/10 text-maroon font-semibold text-[9px] flex items-center justify-center border border-maroon/20 group-hover:bg-maroon/15 transition-all duration-300 shrink-0">
+                अ/A
+              </span>
               <span className="hidden xs:inline">{t("lang.toggle")}</span>
             </button>
             <Link
