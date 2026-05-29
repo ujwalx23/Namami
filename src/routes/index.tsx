@@ -25,25 +25,12 @@ import {
   Bell,
   ShieldCheck,
   Quote,
-  Share2,
 } from "lucide-react";
 import { useLang } from "@/i18n/LangProvider";
 import { subscribeToNotifications, isPushConfigured } from "@/lib/push";
 import { toast } from "sonner";
 import type { TKey } from "@/i18n/translations";
 import { ScrollReveal } from "@/components/ScrollReveal";
-
-function dataURLtoFile(dataurl: string, filename: string): File {
-  const arr = dataurl.split(",");
-  const mime = arr[0].match(/:(.*?);/)![1];
-  const bstr = atob(arr[1]);
-  let n = bstr.length;
-  const u8arr = new Uint8Array(n);
-  while (n--) {
-    u8arr[n] = bstr.charCodeAt(n);
-  }
-  return new File([u8arr], filename, { type: mime });
-}
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -336,202 +323,7 @@ function HomePage() {
     }
   };
 
-  const shareGalleryImage = async (imgUrl: string, caption: string) => {
-    toast.loading(lang === "hi" ? "साझा करने के लिए छवि तैयार की जा रही है..." : "Preparing image for sharing...", { id: "share-gallery" });
-    try {
-      const canvas = document.createElement("canvas");
-      canvas.width = 1080;
-      canvas.height = 1920;
-      const ctx = canvas.getContext("2d");
-      if (!ctx) throw new Error("Could not get canvas context");
 
-      // 1. Draw background gradient
-      const bgGrad = ctx.createRadialGradient(540, 960, 100, 540, 960, 1100);
-      bgGrad.addColorStop(0, "#FFFDF6");
-      bgGrad.addColorStop(1, "#FFF4DD");
-      ctx.fillStyle = bgGrad;
-      ctx.fillRect(0, 0, 1080, 1920);
-
-      // 2. Draw border frame
-      ctx.strokeStyle = "#D9381E";
-      ctx.lineWidth = 12;
-      ctx.strokeRect(30, 30, 1020, 1860);
-
-      ctx.strokeStyle = "#D6A232";
-      ctx.lineWidth = 4;
-      ctx.strokeRect(50, 50, 980, 1820);
-
-      // Corner Accents
-      const drawCorners = () => {
-        ctx.fillStyle = "#D9381E";
-        const corners = [
-          { x: 50, y: 50, dx: 1, dy: 1 },
-          { x: 1030, y: 50, dx: -1, dy: 1 },
-          { x: 50, y: 1870, dx: 1, dy: -1 },
-          { x: 1030, y: 1870, dx: -1, dy: -1 },
-        ];
-        corners.forEach((c) => {
-          ctx.beginPath();
-          ctx.arc(c.x, c.y, 40, 0, Math.PI * 2);
-          ctx.fillStyle = "rgba(217, 56, 30, 0.1)";
-          ctx.fill();
-
-          ctx.strokeStyle = "#D9381E";
-          ctx.lineWidth = 4;
-          ctx.beginPath();
-          ctx.moveTo(c.x, c.y);
-          ctx.lineTo(c.x + c.dx * 80, c.y);
-          ctx.moveTo(c.x, c.y);
-          ctx.lineTo(c.x, c.y + c.dy * 80);
-          ctx.stroke();
-        });
-      };
-      drawCorners();
-
-      // 3. Draw Header Box
-      ctx.save();
-      ctx.shadowColor = "rgba(217, 56, 30, 0.3)";
-      ctx.shadowBlur = 20;
-      ctx.shadowOffsetY = 8;
-      const headGrad = ctx.createLinearGradient(140, 0, 940, 0);
-      headGrad.addColorStop(0, "#D9381E");
-      headGrad.addColorStop(1, "#FF5E36");
-      ctx.fillStyle = headGrad;
-      
-      const drawRoundRect = (x: number, y: number, w: number, h: number, r: number) => {
-        if (typeof ctx.roundRect === "function") {
-          ctx.roundRect(x, y, w, h, r);
-        } else {
-          ctx.moveTo(x + r, y);
-          ctx.arcTo(x + w, y, x + w, y + h, r);
-          ctx.arcTo(x + w, y + h, x, y + h, r);
-          ctx.arcTo(x, y + h, x, y, r);
-          ctx.arcTo(x, y, x + w, y, r);
-        }
-      };
-      
-      ctx.beginPath();
-      drawRoundRect(140, 160, 800, 120, 60);
-      ctx.fill();
-      ctx.restore();
-
-      // Header golden outline
-      ctx.strokeStyle = "#D6A232";
-      ctx.lineWidth = 3;
-      ctx.beginPath();
-      drawRoundRect(145, 165, 790, 110, 55);
-      ctx.stroke();
-
-      // Header Text
-      ctx.fillStyle = "#FFFDF6";
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.font = "bold 44px Georgia, serif";
-      ctx.fillText(lang === "hi" ? "॥ दिव्य दर्शन ॥" : "॥ Divya Darshan ॥", 540, 220);
-
-      // 4. Load and draw the Gallery Image
-      const img = new Image();
-      img.crossOrigin = "anonymous";
-      
-      // Wait for image loading
-      await new Promise((resolve, reject) => {
-        img.onload = resolve;
-        img.onerror = () => reject(new Error("Failed to load image"));
-        img.src = imgUrl;
-      });
-
-      // Position & Size calculation for 3:4 image layout
-      const imgWidth = 840;
-      const imgHeight = 1120; // 3:4 ratio
-      const imgX = (1080 - imgWidth) / 2;
-      const imgY = 360;
-
-      // Draw shadow for image
-      ctx.save();
-      ctx.shadowColor = "rgba(0, 0, 0, 0.3)";
-      ctx.shadowBlur = 25;
-      ctx.shadowOffsetY = 12;
-      
-      // Draw image background card (white border)
-      ctx.fillStyle = "#FFFFFF";
-      ctx.fillRect(imgX - 16, imgY - 16, imgWidth + 32, imgHeight + 32);
-      ctx.restore();
-
-      // Draw the image itself
-      ctx.drawImage(img, imgX, imgY, imgWidth, imgHeight);
-
-      // Gold frame around the image
-      ctx.strokeStyle = "#D6A232";
-      ctx.lineWidth = 4;
-      ctx.strokeRect(imgX - 18, imgY - 18, imgWidth + 36, imgHeight + 36);
-
-      // 5. Draw Caption below the image
-      ctx.fillStyle = "#5E1914";
-      ctx.font = "bold 48px Georgia, serif";
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.fillText(caption, 540, 1560);
-
-      // 6. Draw Bottom Footer Block
-      ctx.save();
-      ctx.shadowColor = "rgba(217, 56, 30, 0.25)";
-      ctx.shadowBlur = 15;
-      ctx.shadowOffsetY = 6;
-      ctx.fillStyle = "#D9381E";
-      ctx.beginPath();
-      drawRoundRect(240, 1680, 600, 80, 40);
-      ctx.fill();
-      ctx.restore();
-
-      // Footer golden outline
-      ctx.strokeStyle = "#D6A232";
-      ctx.lineWidth = 3;
-      ctx.beginPath();
-      drawRoundRect(245, 1685, 590, 70, 35);
-      ctx.stroke();
-
-      ctx.fillStyle = "#FFFDF6";
-      ctx.font = "bold 28px Georgia, serif";
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.fillText("namamivindhyavasini.in", 540, 1720);
-
-      const dataUrl = canvas.toDataURL("image/png");
-      const file = dataURLtoFile(dataUrl, `darshan_${caption.toLowerCase().replace(/\s+/g, "_")}.png`);
-
-      const triggerDownload = () => {
-        const link = document.createElement("a");
-        link.download = `darshan_${caption.toLowerCase().replace(/\s+/g, "_")}.png`;
-        link.href = dataUrl;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        toast.success(lang === "hi" ? "छवि डाउनलोड प्रारंभ!" : "Image download started!", { id: "share-gallery" });
-      };
-
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        try {
-          await navigator.share({
-            files: [file],
-            title: "Maa Vindhyavasini Divya Darshan",
-            text: caption,
-          });
-          toast.success(lang === "hi" ? "सफलतापूर्वक साझा किया गया!" : "Shared successfully!", { id: "share-gallery" });
-        } catch (shareErr) {
-          if (shareErr instanceof Error && shareErr.name === "AbortError") {
-            toast.dismiss("share-gallery");
-            return;
-          }
-          triggerDownload();
-        }
-      } else {
-        triggerDownload();
-      }
-    } catch (err) {
-      console.error("[Gallery Share] Failed:", err);
-      toast.error(lang === "hi" ? "साझा करने में विफल" : "Failed to share image", { id: "share-gallery" });
-    }
-  };
 
   const intro = [
     { icon: Heart, tk: "home.card.purpose.title" as TKey, xk: "home.card.purpose.text" as TKey },
@@ -851,31 +643,7 @@ function HomePage() {
                     {p.cap}
                   </figcaption>
 
-                  {/* Download Button Overlay */}
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleDownload(p.src, p.cap || `darshan_${i + 1}`);
-                    }}
-                    className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-cream/90 text-maroon hover:bg-gold hover:text-cream flex items-center justify-center shadow-lg transition-all duration-300 md:opacity-0 md:group-hover:opacity-100"
-                    title="Download image"
-                    aria-label="Download image"
-                  >
-                    <Download size={16} />
-                  </button>
 
-                  {/* Share Button Overlay */}
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      shareGalleryImage(p.src, p.cap || `Darshan ${i + 1}`);
-                    }}
-                    className="absolute top-3 right-14 z-10 w-9 h-9 rounded-full bg-cream/90 text-maroon hover:bg-gold hover:text-cream flex items-center justify-center shadow-lg transition-all duration-300 md:opacity-0 md:group-hover:opacity-100"
-                    title="Share image"
-                    aria-label="Share image"
-                  >
-                    <Share2 size={16} />
-                  </button>
                 </figure>
               </ScrollReveal>
             ))}
@@ -994,47 +762,7 @@ function HomePage() {
               className="max-h-[75vh] max-w-full rounded-xl shadow-2xl object-contain border border-gold/25 hover:scale-[1.01] transition-transform duration-300"
             />
 
-            <div className="mt-4 flex gap-4">
-              {/* Download Button in Lightbox */}
-              <button
-                onClick={() => {
-                  const itemsList = [
-                    { src: maaImg, cap: hi ? "मुख्य विग्रह" : "Mool Vigraha" },
-                    { src: maaImg2, cap: hi ? "प्रातः आरती" : "Mangala Aarti" },
-                    { src: maaImg3, cap: hi ? "विशेष श्रृंगार" : "Vishesh Shringar" },
-                    { src: gallery1, cap: hi ? "स्वर्ण श्रृंगार" : "Swarna Shringar" },
-                    { src: gallery2, cap: hi ? "पुष्प श्रृंगार" : "Pushpa Shringar" },
-                    { src: gallery3, cap: hi ? "नवरात्रि दर्शन" : "Navaratri Darshan" },
-                  ];
-                  const item = itemsList.find((it) => it.src === lightbox);
-                  handleDownload(lightbox, item?.cap || "darshan_vigraha");
-                }}
-                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-gradient-sacred text-cream font-medium shadow-gold hover:scale-[1.03] active:scale-95 transition-all duration-300 text-sm cursor-pointer"
-              >
-                <Download size={14} />
-                {hi ? "डाउनलोड करें" : "Download Darshan"}
-              </button>
 
-              {/* Share Button in Lightbox */}
-              <button
-                onClick={() => {
-                  const itemsList = [
-                    { src: maaImg, cap: hi ? "मुख्य विग्रह" : "Mool Vigraha" },
-                    { src: maaImg2, cap: hi ? "प्रातः आरती" : "Mangala Aarti" },
-                    { src: maaImg3, cap: hi ? "विशेष श्रृंगार" : "Vishesh Shringar" },
-                    { src: gallery1, cap: hi ? "स्वर्ण श्रृंगार" : "Swarna Shringar" },
-                    { src: gallery2, cap: hi ? "पुष्प श्रृंगार" : "Pushpa Shringar" },
-                    { src: gallery3, cap: hi ? "नवरात्रि दर्शन" : "Navaratri Darshan" },
-                  ];
-                  const item = itemsList.find((it) => it.src === lightbox);
-                  shareGalleryImage(lightbox, item?.cap || "Darshan");
-                }}
-                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border-2 border-gold text-gold font-medium hover:bg-gold/10 hover:scale-[1.03] active:scale-95 transition-all duration-300 text-sm cursor-pointer animate-pulse"
-              >
-                <Share2 size={14} />
-                {hi ? "शेयर करें" : "Share Darshan"}
-              </button>
-            </div>
           </div>
         </div>
       )}
