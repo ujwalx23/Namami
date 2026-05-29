@@ -85,8 +85,8 @@ function VideosPage() {
         {activeTab === "video" ? (
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {list.map((v) => (
-              <div key={v.id}>
-                <div className="aspect-video rounded-2xl overflow-hidden shadow-sacred border-2 border-gold/40">
+              <div key={v.id} className="hover:-translate-y-1.5 transition-all duration-300">
+                <div className="aspect-video rounded-2xl overflow-hidden shadow-sacred border-2 border-gold/40 hover:border-gold/60 transition-colors">
                   <iframe
                     className="w-full h-full"
                     src={v.embed}
@@ -102,8 +102,8 @@ function VideosPage() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {list.map((s) => (
-              <div key={s.id}>
-                <div className="aspect-[9/16] rounded-2xl overflow-hidden shadow-gold border-2 border-gold/40 bg-background">
+              <div key={s.id} className="hover:-translate-y-1.5 transition-all duration-300">
+                <div className="aspect-[9/16] rounded-2xl overflow-hidden shadow-gold border-2 border-gold/40 bg-background hover:border-gold/60 transition-colors">
                   <iframe
                     className="w-full h-full"
                     src={s.embed}

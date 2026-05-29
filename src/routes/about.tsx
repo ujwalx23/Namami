@@ -220,7 +220,7 @@ function AboutPage() {
             ].map((r, i) => (
               <div
                 key={i}
-                className="p-6 rounded-2xl bg-card border border-border flex items-start gap-3"
+                className="p-6 rounded-2xl bg-card border border-border flex items-start gap-3 hover:-translate-y-1 hover:shadow-gold transition-all duration-300"
               >
                 <div className="w-11 h-11 rounded-xl bg-gradient-sacred flex items-center justify-center text-cream shrink-0">
                   <r.icon size={18} />

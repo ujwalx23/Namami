@@ -57,7 +57,7 @@ function formatDate(d: string) {
 
 function EventCard({ e, accent }: { e: EventRow; accent: "gold" | "muted" }) {
   return (
-    <article className="rounded-2xl overflow-hidden bg-card border border-border">
+    <article className="rounded-2xl overflow-hidden bg-card border border-border hover:-translate-y-1.5 hover:shadow-gold transition-all duration-300">
       <div className={`h-1.5 ${accent === "gold" ? "bg-gradient-sacred" : "bg-muted"}`} />
       <div className="p-7">
         <h3 className="font-display text-2xl text-maroon mb-3">{e.title}</h3>

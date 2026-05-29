@@ -44,8 +44,8 @@ export function SiteHeader() {
             <Link
               key={l.to}
               to={l.to}
-              className={`text-foreground/80 hover:text-maroon transition-colors relative ${lang === "hi" ? "font-devanagari" : ""}`}
-              activeProps={{ className: "text-maroon" }}
+              className={`text-foreground/80 hover:text-maroon transition-colors relative py-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-maroon after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left ${lang === "hi" ? "font-devanagari" : ""}`}
+              activeProps={{ className: "text-maroon after:scale-x-100" }}
               activeOptions={{ exact: l.to === "/" }}
             >
               {t(l.key)}
@@ -89,24 +89,22 @@ export function SiteHeader() {
         </div>
       </div>
 
-      {open && (
-        <div className="lg:hidden border-t border-border/60 bg-background">
-          <nav className="container mx-auto px-6 py-4 flex flex-col gap-3">
-            {links.map((l) => (
-              <Link
-                key={l.to}
-                to={l.to}
-                onClick={() => setOpen(false)}
-                className={`py-2 text-foreground/80 hover:text-maroon ${lang === "hi" ? "font-devanagari" : ""}`}
-                activeProps={{ className: "text-maroon font-semibold" }}
-                activeOptions={{ exact: l.to === "/" }}
-              >
-                {t(l.key)}
-              </Link>
-            ))}
-          </nav>
-        </div>
-      )}
+      <div className={`lg:hidden border-t border-border/60 bg-background transition-all duration-300 ease-in-out overflow-hidden ${open ? "max-h-[500px] opacity-100 py-4" : "max-h-0 opacity-0 py-0"}`}>
+        <nav className="container mx-auto px-6 flex flex-col gap-3">
+          {links.map((l) => (
+            <Link
+              key={l.to}
+              to={l.to}
+              onClick={() => setOpen(false)}
+              className={`py-2 text-foreground/80 hover:text-maroon transition-colors ${lang === "hi" ? "font-devanagari" : ""}`}
+              activeProps={{ className: "text-maroon font-semibold" }}
+              activeOptions={{ exact: l.to === "/" }}
+            >
+              {t(l.key)}
+            </Link>
+          ))}
+        </nav>
+      </div>
     </header>
   );
 }
