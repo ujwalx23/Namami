@@ -46,16 +46,16 @@ export const translations = {
     en: "Step into the sacred world of Maa Vindhyavasini, the divine Shakti Pitha of the Vindhya range. Our sansthan preserves the ancient rituals of the Devi, organises satsang and seva, and welcomes every devotee into the bhakti of the Mother.",
     hi: "माँ विन्ध्यवासिनी के पावन धाम में प्रवेश करें, जो विन्ध्य पर्वत की जागृत शक्तिपीठ है। हमारा संस्थान देवी की प्राचीन परम्पराओं का संरक्षण करता है, सत्संग एवं सेवा का आयोजन करता है, और हर भक्त को माँ की भक्ति में आमंत्रित करता है।",
   },
-  "home.cta.today": { en: "Today's Sandesh", hi: "आज का संदेश" },
-  "home.cta.about": { en: "Our Sansthan", hi: "हमारा संस्थान" },
+  "home.cta.today": { en: "Divine Sandesh", hi: "दिव्य संदेश" },
+  "home.cta.about": { en: "About Dham", hi: "धाम के बारे में" },
 
   "home.slide.vindhya.title": { en: "Namami Vindhyavasini", hi: "नमामि विन्ध्यवासिनी" },
   "home.slide.vindhya.sub": { en: "Vindhyachal Dham", hi: "विन्ध्याचल धाम" },
   "home.slide.darshan.title": { en: "Divine Darshan", hi: "दिव्य दर्शन" },
   "home.slide.shringar.title": { en: "Maa ka Shringar", hi: "माँ का श्रृंगार" },
 
-  "home.intro.kicker": { en: "Who We Are", hi: "हम कौन हैं" },
-  "home.intro.title": { en: "Serving Maa Vindhyavasini", hi: "माँ विन्ध्यवासिनी की सेवा में" },
+  "home.intro.kicker": { en: "🌺 SANATAN PARAMPARA", hi: "🌺 सनातन परम्परा" },
+  "home.intro.title": { en: "A Legacy of Faith and Seva", hi: "श्रद्धा और सेवा की विरासत" },
   "home.card.purpose.title": { en: "Our Purpose", hi: "हमारा उद्देश्य" },
   "home.card.purpose.text": {
     en: "To serve devotees of Maa Vindhyavasini with devotion, compassion, and dedication. Our mission is to preserve Sanatan values, support spiritual growth, and create meaningful opportunities for worship, seva, and community service.",

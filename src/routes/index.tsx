@@ -654,12 +654,12 @@ function HomePage() {
           </div>
         </ScrollReveal>
 
-        {/* Mobile: horizontal snap-scroll one-at-a-time; Desktop: 3-column grid */}
-        <div className="flex md:grid md:grid-cols-3 md:items-start gap-5 md:gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none scrollbar-none pb-4 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0">
+        {/* Mobile: vertical single column; Desktop: 3-column grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 md:items-start gap-4 md:gap-6">
           {devoteeReviews.map((r, idx) => (
             <ScrollReveal key={r.name} direction="up" delay={idx * 150} duration={800}>
               <article
-                className="relative rounded-2xl p-5 md:p-6 bg-card border border-gold/30 hover:border-gold/60 hover:shadow-sacred hover:-translate-y-1 transition-premium group min-w-[78vw] md:min-w-0 snap-center"
+                className="relative rounded-2xl p-5 md:p-6 bg-card border border-gold/30 hover:border-gold/60 hover:shadow-sacred hover:-translate-y-1 transition-premium group"
               >
                 <div className="absolute top-4 right-4 text-gold/10 group-hover:text-gold/20 transition-colors">
                   <Quote size={36} strokeWidth={1.5} />
