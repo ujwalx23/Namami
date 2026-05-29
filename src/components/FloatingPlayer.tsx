@@ -61,7 +61,7 @@ export function FloatingPlayer() {
             playTrack(trackList[0]);
           }
         }}
-        className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full border border-gold/30 bg-card/90 shadow-sacred backdrop-blur-md text-maroon hover:text-saffron hover:scale-105 transition-all duration-300"
+        className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full border border-gold/30 bg-card/90 shadow-sacred backdrop-blur-md text-maroon hover:text-saffron hover:scale-105 transition-all duration-300"
         aria-label="Open Devotional Player"
       >
         <Music className="animate-pulse" size={24} />
@@ -70,7 +70,7 @@ export function FloatingPlayer() {
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 font-devanagari select-none">
+    <div className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 font-devanagari select-none">
       {/* Minimized Pill View */}
       {!isExpanded && currentTrack && (
         <div
@@ -112,7 +112,7 @@ export function FloatingPlayer() {
 
       {/* Expanded Player View */}
       {isExpanded && currentTrack && (
-        <div className="w-[320px] md:w-[360px] rounded-3xl border border-gold/30 bg-card/95 p-6 shadow-sacred backdrop-blur-md transition-all duration-300">
+        <div className="w-[calc(100vw-32px)] max-w-[360px] rounded-3xl border border-gold/30 bg-card/95 p-5 md:p-6 shadow-sacred backdrop-blur-md transition-all duration-300">
           {/* Header */}
           <div className="flex items-center justify-between border-b border-border pb-3 mb-4">
             <span className="text-xs uppercase tracking-wider text-saffron font-bold">

@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell, PageHero } from "@/components/PageShell";
+import { ScrollReveal } from "@/components/ScrollReveal";
 import { Quote, RefreshCw, Loader2, Play, Square, Share2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import type { Tables } from "@/integrations/supabase/types";
@@ -359,55 +360,57 @@ function SandeshPage() {
 
       <section className="container mx-auto px-6 py-16">
         {today && (
-          <div className="max-w-3xl mx-auto rounded-3xl bg-gradient-sacred p-1 shadow-sacred mb-14">
-            <div className="rounded-[1.4rem] bg-card p-10 md:p-14 text-center relative">
-              <Quote className="mx-auto text-gold mb-4" size={32} />
-              <div className={`text-xs uppercase tracking-[0.3em] text-saffron mb-3 ${dev}`}>
-                {t("sandesh.today")}
-              </div>
-              <p className={`font-display text-2xl md:text-3xl text-maroon leading-relaxed ${dev}`}>
-                "{today.message}"
-              </p>
-              <div className={`mt-6 text-sm text-muted-foreground ${dev}`}>— {today.author}</div>
-              <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
-                {isHindiText(today.message) && (
+          <ScrollReveal direction="up" duration={900}>
+            <div className="max-w-3xl mx-auto rounded-3xl bg-gradient-sacred p-1 shadow-sacred mb-14">
+              <div className="rounded-[1.4rem] bg-card p-10 md:p-14 text-center relative">
+                <Quote className="mx-auto text-gold mb-4" size={32} />
+                <div className={`text-xs uppercase tracking-[0.3em] text-saffron mb-3 ${dev}`}>
+                  {t("sandesh.today")}
+                </div>
+                <p className={`font-display text-2xl md:text-3xl text-maroon leading-relaxed ${dev}`}>
+                  "{today.message}"
+                </p>
+                <div className={`mt-6 text-sm text-muted-foreground ${dev}`}>— {today.author}</div>
+                <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
+                  {isHindiText(today.message) && (
+                    <button
+                      onClick={() => toggleSpeak(today.message, today.id)}
+                      className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gold/50 text-maroon hover:bg-gold/10 disabled:opacity-50 disabled:cursor-not-allowed transition text-sm ${dev}`}
+                      disabled={loadingId !== null && loadingId !== today.id}
+                      aria-label="Listen to Sandesh"
+                    >
+                      {loadingId === today.id ? (
+                        <Loader2 size={14} className="animate-spin" />
+                      ) : speakingId === today.id ? (
+                        <Square size={14} />
+                      ) : (
+                        <Play size={14} />
+                      )}
+                      {loadingId === today.id
+                        ? t("sandesh.loading")
+                        : speakingId === today.id
+                          ? t("sandesh.stop")
+                          : t("sandesh.listen")}
+                    </button>
+                  )}
                   <button
-                    onClick={() => toggleSpeak(today.message, today.id)}
-                    className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gold/50 text-maroon hover:bg-gold/10 disabled:opacity-50 disabled:cursor-not-allowed transition text-sm ${dev}`}
-                    disabled={loadingId !== null && loadingId !== today.id}
-                    aria-label="Listen to Sandesh"
+                    onClick={() => shareSandesh(today.message, today.author)}
+                    className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border border-saffron/50 text-saffron hover:bg-saffron/10 transition text-sm ${dev}`}
+                    aria-label="Share Sandesh as Image"
                   >
-                    {loadingId === today.id ? (
-                      <Loader2 size={14} className="animate-spin" />
-                    ) : speakingId === today.id ? (
-                      <Square size={14} />
-                    ) : (
-                      <Play size={14} />
-                    )}
-                    {loadingId === today.id
-                      ? t("sandesh.loading")
-                      : speakingId === today.id
-                        ? t("sandesh.stop")
-                        : t("sandesh.listen")}
+                    <Share2 size={14} />
+                    {lang === "hi" ? "शेयर करें" : "Share Image"}
                   </button>
-                )}
-                <button
-                  onClick={() => shareSandesh(today.message, today.author)}
-                  className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border border-saffron/50 text-saffron hover:bg-saffron/10 transition text-sm ${dev}`}
-                  aria-label="Share Sandesh as Image"
-                >
-                  <Share2 size={14} />
-                  {lang === "hi" ? "शेयर करें" : "Share Image"}
-                </button>
-                <button
-                  onClick={() => setSeed((s) => s + 1)}
-                  className={`inline-flex items-center gap-2 text-xs text-maroon hover:text-saffron transition ${dev}`}
-                >
-                  <RefreshCw size={12} /> {t("sandesh.another")}
-                </button>
+                  <button
+                    onClick={() => setSeed((s) => s + 1)}
+                    className={`inline-flex items-center gap-2 text-xs text-maroon hover:text-saffron transition ${dev}`}
+                  >
+                    <RefreshCw size={12} /> {t("sandesh.another")}
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
         )}
         {!today && (
           <div className={`max-w-3xl mx-auto text-center text-muted-foreground py-10 ${dev}`}>
@@ -417,52 +420,55 @@ function SandeshPage() {
 
         {archive.length > 0 && (
           <div className="max-w-3xl mx-auto">
-            <h2 className={`font-display text-3xl text-maroon mb-6 ${dev}`}>{t("sandesh.more")}</h2>
+            <ScrollReveal direction="up" duration={800}>
+              <h2 className={`font-display text-3xl text-maroon mb-6 ${dev}`}>{t("sandesh.more")}</h2>
+            </ScrollReveal>
             <div className="space-y-4">
-              {archive.map((s: Sandesh) => (
-                <div
-                  key={s.id}
-                  className="p-6 rounded-2xl bg-card border border-border hover:border-gold/50 transition"
-                >
-                  <div className="text-xs uppercase tracking-[0.25em] text-saffron mb-2">
-                    {formatDate(s.publish_date)}
-                  </div>
-                  <p className={`text-foreground/85 leading-relaxed mb-4 ${dev}`}>"{s.message}"</p>
-                  <div className="flex flex-wrap items-center justify-between gap-4">
-                    <div className={`text-xs text-muted-foreground ${dev}`}>— {s.author}</div>
-                    <div className="flex gap-2">
-                      {isHindiText(s.message) && (
+              {archive.map((s: Sandesh, idx) => (
+                <ScrollReveal key={s.id} direction="up" delay={(idx % 4) * 80} duration={750}>
+                  <div
+                    className="p-6 rounded-2xl bg-card border border-border hover:border-gold/50 transition"
+                  >
+                    <div className="text-xs uppercase tracking-[0.25em] text-saffron mb-2">
+                      {formatDate(s.publish_date)}
+                    </div>
+                    <p className={`text-foreground/85 leading-relaxed mb-4 ${dev}`}>"{s.message}"</p>
+                    <div className="flex flex-wrap items-center justify-between gap-4">
+                      <div className={`text-xs text-muted-foreground ${dev}`}>— {s.author}</div>
+                      <div className="flex gap-2">
+                        {isHindiText(s.message) && (
+                          <button
+                            onClick={() => toggleSpeak(s.message, s.id)}
+                            className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-gold/50 text-maroon hover:bg-gold/10 disabled:opacity-50 disabled:cursor-not-allowed transition text-xs ${dev}`}
+                            disabled={loadingId !== null && loadingId !== s.id}
+                            aria-label="Listen to Sandesh"
+                          >
+                            {loadingId === s.id ? (
+                              <Loader2 size={12} className="animate-spin" />
+                            ) : speakingId === s.id ? (
+                              <Square size={12} />
+                            ) : (
+                              <Play size={12} />
+                            )}
+                            {loadingId === s.id
+                              ? t("sandesh.loading")
+                              : speakingId === s.id
+                                ? t("sandesh.stop")
+                                : t("sandesh.listen")}
+                          </button>
+                        )}
                         <button
-                          onClick={() => toggleSpeak(s.message, s.id)}
-                          className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-gold/50 text-maroon hover:bg-gold/10 disabled:opacity-50 disabled:cursor-not-allowed transition text-xs ${dev}`}
-                          disabled={loadingId !== null && loadingId !== s.id}
-                          aria-label="Listen to Sandesh"
+                          onClick={() => shareSandesh(s.message, s.author)}
+                          className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-saffron/50 text-saffron hover:bg-saffron/10 transition text-xs ${dev}`}
+                          aria-label="Share Sandesh as Image"
                         >
-                          {loadingId === s.id ? (
-                            <Loader2 size={12} className="animate-spin" />
-                          ) : speakingId === s.id ? (
-                            <Square size={12} />
-                          ) : (
-                            <Play size={12} />
-                          )}
-                          {loadingId === s.id
-                            ? t("sandesh.loading")
-                            : speakingId === s.id
-                              ? t("sandesh.stop")
-                              : t("sandesh.listen")}
+                          <Share2 size={12} />
+                          {lang === "hi" ? "शेयर" : "Share"}
                         </button>
-                      )}
-                      <button
-                        onClick={() => shareSandesh(s.message, s.author)}
-                        className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-saffron/50 text-saffron hover:bg-saffron/10 transition text-xs ${dev}`}
-                        aria-label="Share Sandesh as Image"
-                      >
-                        <Share2 size={12} />
-                        {lang === "hi" ? "शेयर" : "Share"}
-                      </button>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </ScrollReveal>
               ))}
             </div>
           </div>

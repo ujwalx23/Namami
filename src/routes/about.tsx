@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell, PageHero } from "@/components/PageShell";
+import { ScrollReveal } from "@/components/ScrollReveal";
 import { useLang } from "@/i18n/LangProvider";
 import type { TKey } from "@/i18n/translations";
 import { Mountain, Compass, Plane, Train, Bus, Sparkles, Calendar } from "lucide-react";
@@ -86,96 +87,109 @@ function AboutPage() {
       />
 
       {/* INTRO + FACT CARD */}
-      <section className="container mx-auto px-6 py-16 grid lg:grid-cols-3 gap-10">
-        <div className="lg:col-span-2 space-y-5 text-foreground/85 leading-relaxed">
-          <p className={`text-lg ${dev}`}>{t("about.intro")}</p>
-        </div>
-        <aside className="rounded-2xl bg-gradient-divine border border-gold/40 p-6">
-          <div className={`text-xs uppercase tracking-[0.25em] text-saffron mb-3 ${dev}`}>
-            {hi ? "मंदिर परिचय" : "Temple Facts"}
+      <ScrollReveal direction="up" duration={800}>
+        <section className="container mx-auto px-6 py-16 grid lg:grid-cols-3 gap-10">
+          <div className="lg:col-span-2 space-y-5 text-foreground/85 leading-relaxed">
+            <p className={`text-lg ${dev}`}>{t("about.intro")}</p>
           </div>
-          <dl className="space-y-3">
-            {facts.map((f) => (
-              <div
-                key={f.k}
-                className="flex justify-between gap-3 border-b border-gold/20 pb-2 last:border-0"
-              >
-                <dt className={`text-sm text-muted-foreground ${dev}`}>{f.k}</dt>
-                <dd className={`text-sm font-medium text-maroon text-right ${dev}`}>{f.v}</dd>
-              </div>
-            ))}
-          </dl>
-        </aside>
-      </section>
+          <aside className="rounded-2xl bg-gradient-divine border border-gold/40 p-6">
+            <div className={`text-xs uppercase tracking-[0.25em] text-saffron mb-3 ${dev}`}>
+              {hi ? "मंदिर परिचय" : "Temple Facts"}
+            </div>
+            <dl className="space-y-3">
+              {facts.map((f) => (
+                <div
+                  key={f.k}
+                  className="flex justify-between gap-3 border-b border-gold/20 pb-2 last:border-0"
+                >
+                  <dt className={`text-sm text-muted-foreground ${dev}`}>{f.k}</dt>
+                  <dd className={`text-sm font-medium text-maroon text-right ${dev}`}>{f.v}</dd>
+                </div>
+              ))}
+            </dl>
+          </aside>
+        </section>
+      </ScrollReveal>
 
       {/* HISTORY */}
-      <section className="bg-gradient-divine border-y border-border/60">
-        <div className="container mx-auto px-6 py-16 grid lg:grid-cols-2 gap-10 items-center">
-          <div className="aspect-[4/5] max-w-md mx-auto rounded-[2rem] overflow-hidden shadow-sacred border-4 border-gold/60">
-            <img
-              src={maaImg3}
-              alt="Maa Vindhyavasini Shringar"
-              className="w-full h-full object-cover"
-            />
+      <ScrollReveal direction="up" duration={800} delay={100}>
+        <section className="bg-gradient-divine border-y border-border/60">
+          <div className="container mx-auto px-6 py-16 grid lg:grid-cols-2 gap-10 items-center">
+            <div className="aspect-[4/5] max-w-md mx-auto rounded-[2rem] overflow-hidden shadow-sacred border-4 border-gold/60">
+              <img
+                src={maaImg3}
+                alt="Maa Vindhyavasini Shringar"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <Section title={t("about.history.title")}>
+              <p className={`text-foreground/85 leading-relaxed text-lg ${dev}`}>
+                {t("about.history.text")}
+              </p>
+            </Section>
           </div>
-          <Section title={t("about.history.title")}>
-            <p className={`text-foreground/85 leading-relaxed text-lg ${dev}`}>
-              {t("about.history.text")}
-            </p>
-          </Section>
-        </div>
-      </section>
+        </section>
+      </ScrollReveal>
 
       {/* TRIKONA PARIKRAMA */}
       <section className="container mx-auto px-6 py-16">
-        <Section title={t("about.trikona.title")}>
-          <p className={`text-foreground/85 leading-relaxed text-lg max-w-3xl ${dev}`}>
-            {t("about.trikona.text")}
-          </p>
-        </Section>
+        <ScrollReveal direction="up" duration={800}>
+          <Section title={t("about.trikona.title")}>
+            <p className={`text-foreground/85 leading-relaxed text-lg max-w-3xl ${dev}`}>
+              {t("about.trikona.text")}
+            </p>
+          </Section>
+        </ScrollReveal>
         <div className="grid md:grid-cols-3 gap-6 mt-8">
-          {trikona.map((item) => (
-            <div
-              key={item.tk}
-              className="p-7 rounded-2xl bg-card border border-border hover:border-gold/60 hover:shadow-gold transition"
-            >
-              <div className="w-12 h-12 rounded-xl bg-gradient-sacred flex items-center justify-center text-cream mb-4">
-                <item.icon size={20} />
+          {trikona.map((item, idx) => (
+            <ScrollReveal key={item.tk} direction="up" delay={idx * 100} duration={700}>
+              <div
+                className="p-7 rounded-2xl bg-card border border-border hover:border-gold/60 hover:shadow-gold transition h-full"
+              >
+                <div className="w-12 h-12 rounded-xl bg-gradient-sacred flex items-center justify-center text-cream mb-4">
+                  <item.icon size={20} />
+                </div>
+                <h3 className={`font-display text-xl text-maroon mb-2 ${dev}`}>{t(item.tk)}</h3>
+                <p className={`text-sm text-muted-foreground ${dev}`}>{t(item.xk)}</p>
               </div>
-              <h3 className={`font-display text-xl text-maroon mb-2 ${dev}`}>{t(item.tk)}</h3>
-              <p className={`text-sm text-muted-foreground ${dev}`}>{t(item.xk)}</p>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
       </section>
 
       {/* SANCTUM & MAHIMA */}
-      <section className="container mx-auto px-6 py-16">
-        <Section title={t("about.sanctum.title")}>
-          <p className={`text-foreground/85 leading-relaxed text-lg max-w-4xl ${dev}`}>
-            {t("about.sanctum.text")}
-          </p>
-        </Section>
-      </section>
-
-      {/* SPIRITUAL IMPORTANCE */}
-      <section className="bg-gradient-divine border-y border-border/60">
-        <div className="container mx-auto px-6 py-16">
-          <Section title={t("about.importance.title")}>
+      <ScrollReveal direction="up" duration={800}>
+        <section className="container mx-auto px-6 py-16">
+          <Section title={t("about.sanctum.title")}>
             <p className={`text-foreground/85 leading-relaxed text-lg max-w-4xl ${dev}`}>
-              {t("about.importance.text")}
+              {t("about.sanctum.text")}
             </p>
           </Section>
-        </div>
-      </section>
+        </section>
+      </ScrollReveal>
+
+      {/* SPIRITUAL IMPORTANCE */}
+      <ScrollReveal direction="up" duration={800}>
+        <section className="bg-gradient-divine border-y border-border/60">
+          <div className="container mx-auto px-6 py-16">
+            <Section title={t("about.importance.title")}>
+              <p className={`text-foreground/85 leading-relaxed text-lg max-w-4xl ${dev}`}>
+                {t("about.importance.text")}
+              </p>
+            </Section>
+          </div>
+        </section>
+      </ScrollReveal>
 
       {/* FESTIVALS */}
       <section className="container mx-auto px-6 py-16">
-        <Section title={t("about.fest.title")}>
-          <p className={`text-foreground/85 leading-relaxed text-lg max-w-3xl ${dev}`}>
-            {t("about.fest.text")}
-          </p>
-        </Section>
+        <ScrollReveal direction="up" duration={800}>
+          <Section title={t("about.fest.title")}>
+            <p className={`text-foreground/85 leading-relaxed text-lg max-w-3xl ${dev}`}>
+              {t("about.fest.text")}
+            </p>
+          </Section>
+        </ScrollReveal>
         <div className="grid md:grid-cols-2 gap-4 mt-6">
           {[
             {
@@ -192,54 +206,59 @@ function AboutPage() {
                 ? "विन्ध्यवासिनी जयन्ती पर लोक-कवियों एवं गायकों का सम्मेलन"
                 : "Folk-poets and singers gather on Vindhyavasini Jayanti",
             },
-          ].map((f) => (
-            <div
-              key={f.n}
-              className="p-5 rounded-2xl bg-gradient-divine border border-gold/40 flex items-center gap-4"
-            >
-              <div className="w-11 h-11 rounded-xl bg-gradient-sacred flex items-center justify-center text-cream shrink-0">
-                <f.icon size={18} />
+          ].map((f, idx) => (
+            <ScrollReveal key={f.n} direction="up" delay={idx * 100} duration={700}>
+              <div
+                className="p-5 rounded-2xl bg-gradient-divine border border-gold/40 flex items-center gap-4 h-full"
+              >
+                <div className="w-11 h-11 rounded-xl bg-gradient-sacred flex items-center justify-center text-cream shrink-0">
+                  <f.icon size={18} />
+                </div>
+                <div>
+                  <div className={`font-display text-lg text-maroon ${dev}`}>{f.n}</div>
+                  <div className={`text-xs text-muted-foreground ${dev}`}>{f.x}</div>
+                </div>
               </div>
-              <div>
-                <div className={`font-display text-lg text-maroon ${dev}`}>{f.n}</div>
-                <div className={`text-xs text-muted-foreground ${dev}`}>{f.x}</div>
-              </div>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
       </section>
 
       {/* HOW TO REACH */}
       <section className="container mx-auto px-6 py-10">
-        <Section title={t("about.access.title")}>
-          <div className="grid md:grid-cols-3 gap-5 mt-2">
-            {[
-              { icon: Plane, txt: t("about.access.air") },
-              { icon: Train, txt: t("about.access.rail") },
-              { icon: Bus, txt: t("about.access.road") },
-            ].map((r, i) => (
-              <div
-                key={i}
-                className="p-6 rounded-2xl bg-card border border-border flex items-start gap-3 hover:-translate-y-1 hover:shadow-gold transition-all duration-300"
-              >
-                <div className="w-11 h-11 rounded-xl bg-gradient-sacred flex items-center justify-center text-cream shrink-0">
-                  <r.icon size={18} />
+        <ScrollReveal direction="up" duration={800}>
+          <Section title={t("about.access.title")}>
+            <div className="grid md:grid-cols-3 gap-5 mt-2">
+              {[
+                { icon: Plane, txt: t("about.access.air") },
+                { icon: Train, txt: t("about.access.rail") },
+                { icon: Bus, txt: t("about.access.road") },
+              ].map((r, i) => (
+                <div
+                  key={i}
+                  className="p-6 rounded-2xl bg-card border border-border flex items-start gap-3 hover:-translate-y-1 hover:shadow-gold transition-all duration-300 h-full"
+                >
+                  <div className="w-11 h-11 rounded-xl bg-gradient-sacred flex items-center justify-center text-cream shrink-0">
+                    <r.icon size={18} />
+                  </div>
+                  <p className={`text-foreground/80 leading-relaxed text-sm ${dev}`}>{r.txt}</p>
                 </div>
-                <p className={`text-foreground/80 leading-relaxed text-sm ${dev}`}>{r.txt}</p>
-              </div>
-            ))}
-          </div>
-        </Section>
+              ))}
+            </div>
+          </Section>
+        </ScrollReveal>
       </section>
 
       {/* OUR SANSTHAN */}
       <section className="container mx-auto px-6 py-16 grid lg:grid-cols-3 gap-10">
         <div className="lg:col-span-2">
-          <Section title={t("about.sansthan.title")}>
-            <p className={`text-foreground/85 leading-relaxed text-lg ${dev}`}>
-              {t("about.sansthan.text")}
-            </p>
-          </Section>
+          <ScrollReveal direction="up" duration={800}>
+            <Section title={t("about.sansthan.title")}>
+              <p className={`text-foreground/85 leading-relaxed text-lg ${dev}`}>
+                {t("about.sansthan.text")}
+              </p>
+            </Section>
+          </ScrollReveal>
         </div>
         <aside className="space-y-4">
           {(
@@ -248,14 +267,16 @@ function AboutPage() {
               { tk: "about.values.mission.t", vk: "about.values.mission.v" },
               { tk: "about.values.values.t", vk: "about.values.values.v" },
             ] as { tk: TKey; vk: TKey }[]
-          ).map((v) => (
-            <div key={v.tk} className="p-5 rounded-2xl bg-card border border-border">
-              <div className={`text-xs uppercase tracking-[0.25em] text-saffron mb-1 ${dev}`}>
-                {t(v.tk)}
+          ).map((v, idx) => (
+            <ScrollReveal key={v.tk} direction="up" delay={idx * 100} duration={700}>
+              <div className="p-5 rounded-2xl bg-card border border-border h-full">
+                <div className={`text-xs uppercase tracking-[0.25em] text-saffron mb-1 ${dev}`}>
+                  {t(v.tk)}
+                </div>
+                <div className={`font-display text-xl text-maroon mb-1 ${dev}`}>{t(v.tk)}</div>
+                <p className={`text-muted-foreground text-sm ${dev}`}>{t(v.vk)}</p>
               </div>
-              <div className={`font-display text-xl text-maroon mb-1 ${dev}`}>{t(v.tk)}</div>
-              <p className={`text-muted-foreground text-sm ${dev}`}>{t(v.vk)}</p>
-            </div>
+            </ScrollReveal>
           ))}
         </aside>
       </section>

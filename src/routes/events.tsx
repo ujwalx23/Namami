@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell, PageHero } from "@/components/PageShell";
+import { ScrollReveal } from "@/components/ScrollReveal";
 import { Calendar, MapPin } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import type { Tables } from "@/integrations/supabase/types";
@@ -96,8 +97,10 @@ function EventsPage() {
           <p className={`text-muted-foreground mb-12 ${dev}`}>{t("events.empty.up")}</p>
         ) : (
           <div className="grid md:grid-cols-3 gap-6 mb-16">
-            {upcoming.map((e: EventRow) => (
-              <EventCard key={e.id} e={e} accent="gold" />
+            {upcoming.map((e: EventRow, idx) => (
+              <ScrollReveal key={e.id} direction="up" delay={idx * 120} duration={800}>
+                <EventCard e={e} accent="gold" />
+              </ScrollReveal>
             ))}
           </div>
         )}
@@ -107,8 +110,10 @@ function EventsPage() {
           <p className={`text-muted-foreground ${dev}`}>{t("events.empty.past")}</p>
         ) : (
           <div className="grid md:grid-cols-2 gap-6">
-            {past.map((e: EventRow) => (
-              <EventCard key={e.id} e={e} accent="muted" />
+            {past.map((e: EventRow, idx) => (
+              <ScrollReveal key={e.id} direction="up" delay={idx * 120} duration={800}>
+                <EventCard e={e} accent="muted" />
+              </ScrollReveal>
             ))}
           </div>
         )}

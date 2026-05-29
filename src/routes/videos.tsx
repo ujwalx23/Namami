@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell, PageHero } from "@/components/PageShell";
+import { ScrollReveal } from "@/components/ScrollReveal";
 import { useLang } from "@/i18n/LangProvider";
 import { Play, Smartphone } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -84,36 +85,40 @@ function VideosPage() {
 
         {activeTab === "video" ? (
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {list.map((v) => (
-              <div key={v.id} className="hover:-translate-y-1.5 transition-all duration-300">
-                <div className="aspect-video rounded-2xl overflow-hidden shadow-sacred border-2 border-gold/40 hover:border-gold/60 transition-colors">
-                  <iframe
-                    className="w-full h-full"
-                    src={v.embed}
-                    title={v.title}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
+            {list.map((v, idx) => (
+              <ScrollReveal key={v.id} direction="up" delay={(idx % 2) * 120} duration={800}>
+                <div className="hover:-translate-y-1.5 transition-all duration-300">
+                  <div className="aspect-video rounded-2xl overflow-hidden shadow-sacred border-2 border-gold/40 hover:border-gold/60 transition-colors">
+                    <iframe
+                      className="w-full h-full"
+                      src={v.embed}
+                      title={v.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+                  <p className={`mt-3 text-muted-foreground text-sm ${dev}`}>{v.title}</p>
                 </div>
-                <p className={`mt-3 text-muted-foreground text-sm ${dev}`}>{v.title}</p>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            {list.map((s) => (
-              <div key={s.id} className="hover:-translate-y-1.5 transition-all duration-300">
-                <div className="aspect-[9/16] rounded-2xl overflow-hidden shadow-gold border-2 border-gold/40 bg-background hover:border-gold/60 transition-colors">
-                  <iframe
-                    className="w-full h-full"
-                    src={s.embed}
-                    title={s.title}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
+            {list.map((s, idx) => (
+              <ScrollReveal key={s.id} direction="up" delay={(idx % 3) * 100} duration={750}>
+                <div className="hover:-translate-y-1.5 transition-all duration-300">
+                  <div className="aspect-[9/16] rounded-2xl overflow-hidden shadow-gold border-2 border-gold/40 bg-background hover:border-gold/60 transition-colors">
+                    <iframe
+                      className="w-full h-full"
+                      src={s.embed}
+                      title={s.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+                  <p className={`mt-3 text-muted-foreground text-sm text-center ${dev}`}>{s.title}</p>
                 </div>
-                <p className={`mt-3 text-muted-foreground text-sm text-center ${dev}`}>{s.title}</p>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         )}

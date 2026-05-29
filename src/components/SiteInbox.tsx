@@ -21,10 +21,10 @@ export function SiteInbox() {
       <PopoverTrigger asChild>
         <button
           type="button"
-          className="relative inline-flex items-center justify-center w-9 h-9 rounded-full border border-maroon/30 text-maroon hover:bg-maroon hover:text-cream transition"
+          className="relative inline-flex items-center justify-center w-11 h-11 lg:w-10 lg:h-10 rounded-full border border-maroon/30 text-maroon hover:bg-maroon hover:text-cream transition active:scale-95 duration-200"
           aria-label={hi ? "इनबॉक्स" : "Inbox"}
         >
-          <Inbox size={16} />
+          <Inbox size={18} />
           {unreadCount > 0 && (
             <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-saffron text-cream text-[10px] font-bold flex items-center justify-center">
               {unreadCount > 9 ? "9+" : unreadCount}

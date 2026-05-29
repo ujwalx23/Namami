@@ -70,18 +70,18 @@ export function SiteHeader() {
           </Link>
         </div>
 
-        <div className="flex items-center gap-2 lg:hidden">
+        <div className="flex items-center gap-3 lg:hidden">
           <SiteInbox />
           <button
             onClick={toggle}
-            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full border border-maroon/30 text-maroon text-xs font-medium"
+            className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-full border border-maroon/30 text-maroon text-xs font-medium min-h-[44px] hover:bg-maroon/5 active:bg-maroon/10 transition-colors"
             aria-label="Switch language"
           >
-            <Languages size={12} /> {t("lang.toggle")}
+            <Languages size={14} /> {t("lang.toggle")}
           </button>
           <button
             onClick={() => setOpen(!open)}
-            className="p-2 text-maroon"
+            className="p-3 text-maroon hover:bg-maroon/5 active:bg-maroon/10 rounded-full transition-colors inline-flex items-center justify-center min-w-[44px] min-h-[44px]"
             aria-label={t("nav.menu")}
           >
             {open ? <X size={22} /> : <Menu size={22} />}
@@ -91,12 +91,19 @@ export function SiteHeader() {
 
       <div className={`lg:hidden border-t border-border/60 bg-background transition-all duration-300 ease-in-out overflow-hidden ${open ? "max-h-[500px] opacity-100 py-4" : "max-h-0 opacity-0 py-0"}`}>
         <nav className="container mx-auto px-6 flex flex-col gap-3">
-          {links.map((l) => (
+          {links.map((l, idx) => (
             <Link
               key={l.to}
               to={l.to}
               onClick={() => setOpen(false)}
-              className={`py-2 text-foreground/80 hover:text-maroon transition-colors ${lang === "hi" ? "font-devanagari" : ""}`}
+              style={
+                open
+                  ? {
+                      animationDelay: `${idx * 40}ms`,
+                    }
+                  : undefined
+              }
+              className={`py-2.5 text-foreground/80 hover:text-maroon transition-colors block text-base ${open ? "opacity-0 animate-slide-in-left" : ""} ${lang === "hi" ? "font-devanagari" : ""}`}
               activeProps={{ className: "text-maroon font-semibold" }}
               activeOptions={{ exact: l.to === "/" }}
             >

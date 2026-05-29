@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { PageShell, PageHero } from "@/components/PageShell";
+import { ScrollReveal } from "@/components/ScrollReveal";
 import { supabase } from "@/integrations/supabase/client";
 import { useLang } from "@/i18n/LangProvider";
 import { Download, X } from "lucide-react";
@@ -106,37 +107,38 @@ function GalleryPage() {
       <section className="container mx-auto px-6 py-16">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
           {items.map((p, i) => (
-            <figure
-              key={i}
-              onClick={() => setLightbox(p.src)}
-              className="group relative aspect-[3/4] rounded-2xl overflow-hidden border-2 border-gold/40 shadow-sacred hover:shadow-gold transition-all hover:-translate-y-1 cursor-pointer bg-cream/10 flex items-center justify-center"
-            >
-              <img
-                src={p.src}
-                alt={p.cap}
-                loading="lazy"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-maroon/85 via-maroon/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              <figcaption
-                className={`absolute bottom-0 left-0 right-0 p-4 text-cream font-display text-lg translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all ${dev}`}
+            <ScrollReveal key={i} direction="up" delay={(i % 3) * 100} duration={800}>
+              <figure
+                onClick={() => setLightbox(p.src)}
+                className="group relative aspect-[3/4] rounded-2xl overflow-hidden border-2 border-gold/40 shadow-sacred hover:shadow-gold transition-all hover:-translate-y-1 cursor-pointer bg-cream/10 flex items-center justify-center h-full"
               >
-                {p.cap}
-              </figcaption>
+                <img
+                  src={p.src}
+                  alt={p.cap}
+                  loading="lazy"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-maroon/85 via-maroon/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <figcaption
+                  className={`absolute bottom-0 left-0 right-0 p-4 text-cream font-display text-lg translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all ${dev}`}
+                >
+                  {p.cap}
+                </figcaption>
 
-              {/* Download Button Overlay */}
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleDownload(p.src, p.cap || `darshan_${i + 1}`);
-                }}
-                className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-cream/90 text-maroon hover:bg-gold hover:text-cream flex items-center justify-center shadow-lg transition-all duration-300 md:opacity-0 md:group-hover:opacity-100"
-                title="Download image"
-                aria-label="Download image"
-              >
-                <Download size={16} />
-              </button>
-            </figure>
+                {/* Download Button Overlay */}
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleDownload(p.src, p.cap || `darshan_${i + 1}`);
+                  }}
+                  className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-cream/90 text-maroon hover:bg-gold hover:text-cream flex items-center justify-center shadow-lg transition-all duration-300 md:opacity-0 md:group-hover:opacity-100"
+                  title="Download image"
+                  aria-label="Download image"
+                >
+                  <Download size={16} />
+                </button>
+              </figure>
+            </ScrollReveal>
           ))}
         </div>
       </section>
