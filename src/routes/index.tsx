@@ -13,7 +13,6 @@ import {
   ArrowRight,
   Sparkles,
   Heart,
-  BookOpen,
   ChevronLeft,
   ChevronRight,
   Mountain,
@@ -24,6 +23,8 @@ import {
   WifiOff,
   X,
   Bell,
+  ShieldCheck,
+  Quote,
 } from "lucide-react";
 import { useLang } from "@/i18n/LangProvider";
 import { subscribeToNotifications, isPushConfigured } from "@/lib/push";
@@ -318,12 +319,8 @@ function HomePage() {
 
   const intro = [
     { icon: Heart, tk: "home.card.purpose.title" as TKey, xk: "home.card.purpose.text" as TKey },
-    {
-      icon: BookOpen,
-      tk: "home.card.sansthapana.title" as TKey,
-      xk: "home.card.sansthapana.text" as TKey,
-    },
-    { icon: Sparkles, tk: "home.card.vision.title" as TKey, xk: "home.card.vision.text" as TKey },
+    { icon: ShieldCheck, tk: "home.card.trust.title" as TKey, xk: "home.card.trust.text" as TKey },
+    { icon: Users, tk: "home.card.guidance.title" as TKey, xk: "home.card.guidance.text" as TKey },
   ];
 
   const stats = [
@@ -332,50 +329,35 @@ function HomePage() {
     { icon: Compass, n: t("home.shakti.stat3"), s: t("home.shakti.stat3v") },
   ];
 
-  const upcomingEvents = hi
+  const devoteeReviews = hi
     ? [
         {
-          title: "नवरात्रि महोत्सव",
-          date: "३ – १२ अक्टूबर",
-          location: "मुख्य मंदिर प्रांगण",
-          desc: "नौ रात्रि भक्ति, कीर्तन एवं आरती।",
+          name: "प्रिया शर्मा",
+          comment: "मन्दिर का वातावरण अत्यंत शांतिपूर्ण और दिव्य है। सेवादार बहुत सहायक थे, और दर्शन का अनुभव बहुत अच्छी तरह से व्यवस्थित था। मेरी यात्रा के बाद मुझे वास्तव में धन्य महसूस हुआ। जय माँ विन्ध्यवासिनी 🙏",
+          rating: 5,
         },
         {
-          title: "पूर्णिमा सत्संग",
-          date: "५ नवंबर",
-          location: "सत्संग भवन",
-          desc: "गुरुजी के साथ मासिक पूर्णिमा सत्संग।",
-        },
-        {
-          title: "अन्नकूट भण्डारा",
-          date: "१४ नवंबर",
-          location: "भोजनालय",
-          desc: "सभी भक्तों हेतु प्रसाद सेवा।",
+          name: "राजेश मिश्रा",
+          comment: "एक सुंदर और आध्यात्मिक रूप से उन्नत करने वाला स्थान। व्यवस्थाएं उत्कृष्ट थीं, और पूरा अनुभव सहज और यादगार रहा। मैं परिवार के साथ दर्शन करने की अत्यधिक सलाह देता हूँ।",
+          rating: 5,
         },
       ]
     : [
         {
-          title: "Navratri Mahotsav",
-          date: "Oct 03 – Oct 12",
-          location: "Main Mandir Prangan",
-          desc: "Nine nights of devotion, kirtan and aarti.",
+          name: "Priya Sharma",
+          comment: "The temple atmosphere is incredibly peaceful and divine. The staff was very helpful, and the darshan experience was well organized. I felt truly blessed after my visit. Jai Maa Vindhyavasini 🙏",
+          rating: 5,
         },
         {
-          title: "Purnima Satsang",
-          date: "Nov 05",
-          location: "Satsang Hall",
-          desc: "Monthly purnima satsang with Guru ji.",
-        },
-        {
-          title: "Annakut Bhandara",
-          date: "Nov 14",
-          location: "Bhojanalaya",
-          desc: "Community prasad seva for all devotees.",
+          name: "Rajesh Mishra",
+          comment: "A beautiful and spiritually uplifting place. The arrangements were excellent, and the entire experience was smooth and memorable. I highly recommend visiting with family.",
+          rating: 5,
         },
       ];
 
   return (
     <PageShell>
+      <MantraMarquee />
       {/* HERO */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-divine" />
@@ -469,8 +451,7 @@ function HomePage() {
         </ScrollReveal>
       </section>
 
-      {/* SACRED MANTRA MARQUEE */}
-      <MantraMarquee />
+
 
 
       {/* INTRO */}
@@ -648,49 +629,58 @@ function HomePage() {
         </div>
       </section>
 
-      {/* UPCOMING EVENTS */}
-      <section className="container mx-auto px-6 py-10 pb-20">
+      {/* DEVOTEE REVIEWS */}
+      <section className="container mx-auto px-6 py-16 pb-20">
         <ScrollReveal direction="up" duration={800}>
           <div className="flex items-end justify-between mb-12 flex-wrap gap-4">
             <div>
               <div className={`text-saffron text-xs uppercase tracking-[0.3em] mb-2 ${dev}`}>
-                {t("home.events.kicker")}
+                {hi ? "श्रद्धालुओं के अनुभव" : "Devotee Experiences"}
               </div>
               <h2 className={`font-display text-4xl md:text-5xl text-maroon ${dev}`}>
-                {t("home.events.title")}
+                {hi ? "भक्तों की समीक्षाएं" : "Devotee Reviews"}
               </h2>
             </div>
             <Link
-              to="/events"
+              to="/reviews"
               className={`inline-flex items-center gap-2 text-maroon font-medium hover:text-saffron transition-colors duration-300 ${dev}`}
             >
-              {t("home.events.viewall")} <ArrowRight size={16} />
+              {hi ? "सभी समीक्षाएं पढ़ें" : "Read More Reviews"} <ArrowRight size={16} />
             </Link>
           </div>
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {upcomingEvents.map((e, idx) => (
-            <ScrollReveal key={e.title} direction="up" delay={idx * 150} duration={800}>
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          {devoteeReviews.map((r, idx) => (
+            <ScrollReveal key={r.name} direction="up" delay={idx * 150} duration={800}>
               <article
-                className="rounded-2xl overflow-hidden bg-card border border-gold/30 hover:border-gold/60 hover:shadow-sacred hover:-translate-y-1.5 transition-premium group h-full"
+                className="relative rounded-2xl p-8 bg-card border border-gold/30 hover:border-gold/60 hover:shadow-sacred hover:-translate-y-1.5 transition-premium group flex flex-col justify-between h-full"
               >
-                <div className="h-2 bg-gradient-sacred" />
-                <div className="p-7">
-                  <h3
-                    className={`font-display text-2xl text-maroon mb-3 group-hover:text-saffron transition-colors duration-300 ${dev}`}
-                  >
-                    {e.title}
-                  </h3>
-                  <div className={`flex flex-col gap-1.5 text-sm text-muted-foreground mb-4 ${dev}`}>
-                    <span className="flex items-center gap-2">
-                      <Calendar size={14} className="text-gold" /> {e.date}
-                    </span>
-                    <span className="flex items-center gap-2">
-                      <MapPin size={14} className="text-gold" /> {e.location}
-                    </span>
+                <div className="absolute top-6 right-6 text-gold/10 group-hover:text-gold/20 transition-colors">
+                  <Quote size={56} strokeWidth={1.5} />
+                </div>
+                
+                <div className="relative">
+                  {/* Stars rating */}
+                  <div className="flex gap-1 mb-4">
+                    {[...Array(r.rating)].map((_, i) => (
+                      <span key={i} className="text-saffron text-lg">★</span>
+                    ))}
                   </div>
-                  <p className={`text-foreground/75 ${dev}`}>{e.desc}</p>
+                  
+                  <p className={`text-foreground/85 leading-relaxed italic mb-6 text-base md:text-lg ${dev}`}>
+                    "{r.comment}"
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-3 border-t border-gold/10 pt-4 mt-auto">
+                  <div className="w-10 h-10 rounded-full bg-gradient-sacred flex items-center justify-center text-cream font-display text-lg">
+                    {r.name.charAt(0).toUpperCase()}
+                  </div>
+                  <div>
+                    <h3 className={`font-semibold text-maroon ${dev}`}>{r.name}</h3>
+                    <p className="text-xs text-muted-foreground">{hi ? "सत्यापित भक्त" : "Verified Devotee"}</p>
+                  </div>
                 </div>
               </article>
             </ScrollReveal>

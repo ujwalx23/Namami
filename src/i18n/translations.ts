@@ -61,15 +61,15 @@ export const translations = {
     en: "To spread the divine message of Maa Vindhyavasini, nurture devotion, and serve humanity through seva, satsang and sanskar.",
     hi: "माँ विन्ध्यवासिनी का दिव्य संदेश प्रसारित करना, भक्ति का पोषण और सेवा, सत्संग एवं संस्कार से मानवता की सेवा।",
   },
-  "home.card.sansthapana.title": { en: "Sansthapana", hi: "संस्थापना" },
-  "home.card.sansthapana.text": {
-    en: "Established by Pujya Guru Ji with the blessings of Maa, the trust has been a beacon of dharma, preserving rituals and uplifting devotees for decades.",
-    hi: "पूज्य गुरुजी द्वारा माँ के आशीर्वाद से स्थापित यह न्यास दशकों से धर्म का दीप जलाए हुए है, जो परम्पराओं की रक्षा और भक्तों के उत्थान में सतत कार्यरत है।",
+  "home.card.trust.title": { en: "100% Transparent Seva", hi: "पारदर्शी सेवा" },
+  "home.card.trust.text": {
+    en: "Every contribution is fully accounted for. We support free bhandara, Sanskrit education, and temple services with absolute financial integrity.",
+    hi: "आपके दान का एक-एक पैसा सीधे अन्नक्षेत्र भंडारा, वैदिक बटुकों की शिक्षा और जन सेवा में लगाया जाता है, पूर्ण पारदर्शिता के साथ।",
   },
-  "home.card.vision.title": { en: "Vision", hi: "हमारी दृष्टि" },
-  "home.card.vision.text": {
-    en: "A united community rooted in Sanatan values, promoting learning, seva and unwavering bhakti at the lotus feet of the Goddess.",
-    hi: "सनातन मूल्यों में रचा-बसा एक एकजुट समाज, जो शिक्षा, सेवा और देवी के चरणों में अटूट भक्ति को समर्पित है।",
+  "home.card.guidance.title": { en: "Pilgrim Guidance", hi: "श्रद्धालु मार्गदर्शन" },
+  "home.card.guidance.text": {
+    en: "Offering dedicated support for devotees visiting Vindhyachal Dham, including direct darshan planning, ritual information, and lodging guidance.",
+    hi: "विन्ध्याचल धाम आने वाले भक्तों के लिए दर्शन, पूजन, और मंदिर परिसर में मार्ग दर्शन हेतु हमारा सेवा सहायता केंद्र सदैव तत्पर है।",
   },
 
   "home.sandesh.kicker": { en: "Daily Wisdom", hi: "दैनिक प्रेरणा" },
