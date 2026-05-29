@@ -29,7 +29,6 @@ const links = [
   { to: "/panchang", key: "nav.panchang" as TKey, icon: CalendarDays },
   { to: "/reviews", key: "nav.reviews" as TKey, icon: MessageSquare },
   { to: "/gallery", key: "nav.gallery" as TKey, icon: Image },
-  { to: "/donation", key: "nav.donation" as TKey, icon: Heart },
   { to: "/contact", key: "nav.contact" as TKey, icon: Phone },
 ];
 
