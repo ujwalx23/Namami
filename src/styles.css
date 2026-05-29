@@ -378,4 +378,60 @@ html {
   animation: spin-once 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* --- Premium Devotional Animations & Classes --- */
+
+/* Seamless Marquee Scrolling */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Breathing Gold Glow */
+@keyframes gold-breath {
+  0%, 100% {
+    border-color: oklch(0.78 0.16 80 / 0.4);
+    box-shadow: 0 0 15px oklch(0.78 0.16 80 / 0.15);
+  }
+  50% {
+    border-color: oklch(0.78 0.16 80 / 0.9);
+    box-shadow: 0 0 30px oklch(0.78 0.16 80 / 0.45);
+  }
+}
+.animate-gold-breath {
+  animation: gold-breath 4s ease-in-out infinite;
+}
+
+/* Golden Sweep Shine Effect */
+.golden-sweep-container {
+  position: relative;
+  overflow: hidden;
+}
+.golden-sweep-effect {
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(212, 175, 55, 0) 0%,
+    rgba(212, 175, 55, 0.35) 50%,
+    rgba(212, 175, 55, 0) 100%
+  );
+  transform: skewX(-25deg);
+  pointer-events: none;
+}
+.golden-sweep-container:hover .golden-sweep-effect {
+  animation: button-shine 1.6s ease-in-out infinite;
+}
+
+
 

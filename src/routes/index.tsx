@@ -90,7 +90,7 @@ function HeroSlider() {
   return (
     <div className="relative">
       <div className="absolute -inset-6 bg-gradient-sacred rounded-[2rem] blur-3xl opacity-30 animate-glow" />
-      <div className="relative aspect-[3/4] max-w-md mx-auto rounded-[2rem] overflow-hidden shadow-sacred border-4 border-gold/60">
+      <div className="relative aspect-[3/4] max-w-md mx-auto rounded-[2rem] overflow-hidden shadow-sacred border-4 border-gold/60 transition-premium hover:scale-[1.02] hover:border-gold/90 animate-gold-breath">
         {slides.map((s, idx) => (
           <div
             key={idx}
@@ -300,11 +300,14 @@ function PanchangStrip() {
   ];
   return (
     <section className="container mx-auto px-6 pb-4">
-      <div className="rounded-3xl bg-gradient-divine border-2 border-gold/40 shadow-sacred overflow-hidden">
+      <div className="rounded-3xl bg-gradient-divine border-2 border-gold/40 shadow-[0_0_35px_rgba(212,175,55,0.22)] shadow-sacred overflow-hidden hover:shadow-[0_0_40px_rgba(212,175,55,0.32)] transition-shadow duration-500">
         <div className="px-6 md:px-8 py-5 flex flex-wrap items-center justify-between gap-4 border-b border-gold/20">
           <div>
-            <div className={`text-[11px] uppercase tracking-[0.3em] text-saffron ${dev}`}>
-              {t("home.panch.kicker")}
+            <div className="flex items-center gap-2 mb-0.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+              <div className={`text-[11px] uppercase tracking-[0.3em] text-saffron ${dev}`}>
+                {t("home.panch.kicker")}
+              </div>
             </div>
             <div className={`font-display text-xl text-maroon ${dev}`}>{t("home.panch.title")}</div>
           </div>
@@ -319,9 +322,9 @@ function PanchangStrip() {
           {items.map((it) => (
             <div
               key={it.k}
-              className="px-5 py-4 flex items-center gap-3 border-r last:border-r-0 border-gold/20 odd:bg-cream/30"
+              className="group px-5 py-4 flex items-center gap-3 border-r last:border-r-0 border-gold/20 odd:bg-cream/30 hover:bg-gold/5 transition-all duration-300"
             >
-              <div className="w-9 h-9 rounded-lg bg-gradient-sacred flex items-center justify-center text-cream shrink-0">
+              <div className="w-9 h-9 rounded-lg bg-gradient-sacred flex items-center justify-center text-cream shrink-0 group-hover:scale-110 transition-transform duration-300">
                 <it.i size={16} />
               </div>
               <div className="min-w-0">
@@ -459,6 +462,29 @@ function PWAInstallCard() {
             </span>
           </div>
         )}
+      </div>
+    </div>
+  );
+}
+
+function MantraMarquee() {
+  const mantras = [
+    "॥ जय माँ विन्ध्यवासिनी ॥",
+    "॥ श्री विन्ध्यवासिन्यै नमः ॥",
+    "॥ सर्वमङ्गलमाङ्गल्ये शिवे सर्वार्थसाधिके । शरण्ये त्र्यम्बके गौरि नारायणि नमोऽस्तु ते ॥",
+    "॥ या देवी सर्वभूतेषु शक्तिरूपेण संस्थिता । नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः ॥",
+    "॥ जय जगदम्ब जय जननी ॥",
+  ];
+  const doubledMantras = [...mantras, ...mantras, ...mantras];
+  return (
+    <div className="w-full bg-saffron py-2.5 overflow-hidden border-y border-gold/30 relative z-20 shadow-md">
+      <div className="animate-marquee flex whitespace-nowrap gap-16 text-cream font-devanagari text-base md:text-lg font-medium tracking-wide">
+        {doubledMantras.map((m, idx) => (
+          <span key={idx} className="flex items-center gap-3">
+            <span className="text-gold text-lg">✦</span>
+            <span>{m}</span>
+          </span>
+        ))}
       </div>
     </div>
   );
@@ -627,14 +653,6 @@ function HomePage() {
             <HeroSlider />
           </ScrollReveal>
         </div>
-
-        {/* Scroll Guide Indicator */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-1 text-maroon/60 pointer-events-none select-none">
-          <span className="text-[10px] uppercase tracking-[0.25em] font-semibold">Scroll Down</span>
-          <div className="w-5 h-8 rounded-full border-2 border-maroon/40 flex justify-center p-1">
-            <div className="w-1 h-2 rounded-full bg-maroon/60 animate-scroll-bounce" />
-          </div>
-        </div>
       </section>
 
       {/* SHAKTI PITHA STATS */}
@@ -656,8 +674,14 @@ function HomePage() {
         </ScrollReveal>
       </section>
 
+      {/* SACRED MANTRA MARQUEE */}
+      <MantraMarquee />
+
+      {/* DAILY PANCHANG STRIP */}
+      <PanchangStrip />
+
       {/* INTRO */}
-      <section className="container mx-auto px-6 py-20">
+      <section className="container mx-auto px-6 py-16">
         <ScrollReveal direction="up" duration={800}>
           <div className="text-center max-w-2xl mx-auto mb-14">
             <div className={`text-saffron text-xs uppercase tracking-[0.3em] mb-2 ${dev}`}>
@@ -674,13 +698,13 @@ function HomePage() {
           {intro.map((c, idx) => (
             <ScrollReveal key={c.tk} direction="up" delay={idx * 150} duration={800}>
               <div
-                className="group tilt-card-hover p-8 rounded-2xl bg-card border border-border hover:border-gold/60 h-full"
+                className="group tilt-card-hover p-8 rounded-2xl bg-card/75 backdrop-blur-md border border-gold/30 hover:border-gold hover:shadow-[0_10px_35px_rgba(212,175,55,0.15)] transition-premium h-full"
               >
-                <div className="w-12 h-12 rounded-xl bg-gradient-sacred flex items-center justify-center text-cream mb-5 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-12 h-12 rounded-xl bg-gradient-sacred flex items-center justify-center text-cream mb-5 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-md">
                   <c.icon size={20} />
                 </div>
                 <h3 className={`font-display text-2xl text-maroon mb-2 group-hover:text-saffron transition-colors duration-300 ${dev}`}>{t(c.tk)}</h3>
-                <p className={`text-muted-foreground leading-relaxed ${dev}`}>{t(c.xk)}</p>
+                <p className={`text-muted-foreground/90 leading-relaxed text-sm md:text-base ${dev}`}>{t(c.xk)}</p>
               </div>
             </ScrollReveal>
           ))}
@@ -796,7 +820,7 @@ function HomePage() {
               <ScrollReveal key={i} direction="up" delay={(i % 3) * 120} duration={850}>
                 <figure
                   onClick={() => setLightbox(p.src)}
-                  className="group relative aspect-[3/4] rounded-2xl overflow-hidden border-2 border-gold/40 shadow-sacred hover:shadow-gold transition-all duration-500 hover:-translate-y-2 cursor-pointer"
+                  className="group golden-sweep-container relative aspect-[3/4] rounded-2xl overflow-hidden border-2 border-gold/40 shadow-sacred hover:shadow-gold transition-all duration-500 hover:-translate-y-2 cursor-pointer"
                 >
                   <img
                     src={p.src}
@@ -804,6 +828,7 @@ function HomePage() {
                     loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
+                  <div className="golden-sweep-effect" />
                   <div className="absolute inset-0 bg-gradient-to-t from-maroon/80 via-maroon/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <figcaption
                     className={`absolute bottom-0 left-0 right-0 p-4 text-cream font-display text-lg translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 ${dev}`}
@@ -855,7 +880,7 @@ function HomePage() {
           {upcomingEvents.map((e, idx) => (
             <ScrollReveal key={e.title} direction="up" delay={idx * 150} duration={800}>
               <article
-                className="rounded-2xl overflow-hidden bg-card border border-border hover:shadow-sacred hover:-translate-y-1.5 transition-all duration-300 group h-full"
+                className="rounded-2xl overflow-hidden bg-card border border-gold/30 hover:border-gold/60 hover:shadow-sacred hover:-translate-y-1.5 transition-premium group h-full"
               >
                 <div className="h-2 bg-gradient-sacred" />
                 <div className="p-7">

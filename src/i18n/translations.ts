@@ -348,7 +348,7 @@ export const translations = {
   "ct.send.title": { en: "Send a Message", hi: "संदेश भेजें" },
   "ct.f.name": { en: "Your Name", hi: "आपका नाम" },
   "ct.f.email": { en: "Email Address", hi: "ईमेल पता" },
-  "ct.f.phone": { en: "Phone (optional)", hi: "फ़ोन (वैकल्पिक)" },
+  "ct.f.phone": { en: "Phone Number", hi: "फ़ोन नंबर" },
   "ct.f.msg": { en: "Your Message", hi: "आपका संदेश" },
   "ct.f.send": { en: "Send Message", hi: "संदेश भेजें" },
   "ct.f.sending": { en: "Sending…", hi: "भेज रहे हैं…" },
@@ -357,7 +357,7 @@ export const translations = {
   "ct.f.toast": { en: "Message received 🙏", hi: "संदेश प्राप्त हुआ 🙏" },
   "ct.appt.title": { en: "Book Appointment with Guru Ji", hi: "गुरुजी से समय निर्धारण" },
   "ct.appt.phone": { en: "Phone Number", hi: "फ़ोन नंबर" },
-  "ct.appt.email": { en: "Email (optional)", hi: "ईमेल (वैकल्पिक)" },
+  "ct.appt.email": { en: "Email Address", hi: "ईमेल पता" },
   "ct.appt.date": { en: "Date", hi: "तिथि" },
   "ct.appt.slot": { en: "Time slot", hi: "समय" },
   "ct.appt.purpose": {
