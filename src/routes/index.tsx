@@ -19,21 +19,22 @@ import {
   Mountain,
   Users,
   Compass,
-  Sunrise,
-  Sunset,
-  Star,
-  Moon,
   Download,
   Smartphone,
   WifiOff,
   X,
   Bell,
+  Play,
+  Pause,
+  Volume2,
+  Music4
 } from "lucide-react";
 import { useLang } from "@/i18n/LangProvider";
 import { subscribeToNotifications, isPushConfigured } from "@/lib/push";
 import { toast } from "sonner";
 import type { TKey } from "@/i18n/translations";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { useAudio } from "@/lib/AudioContext";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -142,206 +143,299 @@ function HeroSlider() {
   );
 }
 
-// ===== Lightweight Panchang for homepage strip =====
-const TITHIS = [
-  "Pratipada",
-  "Dwitiya",
-  "Tritiya",
-  "Chaturthi",
-  "Panchami",
-  "Shashti",
-  "Saptami",
-  "Ashtami",
-  "Navami",
-  "Dashami",
-  "Ekadashi",
-  "Dwadashi",
-  "Trayodashi",
-  "Chaturdashi",
-  "Purnima/Amavasya",
+// ===== Virtual Temple Bell & Aarti Player Hub =====
+
+const aartiLyricsHi = [
+  "जय विन्ध्येश्वरी मात भवानी। आरती उतारें सुर नर ज्ञानी॥",
+  "विन्ध्य पर्वत पै वास तिहारो। भक्तन के दुःख पल में टारो॥",
+  "महिमा अमित न जाए बखानी। जन हित रूप धरयो सुकुमारी॥",
+  "महिषासुर मर्दिनी सुख दानी। आदिशक्ति तुम हो जग कल्याणी॥",
+  "सिंह वाहिनी जय जगदम्बा। हरहु विपत्ति मातु करुणामय अम्बा॥",
+  "धूप दीप नैवेद्य चढ़ावें। श्रद्धा भाव से ध्यान लगावें॥",
+  "जय जय जय माँ विन्ध्यवासिनी। रक्षा करो शरणागत की सुख राशिनी॥"
 ];
-const NAKSHATRAS = [
-  "Ashwini",
-  "Bharani",
-  "Krittika",
-  "Rohini",
-  "Mrigashira",
-  "Ardra",
-  "Punarvasu",
-  "Pushya",
-  "Ashlesha",
-  "Magha",
-  "Purva Phalguni",
-  "Uttara Phalguni",
-  "Hasta",
-  "Chitra",
-  "Swati",
-  "Vishakha",
-  "Anuradha",
-  "Jyeshtha",
-  "Mula",
-  "Purva Ashadha",
-  "Uttara Ashadha",
-  "Shravana",
-  "Dhanishta",
-  "Shatabhisha",
-  "Purva Bhadrapada",
-  "Uttara Bhadrapada",
-  "Revati",
+
+const aartiLyricsEn = [
+  "Jai Vindhyeshwari Maat Bhawani. Aarti Utaarein Sur Nar Gyaani.",
+  "Vindhya Parvat Pai Vaas Tihaaro. Bhaktan Ke Dukh Pal Mein Taaro.",
+  "Mahima Amit Na Jaaye Bakhaani. Jan Hit Roop Dharayo Sukumaari.",
+  "Mahishasur Mardini Sukh Daani. Aadishakti Tum Ho Jag Kalyaani.",
+  "Singh Vaahini Jai Jagdamba. Harahu Vipatti Maatu Karunaamay Amba.",
+  "Dhoop Deep Naivedya Chadhaavein. Shraddha Bhaav Se Dhyaan Lagaavein.",
+  "Jai Jai Jai Maa Vindhyavasini. Raksha Karo Sharnaagat Ki Sukh Raashini."
 ];
-function jd(d: Date) {
-  return d.getTime() / 86400000 + 2440587.5;
-}
-function getAyanamsha(jdVal: number) {
-  const yearsSince1900 = (jdVal - 2415020.0) / 365.2422;
-  return 22.466 + yearsSince1900 * (50.29 / 3600);
-}
-function sunLon(d: Date) {
-  const n = jd(d) - 2451545.0;
-  const L = (280.460 + 0.9856474 * n) % 360;
-  const g = (((357.528 + 0.9856003 * n) % 360) * Math.PI) / 180;
-  return (L + 1.915 * Math.sin(g) + 0.02 * Math.sin(2 * g) + 360) % 360;
-}
-function moonLon(d: Date) {
-  const jdVal = jd(d);
-  const T = (jdVal - 2451545.0) / 36525;
-  const L_prime = (218.3164 + 481267.8812 * T) % 360;
-  const D = (297.8502 + 445267.1114 * T) % 360;
-  const M = (134.9634 + 477198.8675 * T) % 360;
-  const M_prime = (357.5291 + 35999.0503 * T) % 360;
-  const F = (93.2721 + 483202.0175 * T) % 360;
 
-  const D_rad = D * Math.PI / 180;
-  const M_rad = M * Math.PI / 180;
-  const Mp_rad = M_prime * Math.PI / 180;
-  const F_rad = F * Math.PI / 180;
+function playBellChime() {
+  try {
+    const AudioCtor =
+      window.AudioContext ||
+      ((window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext ??
+        null);
+    if (!AudioCtor) return;
+    const audioCtx = new AudioCtor();
+    const osc1 = audioCtx.createOscillator();
+    const osc2 = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
 
-  let dL = 0;
-  dL += 6.288774 * Math.sin(M_rad);
-  dL += 1.274027 * Math.sin(2 * D_rad - M_rad);
-  dL += 0.658309 * Math.sin(2 * D_rad);
-  dL += 0.213618 * Math.sin(2 * M_rad);
-  dL += -0.185116 * Math.sin(Mp_rad);
-  dL += -0.114332 * Math.sin(2 * F_rad);
-  dL += 0.058793 * Math.sin(2 * D_rad - 2 * M_rad);
-  dL += 0.057066 * Math.sin(2 * D_rad - M_rad - Mp_rad);
-  dL += 0.053322 * Math.sin(2 * D_rad + M_rad);
-  dL += 0.045758 * Math.sin(2 * D_rad - Mp_rad);
-  dL += -0.041023 * Math.sin(M_rad - Mp_rad);
-  dL += -0.034720 * Math.sin(D_rad);
-  dL += -0.030465 * Math.sin(M_rad + Mp_rad);
-  dL += 0.015327 * Math.sin(2 * D_rad - 2 * F_rad);
-  dL += -0.012528 * Math.sin(2 * D_rad + Mp_rad);
-  dL += -0.009756 * Math.sin(2 * D_rad - M_rad + Mp_rad);
-  dL += 0.008034 * Math.sin(2 * D_rad - 2 * M_rad - Mp_rad);
-  dL += -0.007684 * Math.sin(2 * D_rad - 2 * M_rad + Mp_rad);
-  dL += 0.006322 * Math.sin(2 * M_rad - 2 * D_rad);
-  dL += -0.005877 * Math.sin(M_rad - 2 * D_rad);
+    osc1.type = "sine";
+    osc1.frequency.setValueAtTime(880, audioCtx.currentTime); // A5 note - bright bell chime
+    osc1.frequency.exponentialRampToValueAtTime(220, audioCtx.currentTime + 1.8); // decay
 
-  return (L_prime + dL + 360) % 360;
-}
-function sunRiseSet(date: Date): [Date, Date] {
-  const lat = 25.1467,
-    lon = 82.5;
-  const j = Math.floor(jd(date) - 0.5) + 0.5;
-  const n = Math.round(j - 2451545.0 + 0.0008);
-  const Js = n - lon / 360;
-  const M = (357.5291 + 0.98560028 * Js) % 360;
-  const Mr = (M * Math.PI) / 180;
-  const C = 1.9148 * Math.sin(Mr) + 0.02 * Math.sin(2 * Mr);
-  const lam = (((M + C + 180 + 102.9372) % 360) * Math.PI) / 180;
-  const Jt = 2451545.0 + Js + 0.0053 * Math.sin(Mr) - 0.0069 * Math.sin(2 * lam);
-  const decl = Math.asin(Math.sin(lam) * Math.sin((23.44 * Math.PI) / 180));
-  const lr = (lat * Math.PI) / 180;
-  const cosH =
-    (Math.sin((-0.83 * Math.PI) / 180) - Math.sin(lr) * Math.sin(decl)) /
-    (Math.cos(lr) * Math.cos(decl));
-  const H = (Math.acos(Math.max(-1, Math.min(1, cosH))) * 180) / Math.PI;
-  return [
-    new Date((Jt - H / 360 - 2440587.5) * 86400000),
-    new Date((Jt + H / 360 - 2440587.5) * 86400000),
-  ];
-}
-function fmtT(d: Date) {
-  return d.toLocaleTimeString("en-IN", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: true,
-    timeZone: "Asia/Kolkata",
-  });
+    osc2.type = "triangle";
+    osc2.frequency.setValueAtTime(440, audioCtx.currentTime); // A4 resonance
+    osc2.frequency.exponentialRampToValueAtTime(110, audioCtx.currentTime + 2.5); // decay
+
+    gainNode.gain.setValueAtTime(0.35, audioCtx.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 2.5);
+
+    osc1.connect(gainNode);
+    osc2.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+
+    osc1.start();
+    osc2.start();
+    osc1.stop(audioCtx.currentTime + 2.6);
+    osc2.stop(audioCtx.currentTime + 2.6);
+  } catch (err) {
+    console.warn("Bell sound synthesis failed:", err);
+  }
 }
 
-function PanchangStrip() {
-  const { t, lang } = useLang();
-  const dev = lang === "hi" ? "font-devanagari" : "";
-  const data = useMemo(() => {
-    const today = new Date();
-    const noon = new Date(
-      Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate(), 6, 30, 0),
+function VirtualBell() {
+  const { lang } = useLang();
+  const [isSwinging, setIsSwinging] = useState(false);
+  const [rippleActive, setRippleActive] = useState(false);
+  const hi = lang === "hi";
+
+  const handleRing = () => {
+    if (isSwinging) return;
+    playBellChime();
+    setIsSwinging(true);
+    setRippleActive(true);
+
+    toast.success(
+      hi
+        ? "जय माँ विन्ध्यवासिनी! माँ की असीम कृपा आप पर सदा बनी रहे। 🙏"
+        : "Jai Maa Vindhyavasini! May the Mother bless you. 🙏",
+      { duration: 2500 }
     );
-    const sl = sunLon(noon),
-      ml = moonLon(noon);
-    const diff = (ml - sl + 360) % 360;
-    const tNum = Math.floor(diff / 12);
-    const paksha =
-      tNum < 15 ? (lang === "hi" ? "शुक्ल" : "Shukla") : lang === "hi" ? "कृष्ण" : "Krishna";
-    const tithi = `${paksha} ${TITHIS[tNum % 15]}`;
-    const ayan = getAyanamsha(jd(noon));
-    const moonSid = (ml - ayan + 360) % 360;
-    const nak = NAKSHATRAS[Math.floor(moonSid / (360 / 27)) % 27];
-    const [sr, ss] = sunRiseSet(today);
-    return { tithi, nak, sr: fmtT(sr), ss: fmtT(ss) };
-  }, []);
-  const items = [
-    { i: Star, k: t("home.panch.tithi"), v: data.tithi },
-    { i: Moon, k: t("home.panch.nak"), v: data.nak },
-    { i: Sunrise, k: t("home.panch.sunrise"), v: data.sr },
-    { i: Sunset, k: t("home.panch.sunset"), v: data.ss },
-  ];
+
+    setTimeout(() => setIsSwinging(false), 1800);
+    setTimeout(() => setRippleActive(false), 2000);
+  };
+
   return (
-    <section className="container mx-auto px-6 pb-4">
-      <div className="rounded-3xl bg-gradient-divine border-2 border-gold/40 shadow-[0_0_35px_rgba(212,175,55,0.22)] shadow-sacred overflow-hidden hover:shadow-[0_0_40px_rgba(212,175,55,0.32)] transition-shadow duration-500">
-        <div className="px-6 md:px-8 py-5 flex flex-wrap items-center justify-between gap-4 border-b border-gold/20">
-          <div>
-            <div className="flex items-center gap-2 mb-0.5">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-              <div className={`text-[11px] uppercase tracking-[0.3em] text-saffron ${dev}`}>
-                {t("home.panch.kicker")}
-              </div>
-            </div>
-            <div className={`font-display text-xl text-maroon ${dev}`}>{t("home.panch.title")}</div>
-          </div>
-          <Link
-            to="/panchang"
-            className={`text-sm text-maroon font-medium hover:text-saffron inline-flex items-center gap-1 ${dev}`}
+    <div className="rounded-3xl bg-gradient-divine border-2 border-gold/40 shadow-sacred p-8 flex flex-col items-center text-center relative overflow-hidden h-full">
+      {/* Decorative Hanging Bell Arch */}
+      <div className="w-full flex flex-col items-center relative py-6">
+        {/* Support beam */}
+        <div className="w-32 h-2.5 rounded-full bg-gradient-to-r from-maroon/70 via-gold/80 to-maroon/70 shadow-md relative z-10" />
+        
+        {/* Rope */}
+        <div className="w-1.5 h-12 bg-saffron shadow-sm relative z-0" />
+
+        {/* Ripples when bell rings */}
+        {rippleActive && (
+          <>
+            <div className="absolute top-24 w-40 h-40 rounded-full border border-gold/40 animate-pulse-ring z-0" />
+            <div className="absolute top-24 w-48 h-48 rounded-full border border-gold/20 animate-pulse-ring z-0 [animation-delay:0.3s]" />
+          </>
+        )}
+
+        {/* Bell Body */}
+        <button
+          onClick={handleRing}
+          className="relative z-10 cursor-pointer active:scale-95 transition-transform duration-200 focus:outline-none select-none"
+          aria-label={hi ? "आरती घंटी बजाएं" : "Ring Temple Bell"}
+        >
+          <svg
+            className={`w-28 h-28 text-gold drop-shadow-[0_8px_16px_rgba(212,175,55,0.4)] transition-all ${
+              isSwinging ? "animate-bell-swing" : ""
+            }`}
+            viewBox="0 0 24 24"
+            fill="currentColor"
           >
-            {t("home.panch.full")} <ArrowRight size={14} />
-          </Link>
+            {/* Hanging loop */}
+            <path d="M12 2a3 3 0 00-3 3v1h6V5a3 3 0 00-3-3zM8 7h8v1H8z" opacity="0.8" />
+            {/* Main bell body */}
+            <path d="M12 6a7 7 0 00-7 7v4h14v-4a7 7 0 00-7-7z" />
+            {/* Flared rim */}
+            <path d="M4 17h16a1 1 0 011 1v1H3v-1a1 1 0 011-1z" opacity="0.9" />
+            {/* Clapper / Pendulum */}
+            <circle cx="12" cy="21" r="2" className={isSwinging ? "animate-pulse" : ""} />
+          </svg>
+        </button>
+      </div>
+
+      <div className="mt-4">
+        <h3 className={`font-display text-2xl text-maroon ${hi ? "font-devanagari" : ""}`}>
+          {hi ? "वर्चुअल दर्शन घंटी" : "Virtual Darshan Bell"}
+        </h3>
+        <p className={`text-xs uppercase tracking-widest text-saffron mt-1 ${hi ? "font-devanagari" : ""}`}>
+          {hi ? "घंटी बजाने के लिए स्पर्श करें" : "Tap to Ring Puja Bell & Pray"}
+        </p>
+        <p className={`text-sm text-muted-foreground mt-3 max-w-sm ${hi ? "font-devanagari" : ""}`}>
+          {hi
+            ? "माँ विन्ध्यवासिनी के पावन चरणों में ध्यान लगाएँ और दिव्य घंटी की ध्वनि से मन को शांत करें।"
+            : "Focus your mind on Maa Vindhyavasini and sound the brass bell for peace and blessings."}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function AartiLyricsPlayer() {
+  const { t, lang } = useLang();
+  const hi = lang === "hi";
+  const {
+    currentTrack,
+    isPlaying,
+    playTrack,
+    togglePlay,
+    trackList,
+    progress,
+    seek,
+    volume,
+    setVolume,
+    isMuted,
+    toggleMute,
+  } = useAudio();
+
+  const [activeTab, setActiveTab] = useState<"hi" | "en">(hi ? "hi" : "en");
+
+  const aartiTrack = trackList.find((tk) => tk.id === "1") || trackList[0];
+  const isAartiActive = currentTrack?.id === aartiTrack.id;
+
+  const handlePlayToggle = () => {
+    if (!isAartiActive) {
+      playTrack(aartiTrack);
+    } else {
+      togglePlay();
+    }
+  };
+
+  const lyrics = activeTab === "hi" ? aartiLyricsHi : aartiLyricsEn;
+
+  return (
+    <div className="rounded-3xl bg-card border border-gold/30 shadow-sacred p-7 flex flex-col h-full hover:border-gold/60 transition-colors duration-500">
+      <div className="flex items-center justify-between gap-4 mb-4 border-b border-gold/20 pb-3">
+        <div className="flex items-center gap-2.5">
+          <div className={`w-8 h-8 rounded-lg bg-gradient-sacred/10 text-saffron flex items-center justify-center ${isPlaying && isAartiActive ? "animate-pulse" : ""}`}>
+            <Music4 size={16} />
+          </div>
+          <div>
+            <h3 className={`font-display text-xl text-maroon ${hi ? "font-devanagari" : ""}`}>
+              {hi ? "दैनिक आरती श्रवण" : "Daily Aarti Player"}
+            </h3>
+            <p className="text-[10px] uppercase tracking-wider text-muted-foreground mt-0.5">
+              Maa Vindhyavasini Aarti
+            </p>
+          </div>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4">
-          {items.map((it) => (
-            <div
-              key={it.k}
-              className="group px-5 py-4 flex items-center gap-3 border-r last:border-r-0 border-gold/20 odd:bg-cream/30 hover:bg-gold/5 transition-all duration-300"
+
+        {/* Tab Buttons */}
+        <div className="inline-flex rounded-full bg-cream border border-gold/20 p-1">
+          <button
+            onClick={() => setActiveTab("hi")}
+            className={`px-3 py-1 text-xs rounded-full font-medium transition-all ${
+              activeTab === "hi" ? "bg-gradient-sacred text-cream shadow-sm" : "text-muted-foreground hover:text-maroon"
+            }`}
+          >
+            हिंदी
+          </button>
+          <button
+            onClick={() => setActiveTab("en")}
+            className={`px-3 py-1 text-xs rounded-full font-medium transition-all ${
+              activeTab === "en" ? "bg-gradient-sacred text-cream shadow-sm" : "text-muted-foreground hover:text-maroon"
+            }`}
+          >
+            EN
+          </button>
+        </div>
+      </div>
+
+      {/* Lyrics Scroll Container */}
+      <div className="flex-1 min-h-[160px] max-h-[220px] overflow-y-auto px-4 py-3 border border-gold/10 rounded-2xl bg-cream/25 scrollbar-none relative">
+        <div className="absolute top-0 left-0 right-0 h-4 bg-gradient-to-b from-card to-transparent pointer-events-none" />
+        <div className="space-y-3.5 py-2 text-center">
+          {lyrics.map((line, idx) => (
+            <p
+              key={idx}
+              className={`text-sm leading-relaxed ${
+                activeTab === "hi" ? "font-devanagari text-maroon" : "text-foreground font-medium"
+              } transition-colors duration-300`}
             >
-              <div className="w-9 h-9 rounded-lg bg-gradient-sacred flex items-center justify-center text-cream shrink-0 group-hover:scale-110 transition-transform duration-300">
-                <it.i size={16} />
-              </div>
-              <div className="min-w-0">
-                <div
-                  className={`text-[11px] uppercase tracking-wider text-muted-foreground ${dev}`}
-                >
-                  {it.k}
-                </div>
-                <div className={`font-medium text-maroon text-sm truncate ${dev}`}>{it.v}</div>
-              </div>
-            </div>
+              {line}
+            </p>
           ))}
         </div>
+        <div className="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-t from-card to-transparent pointer-events-none" />
+      </div>
+
+      {/* Audio Controls */}
+      <div className="mt-5 space-y-4">
+        {/* Progress Bar */}
+        <div className="flex items-center gap-3">
+          <span className="text-[10px] text-muted-foreground tabular-nums">
+            {isAartiActive && isPlaying ? "Active" : "0:00"}
+          </span>
+          <input
+            type="range"
+            min="0"
+            max="100"
+            value={isAartiActive ? progress : 0}
+            onChange={(e) => isAartiActive && seek(Number(e.target.value))}
+            className="flex-1 h-1.5 rounded-full bg-cream border border-gold/10 appearance-none cursor-pointer accent-saffron"
+            style={{
+              background: `linear-gradient(to right, var(--saffron) ${
+                isAartiActive ? progress : 0
+              }%, oklch(0.97 0.03 85) ${isAartiActive ? progress : 0}%)`
+            }}
+          />
+          <span className="text-[10px] text-muted-foreground tabular-nums">
+            {isPlaying && isAartiActive ? "Playing" : "Aarti"}
+          </span>
+        </div>
+
+        {/* Main Controls Row */}
+        <div className="flex items-center justify-between gap-4">
+          {/* Mute button */}
+          <button
+            onClick={toggleMute}
+            className="p-2.5 rounded-full border border-gold/20 bg-cream hover:bg-gold/5 text-maroon active:scale-90 transition-transform cursor-pointer"
+            aria-label={isMuted ? "Unmute" : "Mute"}
+          >
+            <Volume2 size={16} className={isMuted ? "opacity-40" : "opacity-100"} />
+          </button>
+
+          {/* Main Play/Pause Button */}
+          <button
+            onClick={handlePlayToggle}
+            className="w-12 h-12 rounded-full bg-gradient-sacred text-cream flex items-center justify-center shadow-gold hover:scale-105 active:scale-95 transition-transform duration-300 cursor-pointer"
+            aria-label={isPlaying && isAartiActive ? "Pause" : "Play"}
+          >
+            {isPlaying && isAartiActive ? <Pause size={18} fill="currentColor" /> : <Play size={18} className="translate-x-0.5" fill="currentColor" />}
+          </button>
+
+          {/* Dummy placeholder for spacing symmetry */}
+          <div className="w-10 h-10 opacity-0" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function VirtualPujaHub() {
+  return (
+    <section className="container mx-auto px-6 pb-12">
+      <div className="grid md:grid-cols-2 gap-8 items-stretch">
+        <VirtualBell />
+        <AartiLyricsPlayer />
       </div>
     </section>
   );
 }
+
 
 function PWAInstallCard() {
   const { t, lang } = useLang();
@@ -677,8 +771,8 @@ function HomePage() {
       {/* SACRED MANTRA MARQUEE */}
       <MantraMarquee />
 
-      {/* DAILY PANCHANG STRIP */}
-      <PanchangStrip />
+      {/* VIRTUAL PUJA HUB: BELL & AARTI PLAYER */}
+      <VirtualPujaHub />
 
       {/* INTRO */}
       <section className="container mx-auto px-6 py-16">

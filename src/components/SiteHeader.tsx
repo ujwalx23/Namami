@@ -1,20 +1,36 @@
 import { Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { Menu, X, Languages } from "lucide-react";
+import {
+  Menu,
+  X,
+  Languages,
+  Home,
+  Info,
+  Sparkles,
+  Calendar,
+  Video,
+  CalendarDays,
+  MessageSquare,
+  Image,
+  Heart,
+  Phone,
+  ArrowRight
+} from "lucide-react";
 import { useLang } from "@/i18n/LangProvider";
 import { SiteInbox } from "@/components/SiteInbox";
 import type { TKey } from "@/i18n/translations";
-const links: { to: string; key: TKey }[] = [
-  { to: "/", key: "nav.home" },
-  { to: "/about", key: "nav.about" },
-  { to: "/sandesh", key: "nav.sandesh" },
-  { to: "/events", key: "nav.events" },
-  { to: "/videos", key: "nav.videos" },
-  { to: "/panchang", key: "nav.panchang" },
-  { to: "/reviews", key: "nav.reviews" },
-  { to: "/gallery", key: "nav.gallery" },
-  { to: "/donation", key: "nav.donation" },
-  { to: "/contact", key: "nav.contact" },
+
+const links = [
+  { to: "/", key: "nav.home" as TKey, icon: Home },
+  { to: "/about", key: "nav.about" as TKey, icon: Info },
+  { to: "/sandesh", key: "nav.sandesh" as TKey, icon: Sparkles },
+  { to: "/events", key: "nav.events" as TKey, icon: Calendar },
+  { to: "/videos", key: "nav.videos" as TKey, icon: Video },
+  { to: "/panchang", key: "nav.panchang" as TKey, icon: CalendarDays },
+  { to: "/reviews", key: "nav.reviews" as TKey, icon: MessageSquare },
+  { to: "/gallery", key: "nav.gallery" as TKey, icon: Image },
+  { to: "/donation", key: "nav.donation" as TKey, icon: Heart },
+  { to: "/contact", key: "nav.contact" as TKey, icon: Phone },
 ];
 
 export function SiteHeader() {
@@ -35,6 +51,18 @@ export function SiteHeader() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Prevent scroll when drawer is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   return (
     <header className="sticky top-0 z-50 backdrop-blur-xl bg-background/70 border-b border-white/10 shadow-lg">
       {/* Scroll Progress Indicator */}
@@ -43,7 +71,7 @@ export function SiteHeader() {
       </div>
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-full bg-gradient-sacred flex items-center justify-center shadow-gold">
+          <div className="w-10 h-10 rounded-full bg-gradient-sacred flex items-center justify-center shadow-gold group-hover:scale-105 transition-transform duration-300">
             <span className="text-cream font-display text-lg">ॐ</span>
           </div>
           <div className="leading-tight">
@@ -108,28 +136,65 @@ export function SiteHeader() {
         </div>
       </div>
 
-      <div className={`lg:hidden border-t border-border/60 bg-background transition-all duration-500 ease-expo overflow-hidden ${open ? "max-h-[500px] opacity-100 py-4" : "max-h-0 opacity-0 py-0"}`}>
-        <nav className="container mx-auto px-6 flex flex-col gap-3">
-          {links.map((l, idx) => (
-            <Link
-              key={l.to}
-              to={l.to}
-              onClick={() => setOpen(false)}
-              style={
-                open
-                  ? {
-                      animationDelay: `${idx * 40}ms`,
-                    }
-                  : undefined
-              }
-              className={`py-2.5 text-foreground/80 hover:text-maroon transition-all duration-300 active:scale-95 block text-base ${open ? "opacity-0 animate-slide-in-left" : ""} ${lang === "hi" ? "font-devanagari" : ""}`}
-              activeProps={{ className: "text-maroon font-semibold" }}
-              activeOptions={{ exact: l.to === "/" }}
-            >
-              {t(l.key)}
-            </Link>
-          ))}
+      {/* Mobile Right Slide-out Drawer */}
+      {open && (
+        <div
+          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm transition-opacity duration-300 lg:hidden"
+          onClick={() => setOpen(false)}
+        />
+      )}
+      <div
+        className={`fixed top-0 right-0 h-full w-[290px] bg-card/95 backdrop-blur-2xl border-l border-gold/30 shadow-sacred z-50 transition-all duration-500 ease-spring lg:hidden flex flex-col ${
+          open ? "translate-x-0 opacity-100" : "translate-x-full opacity-0 pointer-events-none"
+        }`}
+      >
+        <div className="p-5 border-b border-gold/20 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="text-maroon font-display text-lg">ॐ {lang === "hi" ? "मेनू" : "Navigation"}</span>
+          </div>
+          <button
+            onClick={() => setOpen(false)}
+            className="p-2 text-maroon hover:bg-maroon/5 rounded-full transition-transform active:scale-90"
+            aria-label="Close menu"
+          >
+            <X size={20} />
+          </button>
+        </div>
+
+        <nav className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-1 scrollbar-none">
+          {links.map((l, idx) => {
+            const Icon = l.icon;
+            return (
+              <Link
+                key={l.to}
+                to={l.to}
+                onClick={() => setOpen(false)}
+                className={`group flex items-center gap-3.5 px-4 py-2.5 rounded-xl text-foreground/80 hover:text-maroon hover:bg-gold/5 active:scale-[0.98] transition-all duration-300 ${
+                  lang === "hi" ? "font-devanagari text-base" : "text-sm"
+                }`}
+                activeProps={{ className: "text-maroon font-semibold bg-gold/10 border-r-4 border-maroon" }}
+                activeOptions={{ exact: l.to === "/" }}
+              >
+                <div className="w-8 h-8 rounded-lg bg-gradient-sacred/10 text-saffron flex items-center justify-center shrink-0">
+                  <Icon size={16} />
+                </div>
+                <span>{t(l.key)}</span>
+                <ArrowRight size={12} className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-gold" />
+              </Link>
+            );
+          })}
         </nav>
+
+        <div className="p-5 border-t border-gold/20 flex flex-col gap-3 bg-cream/10">
+          <Link
+            to="/donation"
+            onClick={() => setOpen(false)}
+            className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-gradient-sacred text-cream font-medium text-sm shadow-gold hover:opacity-95 active:scale-95 transition-all duration-300"
+          >
+            <Heart size={14} />
+            {t("nav.donate_btn")}
+          </Link>
+        </div>
       </div>
     </header>
   );
