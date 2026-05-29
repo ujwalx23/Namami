@@ -11,7 +11,7 @@ Your website requires environment variables for Supabase authentication and conf
 Create a new file in your project root called `.env.local`:
 
 ```
-superbase-sync-site-main/
+project-root/
 ├── .env.local ← Create this file here
 ├── .env.example ← Reference (optional)
 ├── src/

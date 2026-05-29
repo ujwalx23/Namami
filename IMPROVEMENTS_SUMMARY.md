@@ -260,7 +260,7 @@ For icon generation:
 ## 📊 File Structure
 
 ```
-superbase-sync-site-main/
+project-root/
 ├── src/
 │   ├── integrations/supabase/
 │   │   ├── auth.ts ✨ NEW - Auth functions
