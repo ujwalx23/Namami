@@ -191,18 +191,7 @@ function SandeshPage() {
     };
     drawCorners();
 
-    // 3. Draw a faded sacred sunburst/mandala in the background center
-    ctx.save();
-    ctx.translate(540, 960);
-    ctx.strokeStyle = "rgba(214, 162, 50, 0.08)";
-    ctx.lineWidth = 2;
-    for (let i = 0; i < 36; i++) {
-      ctx.rotate((10 * Math.PI) / 180);
-      ctx.beginPath();
-      ctx.arc(0, 0, 350, 0, Math.PI / 6);
-      ctx.stroke();
-    }
-    ctx.restore();
+
 
     // 3.5 Draw background watermark "namamivindhyavasini.in" repeated diagonally
     ctx.save();
