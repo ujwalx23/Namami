@@ -207,7 +207,7 @@ function SandeshPage() {
     // 3.5 Draw background watermark "namamivindhyavasini.in" repeated diagonally
     ctx.save();
     ctx.rotate(-25 * Math.PI / 180);
-    ctx.fillStyle = "rgba(217, 56, 30, 0.035)"; // Very light saffron/red
+    ctx.fillStyle = "rgba(217, 56, 30, 0.085)"; // Darker saffron/red watermark
     ctx.font = "bold 32px sans-serif";
     ctx.textAlign = "left";
     const stepX = 450;
@@ -221,6 +221,10 @@ function SandeshPage() {
     ctx.restore();
 
     // 4. Draw Header Box
+    ctx.save();
+    ctx.shadowColor = "rgba(217, 56, 30, 0.3)";
+    ctx.shadowBlur = 20;
+    ctx.shadowOffsetY = 8;
     const headGrad = ctx.createLinearGradient(140, 0, 940, 0);
     headGrad.addColorStop(0, "#D9381E");
     headGrad.addColorStop(1, "#FF5E36");
@@ -229,6 +233,7 @@ function SandeshPage() {
     ctx.beginPath();
     drawRoundRect(140, 160, 800, 120, 60);
     ctx.fill();
+    ctx.restore();
 
     // Header golden outline
     ctx.strokeStyle = "#D6A232";
@@ -290,13 +295,27 @@ function SandeshPage() {
     ctx.fillText(`— ${author}`, 540, startY + totalTextHeight + 90);
 
     // 8. Draw Bottom Footer Block
+    ctx.save();
+    ctx.shadowColor = "rgba(217, 56, 30, 0.25)";
+    ctx.shadowBlur = 15;
+    ctx.shadowOffsetY = 6;
     ctx.fillStyle = "#D9381E";
     ctx.beginPath();
     drawRoundRect(240, 1680, 600, 80, 40);
     ctx.fill();
+    ctx.restore();
+
+    // Footer golden outline
+    ctx.strokeStyle = "#D6A232";
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    drawRoundRect(245, 1685, 590, 70, 35);
+    ctx.stroke();
 
     ctx.fillStyle = "#FFFDF6";
-    ctx.font = "bold 28px sans-serif";
+    ctx.font = "bold 28px Georgia, serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
     ctx.fillText("namamivindhyavasini.in", 540, 1720);
 
     const dataUrl = canvas.toDataURL("image/png");
