@@ -67,16 +67,30 @@ function RootComponent() {
       sessionId = Math.random().toString(36).substring(2) + Date.now().toString(36);
     }
 
-    const beat = () =>
-      void supabase.from("visitor_heartbeats" as any).upsert(
-        { session_id: sessionId, last_seen: new Date().toISOString(), page_path: path } as any,
-        { onConflict: "session_id" }
-      );
+    const beat = () => {
+      console.log("[Heartbeat] Sending session:", sessionId, "path:", path);
+      void supabase
+        .from("visitor_heartbeats" as any)
+        .upsert(
+          { session_id: sessionId, last_seen: new Date().toISOString(), page_path: path } as any,
+          { onConflict: "session_id" }
+        )
+        .then(({ error }) => {
+          if (error) {
+            console.error("[Heartbeat] Upsert failed:", error);
+          } else {
+            console.log("[Heartbeat] Upsert succeeded");
+          }
+        });
+    };
 
     beat(); // immediate on navigation
     const iv = setInterval(beat, 30_000); // keep-alive every 30 s
 
-    return () => clearInterval(iv);
+    return () => {
+      console.log("[Heartbeat] Cleaning up interval for path:", path);
+      clearInterval(iv);
+    };
   }, [location.pathname]);
 
   return (

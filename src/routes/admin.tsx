@@ -1314,15 +1314,20 @@ function AnalyticsAdmin() {
           .from("visitor_heartbeats" as any)
           .select("session_id", { count: "exact", head: true })
           .gte("last_seen", twoMinAgo);
-        if (!error && count !== null) {
+        if (error) {
+          console.error("[Live Visitors] Fetch failed:", error);
+        } else if (count !== null) {
+          console.log("[Live Visitors] Fetched count:", count);
           setLiveCount(count);
         }
-      } catch {
-        // silently ignore — table may not exist yet
+      } catch (err) {
+        console.error("[Live Visitors] Fetch exception:", err);
       }
     };
 
     void fetchLive();
+
+    console.log("[Realtime] Setting up subscriptions...");
 
     // Subscribe to postgres changes for visitor_heartbeats (live count updates)
     const heartbeatChannel = supabase
@@ -1330,11 +1335,14 @@ function AnalyticsAdmin() {
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "visitor_heartbeats" },
-        () => {
+        (payload) => {
+          console.log("[Realtime] Heartbeat change detected:", payload);
           void fetchLive();
         }
       )
-      .subscribe();
+      .subscribe((status) => {
+        console.log("[Realtime] Heartbeat channel status:", status);
+      });
 
     // Subscribe to postgres changes for new page views (increment count in state)
     const pageViewsChannel = supabase
@@ -1342,7 +1350,8 @@ function AnalyticsAdmin() {
       .on(
         "postgres_changes",
         { event: "INSERT", schema: "public", table: "page_views" },
-        () => {
+        (payload) => {
+          console.log("[Realtime] Page view inserted:", payload);
           setData((prev) => {
             if (!prev) return null;
             return {
@@ -1352,12 +1361,18 @@ function AnalyticsAdmin() {
           });
         }
       )
-      .subscribe();
+      .subscribe((status) => {
+        console.log("[Realtime] Page view channel status:", status);
+      });
 
     // Fallback interval check to prune expired sessions (every 15 seconds)
-    const iv = setInterval(() => void fetchLive(), 15_000);
+    const iv = setInterval(() => {
+      console.log("[Fallback] Polling live visitors...");
+      void fetchLive();
+    }, 15_000);
 
     return () => {
+      console.log("[Realtime] Unsubscribing channels...");
       void heartbeatChannel.unsubscribe();
       void pageViewsChannel.unsubscribe();
       clearInterval(iv);
