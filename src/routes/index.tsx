@@ -347,7 +347,7 @@ function HomePage() {
     : [
         {
           name: "Priya Sharma",
-          comment: "I was impressed by how well-organized everything was. The temple information, darshan details, and the thoughtful Sandesh section provided valuable guidance and inspiration. Highly recommended for devotees planning their visit. 🌺🙏",
+          comment: "I was impressed by how well-organized everything was. The temple information, darshan details, and Sandesh section were very helpful. Highly valuable resource for devotees and visitors. 🌺🙏",
         },
         {
           name: "Rajesh Mishra",
@@ -655,25 +655,25 @@ function HomePage() {
         </ScrollReveal>
 
         {/* Mobile: horizontal snap-scroll one-at-a-time; Desktop: 3-column grid */}
-        <div className="flex md:grid md:grid-cols-3 gap-5 md:gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none scrollbar-none pb-4 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0">
+        <div className="flex md:grid md:grid-cols-3 md:items-start gap-5 md:gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none scrollbar-none pb-4 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0">
           {devoteeReviews.map((r, idx) => (
             <ScrollReveal key={r.name} direction="up" delay={idx * 150} duration={800}>
               <article
-                className="relative rounded-2xl p-6 md:p-8 bg-card border border-gold/30 hover:border-gold/60 hover:shadow-sacred hover:-translate-y-1 transition-premium group flex flex-col h-full min-w-[78vw] md:min-w-0 snap-center"
+                className="relative rounded-2xl p-5 md:p-6 bg-card border border-gold/30 hover:border-gold/60 hover:shadow-sacred hover:-translate-y-1 transition-premium group min-w-[78vw] md:min-w-0 snap-center"
               >
-                <div className="absolute top-5 right-5 text-gold/10 group-hover:text-gold/20 transition-colors">
-                  <Quote size={44} strokeWidth={1.5} />
+                <div className="absolute top-4 right-4 text-gold/10 group-hover:text-gold/20 transition-colors">
+                  <Quote size={36} strokeWidth={1.5} />
                 </div>
 
-                <p className={`relative text-foreground/85 leading-relaxed italic mb-6 text-sm md:text-base ${dev}`}>
+                <p className={`relative text-foreground/80 leading-relaxed italic mb-4 text-sm ${dev}`}>
                   "{r.comment}"
                 </p>
 
-                <div className="flex items-center gap-3 border-t border-gold/10 pt-4 mt-auto">
-                  <div className="w-9 h-9 rounded-full bg-gradient-sacred flex items-center justify-center text-cream font-display text-base shrink-0">
+                <div className="flex items-center gap-2.5 border-t border-gold/10 pt-3">
+                  <div className="w-8 h-8 rounded-full bg-gradient-sacred flex items-center justify-center text-cream font-display text-sm shrink-0">
                     {r.name.charAt(0).toUpperCase()}
                   </div>
-                  <h3 className={`font-semibold text-maroon ${dev}`}>{r.name}</h3>
+                  <h3 className={`font-semibold text-maroon text-sm ${dev}`}>{r.name}</h3>
                 </div>
               </article>
             </ScrollReveal>
