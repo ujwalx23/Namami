@@ -1305,24 +1305,65 @@ function AnalyticsAdmin() {
   const [error, setError] = useState<string | null>(null);
   const [liveCount, setLiveCount] = useState(0);
 
-  // Poll visitor heartbeats every 15 s — sessions active in last 2 min = "live"
+  // Realtime updates for live visitors and page views
   useEffect(() => {
     const fetchLive = async () => {
       try {
         const twoMinAgo = new Date(Date.now() - 2 * 60 * 1000).toISOString();
-        const { count } = await supabase
+        const { count, error } = await supabase
           .from("visitor_heartbeats" as any)
           .select("session_id", { count: "exact", head: true })
           .gte("last_seen", twoMinAgo);
-        setLiveCount(count ?? 0);
+        if (!error && count !== null) {
+          setLiveCount(count);
+        }
       } catch {
         // silently ignore — table may not exist yet
       }
     };
+
     void fetchLive();
+
+    // Subscribe to postgres changes for visitor_heartbeats (live count updates)
+    const heartbeatChannel = supabase
+      .channel("admin-heartbeats")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "visitor_heartbeats" },
+        () => {
+          void fetchLive();
+        }
+      )
+      .subscribe();
+
+    // Subscribe to postgres changes for new page views (increment count in state)
+    const pageViewsChannel = supabase
+      .channel("admin-pageviews")
+      .on(
+        "postgres_changes",
+        { event: "INSERT", schema: "public", table: "page_views" },
+        () => {
+          setData((prev) => {
+            if (!prev) return null;
+            return {
+              ...prev,
+              pageViewsTotal: prev.pageViewsTotal + 1,
+            };
+          });
+        }
+      )
+      .subscribe();
+
+    // Fallback interval check to prune expired sessions (every 15 seconds)
     const iv = setInterval(() => void fetchLive(), 15_000);
-    return () => clearInterval(iv);
+
+    return () => {
+      void heartbeatChannel.unsubscribe();
+      void pageViewsChannel.unsubscribe();
+      clearInterval(iv);
+    };
   }, []);
+
 
   async function load() {
     setLoading(true);
