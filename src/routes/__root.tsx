@@ -48,12 +48,12 @@ function RootComponent() {
 
     let sessionId = "";
     try {
-      sessionId = localStorage.getItem("__vis_sid") ?? "";
+      sessionId = sessionStorage.getItem("__vis_sid") ?? "";
       if (!sessionId) {
         sessionId =
           Math.random().toString(36).substring(2) +
           Date.now().toString(36);
-        localStorage.setItem("__vis_sid", sessionId);
+        sessionStorage.setItem("__vis_sid", sessionId);
       }
     } catch {
       sessionId = Math.random().toString(36).substring(2) + Date.now().toString(36);
