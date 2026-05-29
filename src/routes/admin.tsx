@@ -1217,7 +1217,6 @@ type DayActivity = {
   shorts: number;
   events: number;
   inbox: number;
-  pageViews: number;
 };
 
 type AnalyticsSnapshot = {
@@ -1232,7 +1231,6 @@ type AnalyticsSnapshot = {
   shorts: number;
   gallery: number;
   inboxTotal: number;
-  pageViewsTotal: number;
   dailyActivity: DayActivity[];
 };
 
@@ -1244,7 +1242,6 @@ function buildDailyActivity(
   videos: { created_at: string; type: string }[],
   events: { created_at: string }[],
   inbox: { created_at: string }[],
-  pageViews: { created_at: string }[],
 ): DayActivity[] {
   const days: DayActivity[] = [];
   for (let i = 6; i >= 0; i--) {
@@ -1273,7 +1270,6 @@ function buildDailyActivity(
       shorts: videos.filter((v) => v.type === "short" && inDay(v.created_at)).length,
       events: events.filter((e) => inDay(e.created_at)).length,
       inbox: inbox.filter((inb) => inDay(inb.created_at)).length,
-      pageViews: pageViews.filter((pv) => inDay(pv.created_at)).length,
     });
   }
   return days;
@@ -1344,27 +1340,6 @@ function AnalyticsAdmin() {
         console.log("[Realtime] Heartbeat channel status:", status);
       });
 
-    // Subscribe to postgres changes for new page views (increment count in state)
-    const pageViewsChannel = supabase
-      .channel("admin-pageviews")
-      .on(
-        "postgres_changes",
-        { event: "INSERT", schema: "public", table: "page_views" },
-        (payload) => {
-          console.log("[Realtime] Page view inserted:", payload);
-          setData((prev) => {
-            if (!prev) return null;
-            return {
-              ...prev,
-              pageViewsTotal: prev.pageViewsTotal + 1,
-            };
-          });
-        }
-      )
-      .subscribe((status) => {
-        console.log("[Realtime] Page view channel status:", status);
-      });
-
     // Fallback interval check to prune expired sessions (every 15 seconds)
     const iv = setInterval(() => {
       console.log("[Fallback] Polling live visitors...");
@@ -1374,7 +1349,6 @@ function AnalyticsAdmin() {
     return () => {
       console.log("[Realtime] Unsubscribing channels...");
       void heartbeatChannel.unsubscribe();
-      void pageViewsChannel.unsubscribe();
       clearInterval(iv);
     };
   }, []);
@@ -1446,27 +1420,6 @@ function AnalyticsAdmin() {
         throw new Error(firstError.message);
       }
 
-      let pageViewsTotal = 0;
-      let pageViewsDaily: any[] = [];
-      try {
-        const { count, error: pvTotalErr } = await supabase
-          .from("page_views" as any)
-          .select("id", { count: "exact", head: true });
-        if (!pvTotalErr && count !== null) {
-          pageViewsTotal = count;
-        }
-
-        const { data: pvDailyData, error: pvDailyErr } = await supabase
-          .from("page_views" as any)
-          .select("created_at")
-          .gte("created_at", sevenDaysAgo);
-        if (!pvDailyErr && pvDailyData) {
-          pageViewsDaily = pvDailyData;
-        }
-      } catch (err) {
-        console.warn("page_views table not yet available:", err);
-      }
-
       const dailyActivity = buildDailyActivity(
         reviewsDailyRes.data ?? [],
         contactsDailyRes.data ?? [],
@@ -1475,7 +1428,6 @@ function AnalyticsAdmin() {
         (videosDailyRes.data as { created_at: string; type: string }[]) ?? [],
         eventsDailyRes.data ?? [],
         inboxDailyRes.data ?? [],
-        pageViewsDaily,
       );
 
       setData({
@@ -1490,7 +1442,6 @@ function AnalyticsAdmin() {
         shorts: shortsRes.count ?? 0,
         gallery: galleryRes.error ? 0 : (galleryRes.count ?? 0),
         inboxTotal: inboxTotalRes.error ? 0 : (inboxTotalRes.count ?? 0),
-        pageViewsTotal,
         dailyActivity,
       });
     } catch (e: unknown) {
@@ -1531,9 +1482,8 @@ function AnalyticsAdmin() {
       shorts: acc.shorts + d.shorts,
       events: acc.events + d.events,
       inbox: acc.inbox + d.inbox,
-      pageViews: acc.pageViews + d.pageViews,
     }),
-    { reviews: 0, contacts: 0, appointments: 0, sandesh: 0, videos: 0, shorts: 0, events: 0, inbox: 0, pageViews: 0 },
+    { reviews: 0, contacts: 0, appointments: 0, sandesh: 0, videos: 0, shorts: 0, events: 0, inbox: 0 },
   );
 
   const statCards = [
@@ -1542,7 +1492,6 @@ function AnalyticsAdmin() {
       label: "Live Visitors (online)",
       value: formatAnalyticsCount(liveCount),
     },
-    { icon: Eye, label: "Total Page Views", value: formatAnalyticsCount(data.pageViewsTotal) },
     { icon: MessageSquare, label: "Sandesh (total)", value: formatAnalyticsCount(data.sandesh) },
     { icon: Calendar, label: "Events", value: formatAnalyticsCount(data.eventsTotal), sub: `${formatAnalyticsCount(data.eventsUpcoming)} upcoming` },
     { icon: Users, label: "Reviews (total)", value: formatAnalyticsCount(data.reviews) },
@@ -1572,7 +1521,7 @@ function AnalyticsAdmin() {
             <BarChart3 size={22} /> Analytics Dashboard
           </h3>
           <p className="text-sm text-muted-foreground mt-1 max-w-2xl">
-            Accurate database counts and realtime sessions. Daily breakdown uses real submission and page view timestamps from the last 7 days.
+            Accurate database counts and realtime sessions. Daily breakdown uses real submission timestamps from the last 7 days.
           </p>
         </div>
         <button
@@ -1603,7 +1552,7 @@ function AnalyticsAdmin() {
         <div className="px-5 py-4 bg-gradient-divine border-b border-gold/20">
           <h4 className="font-display text-lg text-maroon">Activity by day (last 7 days)</h4>
           <p className="text-xs text-muted-foreground mt-1">
-            Page Views {formatAnalyticsCount(last7Totals.pageViews)} · Reviews {formatAnalyticsCount(last7Totals.reviews)} · Contacts {formatAnalyticsCount(last7Totals.contacts)} · Appointments{" "}
+            Reviews {formatAnalyticsCount(last7Totals.reviews)} · Contacts {formatAnalyticsCount(last7Totals.contacts)} · Appointments{" "}
             {formatAnalyticsCount(last7Totals.appointments)} · Sandesh {formatAnalyticsCount(last7Totals.sandesh)} · Videos{" "}
             {formatAnalyticsCount(last7Totals.videos)} · Shorts {formatAnalyticsCount(last7Totals.shorts)} · Events{" "}
             {formatAnalyticsCount(last7Totals.events)} · Inbox Broadcasts {formatAnalyticsCount(last7Totals.inbox)}
@@ -1614,7 +1563,6 @@ function AnalyticsAdmin() {
             <thead>
               <tr className="border-b border-border bg-cream/30 text-left">
                 <th className="px-4 py-3 font-medium text-maroon">Day</th>
-                <th className="px-4 py-3 font-medium text-maroon">Page Views</th>
                 <th className="px-4 py-3 font-medium text-maroon">Reviews</th>
                 <th className="px-4 py-3 font-medium text-maroon">Contacts</th>
                 <th className="px-4 py-3 font-medium text-maroon">Appointments</th>
@@ -1628,7 +1576,6 @@ function AnalyticsAdmin() {
             <tbody>
               {data.dailyActivity.map((day) => {
                 const total =
-                  day.pageViews +
                   day.reviews +
                   day.contacts +
                   day.appointments +
@@ -1643,7 +1590,6 @@ function AnalyticsAdmin() {
                     className={`border-b border-border/60 ${total > 0 ? "bg-saffron/5" : ""}`}
                   >
                     <td className="px-4 py-3 font-medium text-foreground">{day.label}</td>
-                    <td className="px-4 py-3 font-semibold text-saffron">{formatAnalyticsCount(day.pageViews)}</td>
                     <td className="px-4 py-3">{formatAnalyticsCount(day.reviews)}</td>
                     <td className="px-4 py-3">{formatAnalyticsCount(day.contacts)}</td>
                     <td className="px-4 py-3">{formatAnalyticsCount(day.appointments)}</td>
@@ -1661,7 +1607,7 @@ function AnalyticsAdmin() {
       </div>
 
       <div className="p-4 rounded-xl bg-cream/30 border border-gold/20 text-xs text-muted-foreground">
-        <strong className="text-maroon">Realtime Tracking:</strong> Active page views and live user sessions are captured automatically.
+        <strong className="text-maroon">Realtime Tracking:</strong> Active live user sessions are captured automatically.
       </div>
     </div>
   );

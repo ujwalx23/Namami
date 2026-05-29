@@ -42,18 +42,10 @@ function RootComponent() {
     document.title = "Namami Vindhyavasini Sansthan";
   }, []);
 
-  // Track page views and live visitors via heartbeat table
+  // Track live visitors via heartbeat table with instant cleanup on tab close
   useEffect(() => {
     const path = location.pathname;
-    const isAdmin = path.startsWith("/admin");
 
-    // 1. Page view tracking — skip admin to keep stats clean
-    if (!isAdmin) {
-      void supabase.from("page_views" as any).insert({ page_path: path } as any);
-    }
-
-    // 2. Heartbeat — upsert a row every 30s so admin can count
-    //    sessions active in last 2 min. Works everywhere, no Realtime needed.
     let sessionId = "";
     try {
       sessionId = localStorage.getItem("__vis_sid") ?? "";
@@ -84,12 +76,40 @@ function RootComponent() {
         });
     };
 
+    const cleanUpSession = () => {
+      console.log("[Heartbeat] Performing instant cleanup for session:", sessionId);
+      const baseUrl = (supabase as any).supabaseUrl || "https://avmemxowlunhlyfntiqu.supabase.co";
+      const key = (supabase as any).supabaseKey || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF2bWVteG93bHVuaGx5Zm50aXF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk2OTIyOTMsImV4cCI6MjA5NTI2ODI5M30.R5DwGPSWZH_PXmsEnUntYu7WyHK6VHXsEUkq8zISRkw";
+      const url = `${baseUrl}/rest/v1/visitor_heartbeats?session_id=eq.${sessionId}`;
+      void fetch(url, {
+        method: "DELETE",
+        headers: {
+          apikey: key,
+          Authorization: `Bearer ${key}`,
+        },
+        keepalive: true,
+      });
+    };
+
     beat(); // immediate on navigation
     const iv = setInterval(beat, 30_000); // keep-alive every 30 s
 
+    // Send heartbeat when tab visibility changes back to visible
+    const handleVisibility = () => {
+      if (document.visibilityState === "visible") {
+        console.log("[Heartbeat] Tab became visible, sending beat");
+        beat();
+      }
+    };
+
+    window.addEventListener("beforeunload", cleanUpSession);
+    document.addEventListener("visibilitychange", handleVisibility);
+
     return () => {
-      console.log("[Heartbeat] Cleaning up interval for path:", path);
+      console.log("[Heartbeat] Cleaning up interval & listeners for path:", path);
       clearInterval(iv);
+      window.removeEventListener("beforeunload", cleanUpSession);
+      document.removeEventListener("visibilitychange", handleVisibility);
     };
   }, [location.pathname]);
 
