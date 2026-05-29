@@ -37,7 +37,7 @@ const contactSchema = z.object({
 const apptSchema = z.object({
   name: z.string().trim().min(1).max(120),
   phone: z.string().trim().min(5).max(30),
-  email: z.string().trim().email().max(255).optional().or(z.literal("")),
+  email: z.string().trim().email().max(255),
   appointment_date: z.string().min(1),
   time_slot: z.string().min(1),
   purpose: z.string().trim().min(1).max(1000),
@@ -351,6 +351,7 @@ function AppointmentForm() {
             />
             <input
               name="email"
+              required
               type="email"
               placeholder={t("ct.appt.email")}
               className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none input-focus-spring"

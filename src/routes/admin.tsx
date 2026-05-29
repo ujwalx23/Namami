@@ -17,6 +17,8 @@ import {
   Activity,
   RotateCw,
   MapPin,
+  Check,
+  X,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -718,6 +720,7 @@ function AppointmentAdmin({ onUpdate }: { onUpdate?: () => void }) {
   const [list, setList] = useState<Appointment[]>([]);
   const [loaded, setLoaded] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const [busyId, setBusyId] = useState<string | null>(null);
 
   async function load() {
     const { data } = await supabase
@@ -743,28 +746,59 @@ function AppointmentAdmin({ onUpdate }: { onUpdate?: () => void }) {
     if (onUpdate) onUpdate();
   }
 
-  async function toggleStatus(id: string, currentStatus: string) {
-    const nextStatus = currentStatus === "approved" ? "pending" : "approved";
-    console.log("[toggleStatus] Updating", id, "status to", nextStatus);
-    const { data, error } = await supabase
-      .from("appointments")
-      .update({ status: nextStatus })
-      .eq("id", id)
-      .select();
-    
-    if (error) {
-      console.error("[toggleStatus] Error:", error);
-      return toast.error(error.message);
+  async function updateStatus(id: string, newStatus: "approved" | "rejected") {
+    const actionLabel = newStatus === "approved" ? "approve" : "reject";
+    const confirmMessage = `Are you sure you want to ${actionLabel} this appointment?`;
+    if (!window.confirm(confirmMessage)) return;
+
+    setBusyId(id);
+    try {
+      const { data, error } = await supabase
+        .from("appointments")
+        .update({ status: newStatus })
+        .eq("id", id)
+        .select();
+
+      if (error) {
+        toast.error(error.message);
+        setBusyId(null);
+        return;
+      }
+
+      if (!data || data.length === 0) {
+        toast.error("Update failed. Row not found or RLS policy blocked the update.");
+        setBusyId(null);
+        return;
+      }
+
+      // Invoke Edge Function to dispatch templated email
+      try {
+        const { error: fnError } = await supabase.functions.invoke("send-appointment-email", {
+          body: { appointmentId: id, action: newStatus === "approved" ? "approve" : "reject" },
+        });
+
+        if (fnError) {
+          console.warn("Email function invoke returned error:", fnError);
+          toast.warning("Status updated, but email could not be delivered.");
+        } else {
+          const successMsg =
+            newStatus === "approved"
+              ? "Appointment approved and email sent successfully."
+              : "Appointment rejected and notification sent.";
+          toast.success(successMsg);
+        }
+      } catch (fnEx) {
+        console.warn("Email function invoke exception:", fnEx);
+        toast.warning("Status updated, but email could not be delivered.");
+      }
+
+      await load();
+      if (onUpdate) onUpdate();
+    } catch (e: any) {
+      toast.error(e.message);
+    } finally {
+      setBusyId(null);
     }
-    
-    if (!data || data.length === 0) {
-      console.warn("[toggleStatus] No rows updated. This is likely due to missing Supabase RLS UPDATE policy.");
-      return toast.error("Update failed. Please run the SQL migration query in your Supabase dashboard to enable UPDATE permissions.");
-    }
-    
-    toast.success(`Status updated to ${nextStatus}`);
-    await load();
-    if (onUpdate) onUpdate();
   }
   if (!loaded) return <AdminTabLoader />;
 
@@ -803,18 +837,9 @@ function AppointmentAdmin({ onUpdate }: { onUpdate?: () => void }) {
                   </div>
                   <div className="flex gap-2 shrink-0">
                     <button
-                      onClick={() => toggleStatus(a.id, a.status)}
-                      className={`text-xs px-2.5 py-1 rounded-full font-medium transition ${
-                        a.status === "approved"
-                          ? "bg-green-500/10 text-green-700 hover:bg-green-500/20"
-                          : "bg-amber-500/10 text-amber-700 hover:bg-amber-500/20"
-                      }`}
-                    >
-                      {a.status === "approved" ? "Approved" : "Pending"}
-                    </button>
-                    <button
                       onClick={() => del(a.id)}
-                      className="text-destructive hover:bg-destructive/10 p-1.5 rounded transition"
+                      disabled={busyId === a.id}
+                      className="text-destructive hover:bg-destructive/10 p-1.5 rounded transition disabled:opacity-50"
                       title="Delete request"
                     >
                       <Trash2 size={16} />
@@ -838,8 +863,39 @@ function AppointmentAdmin({ onUpdate }: { onUpdate?: () => void }) {
                   </div>
                 </div>
               </div>
-              <div className="text-[10px] text-muted-foreground mt-4 text-right">
-                Requested: {new Date(a.created_at).toLocaleString("en-IN")}
+              
+              <div className="mt-4 pt-3 border-t border-border/40 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <span className="text-[10px] text-muted-foreground">
+                  Requested: {new Date(a.created_at).toLocaleDateString("en-IN")}
+                </span>
+                <div className="flex justify-end">
+                  {a.status === "pending" ? (
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => updateStatus(a.id, "approved")}
+                        disabled={busyId !== null}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-green-500 text-white hover:bg-green-600 active:scale-95 transition-all shadow-sm hover:shadow cursor-pointer disabled:opacity-60"
+                      >
+                        <Check size={14} /> Approve
+                      </button>
+                      <button
+                        onClick={() => updateStatus(a.id, "rejected")}
+                        disabled={busyId !== null}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-red-500 text-white hover:bg-red-600 active:scale-95 transition-all shadow-sm hover:shadow cursor-pointer disabled:opacity-60"
+                      >
+                        <X size={14} /> Reject
+                      </button>
+                    </div>
+                  ) : a.status === "approved" ? (
+                    <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-green-50 text-green-700 border border-green-200 dark:bg-green-950/30 dark:text-green-400 dark:border-green-900/50">
+                      <Check size={14} /> Approved
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-red-50 text-red-700 border border-red-200 dark:bg-red-950/30 dark:text-red-400 dark:border-red-900/50">
+                      <X size={14} /> Rejected
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
           ))}
