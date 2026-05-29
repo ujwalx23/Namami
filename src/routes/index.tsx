@@ -333,25 +333,29 @@ function HomePage() {
     ? [
         {
           name: "प्रिया शर्मा",
-          comment: "मन्दिर का वातावरण अत्यंत शांतिपूर्ण और दिव्य है। सेवादार बहुत सहायक थे, और दर्शन का अनुभव बहुत अच्छी तरह से व्यवस्थित था। मेरी यात्रा के बाद मुझे वास्तव में धन्य महसूस हुआ। जय माँ विन्ध्यवासिनी 🙏",
-          rating: 5,
+          comment: "मैं प्रभावित हुई कि सबकुछ कितना व्यवस्थित था। मंदिर की जानकारी, दर्शन विवरण और विचारशील संदेश खंड ने मूल्यवान मार्गदर्शन और प्रेरणा प्रदान की। दर्शन की योजना बनाने वाले भक्तों के लिए अत्यंत अनुशंसित। 🌺🙏",
         },
         {
           name: "राजेश मिश्रा",
           comment: "एक सुंदर और आध्यात्मिक रूप से उन्नत करने वाला स्थान। व्यवस्थाएं उत्कृष्ट थीं, और पूरा अनुभव सहज और यादगार रहा। मैं परिवार के साथ दर्शन करने की अत्यधिक सलाह देता हूँ।",
-          rating: 5,
+        },
+        {
+          name: "मनिष तिवारी",
+          comment: "एक अद्भुत पहल जो भक्तों को सनातन धर्म की शिक्षाओं, परंपराओं और मूल्यों से जोड़े रखने में मदद करती है।",
         },
       ]
     : [
         {
           name: "Priya Sharma",
-          comment: "The temple atmosphere is incredibly peaceful and divine. The staff was very helpful, and the darshan experience was well organized. I felt truly blessed after my visit. Jai Maa Vindhyavasini 🙏",
-          rating: 5,
+          comment: "I was impressed by how well-organized everything was. The temple information, darshan details, and the thoughtful Sandesh section provided valuable guidance and inspiration. Highly recommended for devotees planning their visit. 🌺🙏",
         },
         {
           name: "Rajesh Mishra",
           comment: "A beautiful and spiritually uplifting place. The arrangements were excellent, and the entire experience was smooth and memorable. I highly recommend visiting with family.",
-          rating: 5,
+        },
+        {
+          name: "Manish Tiwari",
+          comment: "A wonderful initiative that helps devotees stay connected with the teachings, traditions, and values of Sanatan Dharma.",
         },
       ];
 
@@ -650,37 +654,26 @@ function HomePage() {
           </div>
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        {/* Mobile: horizontal snap-scroll one-at-a-time; Desktop: 3-column grid */}
+        <div className="flex md:grid md:grid-cols-3 gap-5 md:gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none scrollbar-none pb-4 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0">
           {devoteeReviews.map((r, idx) => (
             <ScrollReveal key={r.name} direction="up" delay={idx * 150} duration={800}>
               <article
-                className="relative rounded-2xl p-8 bg-card border border-gold/30 hover:border-gold/60 hover:shadow-sacred hover:-translate-y-1.5 transition-premium group flex flex-col justify-between h-full"
+                className="relative rounded-2xl p-6 md:p-8 bg-card border border-gold/30 hover:border-gold/60 hover:shadow-sacred hover:-translate-y-1 transition-premium group flex flex-col h-full min-w-[78vw] md:min-w-0 snap-center"
               >
-                <div className="absolute top-6 right-6 text-gold/10 group-hover:text-gold/20 transition-colors">
-                  <Quote size={56} strokeWidth={1.5} />
-                </div>
-                
-                <div className="relative">
-                  {/* Stars rating */}
-                  <div className="flex gap-1 mb-4">
-                    {[...Array(r.rating)].map((_, i) => (
-                      <span key={i} className="text-saffron text-lg">★</span>
-                    ))}
-                  </div>
-                  
-                  <p className={`text-foreground/85 leading-relaxed italic mb-6 text-base md:text-lg ${dev}`}>
-                    "{r.comment}"
-                  </p>
+                <div className="absolute top-5 right-5 text-gold/10 group-hover:text-gold/20 transition-colors">
+                  <Quote size={44} strokeWidth={1.5} />
                 </div>
 
+                <p className={`relative text-foreground/85 leading-relaxed italic mb-6 text-sm md:text-base ${dev}`}>
+                  "{r.comment}"
+                </p>
+
                 <div className="flex items-center gap-3 border-t border-gold/10 pt-4 mt-auto">
-                  <div className="w-10 h-10 rounded-full bg-gradient-sacred flex items-center justify-center text-cream font-display text-lg">
+                  <div className="w-9 h-9 rounded-full bg-gradient-sacred flex items-center justify-center text-cream font-display text-base shrink-0">
                     {r.name.charAt(0).toUpperCase()}
                   </div>
-                  <div>
-                    <h3 className={`font-semibold text-maroon ${dev}`}>{r.name}</h3>
-                    <p className="text-xs text-muted-foreground">{hi ? "सत्यापित भक्त" : "Verified Devotee"}</p>
-                  </div>
+                  <h3 className={`font-semibold text-maroon ${dev}`}>{r.name}</h3>
                 </div>
               </article>
             </ScrollReveal>

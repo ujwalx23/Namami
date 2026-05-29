@@ -54,22 +54,22 @@ export const translations = {
   "home.slide.darshan.title": { en: "Divine Darshan", hi: "दिव्य दर्शन" },
   "home.slide.shringar.title": { en: "Maa ka Shringar", hi: "माँ का श्रृंगार" },
 
-  "home.intro.kicker": { en: "Sanatan Parampara", hi: "सनातन परम्परा" },
-  "home.intro.title": { en: "Charanon Mein Bhakti", hi: "चरणों में भक्ति" },
+  "home.intro.kicker": { en: "Who We Are", hi: "हम कौन हैं" },
+  "home.intro.title": { en: "Serving Maa Vindhyavasini", hi: "माँ विन्ध्यवासिनी की सेवा में" },
   "home.card.purpose.title": { en: "Our Purpose", hi: "हमारा उद्देश्य" },
   "home.card.purpose.text": {
-    en: "To spread the divine message of Maa Vindhyavasini, nurture devotion, and serve humanity through seva, satsang and sanskar.",
-    hi: "माँ विन्ध्यवासिनी का दिव्य संदेश प्रसारित करना, भक्ति का पोषण और सेवा, सत्संग एवं संस्कार से मानवता की सेवा।",
+    en: "To serve devotees of Maa Vindhyavasini with devotion, compassion, and dedication. Our mission is to preserve Sanatan values, support spiritual growth, and create meaningful opportunities for worship, seva, and community service.",
+    hi: "माँ विन्ध्यवासिनी के भक्तों की भक्ति, करुणा और समर्पण के साथ सेवा करना। हमारा मिशन सनातन मूल्यों को संरक्षित करना, आध्यात्मिक विकास का समर्थन करना और पूजा, सेवा एवं सामुदायिक सेवा के अवसर प्रदान करना है।",
   },
-  "home.card.trust.title": { en: "100% Transparent Seva", hi: "पारदर्शी सेवा" },
+  "home.card.trust.title": { en: "Devotee Support", hi: "भक्त सहायता" },
   "home.card.trust.text": {
-    en: "Every contribution is fully accounted for. We support free bhandara, Sanskrit education, and temple services with absolute financial integrity.",
-    hi: "आपके दान का एक-एक पैसा सीधे अन्नक्षेत्र भंडारा, वैदिक बटुकों की शिक्षा और जन सेवा में लगाया जाता है, पूर्ण पारदर्शिता के साथ।",
+    en: "We assist devotees with temple information, appointment bookings, and religious activities. Our goal is to provide timely guidance and support for a smooth and meaningful devotional experience.",
+    hi: "हम भक्तों को मंदिर की जानकारी, अपॉइंटमेंट बुकिंग और धार्मिक गतिविधियों में सहायता करते हैं। हमारा लक्ष्य एक सुचारु और सार्थक भक्ति अनुभव के लिए समय पर मार्गदर्शन और सहायता प्रदान करना है।",
   },
-  "home.card.guidance.title": { en: "Pilgrim Guidance", hi: "श्रद्धालु मार्गदर्शन" },
+  "home.card.guidance.title": { en: "Donation Impact", hi: "दान का प्रभाव" },
   "home.card.guidance.text": {
-    en: "Offering dedicated support for devotees visiting Vindhyachal Dham, including direct darshan planning, ritual information, and lodging guidance.",
-    hi: "विन्ध्याचल धाम आने वाले भक्तों के लिए दर्शन, पूजन, और मंदिर परिसर में मार्ग दर्शन हेतु हमारा सेवा सहायता केंद्र सदैव तत्पर है।",
+    en: "Your generous contributions support temple operations, religious activities, and community service programs. We ensure that every donation is utilized with care, purpose, and transparency. 🌺🙏",
+    hi: "आपके उदार योगदान से मंदिर संचालन, धार्मिक गतिविधियों और सामुदायिक सेवा कार्यक्रमों को सहायता मिलती है। हम सुनिश्चित करते हैं कि प्रत्येक दान का उपयोग सावधानी, उद्देश्य और पारदर्शिता के साथ हो। 🌺🙏",
   },
 
   "home.sandesh.kicker": { en: "Daily Wisdom", hi: "दैनिक प्रेरणा" },
