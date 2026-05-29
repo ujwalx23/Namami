@@ -30,14 +30,14 @@ export const Route = createFileRoute("/contact")({
 const contactSchema = z.object({
   name: z.string().trim().min(1).max(120),
   email: z.string().trim().email().max(255),
-  phone: z.string().trim().max(30).optional(),
+  phone: z.string().trim().min(5, "Please enter a valid phone number").max(30),
   message: z.string().trim().min(3).max(2000),
 });
 
 const apptSchema = z.object({
   name: z.string().trim().min(1).max(120),
   phone: z.string().trim().min(5).max(30),
-  email: z.string().trim().email().max(255),
+  email: z.string().trim().email("Please enter a valid email address").max(255),
   appointment_date: z.string().min(1),
   time_slot: z.string().min(1),
   purpose: z.string().trim().min(1).max(1000),
@@ -217,6 +217,7 @@ function ContactForm() {
           />
           <input
             name="phone"
+            required
             placeholder={t("ct.f.phone")}
             className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none input-focus-spring"
           />
@@ -351,8 +352,8 @@ function AppointmentForm() {
             />
             <input
               name="email"
-              required
               type="email"
+              required
               placeholder={t("ct.appt.email")}
               className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none input-focus-spring"
             />
