@@ -322,8 +322,6 @@ function HomePage() {
     }
   };
 
-
-
   const intro = [
     { icon: Heart, tk: "home.card.purpose.title" as TKey, xk: "home.card.purpose.text" as TKey },
     { icon: ShieldCheck, tk: "home.card.trust.title" as TKey, xk: "home.card.trust.text" as TKey },
@@ -640,8 +638,6 @@ function HomePage() {
                   >
                     {p.cap}
                   </figcaption>
-
-
                 </figure>
               </ScrollReveal>
             ))}
@@ -735,8 +731,6 @@ function HomePage() {
           <PWAInstallCard />
         </ScrollReveal>
       </section>
-
-
     </PageShell>
   );
 }

@@ -191,8 +191,6 @@ function SandeshPage() {
     };
     drawCorners();
 
-
-
     // 3.5 Draw background watermark "namamivindhyavasini.in" repeated diagonally
     ctx.save();
     ctx.rotate(-25 * Math.PI / 180);
