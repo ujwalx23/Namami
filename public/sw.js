@@ -1,4 +1,4 @@
-const CACHE_NAME = "vindhyavasini-sansthan-v1";
+const CACHE_NAME = "vindhyavasini-sansthan-v2";
 const ASSETS_TO_CACHE = [
   "/",
   "/index.html",
@@ -45,24 +45,27 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // Handle SPA navigation requests - fallback to cached /index.html if offline
+  // Handle SPA navigation requests - Network First (always load latest online, fallback to cache offline)
   if (event.request.mode === "navigate") {
     event.respondWith(
-      caches.match("/index.html").then((cachedResponse) => {
-        const fetchPromise = fetch(event.request)
-          .then((networkResponse) => {
-            if (networkResponse && networkResponse.status === 200) {
-              caches.open(CACHE_NAME).then((cache) => {
-                cache.put("/index.html", networkResponse.clone());
-              });
-            }
+      fetch(event.request)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const responseClone = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put("/index.html", responseClone);
+            });
             return networkResponse;
-          })
-          .catch(() => {
-            return cachedResponse;
+          }
+          // If status is not 200 (e.g. server error), try fallback to cached index.html
+          return caches.match("/index.html").then((cachedResponse) => {
+            return cachedResponse || networkResponse;
           });
-        return cachedResponse || fetchPromise;
-      })
+        })
+        .catch(() => {
+          // If network request fails (e.g. offline), fallback to cached index.html
+          return caches.match("/index.html");
+        })
     );
     return;
   }

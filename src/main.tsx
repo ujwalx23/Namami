@@ -18,6 +18,16 @@ if (typeof window !== "undefined") {
         })
         .catch((err) => console.error("[Service Worker] Registration failed:", err));
     });
+
+    // Automatically reload the page when a new service worker takes control
+    let refreshing = false;
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (!refreshing) {
+        refreshing = true;
+        console.log("[Service Worker] Controller changed. Reloading page to load latest version...");
+        window.location.reload();
+      }
+    });
   }
 
   window.addEventListener("beforeinstallprompt", (e) => {
