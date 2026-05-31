@@ -39,6 +39,21 @@ export const Route = createFileRoute("/panchang")({
 const LAT = 25.1467;
 const LON = 82.5;
 const TZ_OFFSET = 5.5; // IST
+const PROKERALA_LOC = "1262995";
+const PROKERALA_MONTHS = [
+  "january",
+  "february",
+  "march",
+  "april",
+  "may",
+  "june",
+  "july",
+  "august",
+  "september",
+  "october",
+  "november",
+  "december",
+];
 
 const TITHIS = [
   "Pratipada",
@@ -153,6 +168,12 @@ const HINDU_MONTHS = [
   "Magha",
   "Phalguna",
 ];
+
+function buildProkeralaUrl(date: Date) {
+  return `https://www.prokerala.com/astrology/panchang/${date.getFullYear()}-${PROKERALA_MONTHS[date.getMonth()]}-${String(
+    date.getDate(),
+  ).padStart(2, "0")}.html?loc=${PROKERALA_LOC}`;
+}
 
 // Julian Day from date
 function julian(d: Date): number {
@@ -374,6 +395,9 @@ function PanchangPage() {
   const [isManuallyChanged, setIsManuallyChanged] = useState(false);
   const [live, setLive] = useState<Record<string, string>>({});
   const [loadingLive, setLoadingLive] = useState(false);
+  const [fetchError, setFetchError] = useState<string | null>(null);
+  const [refreshKey, setRefreshKey] = useState(0);
+  const [lastUpdated, setLastUpdated] = useState<string | null>(null);
 
   const dateKey = localDateKey(selectedDate);
   const dateString = selectedDate.toLocaleDateString("en-IN", {
@@ -412,30 +436,18 @@ function PanchangPage() {
     return { sunrise, sunset, p, m, dateLabel, samvat };
   }, [dateString]);
 
-  // Fetch live Panchang values from reliable internet sources and fall back to site scraping when needed.
+  // Fetch live Panchang values from Prokerala with a local API proxy fallback.
   useEffect(() => {
     setLive({});
     setLoadingLive(true);
+    setFetchError(null);
 
-    const dateIso = dateKey;
-    const sunriseApi = `https://api.sunrise-sunset.org/json?lat=${LAT}&lng=${LON}&date=${dateIso}&formatted=0`;
-
-    const MONTH_NAMES = [
-      "january",
-      "february",
-      "march",
-      "april",
-      "may",
-      "june",
-      "july",
-      "august",
-      "september",
-      "october",
-      "november",
-      "december",
+    const prokeralaUrl = buildProkeralaUrl(selectedDate);
+    const apiUrl = `/api/panchang?date=${dateKey}`;
+    const fallbackUrls = [
+      `https://api.allorigins.win/raw?url=${encodeURIComponent(prokeralaUrl)}`,
+      `https://corsproxy.io/?${encodeURIComponent(prokeralaUrl)}`,
     ];
-    const target = `https://www.prokerala.com/astrology/panchang/${selectedDate.getFullYear()}-${MONTH_NAMES[selectedDate.getMonth()]}-${selectedDate.getDate()}.html`;
-    const proxies = ["https://api.allorigins.win/raw?url="];
 
     let active = true;
 
@@ -444,167 +456,143 @@ function PanchangPage() {
       return fmtTime(new Date(date.toLocaleString("en-US", { timeZone: "Asia/Kolkata" })));
     };
 
-    async function attemptFetch() {
-      const out: Record<string, string> = {};
-
-      try {
-        console.log(`[Panchang] Fetching sunrise/sunset from internet for ${dateIso}`);
-        const res = await fetch(
-          `https://api.allorigins.win/raw?url=${encodeURIComponent(sunriseApi)}`,
-        );
-        if (res.ok) {
-          const body = await res.json();
-          if (body.status === "OK" && body.results) {
-            out["Sunrise"] = parseTimezoneDate(body.results.sunrise);
-            out["Sunset"] = parseTimezoneDate(body.results.sunset);
-          }
-        }
-      } catch (err) {
-        console.warn("[Panchang] Sunrise API fetch failed:", err);
+    async function fetchLiveSource(url: string) {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Source returned ${response.status}`);
+      }
+      if (url.startsWith('/api/')) {
+        return await response.json();
       }
 
-      for (const proxy of proxies) {
+      const html = await response.text();
+      const out: Record<string, string> = {};
+      const cleanText = (text: string) =>
+        text
+          .replace(/<[^>]+>/g, ' ')
+          .replace(/&nbsp;/gi, ' ')
+          .replace(/&ndash;/gi, '–')
+          .replace(/&mdash;/gi, '—')
+          .replace(/&amp;/gi, '&')
+          .replace(/\s+/g, ' ')
+          .trim();
+
+      const parseBlockItems = (blockClass: string) => {
+        const regex = new RegExp(
+          `<div[^>]+class=["'][^"']*${blockClass}[^"']*["'][^>]*>([\\s\\S]*?)<\\/div>`,
+          'i',
+        );
+        const match = html.match(regex);
+        if (!match) return [];
+
+        const blockContent = match[1];
+        const items: string[] = [];
+        const liRegex = /<li[^>]*>([\s\S]*?)<\/li>/gi;
+        let liMatch;
+        while ((liMatch = liRegex.exec(blockContent)) !== null) {
+          items.push(cleanText(liMatch[1]));
+        }
+        return items;
+      };
+
+      const add = (key: string, value: string) => {
+        if (value) out[key] = value;
+      };
+
+      const tithis = parseBlockItems('panchang-data-tithi');
+      if (tithis.length) add('Tithi', tithis.join(' | '));
+      const nakshatras = parseBlockItems('panchang-data-nakshatra');
+      if (nakshatras.length) add('Nakshatra', nakshatras.join(' | '));
+      const yogas = parseBlockItems('panchang-data-yoga');
+      if (yogas.length) add('Yoga', yogas.join(' | '));
+      const karanas = parseBlockItems('panchang-data-karana');
+      if (karanas.length) add('Karana', karanas.join(' | '));
+      const varas = parseBlockItems('panchang-data-vaasara');
+      if (varas.length) add('Weekday', varas[0]);
+
+      const dayItems = parseBlockItems('panchang-data-day');
+      for (const item of dayItems) {
+        if (/Vikram Samvat/i.test(item)) {
+          add('Vikram Samvat', item.replace(/Vikram Samvat\s*-*/i, '').trim());
+        }
+      }
+
+      const lunarItems = parseBlockItems('panchang-data-lunar-month');
+      for (const item of lunarItems) {
+        if (/Purnimanta/i.test(item)) {
+          add('Chandramasa', item.replace(/Purnimanta\s*-*/i, '').trim());
+        }
+      }
+
+      const timings = parseBlockItems('panchang-data-sun_moon_timing');
+      for (const t of timings) {
+        if (/Sunrise/i.test(t)) add('Sunrise', t.replace(/Sunrise\s*-*/i, '').trim());
+        if (/Sunset/i.test(t)) add('Sunset', t.replace(/Sunset\s*-*/i, '').trim());
+        if (/Moonrise/i.test(t)) add('Moonrise', t.replace(/Moonrise\s*-*/i, '').trim());
+        if (/Moonset/i.test(t)) add('Moonset', t.replace(/Moonset\s*-*/i, '').trim());
+      }
+
+      const suryaRasi = parseBlockItems('panchang-data-soorya-rasi');
+      if (suryaRasi.length) add('Sunsign', suryaRasi[0].replace(/Sun\s*(in)?\s*/i, '').trim());
+      const chandraRasi = parseBlockItems('panchang-data-chandra-rasi');
+      if (chandraRasi.length) add('Moonsign', chandraRasi[0].replace(/Moon\s*(travels through|in)?\s*/i, '').trim());
+
+      const auspicious = parseBlockItems('panchang-data-auspicious-period');
+      for (const item of auspicious) {
+        if (/Abhijit/i.test(item)) add('Abhijit', item.replace(/Abhijit\s*Muhurat?\s*-*/i, '').trim());
+        if (/Brahma/i.test(item)) add('Brahma Muhurta', item.replace(/Brahma\s*Muhurat?\s*-*/i, '').trim());
+      }
+
+      const inauspicious = parseBlockItems('panchang-data-inauspicious-period');
+      for (const item of inauspicious) {
+        if (/Rahu/i.test(item)) add('Rahu Kalam', item.replace(/Rahu\s*-*/i, '').trim());
+        if (/Yamaganda/i.test(item)) add('Yamaganda', item.replace(/Yamaganda\s*-*/i, '').trim());
+        if (/Gulika/i.test(item)) add('Gulikai Kalam', item.replace(/Gulika\s*-*/i, '').trim());
+      }
+
+      if (/sukla paksha/i.test(html)) add('Paksha', 'Sukla Paksha');
+      if (/krishna paksha/i.test(html)) add('Paksha', 'Krishna Paksha');
+
+      return { source: 'prokerala-html', url: prokeralaUrl, data: out };
+    }
+
+    async function attemptFetch() {
+      const sources = [apiUrl, ...fallbackUrls];
+      let lastErrorMessage = '';
+
+      for (const source of sources) {
         if (!active) return;
         try {
-          const url = proxy + encodeURIComponent(target);
-          console.log(`[Panchang] Fetching live data for ${target} via proxy: ${proxy}`);
-
-          const res = await fetch(url);
-          if (!res.ok) continue;
-
-          const html = await res.text();
-
-          const cleanText = (text: string) => {
-            if (!text) return "";
-            return text
-              .replace(/<[^>]+>/g, " ")
-              .replace(/&nbsp;/gi, " ")
-              .replace(/&ndash;/gi, "–")
-              .replace(/&mdash;/gi, "—")
-              .replace(/&amp;/gi, "&")
-              .replace(/\s+/g, " ")
-              .trim();
-          };
-
-          const parseBlockItems = (blockClass: string) => {
-            const regex = new RegExp(
-              `<div class="panchang-box-data-block[^"]*${blockClass}[^"]*">([\\s\\S]*?)<\\/div>`,
-              "i",
-            );
-            const match = html.match(regex);
-            if (!match) return [];
-
-            const blockContent = match[1];
-            const items: string[] = [];
-            const liRegex = /<li[^>]*>([\s\S]*?)<\/li>/gi;
-            let liMatch;
-            while ((liMatch = liRegex.exec(blockContent)) !== null) {
-              items.push(cleanText(liMatch[1]));
-            }
-            return items;
-          };
-
-          // 1. Tithi
-          const tithis = parseBlockItems("panchang-data-tithi");
-          if (tithis.length > 0) out["Tithi"] = tithis.join(" | ");
-
-          // 2. Nakshatra
-          const nakshatras = parseBlockItems("panchang-data-nakshatra");
-          if (nakshatras.length > 0) out["Nakshatra"] = nakshatras.join(" | ");
-
-          // 3. Yoga
-          const yogas = parseBlockItems("panchang-data-yoga");
-          if (yogas.length > 0) out["Yoga"] = yogas.join(" | ");
-
-          // 4. Karana
-          const karanas = parseBlockItems("panchang-data-karana");
-          if (karanas.length > 0) out["Karana"] = karanas.join(" | ");
-
-          // 5. Weekday
-          const varas = parseBlockItems("panchang-data-vaasara");
-          if (varas.length > 0) out["Weekday"] = varas[0];
-
-          // 6. Vikram Samvat
-          const dayItems = parseBlockItems("panchang-data-day");
-          for (const item of dayItems) {
-            if (item.includes("Vikram Samvat")) {
-              out["Vikram Samvat"] = item.replace("Vikram Samvat -", "").trim();
-            }
-          }
-
-          // 7. Chandramasa
-          const lunarItems = parseBlockItems("panchang-data-lunar-month");
-          for (const item of lunarItems) {
-            if (item.includes("Purnimanta")) {
-              out["Chandramasa"] = item.replace("Purnimanta -", "").trim();
-            }
-          }
-
-          // 8. Sun & Moon timings
-          const timings = parseBlockItems("panchang-data-sun_moon_timing");
-          for (const t of timings) {
-            if (t.includes("Sunrise")) out["Sunrise"] = t.replace("Sunrise -", "").trim();
-            if (t.includes("Sunset")) out["Sunset"] = t.replace("Sunset -", "").trim();
-            if (t.includes("Moonrise")) out["Moonrise"] = t.replace("Moonrise -", "").trim();
-            if (t.includes("Moonset")) out["Moonset"] = t.replace("Moonset -", "").trim();
-          }
-
-          // 9. Rashi
-          const suryaRasi = parseBlockItems("panchang-data-soorya-rasi");
-          if (suryaRasi.length > 0) {
-            out["Sunsign"] = suryaRasi[0].replace("Sun in ", "").trim();
-          }
-          const chandraRasi = parseBlockItems("panchang-data-chandra-rasi");
-          if (chandraRasi.length > 0) {
-            out["Moonsign"] = chandraRasi[0]
-              .replace("Moon travels through ", "")
-              .replace("Moon in ", "")
-              .trim();
-          }
-
-          // 10. Auspicious periods
-          const auspicious = parseBlockItems("panchang-data-auspicious-period");
-          for (const item of auspicious) {
-            if (item.includes("Abhijit Muhurat"))
-              out["Abhijit"] = item.replace("Abhijit Muhurat -", "").trim();
-            if (item.includes("Brahma Muhurat"))
-              out["Brahma Muhurta"] = item.replace("Brahma Muhurat -", "").trim();
-          }
-
-          // 11. Inauspicious periods
-          const inauspicious = parseBlockItems("panchang-data-inauspicious-period");
-          for (const item of inauspicious) {
-            if (item.includes("Rahu")) out["Rahu Kalam"] = item.replace("Rahu -", "").trim();
-            if (item.includes("Yamaganda"))
-              out["Yamaganda"] = item.replace("Yamaganda -", "").trim();
-            if (item.includes("Gulika")) out["Gulikai Kalam"] = item.replace("Gulika -", "").trim();
-          }
-
-          // 12. Paksha
-          if (html.toLowerCase().includes("sukla paksha")) {
-            out["Paksha"] = "Sukla Paksha";
-          } else if (html.toLowerCase().includes("krishna paksha")) {
-            out["Paksha"] = "Krishna Paksha";
-          }
-
-          if (Object.keys(out).length > 0) {
-            console.log("[Panchang] Live Prokerala data loaded:", out);
+          const result = await fetchLiveSource(source);
+          const payload = typeof result === 'string' ? JSON.parse(result) : result;
+          const liveData = payload?.data || payload;
+          if (liveData && Object.keys(liveData).length) {
             if (active) {
-              setLive(out);
+              setLive(liveData);
               setLoadingLive(false);
+              setLastUpdated(
+                new Date().toLocaleTimeString('en-IN', {
+                  hour: '2-digit',
+                  minute: '2-digit',
+                  hour12: true,
+                  timeZone: 'Asia/Kolkata',
+                }),
+              );
               return;
             }
           }
-        } catch (err) {
-          console.warn(`[Panchang] Proxy ${proxy} failed:`, err);
+          lastErrorMessage = `Unable to parse live Panchang from ${source}`;
+        } catch (error) {
+          lastErrorMessage = error?.message || String(error);
+          console.warn('[Panchang] Live fetch failed', source, lastErrorMessage);
         }
       }
 
       if (active) {
-        if (Object.keys(out).length > 0) {
-          setLive(out);
-        }
         setLoadingLive(false);
+        setFetchError(
+          `Could not fetch live Prokerala Panchang data. Showing local calculations. ${lastErrorMessage}`,
+        );
       }
     }
 
@@ -612,7 +600,7 @@ function PanchangPage() {
     return () => {
       active = false;
     };
-  }, [dateString]);
+  }, [dateString, refreshKey]);
 
   const pick = (k: string, fallback: string) => live[k] || fallback;
 
@@ -762,11 +750,13 @@ function PanchangPage() {
 
         {/* Today's Panchang Grid */}
         <div key={dateKey + "_details"} className="animate-fade-in">
-          <div className="flex items-center gap-3 mb-6">
-            <Clock className="text-saffron" size={28} />
-            <h2 className="font-display text-2xl md:text-3xl text-maroon">Panchang Details</h2>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+            <div className="flex items-center gap-3">
+              <Clock className="text-saffron" size={28} />
+              <h2 className="font-display text-2xl md:text-3xl text-maroon">Panchang Details</h2>
+            </div>
             {loadingLive && (
-              <span className="text-xs text-saffron animate-pulse bg-saffron/10 border border-saffron/20 px-2 py-0.5 rounded-full ml-auto">
+              <span className="text-xs text-saffron animate-pulse bg-saffron/10 border border-saffron/20 px-2 py-0.5 rounded-full">
                 Updating Live...
               </span>
             )}
@@ -833,12 +823,12 @@ function PanchangPage() {
           <div className="flex items-center gap-3 mb-2">
             <CalendarDays className="text-saffron" size={28} />
             <h2 className="font-display text-2xl md:text-3xl text-maroon">
-              Hindu Festival Calendar (2026)
+              Complete Hindu Calendar 2026
             </h2>
           </div>
           <p className="text-muted-foreground mb-6 max-w-2xl text-sm">
-            Major Hindu festivals, vrats and auspicious days. Plan your darshan at Vindhyachal Dham
-            in advance.
+            Full year festival calendar with important dates, vrats, and auspicious days for 2026.
+            Use this table to plan darshan and observe key events for Vindhyachal Dham.
           </p>
 
           <div className="rounded-2xl border-2 border-gold/40 overflow-hidden shadow-sacred">
