@@ -41,14 +41,14 @@ function DonationPage() {
 
       <section className="container mx-auto px-6 py-16 grid lg:grid-cols-2 gap-12 items-start">
         <div className="relative">
-          <div className="absolute -inset-6 bg-gradient-sacred rounded-[2rem] blur-3xl opacity-25" />
-          <div className="relative bg-card border-2 border-gold/60 rounded-[2rem] p-8 shadow-sacred max-w-md mx-auto text-center flex flex-col items-center">
+          <div className="absolute -inset-2 sm:-inset-6 bg-gradient-sacred rounded-[2rem] blur-2xl sm:blur-3xl opacity-25" />
+          <div className="relative bg-card border-2 border-gold/60 rounded-[2rem] p-5 xs:p-6 sm:p-8 shadow-sacred max-w-md mx-auto text-center flex flex-col items-center">
             <h3 className="font-display text-2xl text-maroon mb-1">Scan to Donate</h3>
             <p className="text-xs text-muted-foreground mb-6 uppercase tracking-wider">
               Secure UPI Payment
             </p>
 
-            <div className="relative w-64 h-64 p-3 bg-white rounded-2xl shadow-md border border-border flex items-center justify-center mb-6">
+            <div className="relative w-full max-w-[240px] aspect-square sm:w-64 sm:h-64 p-3 bg-white rounded-2xl shadow-md border border-border flex items-center justify-center mb-6">
               {/* Corner brackets/borders for visual scan effect */}
               <div className="absolute top-0 left-0 w-6 h-6 border-t-4 border-l-4 border-saffron rounded-tl-lg" />
               <div className="absolute top-0 right-0 w-6 h-6 border-t-4 border-r-4 border-saffron rounded-tr-lg" />
@@ -62,16 +62,16 @@ function DonationPage() {
               />
             </div>
 
-            <div className="w-full space-y-3 bg-gradient-divine border border-gold/30 rounded-xl p-4 text-left">
-              <div className="flex justify-between items-center text-sm border-b border-gold/20 pb-2">
-                <span className="text-muted-foreground font-medium">Verified UPI Name</span>
-                <span className="font-display text-maroon font-bold">
+            <div className="w-full space-y-3 bg-gradient-divine border border-gold/30 rounded-xl p-3 sm:p-4 text-left">
+              <div className="flex flex-col xs:flex-row justify-between items-start xs:items-center text-sm border-b border-gold/20 pb-2 gap-1 xs:gap-0">
+                <span className="text-muted-foreground font-medium text-xs sm:text-sm">Verified UPI Name</span>
+                <span className="font-display text-maroon font-bold text-xs xs:text-sm">
                   Namami Vindhyavasini Sansthan
                 </span>
               </div>
-              <div className="flex justify-between items-center text-sm">
-                <span className="text-muted-foreground font-medium">Verified UPI ID</span>
-                <span className="font-mono text-maroon font-bold">9334339505@upi</span>
+              <div className="flex flex-col xs:flex-row justify-between items-start xs:items-center text-sm gap-1 xs:gap-0">
+                <span className="text-muted-foreground font-medium text-xs sm:text-sm">Verified UPI ID</span>
+                <span className="font-mono text-maroon font-bold text-xs xs:text-sm">9334339505@upi</span>
               </div>
             </div>
 
@@ -107,37 +107,37 @@ function DonationPage() {
             </div>
           </div>
 
-          <div className="rounded-2xl bg-gradient-divine border border-gold/40 p-6 shadow-sm">
+          <div className="rounded-2xl bg-gradient-divine border border-gold/40 p-5 sm:p-6 shadow-sm">
             <h4 className="font-display text-lg text-maroon mb-4 flex items-center gap-2">
               <span className="text-xl">🏛️</span> Bank Transfer Details
             </h4>
-            <div className="space-y-3 text-sm">
-              <div className="flex justify-between border-b border-gold/15 pb-2">
+            <div className="space-y-3 text-xs sm:text-sm">
+              <div className="flex flex-col xs:flex-row justify-between border-b border-gold/15 pb-2 gap-1 xs:gap-0">
                 <span className="text-muted-foreground">Account Name</span>
-                <span className="font-medium text-foreground">
+                <span className="font-medium text-foreground text-left xs:text-right">
                   Namami Vindhyavasini Sansthan Trust
                 </span>
               </div>
-              <div className="flex justify-between border-b border-gold/15 pb-2">
+              <div className="flex flex-col xs:flex-row justify-between border-b border-gold/15 pb-2 gap-1 xs:gap-0">
                 <span className="text-muted-foreground">Bank Name</span>
-                <span className="font-medium text-foreground">State Bank of India (SBI)</span>
+                <span className="font-medium text-foreground text-left xs:text-right">State Bank of India (SBI)</span>
               </div>
-              <div className="flex justify-between border-b border-gold/15 pb-2">
+              <div className="flex flex-col xs:flex-row justify-between border-b border-gold/15 pb-2 gap-1 xs:gap-0">
                 <span className="text-muted-foreground">Account Number</span>
-                <span className="font-mono font-semibold text-foreground">XXXX</span>
+                <span className="font-mono font-semibold text-foreground text-left xs:text-right">XXXX</span>
               </div>
-              <div className="flex justify-between border-b border-gold/15 pb-2">
+              <div className="flex flex-col xs:flex-row justify-between border-b border-gold/15 pb-2 gap-1 xs:gap-0">
                 <span className="text-muted-foreground">IFSC Code</span>
-                <span className="font-mono font-semibold text-foreground">XXXX</span>
+                <span className="font-mono font-semibold text-foreground text-left xs:text-right">XXXX</span>
               </div>
-              <div className="flex justify-between">
+              <div className="flex flex-col xs:flex-row justify-between gap-1 xs:gap-0">
                 <span className="text-muted-foreground">Branch</span>
-                <span className="font-medium text-foreground">Vindhyachal Branch</span>
+                <span className="font-medium text-foreground text-left xs:text-right">Vindhyachal Branch</span>
               </div>
             </div>
           </div>
 
-          <div className="mt-6 p-6 rounded-2xl bg-gradient-divine border border-gold/30 text-center shadow-sm">
+          <div className="mt-6 p-5 sm:p-6 rounded-2xl bg-gradient-divine border border-gold/30 text-center shadow-sm">
             <div className="text-saffron font-devanagari text-lg font-bold mb-1">
               ॥ सेवा परमो धर्मः ॥
             </div>
@@ -147,7 +147,7 @@ function DonationPage() {
             </p>
           </div>
 
-          <div className="mt-6 p-6 rounded-2xl bg-card border border-border space-y-3 shadow-sm">
+          <div className="mt-6 p-5 sm:p-6 rounded-2xl bg-card border border-border space-y-3 shadow-sm">
             <h4 className="font-display text-base text-maroon font-semibold">
               Important Notes for Donors
             </h4>

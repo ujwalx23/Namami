@@ -333,8 +333,43 @@ function GalleryPage() {
         triggerDownload();
       }
     } catch (err) {
-      console.error("[Gallery Share] Failed:", err);
-      toast.error(lang === "hi" ? "साझा करने में विफल" : "Failed to share image", { id: "share-gallery" });
+      console.error("[Gallery Share] Canvas generation failed, trying direct link share fallback:", err);
+      
+      // First-tier Fallback: Use Web Share API to share direct URL and text
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: "Maa Vindhyavasini Divya Darshan",
+            text: `${caption} — Glimpse of Maa Vindhyavasini's divine shringar`,
+            url: imgUrl,
+          });
+          toast.success(lang === "hi" ? "सफलतापूर्वक साझा किया गया!" : "Shared successfully!", { id: "share-gallery" });
+          return;
+        } catch (shareErr) {
+          if (shareErr instanceof Error && shareErr.name === "AbortError") {
+            toast.dismiss("share-gallery");
+            return;
+          }
+          console.error("[Gallery Share] Web Share API direct link fallback failed:", shareErr);
+        }
+      }
+
+      // Second-tier Fallback: Copy link to clipboard
+      try {
+        await navigator.clipboard.writeText(imgUrl);
+        toast.success(
+          lang === "hi" 
+            ? "छवि लिंक क्लिपबोर्ड पर कॉपी किया गया!" 
+            : "Image link copied to clipboard!", 
+          { id: "share-gallery" }
+        );
+      } catch (clipErr) {
+        console.error("[Gallery Share] Clipboard write failed:", clipErr);
+        toast.error(
+          lang === "hi" ? "साझा करने में विफल" : "Failed to share image", 
+          { id: "share-gallery" }
+        );
+      }
     }
   };
 

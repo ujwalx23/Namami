@@ -72,7 +72,7 @@ function ContactPage() {
             ].map((c) => (
               <div
                 key={c.label}
-                className="flex items-start gap-4 p-5 rounded-2xl bg-card border border-border"
+                className="flex items-start gap-3 sm:gap-4 p-4 sm:p-5 rounded-2xl bg-card border border-border"
               >
                 <div className="w-11 h-11 rounded-xl bg-gradient-sacred flex items-center justify-center text-cream shrink-0">
                   <c.icon size={18} />
@@ -190,7 +190,7 @@ function ContactForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="p-8 rounded-2xl bg-card border border-border">
+    <form onSubmit={onSubmit} className="p-5 xs:p-6 sm:p-8 rounded-2xl bg-card border border-border">
       <div className="flex items-center gap-2 mb-5">
         <Send size={18} className="text-saffron" />
         <h2 className={`font-display text-2xl text-maroon ${dev}`}>{t("ct.send.title")}</h2>
@@ -323,7 +323,7 @@ function AppointmentForm() {
   return (
     <form
       onSubmit={onSubmit}
-      className="p-8 rounded-2xl bg-gradient-divine border-2 border-gold/40"
+      className="p-5 xs:p-6 sm:p-8 rounded-2xl bg-gradient-divine border-2 border-gold/40"
     >
       <div className="flex items-center gap-2 mb-5">
         <CalendarPlus size={18} className="text-saffron" />
@@ -343,7 +343,7 @@ function AppointmentForm() {
             placeholder={t("ct.f.name")}
             className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none input-focus-spring"
           />
-          <div className="grid sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 xs:grid-cols-2 gap-3">
             <input
               name="phone"
               required
@@ -358,7 +358,7 @@ function AppointmentForm() {
               className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none input-focus-spring"
             />
           </div>
-          <div className="grid sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 xs:grid-cols-2 gap-3">
             <input
               name="appointment_date"
               required
