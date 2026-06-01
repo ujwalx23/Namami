@@ -39,21 +39,6 @@ export const Route = createFileRoute("/panchang")({
 const LAT = 25.1467;
 const LON = 82.5;
 const TZ_OFFSET = 5.5; // IST
-const PROKERALA_LOC = "1262995";
-const PROKERALA_MONTHS = [
-  "january",
-  "february",
-  "march",
-  "april",
-  "may",
-  "june",
-  "july",
-  "august",
-  "september",
-  "october",
-  "november",
-  "december",
-];
 
 const TITHIS = [
   "Pratipada",
@@ -168,12 +153,6 @@ const HINDU_MONTHS = [
   "Magha",
   "Phalguna",
 ];
-
-function buildProkeralaUrl(date: Date) {
-  return `https://www.prokerala.com/astrology/panchang/${date.getFullYear()}-${PROKERALA_MONTHS[date.getMonth()]}-${String(
-    date.getDate(),
-  ).padStart(2, "0")}.html?loc=${PROKERALA_LOC}`;
-}
 
 // Julian Day from date
 function julian(d: Date): number {
@@ -374,48 +353,6 @@ const festivals2026: Festival[] = [
   { date: "2026-12-20", name: "Gita Jayanti", desc: "Day Bhagavad Gita was revealed." },
 ];
 
-const festivals2027: Festival[] = [
-  { date: "2027-01-14", name: "Makar Sankranti", desc: "Sun's transit into Capricorn." },
-  { date: "2027-02-05", name: "Maha Shivaratri", desc: "Great night of Lord Shiva." },
-  { date: "2027-03-23", name: "Holi", desc: "Festival of colours." },
-  { date: "2027-04-11", name: "Rama Navami", desc: "Birth of Lord Rama." },
-  { date: "2027-04-18", name: "Hanuman Jayanti", desc: "Birth of Lord Hanuman." },
-  { date: "2027-04-25", name: "Akshaya Tritiya", desc: "Most auspicious day for new ventures." },
-  { date: "2027-05-03", name: "Buddha Purnima", desc: "Birth of Lord Buddha." },
-  { date: "2027-06-14", name: "Nirjala Ekadashi", desc: "Most rigorous Ekadashi — waterless fast." },
-  { date: "2027-07-08", name: "Jagannath Rath Yatra", desc: "Grand chariot festival of Lord Jagannath." },
-  { date: "2027-07-18", name: "Guru Purnima", desc: "Honouring spiritual teachers." },
-  { date: "2027-08-15", name: "Hariyali Teej", desc: "Monsoon festival for women." },
-  { date: "2027-08-26", name: "Raksha Bandhan", desc: "Sacred bond between siblings." },
-  { date: "2027-09-23", name: "Krishna Janmashtami", desc: "Birth of Lord Krishna." },
-  { date: "2027-10-02", name: "Ganesh Chaturthi", desc: "Welcoming Lord Ganesha." },
-  { date: "2027-10-11", name: "Sharad Navratri Begins", desc: "Nine nights of Goddess Durga." },
-  { date: "2027-10-20", name: "Vijayadashami / Dussehra", desc: "Victory of good over evil." },
-  { date: "2027-11-01", name: "Diwali / Lakshmi Puja", desc: "Festival of lights." },
-  { date: "2027-11-05", name: "Bhai Dooj", desc: "Sister-brother bond celebration." },
-  { date: "2027-11-18", name: "Chhath Puja", desc: "Four-day festival of Sun God." },
-  { date: "2027-12-06", name: "Gita Jayanti", desc: "Day Bhagavad Gita was revealed." },
-];
-
-const festivalDataByYear: Record<number, Festival[]> = {
-  2026: festivals2026,
-  2027: festivals2027,
-};
-
-function groupFestivalsByMonth(fests: Festival[]) {
-  const groups: Record<string, Festival[]> = {};
-  for (let m = 1; m <= 12; m++) {
-    const key = String(m).padStart(2, "0");
-    groups[key] = [];
-  }
-  for (const f of fests) {
-    const month = f.date.split("-")[1];
-    if (!groups[month]) groups[month] = [];
-    groups[month].push(f);
-  }
-  return groups;
-}
-
 function formatFest(date: string) {
   return new Date(date + "T00:00:00").toLocaleDateString("en-IN", {
     weekday: "short",
@@ -437,9 +374,6 @@ function PanchangPage() {
   const [isManuallyChanged, setIsManuallyChanged] = useState(false);
   const [live, setLive] = useState<Record<string, string>>({});
   const [loadingLive, setLoadingLive] = useState(false);
-  const [fetchError, setFetchError] = useState<string | null>(null);
-  const [refreshKey, setRefreshKey] = useState(0);
-  const [lastUpdated, setLastUpdated] = useState<string | null>(null);
 
   const dateKey = localDateKey(selectedDate);
   const dateString = selectedDate.toLocaleDateString("en-IN", {
@@ -478,18 +412,30 @@ function PanchangPage() {
     return { sunrise, sunset, p, m, dateLabel, samvat };
   }, [dateString]);
 
-  // Fetch live Panchang values from Prokerala with a local API proxy fallback.
+  // Fetch live Panchang values from reliable internet sources and fall back to site scraping when needed.
   useEffect(() => {
     setLive({});
     setLoadingLive(true);
-    setFetchError(null);
 
-    const prokeralaUrl = buildProkeralaUrl(selectedDate);
-    const apiUrl = `/api/panchang?date=${dateKey}`;
-    const fallbackUrls = [
-      `https://api.allorigins.win/raw?url=${encodeURIComponent(prokeralaUrl)}`,
-      `https://corsproxy.io/?${encodeURIComponent(prokeralaUrl)}`,
+    const dateIso = dateKey;
+    const sunriseApi = `https://api.sunrise-sunset.org/json?lat=${LAT}&lng=${LON}&date=${dateIso}&formatted=0`;
+
+    const MONTH_NAMES = [
+      "january",
+      "february",
+      "march",
+      "april",
+      "may",
+      "june",
+      "july",
+      "august",
+      "september",
+      "october",
+      "november",
+      "december",
     ];
+    const target = `https://www.prokerala.com/astrology/panchang/${selectedDate.getFullYear()}-${MONTH_NAMES[selectedDate.getMonth()]}-${selectedDate.getDate()}.html`;
+    const proxies = ["https://api.allorigins.win/raw?url="];
 
     let active = true;
 
@@ -498,143 +444,167 @@ function PanchangPage() {
       return fmtTime(new Date(date.toLocaleString("en-US", { timeZone: "Asia/Kolkata" })));
     };
 
-    async function fetchLiveSource(url: string) {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`Source returned ${response.status}`);
-      }
-      if (url.startsWith('/api/')) {
-        return await response.json();
-      }
-
-      const html = await response.text();
-      const out: Record<string, string> = {};
-      const cleanText = (text: string) =>
-        text
-          .replace(/<[^>]+>/g, ' ')
-          .replace(/&nbsp;/gi, ' ')
-          .replace(/&ndash;/gi, '–')
-          .replace(/&mdash;/gi, '—')
-          .replace(/&amp;/gi, '&')
-          .replace(/\s+/g, ' ')
-          .trim();
-
-      const parseBlockItems = (blockClass: string) => {
-        const regex = new RegExp(
-          `<div[^>]+class=["'][^"']*${blockClass}[^"']*["'][^>]*>([\\s\\S]*?)<\\/div>`,
-          'i',
-        );
-        const match = html.match(regex);
-        if (!match) return [];
-
-        const blockContent = match[1];
-        const items: string[] = [];
-        const liRegex = /<li[^>]*>([\s\S]*?)<\/li>/gi;
-        let liMatch;
-        while ((liMatch = liRegex.exec(blockContent)) !== null) {
-          items.push(cleanText(liMatch[1]));
-        }
-        return items;
-      };
-
-      const add = (key: string, value: string) => {
-        if (value) out[key] = value;
-      };
-
-      const tithis = parseBlockItems('panchang-data-tithi');
-      if (tithis.length) add('Tithi', tithis.join(' | '));
-      const nakshatras = parseBlockItems('panchang-data-nakshatra');
-      if (nakshatras.length) add('Nakshatra', nakshatras.join(' | '));
-      const yogas = parseBlockItems('panchang-data-yoga');
-      if (yogas.length) add('Yoga', yogas.join(' | '));
-      const karanas = parseBlockItems('panchang-data-karana');
-      if (karanas.length) add('Karana', karanas.join(' | '));
-      const varas = parseBlockItems('panchang-data-vaasara');
-      if (varas.length) add('Weekday', varas[0]);
-
-      const dayItems = parseBlockItems('panchang-data-day');
-      for (const item of dayItems) {
-        if (/Vikram Samvat/i.test(item)) {
-          add('Vikram Samvat', item.replace(/Vikram Samvat\s*-*/i, '').trim());
-        }
-      }
-
-      const lunarItems = parseBlockItems('panchang-data-lunar-month');
-      for (const item of lunarItems) {
-        if (/Purnimanta/i.test(item)) {
-          add('Chandramasa', item.replace(/Purnimanta\s*-*/i, '').trim());
-        }
-      }
-
-      const timings = parseBlockItems('panchang-data-sun_moon_timing');
-      for (const t of timings) {
-        if (/Sunrise/i.test(t)) add('Sunrise', t.replace(/Sunrise\s*-*/i, '').trim());
-        if (/Sunset/i.test(t)) add('Sunset', t.replace(/Sunset\s*-*/i, '').trim());
-        if (/Moonrise/i.test(t)) add('Moonrise', t.replace(/Moonrise\s*-*/i, '').trim());
-        if (/Moonset/i.test(t)) add('Moonset', t.replace(/Moonset\s*-*/i, '').trim());
-      }
-
-      const suryaRasi = parseBlockItems('panchang-data-soorya-rasi');
-      if (suryaRasi.length) add('Sunsign', suryaRasi[0].replace(/Sun\s*(in)?\s*/i, '').trim());
-      const chandraRasi = parseBlockItems('panchang-data-chandra-rasi');
-      if (chandraRasi.length) add('Moonsign', chandraRasi[0].replace(/Moon\s*(travels through|in)?\s*/i, '').trim());
-
-      const auspicious = parseBlockItems('panchang-data-auspicious-period');
-      for (const item of auspicious) {
-        if (/Abhijit/i.test(item)) add('Abhijit', item.replace(/Abhijit\s*Muhurat?\s*-*/i, '').trim());
-        if (/Brahma/i.test(item)) add('Brahma Muhurta', item.replace(/Brahma\s*Muhurat?\s*-*/i, '').trim());
-      }
-
-      const inauspicious = parseBlockItems('panchang-data-inauspicious-period');
-      for (const item of inauspicious) {
-        if (/Rahu/i.test(item)) add('Rahu Kalam', item.replace(/Rahu\s*-*/i, '').trim());
-        if (/Yamaganda/i.test(item)) add('Yamaganda', item.replace(/Yamaganda\s*-*/i, '').trim());
-        if (/Gulika/i.test(item)) add('Gulikai Kalam', item.replace(/Gulika\s*-*/i, '').trim());
-      }
-
-      if (/sukla paksha/i.test(html)) add('Paksha', 'Sukla Paksha');
-      if (/krishna paksha/i.test(html)) add('Paksha', 'Krishna Paksha');
-
-      return { source: 'prokerala-html', url: prokeralaUrl, data: out };
-    }
-
     async function attemptFetch() {
-      const sources = [apiUrl, ...fallbackUrls];
-      let lastErrorMessage = '';
+      const out: Record<string, string> = {};
 
-      for (const source of sources) {
+      try {
+        console.log(`[Panchang] Fetching sunrise/sunset from internet for ${dateIso}`);
+        const res = await fetch(
+          `https://api.allorigins.win/raw?url=${encodeURIComponent(sunriseApi)}`,
+        );
+        if (res.ok) {
+          const body = await res.json();
+          if (body.status === "OK" && body.results) {
+            out["Sunrise"] = parseTimezoneDate(body.results.sunrise);
+            out["Sunset"] = parseTimezoneDate(body.results.sunset);
+          }
+        }
+      } catch (err) {
+        console.warn("[Panchang] Sunrise API fetch failed:", err);
+      }
+
+      for (const proxy of proxies) {
         if (!active) return;
         try {
-          const result = await fetchLiveSource(source);
-          const payload = typeof result === 'string' ? JSON.parse(result) : result;
-          const liveData = payload?.data || payload;
-          if (liveData && Object.keys(liveData).length) {
+          const url = proxy + encodeURIComponent(target);
+          console.log(`[Panchang] Fetching live data for ${target} via proxy: ${proxy}`);
+
+          const res = await fetch(url);
+          if (!res.ok) continue;
+
+          const html = await res.text();
+
+          const cleanText = (text: string) => {
+            if (!text) return "";
+            return text
+              .replace(/<[^>]+>/g, " ")
+              .replace(/&nbsp;/gi, " ")
+              .replace(/&ndash;/gi, "–")
+              .replace(/&mdash;/gi, "—")
+              .replace(/&amp;/gi, "&")
+              .replace(/\s+/g, " ")
+              .trim();
+          };
+
+          const parseBlockItems = (blockClass: string) => {
+            const regex = new RegExp(
+              `<div class="panchang-box-data-block[^"]*${blockClass}[^"]*">([\\s\\S]*?)<\\/div>`,
+              "i",
+            );
+            const match = html.match(regex);
+            if (!match) return [];
+
+            const blockContent = match[1];
+            const items: string[] = [];
+            const liRegex = /<li[^>]*>([\s\S]*?)<\/li>/gi;
+            let liMatch;
+            while ((liMatch = liRegex.exec(blockContent)) !== null) {
+              items.push(cleanText(liMatch[1]));
+            }
+            return items;
+          };
+
+          // 1. Tithi
+          const tithis = parseBlockItems("panchang-data-tithi");
+          if (tithis.length > 0) out["Tithi"] = tithis.join(" | ");
+
+          // 2. Nakshatra
+          const nakshatras = parseBlockItems("panchang-data-nakshatra");
+          if (nakshatras.length > 0) out["Nakshatra"] = nakshatras.join(" | ");
+
+          // 3. Yoga
+          const yogas = parseBlockItems("panchang-data-yoga");
+          if (yogas.length > 0) out["Yoga"] = yogas.join(" | ");
+
+          // 4. Karana
+          const karanas = parseBlockItems("panchang-data-karana");
+          if (karanas.length > 0) out["Karana"] = karanas.join(" | ");
+
+          // 5. Weekday
+          const varas = parseBlockItems("panchang-data-vaasara");
+          if (varas.length > 0) out["Weekday"] = varas[0];
+
+          // 6. Vikram Samvat
+          const dayItems = parseBlockItems("panchang-data-day");
+          for (const item of dayItems) {
+            if (item.includes("Vikram Samvat")) {
+              out["Vikram Samvat"] = item.replace("Vikram Samvat -", "").trim();
+            }
+          }
+
+          // 7. Chandramasa
+          const lunarItems = parseBlockItems("panchang-data-lunar-month");
+          for (const item of lunarItems) {
+            if (item.includes("Purnimanta")) {
+              out["Chandramasa"] = item.replace("Purnimanta -", "").trim();
+            }
+          }
+
+          // 8. Sun & Moon timings
+          const timings = parseBlockItems("panchang-data-sun_moon_timing");
+          for (const t of timings) {
+            if (t.includes("Sunrise")) out["Sunrise"] = t.replace("Sunrise -", "").trim();
+            if (t.includes("Sunset")) out["Sunset"] = t.replace("Sunset -", "").trim();
+            if (t.includes("Moonrise")) out["Moonrise"] = t.replace("Moonrise -", "").trim();
+            if (t.includes("Moonset")) out["Moonset"] = t.replace("Moonset -", "").trim();
+          }
+
+          // 9. Rashi
+          const suryaRasi = parseBlockItems("panchang-data-soorya-rasi");
+          if (suryaRasi.length > 0) {
+            out["Sunsign"] = suryaRasi[0].replace("Sun in ", "").trim();
+          }
+          const chandraRasi = parseBlockItems("panchang-data-chandra-rasi");
+          if (chandraRasi.length > 0) {
+            out["Moonsign"] = chandraRasi[0]
+              .replace("Moon travels through ", "")
+              .replace("Moon in ", "")
+              .trim();
+          }
+
+          // 10. Auspicious periods
+          const auspicious = parseBlockItems("panchang-data-auspicious-period");
+          for (const item of auspicious) {
+            if (item.includes("Abhijit Muhurat"))
+              out["Abhijit"] = item.replace("Abhijit Muhurat -", "").trim();
+            if (item.includes("Brahma Muhurat"))
+              out["Brahma Muhurta"] = item.replace("Brahma Muhurat -", "").trim();
+          }
+
+          // 11. Inauspicious periods
+          const inauspicious = parseBlockItems("panchang-data-inauspicious-period");
+          for (const item of inauspicious) {
+            if (item.includes("Rahu")) out["Rahu Kalam"] = item.replace("Rahu -", "").trim();
+            if (item.includes("Yamaganda"))
+              out["Yamaganda"] = item.replace("Yamaganda -", "").trim();
+            if (item.includes("Gulika")) out["Gulikai Kalam"] = item.replace("Gulika -", "").trim();
+          }
+
+          // 12. Paksha
+          if (html.toLowerCase().includes("sukla paksha")) {
+            out["Paksha"] = "Sukla Paksha";
+          } else if (html.toLowerCase().includes("krishna paksha")) {
+            out["Paksha"] = "Krishna Paksha";
+          }
+
+          if (Object.keys(out).length > 0) {
+            console.log("[Panchang] Live Prokerala data loaded:", out);
             if (active) {
-              setLive(liveData);
+              setLive(out);
               setLoadingLive(false);
-              setLastUpdated(
-                new Date().toLocaleTimeString('en-IN', {
-                  hour: '2-digit',
-                  minute: '2-digit',
-                  hour12: true,
-                  timeZone: 'Asia/Kolkata',
-                }),
-              );
               return;
             }
           }
-          lastErrorMessage = `Unable to parse live Panchang from ${source}`;
-        } catch (error) {
-          lastErrorMessage = error?.message || String(error);
-          console.warn('[Panchang] Live fetch failed', source, lastErrorMessage);
+        } catch (err) {
+          console.warn(`[Panchang] Proxy ${proxy} failed:`, err);
         }
       }
 
       if (active) {
+        if (Object.keys(out).length > 0) {
+          setLive(out);
+        }
         setLoadingLive(false);
-        setFetchError(
-          `Could not fetch live Prokerala Panchang data. Showing local calculations. ${lastErrorMessage}`,
-        );
       }
     }
 
@@ -642,23 +612,17 @@ function PanchangPage() {
     return () => {
       active = false;
     };
-  }, [dateString, refreshKey]);
+  }, [dateString]);
 
   const pick = (k: string, fallback: string) => live[k] || fallback;
 
   const todayKey = dateKey;
 
-  // Find current and next festivals (use festivals for the selected date's year)
-  const yearForSelection = selectedDate.getFullYear();
-  const currentYearFestivals = festivalDataByYear[yearForSelection] || festivalDataByYear[2026];
-  const todayFestival = currentYearFestivals.find((f) => f.date === todayKey);
+  // Find current and next festivals
+  const todayFestival = festivals2026.find((f) => f.date === todayKey);
   const upcoming = useMemo(() => {
-    return currentYearFestivals.find((f) => f.date >= todayKey) || currentYearFestivals[0];
-  }, [todayKey, yearForSelection]);
-
-  const [calendarYear, setCalendarYear] = useState<number>(2026);
-  const festivalList = useMemo(() => festivalDataByYear[calendarYear] || [], [calendarYear]);
-  const festivalsByMonth = useMemo(() => groupFestivalsByMonth(festivalList), [festivalList]);
+    return festivals2026.find((f) => f.date >= todayKey) || festivals2026[0];
+  }, [todayKey]);
 
   const panchangRows = [
     { icon: Sunrise, label: "Sunrise", value: pick("Sunrise", fmtTime(data.sunrise)) },
@@ -717,9 +681,9 @@ function PanchangPage() {
         subtitle={data.dateLabel}
       />
 
-      <section className="container mx-auto px-6 py-12 space-y-12 select-none">
+      <section className="container mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-8 sm:space-y-12 select-none">
         {/* Date Selector & Navigation controls */}
-        <div className="max-w-xl mx-auto rounded-2xl border border-gold/30 bg-card p-5 shadow-sacred flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="max-w-xl mx-auto rounded-2xl border border-gold/30 bg-card p-4 sm:p-5 shadow-sacred flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2 w-full sm:w-auto justify-between">
             <button
               onClick={() => changeDate(-1)}
@@ -728,7 +692,7 @@ function PanchangPage() {
             >
               <ChevronLeft size={20} />
             </button>
-            <span className="font-display font-semibold text-maroon text-center px-4">
+            <span className="font-display font-semibold text-maroon text-center px-2 sm:px-4 text-sm sm:text-base">
               {selectedDate.toLocaleDateString("en-IN", {
                 day: "numeric",
                 month: "short",
@@ -767,156 +731,57 @@ function PanchangPage() {
           </div>
         </div>
 
-        {/* Selected Date Highlight (moved up) */}
+        {/* Today's Festival highlight */}
         <div
           key={dateKey + "_fest"}
-          className="animate-fade-in rounded-2xl bg-gradient-sacred text-cream p-6 md:p-8 shadow-sacred flex flex-col md:flex-row md:items-center justify-between gap-4"
+          className="animate-fade-in rounded-2xl bg-gradient-sacred text-cream p-5 sm:p-6 md:p-8 shadow-sacred flex flex-col md:flex-row md:items-center justify-between gap-4"
         >
-          <div>
+          <div className="text-center md:text-left">
             <div className="text-xs uppercase tracking-widest text-gold font-bold">
               Selected Date
             </div>
-            <h3 className="font-display text-2xl md:text-3xl mt-1 text-cream">
+            <h3 className="font-display text-xl sm:text-2xl md:text-3xl mt-1 text-cream">
               {todayFestival
                 ? todayFestival.name
                 : `${pick("Tithi", `${data.p.paksha} ${data.p.tithiName}`)}`}
             </h3>
-            <p className="text-cream/90 text-sm mt-1">
+            <p className="text-cream/90 text-sm mt-1 hidden sm:block">
               {todayFestival
                 ? todayFestival.desc
                 : `${pick("Nakshatra", data.p.nakshatra)} Nakshatra · ${pick("Yoga", data.p.yoga)} Yoga`}
             </p>
           </div>
-          <div className="text-left md:text-right border-t border-cream/20 md:border-t-0 pt-4 md:pt-0">
+          <div className="text-center md:text-right border-t border-cream/20 md:border-t-0 pt-4 md:pt-0">
             <div className="text-xs uppercase tracking-widest text-gold font-bold">
               Upcoming Festival
             </div>
-            <div className="font-display text-xl mt-1 text-cream">{upcoming.name}</div>
+            <div className="font-display text-lg sm:text-xl mt-1 text-cream">{upcoming.name}</div>
             <div className="text-cream/90 text-sm">{formatFest(upcoming.date)}</div>
           </div>
         </div>
-        
-        <div className="mt-6 grid gap-6 lg:grid-cols-[1.35fr_1fr]">
-          <div className="rounded-2xl border border-gold/30 bg-card p-6 shadow-sacred">
-            <div className="flex items-start gap-4">
-              <div className="rounded-full bg-saffron/10 p-3 text-saffron">
-                <span className="text-sm font-bold">Start</span>
-              </div>
-              <div>
-                <h3 className="font-display text-2xl text-maroon">Begin with today’s Hindu calendar</h3>
-                <p className="mt-3 text-sm text-muted-foreground">
-                  Select any date and see the daily Panchang, important Hindu festivals, and monthly calendar highlights with accurate timings for Vindhyachal Dham.
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-6 grid gap-4 sm:grid-cols-2">
-              <div className="rounded-2xl border border-gold/20 bg-background p-4">
-                <h4 className="text-sm font-semibold text-maroon">How to use</h4>
-                <ul className="mt-3 space-y-2 text-sm text-foreground">
-                  <li>• Pick a date from the date picker.</li>
-                  <li>• View today’s Panchang values and special timings.</li>
-                  <li>• See festival highlights and Panchang context for the selected day.</li>
-                </ul>
-              </div>
-              <div className="rounded-2xl border border-gold/20 bg-background p-4">
-                <h4 className="text-sm font-semibold text-maroon">Accuracy note</h4>
-                <p className="mt-3 text-sm text-foreground">
-                  Local Hindu calendar calculations are combined with live Prokerala Panchang data when available for the most accurate result.
-                </p>
-                {lastUpdated && (
-                  <p className="mt-3 text-xs text-muted-foreground">
-                    Last update: {lastUpdated}
-                  </p>
-                )}
-                {fetchError && (
-                  <p className="mt-3 text-xs text-destructive">{fetchError}</p>
-                )}
-              </div>
-            </div>
-          </div>
-
-          <div className="rounded-2xl border border-gold/30 bg-card p-6 shadow-sacred">
-            <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-              <div className="max-w-2xl">
-                <p className="text-xs uppercase tracking-[0.3em] text-gold font-bold">
-                  Hindu Festival Calendar
-                </p>
-                <h3 className="font-display text-3xl text-maroon mt-2">
-                  2026 Hindu Festivals Calendar
-                </h3>
-                <p className="mt-4 text-sm text-foreground leading-7">
-                  Accurate Hindu Tyohar calendar for Mirzapur, Uttar Pradesh. This page provides Panchang details first,
-                  followed by a full festival calendar resource for 2026 and the upcoming 2027 festival year.
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-6 grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
-              <div className="rounded-3xl border border-gold/20 bg-gradient-to-br from-saffron/10 via-amber/20 to-rose/10 p-6">
-                <div className="flex h-full flex-col justify-between gap-4">
-                  <div>
-                    <div className="text-5xl">🎊</div>
-                    <h4 className="mt-4 text-xl font-semibold text-maroon">Festive Calendar Preview</h4>
-                    <p className="mt-3 text-sm text-muted-foreground leading-6">
-                      Explore the yearly Hindu festival calendar with a focus on major tyohars, Panchang observances, and regional celebrations around Mirzapur.
-                    </p>
-                  </div>
-                  <div className="text-xs uppercase tracking-[0.28em] text-gold font-bold">
-                    2026 + 2027</div>
-                </div>
-              </div>
-              <div className="grid gap-4">
-                <div className="rounded-3xl border border-gold/20 bg-background p-5">
-                  <p className="text-xs uppercase tracking-[0.2em] text-gold font-bold">2026 Calendar</p>
-                  <p className="mt-3 text-sm text-foreground leading-6">
-                    Complete festival and key tyohar dates for 2026, curated for Hindu devotees and pilgrimage planning.
-                  </p>
-                </div>
-                <div className="rounded-3xl border border-gold/20 bg-background p-5">
-                  <p className="text-xs uppercase tracking-[0.2em] text-gold font-bold">2027 Festival Preview</p>
-                  <p className="mt-3 text-sm text-foreground leading-6">
-                    Plan ahead with the next year’s festival season. Use the year toggle to view the full 2027 tyohar list and details directly on this site.
-                  </p>
-                  <ul className="mt-4 space-y-2 text-sm text-foreground">
-                    <li>• Holi</li>
-                    <li>• Rama Navami</li>
-                    <li>• Ganesh Chaturthi</li>
-                    <li>• Diwali</li>
-                    <li>• Chhath</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
 
         {/* Today's Panchang Grid */}
         <div key={dateKey + "_details"} className="animate-fade-in">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
-            <div className="flex items-center gap-3">
-              <Clock className="text-saffron" size={28} />
-              <h2 className="font-display text-2xl md:text-3xl text-maroon">Panchang Details</h2>
-            </div>
+          <div className="flex items-center gap-3 mb-4 sm:mb-6 justify-center sm:justify-start">
+            <Clock className="text-saffron w-6 h-6 sm:w-7 sm:h-7" />
+            <h2 className="font-display text-xl sm:text-2xl md:text-3xl text-maroon text-center sm:text-left">Panchang Details</h2>
             {loadingLive && (
-              <span className="text-xs text-saffron animate-pulse bg-saffron/10 border border-saffron/20 px-2 py-0.5 rounded-full">
+              <span className="text-xs text-saffron animate-pulse bg-saffron/10 border border-saffron/20 px-2 py-0.5 rounded-full ml-auto">
                 Updating Live...
               </span>
             )}
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {panchangRows.map((row) => (
               <div
                 key={row.label}
-                className="rounded-xl bg-gradient-divine border border-gold/40 p-4 shadow-gold flex items-center justify-between gap-3 hover:-translate-y-1 hover:shadow-sacred transition-all duration-300"
+                className="rounded-xl bg-gradient-divine border border-gold/40 p-3 sm:p-4 shadow-gold flex flex-col sm:flex-row items-center sm:justify-between gap-2 sm:gap-3 hover:-translate-y-1 hover:shadow-sacred transition-all duration-300"
               >
-                <span className="flex items-center gap-3 text-foreground/80 shrink-0">
-                  <row.icon size={18} className="text-saffron" />
-                  <span className="text-sm font-medium">{row.label}</span>
+                <span className="flex items-center gap-2 sm:gap-3 text-foreground/80 shrink-0">
+                  <row.icon className="text-saffron w-4 h-4 sm:w-[18px] sm:h-[18px]" />
+                  <span className="text-xs sm:text-sm font-medium">{row.label}</span>
                 </span>
-                <span className="font-semibold text-maroon text-right text-xs truncate max-w-[180px]">
+                <span className="font-semibold text-maroon text-center text-xs truncate max-w-full sm:max-w-[180px]">
                   {row.value}
                 </span>
               </div>
@@ -925,12 +790,12 @@ function PanchangPage() {
         </div>
 
         {/* Muhurat & Inauspicious */}
-        <div key={dateKey + "_muhurats"} className="animate-fade-in grid lg:grid-cols-2 gap-6">
-          <div className="rounded-2xl border border-gold/30 bg-cream/20 p-6 shadow-sacred">
-            <h3 className="font-display text-xl text-maroon mb-4 flex items-center gap-2 border-b border-gold/20 pb-2">
-              <Sparkles className="text-saffron" size={20} /> Auspicious Muhurats
+        <div key={dateKey + "_muhurats"} className="animate-fade-in grid sm:grid-cols-2 gap-4 sm:gap-6">
+          <div className="rounded-2xl border border-gold/30 bg-cream/20 p-4 sm:p-6 shadow-sacred">
+            <h3 className="font-display text-lg sm:text-xl text-maroon mb-3 sm:mb-4 flex items-center gap-2 border-b border-gold/20 pb-2">
+              <Sparkles className="text-saffron w-[18px] h-[18px] sm:w-5 sm:h-5" /> Auspicious Muhurats
             </h3>
-            <ul className="space-y-3 text-sm">
+            <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm">
               <li className="flex justify-between gap-4 border-b border-gold/10 pb-2">
                 <span className="text-foreground/80">Brahma Muhurta</span>
                 <span className="font-semibold text-maroon">{muhurat.brahma}</span>
@@ -942,11 +807,11 @@ function PanchangPage() {
             </ul>
           </div>
 
-          <div className="rounded-2xl border border-destructive/20 bg-background p-6 shadow-sacred">
-            <h3 className="font-display text-xl text-maroon mb-4 flex items-center gap-2 border-b border-destructive/20 pb-2">
-              <Clock className="text-destructive" size={20} /> Inauspicious Timings
+          <div className="rounded-2xl border border-destructive/20 bg-background p-4 sm:p-6 shadow-sacred">
+            <h3 className="font-display text-lg sm:text-xl text-maroon mb-3 sm:mb-4 flex items-center gap-2 border-b border-destructive/20 pb-2">
+              <Clock className="text-destructive w-[18px] h-[18px] sm:w-5 sm:h-5" /> Inauspicious Timings
             </h3>
-            <ul className="space-y-3 text-sm">
+            <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm">
               <li className="flex justify-between gap-4 border-b border-border/60 pb-2">
                 <span className="text-foreground/80 font-medium">Rahu Kalam</span>
                 <span className="font-semibold text-destructive">{muhurat.rahu}</span>
@@ -963,71 +828,83 @@ function PanchangPage() {
           </div>
         </div>
 
-        {/* Festival Calendar Section (in-site, year toggle + month grouping) */}
+        {/* Festival Calendar Section */}
         <div className="pt-8 border-t-2 border-gold/20">
-          <div className="flex items-center gap-3 mb-2 justify-between">
-            <div className="flex items-center gap-3">
-              <CalendarDays className="text-saffron" size={28} />
-              <h2 className="font-display text-2xl md:text-3xl text-maroon">
-                Complete Hindu Calendar {calendarYear}
-              </h2>
-            </div>
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => setCalendarYear(2026)}
-                className={`px-3 py-1 rounded-md text-sm font-medium ${calendarYear === 2026 ? 'bg-maroon text-cream' : 'bg-background text-maroon border border-gold/20'}`}>
-                2026
-              </button>
-              <button
-                onClick={() => setCalendarYear(2027)}
-                className={`px-3 py-1 rounded-md text-sm font-medium ${calendarYear === 2027 ? 'bg-maroon text-cream' : 'bg-background text-maroon border border-gold/20'}`}>
-                2027
-              </button>
-            </div>
+          <div className="flex items-center gap-3 mb-2 justify-center">
+            <CalendarDays className="text-saffron" size={28} />
+            <h2 className="font-display text-2xl md:text-3xl text-maroon text-center">
+              Hindu Festival Calendar (2026)
+            </h2>
           </div>
-          <p className="text-muted-foreground mb-6 max-w-2xl text-sm">
-            Full year festival calendar with important dates, vrats, and auspicious days. Use the year
-            toggle to view month-by-month festival details for the selected year.
+          <p className="text-muted-foreground mb-6 max-w-2xl text-sm text-center mx-auto">
+            Major Hindu festivals, vrats and auspicious days. Plan your darshan at Vindhyachal Dham
+            in advance.
           </p>
 
-          <div className="rounded-2xl border-2 border-gold/40 overflow-hidden shadow-sacred">
-            <div className="max-h-[600px] overflow-y-auto pr-1 p-4">
-              {Object.keys(festivalsByMonth).map((mKey) => {
-                const monthFests = festivalsByMonth[mKey];
-                if (!monthFests || monthFests.length === 0) return null;
-                const monthName = new Date(`${calendarYear}-${mKey}-01`).toLocaleString('en-IN', { month: 'long' });
-                return (
-                  <div key={mKey} className="mb-6">
-                    <div className="sticky top-0 bg-background/80 py-2 font-semibold text-maroon">{monthName}</div>
-                    <table className="w-full text-left border-collapse mt-2">
-                      <thead className="text-cream">
-                        <tr>
-                          <th className="px-4 py-2 text-sm text-maroon">Date</th>
-                          <th className="px-4 py-2 text-sm text-maroon">Festival</th>
-                          <th className="px-4 py-2 text-sm text-muted-foreground hidden md:table-cell">Details</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-border">
-                        {monthFests.map((f) => {
+          <div className="rounded-2xl border-2 border-gold/40 overflow-hidden shadow-sacred bg-background">
+            <div className="max-h-[600px] overflow-y-auto">
+              {(() => {
+                const MONTHS = [
+                  "January", "February", "March", "April", "May", "June",
+                  "July", "August", "September", "October", "November", "December"
+                ];
+                
+                return MONTHS.map((month, monthIdx) => {
+                  const monthFestivals = festivals2026.filter(f => {
+                    const festDate = new Date(f.date);
+                    return festDate.getMonth() === monthIdx;
+                  });
+                  
+                  if (monthFestivals.length === 0) return null;
+                  
+                  return (
+                    <div key={month} className="border-b border-gold/20 last:border-b-0">
+                      <div className="bg-gradient-sacred text-cream px-5 py-3 sticky top-0 z-10">
+                        <h3 className="font-display text-lg md:text-xl font-semibold">{month}</h3>
+                      </div>
+                      <div className="divide-y divide-border">
+                        {monthFestivals.map((f) => {
                           const isPast = f.date < selectedDate.toISOString().slice(0, 10);
                           const isToday = f.date === selectedDate.toISOString().slice(0, 10);
                           return (
-                            <tr key={f.date + f.name} className={`${isToday ? 'bg-gold/10 text-maroon font-semibold' : 'bg-background'} ${isPast && !isToday ? 'opacity-70' : ''}`}>
-                              <td className="px-4 py-3 text-xs md:text-sm font-medium text-maroon whitespace-nowrap">{formatFest(f.date)}{isToday && <span className="ml-2 text-[10px] bg-saffron text-cream px-1.5 py-0.5 rounded-full uppercase tracking-wider font-bold">Today</span>}</td>
-                              <td className="px-4 py-3 text-xs md:text-sm text-foreground">{f.name}</td>
-                              <td className="px-4 py-3 text-xs text-muted-foreground hidden md:table-cell">{f.desc}</td>
-                            </tr>
+                            <div
+                              key={f.date + f.name}
+                              className={`${
+                                isToday
+                                  ? "bg-gold/10"
+                                  : "hover:bg-gold/5"
+                              } ${isPast && !isToday ? "opacity-60" : ""} transition`}
+                            >
+                              <div className="px-5 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                                <div className="flex items-center gap-3">
+                                  <span className="text-xs md:text-sm font-medium text-maroon whitespace-nowrap">
+                                    {formatFest(f.date)}
+                                  </span>
+                                  {isToday && (
+                                    <span className="text-[10px] bg-saffron text-cream px-2 py-0.5 rounded-full uppercase tracking-wider font-bold">
+                                      Today
+                                    </span>
+                                  )}
+                                </div>
+                                <div className="flex-1">
+                                  <span className="text-xs md:text-sm text-foreground font-medium">{f.name}</span>
+                                </div>
+                              </div>
+                              <div className="px-5 pb-4 hidden md:block">
+                                <span className="text-xs text-muted-foreground">{f.desc}</span>
+                              </div>
+                            </div>
                           );
                         })}
-                      </tbody>
-                    </table>
-                  </div>
-                );
-              })}
+                      </div>
+                    </div>
+                  );
+                });
+              })()}
             </div>
           </div>
 
-          <p className="mt-4 text-[10px] text-muted-foreground italic text-center md:text-left">
+          <p className="mt-4 text-[10px] text-muted-foreground italic text-center">
             Panchang parameters calculated using local coordinates for Vindhyachal Dham (25.15°N,
             82.5°E) and synchronized in real-time with verified Panchang records.
           </p>
