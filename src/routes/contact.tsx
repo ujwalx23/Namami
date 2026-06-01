@@ -52,62 +52,64 @@ function ContactPage() {
     <PageShell>
       <PageHero sanskrit={t("ct.sanskrit")} title={t("ct.title")} subtitle={t("ct.subtitle")} />
 
-      <section className="container mx-auto px-6 py-16 grid lg:grid-cols-2 gap-10">
-        <div className="max-w-md mx-auto lg:mx-0 w-full">
-          <div className="space-y-5 mb-10">
-            {[
-              { icon: MapPin, label: t("ct.visit"), value: t("ct.address"), href: "" },
-              {
-                icon: Phone,
-                label: t("ct.call"),
-                value: "+91 93343 39505",
-                href: "tel:+919334339505",
-              },
-              {
-                icon: Mail,
-                label: t("ct.email"),
-                value: "info@namamivindhyavasini.org",
-                href: "mailto:info@namamivindhyavasini.org",
-              },
-            ].map((c) => (
-              <div
-                key={c.label}
-                className="flex items-start gap-3 sm:gap-4 p-4 sm:p-5 rounded-2xl bg-card border border-border"
-              >
-                <div className="w-11 h-11 rounded-xl bg-gradient-sacred flex items-center justify-center text-cream shrink-0">
-                  <c.icon size={18} />
-                </div>
-                <div>
-                  <div className={`text-xs uppercase tracking-[0.2em] text-saffron ${dev}`}>
-                    {c.label}
+      <section className="w-full py-16 px-4 xs:px-6 flex justify-center">
+        <div className="w-full max-w-5xl grid lg:grid-cols-2 gap-10 items-start justify-items-center">
+          <div className="w-full max-w-md">
+            <div className="space-y-5 mb-10">
+              {[
+                { icon: MapPin, label: t("ct.visit"), value: t("ct.address"), href: "" },
+                {
+                  icon: Phone,
+                  label: t("ct.call"),
+                  value: "+91 93343 39505",
+                  href: "tel:+919334339505",
+                },
+                {
+                  icon: Mail,
+                  label: t("ct.email"),
+                  value: "info@namamivindhyavasini.org",
+                  href: "mailto:info@namamivindhyavasini.org",
+                },
+              ].map((c) => (
+                <div
+                  key={c.label}
+                  className="flex items-start gap-3 sm:gap-4 p-4 sm:p-5 rounded-2xl bg-card border border-border"
+                >
+                  <div className="w-11 h-11 rounded-xl bg-gradient-sacred flex items-center justify-center text-cream shrink-0">
+                    <c.icon size={18} />
                   </div>
-                  <div className={`font-medium text-maroon mt-0.5 ${dev}`}>
-                    {c.href ? (
-                      <a href={c.href} className="hover:text-saffron">
-                        {c.value}
-                      </a>
-                    ) : (
-                      c.value
-                    )}
+                  <div>
+                    <div className={`text-xs uppercase tracking-[0.2em] text-saffron ${dev}`}>
+                      {c.label}
+                    </div>
+                    <div className={`font-medium text-maroon mt-0.5 ${dev}`}>
+                      {c.href ? (
+                        <a href={c.href} className="hover:text-saffron">
+                          {c.value}
+                        </a>
+                      ) : (
+                        c.value
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+
+            <div className="aspect-video rounded-2xl overflow-hidden border-2 border-gold/40 shadow-gold">
+              <iframe
+                title="Vindhyachal Dham"
+                src="https://www.google.com/maps?q=Maa+Vindhyavasini+Temple,Vindhyachal&ll=25.1643346,82.5060022&z=18&t=k&output=embed"
+                className="w-full h-full"
+                loading="lazy"
+              />
+            </div>
           </div>
 
-          <div className="aspect-video rounded-2xl overflow-hidden border-2 border-gold/40 shadow-gold">
-            <iframe
-              title="Vindhyachal Dham"
-              src="https://www.google.com/maps?q=Maa+Vindhyavasini+Temple,Vindhyachal&ll=25.1643346,82.5060022&z=18&t=k&output=embed"
-              className="w-full h-full"
-              loading="lazy"
-            />
+          <div className="space-y-8 w-full max-w-md">
+            <ContactForm />
+            <AppointmentForm />
           </div>
-        </div>
-
-        <div className="space-y-8 max-w-md mx-auto lg:mx-0 w-full">
-          <ContactForm />
-          <AppointmentForm />
         </div>
       </section>
     </PageShell>
