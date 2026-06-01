@@ -355,9 +355,17 @@ function SandeshPage() {
   const [todayIdx, setTodayIdx] = useState(0);
   useEffect(() => {
     if (sandesh.length === 0) return;
-    const day = Math.floor(Date.now() / 86400000);
-    setTodayIdx((day + seed) % sandesh.length);
-  }, [sandesh.length, seed]);
+    // Select random message on initial load
+    const randomIdx = Math.floor(Math.random() * sandesh.length);
+    setTodayIdx(randomIdx);
+  }, [sandesh.length]);
+
+  // Update index when seed changes (for "Show another" button)
+  useEffect(() => {
+    if (sandesh.length === 0 || seed === 0) return;
+    const randomIdx = Math.floor(Math.random() * sandesh.length);
+    setTodayIdx(randomIdx);
+  }, [seed, sandesh.length]);
 
   useEffect(() => {
     stopPlayback();
