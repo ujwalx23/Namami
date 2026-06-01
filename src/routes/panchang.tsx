@@ -374,6 +374,48 @@ const festivals2026: Festival[] = [
   { date: "2026-12-20", name: "Gita Jayanti", desc: "Day Bhagavad Gita was revealed." },
 ];
 
+const festivals2027: Festival[] = [
+  { date: "2027-01-14", name: "Makar Sankranti", desc: "Sun's transit into Capricorn." },
+  { date: "2027-02-05", name: "Maha Shivaratri", desc: "Great night of Lord Shiva." },
+  { date: "2027-03-23", name: "Holi", desc: "Festival of colours." },
+  { date: "2027-04-11", name: "Rama Navami", desc: "Birth of Lord Rama." },
+  { date: "2027-04-18", name: "Hanuman Jayanti", desc: "Birth of Lord Hanuman." },
+  { date: "2027-04-25", name: "Akshaya Tritiya", desc: "Most auspicious day for new ventures." },
+  { date: "2027-05-03", name: "Buddha Purnima", desc: "Birth of Lord Buddha." },
+  { date: "2027-06-14", name: "Nirjala Ekadashi", desc: "Most rigorous Ekadashi — waterless fast." },
+  { date: "2027-07-08", name: "Jagannath Rath Yatra", desc: "Grand chariot festival of Lord Jagannath." },
+  { date: "2027-07-18", name: "Guru Purnima", desc: "Honouring spiritual teachers." },
+  { date: "2027-08-15", name: "Hariyali Teej", desc: "Monsoon festival for women." },
+  { date: "2027-08-26", name: "Raksha Bandhan", desc: "Sacred bond between siblings." },
+  { date: "2027-09-23", name: "Krishna Janmashtami", desc: "Birth of Lord Krishna." },
+  { date: "2027-10-02", name: "Ganesh Chaturthi", desc: "Welcoming Lord Ganesha." },
+  { date: "2027-10-11", name: "Sharad Navratri Begins", desc: "Nine nights of Goddess Durga." },
+  { date: "2027-10-20", name: "Vijayadashami / Dussehra", desc: "Victory of good over evil." },
+  { date: "2027-11-01", name: "Diwali / Lakshmi Puja", desc: "Festival of lights." },
+  { date: "2027-11-05", name: "Bhai Dooj", desc: "Sister-brother bond celebration." },
+  { date: "2027-11-18", name: "Chhath Puja", desc: "Four-day festival of Sun God." },
+  { date: "2027-12-06", name: "Gita Jayanti", desc: "Day Bhagavad Gita was revealed." },
+];
+
+const festivalDataByYear: Record<number, Festival[]> = {
+  2026: festivals2026,
+  2027: festivals2027,
+};
+
+function groupFestivalsByMonth(fests: Festival[]) {
+  const groups: Record<string, Festival[]> = {};
+  for (let m = 1; m <= 12; m++) {
+    const key = String(m).padStart(2, "0");
+    groups[key] = [];
+  }
+  for (const f of fests) {
+    const month = f.date.split("-")[1];
+    if (!groups[month]) groups[month] = [];
+    groups[month].push(f);
+  }
+  return groups;
+}
+
 function formatFest(date: string) {
   return new Date(date + "T00:00:00").toLocaleDateString("en-IN", {
     weekday: "short",
@@ -606,11 +648,17 @@ function PanchangPage() {
 
   const todayKey = dateKey;
 
-  // Find current and next festivals
-  const todayFestival = festivals2026.find((f) => f.date === todayKey);
+  // Find current and next festivals (use festivals for the selected date's year)
+  const yearForSelection = selectedDate.getFullYear();
+  const currentYearFestivals = festivalDataByYear[yearForSelection] || festivalDataByYear[2026];
+  const todayFestival = currentYearFestivals.find((f) => f.date === todayKey);
   const upcoming = useMemo(() => {
-    return festivals2026.find((f) => f.date >= todayKey) || festivals2026[0];
-  }, [todayKey]);
+    return currentYearFestivals.find((f) => f.date >= todayKey) || currentYearFestivals[0];
+  }, [todayKey, yearForSelection]);
+
+  const [calendarYear, setCalendarYear] = useState<number>(2026);
+  const festivalList = useMemo(() => festivalDataByYear[calendarYear] || [], [calendarYear]);
+  const festivalsByMonth = useMemo(() => groupFestivalsByMonth(festivalList), [festivalList]);
 
   const panchangRows = [
     { icon: Sunrise, label: "Sunrise", value: pick("Sunrise", fmtTime(data.sunrise)) },
@@ -719,7 +767,7 @@ function PanchangPage() {
           </div>
         </div>
 
-        {/* Today's Festival highlight */}
+        {/* Selected Date Highlight (moved up) */}
         <div
           key={dateKey + "_fest"}
           className="animate-fade-in rounded-2xl bg-gradient-sacred text-cream p-6 md:p-8 shadow-sacred flex flex-col md:flex-row md:items-center justify-between gap-4"
@@ -747,6 +795,103 @@ function PanchangPage() {
             <div className="text-cream/90 text-sm">{formatFest(upcoming.date)}</div>
           </div>
         </div>
+        
+        <div className="mt-6 grid gap-6 lg:grid-cols-[1.35fr_1fr]">
+          <div className="rounded-2xl border border-gold/30 bg-card p-6 shadow-sacred">
+            <div className="flex items-start gap-4">
+              <div className="rounded-full bg-saffron/10 p-3 text-saffron">
+                <span className="text-sm font-bold">Start</span>
+              </div>
+              <div>
+                <h3 className="font-display text-2xl text-maroon">Begin with today’s Hindu calendar</h3>
+                <p className="mt-3 text-sm text-muted-foreground">
+                  Select any date and see the daily Panchang, important Hindu festivals, and monthly calendar highlights with accurate timings for Vindhyachal Dham.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              <div className="rounded-2xl border border-gold/20 bg-background p-4">
+                <h4 className="text-sm font-semibold text-maroon">How to use</h4>
+                <ul className="mt-3 space-y-2 text-sm text-foreground">
+                  <li>• Pick a date from the date picker.</li>
+                  <li>• View today’s Panchang values and special timings.</li>
+                  <li>• See festival highlights and Panchang context for the selected day.</li>
+                </ul>
+              </div>
+              <div className="rounded-2xl border border-gold/20 bg-background p-4">
+                <h4 className="text-sm font-semibold text-maroon">Accuracy note</h4>
+                <p className="mt-3 text-sm text-foreground">
+                  Local Hindu calendar calculations are combined with live Prokerala Panchang data when available for the most accurate result.
+                </p>
+                {lastUpdated && (
+                  <p className="mt-3 text-xs text-muted-foreground">
+                    Last update: {lastUpdated}
+                  </p>
+                )}
+                {fetchError && (
+                  <p className="mt-3 text-xs text-destructive">{fetchError}</p>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-gold/30 bg-card p-6 shadow-sacred">
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+              <div className="max-w-2xl">
+                <p className="text-xs uppercase tracking-[0.3em] text-gold font-bold">
+                  Hindu Festival Calendar
+                </p>
+                <h3 className="font-display text-3xl text-maroon mt-2">
+                  2026 Hindu Festivals Calendar
+                </h3>
+                <p className="mt-4 text-sm text-foreground leading-7">
+                  Accurate Hindu Tyohar calendar for Mirzapur, Uttar Pradesh. This page provides Panchang details first,
+                  followed by a full festival calendar resource for 2026 and the upcoming 2027 festival year.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-6 grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
+              <div className="rounded-3xl border border-gold/20 bg-gradient-to-br from-saffron/10 via-amber/20 to-rose/10 p-6">
+                <div className="flex h-full flex-col justify-between gap-4">
+                  <div>
+                    <div className="text-5xl">🎊</div>
+                    <h4 className="mt-4 text-xl font-semibold text-maroon">Festive Calendar Preview</h4>
+                    <p className="mt-3 text-sm text-muted-foreground leading-6">
+                      Explore the yearly Hindu festival calendar with a focus on major tyohars, Panchang observances, and regional celebrations around Mirzapur.
+                    </p>
+                  </div>
+                  <div className="text-xs uppercase tracking-[0.28em] text-gold font-bold">
+                    2026 + 2027</div>
+                </div>
+              </div>
+              <div className="grid gap-4">
+                <div className="rounded-3xl border border-gold/20 bg-background p-5">
+                  <p className="text-xs uppercase tracking-[0.2em] text-gold font-bold">2026 Calendar</p>
+                  <p className="mt-3 text-sm text-foreground leading-6">
+                    Complete festival and key tyohar dates for 2026, curated for Hindu devotees and pilgrimage planning.
+                  </p>
+                </div>
+                <div className="rounded-3xl border border-gold/20 bg-background p-5">
+                  <p className="text-xs uppercase tracking-[0.2em] text-gold font-bold">2027 Festival Preview</p>
+                  <p className="mt-3 text-sm text-foreground leading-6">
+                    Plan ahead with the next year’s festival season. Use the year toggle to view the full 2027 tyohar list and details directly on this site.
+                  </p>
+                  <ul className="mt-4 space-y-2 text-sm text-foreground">
+                    <li>• Holi</li>
+                    <li>• Rama Navami</li>
+                    <li>• Ganesh Chaturthi</li>
+                    <li>• Diwali</li>
+                    <li>• Chhath</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
 
         {/* Today's Panchang Grid */}
         <div key={dateKey + "_details"} className="animate-fade-in">
@@ -818,63 +963,67 @@ function PanchangPage() {
           </div>
         </div>
 
-        {/* Festival Calendar Section */}
+        {/* Festival Calendar Section (in-site, year toggle + month grouping) */}
         <div className="pt-8 border-t-2 border-gold/20">
-          <div className="flex items-center gap-3 mb-2">
-            <CalendarDays className="text-saffron" size={28} />
-            <h2 className="font-display text-2xl md:text-3xl text-maroon">
-              Complete Hindu Calendar 2026
-            </h2>
+          <div className="flex items-center gap-3 mb-2 justify-between">
+            <div className="flex items-center gap-3">
+              <CalendarDays className="text-saffron" size={28} />
+              <h2 className="font-display text-2xl md:text-3xl text-maroon">
+                Complete Hindu Calendar {calendarYear}
+              </h2>
+            </div>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setCalendarYear(2026)}
+                className={`px-3 py-1 rounded-md text-sm font-medium ${calendarYear === 2026 ? 'bg-maroon text-cream' : 'bg-background text-maroon border border-gold/20'}`}>
+                2026
+              </button>
+              <button
+                onClick={() => setCalendarYear(2027)}
+                className={`px-3 py-1 rounded-md text-sm font-medium ${calendarYear === 2027 ? 'bg-maroon text-cream' : 'bg-background text-maroon border border-gold/20'}`}>
+                2027
+              </button>
+            </div>
           </div>
           <p className="text-muted-foreground mb-6 max-w-2xl text-sm">
-            Full year festival calendar with important dates, vrats, and auspicious days for 2026.
-            Use this table to plan darshan and observe key events for Vindhyachal Dham.
+            Full year festival calendar with important dates, vrats, and auspicious days. Use the year
+            toggle to view month-by-month festival details for the selected year.
           </p>
 
           <div className="rounded-2xl border-2 border-gold/40 overflow-hidden shadow-sacred">
-            <div className="max-h-[500px] overflow-y-auto pr-1">
-              <table className="w-full text-left border-collapse">
-                <thead className="bg-gradient-sacred text-cream sticky top-0 z-10">
-                  <tr>
-                    <th className="px-5 py-4 font-display text-sm md:text-base">Date</th>
-                    <th className="px-5 py-4 font-display text-sm md:text-base">Festival</th>
-                    <th className="px-5 py-4 font-display text-sm md:text-base hidden md:table-cell">
-                      Significance
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border">
-                  {festivals2026.map((f, i) => {
-                    const isPast = f.date < selectedDate.toISOString().slice(0, 10);
-                    const isToday = f.date === selectedDate.toISOString().slice(0, 10);
-                    return (
-                      <tr
-                        key={f.date + f.name}
-                        className={`${
-                          isToday
-                            ? "bg-gold/10 text-maroon font-semibold"
-                            : i % 2 === 0
-                              ? "bg-cream/10"
-                              : "bg-background"
-                        } ${isPast && !isToday ? "opacity-60" : ""} hover:bg-gold/5 transition`}
-                      >
-                        <td className="px-5 py-4 text-xs md:text-sm font-medium text-maroon whitespace-nowrap">
-                          {formatFest(f.date)}
-                          {isToday && (
-                            <span className="ml-2 text-[10px] bg-saffron text-cream px-1.5 py-0.5 rounded-full uppercase tracking-wider font-bold">
-                              Today
-                            </span>
-                          )}
-                        </td>
-                        <td className="px-5 py-4 text-xs md:text-sm text-foreground">{f.name}</td>
-                        <td className="px-5 py-4 text-xs text-muted-foreground hidden md:table-cell">
-                          {f.desc}
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+            <div className="max-h-[600px] overflow-y-auto pr-1 p-4">
+              {Object.keys(festivalsByMonth).map((mKey) => {
+                const monthFests = festivalsByMonth[mKey];
+                if (!monthFests || monthFests.length === 0) return null;
+                const monthName = new Date(`${calendarYear}-${mKey}-01`).toLocaleString('en-IN', { month: 'long' });
+                return (
+                  <div key={mKey} className="mb-6">
+                    <div className="sticky top-0 bg-background/80 py-2 font-semibold text-maroon">{monthName}</div>
+                    <table className="w-full text-left border-collapse mt-2">
+                      <thead className="text-cream">
+                        <tr>
+                          <th className="px-4 py-2 text-sm text-maroon">Date</th>
+                          <th className="px-4 py-2 text-sm text-maroon">Festival</th>
+                          <th className="px-4 py-2 text-sm text-muted-foreground hidden md:table-cell">Details</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-border">
+                        {monthFests.map((f) => {
+                          const isPast = f.date < selectedDate.toISOString().slice(0, 10);
+                          const isToday = f.date === selectedDate.toISOString().slice(0, 10);
+                          return (
+                            <tr key={f.date + f.name} className={`${isToday ? 'bg-gold/10 text-maroon font-semibold' : 'bg-background'} ${isPast && !isToday ? 'opacity-70' : ''}`}>
+                              <td className="px-4 py-3 text-xs md:text-sm font-medium text-maroon whitespace-nowrap">{formatFest(f.date)}{isToday && <span className="ml-2 text-[10px] bg-saffron text-cream px-1.5 py-0.5 rounded-full uppercase tracking-wider font-bold">Today</span>}</td>
+                              <td className="px-4 py-3 text-xs md:text-sm text-foreground">{f.name}</td>
+                              <td className="px-4 py-3 text-xs text-muted-foreground hidden md:table-cell">{f.desc}</td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
