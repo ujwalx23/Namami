@@ -53,7 +53,7 @@ function ContactPage() {
       <PageHero sanskrit={t("ct.sanskrit")} title={t("ct.title")} subtitle={t("ct.subtitle")} />
 
       <section className="container mx-auto px-6 py-16 grid lg:grid-cols-2 gap-10">
-        <div>
+        <div className="max-w-md mx-auto lg:mx-0 w-full">
           <div className="space-y-5 mb-10">
             {[
               { icon: MapPin, label: t("ct.visit"), value: t("ct.address"), href: "" },
@@ -105,7 +105,7 @@ function ContactPage() {
           </div>
         </div>
 
-        <div className="space-y-8">
+        <div className="space-y-8 max-w-md mx-auto lg:mx-0 w-full">
           <ContactForm />
           <AppointmentForm />
         </div>

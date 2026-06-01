@@ -82,15 +82,15 @@ function DonationPage() {
           </div>
         </div>
 
-        <div>
+        <div className="flex flex-col items-center lg:items-start text-center lg:text-left w-full max-w-md mx-auto lg:max-w-none">
           <div className={`text-saffron text-xs uppercase tracking-[0.3em] mb-2 ${dev}`}>
             {t("don.kicker")}
           </div>
-          <h2 className={`font-display text-4xl text-maroon mb-5 ${dev}`}>{t("don.h2")}</h2>
-          <p className={`text-foreground/80 leading-relaxed mb-6 ${dev}`}>{t("don.text")}</p>
+          <h2 className={`font-display text-3xl sm:text-4xl text-maroon mb-5 ${dev}`}>{t("don.h2")}</h2>
+          <p className={`text-foreground/80 leading-relaxed mb-6 max-w-md ${dev}`}>{t("don.text")}</p>
 
           {/* Trust badges and direct bank transfer section */}
-          <div className="grid grid-cols-2 gap-4 mb-6">
+          <div className="grid grid-cols-2 gap-4 mb-6 w-full max-w-md">
             <div className="p-4 bg-card border border-border rounded-2xl text-center flex flex-col items-center justify-center shadow-sm">
               <span className="text-2xl mb-1">🛡️</span>
               <span className="text-[10px] font-bold text-maroon uppercase tracking-wider block">
@@ -107,8 +107,8 @@ function DonationPage() {
             </div>
           </div>
 
-          <div className="rounded-2xl bg-gradient-divine border border-gold/40 p-5 sm:p-6 shadow-sm">
-            <h4 className="font-display text-lg text-maroon mb-4 flex items-center gap-2">
+          <div className="rounded-2xl bg-gradient-divine border border-gold/40 p-5 sm:p-6 shadow-sm w-full max-w-md">
+            <h4 className="font-display text-lg text-maroon mb-4 flex items-center justify-center lg:justify-start gap-2">
               <span className="text-xl">🏛️</span> Bank Transfer Details
             </h4>
             <div className="space-y-3 text-xs sm:text-sm">
@@ -137,7 +137,7 @@ function DonationPage() {
             </div>
           </div>
 
-          <div className="mt-6 p-5 sm:p-6 rounded-2xl bg-gradient-divine border border-gold/30 text-center shadow-sm">
+          <div className="mt-6 p-5 sm:p-6 rounded-2xl bg-gradient-divine border border-gold/30 text-center shadow-sm w-full max-w-md">
             <div className="text-saffron font-devanagari text-lg font-bold mb-1">
               ॥ सेवा परमो धर्मः ॥
             </div>
@@ -147,7 +147,7 @@ function DonationPage() {
             </p>
           </div>
 
-          <div className="mt-6 p-5 sm:p-6 rounded-2xl bg-card border border-border space-y-3 shadow-sm">
+          <div className="mt-6 p-5 sm:p-6 rounded-2xl bg-card border border-border space-y-3 shadow-sm w-full max-w-md text-left">
             <h4 className="font-display text-base text-maroon font-semibold">
               Important Notes for Donors
             </h4>
