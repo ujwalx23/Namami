@@ -162,7 +162,7 @@ function AdminPage() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@namamivindhyavasini.org"
+                placeholder="contact@namamivindhyavasini.in"
                 className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold"
                 required
               />

@@ -7,15 +7,15 @@ import { supabase } from "@/integrations/supabase/client";
 import { useLang } from "@/i18n/LangProvider";
 import { Download, X, Share2, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
-import maaImg from "@/assets/maa-vindhyavasini.png";
-import maaImg2 from "@/assets/maa-vindhyavasini-2.jpg";
-import maaImg3 from "@/assets/maa-vindhyavasini-3.jpg";
-import gallery1 from "@/assets/gallery-1.png";
-import gallery2 from "@/assets/gallery-2.png";
-import gallery3 from "@/assets/gallery-3.png";
-import darshan1 from "@/assets/darshan-1.png";
-import darshan2 from "@/assets/darshan-2.png";
-import darshan3 from "@/assets/darshan-3.png";
+import maaImg from "@/assets/maa-vindhyavasini.webp";
+import maaImg2 from "@/assets/maa-vindhyavasini-2.webp";
+import maaImg3 from "@/assets/maa-vindhyavasini-3.webp";
+import gallery1 from "@/assets/gallery-1.webp";
+import gallery2 from "@/assets/gallery-2.webp";
+import gallery3 from "@/assets/gallery-3.webp";
+import darshan1 from "@/assets/darshan-1.webp";
+import darshan2 from "@/assets/darshan-2.webp";
+import darshan3 from "@/assets/darshan-3.webp";
 
 export const Route = createFileRoute("/gallery")({
   head: () => ({

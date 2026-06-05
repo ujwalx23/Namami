@@ -80,20 +80,9 @@ export function FloatingPlayer() {
           onClick={() => setIsExpanded(true)}
           className={`animate-fade-in flex items-center gap-3 px-4 py-2.5 rounded-full border border-gold/30 bg-card/95 shadow-sacred backdrop-blur-md cursor-pointer hover:border-gold/60 hover:scale-[1.02] active:scale-95 transition-all duration-300 ${isPlaying ? "shadow-gold border-gold/50 animate-glow" : ""}`}
         >
-          {/* Spin disk */}
-          <div
-            className={`relative h-10 w-10 overflow-hidden rounded-full border-2 border-gold/50 bg-maroon shrink-0 ${isPlaying ? "animate-spin" : ""}`}
-            style={{ animationDuration: "6s" }}
-          >
-            <img
-              src={
-                currentTrack.cover ||
-                "https://images.unsplash.com/photo-1545128485-c400e7702796?auto=format&fit=crop&q=80&w=100"
-              }
-              alt=""
-              className="h-full w-full object-cover opacity-80"
-            />
-            <div className="absolute inset-0 m-auto h-3 w-3 rounded-full bg-card border border-gold/50"></div>
+          {/* Small music icon to represent audio player compact status */}
+          <div className="flex h-7 w-7 items-center justify-center rounded-full bg-maroon text-gold border border-gold/30 shrink-0">
+            <Music size={14} className={isPlaying ? "animate-pulse" : ""} />
           </div>
           <div className="flex items-center gap-2 shrink-0">
             <div className="max-w-[90px] md:max-w-[140px] leading-tight">
@@ -160,25 +149,7 @@ export function FloatingPlayer() {
           {/* Track Detail Info */}
           {!isPlaylistOpen ? (
             <div className="text-center py-2">
-              {/* Disc Visualizer */}
-              <div className="flex justify-center mb-4">
-                <div
-                  className={`relative h-28 w-28 overflow-hidden rounded-full border-4 border-gold/50 bg-gradient-sacred shadow-sacred transition-all duration-500 ${isPlaying ? "animate-spin animate-ripple" : ""}`}
-                  style={{ animationDuration: "10s" }}
-                >
-                  <img
-                    src={
-                      currentTrack.cover ||
-                      "https://images.unsplash.com/photo-1545128485-c400e7702796?auto=format&fit=crop&q=80&w=400"
-                    }
-                    alt=""
-                    className="h-full w-full object-cover opacity-80"
-                  />
-                  <div className="absolute inset-0 m-auto h-8 w-8 rounded-full bg-card border border-gold/50 flex items-center justify-center">
-                    <Music size={12} className="text-saffron animate-pulse" />
-                  </div>
-                </div>
-              </div>
+              {/* Compact title display with no image */}
 
               {/* Title & Artist */}
               <h3 className="text-lg font-bold text-maroon line-clamp-1">{currentTrack.title}</h3>

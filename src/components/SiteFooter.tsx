@@ -141,10 +141,10 @@ export function SiteFooter() {
             <li className="flex items-center gap-3">
               <Mail size={18} className="text-gold shrink-0" />
               <a
-                href="mailto:info@namamivindhyavasini.org"
+                href="mailto:contact@namamivindhyavasini.in"
                 className="hover:text-gold transition-colors duration-300 break-all"
               >
-                info@namamivindhyavasini.org
+                contact@namamivindhyavasini.in
               </a>
             </li>
           </ul>

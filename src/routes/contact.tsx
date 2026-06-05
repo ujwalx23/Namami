@@ -67,8 +67,8 @@ function ContactPage() {
                 {
                   icon: Mail,
                   label: t("ct.email"),
-                  value: "info@namamivindhyavasini.org",
-                  href: "mailto:info@namamivindhyavasini.org",
+                  value: "contact@namamivindhyavasini.in",
+                  href: "mailto:contact@namamivindhyavasini.in",
                 },
               ].map((c) => (
                 <div

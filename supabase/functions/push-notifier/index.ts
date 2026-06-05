@@ -31,7 +31,7 @@ serve(async (req) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
     );
 
-    webpush.setVapidDetails("mailto:info@namamivindhyavasini.org", vapidPublic, vapidPrivate);
+    webpush.setVapidDetails("mailto:contact@namamivindhyavasini.in", vapidPublic, vapidPrivate);
 
     const bodyJson = await req.json();
     const { record, table, type } = bodyJson;

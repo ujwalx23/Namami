@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell, PageHero } from "@/components/PageShell";
-import qrImg from "@/assets/donation-qr.png";
+import qrImg from "@/assets/donation-qr.webp";
 import { Heart, Building2, Utensils, BookOpen, Sparkles } from "lucide-react";
 import { useLang } from "@/i18n/LangProvider";
 import type { TKey } from "@/i18n/translations";
@@ -160,10 +160,10 @@ function DonationPage() {
                 <li>
                   To request a transaction receipt or confirmation, email details to{" "}
                   <a
-                    href="mailto:info@namamivindhyavasini.org"
+                    href="mailto:contact@namamivindhyavasini.in"
                     className="text-maroon underline font-medium"
                   >
-                    info@namamivindhyavasini.org
+                    contact@namamivindhyavasini.in
                   </a>
                   .
                 </li>

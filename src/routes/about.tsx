@@ -18,7 +18,7 @@ import {
   ArrowRight,
   Heart,
 } from "lucide-react";
-import maaImg3 from "@/assets/maa-vindhyavasini-3.jpg";
+import maaImg3 from "@/assets/maa-vindhyavasini-3.webp";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
