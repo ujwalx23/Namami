@@ -84,6 +84,12 @@
     oklch(0.72 0.19 55) 50%,
     oklch(0.45 0.18 25) 100%
   );
+  --gradient-saffron: linear-gradient(
+    135deg,
+    oklch(0.82 0.17 75) 0%,
+    oklch(0.72 0.19 55) 50%,
+    oklch(0.64 0.18 45) 100%
+  );
   --gradient-divine: linear-gradient(180deg, oklch(0.97 0.03 85) 0%, oklch(0.92 0.07 75) 100%);
   --gradient-overlay: linear-gradient(
     180deg,
@@ -141,6 +147,9 @@
 @layer utilities {
   .bg-gradient-sacred {
     background: var(--gradient-sacred);
+  }
+  .bg-gradient-saffron {
+    background: var(--gradient-saffron);
   }
   .bg-gradient-divine {
     background: var(--gradient-divine);

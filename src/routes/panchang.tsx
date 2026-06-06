@@ -12,6 +12,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Calendar,
+  Search,
 } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
@@ -55,7 +56,7 @@ const TITHIS = [
   "Dwadashi",
   "Trayodashi",
   "Chaturdashi",
-  "Purnima/Amavasya",
+  "Purnima",
 ];
 const NAKSHATRAS = [
   "Ashwini",
@@ -245,30 +246,66 @@ function moonLongitude(d: Date): number {
   return (L_prime + dL + 360) % 360;
 }
 
-function panchangFor(date: Date) {
-  const noon = new Date(
+function panchangFor(date: Date, sunrise?: Date) {
+  // Use sunrise time for planetary calculations (Udayatithi), fallback to local noon if unavailable
+  const calculationTime = sunrise || new Date(
     Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), 12 - TZ_OFFSET, 0, 0),
   );
-  const sunLon = sunLongitude(noon);
-  const moonLon = moonLongitude(noon);
-  const ayan = getAyanamsha(julian(noon));
+  const sunLon = sunLongitude(calculationTime);
+  const moonLon = moonLongitude(calculationTime);
+  const ayan = getAyanamsha(julian(calculationTime));
   const sunSid = (sunLon - ayan + 360) % 360;
   const moonSid = (moonLon - ayan + 360) % 360;
   const diff = (moonLon - sunLon + 360) % 360;
   const tithiNum = Math.floor(diff / 12);
   const paksha = tithiNum < 15 ? "Shukla" : "Krishna";
-  const tithiName = TITHIS[tithiNum % 15];
+  
+  let tithiName = TITHIS[tithiNum % 15];
+  if (paksha === "Krishna" && (tithiNum % 15 === 14)) {
+    tithiName = "Amavasya";
+  } else if (paksha === "Shukla" && (tithiNum % 15 === 14)) {
+    tithiName = "Purnima";
+  }
+
   const nakIdx = Math.floor(moonSid / (360 / 27)) % 27;
   const nakshatra = NAKSHATRAS[nakIdx];
   const yogaIdx = Math.floor(((sunSid + moonSid) % 360) / (360 / 27)) % 27;
   const yoga = YOGAS[yogaIdx];
-  const karana = KARANAS[Math.floor((diff % 12) / 6) % KARANAS.length];
+  
+  // High-accuracy Karana calculation
+  const halfTithi = Math.floor(diff / 6); // 0 to 59
+  let karana = "";
+  if (halfTithi === 0) {
+    karana = "Kimstughna";
+  } else if (halfTithi >= 57) {
+    if (halfTithi === 57) karana = "Shakuni";
+    else if (halfTithi === 58) karana = "Chatushpada";
+    else karana = "Naga";
+  } else {
+    const mobileKaranas = ["Bava", "Balava", "Kaulava", "Taitila", "Garaja", "Vanija", "Vishti"];
+    karana = mobileKaranas[(halfTithi - 1) % 7];
+  }
+
   const surya = RASHIS[Math.floor(sunSid / 30) % 12];
   const chandra = RASHIS[Math.floor(moonSid / 30) % 12];
   const vara = VARAS[date.getDay()];
   const monthIdx = (Math.floor(sunSid / 30) + 11) % 12;
   const month = HINDU_MONTHS[monthIdx];
-  return { tithiName, paksha, nakshatra, yoga, karana, surya, chandra, vara, month };
+
+  // High-accuracy Vikram Samvat calculation
+  let samvat = date.getFullYear() + 57;
+  const year = date.getFullYear();
+  if (year === 2026) {
+    const newYearDate = new Date("2026-03-19");
+    samvat = date >= newYearDate ? 2083 : 2082;
+  } else if (year === 2027) {
+    const newYearDate = new Date("2027-04-07");
+    samvat = date >= newYearDate ? 2084 : 2083;
+  } else {
+    samvat = year + (date.getMonth() > 2 ? 57 : 56);
+  }
+
+  return { tithiName, paksha, nakshatra, yoga, karana, surya, chandra, vara, month, samvat };
 }
 
 function muhuratFor(sunrise: Date, sunset: Date) {
@@ -297,61 +334,81 @@ function muhuratFor(sunrise: Date, sunset: Date) {
   };
 }
 
-// =============== Festival data (multi-year, key by MM-DD approx; main fixed-solar markers + 2026) ===============
+// =============== Festival data (multi-year, key by MM-DD approx; main fixed-solar markers + 2026 & 2027) ===============
 type Festival = { date: string; name: string; desc: string };
 
-const festivals2026: Festival[] = [
-  { date: "2026-01-14", name: "Makar Sankranti", desc: "Sun's transit into Capricorn." },
-  { date: "2026-02-15", name: "Maha Shivaratri", desc: "Great night of Lord Shiva." },
-  { date: "2026-03-04", name: "Holi", desc: "Festival of colours." },
-  {
-    date: "2026-03-19",
-    name: "Chaitra Navratri Begins",
-    desc: "Hindu New Year, nine nights of Devi.",
-  },
-  { date: "2026-03-26", name: "Rama Navami", desc: "Birth of Lord Rama." },
-  { date: "2026-04-02", name: "Hanuman Jayanti", desc: "Birth of Lord Hanuman." },
-  { date: "2026-04-19", name: "Akshaya Tritiya", desc: "Most auspicious day for new ventures." },
-  { date: "2026-04-25", name: "Sita Navami", desc: "Birth of Goddess Sita." },
-  { date: "2026-05-01", name: "Buddha Purnima", desc: "Birth of Lord Buddha." },
-  {
-    date: "2026-06-25",
-    name: "Nirjala Ekadashi",
-    desc: "Most rigorous Ekadashi — waterless fast.",
-  },
-  {
-    date: "2026-07-16",
-    name: "Jagannath Rath Yatra",
-    desc: "Grand chariot festival of Lord Jagannath.",
-  },
-  { date: "2026-07-29", name: "Guru Purnima", desc: "Honouring spiritual teachers." },
-  { date: "2026-08-15", name: "Hariyali Teej", desc: "Monsoon festival for women." },
-  { date: "2026-08-17", name: "Nag Panchami", desc: "Worship of serpent deities." },
-  { date: "2026-08-28", name: "Raksha Bandhan", desc: "Sacred bond between siblings." },
-  { date: "2026-09-04", name: "Krishna Janmashtami", desc: "Birth of Lord Krishna." },
-  { date: "2026-09-14", name: "Ganesh Chaturthi", desc: "Welcoming Lord Ganesha." },
-  { date: "2026-09-25", name: "Anant Chaturdashi", desc: "Ganesh Visarjan." },
-  {
-    date: "2026-10-11",
-    name: "Sharad Navratri Begins",
-    desc: "Nine nights of Goddess Durga — special darshan at Vindhyachal.",
-  },
-  { date: "2026-10-19", name: "Durga Ashtami", desc: "Sandhi Puja and Kanya Pujan." },
-  { date: "2026-10-20", name: "Vijayadashami / Dussehra", desc: "Victory of good over evil." },
-  { date: "2026-10-25", name: "Sharad Purnima", desc: "Lakshmi Puja under full moon." },
-  { date: "2026-10-29", name: "Karwa Chauth", desc: "Vrat by married women." },
-  { date: "2026-11-06", name: "Dhanteras", desc: "First day of Diwali." },
-  { date: "2026-11-08", name: "Diwali / Lakshmi Puja", desc: "Festival of lights." },
-  { date: "2026-11-10", name: "Govardhan Puja", desc: "Worship of Govardhan hill." },
-  { date: "2026-11-11", name: "Bhai Dooj", desc: "Sister-brother bond celebration." },
-  { date: "2026-11-15", name: "Chhath Puja", desc: "Four-day festival of Sun God." },
-  {
-    date: "2026-11-24",
-    name: "Kartika Purnima / Dev Diwali",
-    desc: "Most sacred Purnima — lights at Kashi ghats.",
-  },
-  { date: "2026-12-20", name: "Gita Jayanti", desc: "Day Bhagavad Gita was revealed." },
-];
+const ALL_FESTIVALS: Record<number, Festival[]> = {
+  2026: [
+    { date: "2026-01-14", name: "Makar Sankranti", desc: "Sun's transit into Capricorn, marking the end of winter solstice and harvest season." },
+    { date: "2026-01-23", name: "Vasant Panchami", desc: "Auspicious day dedicated to Goddess Saraswati, the deity of knowledge, music, and art." },
+    { date: "2026-02-15", name: "Maha Shivaratri", desc: "The Great Night of Lord Shiva, celebrated with night-long prayers, fasting, and rudrabhishek." },
+    { date: "2026-03-03", name: "Holika Dahan", desc: "Celebrating the burning of demoness Holika, symbolizing the triumph of good over evil." },
+    { date: "2026-03-04", name: "Holi", desc: "The vibrant festival of colors celebrating love, spring, and the playfulness of Lord Krishna." },
+    { date: "2026-03-19", name: "Chaitra Navratri Begins", desc: "Hindu New Year (Vikram Samvat 2083) and the beginning of nine sacred nights of Goddess Durga." },
+    { date: "2026-03-26", name: "Rama Navami", desc: "Birth anniversary of Lord Rama, the seventh incarnation of Lord Vishnu." },
+    { date: "2026-04-02", name: "Hanuman Jayanti", desc: "Birth anniversary of Lord Hanuman, the epitome of devotion and strength." },
+    { date: "2026-04-19", name: "Akshaya Tritiya", desc: "Highly auspicious day for new beginnings, purchases, and investments." },
+    { date: "2026-04-25", name: "Sita Navami", desc: "Birth anniversary of Goddess Sita, celebrated with prayers and fasts." },
+    { date: "2026-05-01", name: "Buddha Purnima", desc: "Birth, enlightenment, and death anniversary of Gautama Buddha." },
+    { date: "2026-06-25", name: "Nirjala Ekadashi", desc: "The most sacred and rigorous Ekadashi fast, observed without food or water." },
+    { date: "2026-06-26", name: "Ganga Dussehra", desc: "The holy day when Goddess Ganga descended from heaven to Earth, celebrated with Ganga snan." },
+    { date: "2026-07-16", name: "Jagannath Rath Yatra", desc: "Grand chariot procession of Lord Jagannath, Balabhadra, and Subhadra in Puri." },
+    { date: "2026-07-29", name: "Guru Purnima", desc: "Day dedicated to spiritual and academic gurus, commemorating Sage Vyasa." },
+    { date: "2026-08-15", name: "Hariyali Teej", desc: "Monsoon festival celebrating the union of Lord Shiva and Goddess Parvati." },
+    { date: "2026-08-17", name: "Nag Panchami", desc: "Traditional worship of snakes and serpents offered with milk and prayers." },
+    { date: "2026-08-28", name: "Raksha Bandhan", desc: "Celebrating the sacred bond of love and protection between brothers and sisters." },
+    { date: "2026-09-04", name: "Krishna Janmashtami", desc: "Birth anniversary of Lord Krishna, celebrated with midnight prayers and dahi handi." },
+    { date: "2026-09-14", name: "Ganesh Chaturthi", desc: "Ten-day festival welcoming the elephant-headed deity Lord Ganesha to homes." },
+    { date: "2026-09-25", name: "Anant Chaturdashi", desc: "The final day of Ganeshotsav, marked by immersion of Lord Ganesha idols." },
+    { date: "2026-10-11", name: "Sharad Navratri Begins", desc: "Grand autumn festival of nine nights dedicated to Goddess Durga, major festivities at Vindhyachal." },
+    { date: "2026-10-19", name: "Durga Ashtami", desc: "Maha Ashtami of Durga Puja, featuring Sandhi Puja and Kanya Pujan." },
+    { date: "2026-10-20", name: "Vijayadashami / Dussehra", desc: "Celebration of Lord Rama's victory over Ravana and Goddess Durga's victory over Mahishasura." },
+    { date: "2026-10-25", name: "Sharad Purnima", desc: "Harvest festival marked by moonlight kheer, worship of Goddess Lakshmi." },
+    { date: "2026-10-29", name: "Karwa Chauth", desc: "Fasting ritual by married Hindu women for the safety and long life of their husbands." },
+    { date: "2026-11-06", name: "Dhanteras", desc: "Worship of Lord Dhanvantari and purchasing gold, silver, or new utensils." },
+    { date: "2026-11-08", name: "Diwali / Lakshmi Puja", desc: "The festival of lights, celebrating the return of Lord Rama to Ayodhya." },
+    { date: "2026-11-10", name: "Govardhan Puja", desc: "Commemorating Lord Krishna lifting the Govardhan hill to protect citizens of Vrindavan." },
+    { date: "2026-11-11", name: "Bhai Dooj", desc: "Celebration of sibling bond where sisters pray for their brothers' well-being." },
+    { date: "2026-11-15", name: "Chhath Puja", desc: "Rigorous ancient festival worshipping the Sun God (Surya) and Chhathi Maiya." },
+    { date: "2026-11-24", name: "Kartika Purnima / Dev Diwali", desc: "Festival of gods, marked by lakhs of diyas lit at Ganga ghats." },
+    { date: "2026-12-20", name: "Gita Jayanti", desc: "Anniversary of the day Lord Krishna delivered the sermon of Bhagavad Gita to Arjuna." },
+  ],
+  2027: [
+    { date: "2027-01-15", name: "Makar Sankranti", desc: "Sun's transit into Capricorn, marking the end of winter solstice and harvest season." },
+    { date: "2027-02-11", name: "Vasant Panchami", desc: "Auspicious day dedicated to Goddess Saraswati, the deity of knowledge, music, and art." },
+    { date: "2027-03-06", name: "Maha Shivaratri", desc: "The Great Night of Lord Shiva, celebrated with night-long prayers, fasting, and rudrabhishek." },
+    { date: "2027-03-21", name: "Holika Dahan", desc: "Celebrating the burning of demoness Holika, symbolizing the triumph of good over evil." },
+    { date: "2027-03-22", name: "Holi", desc: "The vibrant festival of colors celebrating love, spring, and the playfulness of Lord Krishna." },
+    { date: "2027-04-07", name: "Chaitra Navratri Begins", desc: "Hindu New Year (Vikram Samvat 2084) and the beginning of nine sacred nights of Goddess Durga." },
+    { date: "2027-04-15", name: "Rama Navami", desc: "Birth anniversary of Lord Rama, the seventh incarnation of Lord Vishnu." },
+    { date: "2027-04-20", name: "Hanuman Jayanti", desc: "Birth anniversary of Lord Hanuman, the epitome of devotion and strength." },
+    { date: "2027-05-09", name: "Akshaya Tritiya", desc: "Highly auspicious day for new beginnings, purchases, and investments." },
+    { date: "2027-05-14", name: "Sita Navami", desc: "Birth anniversary of Goddess Sita, celebrated with prayers and fasts." },
+    { date: "2027-05-20", name: "Buddha Purnima", desc: "Birth, enlightenment, and death anniversary of Gautama Buddha." },
+    { date: "2027-06-13", name: "Ganga Dussehra", desc: "The holy day when Goddess Ganga descended from heaven to Earth, celebrated with Ganga snan." },
+    { date: "2027-06-14", name: "Nirjala Ekadashi", desc: "The most sacred and rigorous Ekadashi fast, observed without food or water." },
+    { date: "2027-07-05", name: "Jagannath Rath Yatra", desc: "Grand chariot procession of Lord Jagannath, Balabhadra, and Subhadra in Puri." },
+    { date: "2027-07-18", name: "Guru Purnima", desc: "Day dedicated to spiritual and academic gurus, commemorating Sage Vyasa." },
+    { date: "2027-08-06", name: "Nag Panchami", desc: "Traditional worship of snakes and serpents offered with milk and prayers." },
+    { date: "2027-08-13", name: "Hariyali Teej", desc: "Monsoon festival celebrating the union of Lord Shiva and Goddess Parvati." },
+    { date: "2027-08-17", name: "Raksha Bandhan", desc: "Celebrating the sacred bond of love and protection between brothers and sisters." },
+    { date: "2027-08-25", name: "Krishna Janmashtami", desc: "Birth anniversary of Lord Krishna, celebrated with midnight prayers and dahi handi." },
+    { date: "2027-09-04", name: "Ganesh Chaturthi", desc: "Ten-day festival welcoming the elephant-headed deity Lord Ganesha to homes." },
+    { date: "2027-09-14", name: "Anant Chaturdashi", desc: "The final day of Ganeshotsav, marked by immersion of Lord Ganesha idols." },
+    { date: "2027-09-30", name: "Sharad Navratri Begins", desc: "Grand autumn festival of nine nights dedicated to Goddess Durga, major festivities at Vindhyachal." },
+    { date: "2027-10-08", name: "Durga Ashtami", desc: "Maha Ashtami of Durga Puja, featuring Sandhi Puja and Kanya Pujan." },
+    { date: "2027-10-09", name: "Vijayadashami / Dussehra", desc: "Celebration of Lord Rama's victory over Ravana and Goddess Durga's victory over Mahishasura." },
+    { date: "2027-10-14", name: "Sharad Purnima", desc: "Harvest festival marked by moonlight kheer, worship of Goddess Lakshmi." },
+    { date: "2027-10-18", name: "Karwa Chauth", desc: "Fasting ritual by married Hindu women for the safety and long life of their husbands." },
+    { date: "2027-10-27", name: "Dhanteras", desc: "Worship of Lord Dhanvantari and purchasing gold, silver, or new utensils." },
+    { date: "2027-10-29", name: "Diwali / Lakshmi Puja", desc: "The festival of lights, celebrating the return of Lord Rama to Ayodhya." },
+    { date: "2027-10-30", name: "Govardhan Puja", desc: "Commemorating Lord Krishna lifting the Govardhan hill to protect citizens of Vrindavan." },
+    { date: "2027-10-31", name: "Bhai Dooj", desc: "Celebration of sibling bond where sisters pray for their brothers' well-being." },
+    { date: "2027-11-04", name: "Chhath Puja", desc: "Rigorous ancient festival worshipping the Sun God (Surya) and Chhathi Maiya." },
+    { date: "2027-11-14", name: "Kartika Purnima / Dev Diwali", desc: "Festival of gods, marked by lakhs of diyas lit at Ganga ghats." },
+    { date: "2027-12-09", name: "Gita Jayanti", desc: "Anniversary of the day Lord Krishna delivered the sermon of Bhagavad Gita to Arjuna." },
+  ],
+};
 
 function formatFest(date: string) {
   return new Date(date + "T00:00:00").toLocaleDateString("en-IN", {
@@ -374,6 +431,14 @@ function PanchangPage() {
   const [isManuallyChanged, setIsManuallyChanged] = useState(false);
   const [live, setLive] = useState<Record<string, string>>({});
   const [loadingLive, setLoadingLive] = useState(false);
+
+  // Redesigned Festival Calendar state
+  const [calendarYear, setCalendarYear] = useState<2026 | 2027>(() => {
+    const currentYear = new Date().getFullYear();
+    return (currentYear === 2026 || currentYear === 2027) ? (currentYear as 2026 | 2027) : 2026;
+  });
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filterCategory, setFilterCategory] = useState<"all" | "navratri" | "ekadashi" | "major">("all");
 
   const dateKey = localDateKey(selectedDate);
   const dateString = selectedDate.toLocaleDateString("en-IN", {
@@ -399,7 +464,7 @@ function PanchangPage() {
   // Recalculate astronomical factors locally
   const data = useMemo(() => {
     const [sunrise, sunset] = sunRiseSet(selectedDate, LAT, LON);
-    const p = panchangFor(selectedDate);
+    const p = panchangFor(selectedDate, sunrise);
     const m = muhuratFor(sunrise, sunset);
     const dateLabel =
       selectedDate.toLocaleDateString("en-IN", {
@@ -408,11 +473,11 @@ function PanchangPage() {
         month: "long",
         year: "numeric",
       }) + " · Vindhyachal Dham";
-    const samvat = selectedDate.getFullYear() + 57;
+    const samvat = p.samvat;
     return { sunrise, sunset, p, m, dateLabel, samvat };
   }, [dateString]);
 
-  // Fetch live Panchang values from reliable internet sources and fall back to site scraping when needed.
+  // Fetch live Panchang values. Calls Vercel API first, then falls back to proxy scraping.
   useEffect(() => {
     setLive({});
     setLoadingLive(true);
@@ -421,18 +486,8 @@ function PanchangPage() {
     const sunriseApi = `https://api.sunrise-sunset.org/json?lat=${LAT}&lng=${LON}&date=${dateIso}&formatted=0`;
 
     const MONTH_NAMES = [
-      "january",
-      "february",
-      "march",
-      "april",
-      "may",
-      "june",
-      "july",
-      "august",
-      "september",
-      "october",
-      "november",
-      "december",
+      "january", "february", "march", "april", "may", "june",
+      "july", "august", "september", "october", "november", "december"
     ];
     const target = `https://www.prokerala.com/astrology/panchang/${selectedDate.getFullYear()}-${MONTH_NAMES[selectedDate.getMonth()]}-${selectedDate.getDate()}.html`;
     const proxies = ["https://api.allorigins.win/raw?url="];
@@ -447,10 +502,29 @@ function PanchangPage() {
     async function attemptFetch() {
       const out: Record<string, string> = {};
 
+      // 1. Try Vercel Serverless Function (Primary, Server-side API bypasses CORS & blocks)
       try {
-        console.log(`[Panchang] Fetching sunrise/sunset from internet for ${dateIso}`);
+        console.log(`[Panchang] Fetching live data for ${dateIso} from /api/panchang`);
+        const res = await fetch(`/api/panchang?date=${dateIso}`);
+        if (res.ok) {
+          const body = await res.json();
+          if (body && body.data && Object.keys(body.data).length > 0) {
+            console.log("[Panchang] Serverless API data loaded successfully:", body.data);
+            if (active) {
+              setLive(body.data);
+              setLoadingLive(false);
+              return;
+            }
+          }
+        }
+      } catch (err) {
+        console.warn("[Panchang] Serverless API fetch failed, falling back to proxy:", err);
+      }
+
+      // 2. Secondary Fallback: Client-side Proxy Scraping
+      try {
         const res = await fetch(
-          `https://api.allorigins.win/raw?url=${encodeURIComponent(sunriseApi)}`,
+          `https://api.allorigins.win/raw?url=${encodeURIComponent(sunriseApi)}`
         );
         if (res.ok) {
           const body = await res.json();
@@ -460,15 +534,13 @@ function PanchangPage() {
           }
         }
       } catch (err) {
-        console.warn("[Panchang] Sunrise API fetch failed:", err);
+        console.warn("[Panchang] Secondary Sunrise API fetch failed:", err);
       }
 
       for (const proxy of proxies) {
         if (!active) return;
         try {
           const url = proxy + encodeURIComponent(target);
-          console.log(`[Panchang] Fetching live data for ${target} via proxy: ${proxy}`);
-
           const res = await fetch(url);
           if (!res.ok) continue;
 
@@ -489,7 +561,7 @@ function PanchangPage() {
           const parseBlockItems = (blockClass: string) => {
             const regex = new RegExp(
               `<div class="panchang-box-data-block[^"]*${blockClass}[^"]*">([\\s\\S]*?)<\\/div>`,
-              "i",
+              "i"
             );
             const match = html.match(regex);
             if (!match) return [];
@@ -588,7 +660,7 @@ function PanchangPage() {
           }
 
           if (Object.keys(out).length > 0) {
-            console.log("[Panchang] Live Prokerala data loaded:", out);
+            console.log("[Panchang] Live Prokerala data loaded via proxy:", out);
             if (active) {
               setLive(out);
               setLoadingLive(false);
@@ -618,11 +690,13 @@ function PanchangPage() {
 
   const todayKey = dateKey;
 
-  // Find current and next festivals
-  const todayFestival = festivals2026.find((f) => f.date === todayKey);
+  // Find current and next festivals based on active date
+  const activeYear = selectedDate.getFullYear();
+  const yearFestivals = ALL_FESTIVALS[activeYear] || ALL_FESTIVALS[2026];
+  const todayFestival = yearFestivals.find((f) => f.date === todayKey);
   const upcoming = useMemo(() => {
-    return festivals2026.find((f) => f.date >= todayKey) || festivals2026[0];
-  }, [todayKey]);
+    return yearFestivals.find((f) => f.date >= todayKey) || yearFestivals[0];
+  }, [todayKey, yearFestivals]);
 
   const panchangRows = [
     { icon: Sunrise, label: "Sunrise", value: pick("Sunrise", fmtTime(data.sunrise)) },
@@ -731,10 +805,10 @@ function PanchangPage() {
           </div>
         </div>
 
-        {/* Today's Festival highlight */}
+        {/* Today's Festival highlight - Entirely Orange Premium Saffron Gradient */}
         <div
           key={dateKey + "_fest"}
-          className="animate-fade-in rounded-2xl bg-gradient-sacred text-cream p-5 sm:p-6 md:p-8 shadow-sacred flex flex-col md:flex-row md:items-center justify-between gap-4"
+          className="animate-fade-in rounded-2xl bg-gradient-saffron text-cream p-5 sm:p-6 md:p-8 shadow-sacred flex flex-col md:flex-row md:items-center justify-between gap-4"
         >
           <div className="text-center md:text-left">
             <div className="text-xs uppercase tracking-widest text-gold font-bold">
@@ -828,71 +902,222 @@ function PanchangPage() {
           </div>
         </div>
 
-        {/* Festival Calendar Section */}
-        <div className="pt-8 border-t-2 border-gold/20">
-          <div className="flex items-center gap-3 mb-2 justify-center">
-            <CalendarDays className="text-saffron" size={28} />
-            <h2 className="font-display text-2xl md:text-3xl text-maroon text-center">
-              Hindu Festival Calendar (2026)
-            </h2>
+        {/* Redesigned Festival Calendar Section */}
+        <div className="pt-10 border-t-2 border-gold/20">
+          <div className="flex flex-col items-center gap-2 mb-6 text-center">
+            <div className="flex items-center gap-3 justify-center">
+              <CalendarDays className="text-saffron w-7 h-7 sm:w-8 sm:h-8" size={28} />
+              <h2 className="font-display text-2xl md:text-3xl text-maroon">
+                Hindu Festival Calendar
+              </h2>
+            </div>
+            <p className="text-muted-foreground max-w-2xl text-xs sm:text-sm">
+              Explore major Hindu festivals, vrats, and auspicious days for 2026 and 2027. Plan your darshan at Vindhyachal Dham in advance.
+            </p>
           </div>
-          <p className="text-muted-foreground mb-6 max-w-2xl text-sm text-center mx-auto">
-            Major Hindu festivals, vrats and auspicious days. Plan your darshan at Vindhyachal Dham
-            in advance.
-          </p>
 
-          <div className="rounded-2xl border-2 border-gold/40 overflow-hidden shadow-sacred bg-background">
-            <div className="max-h-[600px] overflow-y-auto">
+          {/* Year Toggle Tabs */}
+          <div className="flex justify-center gap-3 mb-6">
+            <button
+              onClick={() => {
+                setCalendarYear(2026);
+                setSearchQuery("");
+                setFilterCategory("all");
+              }}
+              className={`px-6 py-2 rounded-full font-semibold border-2 text-sm transition-all duration-300 ${
+                calendarYear === 2026
+                  ? "bg-saffron text-cream border-saffron shadow-gold scale-105"
+                  : "bg-background text-maroon border-gold/30 hover:border-gold/60 hover:bg-gold/5 cursor-pointer"
+              }`}
+            >
+              Year 2026
+            </button>
+            <button
+              onClick={() => {
+                setCalendarYear(2027);
+                setSearchQuery("");
+                setFilterCategory("all");
+              }}
+              className={`px-6 py-2 rounded-full font-semibold border-2 text-sm transition-all duration-300 ${
+                calendarYear === 2027
+                  ? "bg-saffron text-cream border-saffron shadow-gold scale-105"
+                  : "bg-background text-maroon border-gold/30 hover:border-gold/60 hover:bg-gold/5 cursor-pointer"
+              }`}
+            >
+              Year 2027
+            </button>
+          </div>
+
+          {/* Search and Category Filters */}
+          <div className="flex flex-col md:flex-row gap-4 items-center justify-between mb-8 max-w-4xl mx-auto bg-card border border-gold/20 p-4 rounded-2xl shadow-sm">
+            <div className="relative w-full md:max-w-xs shrink-0">
+              <input
+                type="text"
+                placeholder="Search festival (e.g. Holi, Diwali)..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-2 rounded-xl border border-gold/30 bg-background text-maroon placeholder:text-maroon/40 focus:outline-none focus:ring-1 focus:ring-saffron text-sm transition-all"
+              />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-saffron w-4 h-4" />
+            </div>
+
+            <div className="flex flex-wrap gap-1.5 w-full md:w-auto justify-center md:justify-end">
+              {(["all", "navratri", "ekadashi", "major"] as const).map((cat) => {
+                const labels = {
+                  all: "All",
+                  navratri: "Navratri Specials",
+                  ekadashi: "Vrats & Ekadashi",
+                  major: "Major Festivals",
+                };
+                return (
+                  <button
+                    key={cat}
+                    onClick={() => setFilterCategory(cat)}
+                    className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold border transition-all duration-200 cursor-pointer ${
+                      filterCategory === cat
+                        ? "bg-saffron/10 border-saffron text-maroon font-bold"
+                        : "bg-background border-gold/20 text-foreground/80 hover:bg-gold/5"
+                    }`}
+                  >
+                    {labels[cat]}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Festival List / Cards */}
+          <div className="rounded-2xl border border-gold/40 overflow-hidden shadow-sacred bg-background max-w-4xl mx-auto">
+            <div className="max-h-[600px] overflow-y-auto scrollbar-none divide-y divide-gold/15">
               {(() => {
                 const MONTHS = [
                   "January", "February", "March", "April", "May", "June",
                   "July", "August", "September", "October", "November", "December"
                 ];
-                
+
+                const filteredList = yearFestivals.filter((f) => {
+                  const matchesSearch =
+                    f.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    f.desc.toLowerCase().includes(searchQuery.toLowerCase());
+                  if (!matchesSearch) return false;
+
+                  if (filterCategory === "all") return true;
+                  if (filterCategory === "navratri") {
+                    return (
+                      f.name.toLowerCase().includes("navratri") ||
+                      f.name.toLowerCase().includes("ashtami") ||
+                      f.name.toLowerCase().includes("dussehra") ||
+                      f.name.toLowerCase().includes("vijayadashami")
+                    );
+                  }
+                  if (filterCategory === "ekadashi") {
+                    return (
+                      f.name.toLowerCase().includes("ekadashi") ||
+                      f.name.toLowerCase().includes("chauth") ||
+                      f.name.toLowerCase().includes("teej") ||
+                      f.name.toLowerCase().includes("vrat")
+                    );
+                  }
+                  if (filterCategory === "major") {
+                    const majors = [
+                      "diwali", "holi", "shivaratri", "janmashtami", "ganesh",
+                      "sankranti", "chhath", "dev diwali"
+                    ];
+                    return majors.some((m) => f.name.toLowerCase().includes(m));
+                  }
+                  return true;
+                });
+
+                if (filteredList.length === 0) {
+                  return (
+                    <div className="p-8 text-center text-muted-foreground text-sm">
+                      No festivals found matching your filters.
+                    </div>
+                  );
+                }
+
                 return MONTHS.map((month, monthIdx) => {
-                  const monthFestivals = festivals2026.filter(f => {
-                    const festDate = new Date(f.date);
+                  const monthFestivals = filteredList.filter((f) => {
+                    const festDate = new Date(f.date + "T00:00:00");
                     return festDate.getMonth() === monthIdx;
                   });
-                  
+
                   if (monthFestivals.length === 0) return null;
-                  
+
                   return (
-                    <div key={month} className="border-b border-gold/20 last:border-b-0">
-                      <div className="bg-gradient-sacred text-cream px-5 py-3 sticky top-0 z-10">
-                        <h3 className="font-display text-lg md:text-xl font-semibold">{month}</h3>
+                    <div key={month} className="border-b border-gold/15 last:border-b-0">
+                      {/* Month Header Banner */}
+                      <div className="bg-gradient-divine border-b border-gold/20 text-maroon px-5 py-3 sticky top-0 z-10 flex items-center justify-between">
+                        <h3 className="font-display text-base md:text-lg font-bold uppercase tracking-wider">
+                          {month}
+                        </h3>
+                        <span className="text-xs font-semibold bg-saffron/15 text-saffron px-2 py-0.5 rounded-full">
+                          {monthFestivals.length} {monthFestivals.length === 1 ? "Festival" : "Festivals"}
+                        </span>
                       </div>
-                      <div className="divide-y divide-border">
+
+                      {/* Month Festivals Grid */}
+                      <div className="divide-y divide-gold/10 bg-card/10">
                         {monthFestivals.map((f) => {
                           const isPast = f.date < selectedDate.toISOString().slice(0, 10);
                           const isToday = f.date === selectedDate.toISOString().slice(0, 10);
+                          const fDate = new Date(f.date + "T00:00:00");
+                          
                           return (
                             <div
                               key={f.date + f.name}
-                              className={`${
-                                isToday
-                                  ? "bg-gold/10"
-                                  : "hover:bg-gold/5"
-                              } ${isPast && !isToday ? "opacity-60" : ""} transition`}
+                              className={`group px-4 sm:px-6 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-all duration-300 hover:bg-gold/5 ${
+                                isToday ? "bg-saffron/5 border-l-4 border-saffron" : ""
+                              } ${isPast && !isToday ? "opacity-60" : ""}`}
                             >
-                              <div className="px-5 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                                <div className="flex items-center gap-3">
-                                  <span className="text-xs md:text-sm font-medium text-maroon whitespace-nowrap">
-                                    {formatFest(f.date)}
+                              <div className="flex items-center gap-4 w-full sm:w-auto">
+                                {/* Date Badge */}
+                                <div className="flex flex-col items-center justify-center shrink-0 w-14 h-14 rounded-xl border border-gold/30 bg-background text-maroon group-hover:border-saffron group-hover:bg-saffron/5 transition-all shadow-sm">
+                                  <span className="text-lg font-bold font-display leading-none">
+                                    {fDate.getDate()}
                                   </span>
-                                  {isToday && (
-                                    <span className="text-[10px] bg-saffron text-cream px-2 py-0.5 rounded-full uppercase tracking-wider font-bold">
-                                      Today
-                                    </span>
-                                  )}
+                                  <span className="text-[9px] uppercase font-bold tracking-wider mt-1 text-saffron">
+                                    {fDate.toLocaleDateString("en-US", { month: "short" })}
+                                  </span>
                                 </div>
-                                <div className="flex-1">
-                                  <span className="text-xs md:text-sm text-foreground font-medium">{f.name}</span>
+
+                                <div className="flex flex-col gap-0.5">
+                                  <div className="flex items-center gap-2 flex-wrap">
+                                    <h4 className="text-sm sm:text-base font-semibold text-foreground group-hover:text-maroon transition-colors">
+                                      {f.name}
+                                    </h4>
+                                    {isToday && (
+                                      <span className="text-[8px] bg-saffron text-cream px-2 py-0.5 rounded-full uppercase tracking-wider font-bold animate-pulse">
+                                        Today
+                                      </span>
+                                    )}
+                                  </div>
+                                  {/* Mobile Description */}
+                                  <p className="text-xs text-muted-foreground block md:hidden line-clamp-2 mt-1">
+                                    {f.desc}
+                                  </p>
                                 </div>
                               </div>
-                              <div className="px-5 pb-4 hidden md:block">
-                                <span className="text-xs text-muted-foreground">{f.desc}</span>
+
+                              {/* Desktop Description */}
+                              <div className="hidden md:block flex-1 max-w-md px-4">
+                                <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">
+                                  {f.desc}
+                                </p>
                               </div>
+
+                              {/* Navigation action to jump page to this date */}
+                              <button
+                                onClick={() => {
+                                  const dateObj = new Date(f.date + "T00:00:00");
+                                  setSelectedDate(dateObj);
+                                  setIsManuallyChanged(true);
+                                  window.scrollTo({ top: 150, behavior: "smooth" });
+                                }}
+                                className="text-xs font-semibold text-saffron hover:text-maroon hover:underline shrink-0 flex items-center gap-1 bg-saffron/10 border border-saffron/20 px-3 py-1.5 rounded-full cursor-pointer hover:bg-saffron/20 transition-all self-end sm:self-center"
+                              >
+                                View Panchang
+                              </button>
                             </div>
                           );
                         })}
