@@ -805,32 +805,32 @@ function PanchangPage() {
           </div>
         </div>
 
-        {/* Today's Festival highlight - Entirely Orange Premium Saffron Gradient */}
+        {/* Today's Festival highlight - Entirely Orange Premium Saffron Gradient with Highly Visible Maroon Text */}
         <div
           key={dateKey + "_fest"}
-          className="animate-fade-in rounded-2xl bg-gradient-saffron text-cream p-5 sm:p-6 md:p-8 shadow-sacred flex flex-col md:flex-row md:items-center justify-between gap-4"
+          className="animate-fade-in rounded-2xl bg-gradient-saffron text-maroon p-5 sm:p-6 md:p-8 shadow-sacred flex flex-col md:flex-row md:items-center justify-between gap-4 border border-gold/40"
         >
           <div className="text-center md:text-left">
-            <div className="text-xs uppercase tracking-widest text-gold font-bold">
+            <div className="text-xs uppercase tracking-widest text-maroon/70 font-bold">
               Selected Date
             </div>
-            <h3 className="font-display text-xl sm:text-2xl md:text-3xl mt-1 text-cream">
+            <h3 className="font-display text-xl sm:text-2xl md:text-3xl mt-1 text-maroon font-bold">
               {todayFestival
                 ? todayFestival.name
                 : `${pick("Tithi", `${data.p.paksha} ${data.p.tithiName}`)}`}
             </h3>
-            <p className="text-cream/90 text-sm mt-1 hidden sm:block">
+            <p className="text-maroon/90 text-sm mt-1 hidden sm:block">
               {todayFestival
                 ? todayFestival.desc
                 : `${pick("Nakshatra", data.p.nakshatra)} Nakshatra · ${pick("Yoga", data.p.yoga)} Yoga`}
             </p>
           </div>
-          <div className="text-center md:text-right border-t border-cream/20 md:border-t-0 pt-4 md:pt-0">
-            <div className="text-xs uppercase tracking-widest text-gold font-bold">
+          <div className="text-center md:text-right border-t border-maroon/20 md:border-t-0 pt-4 md:pt-0">
+            <div className="text-xs uppercase tracking-widest text-maroon/70 font-bold">
               Upcoming Festival
             </div>
-            <div className="font-display text-lg sm:text-xl mt-1 text-cream">{upcoming.name}</div>
-            <div className="text-cream/90 text-sm">{formatFest(upcoming.date)}</div>
+            <div className="font-display text-lg sm:text-xl mt-1 text-maroon font-bold">{upcoming.name}</div>
+            <div className="text-maroon/90 text-sm">{formatFest(upcoming.date)}</div>
           </div>
         </div>
 
@@ -995,7 +995,8 @@ function PanchangPage() {
                   "July", "August", "September", "October", "November", "December"
                 ];
 
-                const filteredList = yearFestivals.filter((f) => {
+                const calendarFestivals = ALL_FESTIVALS[calendarYear] || ALL_FESTIVALS[2026];
+                const filteredList = calendarFestivals.filter((f) => {
                   const matchesSearch =
                     f.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                     f.desc.toLowerCase().includes(searchQuery.toLowerCase());
@@ -1099,25 +1100,12 @@ function PanchangPage() {
                                 </div>
                               </div>
 
-                              {/* Desktop Description */}
-                              <div className="hidden md:block flex-1 max-w-md px-4">
-                                <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">
+                              {/* Desktop Description / Mobile Description */}
+                              <div className="flex-1 max-w-md px-0 sm:px-4">
+                                <p className="text-xs text-muted-foreground leading-relaxed hidden md:block line-clamp-2">
                                   {f.desc}
                                 </p>
                               </div>
-
-                              {/* Navigation action to jump page to this date */}
-                              <button
-                                onClick={() => {
-                                  const dateObj = new Date(f.date + "T00:00:00");
-                                  setSelectedDate(dateObj);
-                                  setIsManuallyChanged(true);
-                                  window.scrollTo({ top: 150, behavior: "smooth" });
-                                }}
-                                className="text-xs font-semibold text-saffron hover:text-maroon hover:underline shrink-0 flex items-center gap-1 bg-saffron/10 border border-saffron/20 px-3 py-1.5 rounded-full cursor-pointer hover:bg-saffron/20 transition-all self-end sm:self-center"
-                              >
-                                View Panchang
-                              </button>
                             </div>
                           );
                         })}
