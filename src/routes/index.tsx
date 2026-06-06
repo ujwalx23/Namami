@@ -5,8 +5,6 @@ import maaImg from "@/assets/maa-vindhyavasini.webp";
 import maaImg2 from "@/assets/maa-vindhyavasini-2.webp";
 import maaImg3 from "@/assets/maa-vindhyavasini-3.webp";
 import gallery1 from "@/assets/gallery-1.webp";
-import gallery2 from "@/assets/gallery-2.webp";
-import gallery3 from "@/assets/gallery-3.webp";
 import {
   Calendar,
   MapPin,
@@ -614,12 +612,9 @@ function HomePage() {
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
             {[
-              { src: maaImg, cap: hi ? "मुख्य विग्रह" : "Mool Vigraha" },
+              { src: gallery1, cap: hi ? "स्वर्ण श्रृंगार" : "Swarna Shringar" },
               { src: maaImg2, cap: hi ? "प्रातः आरती" : "Mangala Aarti" },
               { src: maaImg3, cap: hi ? "विशेष श्रृंगार" : "Vishesh Shringar" },
-              { src: gallery1, cap: hi ? "स्वर्ण श्रृंगार" : "Swarna Shringar" },
-              { src: gallery2, cap: hi ? "पुष्प श्रृंगार" : "Pushpa Shringar" },
-              { src: gallery3, cap: hi ? "नवरात्रि दर्शन" : "Navaratri Darshan" },
             ].map((p, i) => (
               <ScrollReveal key={i} direction="up" delay={(i % 3) * 120} duration={850}>
                 <figure

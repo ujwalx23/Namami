@@ -7,15 +7,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { useLang } from "@/i18n/LangProvider";
 import { Download, X, Share2, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
-import maaImg from "@/assets/maa-vindhyavasini.webp";
 import maaImg2 from "@/assets/maa-vindhyavasini-2.webp";
 import maaImg3 from "@/assets/maa-vindhyavasini-3.webp";
 import gallery1 from "@/assets/gallery-1.webp";
-import gallery2 from "@/assets/gallery-2.webp";
-import gallery3 from "@/assets/gallery-3.webp";
-import darshan1 from "@/assets/darshan-1.webp";
-import darshan2 from "@/assets/darshan-2.webp";
-import darshan3 from "@/assets/darshan-3.webp";
 
 export const Route = createFileRoute("/gallery")({
   head: () => ({
@@ -36,15 +30,9 @@ export const Route = createFileRoute("/gallery")({
 type GalleryRow = { id: string; image_url: string; caption: string | null; created_at: string };
 
 const defaults: { src: string; cap_en: string; cap_hi: string }[] = [
-  { src: maaImg, cap_en: "Mool Vigraha", cap_hi: "मुख्य विग्रह" },
+  { src: gallery1, cap_en: "Swarna Shringar", cap_hi: "स्वर्ण श्रृंगार" },
   { src: maaImg2, cap_en: "Mangala Aarti", cap_hi: "प्रातः आरती" },
   { src: maaImg3, cap_en: "Vishesh Shringar", cap_hi: "विशेष श्रृंगार" },
-  { src: gallery1, cap_en: "Swarna Shringar", cap_hi: "स्वर्ण श्रृंगार" },
-  { src: gallery2, cap_en: "Pushpa Shringar", cap_hi: "पुष्प श्रृंगार" },
-  { src: gallery3, cap_en: "Navaratri Darshan", cap_hi: "नवरात्रि दर्शन" },
-  { src: darshan1, cap_en: "Sayankaal Aarti Darshan", cap_hi: "सायंकाल आरती दर्शन" },
-  { src: darshan2, cap_en: "Divya Pushpa Shringar", cap_hi: "दिव्य पुष्प श्रृंगार" },
-  { src: darshan3, cap_en: "Mogra Shringar", cap_hi: "मोगरा श्रृंगार" },
 ];
 
 function dataURLtoFile(dataurl: string, filename: string): File {
