@@ -434,7 +434,7 @@ function AboutPage() {
               n: hi ? "शारदीय व चैत्र नवरात्रि" : "Chaitra & Sharad Navaratri",
               x: hi
                 ? "नौ पावन रात्रियाँ — महाआरती, चंडी पाठ, अखंड ज्योति एवं लाखों भक्तों की आस्था से जगमगाता पवित्र धाम।"
-                : "Nine holy nights — mahapuja, chandi path, akhand jyoti, and the entire town aglow with millions of devotees.",
+                : "Nine holy nights — mahapuja, chandi path, akhand jyoti and the entire town aglow with millions of devotees.",
             },
             {
               icon: Sparkles,

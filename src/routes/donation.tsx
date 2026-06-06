@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell, PageHero } from "@/components/PageShell";
-import qrImg from "@/assets/donation-qr.webp";
+import qrImg from "@/assets/donation-qr.png";
 import { Heart, Building2, Utensils, BookOpen, Sparkles } from "lucide-react";
 import { useLang } from "@/i18n/LangProvider";
 import type { TKey } from "@/i18n/translations";
@@ -65,14 +65,12 @@ function DonationPage() {
 
               <div className="w-full space-y-3 bg-gradient-divine border border-gold/30 rounded-xl p-3 sm:p-4 text-left">
                 <div className="flex flex-col xs:flex-row justify-between items-start xs:items-center text-sm border-b border-gold/20 pb-2 gap-1 xs:gap-0">
-                  <span className="text-muted-foreground font-medium text-xs sm:text-sm">Verified UPI Name</span>
-                  <span className="font-display text-maroon font-bold text-xs xs:text-sm">
-                    Namami Vindhyavasini Sansthan
-                  </span>
+                  <span className="text-muted-foreground font-medium text-xs sm:text-sm">Verified UPI ID</span>
+                  <span className="font-mono text-maroon font-bold text-xs xs:text-sm">yugal.roy.one@okicici</span>
                 </div>
                 <div className="flex flex-col xs:flex-row justify-between items-start xs:items-center text-sm gap-1 xs:gap-0">
-                  <span className="text-muted-foreground font-medium text-xs sm:text-sm">Verified UPI ID</span>
-                  <span className="font-mono text-maroon font-bold text-xs xs:text-sm">9334339505@upi</span>
+                  <span className="text-muted-foreground font-medium text-xs sm:text-sm">UPI Number</span>
+                  <span className="font-mono text-maroon font-bold text-xs xs:text-sm">9334339505</span>
                 </div>
               </div>
 
@@ -121,19 +119,19 @@ function DonationPage() {
                 </div>
                 <div className="flex flex-col xs:flex-row justify-between border-b border-gold/15 pb-2 gap-1 xs:gap-0">
                   <span className="text-muted-foreground">Bank Name</span>
-                  <span className="font-medium text-foreground text-left xs:text-right">State Bank of India (SBI)</span>
+                  <span className="font-medium text-foreground text-left xs:text-right">Not Available</span>
                 </div>
                 <div className="flex flex-col xs:flex-row justify-between border-b border-gold/15 pb-2 gap-1 xs:gap-0">
                   <span className="text-muted-foreground">Account Number</span>
-                  <span className="font-mono font-semibold text-foreground text-left xs:text-right">XXXX</span>
+                  <span className="font-medium text-foreground text-left xs:text-right">Not Available</span>
                 </div>
                 <div className="flex flex-col xs:flex-row justify-between border-b border-gold/15 pb-2 gap-1 xs:gap-0">
                   <span className="text-muted-foreground">IFSC Code</span>
-                  <span className="font-mono font-semibold text-foreground text-left xs:text-right">XXXX</span>
+                  <span className="font-medium text-foreground text-left xs:text-right">Not Available</span>
                 </div>
                 <div className="flex flex-col xs:flex-row justify-between gap-1 xs:gap-0">
                   <span className="text-muted-foreground">Branch</span>
-                  <span className="font-medium text-foreground text-left xs:text-right">Vindhyachal Branch</span>
+                  <span className="font-medium text-foreground text-left xs:text-right">Not Available</span>
                 </div>
               </div>
             </div>
@@ -144,7 +142,7 @@ function DonationPage() {
               </div>
               <p className="text-xs text-muted-foreground italic leading-relaxed">
                 "Service to others is the ultimate duty. Your support aids the temple's daily rituals,
-                devotee feeding, and preservation of eternal values."
+                devotee feeding and preservation of eternal values."
               </p>
             </div>
 
@@ -154,7 +152,7 @@ function DonationPage() {
               </h4>
               <ul className="text-xs text-muted-foreground space-y-2 list-disc list-inside">
                 <li>
-                  Offerings are utilized exclusively for the temple operations, bhandara, and
+                  Offerings are utilized exclusively for the temple operations, bhandara and
                   community seva.
                 </li>
                 <li>

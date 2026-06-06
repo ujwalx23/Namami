@@ -23,10 +23,10 @@ export function SiteFooter() {
     {
       name: "Facebook",
       icon: Facebook,
-      to: "/contact",
-      isExternal: false,
+      to: "https://www.facebook.com/profile.php?id=61590841911906",
+      isExternal: true,
       className: "social-icon-fb",
-      label: lang === "hi" ? "फ़ेसबुक (संपर्क)" : "Facebook (Contact)",
+      label: "Facebook",
     },
     {
       name: "YouTube",
@@ -39,10 +39,10 @@ export function SiteFooter() {
     {
       name: "Instagram",
       icon: Instagram,
-      to: "/contact",
-      isExternal: false,
+      to: "https://www.instagram.com/namamivindhyavasini",
+      isExternal: true,
       className: "social-icon-ig",
-      label: lang === "hi" ? "इंस्टाग्राम (संपर्क)" : "Instagram (Contact)",
+      label: "Instagram",
     },
   ];
 

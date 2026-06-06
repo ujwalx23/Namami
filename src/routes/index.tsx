@@ -200,7 +200,7 @@ function PWAInstallCard() {
         <p className="text-sm text-muted-foreground">
           {lang === "hi"
             ? "अब आप बिना इंटरनेट के भी माँ विन्ध्यवासिनी की परिक्रमा, संदेश एवं पंचांग देख सकते हैं।"
-            : "You can now access the virtual Parikrama, daily Sandesh, and Panchang offline."}
+            : "You can now access Maa information, devotional content and spiritual guidance."}
         </p>
         {isPushConfigured() && (
           <button
@@ -240,7 +240,7 @@ function PWAInstallCard() {
           <p className="text-sm text-muted-foreground max-w-md">
             {lang === "hi"
               ? "पंचांग, दैनिक संदेश और परिक्रमा की जानकारी को बिना इंटरनेट के भी सीधे अपने फ़ोन पर देखने के लिए इंस्टॉल करें।"
-              : "Install directly on your phone to check Panchang details, daily messages, and tour directions completely offline."}
+              : "Install directly on your phone to explore Maa Vindhyavasini's information, gallery, temple updates and devotional content."}
           </p>
         </div>
       </div>
@@ -356,17 +356,17 @@ function HomePage() {
         {
           name: "Priya Sharma",
           comment:
-            "I was impressed by how well-organized everything was. The temple information, darshan details, and Sandesh section were very helpful. Highly valuable resource for devotees and visitors. 🌺🙏",
+            "I was impressed by how well-organized everything was. The temple information, darshan details and Sandesh section were very helpful. Highly valuable resource for devotees and visitors. 🌺🙏",
         },
         {
           name: "Rajesh Mishra",
           comment:
-            "A beautiful and spiritually uplifting place. The arrangements were excellent, and the entire experience was smooth and memorable. I highly recommend visiting with family.",
+            "A beautiful and spiritually uplifting place. The arrangements were excellent and the entire experience was smooth and memorable. I highly recommend visiting with family.",
         },
         {
           name: "Manish Tiwari",
           comment:
-            "A wonderful initiative that helps devotees stay connected with the teachings, traditions, and values of Sanatan Dharma.",
+            "A wonderful initiative that helps devotees stay connected with the teachings, traditions and values of Sanatan Dharma.",
         },
       ];
 
