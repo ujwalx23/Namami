@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useAudio } from "@/lib/AudioContext";
+import { useLocation } from "@tanstack/react-router";
 import {
   Play,
   Pause,
@@ -34,6 +35,54 @@ export function FloatingPlayer() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isPlaylistOpen, setIsPlaylistOpen] = useState(false);
 
+  const location = useLocation();
+  const playerRef = useRef<HTMLDivElement>(null);
+
+  // Collapse player on route navigation
+  useEffect(() => {
+    setIsExpanded(false);
+  }, [location.pathname]);
+
+  // Handle click outside to minimize
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        isExpanded &&
+        playerRef.current &&
+        !playerRef.current.contains(event.target as Node)
+      ) {
+        setIsExpanded(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isExpanded]);
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsExpanded(true);
+  };
+
+  const getMinimizedIcon = () => {
+    if (isPlaying) {
+      return (
+        <Pause
+          className="hover:scale-110 transition-transform duration-300"
+          size={24}
+        />
+      );
+    }
+    return (
+      <Music
+        className="animate-pulse hover:rotate-12 transition-transform duration-300"
+        size={24}
+      />
+    );
+  };
+
   // Format time (seconds -> MM:SS)
   const formatTime = (secs: number) => {
     if (isNaN(secs)) return "00:00";
@@ -50,74 +99,22 @@ export function FloatingPlayer() {
     setVolume(parseFloat(e.target.value));
   };
 
-  if (!currentTrack && !isExpanded) {
-    // Mini entry button if no music is active yet
-    return (
-      <button
-        onClick={() => {
-          setIsExpanded(true);
-          // Auto play first track on expand
-          if (!currentTrack && trackList.length > 0) {
-            playTrack(trackList[0]);
-          }
-        }}
-        className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full border border-gold/30 bg-card/90 shadow-sacred backdrop-blur-md text-maroon hover:text-saffron hover:scale-110 active:scale-95 animate-ripple transition-all duration-300 cursor-pointer"
-        aria-label="Open Devotional Player"
-      >
-        <Music
-          className="animate-pulse hover:rotate-12 transition-transform duration-300"
-          size={24}
-        />
-      </button>
-    );
-  }
-
   return (
-    <div className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 font-devanagari select-none">
-      {/* Minimized Pill View */}
-      {!isExpanded && currentTrack && (
-        <div
-          onClick={() => setIsExpanded(true)}
-          className={`animate-fade-in flex items-center gap-3 px-4 py-2.5 rounded-full border border-gold/30 bg-card/95 shadow-sacred backdrop-blur-md cursor-pointer hover:border-gold/60 hover:scale-[1.02] active:scale-95 transition-all duration-300 ${isPlaying ? "shadow-gold border-gold/50 animate-glow" : ""}`}
+    <div
+      ref={playerRef}
+      className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 font-devanagari select-none"
+    >
+      {/* Minimized View */}
+      {!isExpanded && (
+        <button
+          onClick={handleClick}
+          className={`flex h-14 w-14 items-center justify-center rounded-full border border-gold/30 bg-card/90 shadow-sacred backdrop-blur-md text-maroon hover:text-saffron hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer ${
+            isPlaying ? "shadow-gold border-gold/50 animate-ripple" : "animate-ripple"
+          }`}
+          aria-label="Open Devotional Player"
         >
-          {/* Small music icon to represent audio player compact status */}
-          <div className="flex h-7 w-7 items-center justify-center rounded-full bg-maroon text-gold border border-gold/30 shrink-0">
-            <Music size={14} className={isPlaying ? "animate-pulse" : ""} />
-          </div>
-          <div className="flex items-center gap-2 shrink-0">
-            <div className="max-w-[90px] md:max-w-[140px] leading-tight">
-              <p className="truncate text-xs font-semibold text-maroon">{currentTrack.title}</p>
-              <p className="truncate text-[10px] text-muted-foreground">
-                {isPlaying ? "Playing..." : "Paused"}
-              </p>
-            </div>
-            {isPlaying && (
-              <span className="flex gap-0.5 h-3.5 items-end pb-0.5 shrink-0">
-                <span
-                  className="w-0.5 bg-saffron rounded-full animate-bar-grow"
-                  style={{ animationDelay: "0.1s", animationDuration: "1s" }}
-                ></span>
-                <span
-                  className="w-0.5 bg-saffron rounded-full animate-bar-grow"
-                  style={{ animationDelay: "0.3s", animationDuration: "0.7s" }}
-                ></span>
-                <span
-                  className="w-0.5 bg-saffron rounded-full animate-bar-grow"
-                  style={{ animationDelay: "0.2s", animationDuration: "1.2s" }}
-                ></span>
-              </span>
-            )}
-          </div>
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              togglePlay();
-            }}
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-sacred text-cream shadow hover:opacity-90 hover:scale-105 active:scale-90 transition-transform duration-300 shrink-0 cursor-pointer"
-          >
-            {isPlaying ? <Pause size={12} /> : <Play size={12} className="ml-0.5" />}
-          </button>
-        </div>
+          {getMinimizedIcon()}
+        </button>
       )}
 
       {/* Expanded Player View */}

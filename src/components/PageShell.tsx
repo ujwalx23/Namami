@@ -2,10 +2,10 @@ import { ReactNode } from "react";
 import { SiteHeader } from "./SiteHeader";
 import { SiteFooter } from "./SiteFooter";
 
-export function PageShell({ children }: { children: ReactNode }) {
+export function PageShell({ children, hideHeader }: { children: ReactNode; hideHeader?: boolean }) {
   return (
     <div className="min-h-screen flex flex-col mandala-bg overflow-x-hidden">
-      <SiteHeader />
+      {!hideHeader && <SiteHeader />}
       <main className="flex-1">{children}</main>
       <SiteFooter />
     </div>

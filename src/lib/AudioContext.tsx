@@ -41,7 +41,7 @@ const DEFAULT_TRACKS: Track[] = [
 const AudioContext = createContext<AudioContextType | undefined>(undefined);
 
 export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
+  const [currentTrack, setCurrentTrack] = useState<Track | null>(DEFAULT_TRACKS[0] || null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -52,6 +52,11 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   useEffect(() => {
     audioRef.current = new Audio();
     const audio = audioRef.current;
+
+    if (DEFAULT_TRACKS.length > 0) {
+      audio.src = DEFAULT_TRACKS[0].url;
+      audio.load();
+    }
 
     const onTimeUpdate = () => {
       setCurrentTime(audio.currentTime);

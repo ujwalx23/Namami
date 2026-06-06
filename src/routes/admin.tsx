@@ -113,7 +113,7 @@ function AdminPage() {
 
   if (loadingSession) {
     return (
-      <PageShell>
+      <PageShell hideHeader>
         <PageHero title="Admin Access" subtitle="Verifying authentication session..." />
         <div className="container mx-auto px-6 py-20 flex justify-center">
           <AdminTabLoader />
@@ -142,7 +142,7 @@ function AdminPage() {
     }
 
     return (
-      <PageShell>
+      <PageShell hideHeader>
         <PageHero title="Admin Login" subtitle="Sign in to manage the website content." />
         <section className="container mx-auto px-6 py-16 max-w-md">
           <form
@@ -217,7 +217,7 @@ function AdminPage() {
   ];
 
   return (
-    <PageShell>
+    <PageShell hideHeader>
       <PageHero title="Admin Panel" subtitle="Manage all website content." />
       <section className="container mx-auto px-6 py-10">
         {/* Admin Meta Header with Session details and Sign Out */}
