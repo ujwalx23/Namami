@@ -754,14 +754,13 @@ function HomePage() {
             ))}
           </div>
 
-          <div className="mt-12 text-center">
+          <div className="mt-8 text-center">
             <ScrollReveal direction="up" delay={200} duration={800}>
               <Link
                 to="/gallery"
-                className="group relative overflow-hidden inline-flex items-center gap-2 px-7 py-3 rounded-full bg-gradient-sacred text-cream font-medium shadow-gold hover:opacity-95 hover:scale-[1.03] active:scale-95 transition-all duration-300"
+                className={`inline-flex items-center gap-2 text-maroon font-medium hover:text-saffron transition-colors duration-300 ${dev}`}
               >
-                <span className="btn-shine-overlay" />
-                {hi ? "गैलरी देखें" : "View Gallery"} <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-300" />
+                {hi ? "गैलरी देखें" : "View Gallery"} <ArrowRight size={16} />
               </Link>
             </ScrollReveal>
           </div>
