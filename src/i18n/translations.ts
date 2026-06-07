@@ -14,7 +14,7 @@ export const translations = {
   "nav.events": { en: "Events", hi: "कार्यक्रम" },
   "nav.videos": { en: "Videos", hi: "वीडियो" },
   "nav.shorts": { en: "Shorts", hi: "शॉर्ट्स" },
-  "nav.panchang": { en: "Panchang", hi: "पंचांग" },
+  "nav.calendar": { en: "Calendar", hi: "कैलेंडर" },
   "nav.reviews": { en: "Reviews", hi: "समीक्षा" },
   "nav.gallery": { en: "Gallery", hi: "गैलरी" },
   "nav.donation": { en: "Donation", hi: "दान" },
@@ -404,14 +404,6 @@ export const translations = {
   "ct.slot.late": { en: "Late Morning (10 AM–12 PM)", hi: "पूर्वाह्न (१०–१२ बजे)" },
   "ct.slot.noon": { en: "Afternoon (2–4 PM)", hi: "अपराह्न (२–४ बजे)" },
   "ct.slot.evening": { en: "Evening (5–7 PM)", hi: "सायं (५–७ बजे)" },
-  // ---- Home Panchang strip ----
-  "home.panch.kicker": { en: "Aaj Ka Panchang", hi: "आज का पंचांग" },
-  "home.panch.title": { en: "Today at Vindhyachal Dham", hi: "आज विन्ध्याचल धाम पर" },
-  "home.panch.tithi": { en: "Tithi", hi: "तिथि" },
-  "home.panch.nak": { en: "Nakshatra", hi: "नक्षत्र" },
-  "home.panch.sunrise": { en: "Sunrise", hi: "सूर्योदय" },
-  "home.panch.sunset": { en: "Sunset", hi: "सूर्यास्त" },
-  "home.panch.full": { en: "View full Panchang", hi: "पूर्ण पंचांग देखें" },
 
   // ---- Sandesh page ----
   "sandesh.sanskrit": {

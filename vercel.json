@@ -3,6 +3,18 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": null,
+  "redirects": [
+    {
+      "source": "/panchang",
+      "destination": "/calendar",
+      "permanent": true
+    },
+    {
+      "source": "/hindu-calendar",
+      "destination": "/calendar",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/((?!api/|assets/|favicon\\.png|icon-192\\.png|icon-512\\.png|sw\\.js|manifest\\.webmanifest|audio/|robots\\.txt|.*\\.(?:ico|png|jpg|jpeg|svg|gif|webp|woff2?|ttf|otf|css|js|json|map|txt|xml|webmanifest)).*)",

@@ -19,23 +19,43 @@ import {
   Heart,
 } from "lucide-react";
 import maaImg3 from "@/assets/maa-vindhyavasini-3.webp";
+import { JsonLd } from "@/components/JsonLd";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About Maa Vindhyavasini Dham — History, Trikona Parikrama & Sansthan" },
+      { title: "About Maa Vindhyavasini & Sansthan | History, Significance & Teachings" },
       {
         name: "description",
         content:
-          "Discover Maa Vindhyavasini Shakti Dham at Vindhyachal: history, Trikona Parikrama (Vindhyavasini, Kali Khoh, Ashtabhuja), festivals and how to reach.",
+          "Learn the divine history and significance of Maa Vindhyavasini Shakti Pitha at Vindhyachal. Explore the activities, mission, and spiritual initiatives of Namami Vindhyavasini Sansthan.",
       },
-      { property: "og:title", content: "About Maa Vindhyavasini Dham" },
+      {
+        name: "keywords",
+        content:
+          "Maa Vindhyavasini history, Vindhyachal Peeth, Trikona Parikrama, Vindhyavasini significance, Devi Mahatmya, विंध्यवासिनी इतिहास, विंध्याचल",
+      },
+      { property: "og:title", content: "About Maa Vindhyavasini & Sansthan | History, Significance & Teachings" },
       {
         property: "og:description",
         content:
-          "History, sacred origin and pilgrimage details of Maa Vindhyavasini Shakti Dham at Vindhyachal.",
+          "Learn the divine history and significance of Maa Vindhyavasini Shakti Pitha at Vindhyachal. Explore the activities, mission, and spiritual initiatives.",
       },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://www.namamivindhyavasini.in/about" },
+      { property: "og:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "About Maa Vindhyavasini & Sansthan" },
+      {
+        name: "twitter:description",
+        content:
+          "Learn the divine history and significance of Maa Vindhyavasini Shakti Pitha at Vindhyachal.",
+      },
+      { name: "twitter:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
     ],
+    links: [
+      { rel: "canonical", href: "https://www.namamivindhyavasini.in/about" }
+    ]
   }),
   component: AboutPage,
 });
@@ -114,8 +134,43 @@ function AboutPage() {
         source: "— Sri Durga Saptashati (11.12)",
       };
 
+  const webpageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://www.namamivindhyavasini.in/about#webpage",
+    "url": "https://www.namamivindhyavasini.in/about",
+    "name": "About Maa Vindhyavasini & Sansthan | History, Significance & Teachings",
+    "description": "Learn the divine history and significance of Maa Vindhyavasini Shakti Pitha at Vindhyachal. Explore the activities, mission, and spiritual initiatives of Namami Vindhyavasini Sansthan.",
+    "isPartOf": {
+      "@type": "WebSite",
+      "@id": "https://www.namamivindhyavasini.in/#website",
+      "url": "https://www.namamivindhyavasini.in"
+    }
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.namamivindhyavasini.in"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "About",
+        "item": "https://www.namamivindhyavasini.in/about"
+      }
+    ]
+  };
+
   return (
     <PageShell>
+      <JsonLd data={webpageSchema} />
+      <JsonLd data={breadcrumbSchema} />
       <PageHero
         sanskrit={t("about.sanskrit")}
         title={t("about.title")}
@@ -131,7 +186,11 @@ function AboutPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-maroon/40 to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-500" />
               <img
                 src={maaImg3}
-                alt="Maa Vindhyavasini Shringar"
+                alt="Divine Shringar of Maa Vindhyavasini Devi at Vindhyachal Temple"
+                title="Maa Vindhyavasini Shringar"
+                width={320}
+                height={400}
+                loading="lazy"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 pointer-events-none select-none"
               />
             </div>

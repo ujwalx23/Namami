@@ -25,7 +25,7 @@ const links = [
   { to: "/sandesh", key: "nav.sandesh" as TKey, icon: Sparkles },
   { to: "/events", key: "nav.events" as TKey, icon: Calendar },
   { to: "/videos", key: "nav.videos" as TKey, icon: Video },
-  { to: "/panchang", key: "nav.panchang" as TKey, icon: CalendarDays },
+  { to: "/calendar", key: "nav.calendar" as TKey, icon: CalendarDays },
   { to: "/reviews", key: "nav.reviews" as TKey, icon: MessageSquare },
   { to: "/gallery", key: "nav.gallery" as TKey, icon: Image },
   { to: "/contact", key: "nav.contact" as TKey, icon: Phone },

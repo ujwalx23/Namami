@@ -5,23 +5,44 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import type { Tables } from "@/integrations/supabase/types";
 import { useLang } from "@/i18n/LangProvider";
+import { JsonLd } from "@/components/JsonLd";
 
 type Review = Tables<"reviews">;
 
 export const Route = createFileRoute("/reviews")({
   head: () => ({
     meta: [
-      { title: "Reviews & Comments — Namami Vindhyavasini" },
+      { title: "Devotee Reviews & Feedback | Namami Vindhyavasini Sansthan" },
       {
         name: "description",
         content:
-          "Read what devotees say about their experience and share your own feedback with the trust.",
+          "Read reviews, testimonials, and experiences shared by devotees of Maa Vindhyavasini. Share your feedback, comments, and spiritual experiences with the Sansthan.",
       },
-      { property: "og:title", content: "Devotee Reviews & Feedback" },
+      {
+        name: "keywords",
+        content:
+          "Maa Vindhyavasini reviews, Vindhyachal temple testimonials, Namami Vindhyavasini comments, devotee feedback, reviews, विंध्यवासिनी फीडबैक, विंध्याचल भक्त अनुभव",
+      },
+      { property: "og:title", content: "Devotee Reviews & Feedback | Namami Vindhyavasini Sansthan" },
       {
         property: "og:description",
-        content: "Share your experience with Namami Vindhyavasini Sansthan.",
+        content:
+          "Read reviews, testimonials, and experiences shared by devotees of Maa Vindhyavasini. Share your feedback, comments, and spiritual experiences.",
       },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://www.namamivindhyavasini.in/reviews" },
+      { property: "og:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Devotee Reviews & Feedback | Namami Vindhyavasini Sansthan" },
+      {
+        name: "twitter:description",
+        content:
+          "Read reviews, testimonials, and experiences shared by devotees of Maa Vindhyavasini.",
+      },
+      { name: "twitter:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://www.namamivindhyavasini.in/reviews" }
     ],
   }),
   loader: async () => {
@@ -93,8 +114,43 @@ function ReviewsPage() {
     router.invalidate();
   };
 
+  const webpageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://www.namamivindhyavasini.in/reviews#webpage",
+    "url": "https://www.namamivindhyavasini.in/reviews",
+    "name": "Devotee Reviews & Feedback | Namami Vindhyavasini Sansthan",
+    "description": "Read reviews, testimonials, and experiences shared by devotees of Maa Vindhyavasini. Share your feedback, comments, and spiritual experiences with the Sansthan.",
+    "isPartOf": {
+      "@type": "WebSite",
+      "@id": "https://www.namamivindhyavasini.in/#website",
+      "url": "https://www.namamivindhyavasini.in"
+    }
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.namamivindhyavasini.in"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Reviews",
+        "item": "https://www.namamivindhyavasini.in/reviews"
+      }
+    ]
+  };
+
   return (
     <PageShell>
+      <JsonLd data={webpageSchema} />
+      <JsonLd data={breadcrumbSchema} />
       <PageHero
         sanskrit={t("reviews.sanskrit")}
         title={t("reviews.title")}

@@ -29,24 +29,47 @@ import { subscribeToNotifications, isPushConfigured } from "@/lib/push";
 import { toast } from "sonner";
 import type { TKey } from "@/i18n/translations";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { JsonLd } from "@/components/JsonLd";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Namami Vindhyavasini Sansthan — Divine Grace of Maa Vindhyavasini" },
+      { title: "Namami Vindhyavasini Sansthan | Maa Vindhyavasini Darshan, Stotram, Aarti, Events & Spiritual Guidance" },
       {
         name: "description",
         content:
-          "Devotional trust dedicated to Maa Vindhyavasini Shakti Pitha at Vindhyachal Dham. Daily Sandesh, temple events, satsang, panchang and seva.",
+          "Official Namami Vindhyavasini Sansthan website dedicated to Maa Vindhyavasini. Explore devotional content, stotram, aarti, spiritual guidance, events, gallery, videos and temple-related information.",
       },
-      { property: "og:title", content: "Namami Vindhyavasini Sansthan" },
+      {
+        name: "keywords",
+        content:
+          "Namami Vindhyavasini, Maa Vindhyavasini, Vindhyachal Dham, Shakti Peeth, Vindhyavasini Temple, stotram, aarti, daily sandesh, माँ विंध्यवासिनी, विंध्याचल, शक्ति पीठ, विंध्यवासिनी मंदिर",
+      },
+      { property: "og:title", content: "Namami Vindhyavasini Sansthan | Maa Vindhyavasini Darshan, Stotram, Aarti, Events & Spiritual Guidance" },
       {
         property: "og:description",
         content:
-          "Embrace divine grace. Daily darshan, sandesh and events from the sacred Shakti Pitha of Maa Vindhyavasini.",
+          "Official Namami Vindhyavasini Sansthan website dedicated to Maa Vindhyavasini. Explore devotional content, stotram, aarti, spiritual guidance, events, gallery, videos and temple-related information.",
       },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://www.namamivindhyavasini.in/" },
+      { property: "og:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
+      { property: "og:site_name", content: "Namami Vindhyavasini Sansthan" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Namami Vindhyavasini Sansthan | Maa Vindhyavasini Darshan, Stotram, Aarti, Events" },
+      {
+        name: "twitter:description",
+        content:
+          "Official Namami Vindhyavasini Sansthan website dedicated to Maa Vindhyavasini. Explore devotional content, stotram, aarti, spiritual guidance, events, gallery, and videos.",
+      },
+      { name: "twitter:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
+      { name: "theme-color", content: "#7a1e1e" },
     ],
-    links: [{ rel: "icon", href: "/favicon.png" }],
+    links: [
+      { rel: "icon", href: "/favicon.png" },
+      { rel: "canonical", href: "https://www.namamivindhyavasini.in/" },
+      { rel: "manifest", href: "/manifest.webmanifest" },
+    ],
   }),
   component: HomePage,
 });
@@ -197,7 +220,7 @@ function PWAInstallCard() {
         </h3>
         <p className="text-sm text-muted-foreground">
           {lang === "hi"
-            ? "अब आप बिना इंटरनेट के भी माँ विन्ध्यवासिनी की परिक्रमा, संदेश एवं पंचांग देख सकते हैं।"
+            ? "अब आप बिना इंटरनेट के भी माँ विन्ध्यवासिनी की परिक्रमा, संदेश एवं हिंदू कैलेंडर देख सकते हैं।"
             : "You can now access Maa information, devotional content and spiritual guidance."}
         </p>
         {isPushConfigured() && (
@@ -237,7 +260,7 @@ function PWAInstallCard() {
           </h3>
           <p className="text-sm text-muted-foreground max-w-md">
             {lang === "hi"
-              ? "पंचांग, दैनिक संदेश और परिक्रमा की जानकारी को बिना इंटरनेट के भी सीधे अपने फ़ोन पर देखने के लिए इंस्टॉल करें।"
+              ? "हिंदू कैलेंडर, दैनिक संदेश और परिक्रमा की जानकारी को बिना इंटरनेट के भी सीधे अपने फ़ोन पर देखने के लिए इंस्टॉल करें।"
               : "Install directly on your phone to explore Maa Vindhyavasini's information, gallery, temple updates and devotional content."}
           </p>
         </div>
@@ -294,6 +317,88 @@ function HomePage() {
   const { t, lang } = useLang();
   const hi = lang === "hi";
   const dev = hi ? "font-devanagari" : "";
+
+  const orgSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://www.namamivindhyavasini.in/#organization",
+    "name": "Namami Vindhyavasini Sansthan",
+    "url": "https://www.namamivindhyavasini.in",
+    "logo": "https://www.namamivindhyavasini.in/favicon.png",
+    "image": "https://www.namamivindhyavasini.in/maa-vindhyavasini.png",
+    "description": "Official Namami Vindhyavasini Sansthan website dedicated to Maa Vindhyavasini. Explore devotional content, stotram, aarti, spiritual guidance, events, gallery, videos and temple-related information.",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer support",
+      "email": "info@namamivindhyavasini.in"
+    },
+    "sameAs": [
+      "https://www.youtube.com/@NamamiVindhyavasini"
+    ]
+  };
+
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://www.namamivindhyavasini.in/#website",
+    "name": "Namami Vindhyavasini Sansthan",
+    "url": "https://www.namamivindhyavasini.in",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://www.namamivindhyavasini.in/calendar?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  };
+
+  const webpageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://www.namamivindhyavasini.in/#webpage",
+    "url": "https://www.namamivindhyavasini.in",
+    "name": "Namami Vindhyavasini Sansthan | Maa Vindhyavasini Darshan, Stotram, Aarti, Events & Spiritual Guidance",
+    "description": "Official Namami Vindhyavasini Sansthan website dedicated to Maa Vindhyavasini. Explore devotional content, stotram, aarti, spiritual guidance, events, gallery, videos and temple-related information.",
+    "isPartOf": {
+      "@type": "WebSite",
+      "@id": "https://www.namamivindhyavasini.in/#website"
+    }
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": hi ? "माँ विंध्यवासिनी मंदिर कहाँ स्थित है?" : "Where is Maa Vindhyavasini Temple located?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": hi 
+            ? "माँ विंध्यवासिनी देवी का प्राचीन मंदिर उत्तर प्रदेश के मिर्जापुर जिले में पवित्र गंगा नदी के तट पर स्थित विंध्याचल धाम में है।"
+            : "Maa Vindhyavasini Temple is located in Vindhyachal Dham, Mirzapur district, Uttar Pradesh, India, on the banks of the sacred river Ganges."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": hi ? "त्रिकोण परिक्रमा का क्या महत्व है?" : "What is the significance of the Trikona Parikrama?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": hi 
+            ? "त्रिकोण परिक्रमा विंध्याचल का एक अत्यंत पवित्र परिक्रमा पथ है जिसमें आदि शक्ति के तीन रूपों के दर्शन होते हैं: माँ विंध्यवासिनी (महालक्ष्मी), काली खोह में माँ काली (महाकाली) और अष्टभुजा मंदिर में माँ अष्टभुजा (महासरस्वती)।"
+            : "Trikona Parikrama is a sacred pilgrimage circuit in Vindhyachal that includes visiting three key temples representing the three main forms of Adi Parashakti: Maa Vindhyavasini (Maha Lakshmi), Maa Kali at Kali Khoh (Maha Kali), and Maa Ashtabhuja (Maha Saraswati)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": hi ? "नमामि विंध्यवासिनी संस्थान क्या है?" : "What is Namami Vindhyavasini Sansthan?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": hi 
+            ? "नमामि विंध्यवासिनी संस्थान एक धार्मिक एवं आध्यात्मिक ट्रस्ट है जो भक्तों तक माँ विंध्यवासिनी की महिमा पहुँचाने, मंदिर की व्यवस्थाओं को सुलभ करने, सत्संग आयोजित करने, तथा धार्मिक संसाधन, स्तोत्र, आरती और हिंदू कैलेंडर प्रकाशित करने के लिए समर्पित है।"
+            : "Namami Vindhyavasini Sansthan is a spiritual trust dedicated to spreading the divine message of Maa Vindhyavasini, supporting temple facilities, organizing satsangs, and publishing devotional resources, stotram, aartis, and the Hindu calendar."
+        }
+      }
+    ]
+  };
 
   const handleDownload = async (url: string, title: string) => {
     try {
@@ -370,6 +475,10 @@ function HomePage() {
 
   return (
     <PageShell>
+      <JsonLd data={orgSchema} />
+      <JsonLd data={websiteSchema} />
+      <JsonLd data={webpageSchema} />
+      <JsonLd data={faqSchema} />
       <MantraMarquee />
       {/* HERO */}
       <section className="relative overflow-hidden">
@@ -517,8 +626,12 @@ function HomePage() {
               <div className="aspect-[4/5] max-w-md mx-auto rounded-[2rem] overflow-hidden shadow-sacred border-4 border-gold/60 hover:shadow-gold transition-shadow duration-500">
                 <img
                   src={maaImg2}
-                  alt="Maa Vindhyavasini"
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                  alt="Maa Vindhyavasini Devi Temple Vindhyachal Dham"
+                  title="Maa Vindhyavasini Temple"
+                  width={384}
+                  height={480}
+                  loading="lazy"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700 pointer-events-none select-none"
                 />
               </div>
             </ScrollReveal>
@@ -622,9 +735,12 @@ function HomePage() {
                 >
                   <img
                     src={p.src}
-                    alt={p.cap}
+                    alt={`${p.cap} of Maa Vindhyavasini Devi at Vindhyachal Temple`}
+                    title={p.cap}
+                    width={350}
+                    height={460}
                     loading="lazy"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 pointer-events-none select-none"
                   />
                   <div className="golden-sweep-effect" />
                   <div className="absolute inset-0 bg-gradient-to-t from-maroon/80 via-maroon/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -683,6 +799,134 @@ function HomePage() {
                   <h3 className={`font-semibold text-maroon text-sm ${dev}`}>{r.name}</h3>
                 </div>
               </article>
+            </ScrollReveal>
+          ))}
+        </div>
+      </section>
+
+      {/* RICH SEO DEVOTIONAL CONTENT SECTION */}
+      <section className="container mx-auto px-6 py-16 border-t border-gold/15 bg-cream/5 rounded-3xl mt-12">
+        <ScrollReveal direction="up" duration={800}>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div className="lg:col-span-8 space-y-6">
+              <span className={`text-saffron text-xs uppercase tracking-[0.3em] mb-2 block ${dev}`}>
+                {hi ? "सनातन धर्म दर्शन" : "Spiritual Teachings & Devotional Resources"}
+              </span>
+              <h2 className={`font-display text-3xl md:text-4xl text-maroon ${dev}`}>
+                {hi ? "माँ विंध्यवासिनी की पौराणिक महिमा एवं साधना" : "Divine Grace of Maa Vindhyavasini Devi Shakti Peeth"}
+              </h2>
+              <div className="w-20 h-[2px] bg-gradient-sacred rounded-full" />
+              
+              <div className={`space-y-4 text-foreground/80 leading-relaxed text-sm md:text-base ${dev}`}>
+                <p>
+                  {hi ? (
+                    <>
+                      <strong>माँ विंध्यवासिनी</strong> आदि शक्ति का परम अवतार हैं, जो विंध्याचल पर्वत श्रृंखला पर सदा विराजमान रहती हैं। श्रीमद्देवी भागवत महापुराण के अनुसार, देवी विंध्यवासिनी ने द्वापर युग में देवकी और वासुदेव के यहाँ जन्म लिया था और कंस के चंगुल से मुक्त होकर अष्टभुजी रूप (Maa Ashtabhuja) धारण कर आकाश मार्ग से विंध्य क्षेत्र को अपना निवास बनाया। यह पावन भूमि 51 शक्ति पीठ (Shakti Peeth) में से अत्यंत जागृत और फलदायी मानी जाती है।
+                    </>
+                  ) : (
+                    <>
+                      The divine mother <strong>Maa Vindhyavasini</strong> is the ultimate manifestation of Adi Parashakti, residing eternally at the Vindhyachal hill range. According to sacred scriptures, she descended as Yogmaya during the Dwapara Yug to protect the divine infant Sri Krishna and protect righteousness. The sacred shrine of <strong>Vindhyavasini Temple</strong> is venerated as one of the most powerful Shakti Peethas in India, where millions of devotees seek spiritual liberation.
+                    </>
+                  )}
+                </p>
+                <p>
+                  {hi ? (
+                    <>
+                      विंध्याचल धाम में नवरात्रि (Navratri) के पावन समय पर नौ दिनों तक विशेष पूजा-अनुष्ठान आयोजित होते हैं। भक्त यहाँ पवित्र <strong>विंध्येश्वरी स्तोत्र</strong> (Vindhyeshwari Stotram) और <strong>विंध्यवासिनी आरती</strong> (Vindhyavasini Aarti) का गान करते हुए माँ की उपासना करते हैं। परिक्रमा पथ (Trikona Parikrama) के अंतर्गत काली खोह तथा अष्टभुजा देवी का दर्शन करने से मोक्ष एवं मानसिक शांति की प्राप्ति होती है।
+                    </>
+                  ) : (
+                    <>
+                      During the highly auspicious nine days of <strong>Navratri</strong>, Vindhyachal Dham welcomes pilgrims from all over the world. Devotees participate in reciting the sacred <strong>Vindhyeshwari Stotram</strong> and chanting the divine <strong>Vindhyavasini Aarti</strong> for inner peace and prosperity. The Trikona Parikrama pilgrimage including Kali Khoh and Ashtabhuja shrines delivers spiritual salvation.
+                    </>
+                  )}
+                </p>
+                <div className="flex flex-wrap gap-4 pt-2">
+                  <Link
+                    to="/about"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-sacred/10 border border-gold/30 hover:border-gold text-maroon font-semibold text-xs transition"
+                  >
+                    {hi ? "विंध्येश्वरी स्तोत्र पाठ विधि" : "Read Stotram & Aarti Guidelines"} <ArrowRight size={12} />
+                  </Link>
+                  <Link
+                    to="/calendar"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-sacred/10 border border-gold/30 hover:border-gold text-maroon font-semibold text-xs transition"
+                  >
+                    {hi ? "कैलेंडर एवं व्रत तिथियाँ" : "Explore Hindu Festival Calendar"} <ArrowRight size={12} />
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div className="lg:col-span-4 p-6 rounded-2xl bg-card border border-gold/30 space-y-4">
+              <h3 className={`font-display text-xl text-maroon border-b border-gold/20 pb-2 ${dev}`}>
+                {hi ? "धार्मिक संसाधन" : "Devotional Guides"}
+              </h3>
+              <ul className="space-y-3">
+                {[
+                  { to: "/about", label: hi ? "विंध्याचल मंदिर का इतिहास" : "History of Vindhyachal Temple" },
+                  { to: "/calendar", label: hi ? "व्रत, एकादशी एवं पूर्णिमा तिथियाँ" : "Fasting, Ekadashi & Purnima Dates" },
+                  { to: "/events", label: hi ? "नवीनतम धार्मिक आयोजन व सत्संग" : "Upcoming Spiritual Events & Satsang" },
+                  { to: "/gallery", label: hi ? "दिव्य श्रृंगार दर्शन फोटो गैलरी" : "Devi Shringar Photo Gallery" }
+                ].map((link, idx) => (
+                  <li key={idx}>
+                    <Link
+                      to={link.to}
+                      className={`text-sm text-foreground/80 hover:text-maroon flex items-center gap-1.5 transition ${dev}`}
+                    >
+                      <span className="text-gold font-bold">•</span> {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </ScrollReveal>
+      </section>
+
+      {/* FAQ SECTION */}
+      <section className="container mx-auto px-6 py-16 border-t border-gold/15">
+        <ScrollReveal direction="up" duration={800}>
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <span className={`text-saffron text-xs uppercase tracking-[0.3em] mb-2 block ${dev}`}>
+              {hi ? "सामान्य प्रश्न" : "Frequently Asked Questions"}
+            </span>
+            <h2 className={`font-display text-4xl md:text-5xl text-maroon ${dev}`}>
+              {hi ? "जिज्ञासा और समाधान" : "Temple Q&A & Info"}
+            </h2>
+            <div className="mx-auto mt-4 w-24 h-[2px] bg-gradient-sacred rounded-full" />
+          </div>
+        </ScrollReveal>
+
+        <div className="max-w-3xl mx-auto space-y-4">
+          {[
+            {
+              q: hi ? "माँ विंध्यवासिनी मंदिर कहाँ स्थित है?" : "Where is Maa Vindhyavasini Temple located?",
+              a: hi 
+                ? "माँ विंध्यवासिनी देवी का प्राचीन मंदिर उत्तर प्रदेश के मिर्जापुर जिले में पवित्र गंगा नदी के तट पर स्थित विंध्याचल धाम में है।"
+                : "Maa Vindhyavasini Temple is located in Vindhyachal Dham, Mirzapur district, Uttar Pradesh, India, on the banks of the sacred river Ganges."
+            },
+            {
+              q: hi ? "त्रिकोण परिक्रमा का क्या महत्व है?" : "What is the significance of the Trikona Parikrama?",
+              a: hi 
+                ? "त्रिकोण परिक्रमा विंध्याचल का एक अत्यंत पवित्र परिक्रमा पथ है जिसमें आदि शक्ति के तीन रूपों के दर्शन होते हैं: माँ विंध्यवासिनी (महालक्ष्मी), काली खोह में माँ काली (महाकाली) और अष्टभुजा मंदिर में माँ अष्टभुजा (महासरस्वती)।"
+                : "Trikona Parikrama is a sacred pilgrimage circuit in Vindhyachal that includes visiting three key temples representing the three main forms of Adi Parashakti: Maa Vindhyavasini (Maha Lakshmi), Maa Kali at Kali Khoh (Maha Kali), and Maa Ashtabhuja (Maha Saraswati)."
+            },
+            {
+              q: hi ? "नमामि विंध्यवासिनी संस्थान क्या है?" : "What is Namami Vindhyavasini Sansthan?",
+              a: hi 
+                ? "नमामि विंध्यवासिनी संस्थान एक धार्मिक एवं आध्यात्मिक ट्रस्ट है जो भक्तों तक माँ विंध्यवासिनी की महिमा पहुँचाने, मंदिर की व्यवस्थाओं को सुलभ करने, सत्संग आयोजित करने, तथा धार्मिक संसाधन, स्तोत्र, आरती और हिंदू कैलेंडर प्रकाशित करने के लिए समर्पित है।"
+                : "Namami Vindhyavasini Sansthan is a spiritual trust dedicated to spreading the divine message of Maa Vindhyavasini, supporting temple facilities, organizing satsangs, and publishing devotional resources, stotram, aartis, and the Hindu calendar."
+            }
+          ].map((item, index) => (
+            <ScrollReveal key={index} direction="up" delay={index * 100} duration={800}>
+              <div className="p-6 rounded-2xl bg-card border border-gold/30 hover:border-gold/60 hover:shadow-sacred transition-premium">
+                <h3 className={`font-semibold text-maroon text-base md:text-lg mb-2 flex items-start gap-2 ${dev}`}>
+                  <span className="text-saffron font-bold">Q.</span>
+                  {item.q}
+                </h3>
+                <p className={`text-muted-foreground leading-relaxed text-sm md:text-base pl-6 ${dev}`}>
+                  {item.a}
+                </p>
+              </div>
             </ScrollReveal>
           ))}
         </div>

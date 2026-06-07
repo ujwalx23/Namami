@@ -10,19 +10,43 @@ import { toast } from "sonner";
 import maaImg2 from "@/assets/maa-vindhyavasini-2.webp";
 import maaImg3 from "@/assets/maa-vindhyavasini-3.webp";
 import gallery1 from "@/assets/gallery-1.webp";
+import { JsonLd } from "@/components/JsonLd";
 
 export const Route = createFileRoute("/gallery")({
   head: () => ({
     meta: [
-      { title: "Sacred Darshan Gallery — Namami Vindhyavasini" },
+      { title: "Maa Vindhyavasini Darshan Gallery | Divine Shringar & Photos" },
       {
         name: "description",
         content:
-          "divine darshan and shringar of Maa Vindhyavasini across sacred occasions at Vindhyachal Dham.",
+          "Browse premium high-resolution images of Maa Vindhyavasini, sacred shringar darshan, temple architecture, and spiritual events in Vindhyachal Dham.",
       },
-      { property: "og:title", content: "Sacred Darshan Gallery — Maa Vindhyavasini" },
-      { property: "og:description", content: "Glimpses of Maa Vindhyavasini's divine shringar." },
+      {
+        name: "keywords",
+        content:
+          "Maa Vindhyavasini photo gallery, shringar photos, Vindhyachal temple images, divine darshan pictures, माँ विंध्यवासिनी फोटो",
+      },
+      { property: "og:title", content: "Maa Vindhyavasini Darshan Gallery | Divine Shringar & Photos" },
+      {
+        property: "og:description",
+        content:
+          "Browse premium high-resolution images of Maa Vindhyavasini, sacred shringar darshan, temple architecture, and spiritual events in Vindhyachal Dham.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://www.namamivindhyavasini.in/gallery" },
+      { property: "og:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Maa Vindhyavasini Darshan Gallery" },
+      {
+        name: "twitter:description",
+        content:
+          "Browse premium high-resolution images of Maa Vindhyavasini, sacred shringar darshan, and spiritual events in Vindhyachal Dham.",
+      },
+      { name: "twitter:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
     ],
+    links: [
+      { rel: "canonical", href: "https://www.namamivindhyavasini.in/gallery" }
+    ]
   }),
   component: GalleryPage,
 });
@@ -396,8 +420,43 @@ function GalleryPage() {
     }
   };
 
+  const webpageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://www.namamivindhyavasini.in/gallery#webpage",
+    "url": "https://www.namamivindhyavasini.in/gallery",
+    "name": "Maa Vindhyavasini Darshan Gallery | Divine Shringar & Photos",
+    "description": "Browse premium high-resolution images of Maa Vindhyavasini, sacred shringar darshan, temple architecture, and spiritual events in Vindhyachal Dham.",
+    "isPartOf": {
+      "@type": "WebSite",
+      "@id": "https://www.namamivindhyavasini.in/#website",
+      "url": "https://www.namamivindhyavasini.in"
+    }
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.namamivindhyavasini.in"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Gallery",
+        "item": "https://www.namamivindhyavasini.in/gallery"
+      }
+    ]
+  };
+
   return (
     <PageShell>
+      <JsonLd data={webpageSchema} />
+      <JsonLd data={breadcrumbSchema} />
       <PageHero
         sanskrit="॥ दर्शनं देवि कारुणिके ॥"
         title={hi ? "दिव्य दर्शन गैलरी" : "Sacred Darshan Gallery"}
@@ -418,9 +477,12 @@ function GalleryPage() {
               >
                 <img
                   src={p.src}
-                  alt={p.cap}
+                  alt={`${p.cap || "Darshan"} of Maa Vindhyavasini Devi at Vindhyachal Temple`}
+                  title={p.cap || "Maa Vindhyavasini Darshan"}
+                  width={350}
+                  height={460}
                   loading="lazy"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 pointer-events-none select-none"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-maroon/85 via-maroon/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 <figcaption
@@ -497,8 +559,11 @@ function GalleryPage() {
           >
             <img
               src={lightbox}
-              alt="Darshan"
-              className="max-h-[calc(100dvh-180px)] md:max-h-[calc(100vh-220px)] max-w-full rounded-xl shadow-2xl object-contain border border-gold/25 hover:scale-[1.01] transition-transform duration-300"
+              alt="Maa Vindhyavasini Darshan Full Size"
+              title="Maa Vindhyavasini Darshan View"
+              width={800}
+              height={1000}
+              className="max-h-[calc(100dvh-180px)] md:max-h-[calc(100vh-220px)] max-w-full rounded-xl shadow-2xl object-contain border border-gold/25 hover:scale-[1.01] transition-transform duration-300 pointer-events-none select-none"
             />
 
             <div className="mt-4 flex flex-wrap justify-center gap-3 shrink-0">

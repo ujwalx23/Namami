@@ -3,7 +3,7 @@
   "scope": "/",
   "name": "Namami Vindhyavasini Sansthan",
   "short_name": "Namami Vindhyavasini",
-  "description": "Devotional trust dedicated to Maa Vindhyavasini at Vindhyachal Dham. Daily Sandesh, Panchang, events and seva.",
+  "description": "Devotional trust dedicated to Maa Vindhyavasini at Vindhyachal Dham. Daily Sandesh, Calendar, events and seva.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#fdf6e9",

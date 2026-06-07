@@ -9,7 +9,7 @@ const quickLinks: { to: string; key: TKey }[] = [
   { to: "/sandesh", key: "nav.sandesh" },
   { to: "/events", key: "nav.events" },
   { to: "/videos", key: "nav.videos" },
-  { to: "/panchang", key: "nav.panchang" },
+  { to: "/calendar", key: "nav.calendar" },
   { to: "/gallery", key: "nav.gallery" },
   { to: "/reviews", key: "nav.reviews" },
   { to: "/donation", key: "nav.donation" },

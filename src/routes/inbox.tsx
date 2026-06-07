@@ -5,15 +5,38 @@ import { useInbox, groupMessagesByDay } from "@/lib/InboxContext";
 import { CheckCheck, MessageSquare, ArrowLeft } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { Link } from "@tanstack/react-router";
+import { JsonLd } from "@/components/JsonLd";
 
 export const Route = createFileRoute("/inbox")({
   head: () => ({
     meta: [
-      { title: "Message Inbox — Namami Vindhyavasini" },
+      { title: "Message Inbox & Announcements | Namami Vindhyavasini Sansthan" },
       {
         name: "description",
-        content: "Read all messages, announcements and updates from Namami Vindhyavasini Sansthan.",
+        content: "Read all messages, announcements, and updates from Namami Vindhyavasini Sansthan.",
       },
+      {
+        name: "keywords",
+        content: "Vindhyavasini announcements, temple notifications, Namami Vindhyavasini updates, Sansthan messaging, messages, inbox, विंध्यवासिनी घोषणाएं, मंदिर सूचनाएं",
+      },
+      { property: "og:title", content: "Message Inbox & Announcements | Namami Vindhyavasini Sansthan" },
+      {
+        property: "og:description",
+        content: "Read all messages, announcements, and updates from Namami Vindhyavasini Sansthan.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://www.namamivindhyavasini.in/inbox" },
+      { property: "og:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Message Inbox & Announcements" },
+      {
+        name: "twitter:description",
+        content: "Read all messages, announcements, and updates from Namami Vindhyavasini Sansthan.",
+      },
+      { name: "twitter:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://www.namamivindhyavasini.in/inbox" }
     ],
   }),
   component: InboxPage,
@@ -54,8 +77,43 @@ function InboxPage() {
     }
   }, [loading, messages, markRead]);
 
+  const webpageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://www.namamivindhyavasini.in/inbox#webpage",
+    "url": "https://www.namamivindhyavasini.in/inbox",
+    "name": "Message Inbox & Announcements | Namami Vindhyavasini Sansthan",
+    "description": "Read all messages, announcements, and updates from Namami Vindhyavasini Sansthan.",
+    "isPartOf": {
+      "@type": "WebSite",
+      "@id": "https://www.namamivindhyavasini.in/#website",
+      "url": "https://www.namamivindhyavasini.in"
+    }
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.namamivindhyavasini.in"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Inbox",
+        "item": "https://www.namamivindhyavasini.in/inbox"
+      }
+    ]
+  };
+
   return (
     <PageShell>
+      <JsonLd data={webpageSchema} />
+      <JsonLd data={breadcrumbSchema} />
       <PageHero
         sanskrit="॥ शुभ संदेश कल्याणम् ॥"
         title={hi ? "संदेश इनबॉक्स" : "Message Inbox"}

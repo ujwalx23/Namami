@@ -1,4 +1,4 @@
-import { Outlet, Link, createRootRoute, useLocation } from "@tanstack/react-router";
+import { Outlet, Link, createRootRoute, useLocation, HeadContent } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { LangProvider } from "@/i18n/LangProvider";
@@ -37,10 +37,6 @@ export const Route = createRootRoute({
 
 function RootComponent() {
   const location = useLocation();
-
-  useEffect(() => {
-    document.title = "Namami Vindhyavasini Sansthan";
-  }, []);
 
   // Track live visitors via heartbeat table with instant cleanup on tab close
   useEffect(() => {
@@ -118,6 +114,7 @@ function RootComponent() {
       <LangProvider>
         <InboxProvider>
           <AudioProvider>
+            <HeadContent />
             <Outlet />
             <FloatingPlayer />
             <Toaster richColors position="top-center" />

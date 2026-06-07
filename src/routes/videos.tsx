@@ -5,18 +5,43 @@ import { useLang } from "@/i18n/LangProvider";
 import { Play, Smartphone } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
+import { JsonLd } from "@/components/JsonLd";
 
 export const Route = createFileRoute("/videos")({
   head: () => ({
     meta: [
-      { title: "Videos — Namami Vindhyavasini" },
+      { title: "Devotional Videos, Aarti & Shorts | Maa Vindhyavasini" },
       {
         name: "description",
-        content: "Watch latest darshan, kirtan and pravachan videos from Vindhyachal Dham.",
+        content:
+          "Watch daily aartis, bhajan, spiritual discourses, temple videos, and YouTube shorts celebrating the divine presence of Goddess Vindhyavasini.",
       },
-      { property: "og:title", content: "Videos — Namami Vindhyavasini" },
-      { property: "og:description", content: "Latest darshan, kirtan and pravachan videos." },
+      {
+        name: "keywords",
+        content:
+          "Vindhyavasini videos, live aarti, devi bhajans, Vindhyachal shorts, kirtan pravachan videos, माँ विंध्यवासिनी वीडियो, आरती",
+      },
+      { property: "og:title", content: "Devotional Videos, Aarti & Shorts | Maa Vindhyavasini" },
+      {
+        property: "og:description",
+        content:
+          "Watch daily aartis, bhajan, spiritual discourses, temple videos, and YouTube shorts celebrating the divine presence of Goddess Vindhyavasini.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://www.namamivindhyavasini.in/videos" },
+      { property: "og:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Devotional Videos, Aarti & Shorts" },
+      {
+        name: "twitter:description",
+        content:
+          "Watch daily aartis, bhajan, spiritual discourses, temple videos, and YouTube shorts celebrating the divine presence of Goddess Vindhyavasini.",
+      },
+      { name: "twitter:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
     ],
+    links: [
+      { rel: "canonical", href: "https://www.namamivindhyavasini.in/videos" }
+    ]
   }),
   loader: async () => {
     try {
@@ -48,8 +73,43 @@ function VideosPage() {
   const activeVideos: Video[] = (fetchedVideos as Video[]) || [];
   const list = activeVideos.filter((v) => v.type === activeTab);
 
+  const webpageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://www.namamivindhyavasini.in/videos#webpage",
+    "url": "https://www.namamivindhyavasini.in/videos",
+    "name": "Devotional Videos, Aarti & Shorts | Maa Vindhyavasini",
+    "description": "Watch daily aartis, bhajan, spiritual discourses, temple videos, and YouTube shorts celebrating the divine presence of Goddess Vindhyavasini.",
+    "isPartOf": {
+      "@type": "WebSite",
+      "@id": "https://www.namamivindhyavasini.in/#website",
+      "url": "https://www.namamivindhyavasini.in"
+    }
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.namamivindhyavasini.in"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Videos",
+        "item": "https://www.namamivindhyavasini.in/videos"
+      }
+    ]
+  };
+
   return (
     <PageShell>
+      <JsonLd data={webpageSchema} />
+      <JsonLd data={breadcrumbSchema} />
       <PageHero
         sanskrit={t("videos.sanskrit")}
         title={t("videos.title")}

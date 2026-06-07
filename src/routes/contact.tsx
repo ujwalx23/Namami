@@ -7,22 +7,43 @@ import { toast } from "sonner";
 import { z } from "zod";
 import { useLang } from "@/i18n/LangProvider";
 import type { TKey } from "@/i18n/translations";
+import { JsonLd } from "@/components/JsonLd";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact & Appointment — Namami Vindhyavasini Sansthan" },
+      { title: "Contact Namami Vindhyavasini Sansthan | Address & Location Map" },
       {
         name: "description",
         content:
-          "Get in touch with Namami Vindhyavasini Sansthan, or book a personal appointment with Pujya Guru Ji at Vindhyachal Dham.",
+          "Get in touch with Namami Vindhyavasini Sansthan. Find office address, contact number, email, and Google Map location for visiting Vindhyachal Dham.",
       },
-      { property: "og:title", content: "Contact Namami Vindhyavasini Sansthan" },
+      {
+        name: "keywords",
+        content:
+          "Vindhyavasini contact details, contact number, temple address, booking appointment with Gurudev, Vindhyachal Dham office, संपर्क",
+      },
+      { property: "og:title", content: "Contact Namami Vindhyavasini Sansthan | Address & Location Map" },
       {
         property: "og:description",
-        content: "Reach us by phone, email or book an appointment with Guru Ji.",
+        content:
+          "Get in touch with Namami Vindhyavasini Sansthan. Find office address, contact number, email, and Google Map location for visiting Vindhyachal Dham.",
       },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://www.namamivindhyavasini.in/contact" },
+      { property: "og:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Contact Namami Vindhyavasini Sansthan" },
+      {
+        name: "twitter:description",
+        content:
+          "Get in touch with Namami Vindhyavasini Sansthan. Find address, contact, and map locations.",
+      },
+      { name: "twitter:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
     ],
+    links: [
+      { rel: "canonical", href: "https://www.namamivindhyavasini.in/contact" }
+    ]
   }),
   component: ContactPage,
 });
@@ -48,8 +69,43 @@ const SLOT_KEYS: TKey[] = ["ct.slot.morning", "ct.slot.late", "ct.slot.noon", "c
 function ContactPage() {
   const { t, lang } = useLang();
   const dev = lang === "hi" ? "font-devanagari" : "";
+  const webpageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://www.namamivindhyavasini.in/contact#webpage",
+    "url": "https://www.namamivindhyavasini.in/contact",
+    "name": "Contact Namami Vindhyavasini Sansthan | Address & Location Map",
+    "description": "Get in touch with Namami Vindhyavasini Sansthan. Find office address, contact number, email, and Google Map location for visiting Vindhyachal Dham.",
+    "isPartOf": {
+      "@type": "WebSite",
+      "@id": "https://www.namamivindhyavasini.in/#website",
+      "url": "https://www.namamivindhyavasini.in"
+    }
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.namamivindhyavasini.in"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Contact",
+        "item": "https://www.namamivindhyavasini.in/contact"
+      }
+    ]
+  };
+
   return (
     <PageShell>
+      <JsonLd data={webpageSchema} />
+      <JsonLd data={breadcrumbSchema} />
       <PageHero sanskrit={t("ct.sanskrit")} title={t("ct.title")} subtitle={t("ct.subtitle")} />
 
       <section className="w-full py-16 px-4 xs:px-6 flex justify-center">

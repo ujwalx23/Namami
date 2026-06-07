@@ -1899,7 +1899,6 @@ function AnalyticsAdmin() {
       icon: Calendar,
       label: "Appointments",
       value: formatAnalyticsCount(data.appointmentsTotal),
-      sub: `${formatAnalyticsCount(data.appointmentsPending)} pending`,
     },
     { icon: MessageSquare, label: "Contacts (total)", value: formatAnalyticsCount(data.contacts) },
     { icon: Video, label: "Videos (long-form)", value: formatAnalyticsCount(data.videos) },

@@ -5,24 +5,45 @@ import { Calendar, MapPin } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import type { Tables } from "@/integrations/supabase/types";
 import { useLang } from "@/i18n/LangProvider";
+import { JsonLd } from "@/components/JsonLd";
 
 type EventRow = Tables<"events">;
 
 export const Route = createFileRoute("/events")({
   head: () => ({
     meta: [
-      { title: "Events — Namami Vindhyavasini Sansthan" },
+      { title: "Spiritual Events, Navratri Pujas & Satsangs | Namami Vindhyavasini" },
       {
         name: "description",
         content:
-          "Upcoming and past temple events, festivals, satsang and seva programmes at Vindhyachal Dham.",
+          "Stay updated on upcoming spiritual events, Navratri celebrations, regular satsangs, bhandaras, and special pujas organized at Maa Vindhyavasini Dham.",
       },
-      { property: "og:title", content: "Temple Events & Festivals" },
+      {
+        name: "keywords",
+        content:
+          "Vindhyachal temple events, Navratri celebration schedule, satsang dates, temple bhandara, spiritual events",
+      },
+      { property: "og:title", content: "Spiritual Events, Navratri Pujas & Satsangs | Namami Vindhyavasini" },
       {
         property: "og:description",
-        content: "Navratri, satsang, bhandaras and more — join our temple events.",
+        content:
+          "Stay updated on upcoming spiritual events, Navratri celebrations, regular satsangs, bhandaras, and special pujas organized at Maa Vindhyavasini Dham.",
       },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://www.namamivindhyavasini.in/events" },
+      { property: "og:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Spiritual Events, Navratri Pujas & Satsangs" },
+      {
+        name: "twitter:description",
+        content:
+          "Stay updated on upcoming spiritual events, Navratri celebrations, regular satsangs, and special pujas.",
+      },
+      { name: "twitter:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
     ],
+    links: [
+      { rel: "canonical", href: "https://www.namamivindhyavasini.in/events" }
+    ]
   }),
   loader: async () => {
     const { data, error } = await supabase
@@ -111,8 +132,43 @@ function EventsPage() {
   const upcoming = events.filter((e: EventRow) => e.event_date > todayIso);
   const past = events.filter((e: EventRow) => e.event_date < todayIso);
 
+  const webpageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://www.namamivindhyavasini.in/events#webpage",
+    "url": "https://www.namamivindhyavasini.in/events",
+    "name": "Spiritual Events, Navratri Pujas & Satsangs | Namami Vindhyavasini",
+    "description": "Stay updated on upcoming spiritual events, Navratri celebrations, regular satsangs, bhandaras, and special pujas organized at Maa Vindhyavasini Dham.",
+    "isPartOf": {
+      "@type": "WebSite",
+      "@id": "https://www.namamivindhyavasini.in/#website",
+      "url": "https://www.namamivindhyavasini.in"
+    }
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.namamivindhyavasini.in"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Events",
+        "item": "https://www.namamivindhyavasini.in/events"
+      }
+    ]
+  };
+
   return (
     <PageShell>
+      <JsonLd data={webpageSchema} />
+      <JsonLd data={breadcrumbSchema} />
       <PageHero
         sanskrit={t("events.sanskrit")}
         title={t("events.title")}

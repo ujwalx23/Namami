@@ -8,20 +8,44 @@ import { useCallback, useEffect, useState } from "react";
 import { useLang } from "@/i18n/LangProvider";
 import { speakText, stopSpeech, isHindiText } from "@/lib/speech";
 import { toast } from "sonner";
+import { JsonLd } from "@/components/JsonLd";
 
 type Sandesh = Tables<"sandesh">;
 
 export const Route = createFileRoute("/sandesh")({
   head: () => ({
     meta: [
-      { title: "Sandesh — Daily Spiritual Message" },
+      { title: "Daily Spiritual Sandesh & Quotes | Namami Vindhyavasini Sansthan" },
       {
         name: "description",
         content:
-          "Daily spiritual sandesh and quotes — wisdom and blessings for devotees of Maa Vindhyavasini.",
+          "Receive daily spiritual sandesh, divine quotes, and wisdom from Pujya Guru Ji. Get blessings and spiritual guidance for devotees of Maa Vindhyavasini.",
       },
-      { property: "og:title", content: "Sandesh — Daily Message" },
-      { property: "og:description", content: "Daily spiritual wisdom from Pujya Guru Ji." },
+      {
+        name: "keywords",
+        content:
+          "Daily spiritual sandesh, Vindhyavasini quotes, Pujya Guru Ji wisdom, Hindu spiritual messages, दैनिक संदेश, आध्यात्मिक विचार, विंध्यवासिनी",
+      },
+      { property: "og:title", content: "Daily Spiritual Sandesh & Quotes | Namami Vindhyavasini Sansthan" },
+      {
+        property: "og:description",
+        content:
+          "Receive daily spiritual sandesh, divine quotes, and wisdom from Pujya Guru Ji. Get blessings and spiritual guidance.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://www.namamivindhyavasini.in/sandesh" },
+      { property: "og:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Daily Spiritual Sandesh & Quotes" },
+      {
+        name: "twitter:description",
+        content:
+          "Receive daily spiritual sandesh, divine quotes, and wisdom from Pujya Guru Ji.",
+      },
+      { name: "twitter:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://www.namamivindhyavasini.in/sandesh" }
     ],
   }),
   loader: async () => {
@@ -374,8 +398,43 @@ function SandeshPage() {
   const today = sandesh[todayIdx];
   const archive = sandesh.filter((_: Sandesh, i: number) => i !== todayIdx).slice(0, 12);
 
+  const webpageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://www.namamivindhyavasini.in/sandesh#webpage",
+    "url": "https://www.namamivindhyavasini.in/sandesh",
+    "name": "Daily Spiritual Sandesh & Quotes | Namami Vindhyavasini Sansthan",
+    "description": "Receive daily spiritual sandesh, divine quotes, and wisdom from Pujya Guru Ji. Get blessings and spiritual guidance for devotees of Maa Vindhyavasini.",
+    "isPartOf": {
+      "@type": "WebSite",
+      "@id": "https://www.namamivindhyavasini.in/#website",
+      "url": "https://www.namamivindhyavasini.in"
+    }
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.namamivindhyavasini.in"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Sandesh",
+        "item": "https://www.namamivindhyavasini.in/sandesh"
+      }
+    ]
+  };
+
   return (
     <PageShell>
+      <JsonLd data={webpageSchema} />
+      <JsonLd data={breadcrumbSchema} />
       <PageHero
         sanskrit={t("sandesh.sanskrit")}
         title={t("sandesh.title")}

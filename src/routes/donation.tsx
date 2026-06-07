@@ -4,23 +4,43 @@ import qrImg from "@/assets/donation-qr.png";
 import { Heart, Building2, Utensils, BookOpen, Sparkles } from "lucide-react";
 import { useLang } from "@/i18n/LangProvider";
 import type { TKey } from "@/i18n/translations";
+import { JsonLd } from "@/components/JsonLd";
 
 export const Route = createFileRoute("/donation")({
   head: () => ({
     meta: [
-      { title: "Donation — Namami Vindhyavasini Sansthan" },
+      { title: "Support & Donate | Online Seva Contributions — Namami Vindhyavasini" },
       {
         name: "description",
         content:
-          "Contribute to Maa Vindhyavasini's seva. Support temple upkeep, bhandara, vidya daan and other sacred causes.",
+          "Support the spiritual and social initiatives of Namami Vindhyavasini Sansthan. Contribute to bhandara, path, Gau Seva, and temple development online.",
       },
-      { property: "og:title", content: "Donate to Namami Vindhyavasini Sansthan" },
+      {
+        name: "keywords",
+        content:
+          "Vindhyavasini temple donation, online seva booking, trust support, support Vindhyachal bhandara, donation details, दान, सेवा",
+      },
+      { property: "og:title", content: "Support & Donate | Online Seva Contributions — Namami Vindhyavasini" },
       {
         property: "og:description",
         content:
-          "Your contribution helps us continue seva, satsang and sacred traditions at Vindhyachal Dham.",
+          "Support the spiritual and social initiatives of Namami Vindhyavasini Sansthan. Contribute to bhandara, path, Gau Seva, and temple development online.",
       },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://www.namamivindhyavasini.in/donation" },
+      { property: "og:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Support & Donate | Online Seva Contributions" },
+      {
+        name: "twitter:description",
+        content:
+          "Support the spiritual and social initiatives of Namami Vindhyavasini Sansthan. Contribute online.",
+      },
+      { name: "twitter:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
     ],
+    links: [
+      { rel: "canonical", href: "https://www.namamivindhyavasini.in/donation" }
+    ]
   }),
   component: DonationPage,
 });
@@ -35,8 +55,43 @@ const causes: { icon: React.ComponentType<{ size?: number }>; tk: TKey; xk: TKey
 function DonationPage() {
   const { t, lang } = useLang();
   const dev = lang === "hi" ? "font-devanagari" : "";
+  const webpageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://www.namamivindhyavasini.in/donation#webpage",
+    "url": "https://www.namamivindhyavasini.in/donation",
+    "name": "Support & Donate | Online Seva Contributions — Namami Vindhyavasini",
+    "description": "Support the spiritual and social initiatives of Namami Vindhyavasini Sansthan. Contribute to bhandara, path, Gau Seva, and temple development online.",
+    "isPartOf": {
+      "@type": "WebSite",
+      "@id": "https://www.namamivindhyavasini.in/#website",
+      "url": "https://www.namamivindhyavasini.in"
+    }
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.namamivindhyavasini.in"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Donation",
+        "item": "https://www.namamivindhyavasini.in/donation"
+      }
+    ]
+  };
+
   return (
     <PageShell>
+      <JsonLd data={webpageSchema} />
+      <JsonLd data={breadcrumbSchema} />
       <PageHero sanskrit={t("don.sanskrit")} title={t("don.title")} subtitle={t("don.subtitle")} />
 
       <section className="w-full py-16 px-4 xs:px-6 flex justify-center">
@@ -58,8 +113,12 @@ function DonationPage() {
 
                 <img
                   src={qrImg}
-                  alt="UPI Donation QR Code"
-                  className="w-full h-full object-contain rounded-lg"
+                  alt="UPI Donation QR Code - Namami Vindhyavasini Sansthan"
+                  title="UPI Donation QR Code"
+                  width={240}
+                  height={240}
+                  loading="lazy"
+                  className="w-full h-full object-contain rounded-lg pointer-events-none select-none"
                 />
               </div>
 
