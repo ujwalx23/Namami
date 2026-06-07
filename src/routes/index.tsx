@@ -393,8 +393,8 @@ function HomePage() {
         "acceptedAnswer": {
           "@type": "Answer",
           "text": hi 
-            ? "नमामि विंध्यवासिनी संस्थान एक धार्मिक एवं आध्यात्मिक ट्रस्ट है जो भक्तों तक माँ विंध्यवासिनी की महिमा पहुँचाने, मंदिर की व्यवस्थाओं को सुलभ करने, सत्संग आयोजित करने, तथा धार्मिक संसाधन, स्तोत्र, आरती और हिंदू कैलेंडर प्रकाशित करने के लिए समर्पित है।"
-            : "Namami Vindhyavasini Sansthan is a spiritual trust dedicated to spreading the divine message of Maa Vindhyavasini, supporting temple facilities, organizing satsangs, and publishing devotional resources, stotram, aartis, and the Hindu calendar."
+            ? "नमामि विंध्यवासिनी संस्थान एक धार्मिक एवं आध्यात्मिक ट्रस्ट है जो भक्तों तक माँ विंध्यवासिनी की महिमा पहुँचाने, धार्मिक संसाधन, स्तोत्र और हिंदू कैलेंडर प्रकाशित करने के साथ-साथ मीडिया गैलरी, वीडियो और आध्यात्मिक संदेश प्रदान करने के लिए समर्पित है।"
+            : "Namami Vindhyavasini Sansthan is a spiritual trust dedicated to spreading the divine message of Maa Vindhyavasini, publishing devotional resources, stotram, and the Hindu calendar, while also providing a media gallery, videos and spiritual sandesha."
         }
       }
     ]
@@ -845,7 +845,7 @@ function HomePage() {
                     to="/about"
                     className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-sacred/10 border border-gold/30 hover:border-gold text-maroon font-semibold text-xs transition"
                   >
-                    {hi ? "विंध्येश्वरी स्तोत्र पाठ विधि" : "Read Stotram & Aarti Guidelines"} <ArrowRight size={12} />
+                    {hi ? "विंध्येश्वरी स्तोत्र एवं आरती समय" : "Read Stotram & Aarti Timings"} <ArrowRight size={12} />
                   </Link>
                   <Link
                     to="/calendar"
@@ -913,8 +913,8 @@ function HomePage() {
             {
               q: hi ? "नमामि विंध्यवासिनी संस्थान क्या है?" : "What is Namami Vindhyavasini Sansthan?",
               a: hi 
-                ? "नमामि विंध्यवासिनी संस्थान एक धार्मिक एवं आध्यात्मिक ट्रस्ट है जो भक्तों तक माँ विंध्यवासिनी की महिमा पहुँचाने, मंदिर की व्यवस्थाओं को सुलभ करने, सत्संग आयोजित करने, तथा धार्मिक संसाधन, स्तोत्र, आरती और हिंदू कैलेंडर प्रकाशित करने के लिए समर्पित है।"
-                : "Namami Vindhyavasini Sansthan is a spiritual trust dedicated to spreading the divine message of Maa Vindhyavasini, supporting temple facilities, organizing satsangs, and publishing devotional resources, stotram, aartis, and the Hindu calendar."
+                ? "नमामि विंध्यवासिनी संस्थान एक धार्मिक एवं आध्यात्मिक ट्रस्ट है जो भक्तों तक माँ विंध्यवासिनी की महिमा पहुँचाने, धार्मिक संसाधन, स्तोत्र और हिंदू कैलेंडर प्रकाशित करने के साथ-साथ मीडिया गैलरी, वीडियो और आध्यात्मिक संदेश प्रदान करने के लिए समर्पित है।"
+                : "Namami Vindhyavasini Sansthan is a spiritual trust dedicated to spreading the divine message of Maa Vindhyavasini, publishing devotional resources, stotram, and the Hindu calendar, while also providing a media gallery, videos and spiritual sandesha."
             }
           ].map((item, index) => (
             <ScrollReveal key={index} direction="up" delay={index * 100} duration={800}>
