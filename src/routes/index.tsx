@@ -707,19 +707,26 @@ function HomePage() {
       <section className="bg-gradient-divine border-y border-border/60">
         <div className="container mx-auto px-6 py-20">
           <ScrollReveal direction="up" duration={800}>
-            <div className="text-center max-w-2xl mx-auto mb-12">
-              <div className={`text-saffron text-xs uppercase tracking-[0.3em] mb-2 ${dev}`}>
-                {hi ? "दिव्य दर्शन" : "Divya Darshan"}
+            <div className="flex items-end justify-between mb-12 flex-wrap gap-4">
+              <div>
+                <div className={`text-saffron text-xs uppercase tracking-[0.3em] mb-2 ${dev}`}>
+                  {hi ? "दिव्य दर्शन" : "Divya Darshan"}
+                </div>
+                <h2 className={`font-display text-4xl md:text-5xl text-maroon ${dev}`}>
+                  {hi ? "माँ का दिव्य श्रृंगार" : "Sacred Darshan Gallery"}
+                </h2>
+                <p className={`mt-3 text-foreground/75 max-w-xl ${dev}`}>
+                  {hi
+                    ? "विभिन्न अवसरों पर माँ विन्ध्यवासिनी का मनमोहक श्रृंगार एवं दर्शन"
+                    : "Glimpses of Maa Vindhyavasini's divine shringar across sacred occasions"}
+                </p>
               </div>
-              <h2 className={`font-display text-4xl md:text-5xl text-maroon ${dev}`}>
-                {hi ? "माँ का दिव्य श्रृंगार" : "Sacred Darshan Gallery"}
-              </h2>
-              <div className="mx-auto mt-4 w-24 h-[2px] bg-gradient-sacred rounded-full" />
-              <p className={`mt-5 text-foreground/75 ${dev}`}>
-                {hi
-                  ? "विभिन्न अवसरों पर माँ विन्ध्यवासिनी का मनमोहक श्रृंगार एवं दर्शन"
-                  : "Glimpses of Maa Vindhyavasini's divine shringar across sacred occasions"}
-              </p>
+              <Link
+                to="/gallery"
+                className={`inline-flex items-center gap-2 text-maroon font-medium hover:text-saffron transition-colors duration-300 ${dev}`}
+              >
+                {hi ? "गैलरी देखें" : "View Gallery"} <ArrowRight size={16} />
+              </Link>
             </div>
           </ScrollReveal>
 
@@ -754,16 +761,7 @@ function HomePage() {
             ))}
           </div>
 
-          <div className="mt-8 text-center">
-            <ScrollReveal direction="up" delay={200} duration={800}>
-              <Link
-                to="/gallery"
-                className={`inline-flex items-center gap-2 text-maroon font-medium hover:text-saffron transition-colors duration-300 ${dev}`}
-              >
-                {hi ? "गैलरी देखें" : "View Gallery"} <ArrowRight size={16} />
-              </Link>
-            </ScrollReveal>
-          </div>
+
         </div>
       </section>
 
