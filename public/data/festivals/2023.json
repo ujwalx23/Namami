@@ -781,6 +781,19 @@
   },
   {
     "id": 61,
+    "date": "2023-11-19",
+    "festival": "Chhath Puja",
+    "category": "Major Festival",
+    "deity": "Surya Dev / Chhathi Maiya",
+    "description": "Ancient Hindu festival dedicated to Surya Dev and Chhathi Maiya, marked by rigorous fasting and offering Arghya to the setting and rising Sun.",
+    "importance": "High",
+    "story": "Celebrated to thank Surya Dev for sustaining life on earth and to request blessings for health and happiness.",
+    "rituals": "Holy bathing, fasting, abstaining from drinking water (Nirjala), standing in water, and offering Prasad and Arghya.",
+    "fasting": "Strict 36-hour waterless fast (Nirjala Vrat).",
+    "image": ""
+  },
+  {
+    "id": 62,
     "date": "2023-11-23",
     "festival": "Ashwina Shukla Ekadashi",
     "category": "Ekadashi",
@@ -793,7 +806,7 @@
     "image": ""
   },
   {
-    "id": 62,
+    "id": 63,
     "date": "2023-11-27",
     "festival": "Kartik Purnima",
     "category": "Purnima",
@@ -806,7 +819,7 @@
     "image": ""
   },
   {
-    "id": 63,
+    "id": 64,
     "date": "2023-12-08",
     "festival": "Ashwina Krishna Ekadashi",
     "category": "Ekadashi",
@@ -819,7 +832,7 @@
     "image": ""
   },
   {
-    "id": 64,
+    "id": 65,
     "date": "2023-12-12",
     "festival": "Ashwina Amavasya",
     "category": "Amavasya",
@@ -832,7 +845,7 @@
     "image": ""
   },
   {
-    "id": 65,
+    "id": 66,
     "date": "2023-12-23",
     "festival": "Kartika Shukla Ekadashi",
     "category": "Ekadashi",
@@ -845,7 +858,7 @@
     "image": ""
   },
   {
-    "id": 66,
+    "id": 67,
     "date": "2023-12-26",
     "festival": "Kartika Purnima",
     "category": "Purnima",

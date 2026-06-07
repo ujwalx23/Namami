@@ -742,6 +742,19 @@
   },
   {
     "id": 58,
+    "date": "2024-11-07",
+    "festival": "Chhath Puja",
+    "category": "Major Festival",
+    "deity": "Surya Dev / Chhathi Maiya",
+    "description": "Ancient Hindu festival dedicated to Surya Dev and Chhathi Maiya, marked by rigorous fasting and offering Arghya to the setting and rising Sun.",
+    "importance": "High",
+    "story": "Celebrated to thank Surya Dev for sustaining life on earth and to request blessings for health and happiness.",
+    "rituals": "Holy bathing, fasting, abstaining from drinking water (Nirjala), standing in water, and offering Prasad and Arghya.",
+    "fasting": "Strict 36-hour waterless fast (Nirjala Vrat).",
+    "image": ""
+  },
+  {
+    "id": 59,
     "date": "2024-11-12",
     "festival": "Bhadrapada Shukla Ekadashi",
     "category": "Ekadashi",
@@ -754,7 +767,7 @@
     "image": ""
   },
   {
-    "id": 59,
+    "id": 60,
     "date": "2024-11-15",
     "festival": "Kartik Purnima",
     "category": "Purnima",
@@ -767,7 +780,7 @@
     "image": ""
   },
   {
-    "id": 60,
+    "id": 61,
     "date": "2024-11-26",
     "festival": "Ashwina Krishna Ekadashi",
     "category": "Ekadashi",
@@ -780,7 +793,7 @@
     "image": ""
   },
   {
-    "id": 61,
+    "id": 62,
     "date": "2024-12-01",
     "festival": "Ashwina Amavasya",
     "category": "Amavasya",
@@ -793,7 +806,7 @@
     "image": ""
   },
   {
-    "id": 62,
+    "id": 63,
     "date": "2024-12-11",
     "festival": "Ashwina Shukla Ekadashi",
     "category": "Ekadashi",
@@ -806,7 +819,7 @@
     "image": ""
   },
   {
-    "id": 63,
+    "id": 64,
     "date": "2024-12-15",
     "festival": "Ashwina Purnima",
     "category": "Purnima",
@@ -819,7 +832,7 @@
     "image": ""
   },
   {
-    "id": 64,
+    "id": 65,
     "date": "2024-12-26",
     "festival": "Kartika Krishna Ekadashi",
     "category": "Ekadashi",
@@ -832,7 +845,7 @@
     "image": ""
   },
   {
-    "id": 65,
+    "id": 66,
     "date": "2024-12-30",
     "festival": "Kartika Amavasya",
     "category": "Amavasya",

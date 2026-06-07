@@ -33,33 +33,34 @@ import data2025 from "../data/festivals/2025.json";
 import data2026 from "../data/festivals/2026.json";
 import data2027 from "../data/festivals/2027.json";
 import data2028 from "../data/festivals/2028.json";
+import data2029 from "../data/festivals/2029.json";
 import { JsonLd } from "@/components/JsonLd";
 
 export const Route = createFileRoute("/calendar")({
   head: () => ({
     meta: [
-      { title: "Calendar & Festival Guide (2023-2028) | Namami Vindhyavasini Sansthan" },
+      { title: "Calendar & Festival Guide (2023-2029) | Namami Vindhyavasini Sansthan" },
       {
         name: "description",
         content:
-          "Explore festivals, vrats, Ekadashi, Purnima, Amavasya, Navratri, and sacred observances from 2023–2028 on the Namami Vindhyavasini Sansthan Calendar.",
+          "Explore festivals, vrats, Ekadashi, Purnima, Amavasya, Navratri, and sacred observances from 2023–2029 on the Namami Vindhyavasini Sansthan Calendar.",
       },
       {
         name: "keywords",
         content:
           "Calendar, Festival Guide, Ekadashi dates, Purnima vrats, Amavasya dates, Navratri calendar, Hindu festivals, calendar, त्योहार, व्रत, कैलेंडर",
       },
-      { property: "og:title", content: "Calendar & Festival Guide (2023-2028) | Namami Vindhyavasini Sansthan" },
+      { property: "og:title", content: "Calendar & Festival Guide (2023-2029) | Namami Vindhyavasini Sansthan" },
       {
         property: "og:description",
         content:
-          "Explore festivals, vrats, Ekadashi, Purnima, Amavasya, Navratri, and sacred observances from 2023–2028.",
+          "Explore festivals, vrats, Ekadashi, Purnima, Amavasya, Navratri, and sacred observances from 2023–2029.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://www.namamivindhyavasini.in/calendar" },
       { property: "og:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Calendar & Festival Guide (2023-2028)" },
+      { name: "twitter:title", content: "Calendar & Festival Guide (2023-2029)" },
       {
         name: "twitter:description",
         content:
@@ -81,6 +82,7 @@ const FESTIVALS_BY_YEAR: Record<number, any[]> = {
   2026: data2026,
   2027: data2027,
   2028: data2028,
+  2029: data2029,
 };
 
 const SPECIAL_FESTIVAL_DETAILS: Record<string, {
@@ -238,7 +240,7 @@ const CATEGORIES = [
   { id: "vrats", label: "Vrats", hi: "व्रत व उपवास" }
 ];
 
-const YEARS = [2023, 2024, 2025, 2026, 2027, 2028];
+const YEARS = [2023, 2024, 2025, 2026, 2027, 2028, 2029];
 
 const MONTHS = [
   "January", "February", "March", "April", "May", "June",
@@ -491,8 +493,8 @@ export function HinduCalendarPage() {
     "@type": "WebPage",
     "@id": "https://www.namamivindhyavasini.in/calendar#webpage",
     "url": "https://www.namamivindhyavasini.in/calendar",
-    "name": "Hindu Calendar & Festival Guide (2023-2028) | Vindhyachal Timings",
-    "description": "Explore Hindu festivals, vrats, Ekadashi, Purnima, Amavasya, Navratri, and sacred observances from 2023–2028 with local spiritual timings for Vindhyachal Dham.",
+    "name": "Hindu Calendar & Festival Guide (2023-2029) | Vindhyachal Timings",
+    "description": "Explore Hindu festivals, vrats, Ekadashi, Purnima, Amavasya, Navratri, and sacred observances from 2023–2029 with local spiritual timings for Vindhyachal Dham.",
     "isPartOf": {
       "@type": "WebSite",
       "@id": "https://www.namamivindhyavasini.in/#website",
@@ -528,8 +530,8 @@ export function HinduCalendarPage() {
         title={isHi ? "कैलेंडर" : "Calendar"}
         subtitle={
           isHi
-            ? "संवत २०२३-२०२८ के त्योहारों, व्रतों, एकादशी, पूर्णिमा, अमावस्या और पवित्र नवरात्रों की सूची।"
-            : "Explore festivals, vrats, Ekadashi, Purnima, Amavasya, Navratri, and sacred observances from 2023–2028."
+            ? "संवत २०२३-२०२९ के त्योहारों, व्रतों, एकादशी, पूर्णिमा, अमावस्या और पवित्र नवरात्रों की सूची।"
+            : "Explore festivals, vrats, Ekadashi, Purnima, Amavasya, Navratri, and sacred observances from 2023–2029."
         }
       />
 

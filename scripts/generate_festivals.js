@@ -87,7 +87,7 @@ function getPanchangDetails(date) {
   return { tithiNum, paksha, month, dateString: date.toISOString().split("T")[0] };
 }
 
-// Major static festivals for years 2023 to 2028
+// Major static festivals for years 2023 to 2029
 const STATIC_FESTIVALS = {
   2023: [
     { date: "2023-01-14", festival: "Makar Sankranti", category: "Major Festival", deity: "Surya Dev", description: "Transit of the Sun into Capricorn, marking the end of winter.", importance: "High" },
@@ -106,7 +106,8 @@ const STATIC_FESTIVALS = {
     { date: "2023-10-24", festival: "Dussehra", category: "Major Festival", deity: "Lord Rama", description: "Victory of Lord Rama over Ravana.", importance: "High" },
     { date: "2023-11-01", festival: "Karva Chauth", category: "Vrats", deity: "Lord Shiva & Parvati", description: "Fasting by married women for husband's long life.", importance: "Medium" },
     { date: "2023-11-12", festival: "Diwali", category: "Major Festival", deity: "Maha Lakshmi", description: "Festival of Lights celebrating Lord Rama's return to Ayodhya.", importance: "High" },
-    { date: "2023-11-15", festival: "Bhai Dooj", category: "Major Festival", deity: "Yama & Yamuna", description: "Celebrating the sibling bond.", importance: "Medium" }
+    { date: "2023-11-15", festival: "Bhai Dooj", category: "Major Festival", deity: "Yama & Yamuna", description: "Celebrating the sibling bond.", importance: "Medium" },
+    { date: "2023-11-19", festival: "Chhath Puja", category: "Major Festival", deity: "Surya Dev / Chhathi Maiya", description: "Ancient Hindu festival dedicated to Surya Dev and Chhathi Maiya, marked by rigorous fasting and offering Arghya to the setting and rising Sun.", importance: "High", story: "Celebrated to thank Surya Dev for sustaining life on earth and to request blessings for health and happiness.", rituals: "Holy bathing, fasting, abstaining from drinking water (Nirjala), standing in water, and offering Prasad and Arghya.", fasting: "Strict 36-hour waterless fast (Nirjala Vrat)." }
   ],
   2024: [
     { date: "2024-01-14", festival: "Makar Sankranti", category: "Major Festival", deity: "Surya Dev", description: "Harvest festival celebrating Sun's entry into Capricorn.", importance: "High" },
@@ -125,7 +126,8 @@ const STATIC_FESTIVALS = {
     { date: "2024-10-12", festival: "Dussehra", category: "Major Festival", deity: "Lord Rama", description: "Effigy burning of Ravana.", importance: "High" },
     { date: "2024-10-20", festival: "Karva Chauth", category: "Vrats", deity: "Lord Shiva & Parvati", description: "Traditional fasting day.", importance: "Medium" },
     { date: "2024-10-31", festival: "Diwali", category: "Major Festival", deity: "Maha Lakshmi", description: "Grand celebration of lights.", importance: "High" },
-    { date: "2024-11-03", festival: "Bhai Dooj", category: "Major Festival", deity: "Yama & Yamuna", description: "Sibling bonding festival.", importance: "Medium" }
+    { date: "2024-11-03", festival: "Bhai Dooj", category: "Major Festival", deity: "Yama & Yamuna", description: "Sibling bonding festival.", importance: "Medium" },
+    { date: "2024-11-07", festival: "Chhath Puja", category: "Major Festival", deity: "Surya Dev / Chhathi Maiya", description: "Ancient Hindu festival dedicated to Surya Dev and Chhathi Maiya, marked by rigorous fasting and offering Arghya to the setting and rising Sun.", importance: "High", story: "Celebrated to thank Surya Dev for sustaining life on earth and to request blessings for health and happiness.", rituals: "Holy bathing, fasting, abstaining from drinking water (Nirjala), standing in water, and offering Prasad and Arghya.", fasting: "Strict 36-hour waterless fast (Nirjala Vrat)." }
   ],
   2025: [
     { date: "2025-01-14", festival: "Makar Sankranti", category: "Major Festival", deity: "Surya Dev", description: "Solar transit celebration.", importance: "High" },
@@ -144,7 +146,8 @@ const STATIC_FESTIVALS = {
     { date: "2025-10-02", festival: "Dussehra", category: "Major Festival", deity: "Lord Rama", description: "Dussehra celebration.", importance: "High" },
     { date: "2025-10-10", festival: "Karva Chauth", category: "Vrats", deity: "Lord Shiva & Parvati", description: "Married women's fast.", importance: "Medium" },
     { date: "2025-10-20", festival: "Diwali", category: "Major Festival", deity: "Maha Lakshmi", description: "Diwali festival of lights.", importance: "High" },
-    { date: "2025-10-23", festival: "Bhai Dooj", category: "Major Festival", deity: "Yama & Yamuna", description: "Bhai Dooj festival.", importance: "Medium" }
+    { date: "2025-10-23", festival: "Bhai Dooj", category: "Major Festival", deity: "Yama & Yamuna", description: "Bhai Dooj festival.", importance: "Medium" },
+    { date: "2025-10-28", festival: "Chhath Puja", category: "Major Festival", deity: "Surya Dev / Chhathi Maiya", description: "Ancient Hindu festival dedicated to Surya Dev and Chhathi Maiya, marked by rigorous fasting and offering Arghya to the setting and rising Sun.", importance: "High", story: "Celebrated to thank Surya Dev for sustaining life on earth and to request blessings for health and happiness.", rituals: "Holy bathing, fasting, abstaining from drinking water (Nirjala), standing in water, and offering Prasad and Arghya.", fasting: "Strict 36-hour waterless fast (Nirjala Vrat)." }
   ],
   2026: [
     { date: "2026-01-14", festival: "Makar Sankranti", category: "Major Festival", deity: "Surya Dev", description: "Harvest festival dedicated to Surya Dev.", importance: "High" },
@@ -163,7 +166,8 @@ const STATIC_FESTIVALS = {
     { date: "2026-10-20", festival: "Dussehra", category: "Major Festival", deity: "Lord Rama", description: "Vijayadashami festival.", importance: "High" },
     { date: "2026-10-29", festival: "Karva Chauth", category: "Vrats", deity: "Lord Shiva & Parvati", description: "Wife's devotion fast.", importance: "Medium" },
     { date: "2026-11-08", festival: "Diwali", category: "Major Festival", deity: "Maha Lakshmi", description: "Lamps lit in victory.", importance: "High" },
-    { date: "2026-11-11", festival: "Bhai Dooj", category: "Major Festival", deity: "Yama & Yamuna", description: "Sibling bonding.", importance: "Medium" }
+    { date: "2026-11-11", festival: "Bhai Dooj", category: "Major Festival", deity: "Yama & Yamuna", description: "Sibling bonding.", importance: "Medium" },
+    { date: "2026-11-15", festival: "Chhath Puja", category: "Major Festival", deity: "Surya Dev / Chhathi Maiya", description: "Ancient Hindu festival dedicated to Surya Dev and Chhathi Maiya, marked by rigorous fasting and offering Arghya to the setting and rising Sun.", importance: "High", story: "Celebrated to thank Surya Dev for sustaining life on earth and to request blessings for health and happiness.", rituals: "Holy bathing, fasting, abstaining from drinking water (Nirjala), standing in water, and offering Prasad and Arghya.", fasting: "Strict 36-hour waterless fast (Nirjala Vrat)." }
   ],
   2027: [
     { date: "2027-01-15", festival: "Makar Sankranti", category: "Major Festival", deity: "Surya Dev", description: "Transit of Surya Dev into Makara Rashi.", importance: "High" },
@@ -182,7 +186,8 @@ const STATIC_FESTIVALS = {
     { date: "2027-10-09", festival: "Dussehra", category: "Major Festival", deity: "Lord Rama", description: "Dussehra victory celebration.", importance: "High" },
     { date: "2027-10-18", festival: "Karva Chauth", category: "Vrats", deity: "Lord Shiva & Parvati", description: "Married women fasting.", importance: "Medium" },
     { date: "2027-10-29", festival: "Diwali", category: "Major Festival", deity: "Maha Lakshmi", description: "Diwali lamps festival.", importance: "High" },
-    { date: "2027-10-31", festival: "Bhai Dooj", category: "Major Festival", deity: "Yama & Yamuna", description: "Sibling worship.", importance: "Medium" }
+    { date: "2027-10-31", festival: "Bhai Dooj", category: "Major Festival", deity: "Yama & Yamuna", description: "Sibling worship.", importance: "Medium" },
+    { date: "2027-11-04", festival: "Chhath Puja", category: "Major Festival", deity: "Surya Dev / Chhathi Maiya", description: "Ancient Hindu festival dedicated to Surya Dev and Chhathi Maiya, marked by rigorous fasting and offering Arghya to the setting and rising Sun.", importance: "High", story: "Celebrated to thank Surya Dev for sustaining life on earth and to request blessings for health and happiness.", rituals: "Holy bathing, fasting, abstaining from drinking water (Nirjala), standing in water, and offering Prasad and Arghya.", fasting: "Strict 36-hour waterless fast (Nirjala Vrat)." }
   ],
   2028: [
     { date: "2028-01-15", festival: "Makar Sankranti", category: "Major Festival", deity: "Surya Dev", description: "Transit into Capricorn.", importance: "High" },
@@ -201,7 +206,28 @@ const STATIC_FESTIVALS = {
     { date: "2028-09-27", festival: "Dussehra", category: "Major Festival", deity: "Lord Rama", description: "Vijayadashami.", importance: "High" },
     { date: "2028-10-07", festival: "Karva Chauth", category: "Vrats", deity: "Lord Shiva & Parvati", description: "Fasting ritual.", importance: "Medium" },
     { date: "2028-10-17", festival: "Diwali", category: "Major Festival", deity: "Maha Lakshmi", description: "Lights and Lakshmi Puja.", importance: "High" },
-    { date: "2028-10-19", festival: "Bhai Dooj", category: "Major Festival", deity: "Yama & Yamuna", description: "Sibling bonding.", importance: "Medium" }
+    { date: "2028-10-19", festival: "Bhai Dooj", category: "Major Festival", deity: "Yama & Yamuna", description: "Sibling bonding.", importance: "Medium" },
+    { date: "2028-11-22", festival: "Chhath Puja", category: "Major Festival", deity: "Surya Dev / Chhathi Maiya", description: "Ancient Hindu festival dedicated to Surya Dev and Chhathi Maiya, marked by rigorous fasting and offering Arghya to the setting and rising Sun.", importance: "High", story: "Celebrated to thank Surya Dev for sustaining life on earth and to request blessings for health and happiness.", rituals: "Holy bathing, fasting, abstaining from drinking water (Nirjala), standing in water, and offering Prasad and Arghya.", fasting: "Strict 36-hour waterless fast (Nirjala Vrat)." }
+  ],
+  2029: [
+    { date: "2029-01-14", festival: "Makar Sankranti", category: "Major Festival", deity: "Surya Dev", description: "Transit of the Sun into Capricorn, marking the end of winter.", importance: "High" },
+    { date: "2029-01-19", festival: "Vasant Panchami", category: "Major Festival", deity: "Saraswati Devi", description: "Festival dedicated to Goddess Saraswati, marking the arrival of spring.", importance: "High" },
+    { date: "2029-02-11", festival: "Maha Shivratri", category: "Major Festival", deity: "Lord Shiva", description: "The great night of Shiva, celebrating the cosmic union.", importance: "High" },
+    { date: "2029-03-01", festival: "Holi", category: "Major Festival", deity: "Lord Krishna", description: "The vibrant spring festival of colors.", importance: "High" },
+    { date: "2029-04-14", festival: "Chaitra Navratri Begins", category: "Navratri", deity: "Devi Durga", description: "Start of the nine sacred nights of spring Navratri.", importance: "High" },
+    { date: "2029-04-23", festival: "Ram Navami", category: "Major Festival", deity: "Lord Rama", description: "Birth anniversary of Lord Sri Rama.", importance: "High" },
+    { date: "2029-04-28", festival: "Hanuman Jayanti", category: "Major Festival", deity: "Hanuman Ji", description: "Birth anniversary of Hanuman Ji.", importance: "High" },
+    { date: "2029-07-25", festival: "Guru Purnima", category: "Major Festival", deity: "Sage Vyasa", description: "Honoring spiritual and academic gurus.", importance: "High" },
+    { date: "2029-08-23", festival: "Raksha Bandhan", category: "Major Festival", deity: "Lord Krishna", description: "Celebrating the bond between brothers and sisters.", importance: "High" },
+    { date: "2029-09-01", festival: "Krishna Janmashtami", category: "Major Festival", deity: "Lord Krishna", description: "Birth celebration of Lord Sri Krishna.", importance: "High" },
+    { date: "2029-09-11", festival: "Ganesh Chaturthi", category: "Major Festival", deity: "Lord Ganesha", description: "Arrival of Lord Ganesha.", importance: "High" },
+    { date: "2029-10-08", festival: "Sharad Navratri Begins", category: "Navratri", deity: "Devi Durga", description: "Beginning of the major autumn Navratri.", importance: "High" },
+    { date: "2029-10-16", festival: "Durga Ashtami", category: "Navratri", deity: "Devi Durga", description: "Maha Ashtami worship of Maa Durga.", importance: "High" },
+    { date: "2029-10-17", festival: "Dussehra", category: "Major Festival", deity: "Lord Rama", description: "Victory of Lord Rama over Ravana.", importance: "High" },
+    { date: "2029-10-26", festival: "Karva Chauth", category: "Vrats", deity: "Lord Shiva & Parvati", description: "Fasting by married women for husband's long life.", importance: "Medium" },
+    { date: "2029-11-05", festival: "Diwali", category: "Major Festival", deity: "Maha Lakshmi", description: "Festival of Lights celebrating Lord Rama's return to Ayodhya.", importance: "High" },
+    { date: "2029-11-07", festival: "Bhai Dooj", category: "Major Festival", deity: "Yama & Yamuna", description: "Celebrating the sibling bond.", importance: "Medium" },
+    { date: "2029-11-11", festival: "Chhath Puja", category: "Major Festival", deity: "Surya Dev / Chhathi Maiya", description: "Ancient Hindu festival dedicated to Surya Dev and Chhathi Maiya, marked by rigorous fasting and offering Arghya to the setting and rising Sun.", importance: "High", story: "Celebrated to thank Surya Dev for sustaining life on earth and to request blessings for health and happiness.", rituals: "Holy bathing, fasting, abstaining from drinking water (Nirjala), standing in water, and offering Prasad and Arghya.", fasting: "Strict 36-hour waterless fast (Nirjala Vrat)." }
   ]
 };
 
@@ -301,10 +327,18 @@ function generateYear(year) {
     }
   }
 
-  // Force-add special required ones if they were missed by calculation or occurred at different boundaries
-  const nirjalaDate = year === 2023 ? "2023-05-31" : year === 2024 ? "2024-06-18" : year === 2025 ? "2025-06-07" : year === 2026 ? "2026-06-25" : year === 2027 ? "2027-06-14" : "2028-06-02";
-  const devshayaniDate = year === 2023 ? "2023-06-29" : year === 2024 ? "2024-07-17" : year === 2025 ? "2025-07-06" : year === 2026 ? "2026-07-25" : year === 2027 ? "2027-07-14" : "2028-07-03";
-  const kartikPurnimaDate = year === 2023 ? "2023-11-27" : year === 2024 ? "2024-11-15" : year === 2025 ? "2025-11-05" : year === 2026 ? "2026-11-24" : year === 2027 ? "2027-11-14" : "2028-11-23";
+  const nirjalaDates = {
+    2023: "2023-05-31", 2024: "2024-06-18", 2025: "2025-06-07", 2026: "2026-06-25", 2027: "2027-06-14", 2028: "2028-06-02", 2029: "2029-06-22"
+  };
+  const devshayaniDates = {
+    2023: "2023-06-29", 2024: "2024-07-17", 2025: "2025-07-06", 2026: "2026-07-25", 2027: "2027-07-14", 2028: "2028-07-03", 2029: "2029-07-21"
+  };
+  const kartikPurnimaDates = {
+    2023: "2023-11-27", 2024: "2024-11-15", 2025: "2025-11-05", 2026: "2026-11-24", 2027: "2027-11-14", 2028: "2028-11-23", 2029: "2029-11-21"
+  };
+  const nirjalaDate = nirjalaDates[year] || "2029-06-22";
+  const devshayaniDate = devshayaniDates[year] || "2029-07-21";
+  const kartikPurnimaDate = kartikPurnimaDates[year] || "2029-11-21";
 
   // Nirjala Ekadashi
   const existingNirjala = fests.find(f => f.date === nirjalaDate && f.category === "Ekadashi");
@@ -393,7 +427,7 @@ if (!fs.existsSync(dataDirSrc)) {
   fs.mkdirSync(dataDirSrc, { recursive: true });
 }
 
-for (let year = 2023; year <= 2028; year++) {
+for (let year = 2023; year <= 2029; year++) {
   const fileContent = generateYear(year);
   const jsonStr = JSON.stringify(fileContent, null, 2);
   fs.writeFileSync(path.join(dataDirPublic, `${year}.json`), jsonStr);
