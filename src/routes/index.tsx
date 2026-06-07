@@ -753,6 +753,18 @@ function HomePage() {
               </ScrollReveal>
             ))}
           </div>
+
+          <div className="mt-12 text-center">
+            <ScrollReveal direction="up" delay={200} duration={800}>
+              <Link
+                to="/gallery"
+                className="group relative overflow-hidden inline-flex items-center gap-2 px-7 py-3 rounded-full bg-gradient-sacred text-cream font-medium shadow-gold hover:opacity-95 hover:scale-[1.03] active:scale-95 transition-all duration-300"
+              >
+                <span className="btn-shine-overlay" />
+                {hi ? "गैलरी देखें" : "View Gallery"} <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-300" />
+              </Link>
+            </ScrollReveal>
+          </div>
         </div>
       </section>
 
