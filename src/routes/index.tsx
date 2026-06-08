@@ -34,33 +34,33 @@ import { JsonLd } from "@/components/JsonLd";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Namami Vindhyavasini Sansthan | Maa Vindhyavasini Darshan, Stotram, Aarti, Events & Spiritual Guidance" },
+      { title: "Namami Vindhyavasini | Official Website of Namami Vindhyavasini Sansthan" },
       {
         name: "description",
         content:
-          "Official Namami Vindhyavasini Sansthan website dedicated to Maa Vindhyavasini. Explore devotional content, stotram, aarti, spiritual guidance, events, gallery, videos and temple-related information.",
+          "Namami Vindhyavasini is the official website of Namami Vindhyavasini Sansthan. Explore Maa Vindhyavasini Darshan at Vindhyachal Dham, divine photo galleries, devotee reviews, daily devotional activities, and spiritual resources.",
       },
       {
         name: "keywords",
         content:
-          "Namami Vindhyavasini, Maa Vindhyavasini, Vindhyachal Dham, Shakti Peeth, Vindhyavasini Temple, stotram, aarti, daily sandesh, माँ विंध्यवासिनी, विंध्याचल, शक्ति पीठ, विंध्यवासिनी मंदिर",
+          "Namami Vindhyavasini, Namami Vindhyavasini Sansthan, Maa Vindhyavasini, Vindhyachal Dham, Vindhyavasini Temple, Vindhyavasini Devi, Shakti Peeth, daily sandesh, stotram, aarti",
       },
-      { property: "og:title", content: "Namami Vindhyavasini Sansthan | Maa Vindhyavasini Darshan, Stotram, Aarti, Events & Spiritual Guidance" },
+      { property: "og:title", content: "Namami Vindhyavasini | Official Website of Namami Vindhyavasini Sansthan" },
       {
         property: "og:description",
         content:
-          "Official Namami Vindhyavasini Sansthan website dedicated to Maa Vindhyavasini. Explore devotional content, stotram, aarti, spiritual guidance, events, gallery, videos and temple-related information.",
+          "Namami Vindhyavasini is the official website of Namami Vindhyavasini Sansthan. Explore Maa Vindhyavasini Darshan at Vindhyachal Dham, galleries, reviews, and devotional activities.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://www.namamivindhyavasini.in/" },
       { property: "og:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
       { property: "og:site_name", content: "Namami Vindhyavasini Sansthan" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Namami Vindhyavasini Sansthan | Maa Vindhyavasini Darshan, Stotram, Aarti, Events" },
+      { name: "twitter:title", content: "Namami Vindhyavasini | Official Website of Namami Vindhyavasini Sansthan" },
       {
         name: "twitter:description",
         content:
-          "Official Namami Vindhyavasini Sansthan website dedicated to Maa Vindhyavasini. Explore devotional content, stotram, aarti, spiritual guidance, events, gallery, and videos.",
+          "Namami Vindhyavasini is the official website of Namami Vindhyavasini Sansthan. Explore Maa Vindhyavasini Darshan, galleries, reviews, and devotional activities.",
       },
       { name: "twitter:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
       { name: "theme-color", content: "#7a1e1e" },
@@ -74,11 +74,12 @@ export const Route = createFileRoute("/")({
   component: HomePage,
 });
 
-const slides: { img: string; titleKey: TKey; subKey?: TKey; sanskrit: string; duration: number }[] =
+const slides: { img: string; titleKey: TKey; altKey: TKey; subKey?: TKey; sanskrit: string; duration: number }[] =
   [
     {
       img: maaImg,
       titleKey: "home.slide.vindhya.title",
+      altKey: "home.slide.vindhya.alt" as TKey,
       subKey: "home.slide.vindhya.sub",
       sanskrit: "श्री विन्ध्यवासिन्यै नमः",
       duration: 6000,
@@ -86,12 +87,14 @@ const slides: { img: string; titleKey: TKey; subKey?: TKey; sanskrit: string; du
     {
       img: maaImg2,
       titleKey: "home.slide.darshan.title",
+      altKey: "home.slide.darshan.alt" as TKey,
       sanskrit: "जय माँ विन्ध्यवासिनी",
       duration: 3500,
     },
     {
       img: maaImg3,
       titleKey: "home.slide.shringar.title",
+      altKey: "home.slide.shringar.alt" as TKey,
       sanskrit: "जय माँ विन्ध्यवासिनी",
       duration: 3500,
     },
@@ -116,7 +119,9 @@ function HeroSlider() {
           >
             <img
               src={s.img}
-              alt={t(s.titleKey)}
+              alt={t(s.altKey)}
+              fetchPriority={idx === 0 ? "high" : "low"}
+              loading={idx === 0 ? "eager" : "lazy"}
               className={`w-full h-full object-cover ${idx === i ? "animate-kenburns" : ""}`}
             />
             <div className="absolute inset-0 bg-gradient-overlay" />
@@ -326,13 +331,16 @@ function HomePage() {
     "url": "https://www.namamivindhyavasini.in",
     "logo": "https://www.namamivindhyavasini.in/favicon.png",
     "image": "https://www.namamivindhyavasini.in/maa-vindhyavasini.png",
-    "description": "Official Namami Vindhyavasini Sansthan website dedicated to Maa Vindhyavasini. Explore devotional content, stotram, aarti, spiritual guidance, events, gallery, videos and temple-related information.",
+    "description": "Official Namami Vindhyavasini Sansthan website dedicated to Maa Vindhyavasini at Vindhyachal Dham. Explore daily spiritual updates, bhandara, and social activities.",
     "contactPoint": {
       "@type": "ContactPoint",
       "contactType": "customer support",
       "email": "info@namamivindhyavasini.in"
     },
     "sameAs": [
+      "https://www.facebook.com/profile.php?id=61590841911906",
+      "https://www.instagram.com/namamivindhyavasini",
+      "https://www.youtube.com/@astroyogiumesh",
       "https://www.youtube.com/@NamamiVindhyavasini"
     ]
   };
@@ -355,12 +363,25 @@ function HomePage() {
     "@type": "WebPage",
     "@id": "https://www.namamivindhyavasini.in/#webpage",
     "url": "https://www.namamivindhyavasini.in",
-    "name": "Namami Vindhyavasini Sansthan | Maa Vindhyavasini Darshan, Stotram, Aarti, Events & Spiritual Guidance",
-    "description": "Official Namami Vindhyavasini Sansthan website dedicated to Maa Vindhyavasini. Explore devotional content, stotram, aarti, spiritual guidance, events, gallery, videos and temple-related information.",
+    "name": "Namami Vindhyavasini | Official Website of Namami Vindhyavasini Sansthan",
+    "description": "Namami Vindhyavasini is the official website of Namami Vindhyavasini Sansthan. Explore Maa Vindhyavasini Darshan at Vindhyachal Dham, galleries, reviews, and devotional activities.",
     "isPartOf": {
       "@type": "WebSite",
       "@id": "https://www.namamivindhyavasini.in/#website"
     }
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.namamivindhyavasini.in"
+      }
+    ]
   };
 
   const faqSchema = {
@@ -478,6 +499,7 @@ function HomePage() {
       <JsonLd data={orgSchema} />
       <JsonLd data={websiteSchema} />
       <JsonLd data={webpageSchema} />
+      <JsonLd data={breadcrumbSchema} />
       <JsonLd data={faqSchema} />
       <MantraMarquee />
       {/* HERO */}
@@ -544,9 +566,9 @@ function HomePage() {
                 </Link>
                 <Link
                   to="/about"
-                  className="inline-flex items-center px-7 py-3 rounded-full border-2 border-maroon text-maroon font-medium hover:bg-maroon hover:text-cream hover:scale-[1.03] active:scale-95 transition-all duration-300"
+                  className="inline-flex items-center px-7 py-3 rounded-full border-2 border-maroon text-maroon font-medium hover:bg-maroon hover:text-cream hover:scale-[1.03] active:scale-95 transition-all duration-300 text-center"
                 >
-                  {t("home.cta.about")}
+                  {hi ? "नमामि विन्ध्यवासिनी संस्थान के बारे में जानें" : "Learn About Namami Vindhyavasini Sansthan"}
                 </Link>
               </div>
             </div>
@@ -649,9 +671,10 @@ function HomePage() {
               </p>
               <Link
                 to="/about"
+                hash="history"
                 className={`mt-6 inline-flex items-center gap-2 text-maroon font-medium hover:text-saffron transition-colors duration-300 ${dev}`}
               >
-                {hi ? "विस्तार से पढ़ें" : "Read the full story"} <ArrowRight size={16} />
+                {hi ? "माँ विन्ध्यवासिनी का विस्तृत पौराणिक इतिहास पढ़ें" : "Read the Detailed History of Maa Vindhyavasini"} <ArrowRight size={16} />
               </Link>
             </ScrollReveal>
           </div>
@@ -725,7 +748,7 @@ function HomePage() {
                 to="/gallery"
                 className={`inline-flex items-center gap-2 text-maroon font-medium hover:text-saffron transition-colors duration-300 ${dev}`}
               >
-                {hi ? "गैलरी देखें" : "View Gallery"} <ArrowRight size={16} />
+                {hi ? "माँ विन्ध्यवासिनी श्रृंगार दर्शन गैलरी देखें" : "Explore Maa Vindhyavasini Divine Gallery"} <ArrowRight size={16} />
               </Link>
             </div>
           </ScrollReveal>
@@ -781,7 +804,7 @@ function HomePage() {
               to="/reviews"
               className={`inline-flex items-center gap-2 text-maroon font-medium hover:text-saffron transition-colors duration-300 ${dev}`}
             >
-              {hi ? "सभी समीक्षाएं पढ़ें" : "Read More Reviews"} <ArrowRight size={16} />
+              {hi ? "श्रद्धालुओं के पावन अनुभव व समीक्षाएं पढ़ें" : "Read Maa Vindhyavasini Devotee Reviews"} <ArrowRight size={16} />
             </Link>
           </div>
         </ScrollReveal>
@@ -963,9 +986,9 @@ function HomePage() {
                 </Link>
                 <Link
                   to="/contact"
-                  className="px-7 py-3 rounded-full border-2 border-cream text-cream font-medium hover:bg-cream hover:text-maroon hover:scale-[1.03] transition-all duration-300"
+                  className="px-7 py-3 rounded-full border-2 border-cream text-cream font-medium hover:bg-cream hover:text-maroon hover:scale-[1.03] transition-all duration-300 text-center"
                 >
-                  {t("home.cta2.contact")}
+                  {hi ? "नमामि विन्ध्यवासिनी संस्थान से संपर्क करें" : "Contact Namami Vindhyavasini Sansthan"}
                 </Link>
               </div>
             </div>

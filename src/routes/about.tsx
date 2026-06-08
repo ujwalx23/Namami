@@ -194,7 +194,7 @@ function AboutPage() {
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 pointer-events-none select-none"
               />
             </div>
-            <div className="lg:col-span-7 space-y-6">
+            <div id="history" className="lg:col-span-7 space-y-6 scroll-mt-24">
               <Section title={t("about.history.title")}>
                 <div className="space-y-4">
                   <p className={`text-foreground/85 leading-relaxed text-lg ${dev}`}>

@@ -40,26 +40,29 @@ export const translations = {
 
   // ---- Home page ----
   "home.badge": { en: "Jai Maa Vindhyavasini", hi: "जय माँ विन्ध्यवासिनी" },
-  "home.hero.title1": { en: "Embrace Divine", hi: "दिव्य कृपा का" },
-  "home.hero.title2": { en: "Grace", hi: "आलिंगन" },
+  "home.hero.title1": { en: "Namami Vindhyavasini", hi: "नमामि विन्ध्यवासिनी" },
+  "home.hero.title2": { en: "Divine Grace", hi: "की दिव्य कृपा" },
   "home.hero.desc": {
-    en: "Step into the sacred world of Maa Vindhyavasini, the divine Shakti Pitha of the Vindhya range. Our sansthan preserves the ancient rituals of the Devi, organises satsang and seva and welcomes every devotee into the bhakti of the Mother.",
-    hi: "माँ विन्ध्यवासिनी के पावन धाम में प्रवेश करें, जो विन्ध्य पर्वत की जागृत शक्तिपीठ है। हमारा संस्थान देवी की प्राचीन परम्पराओं का संरक्षण करता है, सत्संग एवं सेवा का आयोजन करता है, और हर भक्त को माँ की भक्ति में आमंत्रित करता है।",
+    en: "Step into the sacred world of Maa Vindhyavasini at Vindhyachal Dham, the divine Shakti Peeth of the Vindhya range. As the official portal of Namami Vindhyavasini Sansthan, we welcome every devotee to explore daily updates, history, and devotional activities of Namami Vindhyavasini.",
+    hi: "विन्ध्याचल धाम में माँ विन्ध्यवासिनी के पावन और जागृत शक्तिपीठ में प्रवेश करें। नमामि विन्ध्यवासिनी संस्थान की आधिकारिक वेबसाइट के माध्यम से नमामि विन्ध्यवासिनी की महिमा, आरती, दिव्य संदेश एवं धार्मिक सेवा कार्यों से जुड़ें।",
   },
   "home.cta.today": { en: "Divine Sandesh", hi: "दिव्य संदेश" },
   "home.cta.about": { en: "About Dham", hi: "धाम के बारे में" },
-
+ 
   "home.slide.vindhya.title": { en: "Namami Vindhyavasini", hi: "नमामि विन्ध्यवासिनी" },
   "home.slide.vindhya.sub": { en: "Vindhyachal Dham", hi: "विन्ध्याचल धाम" },
+  "home.slide.vindhya.alt": { en: "Maa Vindhyavasini Darshan at Vindhyachal Dham Temple", hi: "विन्ध्याचल धाम मंदिर में माँ विन्ध्यवासिनी के दिव्य दर्शन" },
   "home.slide.darshan.title": { en: "Divine Darshan", hi: "दिव्य दर्शन" },
+  "home.slide.darshan.alt": { en: "Maa Vindhyavasini Shringar and Aarti at Vindhyachal Dham", hi: "विन्ध्याचल धाम में माँ विन्ध्यवासिनी के दिव्य श्रृंगार और आरती" },
   "home.slide.shringar.title": { en: "Maa ka Shringar", hi: "माँ का श्रृंगार" },
-
+  "home.slide.shringar.alt": { en: "Namami Vindhyavasini Devotional Image and Sacred Alankar", hi: "नमामि विन्ध्यवासिनी का पावन चित्र और दिव्य अलंकार" },
+ 
   "home.intro.kicker": { en: "🌺 SANATAN PARAMPARA", hi: "🌺 सनातन परम्परा" },
   "home.intro.title": { en: "A Legacy of Faith and Seva", hi: "श्रद्धा और सेवा की विरासत" },
   "home.card.purpose.title": { en: "Our Purpose", hi: "हमारा उद्देश्य" },
   "home.card.purpose.text": {
-    en: "To serve devotees of Maa Vindhyavasini with devotion, compassion and dedication. Our mission is to preserve Sanatan values, support spiritual growth and create meaningful opportunities for worship, seva and community service.",
-    hi: "माँ विन्ध्यवासिनी के भक्तों की भक्ति, करुणा और समर्पण के साथ सेवा करना। हमारा मिशन सनातन मूल्यों को संरक्षित करना, आध्यात्मिक विकास का समर्थन करना और पूजा, सेवा एवं सामुदायिक सेवा के अवसर प्रदान करना है।",
+    en: "To serve the global community of Maa Vindhyavasini devotees at Vindhyachal Dham with dedication. Namami Vindhyavasini Sansthan is committed to preserving sacred traditions, spiritual growth, and community seva.",
+    hi: "नमामि विन्ध्यवासिनी संस्थान के माध्यम से विन्ध्याचल धाम में माँ विन्ध्यवासिनी के सभी श्रद्धालुओं की सेवा करना। हमारा उद्देश्य प्राचीन वैदिक परंपराओं का संरक्षण और जनकल्याणकारी सेवा कार्यों का संचालन करना है।",
   },
   "home.card.trust.title": { en: "Devotee Support", hi: "भक्त सहायता" },
   "home.card.trust.text": {
@@ -71,7 +74,7 @@ export const translations = {
     en: "Your generous contributions support temple operations, religious activities and community service programs. We ensure that every donation is utilized with care, purpose and transparency. 🌺🙏",
     hi: "आपके उदार योगदान से मंदिर संचालन, धार्मिक गतिविधियों और सामुदायिक सेवा कार्यक्रमों को सहायता मिलती है। हम सुनिश्चित करते हैं कि प्रत्येक दान का उपयोग सावधानी, उद्देश्य और पारदर्शिता के साथ हो। 🌺🙏",
   },
-
+ 
   "home.sandesh.kicker": { en: "Daily Wisdom", hi: "दैनिक प्रेरणा" },
   "home.sandesh.title": { en: "Sandesh", hi: "संदेश" },
   "home.sandesh.quote": {
@@ -82,16 +85,16 @@ export const translations = {
   "home.sandesh.read": { en: "Read all sandesh", hi: "सभी संदेश पढ़ें" },
   "home.pillars": { en: "Shanti ✦ Bhakti ✦ Sewa", hi: "शान्ति ✦ भक्ति ✦ सेवा" },
   "home.pillars.sub": { en: "Three pillars of our path", hi: "हमारे मार्ग के तीन स्तम्भ" },
-
+ 
   "home.events.kicker": { en: "What's Happening", hi: "आगामी" },
   "home.events.title": { en: "Upcoming Events", hi: "आगामी कार्यक्रम" },
   "home.events.viewall": { en: "View all", hi: "सभी देखें" },
-
+ 
   "home.shakti.kicker": { en: "Shakti Pitha", hi: "शक्तिपीठ" },
   "home.shakti.title": { en: "Maa Vindhyavasini Dham", hi: "माँ विन्ध्यवासिनी धाम" },
   "home.shakti.text": {
-    en: "On the holy banks of the Ganga, in the Vindhya hills of Mirzapur, sits one of India's most powerful Shakti Pithas. Devi Vindhyavasini is worshipped here as the protector of dharma and she is the eternal Mother who chose this land after slaying Mahishasura.",
-    hi: "गंगा के पावन तट पर, मिर्जापुर के विन्ध्य पर्वतों में, भारत के अत्यंत प्रतापी शक्तिपीठों में से एक विराजमान है। यहाँ देवी विन्ध्यवासिनी धर्म की रक्षिका के रूप में पूजित हैं, तथा वे ही सनातन माँ हैं जिन्होंने महिषासुर का वध करके इस भूमि को अपना धाम बनाया।",
+    en: "On the holy banks of the Ganges in Vindhyachal Dham sits the historic Vindhyavasini Temple, one of India's most venerated Shakti Peethas. Here, Maa Vindhyavasini Devi is worshipped as the supreme protector of dharma, drawing millions of pilgrims to Namami Vindhyavasini for spiritual blessings.",
+    hi: "गंगा नदी के पावन तट पर विन्ध्याचल धाम में माँ विन्ध्यवासिनी देवी का ऐतिहासिक मंदिर स्थित है, जो सनातन धर्म का एक प्रमुख शक्तिपीठ है। यहाँ माँ विन्ध्यवासिनी की कृपा प्राप्त करने और नमामि विन्ध्यवासिनी की आराधना के लिए प्रतिवर्ष करोड़ों श्रद्धालु पधारते हैं।",
   },
   "home.shakti.stat1": { en: "Shakti Pitha", hi: "शक्तिपीठ" },
   "home.shakti.stat1v": { en: "of Devi Durga", hi: "देवी दुर्गा का" },
