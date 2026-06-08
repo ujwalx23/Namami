@@ -39,7 +39,7 @@ export function SiteFooter() {
     {
       name: "Instagram",
       icon: Instagram,
-      to: "https://www.instagram.com/namamivindhyavasini",
+      to: "https://www.instagram.com/namaivindhyavasini",
       isExternal: true,
       className: "social-icon-ig",
       label: "Instagram",
