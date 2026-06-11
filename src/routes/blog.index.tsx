@@ -70,10 +70,8 @@ export const Route = createFileRoute("/blog/")({
 const categoryTranslations: Record<string, { en: string; hi: string }> = {
   "Temple History": { en: "Temple History", hi: "मंदिर इतिहास" },
   "Guruji Messages": { en: "Guruji Messages", hi: "गुरुजी संदेश" },
-  "Festivals": { en: "Festivals", hi: "त्योहार और उत्सव" },
   "Spiritual Knowledge": { en: "Spiritual Knowledge", hi: "आध्यात्मिक ज्ञान" },
   "Devotional Articles": { en: "Devotional Articles", hi: "भक्ति लेख" },
-  "Events & Announcements": { en: "Events & Announcements", hi: "कार्यक्रम व घोषणाएँ" },
   "Maa Vindhyavasini Stories": { en: "Maa Vindhyavasini Stories", hi: "माँ विंध्यवासिनी कथाएँ" }
 };
 

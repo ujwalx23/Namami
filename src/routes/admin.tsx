@@ -2230,10 +2230,8 @@ function BlogAdmin() {
   const categories = [
     "Temple History",
     "Guruji Messages",
-    "Festivals",
     "Spiritual Knowledge",
     "Devotional Articles",
-    "Events & Announcements",
     "Maa Vindhyavasini Stories"
   ];
 
