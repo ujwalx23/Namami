@@ -8,11 +8,11 @@ const quickLinks: { to: string; key: TKey }[] = [
   { to: "/about", key: "nav.about" },
   { to: "/sandesh", key: "nav.sandesh" },
   { to: "/videos", key: "nav.videos" },
-  { to: "/events", key: "nav.events" },
   { to: "/blog", key: "nav.blog" },
   { to: "/calendar", key: "nav.calendar" },
   { to: "/reviews", key: "nav.reviews" },
   { to: "/gallery", key: "nav.gallery" },
+  { to: "/events", key: "nav.events" },
   { to: "/donation", key: "nav.donation" },
   { to: "/contact", key: "nav.contact" },
 ];

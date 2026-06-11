@@ -25,11 +25,11 @@ const links = [
   { to: "/about", key: "nav.about" as TKey, icon: Info },
   { to: "/sandesh", key: "nav.sandesh" as TKey, icon: Sparkles },
   { to: "/videos", key: "nav.videos" as TKey, icon: Video },
-  { to: "/events", key: "nav.events" as TKey, icon: Calendar },
   { to: "/blog", key: "nav.blog" as TKey, icon: BookOpen },
   { to: "/calendar", key: "nav.calendar" as TKey, icon: CalendarDays },
   { to: "/reviews", key: "nav.reviews" as TKey, icon: MessageSquare },
   { to: "/gallery", key: "nav.gallery" as TKey, icon: Image },
+  { to: "/events", key: "nav.events" as TKey, icon: Calendar },
   { to: "/contact", key: "nav.contact" as TKey, icon: Phone },
 ];
 
