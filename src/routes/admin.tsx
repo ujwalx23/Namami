@@ -2256,10 +2256,10 @@ function BlogAdmin() {
   const handleTitleChange = (val: string) => {
     setTitle(val);
     if (!editingId) {
-      // Basic slugification supporting Devanagari Unicode
+      // Basic slugification supporting only English lowercase alphanumeric and hyphens
       const computedSlug = val
         .toLowerCase()
-        .replace(/[^a-z0-9\u0900-\u097F]+/g, "-")
+        .replace(/[^a-z0-9]+/g, "-")
         .replace(/(^-|-$)/g, "");
       setSlug(computedSlug);
     }
@@ -2270,6 +2270,10 @@ function BlogAdmin() {
     e.preventDefault();
     if (!title.trim() || !slug.trim() || !content.trim()) {
       return toast.error("Title, Slug, and Content are required");
+    }
+
+    if (/[^a-z0-9-]/.test(slug)) {
+      return toast.error("Slug can only contain English lowercase letters, numbers, and hyphens (a-z, 0-9, -)");
     }
 
     const parsedTags = tags
@@ -2401,7 +2405,12 @@ function BlogAdmin() {
             <label className="text-xs font-semibold text-muted-foreground uppercase">Slug</label>
             <input
               value={slug}
-              onChange={(e) => setSlug(e.target.value)}
+              onChange={(e) => {
+                const val = e.target.value
+                  .toLowerCase()
+                  .replace(/[^a-z0-9-]/g, "");
+                setSlug(val);
+              }}
               placeholder="e.g. maa-vindhyavasini-temple-history"
               className="w-full px-4 py-2 rounded-lg border border-input bg-background text-sm focus:ring-2 focus:ring-gold focus:outline-none"
               required

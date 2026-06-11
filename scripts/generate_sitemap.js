@@ -72,6 +72,20 @@ function loadEnv() {
   }
 }
 
+function escapeXml(unsafe) {
+  if (!unsafe) return "";
+  return unsafe.replace(/[&<>\'"]/g, c => {
+    switch (c) {
+      case '<': return '&lt;';
+      case '>': return '&gt;';
+      case '&': return '&amp;';
+      case '\'': return '&apos;';
+      case '"': return '&quot;';
+      default: return c;
+    }
+  });
+}
+
 async function generateSitemap() {
   loadEnv();
 
@@ -225,16 +239,17 @@ async function generateSitemap() {
   // Dynamically append blog posts to sitemap
   blogPosts.forEach(post => {
     const postDate = post.publish_date ? post.publish_date.split("T")[0] : today;
+    const encodedSlug = encodeURIComponent(post.slug);
     sitemapContent += `  <url>
-    <loc>https://www.namamivindhyavasini.in/blog/${post.slug}</loc>
+    <loc>https://www.namamivindhyavasini.in/blog/${encodedSlug}</loc>
     <lastmod>${postDate}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
 `;
     if (post.featured_image) {
       sitemapContent += `    <image:image>
-      <image:loc>${post.featured_image}</image:loc>
-      <image:title>${post.title.replace(/[&<>'"]/g, "")}</image:title>
+      <image:loc>${escapeXml(post.featured_image)}</image:loc>
+      <image:title>${escapeXml(post.title)}</image:title>
     </image:image>
 `;
     }
