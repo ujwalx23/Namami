@@ -13,6 +13,7 @@ const quickLinks: { to: string; key: TKey }[] = [
   { to: "/gallery", key: "nav.gallery" },
   { to: "/reviews", key: "nav.reviews" },
   { to: "/donation", key: "nav.donation" },
+  { to: "/blog", key: "nav.blog" },
   { to: "/contact", key: "nav.contact" },
 ];
 

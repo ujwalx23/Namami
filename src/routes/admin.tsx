@@ -63,6 +63,7 @@ function AdminPage() {
     | "videos"
     | "notifications"
     | "gallery"
+    | "blog"
     | "analytics"
   >("sandesh");
 
@@ -213,6 +214,7 @@ function AdminPage() {
     { id: "videos", label: "Videos & Shorts" },
     { id: "notifications", label: "Inbox Broadcast" },
     { id: "gallery", label: "Gallery Manager" },
+    { id: "blog", label: "Blog Management" },
     { id: "analytics", label: "Analytics" },
   ];
 
@@ -249,11 +251,10 @@ function AdminPage() {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`w-full lg:w-auto px-2 py-2 lg:px-5 lg:py-2.5 rounded-lg font-medium text-[11px] sm:text-xs lg:text-sm transition flex items-center justify-center text-center leading-tight shrink-0 lg:shrink cursor-pointer ${
-                activeTab === tab.id
+              className={`w-full lg:w-auto px-2 py-2 lg:px-5 lg:py-2.5 rounded-lg font-medium text-[11px] sm:text-xs lg:text-sm transition flex items-center justify-center text-center leading-tight shrink-0 lg:shrink cursor-pointer ${activeTab === tab.id
                   ? "bg-gradient-sacred text-cream shadow-gold font-semibold"
                   : "text-muted-foreground hover:bg-card"
-              }`}
+                }`}
             >
               {tab.label}
             </button>
@@ -270,6 +271,7 @@ function AdminPage() {
           {activeTab === "videos" && <VideoAdmin />}
           {activeTab === "notifications" && <NotificationAdmin />}
           {activeTab === "gallery" && <GalleryAdmin />}
+          {activeTab === "blog" && <BlogAdmin />}
           {activeTab === "analytics" && <AnalyticsAdmin />}
         </div>
       </section>
@@ -1129,11 +1131,10 @@ function VideoAdmin() {
               setVideoTab("video");
               setEditingId(null);
             }}
-            className={`pb-2 px-1 font-medium border-b-2 transition ${
-              videoTab === "video"
+            className={`pb-2 px-1 font-medium border-b-2 transition ${videoTab === "video"
                 ? "border-maroon text-maroon font-semibold"
                 : "border-transparent text-muted-foreground hover:text-foreground"
-            }`}
+              }`}
           >
             🎥 Videos
           </button>
@@ -1142,11 +1143,10 @@ function VideoAdmin() {
               setVideoTab("short");
               setEditingId(null);
             }}
-            className={`pb-2 px-1 font-medium border-b-2 transition ${
-              videoTab === "short"
+            className={`pb-2 px-1 font-medium border-b-2 transition ${videoTab === "short"
                 ? "border-maroon text-maroon font-semibold"
                 : "border-transparent text-muted-foreground hover:text-foreground"
-            }`}
+              }`}
           >
             📱 Shorts
           </button>
@@ -1174,11 +1174,10 @@ function VideoAdmin() {
         <input
           value={form.embed}
           onChange={(e) => setForm({ ...form, embed: e.target.value })}
-          placeholder={`YouTube Link or Video ID (e.g. ${
-            videoTab === "short"
+          placeholder={`YouTube Link or Video ID (e.g. ${videoTab === "short"
               ? "https://youtube.com/shorts/A8Vv3V-d7rg"
               : "https://www.youtube.com/watch?v=i3W9AOFhJAI"
-          })`}
+            })`}
           className="w-full px-4 py-2 rounded-lg border border-input bg-background text-xs"
         />
         <button className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-sacred text-cream text-sm">
@@ -1300,9 +1299,8 @@ function VideoAdmin() {
                   </div>
                 </div>
                 <div
-                  className={`${
-                    v.type === "short" ? "aspect-[9/16] w-full" : "aspect-video w-full"
-                  } bg-black rounded-lg overflow-hidden border border-border shadow-sm`}
+                  className={`${v.type === "short" ? "aspect-[9/16] w-full" : "aspect-video w-full"
+                    } bg-black rounded-lg overflow-hidden border border-border shadow-sm`}
                 >
                   <iframe
                     className="w-full h-full"
@@ -1404,8 +1402,8 @@ function NotificationAdmin() {
         if (insertError) {
           toast.error(
             "Could not send: " +
-              insertError.message +
-              ". Run migration 20260528200000_inbox_messages.sql in Supabase SQL Editor.",
+            insertError.message +
+            ". Run migration 20260528200000_inbox_messages.sql in Supabase SQL Editor.",
           );
           setLoading(false);
           return;
@@ -2068,8 +2066,8 @@ function GalleryAdmin() {
       if (error) {
         toast.error(
           "Could not add: " +
-            error.message +
-            ". Run the gallery table SQL migration in your Supabase SQL Editor.",
+          error.message +
+          ". Run the gallery table SQL migration in your Supabase SQL Editor.",
         );
         setLoading(false);
         return;
@@ -2182,6 +2180,417 @@ function GalleryAdmin() {
                     onClick={() => void del(item.id)}
                     className="text-destructive p-1.5 hover:bg-destructive/10 rounded-lg transition shrink-0"
                     aria-label="Delete image"
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ==========================================
+// BLOG ADMIN PANEL
+// ==========================================
+function BlogAdmin() {
+  const [list, setList] = useState<Tables<"blog_posts">[]>([]);
+  const [loaded, setLoaded] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  
+  // Form state
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [title, setTitle] = useState("");
+  const [slug, setSlug] = useState("");
+  const [seoTitle, setSeoTitle] = useState("");
+  const [seoDescription, setSeoDescription] = useState("");
+  const [category, setCategory] = useState("Spiritual Knowledge");
+  const [tags, setTags] = useState("");
+  const [featuredImage, setFeaturedImage] = useState("");
+  const [content, setContent] = useState("");
+  const [author, setAuthor] = useState("Pujya Guru Ji");
+  const [publishDate, setPublishDate] = useState("");
+  const [status, setStatus] = useState("draft");
+  
+  const [search, setSearch] = useState("");
+
+  const categories = [
+    "Temple History",
+    "Guruji Messages",
+    "Festivals",
+    "Spiritual Knowledge",
+    "Devotional Articles",
+    "Events & Announcements",
+    "Maa Vindhyavasini Stories"
+  ];
+
+  async function load() {
+    const { data } = await supabase
+      .from("blog_posts")
+      .select("*")
+      .order("publish_date", { ascending: false });
+    setList((data as Tables<"blog_posts">[]) ?? []);
+    setLoaded(true);
+  }
+
+  async function handleRefresh() {
+    setRefreshing(true);
+    await load();
+    setTimeout(() => setRefreshing(false), 600);
+  }
+
+  if (!loaded) load();
+
+  // Auto-generate slug from title
+  const handleTitleChange = (val: string) => {
+    setTitle(val);
+    if (!editingId) {
+      // Basic slugification supporting Devanagari Unicode
+      const computedSlug = val
+        .toLowerCase()
+        .replace(/[^a-z0-9\u0900-\u097F]+/g, "-")
+        .replace(/(^-|-$)/g, "");
+      setSlug(computedSlug);
+    }
+  };
+
+
+  const save = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!title.trim() || !slug.trim() || !content.trim()) {
+      return toast.error("Title, Slug, and Content are required");
+    }
+
+    const parsedTags = tags
+      .split(",")
+      .map(t => t.trim())
+      .filter(t => t.length > 0);
+
+    const payload = {
+      title: title.trim(),
+      slug: slug.trim(),
+      seo_title: seoTitle.trim() || null,
+      seo_description: seoDescription.trim() || null,
+      category,
+      tags: parsedTags,
+      featured_image: featuredImage.trim() || null,
+      content: content.trim(),
+      author: author.trim() || "Pujya Guru Ji",
+      publish_date: publishDate ? new Date(publishDate).toISOString() : new Date().toISOString(),
+      status,
+      updated_at: new Date().toISOString()
+    };
+
+    if (editingId) {
+      const { data, error } = await supabase
+        .from("blog_posts")
+        .update(payload)
+        .eq("id", editingId)
+        .select();
+
+      if (error) return toast.error(error.message);
+      if (!data || data.length === 0) {
+        return toast.error("Update failed. RLS policy or missing row.");
+      }
+      toast.success("Blog post updated successfully");
+      setEditingId(null);
+    } else {
+      const { error } = await supabase.from("blog_posts").insert(payload);
+      if (error) return toast.error(error.message);
+      toast.success("Blog post created successfully");
+    }
+
+    // Reset form
+    setTitle("");
+    setSlug("");
+    setSeoTitle("");
+    setSeoDescription("");
+    setCategory("Spiritual Knowledge");
+    setTags("");
+    setFeaturedImage("");
+    setContent("");
+    setAuthor("Pujya Guru Ji");
+    setPublishDate("");
+    setStatus("draft");
+
+    await load();
+  };
+
+  async function del(id: string) {
+    if (!confirm("Are you sure you want to delete this blog post?")) return;
+    const { error } = await supabase.from("blog_posts").delete().eq("id", id);
+    if (error) return toast.error(error.message);
+    toast.success("Blog post deleted");
+    if (editingId === id) {
+      setEditingId(null);
+    }
+    await load();
+  }
+
+  function startEdit(post: Tables<"blog_posts">) {
+    setEditingId(post.id);
+    setTitle(post.title);
+    setSlug(post.slug);
+    setSeoTitle(post.seo_title || "");
+    setSeoDescription(post.seo_description || "");
+    setCategory(post.category);
+    setTags(post.tags ? post.tags.join(", ") : "");
+    setFeaturedImage(post.featured_image || "");
+    setContent(post.content);
+    setAuthor(post.author);
+    
+    // Format ISO string to datetime-local input format (YYYY-MM-DDTHH:MM)
+    if (post.publish_date) {
+      const date = new Date(post.publish_date);
+      const tzOffset = date.getTimezoneOffset() * 60000; // offset in milliseconds
+      const localISOTime = (new Date(date.getTime() - tzOffset)).toISOString().slice(0, 16);
+      setPublishDate(localISOTime);
+    } else {
+      setPublishDate("");
+    }
+    setStatus(post.status);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  const filtered = list.filter(p => 
+    p.title.toLowerCase().includes(search.toLowerCase()) || 
+    p.category.toLowerCase().includes(search.toLowerCase())
+  );
+
+  if (!loaded) return <AdminTabLoader />;
+
+  return (
+    <div>
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="font-display text-2xl text-maroon mb-0">
+          {editingId ? "Edit Blog Post" : "Blog Post Manager"}
+        </h3>
+        <button
+          onClick={handleRefresh}
+          disabled={refreshing}
+          className="px-4 py-1.5 rounded-full border border-gold/45 text-maroon text-xs font-medium hover:bg-cream/50 transition cursor-pointer flex items-center gap-1.5 disabled:opacity-60 active:scale-95"
+        >
+          <RotateCw size={12} className={refreshing ? "animate-spin" : ""} /> Refresh
+        </button>
+      </div>
+
+      <form onSubmit={save} className="p-6 rounded-2xl bg-card border border-border space-y-4 mb-8">
+        <div className="grid md:grid-cols-2 gap-4">
+          <div className="space-y-1">
+            <label className="text-xs font-semibold text-muted-foreground uppercase">Title</label>
+            <input
+              value={title}
+              onChange={(e) => handleTitleChange(e.target.value)}
+              placeholder="e.g. Maa Vindhyavasini Temple History"
+              className="w-full px-4 py-2 rounded-lg border border-input bg-background text-sm focus:ring-2 focus:ring-gold focus:outline-none"
+              required
+            />
+          </div>
+          <div className="space-y-1">
+            <label className="text-xs font-semibold text-muted-foreground uppercase">Slug</label>
+            <input
+              value={slug}
+              onChange={(e) => setSlug(e.target.value)}
+              placeholder="e.g. maa-vindhyavasini-temple-history"
+              className="w-full px-4 py-2 rounded-lg border border-input bg-background text-sm focus:ring-2 focus:ring-gold focus:outline-none"
+              required
+            />
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-4">
+          <div className="space-y-1">
+            <label className="text-xs font-semibold text-muted-foreground uppercase">SEO Meta Title</label>
+            <input
+              value={seoTitle}
+              onChange={(e) => setSeoTitle(e.target.value)}
+              placeholder="Title optimized for Google search results"
+              className="w-full px-4 py-2 rounded-lg border border-input bg-background text-sm focus:ring-2 focus:ring-gold focus:outline-none"
+            />
+          </div>
+          <div className="space-y-1">
+            <label className="text-xs font-semibold text-muted-foreground uppercase">SEO Meta Description</label>
+            <input
+              value={seoDescription}
+              onChange={(e) => setSeoDescription(e.target.value)}
+              placeholder="Short excerpt under 160 characters for search listings"
+              className="w-full px-4 py-2 rounded-lg border border-input bg-background text-sm focus:ring-2 focus:ring-gold focus:outline-none"
+            />
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-4">
+          <div className="space-y-1">
+            <label className="text-xs font-semibold text-muted-foreground uppercase">Category</label>
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              className="w-full px-4 py-2 rounded-lg border border-input bg-background text-sm focus:ring-2 focus:ring-gold focus:outline-none"
+            >
+              {categories.map(cat => (
+                <option key={cat} value={cat}>{cat}</option>
+              ))}
+            </select>
+          </div>
+          <div className="space-y-1">
+            <label className="text-xs font-semibold text-muted-foreground uppercase">Tags (comma-separated)</label>
+            <input
+              value={tags}
+              onChange={(e) => setTags(e.target.value)}
+              placeholder="e.g. temple, history, vindhyachal, devotions"
+              className="w-full px-4 py-2 rounded-lg border border-input bg-background text-sm focus:ring-2 focus:ring-gold focus:outline-none"
+            />
+          </div>
+          <div className="space-y-1">
+            <label className="text-xs font-semibold text-muted-foreground uppercase">Featured Image URL</label>
+            <input
+              value={featuredImage}
+              onChange={(e) => setFeaturedImage(e.target.value)}
+              placeholder="https://images.unsplash.com/photo-..."
+              className="w-full px-4 py-2 rounded-lg border border-input bg-background text-sm focus:ring-2 focus:ring-gold focus:outline-none"
+            />
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-4">
+          <div className="space-y-1">
+            <label className="text-xs font-semibold text-muted-foreground uppercase">Author</label>
+            <input
+              value={author}
+              onChange={(e) => setAuthor(e.target.value)}
+              placeholder="Pujya Guru Ji"
+              className="w-full px-4 py-2 rounded-lg border border-input bg-background text-sm focus:ring-2 focus:ring-gold focus:outline-none"
+            />
+          </div>
+          <div className="space-y-1">
+            <label className="text-xs font-semibold text-muted-foreground uppercase">Publish Date & Time (UTC/Local)</label>
+            <input
+              type="datetime-local"
+              value={publishDate}
+              onChange={(e) => setPublishDate(e.target.value)}
+              className="w-full px-4 py-2 rounded-lg border border-input bg-background text-sm focus:ring-2 focus:ring-gold focus:outline-none"
+            />
+          </div>
+          <div className="space-y-1">
+            <label className="text-xs font-semibold text-muted-foreground uppercase">Publish Status</label>
+            <select
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+              className="w-full px-4 py-2 rounded-lg border border-input bg-background text-sm focus:ring-2 focus:ring-gold focus:outline-none"
+            >
+              <option value="draft">Save Draft</option>
+              <option value="published">Publish Now</option>
+              <option value="scheduled">Schedule Later</option>
+            </select>
+          </div>
+        </div>
+
+        {/* Large Clean Content Editor */}
+        <div className="space-y-1">
+          <label className="text-xs font-semibold text-muted-foreground uppercase">Article Content</label>
+          <textarea
+            id="content-editor"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            rows={16}
+            placeholder="Write spiritual contents, temple logs, or messages. Supports HTML formatting if needed."
+            className="w-full p-4 rounded-lg border border-input bg-background text-sm focus:ring-2 focus:ring-gold focus:outline-none resize-y min-h-[300px]"
+            required
+          />
+        </div>
+
+        <div className="flex gap-2">
+          <button
+            type="submit"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-gradient-sacred text-cream text-sm font-medium transition shadow-gold cursor-pointer"
+          >
+            {editingId ? "Update Article" : "Publish Article"}
+          </button>
+          {editingId && (
+            <button
+              type="button"
+              onClick={() => {
+                setEditingId(null);
+                setTitle("");
+                setSlug("");
+                setSeoTitle("");
+                setSeoDescription("");
+                setCategory("Spiritual Knowledge");
+                setTags("");
+                setFeaturedImage("");
+                setContent("");
+                setAuthor("Pujya Guru Ji");
+                setPublishDate("");
+                setStatus("draft");
+              }}
+              className="px-5 py-2.5 rounded-full border border-border text-muted-foreground text-sm font-medium transition hover:bg-muted/10 cursor-pointer"
+            >
+              Cancel Edit
+            </button>
+          )}
+        </div>
+      </form>
+
+      {/* Articles List Table */}
+      <div className="space-y-4">
+        <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-3">
+          <h4 className="font-semibold text-maroon text-lg mb-0">Existing Articles</h4>
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search by title or category..."
+            className="px-3.5 py-1.5 rounded-full border border-input bg-card text-xs w-full sm:max-w-xs focus:ring-1 focus:ring-gold focus:outline-none"
+          />
+        </div>
+
+        {filtered.length === 0 ? (
+          <p className="text-sm text-muted-foreground">No blog posts match your search or filter.</p>
+        ) : (
+          <div className="space-y-3">
+            {filtered.map((post) => (
+              <div
+                key={post.id}
+                className="p-4 rounded-xl bg-card border border-border flex justify-between items-center gap-3"
+              >
+                <div>
+                  <div className="flex items-center gap-2 flex-wrap mb-1">
+                    <span className="text-[10px] font-semibold text-saffron bg-saffron/10 px-2 py-0.5 rounded">
+                      {post.category}
+                    </span>
+                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase ${
+                      post.status === "published"
+                        ? "bg-green-100 text-green-700 dark:bg-green-950/20 dark:text-green-400"
+                        : post.status === "scheduled"
+                        ? "bg-amber-100 text-amber-700 dark:bg-amber-950/20 dark:text-amber-400"
+                        : "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-400"
+                    }`}>
+                      {post.status}
+                    </span>
+                    <span className="text-[10px] text-muted-foreground">
+                      Publish: {new Date(post.publish_date).toLocaleDateString()}
+                    </span>
+                  </div>
+                  <div className="font-semibold text-maroon text-sm">{post.title}</div>
+                  <div className="text-xs text-muted-foreground mt-0.5">
+                    Author: {post.author} &middot; Slug: <span className="font-mono text-muted-foreground/70">{post.slug}</span>
+                  </div>
+                </div>
+                <div className="flex gap-1 shrink-0">
+                  <button
+                    onClick={() => startEdit(post)}
+                    className="text-saffron p-2 hover:bg-saffron/5 rounded transition cursor-pointer"
+                    aria-label="Edit post"
+                  >
+                    <Edit3 size={16} />
+                  </button>
+                  <button
+                    onClick={() => del(post.id)}
+                    className="text-destructive p-2 hover:bg-destructive/5 rounded transition cursor-pointer"
+                    aria-label="Delete post"
                   >
                     <Trash2 size={16} />
                   </button>

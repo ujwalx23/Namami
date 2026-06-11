@@ -44,6 +44,54 @@ export type Database = {
         };
         Relationships: [];
       };
+      blog_posts: {
+        Row: {
+          author: string;
+          category: string;
+          content: string;
+          created_at: string;
+          featured_image: string | null;
+          id: string;
+          publish_date: string;
+          seo_description: string | null;
+          seo_title: string | null;
+          slug: string;
+          status: string;
+          tags: string[] | null;
+          updated_at: string;
+        };
+        Insert: {
+          author?: string;
+          category: string;
+          content: string;
+          created_at?: string;
+          featured_image?: string | null;
+          id?: string;
+          publish_date?: string;
+          seo_description?: string | null;
+          seo_title?: string | null;
+          slug: string;
+          status?: string;
+          tags?: string[] | null;
+          updated_at?: string;
+        };
+        Update: {
+          author?: string;
+          category?: string;
+          content?: string;
+          created_at?: string;
+          featured_image?: string | null;
+          id?: string;
+          publish_date?: string;
+          seo_description?: string | null;
+          seo_title?: string | null;
+          slug?: string;
+          status?: string;
+          tags?: string[] | null;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
       contacts: {
         Row: {
           created_at: string;

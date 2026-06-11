@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
 import { useEffect, useMemo, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import type { Tables } from "@/integrations/supabase/types";
 import maaImg from "@/assets/maa-vindhyavasini.webp";
 import maaImg2 from "@/assets/maa-vindhyavasini-2.webp";
 import maaImg3 from "@/assets/maa-vindhyavasini-3.webp";
@@ -23,6 +25,7 @@ import {
   Bell,
   ShieldCheck,
   Quote,
+  Clock,
 } from "lucide-react";
 import { useLang } from "@/i18n/LangProvider";
 import { subscribeToNotifications, isPushConfigured } from "@/lib/push";
@@ -66,7 +69,10 @@ export const Route = createFileRoute("/")({
       { name: "theme-color", content: "#7a1e1e" },
     ],
     links: [
-      { rel: "icon", href: "/favicon.png" },
+      { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png?v=2" },
+      { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png?v=2" },
+      { rel: "icon", type: "image/png", sizes: "48x48", href: "/favicon-48x48.png?v=2" },
+      { rel: "shortcut icon", href: "/favicon.ico?v=2" },
       { rel: "canonical", href: "https://www.namamivindhyavasini.in/" },
       { rel: "manifest", href: "/manifest.webmanifest" },
     ],
@@ -318,10 +324,63 @@ function MantraMarquee() {
   );
 }
 
+const categoryTranslations: Record<string, { en: string; hi: string }> = {
+  "Temple History": { en: "Temple History", hi: "मंदिर इतिहास" },
+  "Guruji Messages": { en: "Guruji Messages", hi: "गुरुजी संदेश" },
+  "Festivals": { en: "Festivals", hi: "त्योहार और उत्सव" },
+  "Spiritual Knowledge": { en: "Spiritual Knowledge", hi: "आध्यात्मिक ज्ञान" },
+  "Devotional Articles": { en: "Devotional Articles", hi: "भक्ति लेख" },
+  "Events & Announcements": { en: "Events & Announcements", hi: "कार्यक्रम व घोषणाएँ" },
+  "Maa Vindhyavasini Stories": { en: "Maa Vindhyavasini Stories", hi: "माँ विंध्यवासिनी कथाएँ" }
+};
+
+function formatDate(isoString: string, lang: string) {
+  const date = new Date(isoString);
+  return date.toLocaleDateString(lang === "hi" ? "hi-IN" : "en-IN", {
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  });
+}
+
+function calculateReadingTime(text: string): number {
+  const wordsPerMinute = 200;
+  const noOfWords = text.split(/\s+/).length;
+  const minutes = noOfWords / wordsPerMinute;
+  return Math.max(1, Math.ceil(minutes));
+}
+
+function getExcerpt(content: string, length = 150): string {
+  const stripped = content
+    .replace(/[#*`_[\]()]/g, "")
+    .replace(/<[^>]*>/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (stripped.length <= length) return stripped;
+  return stripped.substring(0, length) + "...";
+}
+
+type BlogPost = Tables<"blog_posts">;
+
 function HomePage() {
   const { t, lang } = useLang();
   const hi = lang === "hi";
   const dev = hi ? "font-devanagari" : "";
+
+  const [latestBlogs, setLatestBlogs] = useState<BlogPost[]>([]);
+
+  useEffect(() => {
+    supabase
+      .from("blog_posts")
+      .select("*")
+      .eq("status", "published")
+      .lte("publish_date", new Date().toISOString())
+      .order("publish_date", { ascending: false })
+      .limit(3)
+      .then(({ data }) => {
+        if (data) setLatestBlogs(data as BlogPost[]);
+      });
+  }, []);
 
   const orgSchema = {
     "@context": "https://schema.org",
@@ -393,7 +452,7 @@ function HomePage() {
         "name": hi ? "माँ विंध्यवासिनी मंदिर कहाँ स्थित है?" : "Where is Maa Vindhyavasini Temple located?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": hi 
+          "text": hi
             ? "माँ विंध्यवासिनी देवी का प्राचीन मंदिर उत्तर प्रदेश के मिर्जापुर जिले में पवित्र गंगा नदी के तट पर स्थित विंध्याचल धाम में है।"
             : "Maa Vindhyavasini Temple is located in Vindhyachal Dham, Mirzapur district, Uttar Pradesh, India, on the banks of the sacred river Ganges."
         }
@@ -403,7 +462,7 @@ function HomePage() {
         "name": hi ? "त्रिकोण परिक्रमा का क्या महत्व है?" : "What is the significance of the Trikona Parikrama?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": hi 
+          "text": hi
             ? "त्रिकोण परिक्रमा विंध्याचल का एक अत्यंत पवित्र परिक्रमा पथ है जिसमें आदि शक्ति के तीन रूपों के दर्शन होते हैं: माँ विंध्यवासिनी (महालक्ष्मी), काली खोह में माँ काली (महाकाली) और अष्टभुजा मंदिर में माँ अष्टभुजा (महासरस्वती)।"
             : "Trikona Parikrama is a sacred pilgrimage circuit in Vindhyachal that includes visiting three key temples representing the three main forms of Adi Parashakti: Maa Vindhyavasini (Maha Lakshmi), Maa Kali at Kali Khoh (Maha Kali), and Maa Ashtabhuja (Maha Saraswati)."
         }
@@ -413,7 +472,7 @@ function HomePage() {
         "name": hi ? "नमामि विंध्यवासिनी संस्थान क्या है?" : "What is Namami Vindhyavasini Sansthan?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": hi 
+          "text": hi
             ? "नमामि विंध्यवासिनी संस्थान एक धार्मिक एवं आध्यात्मिक ट्रस्ट है जो भक्तों तक माँ विंध्यवासिनी की महिमा पहुँचाने, धार्मिक संसाधन, स्तोत्र और हिंदू कैलेंडर प्रकाशित करने के साथ-साथ मीडिया गैलरी, वीडियो और आध्यात्मिक संदेश प्रदान करने के लिए समर्पित है।"
             : "Namami Vindhyavasini Sansthan is a spiritual trust dedicated to spreading the divine message of Maa Vindhyavasini, publishing devotional resources, stotram, and the Hindu calendar, while also providing a media gallery, videos and spiritual sandesha."
         }
@@ -460,39 +519,39 @@ function HomePage() {
 
   const devoteeReviews = hi
     ? [
-        {
-          name: "प्रिया शर्मा",
-          comment:
-            "मैं प्रभावित हुई कि सबकुछ कितना व्यवस्थित था। मंदिर की जानकारी, दर्शन विवरण और विचारशील संदेश खंड ने मूल्यवान मार्गदर्शन और प्रेरणा प्रदान की। दर्शन की योजना बनाने वाले भक्तों के लिए अत्यंत अनुशंसित। 🌺🙏",
-        },
-        {
-          name: "राजेश मिश्रा",
-          comment:
-            "एक सुंदर और आध्यात्मिक रूप से उन्नत करने वाला स्थान। व्यवस्थाएं उत्कृष्ट थीं, और पूरा अनुभव सहज और यादगार रहा। मैं परिवार के साथ दर्शन करने की अत्यधिक सलाह देता हूँ।",
-        },
-        {
-          name: "मनिष तिवारी",
-          comment:
-            "एक अद्भुत पहल जो भक्तों को सनातन धर्म की शिक्षाओं, परंपराओं और मूल्यों से जोड़े रखने में मदद करती है।",
-        },
-      ]
+      {
+        name: "प्रिया शर्मा",
+        comment:
+          "मैं प्रभावित हुई कि सबकुछ कितना व्यवस्थित था। मंदिर की जानकारी, दर्शन विवरण और विचारशील संदेश खंड ने मूल्यवान मार्गदर्शन और प्रेरणा प्रदान की। दर्शन की योजना बनाने वाले भक्तों के लिए अत्यंत अनुशंसित। 🌺🙏",
+      },
+      {
+        name: "राजेश मिश्रा",
+        comment:
+          "एक सुंदर और आध्यात्मिक रूप से उन्नत करने वाला स्थान। व्यवस्थाएं उत्कृष्ट थीं, और पूरा अनुभव सहज और यादगार रहा। मैं परिवार के साथ दर्शन करने की अत्यधिक सलाह देता हूँ।",
+      },
+      {
+        name: "मनिष तिवारी",
+        comment:
+          "एक अद्भुत पहल जो भक्तों को सनातन धर्म की शिक्षाओं, परंपराओं और मूल्यों से जोड़े रखने में मदद करती है।",
+      },
+    ]
     : [
-        {
-          name: "Priya Sharma",
-          comment:
-            "I was impressed by how well-organized everything was. The temple information, darshan details and Sandesh section were very helpful. Highly valuable resource for devotees and visitors. 🌺🙏",
-        },
-        {
-          name: "Rajesh Mishra",
-          comment:
-            "A beautiful and spiritually uplifting place. The arrangements were excellent and the entire experience was smooth and memorable. I highly recommend visiting with family.",
-        },
-        {
-          name: "Manish Tiwari",
-          comment:
-            "A wonderful initiative that helps devotees stay connected with the teachings, traditions and values of Sanatan Dharma.",
-        },
-      ];
+      {
+        name: "Priya Sharma",
+        comment:
+          "I was impressed by how well-organized everything was. The temple information, darshan details and Sandesh section were very helpful. Highly valuable resource for devotees and visitors. 🌺🙏",
+      },
+      {
+        name: "Rajesh Mishra",
+        comment:
+          "A beautiful and spiritually uplifting place. The arrangements were excellent and the entire experience was smooth and memorable. I highly recommend visiting with family.",
+      },
+      {
+        name: "Manish Tiwari",
+        comment:
+          "A wonderful initiative that helps devotees stay connected with the teachings, traditions and values of Sanatan Dharma.",
+      },
+    ];
 
   return (
     <PageShell>
@@ -542,9 +601,8 @@ function HomePage() {
                 ॥ नमामि विन्ध्यवासिनी ॥
               </div>
               <h1
-                className={`text-5xl md:text-6xl lg:text-7xl text-maroon mb-6 ${
-                  hi ? "leading-[1.4] font-devanagari py-2" : "font-display leading-[1.05]"
-                }`}
+                className={`text-5xl md:text-6xl lg:text-7xl text-maroon mb-6 ${hi ? "leading-[1.4] font-devanagari py-2" : "font-display leading-[1.05]"
+                  }`}
               >
                 {t("home.hero.title1")}{" "}
                 <span className={`text-gradient-gold ${hi ? "not-italic" : "italic"}`}>
@@ -558,17 +616,11 @@ function HomePage() {
               </p>
               <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
                 <Link
-                  to="/sandesh"
+                  to="/about"
                   className="group relative overflow-hidden inline-flex items-center gap-2 px-7 py-3 rounded-full bg-gradient-sacred text-cream font-medium shadow-gold hover:opacity-95 hover:scale-[1.03] active:scale-95 transition-all duration-300"
                 >
                   <span className="btn-shine-overlay" />
-                  {t("home.cta.today")} <ArrowRight size={16} />
-                </Link>
-                <Link
-                  to="/about"
-                  className="inline-flex items-center px-7 py-3 rounded-full border-2 border-maroon text-maroon font-medium hover:bg-maroon hover:text-cream hover:scale-[1.03] active:scale-95 transition-all duration-300 text-center"
-                >
-                  {hi ? "नमामि विन्ध्यवासिनी संस्थान के बारे में जानें" : "Learn About Namami Vindhyavasini Sansthan"}
+                  {hi ? "माँ के बारे में" : "About Maa"} <ArrowRight size={16} className="transform group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
             </div>
@@ -642,7 +694,7 @@ function HomePage() {
 
       {/* SHAKTI PITHA STORY */}
       <section className="bg-gradient-divine border-y border-border/60">
-        <div className="container mx-auto px-6 py-20 grid lg:grid-cols-2 gap-12 items-center">
+        <div className="container mx-auto px-6 py-10 grid lg:grid-cols-2 gap-12 items-center">
           <div className="relative order-2 lg:order-1">
             <ScrollReveal direction="right" duration={900}>
               <div className="aspect-[4/5] max-w-md mx-auto rounded-[2rem] overflow-hidden shadow-sacred border-4 border-gold/60 hover:shadow-gold transition-shadow duration-500">
@@ -682,7 +734,7 @@ function HomePage() {
       </section>
 
       {/* SANDESH PREVIEW */}
-      <section className="container mx-auto px-6 py-20 grid md:grid-cols-5 gap-10 items-center">
+      <section className="container mx-auto px-6 py-10 grid md:grid-cols-5 gap-10 items-center">
         <div className="md:col-span-3">
           <ScrollReveal direction="right" duration={800}>
             <div className={`text-saffron text-xs uppercase tracking-[0.3em] mb-2 ${dev}`}>
@@ -728,7 +780,7 @@ function HomePage() {
 
       {/* DIVYA DARSHAN GALLERY */}
       <section className="bg-gradient-divine border-y border-border/60">
-        <div className="container mx-auto px-6 py-20">
+        <div className="container mx-auto px-6 py-10">
           <ScrollReveal direction="up" duration={800}>
             <div className="flex items-end justify-between mb-12 flex-wrap gap-4">
               <div>
@@ -789,7 +841,7 @@ function HomePage() {
       </section>
 
       {/* DEVOTEE REVIEWS */}
-      <section className="container mx-auto px-6 py-16 pb-20">
+      <section className="container mx-auto px-6 py-10 pb-10">
         <ScrollReveal direction="up" duration={800}>
           <div className="flex items-end justify-between mb-12 flex-wrap gap-4">
             <div>
@@ -836,8 +888,135 @@ function HomePage() {
         </div>
       </section>
 
+      {/* LATEST BLOGS SECTION */}
+      {latestBlogs.length > 0 && (
+        <section className="container mx-auto px-6 py-10 border-t border-gold/15">
+          <ScrollReveal direction="up" duration={800}>
+            <div className="flex items-end justify-between mb-6 flex-wrap gap-4">
+              <div>
+                <span className={`text-saffron text-xs uppercase tracking-[0.3em] mb-2 block ${dev}`}>
+                  {hi ? "नवीनतम आध्यात्मिक लेख" : "Latest Spiritual Article"}
+                </span>
+                <h2 className={`font-display text-3xl md:text-4xl text-maroon ${dev}`}>
+                  {hi ? "नवीनतम लेख" : "Latest Article"}
+                </h2>
+              </div>
+              <Link
+                to="/blog"
+                className={`inline-flex items-center gap-2 text-maroon font-medium hover:text-saffron transition-colors duration-300 ${dev}`}
+              >
+                {t("blog.view_all")} <ArrowRight size={16} />
+              </Link>
+            </div>
+          </ScrollReveal>
+
+          <div className="max-w-4xl mx-auto">
+            {latestBlogs.slice(0, 1).map((post) => (
+              <ScrollReveal key={post.id} direction="up" duration={800}>
+                <article className="group flex flex-col sm:flex-row bg-card rounded-2xl border border-gold/30 hover:border-gold hover:shadow-gold transition-all duration-300 overflow-hidden sm:h-[210px] h-auto shadow-sm">
+                  {post.featured_image ? (
+                    <>
+                      {/* Featured Image on Left - Fully visible with object-contain */}
+                      <div className="relative w-full sm:w-[200px] md:w-[260px] lg:w-[280px] h-48 sm:h-full shrink-0 overflow-hidden bg-black/5 flex items-center justify-center border-b sm:border-b-0 sm:border-r border-border/40">
+                        <img
+                          src={post.featured_image}
+                          alt={post.title}
+                          className="w-full h-full object-contain group-hover:scale-102 transition-transform duration-500 pointer-events-none select-none"
+                          loading="lazy"
+                        />
+                        <div className="absolute top-3 left-3 sm:hidden">
+                          <span className="px-2.5 py-1 rounded-full bg-maroon/90 text-cream text-[9px] uppercase font-bold tracking-widest border border-gold/20">
+                            {categoryTranslations[post.category]?.[lang] || post.category}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Content on Right */}
+                      <div className="p-4 sm:p-5 flex flex-col justify-between flex-1 min-w-0">
+                        <div className="space-y-2">
+                          <div className="flex items-center gap-3 text-[10px] text-muted-foreground flex-wrap">
+                            <span className="hidden sm:inline-block px-2.5 py-0.5 rounded-full bg-maroon/10 text-maroon font-bold uppercase tracking-wider text-[9px]">
+                              {categoryTranslations[post.category]?.[lang] || post.category}
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <Calendar size={10} className="text-gold" /> {formatDate(post.publish_date, lang)}
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <Clock size={10} className="text-gold" /> {calculateReadingTime(post.content)} {t("blog.read_time")}
+                            </span>
+                          </div>
+
+                          <h3 className={`font-display text-lg sm:text-xl text-maroon group-hover:text-saffron transition-colors duration-300 leading-snug line-clamp-1 sm:line-clamp-2 ${dev}`}>
+                            <Link to="/blog/$slug" params={{ slug: post.slug }} className="hover:underline">
+                              {post.title}
+                            </Link>
+                          </h3>
+
+                          <p className={`text-muted-foreground text-xs sm:text-sm leading-relaxed line-clamp-2 sm:line-clamp-3 ${dev}`}>
+                            {getExcerpt(post.content, 180)}
+                          </p>
+                        </div>
+
+                        <div className="pt-2 border-t border-border/40 flex items-center justify-end mt-2 shrink-0">
+                          <Link
+                            to="/blog/$slug"
+                            params={{ slug: post.slug }}
+                            className="inline-flex items-center gap-1 text-xs text-maroon font-semibold hover:text-saffron transition-colors group/btn"
+                          >
+                            {t("blog.read_more")}
+                            <ArrowRight size={12} className="transform group-hover/btn:translate-x-1 transition-transform" />
+                          </Link>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    /* Content spans full width */
+                    <div className="p-4 sm:p-5 flex flex-col justify-between flex-1 min-w-0">
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-3 text-[10px] text-muted-foreground flex-wrap">
+                          <span className="px-2.5 py-0.5 rounded-full bg-maroon/10 text-maroon font-bold uppercase tracking-wider text-[9px]">
+                            {categoryTranslations[post.category]?.[lang] || post.category}
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <Calendar size={10} className="text-gold" /> {formatDate(post.publish_date, lang)}
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <Clock size={10} className="text-gold" /> {calculateReadingTime(post.content)} {t("blog.read_time")}
+                          </span>
+                        </div>
+
+                        <h3 className={`font-display text-lg sm:text-xl text-maroon group-hover:text-saffron transition-colors duration-300 leading-snug line-clamp-1 sm:line-clamp-2 ${dev}`}>
+                          <Link to="/blog/$slug" params={{ slug: post.slug }} className="hover:underline">
+                            {post.title}
+                          </Link>
+                        </h3>
+
+                        <p className={`text-muted-foreground text-xs sm:text-sm leading-relaxed line-clamp-2 sm:line-clamp-3 ${dev}`}>
+                          {getExcerpt(post.content, 220)}
+                        </p>
+                      </div>
+
+                      <div className="pt-2 border-t border-border/40 flex items-center justify-end mt-2 shrink-0">
+                        <Link
+                          to="/blog/$slug"
+                          params={{ slug: post.slug }}
+                          className="inline-flex items-center gap-1 text-xs text-maroon font-semibold hover:text-saffron transition-colors group/btn"
+                        >
+                          {t("blog.read_more")}
+                          <ArrowRight size={12} className="transform group-hover/btn:translate-x-1 transition-transform" />
+                        </Link>
+                      </div>
+                    </div>
+                  )}
+                </article>
+              </ScrollReveal>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* RICH SEO DEVOTIONAL CONTENT SECTION */}
-      <section className="container mx-auto px-6 py-16 border-t border-gold/15 bg-cream/5 rounded-3xl mt-12">
+      <section className="container mx-auto px-6 py-10 border-t border-gold/15 bg-cream/5 rounded-3xl mt-6">
         <ScrollReveal direction="up" duration={800}>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-8 space-y-6">
@@ -848,7 +1027,7 @@ function HomePage() {
                 {hi ? "माँ विंध्यवासिनी की पौराणिक महिमा एवं साधना" : "Divine Grace of Maa Vindhyavasini Devi Shakti Peeth"}
               </h2>
               <div className="w-20 h-[2px] bg-gradient-sacred rounded-full" />
-              
+
               <div className={`space-y-4 text-foreground/80 leading-relaxed text-sm md:text-base ${dev}`}>
                 <p>
                   {hi ? (
@@ -915,7 +1094,7 @@ function HomePage() {
       </section>
 
       {/* FAQ SECTION */}
-      <section className="container mx-auto px-6 py-16 border-t border-gold/15">
+      <section className="container mx-auto px-6 py-10 border-t border-gold/15">
         <ScrollReveal direction="up" duration={800}>
           <div className="text-center max-w-2xl mx-auto mb-12">
             <span className={`text-saffron text-xs uppercase tracking-[0.3em] mb-2 block ${dev}`}>
@@ -932,19 +1111,19 @@ function HomePage() {
           {[
             {
               q: hi ? "माँ विंध्यवासिनी मंदिर कहाँ स्थित है?" : "Where is Maa Vindhyavasini Temple located?",
-              a: hi 
+              a: hi
                 ? "माँ विंध्यवासिनी देवी का प्राचीन मंदिर उत्तर प्रदेश के मिर्जापुर जिले में पवित्र गंगा नदी के तट पर स्थित विंध्याचल धाम में है।"
                 : "Maa Vindhyavasini Temple is located in Vindhyachal Dham, Mirzapur district, Uttar Pradesh, India, on the banks of the sacred river Ganges."
             },
             {
               q: hi ? "त्रिकोण परिक्रमा का क्या महत्व है?" : "What is the significance of the Trikona Parikrama?",
-              a: hi 
+              a: hi
                 ? "त्रिकोण परिक्रमा विंध्याचल का एक अत्यंत पवित्र परिक्रमा पथ है जिसमें आदि शक्ति के तीन रूपों के दर्शन होते हैं: माँ विंध्यवासिनी (महालक्ष्मी), काली खोह में माँ काली (महाकाली) और अष्टभुजा मंदिर में माँ अष्टभुजा (महासरस्वती)।"
                 : "Trikona Parikrama is a sacred pilgrimage circuit in Vindhyachal that includes visiting three key temples representing the three main forms of Adi Parashakti: Maa Vindhyavasini (Maha Lakshmi), Maa Kali at Kali Khoh (Maha Kali), and Maa Ashtabhuja (Maha Saraswati)."
             },
             {
               q: hi ? "नमामि विंध्यवासिनी संस्थान क्या है?" : "What is Namami Vindhyavasini Sansthan?",
-              a: hi 
+              a: hi
                 ? "नमामि विंध्यवासिनी संस्थान एक धार्मिक एवं आध्यात्मिक ट्रस्ट है जो भक्तों तक माँ विंध्यवासिनी की महिमा पहुँचाने, धार्मिक संसाधन, स्तोत्र और हिंदू कैलेंडर प्रकाशित करने के साथ-साथ मीडिया गैलरी, वीडियो और आध्यात्मिक संदेश प्रदान करने के लिए समर्पित है।"
                 : "Namami Vindhyavasini Sansthan is a spiritual trust dedicated to spreading the divine message of Maa Vindhyavasini, publishing devotional resources, stotram, and the Hindu calendar, while also providing a media gallery, videos and spiritual sandesha."
             }
@@ -988,7 +1167,7 @@ function HomePage() {
                   to="/contact"
                   className="px-7 py-3 rounded-full border-2 border-cream text-cream font-medium hover:bg-cream hover:text-maroon hover:scale-[1.03] transition-all duration-300 text-center"
                 >
-                  {hi ? "नमामि विन्ध्यवासिनी संस्थान से संपर्क करें" : "Contact Namami Vindhyavasini Sansthan"}
+                  {hi ? "संपर्क करें" : "Contact Us"}
                 </Link>
               </div>
             </div>
@@ -997,7 +1176,7 @@ function HomePage() {
       </section>
 
       {/* PWA OFFLINE APP DOWNLOAD */}
-      <section className="container mx-auto px-6 pb-20">
+      <section className="container mx-auto px-6 pb-10">
         <ScrollReveal direction="up" duration={800}>
           <PWAInstallCard />
         </ScrollReveal>

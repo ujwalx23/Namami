@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { createClient } from "@supabase/supabase-js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -50,10 +51,56 @@ Sitemap: https://www.namamivindhyavasini.in/sitemap.xml
 fs.writeFileSync(path.join(publicDir, "robots.txt"), robotsContent, "utf-8");
 console.log("[SEO] Successfully generated robots.txt in public/");
 
-// Generate sitemap.xml with Google Image Sitemap namespace and definitions
-const today = new Date().toISOString().split("T")[0];
+// Helper to parse .env file
+function loadEnv() {
+  const envPath = path.resolve(__dirname, "../.env");
+  if (fs.existsSync(envPath)) {
+    const lines = fs.readFileSync(envPath, "utf-8").split("\n");
+    lines.forEach(line => {
+      const match = line.match(/^\s*([\w.-]+)\s*=\s*(.*)?\s*$/);
+      if (match) {
+        const key = match[1];
+        let value = match[2] || "";
+        if (value.startsWith('"') && value.endsWith('"')) {
+          value = value.slice(1, -1);
+        } else if (value.startsWith("'") && value.endsWith("'")) {
+          value = value.slice(1, -1);
+        }
+        process.env[key] = value.trim();
+      }
+    });
+  }
+}
 
-const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
+async function generateSitemap() {
+  loadEnv();
+
+  const today = new Date().toISOString().split("T")[0];
+  const supabaseUrl = process.env.VITE_SUPABASE_URL || "https://avmemxowlunhlyfntiqu.supabase.co";
+  const supabaseKey = process.env.VITE_SUPABASE_PUBLISHABLE_KEY || process.env.VITE_SUPABASE_ANON_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF2bWVteG93bHVuaGx5Zm50aXF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk2OTIyOTMsImV4cCI6MjA5NTI2ODI5M30.R5DwGPSWZH_PXmsEnUntYu7WyHK6VHXsEUkq8zISRkw";
+
+  const supabase = createClient(supabaseUrl, supabaseKey);
+
+  let blogPosts = [];
+  try {
+    const { data, error } = await supabase
+      .from("blog_posts")
+      .select("slug, title, publish_date, featured_image")
+      .eq("status", "published")
+      .lte("publish_date", new Date().toISOString())
+      .order("publish_date", { ascending: false });
+
+    if (error) {
+      console.warn("[SEO] Warning: Failed to query blog posts for sitemap:", error.message);
+    } else {
+      blogPosts = data || [];
+      console.log(`[SEO] Found ${blogPosts.length} published blog posts for sitemap.`);
+    }
+  } catch (err) {
+    console.warn("[SEO] Warning: Failed to fetch blog posts for sitemap:", err);
+  }
+
+  let sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
@@ -167,8 +214,37 @@ const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
-</urlset>
+  <url>
+    <loc>https://www.namamivindhyavasini.in/blog</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
 `;
 
-fs.writeFileSync(path.join(publicDir, "sitemap.xml"), sitemapContent, "utf-8");
-console.log("[SEO] Successfully generated sitemap.xml in public/");
+  // Dynamically append blog posts to sitemap
+  blogPosts.forEach(post => {
+    const postDate = post.publish_date ? post.publish_date.split("T")[0] : today;
+    sitemapContent += `  <url>
+    <loc>https://www.namamivindhyavasini.in/blog/${post.slug}</loc>
+    <lastmod>${postDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+`;
+    if (post.featured_image) {
+      sitemapContent += `    <image:image>
+      <image:loc>${post.featured_image}</image:loc>
+      <image:title>${post.title.replace(/[&<>'"]/g, "")}</image:title>
+    </image:image>
+`;
+    }
+    sitemapContent += `  </url>\n`;
+  });
+
+  sitemapContent += `</urlset>\n`;
+
+  fs.writeFileSync(path.join(publicDir, "sitemap.xml"), sitemapContent, "utf-8");
+  console.log("[SEO] Successfully generated sitemap.xml in public/");
+}
+
+generateSitemap();

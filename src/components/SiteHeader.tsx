@@ -14,6 +14,7 @@ import {
   Heart,
   Phone,
   ArrowRight,
+  BookOpen,
 } from "lucide-react";
 import { useLang } from "@/i18n/LangProvider";
 import { SiteInbox } from "@/components/SiteInbox";
@@ -28,6 +29,7 @@ const links = [
   { to: "/calendar", key: "nav.calendar" as TKey, icon: CalendarDays },
   { to: "/reviews", key: "nav.reviews" as TKey, icon: MessageSquare },
   { to: "/gallery", key: "nav.gallery" as TKey, icon: Image },
+  { to: "/blog", key: "nav.blog" as TKey, icon: BookOpen },
   { to: "/contact", key: "nav.contact" as TKey, icon: Phone },
 ];
 

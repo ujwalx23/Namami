@@ -18,6 +18,7 @@ export const translations = {
   "nav.reviews": { en: "Reviews", hi: "समीक्षा" },
   "nav.gallery": { en: "Gallery", hi: "गैलरी" },
   "nav.donation": { en: "Donation", hi: "दान" },
+  "nav.blog": { en: "Blog", hi: "ब्लॉग" },
   "nav.contact": { en: "Contact", hi: "संपर्क" },
   "nav.donate_btn": { en: "Donate", hi: "दान करें" },
   "nav.menu": { en: "Menu", hi: "मेनू" },
@@ -48,7 +49,7 @@ export const translations = {
   },
   "home.cta.today": { en: "Divine Sandesh", hi: "दिव्य संदेश" },
   "home.cta.about": { en: "About Dham", hi: "धाम के बारे में" },
- 
+
   "home.slide.vindhya.title": { en: "Namami Vindhyavasini", hi: "नमामि विन्ध्यवासिनी" },
   "home.slide.vindhya.sub": { en: "Vindhyachal Dham", hi: "विन्ध्याचल धाम" },
   "home.slide.vindhya.alt": { en: "Maa Vindhyavasini Darshan at Vindhyachal Dham Temple", hi: "विन्ध्याचल धाम मंदिर में माँ विन्ध्यवासिनी के दिव्य दर्शन" },
@@ -56,7 +57,7 @@ export const translations = {
   "home.slide.darshan.alt": { en: "Maa Vindhyavasini Shringar and Aarti at Vindhyachal Dham", hi: "विन्ध्याचल धाम में माँ विन्ध्यवासिनी के दिव्य श्रृंगार और आरती" },
   "home.slide.shringar.title": { en: "Maa ka Shringar", hi: "माँ का श्रृंगार" },
   "home.slide.shringar.alt": { en: "Namami Vindhyavasini Devotional Image and Sacred Alankar", hi: "नमामि विन्ध्यवासिनी का पावन चित्र और दिव्य अलंकार" },
- 
+
   "home.intro.kicker": { en: "🌺 SANATAN PARAMPARA", hi: "🌺 सनातन परम्परा" },
   "home.intro.title": { en: "A Legacy of Faith and Seva", hi: "श्रद्धा और सेवा की विरासत" },
   "home.card.purpose.title": { en: "Our Purpose", hi: "हमारा उद्देश्य" },
@@ -74,7 +75,7 @@ export const translations = {
     en: "Your generous contributions support temple operations, religious activities and community service programs. We ensure that every donation is utilized with care, purpose and transparency. 🌺🙏",
     hi: "आपके उदार योगदान से मंदिर संचालन, धार्मिक गतिविधियों और सामुदायिक सेवा कार्यक्रमों को सहायता मिलती है। हम सुनिश्चित करते हैं कि प्रत्येक दान का उपयोग सावधानी, उद्देश्य और पारदर्शिता के साथ हो। 🌺🙏",
   },
- 
+
   "home.sandesh.kicker": { en: "Daily Wisdom", hi: "दैनिक प्रेरणा" },
   "home.sandesh.title": { en: "Sandesh", hi: "संदेश" },
   "home.sandesh.quote": {
@@ -85,11 +86,11 @@ export const translations = {
   "home.sandesh.read": { en: "Read all sandesh", hi: "सभी संदेश पढ़ें" },
   "home.pillars": { en: "Shanti ✦ Bhakti ✦ Sewa", hi: "शान्ति ✦ भक्ति ✦ सेवा" },
   "home.pillars.sub": { en: "Three pillars of our path", hi: "हमारे मार्ग के तीन स्तम्भ" },
- 
+
   "home.events.kicker": { en: "What's Happening", hi: "आगामी" },
   "home.events.title": { en: "Upcoming Events", hi: "आगामी कार्यक्रम" },
   "home.events.viewall": { en: "View all", hi: "सभी देखें" },
- 
+
   "home.shakti.kicker": { en: "Shakti Pitha", hi: "शक्तिपीठ" },
   "home.shakti.title": { en: "Maa Vindhyavasini Dham", hi: "माँ विन्ध्यवासिनी धाम" },
   "home.shakti.text": {
@@ -577,6 +578,26 @@ export const translations = {
     hi: "आशीर्वाद प्रमाणपत्र बनायें",
   },
   "parikrama.cert.download": { en: "Download Certificate", hi: "प्रमाणपत्र डाउनलोड करें" },
+
+  // Blog Section
+  "blog.sanskrit": { en: "॥ ज्ञानं परमं बलम् ॥", hi: "॥ ज्ञानं परमं बलम् ॥" },
+  "blog.title": { en: "Spiritual Blog", hi: "आध्यात्मिक ब्लॉग" },
+  "blog.subtitle": { en: "Explore sacred teachings, history, messages, and stories of Maa Vindhyavasini.", hi: "माँ विन्ध्यवासिनी की दिव्य गाथाएँ, इतिहास, संदेश एवं आध्यात्मिक ज्ञान के लेख पढ़ें।" },
+  "blog.featured": { en: "Featured Article", hi: "मुख्य लेख" },
+  "blog.latest": { en: "Latest Articles", hi: "नवीनतम लेख" },
+  "blog.categories": { en: "Categories", hi: "श्रेणियाँ" },
+  "blog.tags": { en: "Tags", hi: "टैग" },
+  "blog.search.ph": { en: "Search articles...", hi: "लेख खोजें..." },
+  "blog.popular": { en: "Popular Posts", hi: "लोकप्रिय लेख" },
+  "blog.related": { en: "Related Posts", hi: "सम्बंधित लेख" },
+  "blog.read_time": { en: "min read", hi: "मिनट पठन" },
+  "blog.share": { en: "Share this Article", hi: "लेख साझा करें" },
+  "blog.author": { en: "Author", hi: "लेखक" },
+  "blog.view_all": { en: "View All Articles", hi: "सभी लेख देखें" },
+  "blog.read_more": { en: "Read More", hi: "और पढ़ें" },
+  "blog.no_posts": { en: "No articles found matching your search.", hi: "खोज से मेल खाता कोई लेख नहीं मिला।" },
+  "blog.prev": { en: "Previous", hi: "पिछला" },
+  "blog.next": { en: "Next", hi: "अगला" },
 } as const;
 
 export type TKey = keyof typeof translations;
