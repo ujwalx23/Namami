@@ -2506,7 +2506,7 @@ function BlogAdmin() {
             value={content}
             onChange={(e) => setContent(e.target.value)}
             rows={16}
-            placeholder="Write spiritual contents, temple logs, or messages. Supports HTML/CSS formatting if needed."
+            placeholder="Write spiritual contents, temple logs, or messages. Supports HTML formatting if needed."
             className="w-full p-4 rounded-lg border border-input bg-background text-sm focus:ring-2 focus:ring-gold focus:outline-none resize-y min-h-[300px]"
             required
           />
