@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
+import { createFileRoute, Link, useRouter, redirect } from "@tanstack/react-router";
 import { PageShell, PageHero } from "@/components/PageShell";
 import { useState, useEffect, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -66,6 +66,14 @@ export const Route = createFileRoute("/blog/$slug")({
 
     if (error) throw error;
     if (!post) {
+      const targetHindiSlug = "जब-जीवन-स्वयं-उपदेश-बन-जाए";
+      const encodedHindiSlug = encodeURIComponent(targetHindiSlug);
+      if (slug === targetHindiSlug || slug === encodedHindiSlug || decodeURIComponent(slug) === targetHindiSlug) {
+        throw redirect({
+          to: "/blog/life-itself-a-teaching",
+          statusCode: 301,
+        });
+      }
       throw new Error("Article not found");
     }
 
