@@ -14,10 +14,6 @@ function Create-OmFaviconSquare {
     $g.TextRenderingHint = [System.Drawing.Text.TextRenderingHint]::AntiAliasGridFit
     $g.CompositingQuality = [System.Drawing.Drawing2D.CompositingQuality]::HighQuality
 
-    # White square background
-    $whiteBrush = New-Object System.Drawing.SolidBrush([System.Drawing.Color]::White)
-    $g.FillRectangle($whiteBrush, 0, 0, $Size, $Size)
-
     # Gold Om symbol
     $fontSize = [int]($Size * 0.75)
     $font = $null
@@ -55,7 +51,6 @@ function Create-OmFaviconSquare {
     $font.Dispose()
     $goldBrush.Dispose()
     $shadowBrush.Dispose()
-    $whiteBrush.Dispose()
     $g.Dispose()
     $bmp.Dispose()
 
