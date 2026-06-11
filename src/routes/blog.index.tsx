@@ -13,32 +13,32 @@ type BlogPost = Tables<"blog_posts">;
 export const Route = createFileRoute("/blog/")({
   head: () => ({
     meta: [
-      { title: "Spiritual Blog & Articles | Namami Vindhyavasini Sansthan" },
+      { title: "Spiritual Enlightenment & Articles | Namami Vindhyavasini Sansthan" },
       {
         name: "description",
         content:
-          "Read spiritual articles, temple history, messages from Pujya Guruji, Maa Vindhyavasini stories, and festivals at Vindhyachal Dham by Namami Vindhyavasini Sansthan.",
+          "Read spiritual enlightenment articles, temple history, messages from Pujya Guruji, Maa Vindhyavasini stories, and festivals at Vindhyachal Dham by Namami Vindhyavasini Sansthan.",
       },
       {
         name: "keywords",
         content:
-          "Namami Vindhyavasini blog, Vindhyavasini temple history, Guruji messages, Vindhyachal stories, spiritual knowledge, Maa Vindhyavasini story, temple festivals, विंध्यवासिनी ब्लॉग, विंध्याचल इतिहास",
+          "Namami Vindhyavasini enlightenment, Vindhyavasini temple history, Guruji messages, Vindhyachal stories, spiritual knowledge, Maa Vindhyavasini story, temple festivals, विंध्यवासिनी ब्लॉग, विंध्याचल इतिहास",
       },
-      { property: "og:title", content: "Spiritual Blog & Articles | Namami Vindhyavasini Sansthan" },
+      { property: "og:title", content: "Spiritual Enlightenment & Articles | Namami Vindhyavasini Sansthan" },
       {
         property: "og:description",
         content:
-          "Read spiritual articles, temple history, Guruji messages, Maa Vindhyavasini stories, and festivals at Vindhyachal Dham.",
+          "Read spiritual enlightenment articles, temple history, Guruji messages, Maa Vindhyavasini stories, and festivals at Vindhyachal Dham.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://www.namamivindhyavasini.in/blog" },
       { property: "og:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Spiritual Blog & Articles | Namami Vindhyavasini Sansthan" },
+      { name: "twitter:title", content: "Spiritual Enlightenment & Articles | Namami Vindhyavasini Sansthan" },
       {
         name: "twitter:description",
         content:
-          "Read spiritual articles, temple history, Guruji messages, Maa Vindhyavasini stories, and festivals at Vindhyachal Dham.",
+          "Read spiritual enlightenment articles, temple history, Guruji messages, Maa Vindhyavasini stories, and festivals at Vindhyachal Dham.",
       },
       { name: "twitter:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
     ],
@@ -58,7 +58,7 @@ export const Route = createFileRoute("/blog/")({
   },
   errorComponent: ({ error }) => (
     <PageShell>
-      <PageHero title="Spiritual Blog" subtitle="Could not load blog posts." />
+      <PageHero title="Spiritual Enlightenment" subtitle="Could not load articles." />
       <div className="container mx-auto px-6 py-10 text-center text-muted-foreground">
         {error.message}
       </div>
@@ -142,7 +142,7 @@ function BlogPage() {
     "@context": "https://schema.org",
     "@type": "Blog",
     "@id": "https://www.namamivindhyavasini.in/blog/#blog",
-    "name": "Spiritual Blog - Namami Vindhyavasini Sansthan",
+    "name": "Spiritual Enlightenment - Namami Vindhyavasini Sansthan",
     "url": "https://www.namamivindhyavasini.in/blog",
     "description": "Explore spiritual articles, temple history, messages from Pujya Guruji, Maa Vindhyavasini stories, and festivals at Vindhyachal Dham.",
     "publisher": {
@@ -164,7 +164,7 @@ function BlogPage() {
       {
         "@type": "ListItem",
         "position": 2,
-        "name": "Blog",
+        "name": "Enlightenment",
         "item": "https://www.namamivindhyavasini.in/blog"
       }
     ]

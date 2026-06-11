@@ -28,7 +28,7 @@ type BlogPost = Tables<"blog_posts">;
 export const Route = createFileRoute("/blog/$slug")({
   head: ({ loaderData }) => {
     const post = loaderData?.post;
-    const title = post ? `${post.seo_title || post.title} | Namami Vindhyavasini` : "Blog | Namami Vindhyavasini";
+    const title = post ? `${post.seo_title || post.title} | Namami Vindhyavasini` : "Enlightenment | Namami Vindhyavasini";
     const desc = post?.seo_description || "Read this article on Namami Vindhyavasini.";
     const url = post ? `https://www.namamivindhyavasini.in/blog/${post.slug}` : "https://www.namamivindhyavasini.in/blog";
     const img = post?.featured_image || "https://www.namamivindhyavasini.in/maa-vindhyavasini.png";
@@ -82,20 +82,23 @@ export const Route = createFileRoute("/blog/$slug")({
 
     return { post: post as BlogPost, related: (related ?? []) as BlogPost[] };
   },
-  errorComponent: ({ error }) => (
-    <PageShell>
-      <PageHero title="Article Not Found" subtitle="We couldn't find the requested article." />
-      <div className="container mx-auto px-6 py-16 text-center space-y-6">
-        <p className="text-muted-foreground">{error.message || "The article might have been draft or deleted."}</p>
-        <Link
-          to="/blog"
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-sacred text-cream font-medium"
-        >
-          <ArrowLeft size={16} /> Back to Blog
-        </Link>
-      </div>
-    </PageShell>
-  ),
+  errorComponent: ({ error }) => {
+    const { lang } = useLang();
+    return (
+      <PageShell>
+        <PageHero title="Article Not Found" subtitle="We couldn't find the requested article." />
+        <div className="container mx-auto px-6 py-16 text-center space-y-6">
+          <p className="text-muted-foreground">{error.message || "The article might have been draft or deleted."}</p>
+          <Link
+            to="/blog"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-sacred text-cream font-medium"
+          >
+            <ArrowLeft size={16} /> {lang === "hi" ? "आध्यात्मिक ज्ञान पर वापस जाएं" : "Back to Enlightenment"}
+          </Link>
+        </div>
+      </PageShell>
+    );
+  },
   component: BlogDetailPage,
 });
 
@@ -234,7 +237,7 @@ function BlogDetailPage() {
       {
         "@type": "ListItem",
         "position": 2,
-        "name": "Blog",
+        "name": "Enlightenment",
         "item": "https://www.namamivindhyavasini.in/blog"
       },
       {
@@ -357,7 +360,7 @@ function BlogDetailPage() {
 
         {/* Content body */}
         <div
-            className={`prose max-w-none text-foreground/90 leading-relaxed text-base md:text-lg space-y-6 pb-12 border-b border-border/40 ${dev} 
+            className={`prose max-w-none text-foreground/90 leading-relaxed text-base md:text-lg space-y-6 pb-4 border-b border-border/40 ${dev} 
               [&_h2]:font-display [&_h2]:text-2xl [&_h2]:md:text-3xl [&_h2]:text-maroon [&_h2]:mt-8 [&_h2]:mb-4
               [&_h3]:font-display [&_h3]:text-xl [&_h3]:md:text-2xl [&_h3]:text-maroon [&_h3]:mt-6 [&_h3]:mb-3
               [&_p]:mb-4 [&_p]:leading-relaxed
@@ -373,7 +376,7 @@ function BlogDetailPage() {
 
         {/* Related Posts Section */}
         {related.length > 0 && (
-          <div className="mt-16 pt-8 border-t border-border">
+          <div className="mt-6 pt-4 border-t border-border">
             <h3 className={`font-display text-2xl md:text-3xl text-maroon mb-6 ${dev}`}>
               {t("blog.related")}
             </h3>

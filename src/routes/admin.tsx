@@ -46,6 +46,16 @@ type Video = {
   created_at?: string;
 };
 
+const formatAdminDate = (dateString: string) => {
+  if (!dateString) return "";
+  const date = new Date(dateString);
+  if (isNaN(date.getTime())) return "";
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = date.getFullYear();
+  return `${day}-${month}-${year}`;
+};
+
 function AdminPage() {
   const [session, setSession] = useState<any>(null);
   const [loadingSession, setLoadingSession] = useState(true);
@@ -214,7 +224,7 @@ function AdminPage() {
     { id: "videos", label: "Videos & Shorts" },
     { id: "notifications", label: "Inbox Broadcast" },
     { id: "gallery", label: "Gallery Manager" },
-    { id: "blog", label: "Blog Management" },
+    { id: "blog", label: "Enlightenment" },
     { id: "analytics", label: "Analytics" },
   ];
 
@@ -728,7 +738,7 @@ function ReviewAdmin({ onUpdate }: { onUpdate?: () => void }) {
             >
               <div className="flex-1">
                 <div className="text-xs text-saffron uppercase tracking-wider">
-                  {r.name} · {new Date(r.created_at).toLocaleDateString()}
+                  {r.name} · {formatAdminDate(r.created_at)}
                 </div>
                 <div className="text-sm mt-1">{r.comment}</div>
               </div>
@@ -2172,7 +2182,7 @@ function GalleryAdmin() {
                   <div className="min-w-0 flex-1">
                     <h5 className="font-semibold text-maroon text-sm truncate">{item.caption}</h5>
                     <time className="text-[10px] text-muted-foreground/80 mt-0.5 block">
-                      {new Date(item.created_at).toLocaleDateString("en-IN")}
+                      {formatAdminDate(item.created_at)}
                     </time>
                   </div>
                   <button
@@ -2295,12 +2305,12 @@ function BlogAdmin() {
       if (!data || data.length === 0) {
         return toast.error("Update failed. RLS policy or missing row.");
       }
-      toast.success("Blog post updated successfully");
+      toast.success("Enlightenment article updated successfully");
       setEditingId(null);
     } else {
       const { error } = await supabase.from("blog_posts").insert(payload);
       if (error) return toast.error(error.message);
-      toast.success("Blog post created successfully");
+      toast.success("Enlightenment article created successfully");
     }
 
     // Reset form
@@ -2320,10 +2330,10 @@ function BlogAdmin() {
   };
 
   async function del(id: string) {
-    if (!confirm("Are you sure you want to delete this blog post?")) return;
+    if (!confirm("Are you sure you want to delete this article?")) return;
     const { error } = await supabase.from("blog_posts").delete().eq("id", id);
     if (error) return toast.error(error.message);
-    toast.success("Blog post deleted");
+    toast.success("Enlightenment article deleted");
     if (editingId === id) {
       setEditingId(null);
     }
@@ -2366,7 +2376,7 @@ function BlogAdmin() {
     <div>
       <div className="flex justify-between items-center mb-4">
         <h3 className="font-display text-2xl text-maroon mb-0">
-          {editingId ? "Edit Blog Post" : "Blog Post Manager"}
+          {editingId ? "Edit Enlightenment Article" : "Enlightenment Manager"}
         </h3>
         <button
           onClick={handleRefresh}
@@ -2496,7 +2506,7 @@ function BlogAdmin() {
             value={content}
             onChange={(e) => setContent(e.target.value)}
             rows={16}
-            placeholder="Write spiritual contents, temple logs, or messages. Supports HTML formatting if needed."
+            placeholder="Write spiritual contents, temple logs, or messages. Supports HTML/CSS formatting if needed."
             className="w-full p-4 rounded-lg border border-input bg-background text-sm focus:ring-2 focus:ring-gold focus:outline-none resize-y min-h-[300px]"
             required
           />
@@ -2548,7 +2558,7 @@ function BlogAdmin() {
         </div>
 
         {filtered.length === 0 ? (
-          <p className="text-sm text-muted-foreground">No blog posts match your search or filter.</p>
+          <p className="text-sm text-muted-foreground">No articles match your search or filter.</p>
         ) : (
           <div className="space-y-3">
             {filtered.map((post) => (
@@ -2571,7 +2581,7 @@ function BlogAdmin() {
                       {post.status}
                     </span>
                     <span className="text-[10px] text-muted-foreground">
-                      Publish: {new Date(post.publish_date).toLocaleDateString()}
+                      Publish: {formatAdminDate(post.publish_date)}
                     </span>
                   </div>
                   <div className="font-semibold text-maroon text-sm">{post.title}</div>

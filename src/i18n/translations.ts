@@ -18,7 +18,7 @@ export const translations = {
   "nav.reviews": { en: "Reviews", hi: "समीक्षा" },
   "nav.gallery": { en: "Gallery", hi: "गैलरी" },
   "nav.donation": { en: "Donation", hi: "दान" },
-  "nav.blog": { en: "Blog", hi: "ब्लॉग" },
+  "nav.blog": { en: "Enlightenment", hi: "ज्ञान" },
   "nav.contact": { en: "Contact", hi: "संपर्क" },
   "nav.donate_btn": { en: "Donate", hi: "दान करें" },
   "nav.menu": { en: "Menu", hi: "मेनू" },
@@ -581,7 +581,7 @@ export const translations = {
 
   // Blog Section
   "blog.sanskrit": { en: "॥ ज्ञानं परमं बलम् ॥", hi: "॥ ज्ञानं परमं बलम् ॥" },
-  "blog.title": { en: "Spiritual Blog", hi: "आध्यात्मिक ब्लॉग" },
+  "blog.title": { en: "Spiritual Enlightenment", hi: "आध्यात्मिक ज्ञान" },
   "blog.subtitle": { en: "Explore sacred teachings, history, messages, and stories of Maa Vindhyavasini.", hi: "माँ विन्ध्यवासिनी की दिव्य गाथाएँ, इतिहास, संदेश एवं आध्यात्मिक ज्ञान के लेख पढ़ें।" },
   "blog.featured": { en: "Featured Article", hi: "मुख्य लेख" },
   "blog.latest": { en: "Latest Articles", hi: "नवीनतम लेख" },
