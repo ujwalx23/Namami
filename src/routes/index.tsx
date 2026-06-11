@@ -913,7 +913,11 @@ function HomePage() {
           <div className="max-w-4xl mx-auto">
             {latestBlogs.slice(0, 1).map((post) => (
               <ScrollReveal key={post.id} direction="up" duration={800}>
-                <article className="group flex flex-col sm:flex-row bg-card rounded-2xl border border-gold/30 hover:border-gold hover:shadow-gold transition-all duration-300 overflow-hidden sm:h-[210px] h-auto shadow-sm">
+                <Link
+                  to="/blog/$slug"
+                  params={{ slug: post.slug }}
+                  className="group flex flex-col sm:flex-row bg-card rounded-2xl border border-gold/30 hover:border-gold hover:shadow-gold transition-all duration-300 overflow-hidden sm:h-[210px] h-auto shadow-sm cursor-pointer text-inherit hover:text-inherit"
+                >
                   {post.featured_image ? (
                     <>
                       {/* Featured Image on Left - Fully visible with object-contain */}
@@ -946,10 +950,8 @@ function HomePage() {
                             </span>
                           </div>
 
-                          <h3 className={`font-display text-lg sm:text-xl text-maroon group-hover:text-saffron transition-colors duration-300 leading-snug line-clamp-1 sm:line-clamp-2 ${dev}`}>
-                            <Link to="/blog/$slug" params={{ slug: post.slug }} className="hover:underline">
-                              {post.title}
-                            </Link>
+                          <h3 className={`font-display text-lg sm:text-xl text-maroon group-hover:text-saffron transition-colors duration-300 leading-snug line-clamp-1 sm:line-clamp-2 ${dev} group-hover:underline`}>
+                            {post.title}
                           </h3>
 
                           <p className={`text-muted-foreground text-xs sm:text-sm leading-relaxed line-clamp-2 sm:line-clamp-3 ${dev}`}>
@@ -958,14 +960,12 @@ function HomePage() {
                         </div>
 
                         <div className="pt-2 border-t border-border/40 flex items-center justify-end mt-2 shrink-0">
-                          <Link
-                            to="/blog/$slug"
-                            params={{ slug: post.slug }}
-                            className="inline-flex items-center gap-1 text-xs text-maroon font-semibold hover:text-saffron transition-colors group/btn"
+                          <span
+                            className="inline-flex items-center gap-1 text-xs text-maroon font-semibold group-hover:text-saffron transition-colors"
                           >
                             {t("blog.read_more")}
-                            <ArrowRight size={12} className="transform group-hover/btn:translate-x-1 transition-transform" />
-                          </Link>
+                            <ArrowRight size={12} className="transform group-hover:translate-x-1 transition-transform" />
+                          </span>
                         </div>
                       </div>
                     </>
@@ -985,10 +985,8 @@ function HomePage() {
                           </span>
                         </div>
 
-                        <h3 className={`font-display text-lg sm:text-xl text-maroon group-hover:text-saffron transition-colors duration-300 leading-snug line-clamp-1 sm:line-clamp-2 ${dev}`}>
-                          <Link to="/blog/$slug" params={{ slug: post.slug }} className="hover:underline">
-                            {post.title}
-                          </Link>
+                        <h3 className={`font-display text-lg sm:text-xl text-maroon group-hover:text-saffron transition-colors duration-300 leading-snug line-clamp-1 sm:line-clamp-2 ${dev} group-hover:underline`}>
+                          {post.title}
                         </h3>
 
                         <p className={`text-muted-foreground text-xs sm:text-sm leading-relaxed line-clamp-2 sm:line-clamp-3 ${dev}`}>
@@ -997,18 +995,16 @@ function HomePage() {
                       </div>
 
                       <div className="pt-2 border-t border-border/40 flex items-center justify-end mt-2 shrink-0">
-                        <Link
-                          to="/blog/$slug"
-                          params={{ slug: post.slug }}
-                          className="inline-flex items-center gap-1 text-xs text-maroon font-semibold hover:text-saffron transition-colors group/btn"
+                        <span
+                          className="inline-flex items-center gap-1 text-xs text-maroon font-semibold group-hover:text-saffron transition-colors"
                         >
                           {t("blog.read_more")}
-                          <ArrowRight size={12} className="transform group-hover/btn:translate-x-1 transition-transform" />
-                        </Link>
+                          <ArrowRight size={12} className="transform group-hover:translate-x-1 transition-transform" />
+                        </span>
                       </div>
                     </div>
                   )}
-                </article>
+                </Link>
               </ScrollReveal>
             ))}
           </div>
