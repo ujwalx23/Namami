@@ -60,17 +60,6 @@ const defaults: { src: string; cap_en: string; cap_hi: string }[] = [
   { src: maaImg3, cap_en: "Vishesh Shringar", cap_hi: "विशेष श्रृंगार" },
 ];
 
-function dataURLtoFile(dataurl: string, filename: string): File {
-  const arr = dataurl.split(",");
-  const mime = arr[0].match(/:(.*?);/)![1];
-  const bstr = atob(arr[1]);
-  let n = bstr.length;
-  const u8arr = new Uint8Array(n);
-  while (n--) {
-    u8arr[n] = bstr.charCodeAt(n);
-  }
-  return new File([u8arr], filename, { type: mime });
-}
 
 function GalleryPage() {
   const { lang } = useLang();
@@ -156,7 +145,7 @@ function GalleryPage() {
       const link = document.createElement("a");
       link.href = url;
       link.target = "_blank";
-      link.download = `${title.toLowerCase().replace(/\s+/g, "_")}.png`;
+      link.download = `${title.toLowerCase().replace(/\s+/g, "_")}.jpg`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -165,250 +154,52 @@ function GalleryPage() {
 
   const shareGalleryImage = async (imgUrl: string) => {
     const caption = hi ? "माँ विंध्यवासिनी दर्शन" : "Maa Vindhyavasini Darshan";
-    // Check if it is an external URL to instantly share the link directly and preserve user gesture
-    const isExternal = imgUrl.startsWith("http") && !imgUrl.includes(window.location.origin);
-    if (isExternal) {
-      if (navigator.share) {
-        try {
-          await navigator.share({
-            title: "Maa Vindhyavasini Divya Darshan",
-            text: `${caption} — Glimpse of Maa Vindhyavasini's divine shringar`,
-            url: imgUrl,
-          });
-          toast.success(lang === "hi" ? "सफलतापूर्वक साझा किया गया!" : "Shared successfully!");
-          return;
-        } catch (shareErr) {
-          if (shareErr instanceof Error && shareErr.name === "AbortError") {
-            return;
-          }
-          console.error("[Gallery Share] External URL share failed:", shareErr);
-        }
-      }
+    const pageUrl = window.location.origin + "/gallery";
 
-      // Fallback: Clipboard copy
-      try {
-        await navigator.clipboard.writeText(imgUrl);
-        toast.success(
-          lang === "hi" 
-            ? "छवि लिंक क्लिपबोर्ड पर कॉपी किया गया!" 
-            : "Image link copied to clipboard!"
-        );
-      } catch (clipErr) {
-        console.error("[Gallery Share] Clipboard write failed for external URL:", clipErr);
-        toast.error(lang === "hi" ? "साझा करने में विफल" : "Failed to share image");
+    // Fetch the raw image blob directly from the URL.
+    // This avoids the canvas CORS taint issue that blocks external (Supabase) URLs.
+    toast.loading(lang === "hi" ? "छवि तैयार की जा रही है..." : "Preparing image...", { id: "share-gallery" });
+
+    let imageBlob: Blob | null = null;
+    try {
+      const response = await fetch(imgUrl);
+      if (response.ok) {
+        imageBlob = await response.blob();
       }
-      return;
+    } catch (fetchErr) {
+      console.warn("[Gallery Share] Could not fetch image blob from URL:", fetchErr);
     }
 
-    toast.loading(lang === "hi" ? "साझा करने के लिए छवि तैयार की जा रही है..." : "Preparing image for sharing...", { id: "share-gallery" });
-    try {
-      const canvas = document.createElement("canvas");
-      canvas.width = 1080;
-      canvas.height = 1920;
-      const ctx = canvas.getContext("2d");
-      if (!ctx) throw new Error("Could not get canvas context");
+    toast.dismiss("share-gallery");
 
-      // 1. Draw background gradient
-      const bgGrad = ctx.createRadialGradient(540, 960, 100, 540, 960, 1100);
-      bgGrad.addColorStop(0, "#FFFDF6");
-      bgGrad.addColorStop(1, "#FFF4DD");
-      ctx.fillStyle = bgGrad;
-      ctx.fillRect(0, 0, 1080, 1920);
-
-      // 2. Draw border frame
-      ctx.strokeStyle = "#D9381E";
-      ctx.lineWidth = 12;
-      ctx.strokeRect(30, 30, 1020, 1860);
-
-      ctx.strokeStyle = "#D6A232";
-      ctx.lineWidth = 4;
-      ctx.strokeRect(50, 50, 980, 1820);
-
-      // Corner Accents
-      const drawCorners = () => {
-        ctx.fillStyle = "#D9381E";
-        const corners = [
-          { x: 50, y: 50, dx: 1, dy: 1 },
-          { x: 1030, y: 50, dx: -1, dy: 1 },
-          { x: 50, y: 1870, dx: 1, dy: -1 },
-          { x: 1030, y: 1870, dx: -1, dy: -1 },
-        ];
-        corners.forEach((c) => {
-          ctx.beginPath();
-          ctx.arc(c.x, c.y, 40, 0, Math.PI * 2);
-          ctx.fillStyle = "rgba(217, 56, 30, 0.1)";
-          ctx.fill();
-
-          ctx.strokeStyle = "#D9381E";
-          ctx.lineWidth = 4;
-          ctx.beginPath();
-          ctx.moveTo(c.x, c.y);
-          ctx.lineTo(c.x + c.dx * 80, c.y);
-          ctx.moveTo(c.x, c.y);
-          ctx.lineTo(c.x, c.y + c.dy * 80);
-          ctx.stroke();
-        });
-      };
-      drawCorners();
-
-      // 3. Draw Header Box
-      ctx.save();
-      ctx.shadowColor = "rgba(217, 56, 30, 0.3)";
-      ctx.shadowBlur = 20;
-      ctx.shadowOffsetY = 8;
-      const headGrad = ctx.createLinearGradient(140, 0, 940, 0);
-      headGrad.addColorStop(0, "#D9381E");
-      headGrad.addColorStop(1, "#FF5E36");
-      ctx.fillStyle = headGrad;
-      
-      const drawRoundRect = (x: number, y: number, w: number, h: number, r: number) => {
-        if (typeof ctx.roundRect === "function") {
-          ctx.roundRect(x, y, w, h, r);
-        } else {
-          ctx.moveTo(x + r, y);
-          ctx.arcTo(x + w, y, x + w, y + h, r);
-          ctx.arcTo(x + w, y + h, x, y + h, r);
-          ctx.arcTo(x, y + h, x, y, r);
-          ctx.arcTo(x, y, x + w, y, r);
-        }
-      };
-      
-      ctx.beginPath();
-      drawRoundRect(140, 160, 800, 120, 60);
-      ctx.fill();
-      ctx.restore();
-
-      // Header golden outline
-      ctx.strokeStyle = "#D6A232";
-      ctx.lineWidth = 3;
-      ctx.beginPath();
-      drawRoundRect(145, 165, 790, 110, 55);
-      ctx.stroke();
-
-      // Header Text
-      ctx.fillStyle = "#FFFDF6";
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.font = "bold 44px Georgia, serif";
-      ctx.fillText(lang === "hi" ? "॥ दिव्य दर्शन ॥" : "॥ Divya Darshan ॥", 540, 220);
-
-      // 4. Load and draw the Gallery Image
-      const img = new Image();
-      img.crossOrigin = "anonymous";
-      
-      await new Promise((resolve, reject) => {
-        img.onload = resolve;
-        img.onerror = () => reject(new Error("Failed to load image"));
-        img.src = imgUrl;
-      });
-
-      // Position & Size calculation for 3:4 image layout
-      const imgWidth = 840;
-      const imgHeight = 1120; // 3:4 ratio
-      const imgX = (1080 - imgWidth) / 2;
-      const imgY = 360;
-
-      // Draw shadow for image
-      ctx.save();
-      ctx.shadowColor = "rgba(0, 0, 0, 0.3)";
-      ctx.shadowBlur = 25;
-      ctx.shadowOffsetY = 12;
-      
-      // Draw image background card (white border)
-      ctx.fillStyle = "#FFFFFF";
-      ctx.fillRect(imgX - 16, imgY - 16, imgWidth + 32, imgHeight + 32);
-      ctx.restore();
-
-      // Draw the image itself
-      ctx.drawImage(img, imgX, imgY, imgWidth, imgHeight);
-
-      // Gold frame around the image
-      ctx.strokeStyle = "#D6A232";
-      ctx.lineWidth = 4;
-      ctx.strokeRect(imgX - 18, imgY - 18, imgWidth + 36, imgHeight + 36);
-
-      // 5. Draw Caption below the image
-      ctx.fillStyle = "#5E1914";
-      ctx.font = "bold 48px Georgia, serif";
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.fillText(caption, 540, 1560);
-
-      // 6. Draw Bottom Footer Block
-      ctx.save();
-      ctx.shadowColor = "rgba(217, 56, 30, 0.25)";
-      ctx.shadowBlur = 15;
-      ctx.shadowOffsetY = 6;
-      ctx.fillStyle = "#D9381E";
-      ctx.beginPath();
-      drawRoundRect(240, 1680, 600, 80, 40);
-      ctx.fill();
-      ctx.restore();
-
-      // Footer golden outline
-      ctx.strokeStyle = "#D6A232";
-      ctx.lineWidth = 3;
-      ctx.beginPath();
-      drawRoundRect(245, 1685, 590, 70, 35);
-      ctx.stroke();
-
-      ctx.fillStyle = "#FFFDF6";
-      ctx.font = "bold 28px Georgia, serif";
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.fillText("namamivindhyavasini.in", 540, 1720);
-
-      const dataUrl = canvas.toDataURL("image/png");
-      const file = dataURLtoFile(dataUrl, `darshan_${caption.toLowerCase().replace(/\s+/g, "_")}.png`);
-
-      const openShareModalFallback = async () => {
-        setShareDataUrl(dataUrl);
-        setShareImageUrl(imgUrl);
-        setSharePageUrl(window.location.origin + "/gallery");
-        setShareText(caption);
-        setShareModalOpen(true);
-        toast.dismiss("share-gallery");
-        try {
-          const response = await fetch(dataUrl);
-          const blob = await response.blob();
-          setShareBlob(blob);
-        } catch (blobErr) {
-          console.warn("[Gallery Share] Could not convert dataUrl to blob for fallback share modal:", blobErr);
-        }
-      };
-
-      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-      if (isMobile && navigator.canShare && navigator.canShare({ files: [file] })) {
+    // On mobile with HTTPS, try native OS share sheet with the actual image file
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    if (isMobile && imageBlob && navigator.canShare) {
+      const ext = imageBlob.type.includes("png") ? "png" : "jpg";
+      const file = new File([imageBlob], `maa_vindhyavasini_darshan.${ext}`, { type: imageBlob.type });
+      if (navigator.canShare({ files: [file] })) {
         try {
           await navigator.share({
             files: [file],
             title: "Maa Vindhyavasini Divya Darshan",
             text: caption,
           });
-          toast.success(lang === "hi" ? "सफलतापूर्वक साझा किया गया!" : "Shared successfully!", { id: "share-gallery" });
+          toast.success(lang === "hi" ? "सफलतापूर्वक साझा किया गया!" : "Shared successfully!");
+          return;
         } catch (shareErr) {
-          if (shareErr instanceof Error && shareErr.name === "AbortError") {
-            toast.dismiss("share-gallery");
-            return;
-          }
-          console.warn("[Gallery Share] Share failed, falling back to modal:", shareErr);
-          await openShareModalFallback();
+          if (shareErr instanceof Error && shareErr.name === "AbortError") return;
+          console.warn("[Gallery Share] Native mobile share failed, falling back to modal:", shareErr);
         }
-      } else {
-        await openShareModalFallback();
       }
-    } catch (err) {
-      console.error("[Gallery Share] Canvas generation failed, trying direct link share fallback:", err);
-      
-      // If canvas generation fails, we still try to open the fallback modal but with just the raw imgUrl (no generated card)
-      setShareDataUrl(null);
-      setShareBlob(null);
-      setShareImageUrl(imgUrl);
-      setSharePageUrl(window.location.origin + "/gallery");
-      setShareText(caption);
-      setShareModalOpen(true);
-      toast.dismiss("share-gallery");
     }
+
+    // Desktop / fallback — open Share Modal with image preview
+    setShareDataUrl(imgUrl);
+    setShareBlob(imageBlob);
+    setShareImageUrl(imgUrl);
+    setSharePageUrl(pageUrl);
+    setShareText(caption);
+    setShareModalOpen(true);
   };
 
   const webpageSchema = {

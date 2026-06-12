@@ -79,8 +79,29 @@ export const ShareModal: React.FC<ShareModalProps> = ({
     }
   };
 
-  const handleDownload = () => {
+  const handleDownload = async () => {
     if (!dataUrl) return;
+    // If it's a regular https:// URL, fetch the blob and download it properly
+    if (dataUrl.startsWith("http")) {
+      try {
+        const response = await fetch(dataUrl);
+        const blob = await response.blob();
+        const blobUrl = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = blobUrl;
+        a.download = downloadFilename || `namami_vindhyavasini_${Date.now()}.jpg`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(blobUrl);
+        toast.success(hi ? "डाउनलोड शुरू हो गया!" : "Download started!");
+      } catch (err) {
+        // Fallback: open in new tab
+        window.open(dataUrl, "_blank");
+      }
+      return;
+    }
+    // It's a data: URL — use direct href download
     const a = document.createElement("a");
     a.href = dataUrl;
     a.download = downloadFilename || `namami_vindhyavasini_${Date.now()}.png`;
@@ -91,6 +112,9 @@ export const ShareModal: React.FC<ShareModalProps> = ({
   };
 
   const shareText = encodeURIComponent(`${text} - ${hi ? "माँ विंध्यवासिनी दर्शन" : "Maa Vindhyavasini Darshan"}`);
+
+  // Use dataUrl as the preview src — works for both https:// URLs and data: URLs
+  const previewSrc = dataUrl || imageUrl || null;
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
@@ -117,22 +141,23 @@ export const ShareModal: React.FC<ShareModalProps> = ({
           <div className="grid md:grid-cols-2 gap-6 items-center">
             {/* Visual Card Preview */}
             <div className="flex flex-col items-center justify-center p-3 rounded-xl bg-amber-50/40 border border-gold/20 shadow-inner">
-              {dataUrl ? (
-                <div className="relative group max-h-[320px] max-w-[200px] overflow-hidden rounded-lg border-2 border-gold/30 shadow-md transition-transform duration-300 hover:scale-[1.02]">
+              {previewSrc ? (
+                <div className="relative group max-h-[320px] max-w-[220px] overflow-hidden rounded-lg border-2 border-gold/30 shadow-md transition-transform duration-300 hover:scale-[1.02]">
                   <img
-                    src={dataUrl}
+                    src={previewSrc}
                     alt="Share Preview"
-                    className="max-h-[320px] w-auto object-contain pointer-events-none select-none"
+                    className="max-h-[320px] w-full object-cover pointer-events-none select-none"
+                    crossOrigin="anonymous"
                   />
                   <div className="absolute inset-0 bg-black/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                     <span className="text-[10px] bg-black/60 text-white font-medium px-2 py-1 rounded">
-                      {hi ? "कार्ड का प्रीव्यू" : "Card Preview"}
+                      {hi ? "कार्ड का प्रीव्यू" : "Image Preview"}
                     </span>
                   </div>
                 </div>
               ) : (
                 <div className="h-[280px] w-[210px] flex items-center justify-center text-muted-foreground text-xs border border-dashed border-gold/30 rounded-lg">
-                  {hi ? "छवि लोड हो रही है..." : "Generating preview..."}
+                  {hi ? "छवि लोड हो रही है..." : "Loading preview..."}
                 </div>
               )}
             </div>
