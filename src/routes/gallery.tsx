@@ -352,8 +352,7 @@ function GalleryPage() {
       const dataUrl = canvas.toDataURL("image/png");
       const file = dataURLtoFile(dataUrl, `darshan_${caption.toLowerCase().replace(/\s+/g, "_")}.png`);
 
-      const triggerDownload = async () => {
-        let copiedToClipboard = false;
+      const copyCardToClipboard = async () => {
         try {
           const response = await fetch(dataUrl);
           const blob = await response.blob();
@@ -362,27 +361,18 @@ function GalleryPage() {
               [blob.type]: blob
             })
           ]);
-          copiedToClipboard = true;
-        } catch (clipErr) {
-          console.warn("[Gallery Share] Clipboard write failed for canvas blob:", clipErr);
-        }
-
-        const link = document.createElement("a");
-        link.download = `darshan_${caption.toLowerCase().replace(/\s+/g, "_")}.png`;
-        link.href = dataUrl;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        
-        if (copiedToClipboard) {
           toast.success(
             lang === "hi" 
-              ? "छवि कॉपी की गई और डाउनलोड शुरू! व्हाट्सएप (Ctrl+V) में सीधे पेस्ट करें।" 
-              : "Image card copied & downloaded! Paste (Ctrl+V) directly into WhatsApp.",
+              ? "छवि कॉपी की गई! व्हाट्सएप (Ctrl+V) में सीधे पेस्ट करें।" 
+              : "Image card copied! Paste (Ctrl+V) directly into WhatsApp.",
             { id: "share-gallery" }
           );
-        } else {
-          toast.success(lang === "hi" ? "छवि डाउनलोड प्रारंभ!" : "Image download started!", { id: "share-gallery" });
+        } catch (clipErr) {
+          console.warn("[Gallery Share] Clipboard write failed for canvas blob:", clipErr);
+          toast.error(
+            lang === "hi" ? "कॉपी करने में विफल" : "Failed to copy card to clipboard",
+            { id: "share-gallery" }
+          );
         }
       };
 
@@ -399,10 +389,10 @@ function GalleryPage() {
             toast.dismiss("share-gallery");
             return;
           }
-          triggerDownload();
+          copyCardToClipboard();
         }
       } else {
-        triggerDownload();
+        copyCardToClipboard();
       }
     } catch (err) {
       console.error("[Gallery Share] Canvas generation failed, trying direct link share fallback:", err);

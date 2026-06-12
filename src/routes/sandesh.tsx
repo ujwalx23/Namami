@@ -332,9 +332,8 @@ function SandeshPage() {
     const dataUrl = canvas.toDataURL("image/png");
     const file = dataURLtoFile(dataUrl, `sandesh_${new Date().toISOString().split("T")[0]}.png`);
 
-    // Helper to trigger direct download
-    const triggerDownload = async () => {
-      let copiedToClipboard = false;
+    // Helper to copy card directly to clipboard
+    const copyCardToClipboard = async () => {
       try {
         const response = await fetch(dataUrl);
         const blob = await response.blob();
@@ -343,27 +342,16 @@ function SandeshPage() {
             [blob.type]: blob
           })
         ]);
-        copiedToClipboard = true;
-      } catch (clipErr) {
-        console.warn("Could not copy image to clipboard", clipErr);
-      }
-
-      const link = document.createElement("a");
-      link.download = `sandesh_${new Date().toISOString().split("T")[0]}.png`;
-      link.href = dataUrl;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      console.log("[Sandesh] Download triggered.");
-      
-      if (copiedToClipboard) {
         toast.success(
           lang === "hi" 
-            ? "छवि कॉपी की गई और डाउनलोड शुरू! व्हाट्सएप (Ctrl+V) में सीधे पेस्ट करें।" 
-            : "Image copied & downloaded! Paste (Ctrl+V) directly into WhatsApp."
+            ? "छवि कॉपी की गई! व्हाट्सएप (Ctrl+V) में सीधे पेस्ट करें।" 
+            : "Image card copied! Paste (Ctrl+V) directly into WhatsApp."
         );
-      } else {
-        toast.success("Image download started!");
+      } catch (clipErr) {
+        console.warn("Could not copy image to clipboard", clipErr);
+        toast.error(
+          lang === "hi" ? "कॉपी करने में विफल" : "Failed to copy card to clipboard"
+        );
       }
     };
 
@@ -383,13 +371,13 @@ function SandeshPage() {
             console.log("[Sandesh] Share cancelled by user.");
             return;
           }
-          // For other errors (like "earlier share not completed"), fallback to download
-          console.warn("[Sandesh] navigator.share failed, falling back to download:", shareErr);
-          triggerDownload();
+          // For other errors (like "earlier share not completed"), fallback to clipboard copy
+          console.warn("[Sandesh] navigator.share failed, falling back to clipboard copy:", shareErr);
+          copyCardToClipboard();
         }
       } else {
-        // Fallback: Direct Download
-        triggerDownload();
+        // Fallback: Clipboard Copy
+        copyCardToClipboard();
       }
     } catch (err) {
       console.error("[Sandesh] Failed to share or download image:", err);
