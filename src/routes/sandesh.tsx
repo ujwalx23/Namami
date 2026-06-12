@@ -10,6 +10,7 @@ import { speakText, stopSpeech, isHindiText } from "@/lib/speech";
 import { toast } from "sonner";
 import { JsonLd } from "@/components/JsonLd";
 import { ShareModal } from "@/components/ShareModal";
+import { isMobileDevice, shareImageNative } from "@/lib/shareHelpers";
 
 type Sandesh = Tables<"sandesh">;
 
@@ -354,29 +355,22 @@ function SandeshPage() {
       }
     };
 
-    // 9. Trigger Web Share or Fallback Modal
+    // 9. Mobile: native share sheet. Desktop: share modal.
     try {
-      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-      if (isMobile && navigator.canShare && navigator.canShare({ files: [file] })) {
-        try {
-          await navigator.share({
-            files: [file],
-            title: "Maa Vindhyavasini Daily Sandesh",
-          });
-          console.log("[Sandesh] Shared successfully via Web Share API.");
-          toast.success("Image shared successfully!");
-        } catch (shareErr) {
-          // If the user cancelled the share, do not display error or force fallback
-          if (shareErr instanceof Error && shareErr.name === "AbortError") {
-            console.log("[Sandesh] Share cancelled by user.");
-            return;
-          }
-          console.warn("[Sandesh] navigator.share failed, falling back to share modal:", shareErr);
-          await openShareModalFallback();
+      if (isMobileDevice()) {
+        const result = await shareImageNative({
+          blob: file,
+          filename: file.name,
+          title: "Maa Vindhyavasini Daily Sandesh",
+          text: `"${message}" — ${author}\nwww.namamivindhyavasini.in`,
+        });
+        if (result === "shared") {
+          toast.success(lang === "hi" ? "सफलतापूर्वक साझा किया गया!" : "Image shared successfully!");
+          return;
         }
-      } else {
-        await openShareModalFallback();
+        if (result === "cancelled") return;
       }
+      await openShareModalFallback();
     } catch (err) {
       console.error("[Sandesh] Failed to share image:", err);
       await openShareModalFallback();

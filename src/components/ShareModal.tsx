@@ -2,17 +2,18 @@ import * as React from "react";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { toast } from "sonner";
-import { Download, Check, Link } from "lucide-react";
+import { Download, Check, Link, Share2 } from "lucide-react";
 import { useLang } from "@/i18n/LangProvider";
+import { isMobileDevice, openWhatsAppApp, shareImageNative } from "@/lib/shareHelpers";
 
 interface ShareModalProps {
   isOpen: boolean;
   onClose: () => void;
-  dataUrl: string | null;   // Canvas data URL OR regular https:// image URL
-  imageBlob: Blob | null;   // Image blob for clipboard copy (may be null for external URLs)
-  imageUrl: string;         // Direct image URL
-  pageUrl: string;          // Page share link
-  text: string;             // Quote text or caption
+  dataUrl: string | null;
+  imageBlob: Blob | null;
+  imageUrl: string;
+  pageUrl: string;
+  text: string;
   title?: string;
   downloadFilename?: string;
 }
@@ -36,38 +37,65 @@ export const ShareModal: React.FC<ShareModalProps> = ({
 }) => {
   const { lang } = useLang();
   const hi = lang === "hi";
+  const mobile = isMobileDevice();
 
   const [copiedLink, setCopiedLink] = useState(false);
   const [whatsappSharing, setWhatsappSharing] = useState(false);
 
-  // Check if the image source is a data: URL (canvas-generated, e.g. Sandesh)
-  // vs a regular https:// URL (external, e.g. Pinterest/Supabase gallery images)
   const isDataUrl = dataUrl?.startsWith("data:") ?? false;
+  const hasImage = Boolean(imageBlob || isDataUrl);
+  const shareCaption = `${text}\nwww.namamivindhyavasini.in`;
 
-  // WhatsApp share:
-  //   - If we have a blob (canvas-generated Sandesh): copy image to clipboard → open WhatsApp Web → user pastes
-  //   - If no blob (external URL like Pinterest): copy image to clipboard if possible, else share link
   const handleWhatsAppShare = async () => {
     setWhatsappSharing(true);
 
+    if (mobile) {
+      if (imageBlob) {
+        const result = await shareImageNative({
+          blob: imageBlob,
+          filename: downloadFilename || "namami_vindhyavasini.png",
+          title: text,
+          text: shareCaption,
+        });
+
+        if (result === "shared") {
+          toast.success(hi ? "सफलतापूर्वक साझा किया गया!" : "Shared successfully!");
+          onClose();
+          setWhatsappSharing(false);
+          return;
+        }
+        if (result === "cancelled") {
+          setWhatsappSharing(false);
+          return;
+        }
+      }
+
+      openWhatsAppApp(`${shareCaption}\n${pageUrl}`);
+      toast.success(
+        hi ? "व्हाट्सएप ऐप खुल रहा है..." : "Opening WhatsApp app...",
+        { duration: 3000 }
+      );
+      setWhatsappSharing(false);
+      return;
+    }
+
+    // Desktop: copy image or link → open WhatsApp Web
     let imageCopied = false;
 
     if (imageBlob) {
       try {
-        const clipBlob = imageBlob.type === "image/png"
-          ? imageBlob
-          : new Blob([await imageBlob.arrayBuffer()], { type: "image/png" });
+        const clipBlob =
+          imageBlob.type === "image/png"
+            ? imageBlob
+            : new Blob([await imageBlob.arrayBuffer()], { type: "image/png" });
 
-        await navigator.clipboard.write([
-          new ClipboardItem({ "image/png": clipBlob }),
-        ]);
+        await navigator.clipboard.write([new ClipboardItem({ "image/png": clipBlob })]);
         imageCopied = true;
       } catch (clipErr) {
         console.warn("[ShareModal] Clipboard write failed:", clipErr);
       }
     }
 
-    // Open WhatsApp Web
     window.open("https://web.whatsapp.com/", "_blank", "noopener,noreferrer");
 
     if (imageCopied) {
@@ -78,7 +106,6 @@ export const ShareModal: React.FC<ShareModalProps> = ({
         { duration: 6000 }
       );
     } else {
-      // No blob available (external URL) — share the link instead
       try {
         await navigator.clipboard.writeText(`${text}\n${pageUrl}`);
         toast.success(
@@ -88,16 +115,27 @@ export const ShareModal: React.FC<ShareModalProps> = ({
           { duration: 5000 }
         );
       } catch {
-        toast(
-          hi
-            ? "व्हाट्सएप वेब खुल गया।"
-            : "WhatsApp Web opened.",
-          { duration: 3000 }
-        );
+        toast(hi ? "व्हाट्सएप वेब खुल गया।" : "WhatsApp Web opened.", { duration: 3000 });
       }
     }
 
     setWhatsappSharing(false);
+  };
+
+  const handleNativeShare = async () => {
+    if (!imageBlob) return;
+
+    const result = await shareImageNative({
+      blob: imageBlob,
+      filename: downloadFilename || "namami_vindhyavasini.png",
+      title: text,
+      text: shareCaption,
+    });
+
+    if (result === "shared") {
+      toast.success(hi ? "सफलतापूर्वक साझा किया गया!" : "Shared successfully!");
+      onClose();
+    }
   };
 
   const handleCopyLink = async () => {
@@ -115,7 +153,6 @@ export const ShareModal: React.FC<ShareModalProps> = ({
     const src = dataUrl || imageUrl;
     if (!src) return;
 
-    // For data: URLs (canvas-generated Sandesh cards) — direct download always works
     if (src.startsWith("data:")) {
       const a = document.createElement("a");
       a.href = src;
@@ -127,9 +164,7 @@ export const ShareModal: React.FC<ShareModalProps> = ({
       return;
     }
 
-    // For https:// URLs — try blob download first, fallback gracefully
     if (imageBlob) {
-      // We already have the blob (fetched earlier)
       const blobUrl = URL.createObjectURL(imageBlob);
       const a = document.createElement("a");
       a.href = blobUrl;
@@ -142,25 +177,41 @@ export const ShareModal: React.FC<ShareModalProps> = ({
       return;
     }
 
-    // No blob available (CORS blocked, e.g. Pinterest) — open in new tab
-    // The user can long-press (mobile) or right-click > Save As (desktop)
     window.open(src, "_blank");
     toast(
-      hi
-        ? "फोटो नई टैब में खुली — राइट-क्लिक करके 'Save Image As' चुनें।"
-        : "Photo opened in new tab — right-click and choose 'Save Image As'.",
+      mobile
+        ? hi
+          ? "फोटो खुली — लंबा दबाकर गैलरी में सेव करें।"
+          : "Photo opened — long-press to save to gallery."
+        : hi
+          ? "फोटो नई टैब में खुली — राइट-क्लिक करके 'Save Image As' चुनें।"
+          : "Photo opened in new tab — right-click and choose 'Save Image As'.",
       { duration: 5000, icon: "💡" }
     );
   };
 
-  // Preview source — works for both data: and https:// URLs
+  const whatsappHint = mobile
+    ? hasImage
+      ? hi
+        ? "शेयर मेनू खुलेगा → व्हाट्सएप चुनें"
+        : "Share menu opens → pick WhatsApp"
+      : hi
+        ? "व्हाट्सएप ऐप में संदेश भेजें"
+        : "Opens WhatsApp app with message"
+    : hasImage
+      ? hi
+        ? "फोटो कॉपी → व्हाट्सएप → Ctrl+V"
+        : "Photo copied → WhatsApp → Ctrl+V"
+      : hi
+        ? "लिंक कॉपी → व्हाट्सएप → Ctrl+V"
+        : "Link copied → WhatsApp → Ctrl+V";
+
   const previewSrc = dataUrl || imageUrl || null;
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-2xl bg-[#FFFDF6] border-2 border-gold/40 rounded-2xl shadow-sacred p-0 overflow-hidden text-foreground">
+      <DialogContent className="sm:max-w-2xl max-w-[calc(100vw-1.5rem)] bg-[#FFFDF6] border-2 border-gold/40 rounded-2xl shadow-sacred p-0 overflow-hidden text-foreground">
 
-        {/* Decorative top stripe */}
         <div className="h-2 bg-gradient-to-r from-maroon via-saffron to-maroon w-full" />
 
         <div className="p-4 sm:p-5 pb-5 sm:pb-6 space-y-4">
@@ -172,22 +223,26 @@ export const ShareModal: React.FC<ShareModalProps> = ({
               {title || (hi ? "साझा करें" : "Share")}
             </DialogTitle>
             <DialogDescription className="text-center text-muted-foreground text-[11px] font-medium">
-              {hi
-                ? "व्हाट्सएप पर भेजें, डाउनलोड करें, या लिंक कॉपी करें"
-                : "Send on WhatsApp, download, or copy link"}
+              {mobile
+                ? hi
+                  ? "व्हाट्सएप, डाउनलोड, या लिंक साझा करें"
+                  : "Share on WhatsApp, download, or copy link"
+                : hi
+                  ? "व्हाट्सएप पर भेजें, डाउनलोड करें, या लिंक कॉपी करें"
+                  : "Send on WhatsApp, download, or copy link"}
             </DialogDescription>
           </DialogHeader>
 
-          {/* Side-by-side: image left, actions right */}
-          <div className="flex flex-row gap-3 sm:gap-5 items-stretch min-h-0">
-            <div className="w-[42%] sm:w-[44%] shrink-0 flex items-center justify-center">
-              <div className="rounded-xl bg-amber-50/40 border border-gold/20 shadow-inner p-1.5 sm:p-2 w-full">
+          {/* Mobile: image on top. Desktop: side-by-side */}
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 items-stretch min-h-0">
+            <div className="w-full sm:w-[44%] shrink-0 flex items-center justify-center">
+              <div className="rounded-xl bg-amber-50/40 border border-gold/20 shadow-inner p-2 w-full max-w-[220px] sm:max-w-none mx-auto">
                 {previewSrc ? (
                   <div className="relative overflow-hidden rounded-lg border-2 border-gold/30 shadow-md">
                     <img
                       src={previewSrc}
                       alt="Share Preview"
-                      className="w-full max-h-[min(52vh,360px)] object-contain pointer-events-none select-none bg-cream/30"
+                      className="w-full max-h-[min(38vh,280px)] sm:max-h-[min(52vh,360px)] object-contain pointer-events-none select-none bg-cream/30"
                     />
                   </div>
                 ) : (
@@ -198,64 +253,85 @@ export const ShareModal: React.FC<ShareModalProps> = ({
               </div>
             </div>
 
-            <div className="flex-1 flex flex-col gap-2 sm:gap-2.5 justify-center min-w-0">
-
-            <button
-              onClick={handleWhatsAppShare}
-              disabled={whatsappSharing}
-              className="w-full flex items-center gap-2 sm:gap-3 px-2.5 sm:px-4 py-2.5 sm:py-3.5 rounded-xl border-2 border-green-300 bg-gradient-to-r from-green-50 to-green-50/50 hover:from-green-100 hover:to-green-50 text-green-700 font-semibold text-xs sm:text-sm transition-all duration-200 active:scale-[0.98] shadow-sm disabled:opacity-60"
-            >
-              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-green-500 flex items-center justify-center text-white shrink-0 shadow-sm">
-                <WhatsAppIcon className="w-4 h-4 sm:w-5 sm:h-5" />
-              </div>
-              <div className="text-left min-w-0">
-                <p className="font-bold leading-tight">{hi ? "व्हाट्सएप पर भेजें" : "Send on WhatsApp"}</p>
-                <p className="text-[9px] sm:text-[10px] text-green-600/80 font-normal mt-0.5 leading-snug">
-                  {imageBlob || isDataUrl
-                    ? (hi ? "फोटो कॉपी → व्हाट्सएप → Ctrl+V" : "Photo copied → WhatsApp → Ctrl+V")
-                    : (hi ? "लिंक कॉपी → व्हाट्सएप → Ctrl+V" : "Link copied → WhatsApp → Ctrl+V")}
-                </p>
-              </div>
-            </button>
-
-            <button
-              onClick={handleDownload}
-              disabled={!dataUrl && !imageUrl}
-              className="w-full flex items-center gap-2 sm:gap-3 px-2.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-gold/30 bg-white hover:bg-gold/5 text-maroon font-semibold text-xs sm:text-sm transition-all duration-200 active:scale-[0.98] shadow-sm disabled:opacity-50"
-            >
-              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-saffron/10 flex items-center justify-center text-saffron shrink-0">
-                <Download size={16} className="sm:w-[18px] sm:h-[18px]" />
-              </div>
-              <div className="text-left min-w-0">
-                <p className="leading-tight">{hi ? "फोटो डाउनलोड करें" : "Download Photo"}</p>
-                <p className="text-[9px] sm:text-[10px] text-muted-foreground font-normal mt-0.5">
-                  {hi ? "डिवाइस में सेव करें" : "Save to your device"}
-                </p>
-              </div>
-            </button>
-
-            <button
-              onClick={handleCopyLink}
-              className="w-full flex items-center justify-between gap-2 px-2.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-gold/30 bg-white hover:bg-gold/5 text-maroon font-semibold text-xs sm:text-sm transition-all duration-200 active:scale-[0.98] shadow-sm"
-            >
-              <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-saffron/10 flex items-center justify-center text-saffron shrink-0">
-                  {copiedLink ? <Check size={16} className="text-green-600" /> : <Link size={16} />}
+            <div className="flex-1 flex flex-col gap-2.5 justify-center min-w-0">
+              <button
+                onClick={handleWhatsAppShare}
+                disabled={whatsappSharing}
+                className="w-full flex items-center gap-3 px-4 py-3.5 rounded-xl border-2 border-green-300 bg-gradient-to-r from-green-50 to-green-50/50 hover:from-green-100 hover:to-green-50 text-green-700 font-semibold text-sm transition-all duration-200 active:scale-[0.98] shadow-sm disabled:opacity-60"
+              >
+                <div className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center text-white shrink-0 shadow-sm">
+                  <WhatsAppIcon className="w-5 h-5" />
                 </div>
                 <div className="text-left min-w-0">
-                  <p className="leading-tight">{hi ? "लिंक कॉपी करें" : "Copy Link"}</p>
-                  <p className="text-[9px] sm:text-[10px] text-muted-foreground font-normal mt-0.5">
-                    {hi ? "वेबसाइट का लिंक" : "Website URL"}
+                  <p className="font-bold leading-tight">
+                    {mobile
+                      ? hi
+                        ? "व्हाट्सएप पर भेजें"
+                        : "Share on WhatsApp"
+                      : hi
+                        ? "व्हाट्सएप पर भेजें"
+                        : "Send on WhatsApp"}
+                  </p>
+                  <p className="text-[10px] text-green-600/80 font-normal mt-0.5 leading-snug">
+                    {whatsappHint}
                   </p>
                 </div>
-              </div>
-              {copiedLink && (
-                <span className="text-[10px] sm:text-xs text-green-600 font-bold animate-in fade-in shrink-0">
-                  {hi ? "कॉपी!" : "Copied!"}
-                </span>
-              )}
-            </button>
+              </button>
 
+              {mobile && imageBlob && (
+                <button
+                  onClick={handleNativeShare}
+                  className="w-full flex items-center gap-3 px-4 py-3 rounded-xl border border-gold/30 bg-white hover:bg-gold/5 text-maroon font-semibold text-sm transition-all duration-200 active:scale-[0.98] shadow-sm"
+                >
+                  <div className="w-10 h-10 rounded-full bg-saffron/10 flex items-center justify-center text-saffron shrink-0">
+                    <Share2 size={18} />
+                  </div>
+                  <div className="text-left min-w-0">
+                    <p className="leading-tight">{hi ? "अन्य ऐप से साझा करें" : "Share via other apps"}</p>
+                    <p className="text-[10px] text-muted-foreground font-normal mt-0.5">
+                      {hi ? "इंस्टाग्राम, मैसेज आदि" : "Instagram, Messages, etc."}
+                    </p>
+                  </div>
+                </button>
+              )}
+
+              <button
+                onClick={handleDownload}
+                disabled={!dataUrl && !imageUrl}
+                className="w-full flex items-center gap-3 px-4 py-3 rounded-xl border border-gold/30 bg-white hover:bg-gold/5 text-maroon font-semibold text-sm transition-all duration-200 active:scale-[0.98] shadow-sm disabled:opacity-50"
+              >
+                <div className="w-10 h-10 rounded-full bg-saffron/10 flex items-center justify-center text-saffron shrink-0">
+                  <Download size={18} />
+                </div>
+                <div className="text-left min-w-0">
+                  <p className="leading-tight">{hi ? "फोटो डाउनलोड करें" : "Download Photo"}</p>
+                  <p className="text-[10px] text-muted-foreground font-normal mt-0.5">
+                    {hi ? "डिवाइस में सेव करें" : "Save to your device"}
+                  </p>
+                </div>
+              </button>
+
+              <button
+                onClick={handleCopyLink}
+                className="w-full flex items-center justify-between gap-2 px-4 py-3 rounded-xl border border-gold/30 bg-white hover:bg-gold/5 text-maroon font-semibold text-sm transition-all duration-200 active:scale-[0.98] shadow-sm"
+              >
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="w-10 h-10 rounded-full bg-saffron/10 flex items-center justify-center text-saffron shrink-0">
+                    {copiedLink ? <Check size={18} className="text-green-600" /> : <Link size={18} />}
+                  </div>
+                  <div className="text-left min-w-0">
+                    <p className="leading-tight">{hi ? "लिंक कॉपी करें" : "Copy Link"}</p>
+                    <p className="text-[10px] text-muted-foreground font-normal mt-0.5">
+                      {hi ? "वेबसाइट का लिंक" : "Website URL"}
+                    </p>
+                  </div>
+                </div>
+                {copiedLink && (
+                  <span className="text-xs text-green-600 font-bold animate-in fade-in shrink-0">
+                    {hi ? "कॉपी!" : "Copied!"}
+                  </span>
+                )}
+              </button>
             </div>
           </div>
         </div>

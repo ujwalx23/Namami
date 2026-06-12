@@ -13,6 +13,7 @@ import gallery1 from "@/assets/gallery-1.webp";
 import { JsonLd } from "@/components/JsonLd";
 import { ShareModal } from "@/components/ShareModal";
 import { addGalleryWatermark } from "@/lib/watermarkImage";
+import { isMobileDevice, shareImageNative } from "@/lib/shareHelpers";
 
 export const Route = createFileRoute("/gallery")({
   head: () => ({
@@ -187,27 +188,22 @@ function GalleryPage() {
 
     toast.dismiss("share-gallery");
 
-    // On mobile with HTTPS, try native OS share sheet with the watermarked image
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    if (isMobile && shareBlob && navigator.canShare) {
-      const file = new File([shareBlob], "maa_vindhyavasini_darshan.png", { type: "image/png" });
-      if (navigator.canShare({ files: [file] })) {
-        try {
-          await navigator.share({
-            files: [file],
-            title: "Maa Vindhyavasini Divya Darshan",
-            text: `${caption}\nwww.namamivindhyavasini.in`,
-          });
-          toast.success(lang === "hi" ? "सफलतापूर्वक साझा किया गया!" : "Shared successfully!");
-          return;
-        } catch (shareErr) {
-          if (shareErr instanceof Error && shareErr.name === "AbortError") return;
-          console.warn("[Gallery Share] Native mobile share failed, falling back to modal:", shareErr);
-        }
+    // On mobile, open the native share sheet immediately (WhatsApp, Instagram, etc.)
+    if (isMobileDevice() && shareBlob) {
+      const result = await shareImageNative({
+        blob: shareBlob,
+        filename: "maa_vindhyavasini_darshan.png",
+        title: "Maa Vindhyavasini Divya Darshan",
+        text: `${caption}\nwww.namamivindhyavasini.in`,
+      });
+      if (result === "shared") {
+        toast.success(lang === "hi" ? "सफलतापूर्वक साझा किया गया!" : "Shared successfully!");
+        return;
       }
+      if (result === "cancelled") return;
     }
 
-    // Desktop / fallback — open Share Modal with watermarked preview
+    // Desktop / mobile fallback — open Share Modal with watermarked preview
     setShareDataUrl(sharePreviewUrl);
     setShareBlob(shareBlob);
     setShareImageUrl(sharePreviewUrl);
