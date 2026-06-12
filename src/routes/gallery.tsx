@@ -127,7 +127,8 @@ function GalleryPage() {
 
   const dbItems = extra.map((r) => ({ src: r.image_url, cap: hi ? "माँ विंध्यवासिनी दर्शन" : "Maa Vindhyavasini Darshan" }));
   const defaultItems = defaults.map((d) => ({ src: d.src, cap: hi ? "माँ विंध्यवासिनी दर्शन" : "Maa Vindhyavasini Darshan" }));
-  const items = [...dbItems, ...defaultItems];
+  // System-bundled images first, then admin-uploaded URL images from database
+  const items = [...defaultItems, ...dbItems];
 
   const handleDownload = async (url: string, title: string) => {
     const filename = `${title.toLowerCase().replace(/\s+/g, "_")}.jpg`;
