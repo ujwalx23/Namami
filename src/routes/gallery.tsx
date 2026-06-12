@@ -128,8 +128,8 @@ function GalleryPage() {
   const items = [...dbItems, ...defaultItems];
 
   const handleDownload = async (url: string, title: string) => {
+    const filename = `${title.toLowerCase().replace(/\s+/g, "_")}.jpg`;
     try {
-      const filename = `${title.toLowerCase().replace(/\s+/g, "_")}.png`;
       const response = await fetch(url);
       const blob = await response.blob();
       const blobUrl = URL.createObjectURL(blob);
@@ -140,15 +140,16 @@ function GalleryPage() {
       link.click();
       document.body.removeChild(link);
       URL.revokeObjectURL(blobUrl);
-    } catch (err) {
-      console.warn("Direct blob download failed, falling back to window.open", err);
-      const link = document.createElement("a");
-      link.href = url;
-      link.target = "_blank";
-      link.download = `${title.toLowerCase().replace(/\s+/g, "_")}.jpg`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      toast.success(hi ? "डाउनलोड शुरू!" : "Download started!");
+    } catch {
+      // CORS blocked (e.g. Pinterest URLs) — open in new tab for manual save
+      window.open(url, "_blank");
+      toast(
+        hi
+          ? "💡 फोटो नई टैब में खुली — राइट-क्लिक → 'Save Image As' चुनें"
+          : "💡 Photo opened — right-click and 'Save Image As'",
+        { duration: 5000 }
+      );
     }
   };
 
