@@ -333,7 +333,21 @@ function SandeshPage() {
     const file = dataURLtoFile(dataUrl, `sandesh_${new Date().toISOString().split("T")[0]}.png`);
 
     // Helper to trigger direct download
-    const triggerDownload = () => {
+    const triggerDownload = async () => {
+      let copiedToClipboard = false;
+      try {
+        const response = await fetch(dataUrl);
+        const blob = await response.blob();
+        await navigator.clipboard.write([
+          new ClipboardItem({
+            [blob.type]: blob
+          })
+        ]);
+        copiedToClipboard = true;
+      } catch (clipErr) {
+        console.warn("Could not copy image to clipboard", clipErr);
+      }
+
       const link = document.createElement("a");
       link.download = `sandesh_${new Date().toISOString().split("T")[0]}.png`;
       link.href = dataUrl;
@@ -341,7 +355,16 @@ function SandeshPage() {
       link.click();
       document.body.removeChild(link);
       console.log("[Sandesh] Download triggered.");
-      toast.success("Image download started!");
+      
+      if (copiedToClipboard) {
+        toast.success(
+          lang === "hi" 
+            ? "छवि कॉपी की गई और डाउनलोड शुरू! व्हाट्सएप (Ctrl+V) में सीधे पेस्ट करें।" 
+            : "Image copied & downloaded! Paste (Ctrl+V) directly into WhatsApp."
+        );
+      } else {
+        toast.success("Image download started!");
+      }
     };
 
     // 9. Trigger Web Share or Download
@@ -362,11 +385,11 @@ function SandeshPage() {
           }
           // For other errors (like "earlier share not completed"), fallback to download
           console.warn("[Sandesh] navigator.share failed, falling back to download:", shareErr);
-          triggerDownload();
+          void triggerDownload();
         }
       } else {
         // Fallback: Direct Download
-        triggerDownload();
+        void triggerDownload();
       }
     } catch (err) {
       console.error("[Sandesh] Failed to share or download image:", err);
@@ -517,7 +540,7 @@ function SandeshPage() {
               </h2>
             </ScrollReveal>
             <div className="space-y-4">
-              {archive.map((s: Sandesh, idx: number) => (
+              {archive.map((s: Sandesh, idx) => (
                 <ScrollReveal key={s.id} direction="up" delay={(idx % 4) * 80} duration={750}>
                   <div className="p-6 rounded-2xl bg-card border border-border hover:border-gold/50 transition">
                     <div className="text-xs uppercase tracking-[0.25em] text-saffron mb-2">
