@@ -517,7 +517,7 @@ function SandeshPage() {
               </h2>
             </ScrollReveal>
             <div className="space-y-4">
-              {archive.map((s: Sandesh, idx) => (
+              {archive.map((s: Sandesh, idx: number) => (
                 <ScrollReveal key={s.id} direction="up" delay={(idx % 4) * 80} duration={750}>
                   <div className="p-6 rounded-2xl bg-card border border-border hover:border-gold/50 transition">
                     <div className="text-xs uppercase tracking-[0.25em] text-saffron mb-2">

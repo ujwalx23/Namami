@@ -187,7 +187,7 @@ function EventsPage() {
               {t("events.today")}
             </h2>
             <div className="grid md:grid-cols-3 gap-6">
-              {todayEvents.map((e: EventRow, idx) => (
+              {todayEvents.map((e: EventRow, idx: number) => (
                 <ScrollReveal key={e.id} direction="up" delay={idx * 120} duration={800}>
                   <EventCard e={e} accent="live" />
                 </ScrollReveal>
@@ -201,7 +201,7 @@ function EventsPage() {
           <p className={`text-muted-foreground mb-12 ${dev}`}>{t("events.empty.up")}</p>
         ) : (
           <div className="grid md:grid-cols-3 gap-6 mb-16">
-            {upcoming.map((e: EventRow, idx) => (
+            {upcoming.map((e: EventRow, idx: number) => (
               <ScrollReveal key={e.id} direction="up" delay={idx * 120} duration={800}>
                 <EventCard e={e} accent="gold" />
               </ScrollReveal>
@@ -214,7 +214,7 @@ function EventsPage() {
           <p className={`text-muted-foreground ${dev}`}>{t("events.empty.past")}</p>
         ) : (
           <div className="grid md:grid-cols-2 gap-6">
-            {past.map((e: EventRow, idx) => (
+            {past.map((e: EventRow, idx: number) => (
               <ScrollReveal key={e.id} direction="up" delay={idx * 120} duration={800}>
                 <EventCard e={e} accent="muted" />
               </ScrollReveal>

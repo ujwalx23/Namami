@@ -27,7 +27,7 @@ type BlogPost = Tables<"blog_posts">;
 
 export const Route = createFileRoute("/blog/$slug")({
   head: ({ loaderData }) => {
-    const post = loaderData?.post;
+    const post = (loaderData as any)?.post;
     const title = post ? `${post.seo_title || post.title} | Namami Vindhyavasini` : "Enlightenment | Namami Vindhyavasini";
     const desc = post?.seo_description || "Read this article on Namami Vindhyavasini.";
     const url = post ? `https://www.namamivindhyavasini.in/blog/${post.slug}` : "https://www.namamivindhyavasini.in/blog";
@@ -387,7 +387,7 @@ function BlogDetailPage() {
               {t("blog.related")}
             </h3>
             <div className="grid md:grid-cols-3 gap-6">
-              {related.map((relPost) => (
+              {related.map((relPost: BlogPost) => (
                 <Link
                   key={relPost.id}
                   to="/blog/$slug"
