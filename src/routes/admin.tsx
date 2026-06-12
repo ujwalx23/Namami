@@ -2035,7 +2035,7 @@ type GalleryRow = {
 };
 
 function GalleryAdmin() {
-  const [form, setForm] = useState({ image_url: "", caption: "" });
+  const [form, setForm] = useState({ image_url: "" });
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState<GalleryRow[]>([]);
   const [listLoaded, setListLoaded] = useState(false);
@@ -2063,8 +2063,8 @@ function GalleryAdmin() {
 
   async function save(e: React.FormEvent) {
     e.preventDefault();
-    if (!form.image_url.trim() || !form.caption.trim()) {
-      return toast.error("Image URL and caption are required");
+    if (!form.image_url.trim()) {
+      return toast.error("Image URL is required");
     }
     setLoading(true);
 
@@ -2074,7 +2074,7 @@ function GalleryAdmin() {
           .from("gallery")
           .update({
             image_url: form.image_url.trim(),
-            caption: form.caption.trim(),
+            caption: null,
           })
           .eq("id", editingId)
           .select();
@@ -2098,7 +2098,7 @@ function GalleryAdmin() {
       } else {
         const { error } = await supabase.from("gallery").insert({
           image_url: form.image_url.trim(),
-          caption: form.caption.trim(),
+          caption: null,
         });
 
         if (error) {
@@ -2113,7 +2113,7 @@ function GalleryAdmin() {
 
         toast.success("Image added to gallery!");
       }
-      setForm({ image_url: "", caption: "" });
+      setForm({ image_url: "" });
       await load();
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : "Unknown error";
@@ -2129,14 +2129,14 @@ function GalleryAdmin() {
     toast.success("Image removed from gallery");
     if (editingId === id) {
       setEditingId(null);
-      setForm({ image_url: "", caption: "" });
+      setForm({ image_url: "" });
     }
     await load();
   }
 
   function startEdit(item: GalleryRow) {
     setEditingId(item.id);
-    setForm({ image_url: item.image_url, caption: item.caption });
+    setForm({ image_url: item.image_url });
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -2165,24 +2165,11 @@ function GalleryAdmin() {
 
         <div className="space-y-1">
           <label className="text-xs font-semibold text-muted-foreground uppercase">
-            Image Title / Caption
-          </label>
-          <input
-            value={form.caption}
-            onChange={(e) => setForm({ ...form, caption: e.target.value })}
-            placeholder="e.g. Swarna Shringar (स्वर्ण श्रृंगार)"
-            className="w-full px-4 py-2.5 rounded-lg border border-input bg-background text-sm"
-            required
-          />
-        </div>
-
-        <div className="space-y-1">
-          <label className="text-xs font-semibold text-muted-foreground uppercase">
             Image URL (Link)
           </label>
           <input
             value={form.image_url}
-            onChange={(e) => setForm({ ...form, image_url: e.target.value })}
+            onChange={(e) => setForm({ image_url: e.target.value })}
             placeholder="e.g. https://images.unsplash.com/photo-..."
             className="w-full px-4 py-2.5 rounded-lg border border-input bg-background text-sm"
             required
@@ -2202,7 +2189,7 @@ function GalleryAdmin() {
               type="button"
               onClick={() => {
                 setEditingId(null);
-                setForm({ image_url: "", caption: "" });
+                setForm({ image_url: "" });
               }}
               className="px-6 py-3 rounded-full border border-border text-muted-foreground font-medium transition hover:bg-muted/10"
             >
@@ -2228,16 +2215,15 @@ function GalleryAdmin() {
                 <div className="aspect-[3/4] w-full overflow-hidden bg-transparent flex items-center justify-center">
                   <img
                     src={item.image_url}
-                    alt={item.caption}
+                    alt={item.caption || "Gallery image"}
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
                 </div>
                 <div className="p-3 flex items-center justify-between gap-2 border-t border-border/60">
                   <div className="min-w-0 flex-1">
-                    <h5 className="font-semibold text-maroon text-sm truncate">{item.caption}</h5>
-                    <time className="text-[10px] text-muted-foreground/80 mt-0.5 block">
-                      {formatAdminDate(item.created_at)}
+                    <time className="text-xs font-semibold text-muted-foreground block">
+                      Uploaded: {formatAdminDate(item.created_at)}
                     </time>
                   </div>
                   <div className="flex gap-1 shrink-0">
