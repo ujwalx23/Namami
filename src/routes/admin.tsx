@@ -2040,6 +2040,7 @@ function GalleryAdmin() {
   const [list, setList] = useState<GalleryRow[]>([]);
   const [listLoaded, setListLoaded] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
 
   async function load() {
     const { data, error } = await supabase
@@ -2060,7 +2061,7 @@ function GalleryAdmin() {
     void load();
   }, []);
 
-  async function add(e: React.FormEvent) {
+  async function save(e: React.FormEvent) {
     e.preventDefault();
     if (!form.image_url.trim() || !form.caption.trim()) {
       return toast.error("Image URL and caption are required");
@@ -2068,27 +2069,55 @@ function GalleryAdmin() {
     setLoading(true);
 
     try {
-      const { error } = await supabase.from("gallery").insert({
-        image_url: form.image_url.trim(),
-        caption: form.caption.trim(),
-      });
+      if (editingId) {
+        const { data, error } = await supabase
+          .from("gallery")
+          .update({
+            image_url: form.image_url.trim(),
+            caption: form.caption.trim(),
+          })
+          .eq("id", editingId)
+          .select();
 
-      if (error) {
-        toast.error(
-          "Could not add: " +
-          error.message +
-          ". Run the gallery table SQL migration in your Supabase SQL Editor.",
-        );
-        setLoading(false);
-        return;
+        if (error) {
+          toast.error("Could not update: " + error.message);
+          setLoading(false);
+          return;
+        }
+
+        if (!data || data.length === 0) {
+          toast.error(
+            "Update failed. Row not found or RLS policy blocked the update. Run migration/SQL query in Supabase dashboard to enable UPDATE permissions.",
+          );
+          setLoading(false);
+          return;
+        }
+
+        toast.success("Image updated successfully!");
+        setEditingId(null);
+      } else {
+        const { error } = await supabase.from("gallery").insert({
+          image_url: form.image_url.trim(),
+          caption: form.caption.trim(),
+        });
+
+        if (error) {
+          toast.error(
+            "Could not add: " +
+            error.message +
+            ". Run the gallery table SQL migration in your Supabase SQL Editor.",
+          );
+          setLoading(false);
+          return;
+        }
+
+        toast.success("Image added to gallery!");
       }
-
-      toast.success("Image added to gallery!");
       setForm({ image_url: "", caption: "" });
       await load();
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : "Unknown error";
-      toast.error("Failed to add: " + message);
+      toast.error("Failed to save: " + message);
     } finally {
       setLoading(false);
     }
@@ -2098,7 +2127,17 @@ function GalleryAdmin() {
     const { error } = await supabase.from("gallery").delete().eq("id", id);
     if (error) return toast.error(error.message);
     toast.success("Image removed from gallery");
+    if (editingId === id) {
+      setEditingId(null);
+      setForm({ image_url: "", caption: "" });
+    }
     await load();
+  }
+
+  function startEdit(item: GalleryRow) {
+    setEditingId(item.id);
+    setForm({ image_url: item.image_url, caption: item.caption });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   return (
@@ -2117,10 +2156,12 @@ function GalleryAdmin() {
       </div>
 
       <form
-        onSubmit={add}
+        onSubmit={save}
         className="p-6 rounded-2xl bg-card border border-border space-y-4 max-w-2xl"
       >
-        <h4 className="font-semibold text-maroon text-sm">Add New Image</h4>
+        <h4 className="font-semibold text-maroon text-sm">
+          {editingId ? "Edit Image" : "Add New Image"}
+        </h4>
 
         <div className="space-y-1">
           <label className="text-xs font-semibold text-muted-foreground uppercase">
@@ -2148,13 +2189,27 @@ function GalleryAdmin() {
           />
         </div>
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-sacred text-cream font-medium shadow-gold disabled:opacity-50 transition"
-        >
-          {loading ? "Adding..." : "Add to Gallery"}
-        </button>
+        <div className="flex gap-2">
+          <button
+            type="submit"
+            disabled={loading}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-sacred text-cream font-medium shadow-gold disabled:opacity-50 transition"
+          >
+            {loading ? "Saving..." : editingId ? "Save Changes" : "Add to Gallery"}
+          </button>
+          {editingId && (
+            <button
+              type="button"
+              onClick={() => {
+                setEditingId(null);
+                setForm({ image_url: "", caption: "" });
+              }}
+              className="px-6 py-3 rounded-full border border-border text-muted-foreground font-medium transition hover:bg-muted/10"
+            >
+              Cancel
+            </button>
+          )}
+        </div>
       </form>
 
       <div>
@@ -2185,14 +2240,24 @@ function GalleryAdmin() {
                       {formatAdminDate(item.created_at)}
                     </time>
                   </div>
-                  <button
-                    type="button"
-                    onClick={() => void del(item.id)}
-                    className="text-destructive p-1.5 hover:bg-destructive/10 rounded-lg transition shrink-0"
-                    aria-label="Delete image"
-                  >
-                    <Trash2 size={16} />
-                  </button>
+                  <div className="flex gap-1 shrink-0">
+                    <button
+                      type="button"
+                      onClick={() => startEdit(item)}
+                      className="text-saffron p-1.5 hover:bg-saffron/10 rounded-lg transition"
+                      aria-label="Edit image"
+                    >
+                      <Edit3 size={16} />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => void del(item.id)}
+                      className="text-destructive p-1.5 hover:bg-destructive/10 rounded-lg transition"
+                      aria-label="Delete image"
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}

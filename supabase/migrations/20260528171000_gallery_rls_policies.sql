@@ -5,6 +5,7 @@ ALTER TABLE public.gallery ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Anyone can select gallery" ON public.gallery;
 DROP POLICY IF EXISTS "Anyone can insert gallery" ON public.gallery;
 DROP POLICY IF EXISTS "Anyone can delete gallery" ON public.gallery;
+DROP POLICY IF EXISTS "Anyone can update gallery" ON public.gallery;
 
 -- Create policies
 CREATE POLICY "Anyone can select gallery"
@@ -15,3 +16,7 @@ ON public.gallery FOR INSERT WITH CHECK (true);
 
 CREATE POLICY "Anyone can delete gallery"
 ON public.gallery FOR DELETE USING (true);
+
+CREATE POLICY "Anyone can update gallery"
+ON public.gallery FOR UPDATE USING (true) WITH CHECK (true);
+
