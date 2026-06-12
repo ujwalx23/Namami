@@ -117,7 +117,7 @@ function BlogPage() {
 
   // Filter posts based on search query and category selection
   const filteredPosts = useMemo(() => {
-    return posts.filter((post: BlogPost) => {
+    return posts.filter(post => {
       const matchesSearch = !searchQuery.trim() || (
         post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         post.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -219,7 +219,7 @@ function BlogPage() {
 
         {/* Compact Articles List */}
         <div className="space-y-6 max-w-5xl mx-auto">
-          {paginatedPosts.map((post: BlogPost, index: number) => (
+          {paginatedPosts.map((post, index) => (
             <ScrollReveal key={post.id} direction="up" delay={(index % 3) * 60} duration={600}>
               <Link
                 to="/blog/$slug"
