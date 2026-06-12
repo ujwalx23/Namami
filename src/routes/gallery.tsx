@@ -12,6 +12,7 @@ import maaImg3 from "@/assets/maa-vindhyavasini-3.webp";
 import gallery1 from "@/assets/gallery-1.webp";
 import { JsonLd } from "@/components/JsonLd";
 import { ShareModal } from "@/components/ShareModal";
+import { addGalleryWatermark } from "@/lib/watermarkImage";
 
 export const Route = createFileRoute("/gallery")({
   head: () => ({
@@ -171,19 +172,31 @@ function GalleryPage() {
       console.warn("[Gallery Share] Could not fetch image blob from URL:", fetchErr);
     }
 
+    let shareBlob: Blob | null = imageBlob;
+    let sharePreviewUrl = imgUrl;
+
+    if (imageBlob) {
+      try {
+        const watermarked = await addGalleryWatermark(imageBlob, hi);
+        shareBlob = watermarked.blob;
+        sharePreviewUrl = watermarked.dataUrl;
+      } catch (wmErr) {
+        console.warn("[Gallery Share] Watermark failed, using original image:", wmErr);
+      }
+    }
+
     toast.dismiss("share-gallery");
 
-    // On mobile with HTTPS, try native OS share sheet with the actual image file
+    // On mobile with HTTPS, try native OS share sheet with the watermarked image
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    if (isMobile && imageBlob && navigator.canShare) {
-      const ext = imageBlob.type.includes("png") ? "png" : "jpg";
-      const file = new File([imageBlob], `maa_vindhyavasini_darshan.${ext}`, { type: imageBlob.type });
+    if (isMobile && shareBlob && navigator.canShare) {
+      const file = new File([shareBlob], "maa_vindhyavasini_darshan.png", { type: "image/png" });
       if (navigator.canShare({ files: [file] })) {
         try {
           await navigator.share({
             files: [file],
             title: "Maa Vindhyavasini Divya Darshan",
-            text: caption,
+            text: `${caption}\nwww.namamivindhyavasini.in`,
           });
           toast.success(lang === "hi" ? "सफलतापूर्वक साझा किया गया!" : "Shared successfully!");
           return;
@@ -194,10 +207,10 @@ function GalleryPage() {
       }
     }
 
-    // Desktop / fallback — open Share Modal with image preview
-    setShareDataUrl(imgUrl);
-    setShareBlob(imageBlob);
-    setShareImageUrl(imgUrl);
+    // Desktop / fallback — open Share Modal with watermarked preview
+    setShareDataUrl(sharePreviewUrl);
+    setShareBlob(shareBlob);
+    setShareImageUrl(sharePreviewUrl);
     setSharePageUrl(pageUrl);
     setShareText(caption);
     setShareModalOpen(true);

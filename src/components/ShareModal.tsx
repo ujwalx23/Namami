@@ -158,17 +158,17 @@ export const ShareModal: React.FC<ShareModalProps> = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-lg bg-[#FFFDF6] border-2 border-gold/40 rounded-2xl shadow-sacred p-0 overflow-hidden text-foreground">
+      <DialogContent className="sm:max-w-2xl bg-[#FFFDF6] border-2 border-gold/40 rounded-2xl shadow-sacred p-0 overflow-hidden text-foreground">
 
         {/* Decorative top stripe */}
         <div className="h-2 bg-gradient-to-r from-maroon via-saffron to-maroon w-full" />
 
-        <div className="p-5 pb-6 space-y-5">
+        <div className="p-4 sm:p-5 pb-5 sm:pb-6 space-y-4">
           <DialogHeader className="space-y-1">
             <div className="text-center font-serif text-maroon text-[10px] tracking-[0.25em] font-semibold uppercase opacity-70 mb-0.5">
               {hi ? "॥ श्री विन्ध्यवासिनी ॥" : "|| Shri Vindhyavasini ||"}
             </div>
-            <DialogTitle className="text-xl font-display font-semibold text-center text-maroon">
+            <DialogTitle className="text-lg sm:text-xl font-display font-semibold text-center text-maroon">
               {title || (hi ? "साझा करें" : "Share")}
             </DialogTitle>
             <DialogDescription className="text-center text-muted-foreground text-[11px] font-medium">
@@ -178,87 +178,85 @@ export const ShareModal: React.FC<ShareModalProps> = ({
             </DialogDescription>
           </DialogHeader>
 
-          {/* Image Preview — centered, no crossOrigin so external URLs work */}
-          <div className="flex justify-center">
-            <div className="rounded-xl bg-amber-50/40 border border-gold/20 shadow-inner p-2.5 inline-block">
-              {previewSrc ? (
-                <div className="relative group max-h-[240px] max-w-[180px] overflow-hidden rounded-lg border-2 border-gold/30 shadow-md transition-transform duration-300 hover:scale-[1.02]">
-                  <img
-                    src={previewSrc}
-                    alt="Share Preview"
-                    className="max-h-[240px] w-full object-cover pointer-events-none select-none"
-                  />
-                </div>
-              ) : (
-                <div className="h-[200px] w-[150px] flex items-center justify-center text-muted-foreground text-xs border border-dashed border-gold/30 rounded-lg">
-                  {hi ? "लोड हो रही है..." : "Loading..."}
-                </div>
-              )}
+          {/* Side-by-side: image left, actions right */}
+          <div className="flex flex-row gap-3 sm:gap-5 items-stretch min-h-0">
+            <div className="w-[42%] sm:w-[44%] shrink-0 flex items-center justify-center">
+              <div className="rounded-xl bg-amber-50/40 border border-gold/20 shadow-inner p-1.5 sm:p-2 w-full">
+                {previewSrc ? (
+                  <div className="relative overflow-hidden rounded-lg border-2 border-gold/30 shadow-md">
+                    <img
+                      src={previewSrc}
+                      alt="Share Preview"
+                      className="w-full max-h-[min(52vh,360px)] object-contain pointer-events-none select-none bg-cream/30"
+                    />
+                  </div>
+                ) : (
+                  <div className="aspect-[3/4] flex items-center justify-center text-muted-foreground text-xs border border-dashed border-gold/30 rounded-lg">
+                    {hi ? "लोड हो रही है..." : "Loading..."}
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
 
-          {/* 3 Action Buttons — clean vertical stack */}
-          <div className="flex flex-col gap-2.5">
+            <div className="flex-1 flex flex-col gap-2 sm:gap-2.5 justify-center min-w-0">
 
-            {/* 1. WhatsApp — primary, most prominent */}
             <button
               onClick={handleWhatsAppShare}
               disabled={whatsappSharing}
-              className="w-full flex items-center gap-3 px-4 py-3.5 rounded-xl border-2 border-green-300 bg-gradient-to-r from-green-50 to-green-50/50 hover:from-green-100 hover:to-green-50 text-green-700 font-semibold text-sm transition-all duration-200 active:scale-[0.98] shadow-sm disabled:opacity-60"
+              className="w-full flex items-center gap-2 sm:gap-3 px-2.5 sm:px-4 py-2.5 sm:py-3.5 rounded-xl border-2 border-green-300 bg-gradient-to-r from-green-50 to-green-50/50 hover:from-green-100 hover:to-green-50 text-green-700 font-semibold text-xs sm:text-sm transition-all duration-200 active:scale-[0.98] shadow-sm disabled:opacity-60"
             >
-              <div className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center text-white shrink-0 shadow-sm">
-                <WhatsAppIcon className="w-5 h-5" />
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-green-500 flex items-center justify-center text-white shrink-0 shadow-sm">
+                <WhatsAppIcon className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
-              <div className="text-left">
-                <p className="font-bold">{hi ? "व्हाट्सएप पर भेजें" : "Send on WhatsApp"}</p>
-                <p className="text-[10px] text-green-600/80 font-normal mt-0.5">
-                  {isDataUrl
+              <div className="text-left min-w-0">
+                <p className="font-bold leading-tight">{hi ? "व्हाट्सएप पर भेजें" : "Send on WhatsApp"}</p>
+                <p className="text-[9px] sm:text-[10px] text-green-600/80 font-normal mt-0.5 leading-snug">
+                  {imageBlob || isDataUrl
                     ? (hi ? "फोटो कॉपी → व्हाट्सएप → Ctrl+V" : "Photo copied → WhatsApp → Ctrl+V")
                     : (hi ? "लिंक कॉपी → व्हाट्सएप → Ctrl+V" : "Link copied → WhatsApp → Ctrl+V")}
                 </p>
               </div>
             </button>
 
-            {/* 2. Download Photo */}
             <button
               onClick={handleDownload}
               disabled={!dataUrl && !imageUrl}
-              className="w-full flex items-center gap-3 px-4 py-3 rounded-xl border border-gold/30 bg-white hover:bg-gold/5 text-maroon font-semibold text-sm transition-all duration-200 active:scale-[0.98] shadow-sm disabled:opacity-50"
+              className="w-full flex items-center gap-2 sm:gap-3 px-2.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-gold/30 bg-white hover:bg-gold/5 text-maroon font-semibold text-xs sm:text-sm transition-all duration-200 active:scale-[0.98] shadow-sm disabled:opacity-50"
             >
-              <div className="w-10 h-10 rounded-full bg-saffron/10 flex items-center justify-center text-saffron shrink-0">
-                <Download size={18} />
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-saffron/10 flex items-center justify-center text-saffron shrink-0">
+                <Download size={16} className="sm:w-[18px] sm:h-[18px]" />
               </div>
-              <div className="text-left">
-                <p>{hi ? "फोटो डाउनलोड करें" : "Download Photo"}</p>
-                <p className="text-[10px] text-muted-foreground font-normal mt-0.5">
+              <div className="text-left min-w-0">
+                <p className="leading-tight">{hi ? "फोटो डाउनलोड करें" : "Download Photo"}</p>
+                <p className="text-[9px] sm:text-[10px] text-muted-foreground font-normal mt-0.5">
                   {hi ? "डिवाइस में सेव करें" : "Save to your device"}
                 </p>
               </div>
             </button>
 
-            {/* 3. Copy Page Link */}
             <button
               onClick={handleCopyLink}
-              className="w-full flex items-center justify-between px-4 py-3 rounded-xl border border-gold/30 bg-white hover:bg-gold/5 text-maroon font-semibold text-sm transition-all duration-200 active:scale-[0.98] shadow-sm"
+              className="w-full flex items-center justify-between gap-2 px-2.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-gold/30 bg-white hover:bg-gold/5 text-maroon font-semibold text-xs sm:text-sm transition-all duration-200 active:scale-[0.98] shadow-sm"
             >
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-saffron/10 flex items-center justify-center text-saffron shrink-0">
-                  {copiedLink ? <Check size={18} className="text-green-600" /> : <Link size={18} />}
+              <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-saffron/10 flex items-center justify-center text-saffron shrink-0">
+                  {copiedLink ? <Check size={16} className="text-green-600" /> : <Link size={16} />}
                 </div>
-                <div className="text-left">
-                  <p>{hi ? "लिंक कॉपी करें" : "Copy Link"}</p>
-                  <p className="text-[10px] text-muted-foreground font-normal mt-0.5">
+                <div className="text-left min-w-0">
+                  <p className="leading-tight">{hi ? "लिंक कॉपी करें" : "Copy Link"}</p>
+                  <p className="text-[9px] sm:text-[10px] text-muted-foreground font-normal mt-0.5">
                     {hi ? "वेबसाइट का लिंक" : "Website URL"}
                   </p>
                 </div>
               </div>
               {copiedLink && (
-                <span className="text-xs text-green-600 font-bold animate-in fade-in">
+                <span className="text-[10px] sm:text-xs text-green-600 font-bold animate-in fade-in shrink-0">
                   {hi ? "कॉपी!" : "Copied!"}
                 </span>
               )}
             </button>
 
+            </div>
           </div>
         </div>
       </DialogContent>
