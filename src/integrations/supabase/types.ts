@@ -58,6 +58,7 @@ export type Database = {
           slug: string;
           status: string;
           tags: string[] | null;
+          title: string;
           updated_at: string;
         };
         Insert: {
@@ -73,6 +74,7 @@ export type Database = {
           slug: string;
           status?: string;
           tags?: string[] | null;
+          title: string;
           updated_at?: string;
         };
         Update: {
@@ -88,6 +90,7 @@ export type Database = {
           slug?: string;
           status?: string;
           tags?: string[] | null;
+          title?: string;
           updated_at?: string;
         };
         Relationships: [];
