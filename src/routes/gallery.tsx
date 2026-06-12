@@ -11,6 +11,7 @@ import maaImg2 from "@/assets/maa-vindhyavasini-2.webp";
 import maaImg3 from "@/assets/maa-vindhyavasini-3.webp";
 import gallery1 from "@/assets/gallery-1.webp";
 import { JsonLd } from "@/components/JsonLd";
+import { ShareModal } from "@/components/ShareModal";
 
 export const Route = createFileRoute("/gallery")({
   head: () => ({
@@ -77,6 +78,14 @@ function GalleryPage() {
   const dev = hi ? "font-devanagari" : "";
   const [extra, setExtra] = useState<GalleryRow[]>([]);
   const [lightbox, setLightbox] = useState<string | null>(null);
+
+  // Sharing states
+  const [shareModalOpen, setShareModalOpen] = useState(false);
+  const [shareDataUrl, setShareDataUrl] = useState<string | null>(null);
+  const [shareBlob, setShareBlob] = useState<Blob | null>(null);
+  const [sharePageUrl, setSharePageUrl] = useState("");
+  const [shareText, setShareText] = useState("");
+  const [shareImageUrl, setShareImageUrl] = useState("");
 
   const openLightbox = (src: string) => {
     setLightbox(src);
@@ -352,31 +361,24 @@ function GalleryPage() {
       const dataUrl = canvas.toDataURL("image/png");
       const file = dataURLtoFile(dataUrl, `darshan_${caption.toLowerCase().replace(/\s+/g, "_")}.png`);
 
-      const copyCardToClipboard = async () => {
+      const openShareModalFallback = async () => {
+        setShareDataUrl(dataUrl);
+        setShareImageUrl(imgUrl);
+        setSharePageUrl(window.location.origin + "/gallery");
+        setShareText(caption);
+        setShareModalOpen(true);
+        toast.dismiss("share-gallery");
         try {
           const response = await fetch(dataUrl);
           const blob = await response.blob();
-          await navigator.clipboard.write([
-            new ClipboardItem({
-              [blob.type]: blob
-            })
-          ]);
-          toast.success(
-            lang === "hi" 
-              ? "छवि कॉपी की गई! व्हाट्सएप (Ctrl+V) में सीधे पेस्ट करें।" 
-              : "Image card copied! Paste (Ctrl+V) directly into WhatsApp.",
-            { id: "share-gallery" }
-          );
-        } catch (clipErr) {
-          console.warn("[Gallery Share] Clipboard write failed for canvas blob:", clipErr);
-          toast.error(
-            lang === "hi" ? "कॉपी करने में विफल" : "Failed to copy card to clipboard",
-            { id: "share-gallery" }
-          );
+          setShareBlob(blob);
+        } catch (blobErr) {
+          console.warn("[Gallery Share] Could not convert dataUrl to blob for fallback share modal:", blobErr);
         }
       };
 
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      if (isMobile && navigator.canShare && navigator.canShare({ files: [file] })) {
         try {
           await navigator.share({
             files: [file],
@@ -389,49 +391,23 @@ function GalleryPage() {
             toast.dismiss("share-gallery");
             return;
           }
-          copyCardToClipboard();
+          console.warn("[Gallery Share] Share failed, falling back to modal:", shareErr);
+          await openShareModalFallback();
         }
       } else {
-        copyCardToClipboard();
+        await openShareModalFallback();
       }
     } catch (err) {
       console.error("[Gallery Share] Canvas generation failed, trying direct link share fallback:", err);
       
-      // First-tier Fallback: Use Web Share API to share direct URL and text
-      if (navigator.share) {
-        try {
-          await navigator.share({
-            title: "Maa Vindhyavasini Divya Darshan",
-            text: `${caption} — Glimpse of Maa Vindhyavasini's divine shringar`,
-            url: imgUrl,
-          });
-          toast.success(lang === "hi" ? "सफलतापूर्वक साझा किया गया!" : "Shared successfully!", { id: "share-gallery" });
-          return;
-        } catch (shareErr) {
-          if (shareErr instanceof Error && shareErr.name === "AbortError") {
-            toast.dismiss("share-gallery");
-            return;
-          }
-          console.error("[Gallery Share] Web Share API direct link fallback failed:", shareErr);
-        }
-      }
-
-      // Second-tier Fallback: Copy link to clipboard
-      try {
-        await navigator.clipboard.writeText(imgUrl);
-        toast.success(
-          lang === "hi" 
-            ? "छवि लिंक क्लिपबोर्ड पर कॉपी किया गया!" 
-            : "Image link copied to clipboard!", 
-          { id: "share-gallery" }
-        );
-      } catch (clipErr) {
-        console.error("[Gallery Share] Clipboard write failed:", clipErr);
-        toast.error(
-          lang === "hi" ? "साझा करने में विफल" : "Failed to share image", 
-          { id: "share-gallery" }
-        );
-      }
+      // If canvas generation fails, we still try to open the fallback modal but with just the raw imgUrl (no generated card)
+      setShareDataUrl(null);
+      setShareBlob(null);
+      setShareImageUrl(imgUrl);
+      setSharePageUrl(window.location.origin + "/gallery");
+      setShareText(caption);
+      setShareModalOpen(true);
+      toast.dismiss("share-gallery");
     }
   };
 
@@ -603,6 +579,17 @@ function GalleryPage() {
         </div>,
         document.body
       )}
+      <ShareModal
+        isOpen={shareModalOpen}
+        onClose={() => setShareModalOpen(false)}
+        dataUrl={shareDataUrl}
+        imageBlob={shareBlob}
+        imageUrl={shareImageUrl}
+        pageUrl={sharePageUrl}
+        text={shareText}
+        title={hi ? "दिव्य दर्शन साझा करें" : "Share Divya Darshan"}
+        downloadFilename="maa_vindhyavasini_darshan.png"
+      />
     </PageShell>
   );
 }

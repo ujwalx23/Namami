@@ -9,6 +9,7 @@ import { useLang } from "@/i18n/LangProvider";
 import { speakText, stopSpeech, isHindiText } from "@/lib/speech";
 import { toast } from "sonner";
 import { JsonLd } from "@/components/JsonLd";
+import { ShareModal } from "@/components/ShareModal";
 
 type Sandesh = Tables<"sandesh">;
 
@@ -101,6 +102,13 @@ function SandeshPage() {
   const [speakingId, setSpeakingId] = useState<string | number | null>(null);
   const [loadingId, setLoadingId] = useState<string | number | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  // Sharing states
+  const [shareModalOpen, setShareModalOpen] = useState(false);
+  const [shareDataUrl, setShareDataUrl] = useState<string | null>(null);
+  const [shareBlob, setShareBlob] = useState<Blob | null>(null);
+  const [sharePageUrl, setSharePageUrl] = useState("");
+  const [shareText, setShareText] = useState("");
   const stopPlayback = useCallback(() => {
     stopSpeech();
     setSpeakingId(null);
@@ -332,32 +340,24 @@ function SandeshPage() {
     const dataUrl = canvas.toDataURL("image/png");
     const file = dataURLtoFile(dataUrl, `sandesh_${new Date().toISOString().split("T")[0]}.png`);
 
-    // Helper to copy card directly to clipboard
-    const copyCardToClipboard = async () => {
+    const openShareModalFallback = async () => {
+      setShareDataUrl(dataUrl);
+      setSharePageUrl(window.location.origin + "/sandesh");
+      setShareText(`"${message}" — ${author}`);
+      setShareModalOpen(true);
       try {
         const response = await fetch(dataUrl);
         const blob = await response.blob();
-        await navigator.clipboard.write([
-          new ClipboardItem({
-            [blob.type]: blob
-          })
-        ]);
-        toast.success(
-          lang === "hi" 
-            ? "छवि कॉपी की गई! व्हाट्सएप (Ctrl+V) में सीधे पेस्ट करें।" 
-            : "Image card copied! Paste (Ctrl+V) directly into WhatsApp."
-        );
-      } catch (clipErr) {
-        console.warn("Could not copy image to clipboard", clipErr);
-        toast.error(
-          lang === "hi" ? "कॉपी करने में विफल" : "Failed to copy card to clipboard"
-        );
+        setShareBlob(blob);
+      } catch (blobErr) {
+        console.warn("Could not convert dataUrl to blob for fallback share modal:", blobErr);
       }
     };
 
-    // 9. Trigger Web Share or Download
+    // 9. Trigger Web Share or Fallback Modal
     try {
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      if (isMobile && navigator.canShare && navigator.canShare({ files: [file] })) {
         try {
           await navigator.share({
             files: [file],
@@ -366,24 +366,20 @@ function SandeshPage() {
           console.log("[Sandesh] Shared successfully via Web Share API.");
           toast.success("Image shared successfully!");
         } catch (shareErr) {
-          // If the user cancelled the share, do not display error or force download
+          // If the user cancelled the share, do not display error or force fallback
           if (shareErr instanceof Error && shareErr.name === "AbortError") {
             console.log("[Sandesh] Share cancelled by user.");
             return;
           }
-          // For other errors (like "earlier share not completed"), fallback to clipboard copy
-          console.warn("[Sandesh] navigator.share failed, falling back to clipboard copy:", shareErr);
-          copyCardToClipboard();
+          console.warn("[Sandesh] navigator.share failed, falling back to share modal:", shareErr);
+          await openShareModalFallback();
         }
       } else {
-        // Fallback: Clipboard Copy
-        copyCardToClipboard();
+        await openShareModalFallback();
       }
     } catch (err) {
-      console.error("[Sandesh] Failed to share or download image:", err);
-      toast.error(
-        "Failed to share or download image: " + (err instanceof Error ? err.message : String(err)),
-      );
+      console.error("[Sandesh] Failed to share image:", err);
+      await openShareModalFallback();
     }
   };
 
@@ -528,7 +524,7 @@ function SandeshPage() {
               </h2>
             </ScrollReveal>
             <div className="space-y-4">
-              {archive.map((s: Sandesh, idx) => (
+              {archive.map((s: Sandesh, idx: number) => (
                 <ScrollReveal key={s.id} direction="up" delay={(idx % 4) * 80} duration={750}>
                   <div className="p-6 rounded-2xl bg-card border border-border hover:border-gold/50 transition">
                     <div className="text-xs uppercase tracking-[0.25em] text-saffron mb-2">
@@ -578,6 +574,18 @@ function SandeshPage() {
           </div>
         )}
       </section>
+
+      <ShareModal
+        isOpen={shareModalOpen}
+        onClose={() => setShareModalOpen(false)}
+        dataUrl={shareDataUrl}
+        imageBlob={shareBlob}
+        imageUrl=""
+        pageUrl={sharePageUrl}
+        text={shareText}
+        title={lang === "hi" ? "दिव्य संदेश साझा करें" : "Share Divine Sandesh"}
+        downloadFilename={`sandesh_${new Date().toISOString().split("T")[0]}.png`}
+      />
     </PageShell>
   );
 }
