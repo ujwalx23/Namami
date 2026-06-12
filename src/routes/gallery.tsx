@@ -125,8 +125,8 @@ function GalleryPage() {
     };
   }, [lightbox]);
 
-  const dbItems = extra.map((r) => ({ src: r.image_url, cap: r.caption ?? "" }));
-  const defaultItems = defaults.map((d) => ({ src: d.src, cap: hi ? d.cap_hi : d.cap_en }));
+  const dbItems = extra.map((r) => ({ src: r.image_url, cap: hi ? "माँ विंध्यवासिनी दर्शन" : "Maa Vindhyavasini Darshan" }));
+  const defaultItems = defaults.map((d) => ({ src: d.src, cap: hi ? "माँ विंध्यवासिनी दर्शन" : "Maa Vindhyavasini Darshan" }));
   const items = [...dbItems, ...defaultItems];
 
   const handleDownload = async (url: string, title: string) => {
@@ -154,7 +154,8 @@ function GalleryPage() {
     }
   };
 
-  const shareGalleryImage = async (imgUrl: string, caption: string) => {
+  const shareGalleryImage = async (imgUrl: string) => {
+    const caption = hi ? "माँ विंध्यवासिनी दर्शन" : "Maa Vindhyavasini Darshan";
     // Check if it is an external URL to instantly share the link directly and preserve user gesture
     const isExternal = imgUrl.startsWith("http") && !imgUrl.includes(window.location.origin);
     if (isExternal) {
@@ -477,25 +478,20 @@ function GalleryPage() {
               >
                 <img
                   src={p.src}
-                  alt={`${p.cap || "Darshan"} of Maa Vindhyavasini Devi at Vindhyachal Temple`}
-                  title={p.cap || "Maa Vindhyavasini Darshan"}
+                  alt="Maa Vindhyavasini Darshan"
+                  title="Maa Vindhyavasini Darshan"
                   width={350}
                   height={460}
                   loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 pointer-events-none select-none"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-maroon/85 via-maroon/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                <figcaption
-                  className={`absolute bottom-0 left-0 right-0 p-4 text-cream font-display text-lg translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all ${dev}`}
-                >
-                  {p.cap}
-                </figcaption>
 
                 {/* Download Button Overlay */}
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
-                    handleDownload(p.src, p.cap || `darshan_${i + 1}`);
+                    handleDownload(p.src, "Maa Vindhyavasini Darshan");
                   }}
                   className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-cream/90 text-maroon hover:bg-gold hover:text-cream flex items-center justify-center shadow-lg transition-all duration-300 md:opacity-0 md:group-hover:opacity-100"
                   title="Download image"
@@ -508,7 +504,7 @@ function GalleryPage() {
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
-                    shareGalleryImage(p.src, p.cap || `Darshan ${i + 1}`);
+                    shareGalleryImage(p.src);
                   }}
                   className="absolute top-3 right-14 z-10 w-9 h-9 rounded-full bg-cream/90 text-maroon hover:bg-gold hover:text-cream flex items-center justify-center shadow-lg transition-all duration-300 md:opacity-0 md:group-hover:opacity-100"
                   title="Share image"
@@ -570,8 +566,7 @@ function GalleryPage() {
               {/* Download Button in Lightbox */}
               <button
                 onClick={() => {
-                  const item = items.find((it) => it.src === lightbox);
-                  handleDownload(lightbox, item?.cap || "darshan_vigraha");
+                  handleDownload(lightbox, "Maa Vindhyavasini Darshan");
                 }}
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-sacred text-cream font-medium shadow-gold hover:scale-[1.03] active:scale-95 transition-all duration-300 text-sm cursor-pointer"
               >
@@ -582,8 +577,7 @@ function GalleryPage() {
               {/* Share Button in Lightbox */}
               <button
                 onClick={() => {
-                  const item = items.find((it) => it.src === lightbox);
-                  shareGalleryImage(lightbox, item?.cap || "Darshan");
+                  shareGalleryImage(lightbox);
                 }}
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border-2 border-gold text-gold font-medium hover:bg-gold/10 hover:scale-[1.03] active:scale-95 transition-all duration-300 text-sm cursor-pointer animate-pulse"
               >

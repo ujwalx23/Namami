@@ -2030,7 +2030,7 @@ function AnalyticsAdmin() {
 type GalleryRow = {
   id: string;
   image_url: string;
-  caption: string;
+  caption?: string | null;
   created_at: string;
 };
 
@@ -2074,7 +2074,6 @@ function GalleryAdmin() {
           .from("gallery")
           .update({
             image_url: form.image_url.trim(),
-            caption: null,
           })
           .eq("id", editingId)
           .select();
@@ -2098,7 +2097,6 @@ function GalleryAdmin() {
       } else {
         const { error } = await supabase.from("gallery").insert({
           image_url: form.image_url.trim(),
-          caption: null,
         });
 
         if (error) {
@@ -2169,7 +2167,7 @@ function GalleryAdmin() {
           </label>
           <input
             value={form.image_url}
-            onChange={(e) => setForm({ image_url: e.target.value })}
+            onChange={(e) => setForm({ ...form, image_url: e.target.value })}
             placeholder="e.g. https://images.unsplash.com/photo-..."
             className="w-full px-4 py-2.5 rounded-lg border border-input bg-background text-sm"
             required
@@ -2215,15 +2213,15 @@ function GalleryAdmin() {
                 <div className="aspect-[3/4] w-full overflow-hidden bg-transparent flex items-center justify-center">
                   <img
                     src={item.image_url}
-                    alt={item.caption || "Gallery image"}
+                    alt="Maa Vindhyavasini Darshan"
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
                 </div>
                 <div className="p-3 flex items-center justify-between gap-2 border-t border-border/60">
                   <div className="min-w-0 flex-1">
-                    <time className="text-xs font-semibold text-muted-foreground block">
-                      Uploaded: {formatAdminDate(item.created_at)}
+                    <time className="text-[10px] text-muted-foreground/80 mt-0.5 block">
+                      {formatAdminDate(item.created_at)}
                     </time>
                   </div>
                   <div className="flex gap-1 shrink-0">
