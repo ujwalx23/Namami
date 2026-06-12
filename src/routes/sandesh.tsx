@@ -333,7 +333,21 @@ function SandeshPage() {
     const file = dataURLtoFile(dataUrl, `sandesh_${new Date().toISOString().split("T")[0]}.png`);
 
     // Helper to trigger direct download
-    const triggerDownload = () => {
+    const triggerDownload = async () => {
+      let copiedToClipboard = false;
+      try {
+        const response = await fetch(dataUrl);
+        const blob = await response.blob();
+        await navigator.clipboard.write([
+          new ClipboardItem({
+            [blob.type]: blob
+          })
+        ]);
+        copiedToClipboard = true;
+      } catch (clipErr) {
+        console.warn("Could not copy image to clipboard", clipErr);
+      }
+
       const link = document.createElement("a");
       link.download = `sandesh_${new Date().toISOString().split("T")[0]}.png`;
       link.href = dataUrl;
@@ -341,7 +355,16 @@ function SandeshPage() {
       link.click();
       document.body.removeChild(link);
       console.log("[Sandesh] Download triggered.");
-      toast.success("Image download started!");
+      
+      if (copiedToClipboard) {
+        toast.success(
+          lang === "hi" 
+            ? "छवि कॉपी की गई और डाउनलोड शुरू! व्हाट्सएप (Ctrl+V) में सीधे पेस्ट करें।" 
+            : "Image copied & downloaded! Paste (Ctrl+V) directly into WhatsApp."
+        );
+      } else {
+        toast.success("Image download started!");
+      }
     };
 
     // 9. Trigger Web Share or Download

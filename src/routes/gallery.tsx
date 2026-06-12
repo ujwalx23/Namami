@@ -352,14 +352,38 @@ function GalleryPage() {
       const dataUrl = canvas.toDataURL("image/png");
       const file = dataURLtoFile(dataUrl, `darshan_${caption.toLowerCase().replace(/\s+/g, "_")}.png`);
 
-      const triggerDownload = () => {
+      const triggerDownload = async () => {
+        let copiedToClipboard = false;
+        try {
+          const response = await fetch(dataUrl);
+          const blob = await response.blob();
+          await navigator.clipboard.write([
+            new ClipboardItem({
+              [blob.type]: blob
+            })
+          ]);
+          copiedToClipboard = true;
+        } catch (clipErr) {
+          console.warn("[Gallery Share] Clipboard write failed for canvas blob:", clipErr);
+        }
+
         const link = document.createElement("a");
         link.download = `darshan_${caption.toLowerCase().replace(/\s+/g, "_")}.png`;
         link.href = dataUrl;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-        toast.success(lang === "hi" ? "छवि डाउनलोड प्रारंभ!" : "Image download started!", { id: "share-gallery" });
+        
+        if (copiedToClipboard) {
+          toast.success(
+            lang === "hi" 
+              ? "छवि कॉपी की गई और डाउनलोड शुरू! व्हाट्सएप (Ctrl+V) में सीधे पेस्ट करें।" 
+              : "Image card copied & downloaded! Paste (Ctrl+V) directly into WhatsApp.",
+            { id: "share-gallery" }
+          );
+        } else {
+          toast.success(lang === "hi" ? "छवि डाउनलोड प्रारंभ!" : "Image download started!", { id: "share-gallery" });
+        }
       };
 
       if (navigator.canShare && navigator.canShare({ files: [file] })) {
