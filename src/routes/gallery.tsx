@@ -156,40 +156,6 @@ function GalleryPage() {
 
   const shareGalleryImage = async (imgUrl: string) => {
     const caption = hi ? "माँ विंध्यवासिनी दर्शन" : "Maa Vindhyavasini Darshan";
-    // Check if it is an external URL to instantly share the link directly and preserve user gesture
-    const isExternal = imgUrl.startsWith("http") && !imgUrl.includes(window.location.origin);
-    if (isExternal) {
-      if (navigator.share) {
-        try {
-          await navigator.share({
-            title: "Maa Vindhyavasini Divya Darshan",
-            text: `${caption} — Glimpse of Maa Vindhyavasini's divine shringar`,
-            url: imgUrl,
-          });
-          toast.success(lang === "hi" ? "सफलतापूर्वक साझा किया गया!" : "Shared successfully!");
-          return;
-        } catch (shareErr) {
-          if (shareErr instanceof Error && shareErr.name === "AbortError") {
-            return;
-          }
-          console.error("[Gallery Share] External URL share failed:", shareErr);
-        }
-      }
-
-      // Fallback: Clipboard copy
-      try {
-        await navigator.clipboard.writeText(imgUrl);
-        toast.success(
-          lang === "hi" 
-            ? "छवि लिंक क्लिपबोर्ड पर कॉपी किया गया!" 
-            : "Image link copied to clipboard!"
-        );
-      } catch (clipErr) {
-        console.error("[Gallery Share] Clipboard write failed for external URL:", clipErr);
-        toast.error(lang === "hi" ? "साझा करने में विफल" : "Failed to share image");
-      }
-      return;
-    }
 
     toast.loading(lang === "hi" ? "साझा करने के लिए छवि तैयार की जा रही है..." : "Preparing image for sharing...", { id: "share-gallery" });
     try {
