@@ -436,7 +436,8 @@ async function downloadCalendarPdf(year: number, festivals: any[], isHi: boolean
       import("jspdf"),
       import("html2canvas"),
     ]);
-    const html2canvas = html2canvasModule.default;
+    // html2canvas may export as default (ESM) or as the module itself (CJS)
+    const html2canvas = (html2canvasModule as any).default || html2canvasModule;
 
     // Build table rows
     const festRows = festivals.map((f) => {
