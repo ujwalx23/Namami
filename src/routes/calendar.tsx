@@ -425,81 +425,100 @@ function fmtTime(d: Date): string {
 }
 
 function downloadCalendarPdf(year: number, festivals: any[], isHi: boolean) {
-  const printWindow = window.open("", "_blank");
-  if (printWindow) {
-    const festRows = festivals.map((f) => {
-      const fDate = new Date(f.date + "T00:00:00");
-      const formattedDate = fDate.toLocaleDateString(isHi ? "hi-IN" : "en-IN", {
-        day: "numeric",
-        month: "short",
-        year: "numeric",
-        weekday: "short"
-      });
-      const translatedName = translateFestivalName(f.festival, isHi);
-      const translatedCat = getTranslatedCategory(f.category, isHi);
-      const translatedDesc = translateText(f.description, isHi);
-      return `
-        <tr>
-          <td style="padding: 10px; border: 1px solid #e2d2b4; font-weight: bold; width: 20%;">${formattedDate}</td>
-          <td style="padding: 10px; border: 1px solid #e2d2b4; font-weight: bold; color: #7a1e1e; width: 30%;">${translatedName}</td>
-          <td style="padding: 10px; border: 1px solid #e2d2b4; font-style: italic; width: 15%; color: #d97706;">${translatedCat}</td>
-          <td style="padding: 10px; border: 1px solid #e2d2b4; font-size: 13px; width: 35%;">${translatedDesc}</td>
-        </tr>
-      `;
-    }).join("");
+  const festRows = festivals.map((f) => {
+    const fDate = new Date(f.date + "T00:00:00");
+    const formattedDate = fDate.toLocaleDateString(isHi ? "hi-IN" : "en-IN", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+      weekday: "short"
+    });
+    const translatedName = translateFestivalName(f.festival, isHi);
+    const translatedCat = getTranslatedCategory(f.category, isHi);
+    const translatedDesc = translateText(f.description, isHi);
+    return `
+      <tr>
+        <td style="padding: 10px; border: 1px solid #e2d2b4; font-weight: bold; width: 20%;">${formattedDate}</td>
+        <td style="padding: 10px; border: 1px solid #e2d2b4; font-weight: bold; color: #7a1e1e; width: 30%;">${translatedName}</td>
+        <td style="padding: 10px; border: 1px solid #e2d2b4; font-style: italic; width: 15%; color: #d97706;">${translatedCat}</td>
+        <td style="padding: 10px; border: 1px solid #e2d2b4; font-size: 13px; width: 35%;">${translatedDesc}</td>
+      </tr>
+    `;
+  }).join("");
 
-    printWindow.document.write(`
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <title>${isHi ? `नमामि विन्ध्यवासिनी हिंदू कैलेंडर - ${year}` : `Namami Vindhyavasini Hindu Calendar - ${year}`}</title>
-          <style>
-            body { font-family: 'Noto Sans Devanagari', 'Inter', sans-serif; background-color: #fff; color: #3f3f46; padding: 30px; }
-            .header { text-align: center; border-bottom: 3px double #7a1e1e; padding-bottom: 15px; margin-bottom: 20px; }
-            h1 { color: #7a1e1e; margin: 0; font-size: 28px; }
-            h2 { color: #d97706; margin: 5px 0 0 0; font-size: 18px; font-weight: normal; letter-spacing: 2px; }
-            .meta { text-align: center; font-size: 12px; color: #71717a; margin-bottom: 25px; }
-            table { width: 100%; border-collapse: collapse; border: 1px solid #e2d2b4; }
-            th { background-color: #7a1e1e; color: #fff; padding: 12px; border: 1px solid #7a1e1e; text-align: left; font-size: 14px; }
-            tr:nth-child(even) { background-color: #fdfaf4; }
-            .footer-note { text-align: center; font-size: 11px; margin-top: 30px; border-top: 1px solid #e2d2b4; padding-top: 15px; color: #a1a1aa; }
-          </style>
-        </head>
-        <body>
-          <div class="header">
-            <h1>${isHi ? "नमामि विन्ध्यवासिनी संस्थान" : "Namami Vindhyavasini Sansthan"}</h1>
-            <h2>${isHi ? `${year} हिंदू त्योहार एवं व्रत कैलेंडर` : `HINDU FESTIVAL & VRAT CALENDAR — ${year}`}</h2>
-          </div>
-          <div class="meta">
-            ${isHi ? `विन्ध्याचल धाम, उत्तर प्रदेश (25.1575° N, 82.5800° E) के भौगोलिक निर्देशांक के लिए गणना की गई है।` : `Calculated for coordinates of Vindhyachal Dham, Uttar Pradesh (25.1575° N, 82.5800° E)`}
-          </div>
-          <table>
-            <thead>
-              <tr>
-                <th>${isHi ? "दिनांक" : "Date"}</th>
-                <th>${isHi ? "त्योहार / व्रत" : "Festival / Vrat"}</th>
-                <th>${isHi ? "श्रेणी" : "Category"}</th>
-                <th>${isHi ? "विवरण" : "Description"}</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${festRows}
-            </tbody>
-          </table>
-          <div class="footer-note">
-            © ${new Date().getFullYear()} ${isHi ? "नमामि विन्ध्यवासिनी संस्थान ✦ जय माँ विन्ध्यवासिनी" : "Namami Vindhyavasini Sansthan ✦ Jai Maa Vindhyavasini"} ✦ ${isHi ? "कैलेंडर निर्यात" : "Dynamic calendar export."}
-          </div>
-          <script>
-            window.onload = function() {
-              window.print();
-              setTimeout(function() { window.close(); }, 500);
-            };
-          </script>
-        </body>
-      </html>
-    `);
-    printWindow.document.close();
-  }
+  const htmlContent = `<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${isHi ? `नमामि विन्ध्यवासिनी हिंदू कैलेंडर - ${year}` : `Namami Vindhyavasini Hindu Calendar - ${year}`}</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&family=Inter:wght@400;600;700&display=swap');
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body { font-family: 'Noto Sans Devanagari', 'Inter', sans-serif; background-color: #fff; color: #3f3f46; padding: 20px; }
+      .header { text-align: center; border-bottom: 3px double #7a1e1e; padding-bottom: 15px; margin-bottom: 20px; }
+      h1 { color: #7a1e1e; margin: 0; font-size: 24px; }
+      h2 { color: #d97706; margin: 5px 0 0 0; font-size: 16px; font-weight: normal; letter-spacing: 2px; }
+      .meta { text-align: center; font-size: 11px; color: #71717a; margin-bottom: 20px; }
+      table { width: 100%; border-collapse: collapse; border: 1px solid #e2d2b4; }
+      th { background-color: #7a1e1e; color: #fff; padding: 10px; border: 1px solid #7a1e1e; text-align: left; font-size: 13px; }
+      td { padding: 8px 10px; border: 1px solid #e2d2b4; font-size: 13px; word-break: break-word; }
+      tr:nth-child(even) { background-color: #fdfaf4; }
+      .footer-note { text-align: center; font-size: 11px; margin-top: 25px; border-top: 1px solid #e2d2b4; padding-top: 15px; color: #a1a1aa; }
+      @media print {
+        body { padding: 10px; }
+        table { font-size: 11px; }
+        td, th { padding: 6px 8px; }
+      }
+      @media (max-width: 600px) {
+        body { padding: 10px; }
+        h1 { font-size: 18px; }
+        h2 { font-size: 13px; }
+        table { font-size: 11px; }
+        td, th { padding: 6px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>${isHi ? "नमामि विन्ध्यवासिनी संस्थान" : "Namami Vindhyavasini Sansthan"}</h1>
+      <h2>${isHi ? `${year} हिंदू त्योहार एवं व्रत कैलेंडर` : `HINDU FESTIVAL & VRAT CALENDAR — ${year}`}</h2>
+    </div>
+    <div class="meta">
+      ${isHi ? `विन्ध्याचल धाम, उत्तर प्रदेश (25.1575° N, 82.5800° E) के भौगोलिक निर्देशांक के लिए गणना की गई है।` : `Calculated for coordinates of Vindhyachal Dham, Uttar Pradesh (25.1575° N, 82.5800° E)`}
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>${isHi ? "दिनांक" : "Date"}</th>
+          <th>${isHi ? "त्योहार / व्रत" : "Festival / Vrat"}</th>
+          <th>${isHi ? "श्रेणी" : "Category"}</th>
+          <th>${isHi ? "विवरण" : "Description"}</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${festRows}
+      </tbody>
+    </table>
+    <div class="footer-note">
+      © ${new Date().getFullYear()} ${isHi ? "नमामि विन्ध्यवासिनी संस्थान ✦ जय माँ विन्ध्यवासिनी" : "Namami Vindhyavasini Sansthan ✦ Jai Maa Vindhyavasini"} ✦ ${isHi ? "कैलेंडर निर्यात" : "Dynamic calendar export."}
+    </div>
+  </body>
+</html>`;
+
+  // Create a Blob and trigger direct download (works on mobile + desktop)
+  const blob = new Blob([htmlContent], { type: "text/html;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = isHi
+    ? `विन्ध्यवासिनी_कैलेंडर_${year}.html`
+    : `Vindhyavasini_Calendar_${year}.html`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  // Revoke after a short delay to ensure download starts
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
 export function HinduCalendarPage() {
