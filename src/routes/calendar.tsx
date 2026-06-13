@@ -425,140 +425,114 @@ function fmtTime(d: Date): string {
   });
 }
 
-async function downloadCalendarPdf(year: number, festivals: any[], isHi: boolean) {
-  const loadingId = toast.loading(
-    isHi ? "PDF तैयार हो रहा है..." : "Generating PDF..."
-  );
-
-  try {
-    // Dynamic imports — only loaded when user clicks download (code-split)
-    const [{ jsPDF }, html2canvasModule] = await Promise.all([
-      import("jspdf"),
-      import("html2canvas"),
-    ]);
-    // html2canvas may export as default (ESM) or as the module itself (CJS)
-    const html2canvas = (html2canvasModule as any).default || html2canvasModule;
-
-    // Build table rows
-    const festRows = festivals.map((f) => {
-      const fDate = new Date(f.date + "T00:00:00");
-      const formattedDate = fDate.toLocaleDateString(isHi ? "hi-IN" : "en-IN", {
-        day: "numeric",
-        month: "short",
-        year: "numeric",
-        weekday: "short"
-      });
-      const translatedName = translateFestivalName(f.festival, isHi);
-      const translatedCat = getTranslatedCategory(f.category, isHi);
-      const translatedDesc = translateText(f.description, isHi);
-      return `
-        <tr>
-          <td style="padding:8px 10px;border:1px solid #e2d2b4;font-weight:bold;width:20%;font-size:12px;">${formattedDate}</td>
-          <td style="padding:8px 10px;border:1px solid #e2d2b4;font-weight:bold;color:#7a1e1e;width:28%;font-size:12px;">${translatedName}</td>
-          <td style="padding:8px 10px;border:1px solid #e2d2b4;font-style:italic;width:14%;color:#d97706;font-size:11px;">${translatedCat}</td>
-          <td style="padding:8px 10px;border:1px solid #e2d2b4;font-size:11px;width:38%;">${translatedDesc}</td>
-        </tr>
-      `;
-    }).join("");
-
-    // Create an off-screen container for rendering
-    const container = document.createElement("div");
-    container.style.cssText = "position:fixed;left:-10000px;top:0;width:800px;background:#fff;padding:24px 28px;font-family:'Noto Sans Devanagari','Inter',sans-serif;color:#3f3f46;";
-    container.innerHTML = `
-      <div style="text-align:center;border-bottom:3px double #7a1e1e;padding-bottom:12px;margin-bottom:16px;">
-        <div style="color:#7a1e1e;font-size:22px;font-weight:bold;margin:0;">${isHi ? "नमामि विन्ध्यवासिनी संस्थान" : "Namami Vindhyavasini Sansthan"}</div>
-        <div style="color:#d97706;font-size:14px;font-weight:normal;letter-spacing:2px;margin-top:4px;">${isHi ? `${year} हिंदू त्योहार एवं व्रत कैलेंडर` : `HINDU FESTIVAL & VRAT CALENDAR — ${year}`}</div>
-      </div>
-      <div style="text-align:center;font-size:10px;color:#71717a;margin-bottom:16px;">
-        ${isHi ? `विन्ध्याचल धाम, उत्तर प्रदेश (25.1575° N, 82.5800° E) के भौगोलिक निर्देशांक के लिए गणना की गई है।` : `Calculated for coordinates of Vindhyachal Dham, Uttar Pradesh (25.1575° N, 82.5800° E)`}
-      </div>
-      <table style="width:100%;border-collapse:collapse;border:1px solid #e2d2b4;">
-        <thead>
-          <tr>
-            <th style="background:#7a1e1e;color:#fff;padding:8px 10px;border:1px solid #7a1e1e;text-align:left;font-size:12px;">${isHi ? "दिनांक" : "Date"}</th>
-            <th style="background:#7a1e1e;color:#fff;padding:8px 10px;border:1px solid #7a1e1e;text-align:left;font-size:12px;">${isHi ? "त्योहार / व्रत" : "Festival / Vrat"}</th>
-            <th style="background:#7a1e1e;color:#fff;padding:8px 10px;border:1px solid #7a1e1e;text-align:left;font-size:12px;">${isHi ? "श्रेणी" : "Category"}</th>
-            <th style="background:#7a1e1e;color:#fff;padding:8px 10px;border:1px solid #7a1e1e;text-align:left;font-size:12px;">${isHi ? "विवरण" : "Description"}</th>
-          </tr>
-        </thead>
-        <tbody>${festRows}</tbody>
-      </table>
-      <div style="text-align:center;font-size:10px;margin-top:20px;border-top:1px solid #e2d2b4;padding-top:12px;color:#a1a1aa;">
-        © ${new Date().getFullYear()} ${isHi ? "नमामि विन्ध्यवासिनी संस्थान ✦ जय माँ विन्ध्यवासिनी" : "Namami Vindhyavasini Sansthan ✦ Jai Maa Vindhyavasini"} ✦ namamivindhyavasini.in
-      </div>
-    `;
-    document.body.appendChild(container);
-
-    // Wait for fonts to be ready before capturing
-    await document.fonts.ready;
-    await new Promise((r) => setTimeout(r, 200));
-
-    // Capture the container as a high-quality canvas
-    const canvas = await html2canvas(container, {
-      scale: 2,
-      useCORS: true,
-      logging: false,
-      backgroundColor: "#ffffff",
+function downloadCalendarPdf(year: number, festivals: any[], isHi: boolean) {
+  const festRows = festivals.map((f) => {
+    const fDate = new Date(f.date + "T00:00:00");
+    const formattedDate = fDate.toLocaleDateString(isHi ? "hi-IN" : "en-IN", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+      weekday: "short"
     });
+    const translatedName = translateFestivalName(f.festival, isHi);
+    const translatedCat = getTranslatedCategory(f.category, isHi);
+    const translatedDesc = translateText(f.description, isHi);
+    return `
+      <tr>
+        <td style="padding:8px 10px;border:1px solid #e2d2b4;font-weight:bold;width:20%;font-size:12px;">${formattedDate}</td>
+        <td style="padding:8px 10px;border:1px solid #e2d2b4;font-weight:bold;color:#7a1e1e;width:28%;font-size:12px;">${translatedName}</td>
+        <td style="padding:8px 10px;border:1px solid #e2d2b4;font-style:italic;width:14%;color:#d97706;font-size:11px;">${translatedCat}</td>
+        <td style="padding:8px 10px;border:1px solid #e2d2b4;font-size:11px;width:38%;">${translatedDesc}</td>
+      </tr>
+    `;
+  }).join("");
 
-    document.body.removeChild(container);
+  const htmlContent = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${isHi ? `नमामि विन्ध्यवासिनी कैलेंडर ${year}` : `Vindhyavasini Calendar ${year}`}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Noto Sans Devanagari', 'Inter', sans-serif; background: #fff; color: #3f3f46; padding: 20px; }
+    .header { text-align: center; border-bottom: 3px double #7a1e1e; padding-bottom: 14px; margin-bottom: 18px; }
+    .header h1 { color: #7a1e1e; font-size: 22px; margin: 0; }
+    .header h2 { color: #d97706; font-size: 14px; font-weight: normal; letter-spacing: 2px; margin-top: 4px; }
+    .meta { text-align: center; font-size: 10px; color: #71717a; margin-bottom: 16px; }
+    table { width: 100%; border-collapse: collapse; border: 1px solid #e2d2b4; }
+    th { background: #7a1e1e; color: #fff; padding: 8px 10px; border: 1px solid #7a1e1e; text-align: left; font-size: 12px; }
+    td { padding: 8px 10px; border: 1px solid #e2d2b4; font-size: 12px; }
+    tr:nth-child(even) { background: #fdfaf4; }
+    .footer { text-align: center; font-size: 10px; margin-top: 20px; border-top: 1px solid #e2d2b4; padding-top: 12px; color: #a1a1aa; }
+    .print-bar { text-align: center; padding: 16px 0; }
+    .print-btn { background: #7a1e1e; color: #fff; border: none; padding: 12px 32px; font-size: 15px; border-radius: 8px; cursor: pointer; font-family: inherit; }
+    .print-btn:hover { background: #5a1515; }
+    @media print { .print-bar { display: none !important; } }
+  </style>
+</head>
+<body>
+  <div class="print-bar">
+    <button class="print-btn" onclick="window.print()">
+      🖨️ ${isHi ? "PDF में सेव करें / प्रिंट करें" : "Save as PDF / Print"}
+    </button>
+  </div>
+  <div class="header">
+    <h1>${isHi ? "नमामि विन्ध्यवासिनी संस्थान" : "Namami Vindhyavasini Sansthan"}</h1>
+    <h2>${isHi ? `${year} हिंदू त्योहार एवं व्रत कैलेंडर` : `HINDU FESTIVAL & VRAT CALENDAR — ${year}`}</h2>
+  </div>
+  <div class="meta">
+    ${isHi ? "विन्ध्याचल धाम, उत्तर प्रदेश (25.1575° N, 82.5800° E) के भौगोलिक निर्देशांक के लिए गणना" : "Calculated for Vindhyachal Dham, UP (25.1575° N, 82.5800° E)"}
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>${isHi ? "दिनांक" : "Date"}</th>
+        <th>${isHi ? "त्योहार / व्रत" : "Festival / Vrat"}</th>
+        <th>${isHi ? "श्रेणी" : "Category"}</th>
+        <th>${isHi ? "विवरण" : "Description"}</th>
+      </tr>
+    </thead>
+    <tbody>${festRows}</tbody>
+  </table>
+  <div class="footer">
+    © ${new Date().getFullYear()} ${isHi ? "नमामि विन्ध्यवासिनी संस्थान ✦ जय माँ विन्ध्यवासिनी" : "Namami Vindhyavasini Sansthan ✦ Jai Maa Vindhyavasini"} ✦ namamivindhyavasini.in
+  </div>
+  <script>
+    // Auto-trigger print after fonts load
+    document.fonts.ready.then(function() {
+      setTimeout(function() { window.print(); }, 600);
+    });
+  </script>
+</body>
+</html>`;
 
-    // Create A4 PDF and split content across pages
-    const pdf = new jsPDF("p", "mm", "a4");
-    const pageW = pdf.internal.pageSize.getWidth();
-    const pageH = pdf.internal.pageSize.getHeight();
-    const margin = 8;
-    const contentW = pageW - margin * 2;
-    const contentH = pageH - margin * 2;
+  // Create Blob URL and open in new tab
+  const blob = new Blob([htmlContent], { type: "text/html;charset=utf-8" });
+  const blobUrl = URL.createObjectURL(blob);
+  const newTab = window.open(blobUrl, "_blank");
 
-    // Scale canvas to fit PDF width
-    const imgAspect = canvas.width / canvas.height;
-    const scaledImgH = contentW / imgAspect;
-
-    // How many pages do we need?
-    const totalPages = Math.ceil(scaledImgH / contentH);
-
-    for (let page = 0; page < totalPages; page++) {
-      if (page > 0) pdf.addPage();
-
-      // Slice the source canvas for this page
-      const srcY = Math.round((page * contentH / scaledImgH) * canvas.height);
-      const srcH = Math.round((contentH / scaledImgH) * canvas.height);
-      const actualSrcH = Math.min(srcH, canvas.height - srcY);
-
-      const pageCanvas = document.createElement("canvas");
-      pageCanvas.width = canvas.width;
-      pageCanvas.height = actualSrcH;
-      const ctx = pageCanvas.getContext("2d");
-      if (ctx) {
-        ctx.fillStyle = "#ffffff";
-        ctx.fillRect(0, 0, pageCanvas.width, pageCanvas.height);
-        ctx.drawImage(
-          canvas,
-          0, srcY, canvas.width, actualSrcH,
-          0, 0, canvas.width, actualSrcH
-        );
-      }
-
-      const pageImgData = pageCanvas.toDataURL("image/jpeg", 0.92);
-      const sliceH = (actualSrcH / canvas.width) * contentW;
-      pdf.addImage(pageImgData, "JPEG", margin, margin, contentW, sliceH);
-    }
-
-    // Trigger PDF download
-    pdf.save(
+  if (newTab) {
+    // Clean up blob URL after the tab is done
+    setTimeout(() => URL.revokeObjectURL(blobUrl), 120000);
+  } else {
+    // Popup was blocked — download as HTML file instead
+    URL.revokeObjectURL(blobUrl);
+    const link = document.createElement("a");
+    const downloadBlob = new Blob([htmlContent], { type: "text/html;charset=utf-8" });
+    link.href = URL.createObjectURL(downloadBlob);
+    link.download = isHi
+      ? `विन्ध्यवासिनी_कैलेंडर_${year}.html`
+      : `Vindhyavasini_Calendar_${year}.html`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+    toast.info(
       isHi
-        ? `विन्ध्यवासिनी_कैलेंडर_${year}.pdf`
-        : `Vindhyavasini_Calendar_${year}.pdf`
-    );
-
-    toast.dismiss(loadingId);
-    toast.success(isHi ? "PDF डाउनलोड हो गया! ✅" : "PDF downloaded! ✅");
-  } catch (err) {
-    console.error("PDF generation failed:", err);
-    toast.dismiss(loadingId);
-    toast.error(
-      isHi ? "PDF बनाने में त्रुटि हुई, कृपया पुनः प्रयास करें" : "Failed to generate PDF. Please try again."
+        ? "फ़ाइल डाउनलोड हो गई — ब्राउज़र में खोलकर Print > Save as PDF चुनें"
+        : "File downloaded — open in browser, then use Print > Save as PDF"
     );
   }
 }
