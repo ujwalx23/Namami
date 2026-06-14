@@ -72,8 +72,8 @@ export const translations = {
   },
   "home.card.guidance.title": { en: "Donation Impact", hi: "दान का प्रभाव" },
   "home.card.guidance.text": {
-    en: "Your generous contributions support temple operations, religious activities and community service programs. We ensure that every donation is utilized with care, purpose and transparency. 🙏",
-    hi: "आपके उदार योगदान से मंदिर संचालन, धार्मिक गतिविधियों और सामुदायिक सेवा कार्यक्रमों को सहायता मिलती है। हम सुनिश्चित करते हैं कि प्रत्येक दान का उपयोग सावधानी, उद्देश्य और पारदर्शिता के साथ हो। 🙏",
+    en: "Your generous contributions support temple operations, religious activities and community service programs. We ensure that every donation is utilized with care, purpose and transparency.",
+    hi: "आपके उदार योगदान से मंदिर संचालन, धार्मिक गतिविधियों और सामुदायिक सेवा कार्यक्रमों को सहायता मिलती है। हम सुनिश्चित करते हैं कि प्रत्येक दान का उपयोग सावधानी, उद्देश्य और पारदर्शिता के साथ हो।",
   },
 
   "home.sandesh.kicker": { en: "Daily Wisdom", hi: "दैनिक प्रेरणा" },

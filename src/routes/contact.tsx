@@ -159,12 +159,14 @@ function ContactPage() {
           </div>
 
           {/* Google Map */}
-          <div className="aspect-video md:aspect-auto rounded-2xl overflow-hidden border-2 border-gold/40 shadow-gold min-h-[300px] h-full">
+          <div className="w-full h-[300px] md:h-full rounded-2xl overflow-hidden border-2 border-gold/40 shadow-gold">
             <iframe
               title="Vindhyachal Dham"
               src="https://www.google.com/maps?q=Maa+Vindhyavasini+Temple,Vindhyachal&ll=25.1643346,82.5060022&z=18&t=k&output=embed"
               className="w-full h-full border-0"
               loading="lazy"
+              width="100%"
+              height="100%"
             />
           </div>
         </div>
