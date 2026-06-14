@@ -108,64 +108,70 @@ function ContactPage() {
       <JsonLd data={breadcrumbSchema} />
       <PageHero sanskrit={t("ct.sanskrit")} title={t("ct.title")} subtitle={t("ct.subtitle")} />
 
-      <section className="w-full py-16 px-4 xs:px-6 flex justify-center">
-        <div className="w-full max-w-5xl grid lg:grid-cols-2 gap-10 items-start justify-items-center">
-          <div className="w-full max-w-md">
-            <div className="space-y-5 mb-10">
-              {[
-                { icon: MapPin, label: t("ct.visit"), value: t("ct.address"), href: "" },
-                {
-                  icon: Phone,
-                  label: t("ct.call"),
-                  value: "+91 93343 39505",
-                  href: "tel:+919334339505",
-                },
-                {
-                  icon: Mail,
-                  label: t("ct.email"),
-                  value: "contact@namamivindhyavasini.in",
-                  href: "mailto:contact@namamivindhyavasini.in",
-                },
-              ].map((c) => (
-                <div
-                  key={c.label}
-                  className="flex flex-col items-center text-center p-4 sm:p-5 rounded-2xl bg-card border border-border hover:border-gold/30 transition shadow-sm w-full"
-                >
-                  <div className="w-11 h-11 rounded-xl bg-gradient-sacred flex items-center justify-center text-cream mb-2.5">
-                    <c.icon size={18} />
+      <section className="w-full py-16 px-4 xs:px-6 flex flex-col items-center gap-14">
+        {/* Row 1: Contact Form */}
+        <div className="w-full max-w-xl">
+          <ContactForm />
+        </div>
+
+        {/* Row 2: Info Cards & Google Map */}
+        <div className="w-full max-w-4xl grid md:grid-cols-2 gap-8 items-stretch">
+          {/* Info Cards */}
+          <div className="flex flex-col gap-4 justify-between h-full w-full">
+            {[
+              { icon: MapPin, label: t("ct.visit"), value: t("ct.address"), href: "" },
+              {
+                icon: Phone,
+                label: t("ct.call"),
+                value: "+91 93343 39505",
+                href: "tel:+919334339505",
+              },
+              {
+                icon: Mail,
+                label: t("ct.email"),
+                value: "contact@namamivindhyavasini.in",
+                href: "mailto:contact@namamivindhyavasini.in",
+              },
+            ].map((c) => (
+              <div
+                key={c.label}
+                className="flex flex-col items-center text-center p-4 sm:p-5 rounded-2xl bg-card border border-border hover:border-gold/30 transition shadow-sm w-full flex-1 justify-center"
+              >
+                <div className="w-11 h-11 rounded-xl bg-gradient-sacred flex items-center justify-center text-cream mb-2.5">
+                  <c.icon size={18} />
+                </div>
+                <div>
+                  <div className={`text-xs uppercase tracking-[0.2em] text-saffron ${dev}`}>
+                    {c.label}
                   </div>
-                  <div>
-                    <div className={`text-xs uppercase tracking-[0.2em] text-saffron ${dev}`}>
-                      {c.label}
-                    </div>
-                    <div className={`font-medium text-maroon mt-1.5 ${dev}`}>
-                      {c.href ? (
-                        <a href={c.href} className="hover:text-saffron">
-                          {c.value}
-                        </a>
-                      ) : (
-                        c.value
-                      )}
-                    </div>
+                  <div className={`font-medium text-maroon mt-1.5 ${dev}`}>
+                    {c.href ? (
+                      <a href={c.href} className="hover:text-saffron">
+                        {c.value}
+                      </a>
+                    ) : (
+                      c.value
+                    )}
                   </div>
                 </div>
-              ))}
-            </div>
-
-            <div className="aspect-video rounded-2xl overflow-hidden border-2 border-gold/40 shadow-gold">
-              <iframe
-                title="Vindhyachal Dham"
-                src="https://www.google.com/maps?q=Maa+Vindhyavasini+Temple,Vindhyachal&ll=25.1643346,82.5060022&z=18&t=k&output=embed"
-                className="w-full h-full"
-                loading="lazy"
-              />
-            </div>
+              </div>
+            ))}
           </div>
 
-          <div className="space-y-8 w-full max-w-md">
-            <ContactForm />
-            <AppointmentForm />
+          {/* Google Map */}
+          <div className="aspect-video md:aspect-auto rounded-2xl overflow-hidden border-2 border-gold/40 shadow-gold min-h-[300px] h-full">
+            <iframe
+              title="Vindhyachal Dham"
+              src="https://www.google.com/maps?q=Maa+Vindhyavasini+Temple,Vindhyachal&ll=25.1643346,82.5060022&z=18&t=k&output=embed"
+              className="w-full h-full border-0"
+              loading="lazy"
+            />
           </div>
+        </div>
+
+        {/* Row 3: Appointment Form */}
+        <div className="w-full max-w-xl">
+          <AppointmentForm />
         </div>
       </section>
     </PageShell>

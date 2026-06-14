@@ -830,120 +830,85 @@ function HomePage() {
 
       {/* LATEST BLOGS SECTION */}
       {latestBlogs.length > 0 && (
-        <section className="container mx-auto px-6 py-10 border-t border-gold/15">
-          <ScrollReveal direction="up" duration={800}>
-            <div className="flex items-end justify-between mb-6 flex-wrap gap-4">
-              <div>
-                <span className={`text-saffron text-xs uppercase tracking-[0.3em] mb-2 block ${dev}`}>
-                  {hi ? "नवीनतम आध्यात्मिक लेख" : "Latest Spiritual Article"}
-                </span>
-                <h2 className={`font-display text-3xl md:text-4xl text-maroon ${dev}`}>
-                  {hi ? "नवीनतम लेख" : "Latest Article"}
-                </h2>
+        <section className="container mx-auto px-6 py-10 border-t border-gold/15 grid md:grid-cols-5 gap-10 items-center">
+          <div className="md:col-span-3">
+            <ScrollReveal direction="right" duration={800}>
+              <div className={`text-saffron text-xs uppercase tracking-[0.3em] mb-2 ${dev}`}>
+                {hi ? "नवीनतम आध्यात्मिक लेख" : "Latest Spiritual Article"}
               </div>
+              <h2 className={`font-display text-4xl md:text-5xl text-maroon mb-4 ${dev}`}>
+                {hi ? "नवीनतम लेख" : "Latest Article"}
+              </h2>
+              <p className={`text-foreground/80 leading-relaxed mb-6 ${dev}`}>
+                {hi 
+                  ? "गुरुकृपा, साधना और सनातन धर्म के गहन ज्ञान को समझने के लिए हमारे आध्यात्मिक ब्लॉग व लेख पढ़ें।"
+                  : "Explore our collection of spiritual articles, teachings, and divine wisdom from Pujya Guru Ji."}
+              </p>
               <Link
                 to="/blog"
                 className={`inline-flex items-center gap-2 text-maroon font-medium hover:text-saffron transition-colors duration-300 ${dev}`}
               >
                 {t("blog.view_all")} <ArrowRight size={16} />
               </Link>
-            </div>
-          </ScrollReveal>
-
-          <div className="max-w-5xl mx-auto">
+            </ScrollReveal>
+          </div>
+          
+          <div className="md:col-span-2 w-full max-w-sm mx-auto">
             {latestBlogs.slice(0, 1).map((post) => (
-              <ScrollReveal key={post.id} direction="up" duration={800}>
+              <ScrollReveal key={post.id} direction="left" duration={800}>
                 <Link
                   to="/blog/$slug"
                   params={{ slug: post.slug }}
-                  className="group flex flex-col sm:flex-row bg-card rounded-2xl border border-gold/30 hover:border-gold hover:shadow-gold transition-all duration-300 overflow-hidden sm:h-[210px] h-auto shadow-sm cursor-pointer text-inherit hover:text-inherit"
+                  className="group flex flex-col bg-card rounded-2xl border border-gold/30 hover:border-gold hover:shadow-gold transition-all duration-300 overflow-hidden shadow-sm cursor-pointer text-inherit hover:text-inherit"
                 >
                   {post.featured_image ? (
-                    <>
-                      {/* Featured Image on Left - Fully visible with object-contain */}
-                      <div className="relative w-full sm:w-[200px] md:w-[260px] lg:w-[350px] h-48 sm:h-full shrink-0 overflow-hidden bg-black/5 flex items-center justify-center border-b sm:border-b-0 sm:border-r border-border/40">
-                        <img
-                          src={post.featured_image}
-                          alt={post.title}
-                          className="w-full h-full object-contain group-hover:scale-102 transition-transform duration-500 pointer-events-none select-none"
-                          loading="lazy"
-                        />
-                        <div className="absolute top-3 left-3 sm:hidden">
-                          <span className="px-2.5 py-1 rounded-full bg-maroon/90 text-cream text-[9px] uppercase font-bold tracking-widest border border-gold/20">
-                            {categoryTranslations[post.category]?.[lang] || post.category}
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Content on Right */}
-                      <div className="p-4 sm:p-5 flex flex-col justify-between flex-1 min-w-0">
-                        <div className="space-y-2">
-                          <div className="flex items-center gap-3 text-[10px] text-muted-foreground flex-wrap">
-                            <span className="hidden sm:inline-block px-2.5 py-0.5 rounded-full bg-maroon/10 text-maroon font-bold uppercase tracking-wider text-[9px]">
-                              {categoryTranslations[post.category]?.[lang] || post.category}
-                            </span>
-                            <span className="flex items-center gap-1">
-                              <Calendar size={10} className="text-gold" /> {formatDate(post.publish_date, lang)}
-                            </span>
-                            <span className="flex items-center gap-1">
-                              <Clock size={10} className="text-gold" /> {calculateReadingTime(post.content)} {t("blog.read_time")}
-                            </span>
-                          </div>
-
-                          <h3 className={`font-display text-lg sm:text-xl text-maroon group-hover:text-saffron transition-colors duration-300 leading-snug line-clamp-1 sm:line-clamp-2 ${dev} group-hover:underline`}>
-                            {post.title}
-                          </h3>
-
-                          <p className={`text-muted-foreground text-xs sm:text-sm leading-relaxed line-clamp-2 sm:line-clamp-3 ${dev}`}>
-                            {getExcerpt(post.content, 180)}
-                          </p>
-                        </div>
-
-                        <div className="pt-2 border-t border-border/40 flex items-center justify-end mt-2 shrink-0">
-                          <span
-                            className="inline-flex items-center gap-1 text-xs text-maroon font-semibold group-hover:text-saffron transition-colors"
-                          >
-                            {t("blog.read_more")}
-                            <ArrowRight size={12} className="transform group-hover:translate-x-1 transition-transform" />
-                          </span>
-                        </div>
-                      </div>
-                    </>
-                  ) : (
-                    /* Content spans full width */
-                    <div className="p-4 sm:p-5 flex flex-col justify-between flex-1 min-w-0">
-                      <div className="space-y-2">
-                        <div className="flex items-center gap-3 text-[10px] text-muted-foreground flex-wrap">
-                          <span className="px-2.5 py-0.5 rounded-full bg-maroon/10 text-maroon font-bold uppercase tracking-wider text-[9px]">
-                            {categoryTranslations[post.category]?.[lang] || post.category}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <Calendar size={10} className="text-gold" /> {formatDate(post.publish_date, lang)}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <Clock size={10} className="text-gold" /> {calculateReadingTime(post.content)} {t("blog.read_time")}
-                          </span>
-                        </div>
-
-                        <h3 className={`font-display text-lg sm:text-xl text-maroon group-hover:text-saffron transition-colors duration-300 leading-snug line-clamp-1 sm:line-clamp-2 ${dev} group-hover:underline`}>
-                          {post.title}
-                        </h3>
-
-                        <p className={`text-muted-foreground text-xs sm:text-sm leading-relaxed line-clamp-2 sm:line-clamp-3 ${dev}`}>
-                          {getExcerpt(post.content, 220)}
-                        </p>
-                      </div>
-
-                      <div className="pt-2 border-t border-border/40 flex items-center justify-end mt-2 shrink-0">
-                        <span
-                          className="inline-flex items-center gap-1 text-xs text-maroon font-semibold group-hover:text-saffron transition-colors"
-                        >
-                          {t("blog.read_more")}
-                          <ArrowRight size={12} className="transform group-hover:translate-x-1 transition-transform" />
+                    <div className="relative w-full h-44 overflow-hidden bg-black/5 flex items-center justify-center border-b border-border/40">
+                      <img
+                        src={post.featured_image}
+                        alt={post.title}
+                        className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500 pointer-events-none select-none"
+                        loading="lazy"
+                      />
+                      <div className="absolute top-3 left-3">
+                        <span className="px-2.5 py-1 rounded-full bg-maroon/90 text-cream text-[9px] uppercase font-bold tracking-widest border border-gold/20">
+                          {categoryTranslations[post.category]?.[lang] || post.category}
                         </span>
                       </div>
                     </div>
-                  )}
+                  ) : null}
+
+                  <div className="p-5 flex flex-col justify-between flex-1 min-w-0">
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-3 text-[10px] text-muted-foreground flex-wrap">
+                        {!post.featured_image && (
+                          <span className="px-2.5 py-0.5 rounded-full bg-maroon/10 text-maroon font-bold uppercase tracking-wider text-[9px]">
+                            {categoryTranslations[post.category]?.[lang] || post.category}
+                          </span>
+                        )}
+                        <span className="flex items-center gap-1">
+                          <Calendar size={10} className="text-gold" /> {formatDate(post.publish_date, lang)}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <Clock size={10} className="text-gold" /> {calculateReadingTime(post.content)} {t("blog.read_time")}
+                        </span>
+                      </div>
+
+                      <h3 className={`font-display text-lg text-maroon group-hover:text-saffron transition-colors duration-300 leading-snug line-clamp-2 ${dev} group-hover:underline`}>
+                        {post.title}
+                      </h3>
+
+                      <p className={`text-muted-foreground text-xs leading-relaxed line-clamp-3 ${dev}`}>
+                        {getExcerpt(post.content, 120)}
+                      </p>
+                    </div>
+
+                    <div className="pt-3 border-t border-border/40 flex items-center justify-end mt-3 shrink-0">
+                      <span className="inline-flex items-center gap-1 text-xs text-maroon font-semibold group-hover:text-saffron transition-colors">
+                        {t("blog.read_more")}
+                        <ArrowRight size={12} className="transform group-hover:translate-x-1 transition-transform" />
+                      </span>
+                    </div>
+                  </div>
                 </Link>
               </ScrollReveal>
             ))}
@@ -952,46 +917,48 @@ function HomePage() {
       )}
 
       {/* DEVOTEE REVIEWS */}
-      <section className="container mx-auto px-6 py-10 pb-10">
-        <ScrollReveal direction="up" duration={800}>
-          <div className="flex items-end justify-between mb-12 flex-wrap gap-4">
-            <div>
-              <div className={`text-saffron text-xs uppercase tracking-[0.3em] mb-2 ${dev}`}>
-                {hi ? "श्रद्धालुओं के अनुभव" : "Devotee Experiences"}
-              </div>
-              <h2 className={`font-display text-4xl md:text-5xl text-maroon ${dev}`}>
-                {hi ? "भक्तों की समीक्षाएं" : "Devotee Reviews"}
-              </h2>
+      <section className="container mx-auto px-6 py-10 pb-10 grid md:grid-cols-5 gap-10 items-center">
+        <div className="md:col-span-3">
+          <ScrollReveal direction="right" duration={800}>
+            <div className={`text-saffron text-xs uppercase tracking-[0.3em] mb-2 ${dev}`}>
+              {hi ? "श्रद्धालुओं के अनुभव" : "Devotee Experiences"}
             </div>
+            <h2 className={`font-display text-4xl md:text-5xl text-maroon mb-4 ${dev}`}>
+              {hi ? "भक्तों की समीक्षाएं" : "Devotee Reviews"}
+            </h2>
+            <p className={`text-foreground/80 leading-relaxed mb-6 ${dev}`}>
+              {hi
+                ? "माँ विन्ध्यवासिनी की असीम अनुकंपा, मंदिर की दिव्य व्यवस्था और यहाँ दर्शन करने वाले श्रद्धालुओं के पावन अनुभव।"
+                : "Read about the personal experiences, spiritual feedback and divine blessings shared by devotees of Maa Vindhyavasini."}
+            </p>
             <Link
               to="/reviews"
               className={`inline-flex items-center gap-2 text-maroon font-medium hover:text-saffron transition-colors duration-300 ${dev}`}
             >
-              {hi ? "श्रद्धालुओं के पावन अनुभव व समीक्षाएं पढ़ें" : "Read Maa Vindhyavasini Devotee Reviews"} <ArrowRight size={16} />
+              {hi ? "श्रद्धालुओं के अनुभव व समीक्षाएं पढ़ें" : "Read Maa Vindhyavasini Devotee Reviews"} <ArrowRight size={16} />
             </Link>
-          </div>
-        </ScrollReveal>
+          </ScrollReveal>
+        </div>
 
-        {/* Single testimonial card centered */}
-        <div className="max-w-4xl mx-auto">
+        <div className="md:col-span-2 w-full max-w-sm mx-auto">
           {devoteeReviews.map((r, idx) => (
-            <ScrollReveal key={r.name} direction="up" delay={idx * 150} duration={800}>
-              <article className="relative rounded-2xl p-5 md:p-8 lg:p-10 bg-card border border-gold/30 hover:border-gold/60 hover:shadow-sacred hover:-translate-y-1 transition-premium group">
+            <ScrollReveal key={r.name} direction="left" delay={idx * 150} duration={800}>
+              <article className="relative rounded-2xl p-6 bg-card border border-gold/30 hover:border-gold/60 hover:shadow-sacred hover:-translate-y-1 transition-premium group">
                 <div className="absolute top-4 right-4 text-gold/10 group-hover:text-gold/20 transition-colors">
-                  <Quote size={36} strokeWidth={1.5} />
+                  <Quote size={32} strokeWidth={1.5} />
                 </div>
 
                 <p
-                  className={`relative text-foreground/80 leading-relaxed italic mb-4 text-sm md:text-base lg:text-lg ${dev}`}
+                  className={`relative text-foreground/80 leading-relaxed italic mb-4 text-sm ${dev}`}
                 >
                   "{r.comment}"
                 </p>
 
                 <div className="flex items-center gap-2.5 border-t border-gold/10 pt-3">
-                  <div className="w-8 h-8 rounded-full bg-gradient-sacred flex items-center justify-center text-cream font-display text-sm shrink-0">
+                  <div className="w-8 h-8 rounded-full bg-gradient-sacred flex items-center justify-center text-cream font-display text-xs shrink-0">
                     {r.name.charAt(0).toUpperCase()}
                   </div>
-                  <h3 className={`font-semibold text-maroon text-sm ${dev}`}>{r.name}</h3>
+                  <h3 className={`font-semibold text-maroon text-xs ${dev}`}>{r.name}</h3>
                 </div>
               </article>
             </ScrollReveal>
