@@ -197,7 +197,7 @@ function AboutPage() {
             <div id="history" className="lg:col-span-7 space-y-4 sm:space-y-6 scroll-mt-24">
               <Section title={t("about.history.title")}>
                 <div className="space-y-4">
-                  <p className={`text-foreground/85 leading-relaxed text-lg ${dev}`}>
+                  <p className={`text-foreground/85 leading-relaxed text-sm sm:text-base md:text-lg ${dev}`}>
                     {t("about.history.text")}
                   </p>
 
@@ -233,17 +233,17 @@ function AboutPage() {
                   >
                     <div className="overflow-hidden space-y-4">
                       <p
-                        className={`text-foreground/80 leading-relaxed text-base md:text-lg border-l-2 border-gold/40 pl-4 ${dev}`}
+                        className={`text-foreground/80 leading-relaxed text-sm sm:text-base md:text-lg border-l-2 border-gold/40 pl-4 ${dev}`}
                       >
                         {t("about.history.detailed.p1")}
                       </p>
                       <p
-                        className={`text-foreground/80 leading-relaxed text-base md:text-lg border-l-2 border-gold/40 pl-4 ${dev}`}
+                        className={`text-foreground/80 leading-relaxed text-sm sm:text-base md:text-lg border-l-2 border-gold/40 pl-4 ${dev}`}
                       >
                         {t("about.history.detailed.p2")}
                       </p>
                       <p
-                        className={`text-foreground/80 leading-relaxed text-base md:text-lg border-l-2 border-gold/40 pl-4 ${dev}`}
+                        className={`text-foreground/80 leading-relaxed text-sm sm:text-base md:text-lg border-l-2 border-gold/40 pl-4 ${dev}`}
                       >
                         {t("about.history.detailed.p3")}
                       </p>
@@ -275,7 +275,7 @@ function AboutPage() {
       <section className="container mx-auto px-6 py-8 md:py-16">
         <ScrollReveal direction="up" duration={800}>
           <Section title={t("about.trikona.title")}>
-            <p className={`text-foreground/85 leading-relaxed text-lg max-w-4xl ${dev}`}>
+            <p className={`text-foreground/85 leading-relaxed text-sm sm:text-base md:text-lg max-w-4xl ${dev}`}>
               {t("about.trikona.text")}
             </p>
           </Section>
@@ -312,7 +312,7 @@ function AboutPage() {
             <Section title={t("about.sanctum.title")}>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 items-center mt-2 sm:mt-4">
                 <div className="lg:col-span-2 space-y-4">
-                  <p className={`text-foreground/85 leading-relaxed text-lg ${dev}`}>
+                  <p className={`text-foreground/85 leading-relaxed text-sm sm:text-base md:text-lg ${dev}`}>
                     {t("about.sanctum.text")}
                   </p>
                 </div>
@@ -365,7 +365,7 @@ function AboutPage() {
       <ScrollReveal direction="up" duration={800}>
         <section className="container mx-auto px-6 py-8 md:py-16">
           <Section title={t("about.importance.title")}>
-            <p className={`text-foreground/85 leading-relaxed text-lg max-w-5xl ${dev}`}>
+            <p className={`text-foreground/85 leading-relaxed text-sm sm:text-base md:text-lg max-w-5xl ${dev}`}>
               {t("about.importance.text")}
             </p>
           </Section>
@@ -420,7 +420,7 @@ function AboutPage() {
       <ScrollReveal direction="up" duration={800}>
         <section className="container mx-auto px-6 py-8 md:py-16">
           <Section title={t("about.kunds.title")}>
-            <p className={`text-foreground/85 leading-relaxed text-lg max-w-5xl ${dev}`}>
+            <p className={`text-foreground/85 leading-relaxed text-sm sm:text-base md:text-lg max-w-5xl ${dev}`}>
               {t("about.kunds.text")}
             </p>
           </Section>
@@ -480,7 +480,7 @@ function AboutPage() {
       <section className="container mx-auto px-6 py-8 md:py-16">
         <ScrollReveal direction="up" duration={800}>
           <Section title={t("about.fest.title")}>
-            <p className={`text-foreground/85 leading-relaxed text-lg max-w-4xl ${dev}`}>
+            <p className={`text-foreground/85 leading-relaxed text-sm sm:text-base md:text-lg max-w-4xl ${dev}`}>
               {t("about.fest.text")}
             </p>
           </Section>
@@ -523,7 +523,7 @@ function AboutPage() {
         <div className="lg:col-span-7">
           <ScrollReveal direction="up" duration={800}>
             <Section title={t("about.sansthan.title")}>
-              <p className={`text-foreground/85 leading-relaxed text-lg ${dev}`}>
+              <p className={`text-foreground/85 leading-relaxed text-sm sm:text-base md:text-lg ${dev}`}>
                 {t("about.sansthan.text")}
               </p>
             </Section>
