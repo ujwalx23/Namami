@@ -448,22 +448,22 @@ function SandeshPage() {
         </div>
       ) : null}
 
-      <section className="container mx-auto px-6 py-16">
+      <section className="container mx-auto px-6 py-10 md:py-16">
         {today && (
           <ScrollReveal direction="up" duration={900}>
-            <div className="max-w-3xl mx-auto rounded-3xl bg-gradient-sacred p-1 shadow-sacred mb-14">
-              <div className="rounded-[1.4rem] bg-card p-10 md:p-14 text-center relative">
-                <Quote className="mx-auto text-gold mb-4" size={32} />
-                <div className={`text-xs uppercase tracking-[0.3em] text-saffron mb-3 ${dev}`}>
+            <div className="max-w-3xl mx-auto rounded-3xl bg-gradient-sacred p-1 shadow-sacred mb-8 md:mb-14">
+              <div className="rounded-[1.4rem] bg-card p-6 sm:p-10 md:p-14 text-center relative">
+                <Quote className="mx-auto text-gold mb-3 md:mb-4 w-6 h-6 md:w-8 md:h-8" />
+                <div className={`text-xs uppercase tracking-[0.3em] text-saffron mb-2 md:mb-3 ${dev}`}>
                   {t("sandesh.today")}
                 </div>
                 <p
-                  className={`font-display text-2xl md:text-3xl text-maroon leading-relaxed ${dev}`}
+                  className={`font-display text-lg sm:text-2xl md:text-3xl text-maroon leading-relaxed ${dev}`}
                 >
                   "{today.message}"
                 </p>
-                <div className={`mt-6 text-sm text-muted-foreground ${dev}`}>— {today.author}</div>
-                <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
+                <div className={`mt-4 md:mt-6 text-sm text-muted-foreground ${dev}`}>— {today.author}</div>
+                <div className="mt-4 md:mt-6 flex flex-wrap items-center justify-center gap-4">
                   {isHindiText(today.message) && (
                     <button
                       onClick={() => toggleSpeak(today.message, today.id)}

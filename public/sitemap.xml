@@ -3,7 +3,7 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.namamivindhyavasini.in/</loc>
-    <lastmod>2026-06-12</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -24,7 +24,7 @@
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/about</loc>
-    <lastmod>2026-06-12</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -45,19 +45,19 @@
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/calendar</loc>
-    <lastmod>2026-06-12</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/events</loc>
-    <lastmod>2026-06-12</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/gallery</loc>
-    <lastmod>2026-06-12</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -78,43 +78,43 @@
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/videos</loc>
-    <lastmod>2026-06-12</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/donation</loc>
-    <lastmod>2026-06-12</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/contact</loc>
-    <lastmod>2026-06-12</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/reviews</loc>
-    <lastmod>2026-06-12</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/sandesh</loc>
-    <lastmod>2026-06-12</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/inbox</loc>
-    <lastmod>2026-06-12</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/blog</loc>
-    <lastmod>2026-06-12</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
@@ -124,7 +124,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://img.sanishtech.com/u/b2ee656cc6436628e1e76c3c95371f85.jpg</image:loc>
+      <image:loc>https://i.pinimg.com/736x/45/93/5a/45935aaa18f67bb9bd228dc5f89c431b.jpg</image:loc>
       <image:title>जब जीवन स्वयं उपदेश बन जाए</image:title>
     </image:image>
   </url>
@@ -134,7 +134,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://img.sanishtech.com/u/ab6df33d46150848875f2a8e061e2fad.jpg</image:loc>
+      <image:loc>https://i.pinimg.com/736x/a4/f1/f0/a4f1f04204c9ade427de075bfad9b7e9.jpg</image:loc>
       <image:title>Living Truth in Daily Life</image:title>
     </image:image>
   </url>
@@ -144,7 +144,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://translate.google.com/website?sl=en&amp;tl=hi&amp;hl=hi&amp;client=srp&amp;u=http://vindhyachalmata.com/wp-content/uploads/2016/05/Vindhyachalmata.jpg</image:loc>
+      <image:loc>https://i.pinimg.com/736x/1f/c2/90/1fc2907acd18e6f27e265ba0a581d1c0.jpg</image:loc>
       <image:title>Maa Vindhyavasini Temple History and Divine Significance</image:title>
     </image:image>
   </url>

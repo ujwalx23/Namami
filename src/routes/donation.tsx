@@ -227,6 +227,24 @@ function DonationPage() {
                 <li>QR code scans reflect instantly; direct bank transfers may take 24-48 hours.</li>
               </ul>
             </div>
+
+            {/* Questions/Contact Card */}
+            <div className="mt-6 p-5 sm:p-6 rounded-2xl bg-gradient-divine border border-gold/40 text-center shadow-sm w-full max-w-md flex flex-col items-center gap-3">
+              <h4 className="font-display text-base text-maroon font-semibold">
+                {lang === "hi" ? "पूछताछ या विशेष सेवा?" : "Questions or Special Seva?"}
+              </h4>
+              <p className="text-xs text-muted-foreground max-w-xs leading-relaxed">
+                {lang === "hi"
+                  ? "यदि आप विशेष भंडारा आयोजित करना चाहते हैं, या दान से संबंधित कोई प्रश्न हैं, तो हमसे संपर्क करें।"
+                  : "If you wish to organize a special bhandara, perform specific rituals, or have questions, please reach out to us."}
+              </p>
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-gradient-sacred text-cream font-medium text-xs shadow-gold hover:opacity-95 hover:scale-[1.03] transition-all duration-300"
+              >
+                {lang === "hi" ? "हमसे संपर्क करें" : "Contact Us"}
+              </Link>
+            </div>
           </div>
         </div>
       </section>

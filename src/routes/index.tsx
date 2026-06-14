@@ -5,8 +5,10 @@ import { supabase } from "@/integrations/supabase/client";
 import type { Tables } from "@/integrations/supabase/types";
 import maaImg from "@/assets/maa-vindhyavasini.webp";
 import maaImg2 from "@/assets/maa-vindhyavasini-2.webp";
-import maaImg3 from "@/assets/maa-vindhyavasini-3.webp";
+import maaImg3 from "@/assets/maa-vindhyavasini-3.jpg";
 import gallery1 from "@/assets/gallery-1.webp";
+import gallery2 from "@/assets/gallery-2.webp";
+import gallery3 from "@/assets/gallery-3.webp";
 import {
   Calendar,
   MapPin,
@@ -524,32 +526,12 @@ function HomePage() {
         comment:
           "मैं प्रभावित हुई कि सबकुछ कितना व्यवस्थित था। मंदिर की जानकारी, दर्शन विवरण और विचारशील संदेश खंड ने मूल्यवान मार्गदर्शन और प्रेरणा प्रदान की। दर्शन की योजना बनाने वाले भक्तों के लिए अत्यंत अनुशंसित। 🌺🙏",
       },
-      {
-        name: "राजेश मिश्रा",
-        comment:
-          "एक सुंदर और आध्यात्मिक रूप से उन्नत करने वाला स्थान। व्यवस्थाएं उत्कृष्ट थीं, और पूरा अनुभव सहज और यादगार रहा। मैं परिवार के साथ दर्शन करने की अत्यधिक सलाह देता हूँ।",
-      },
-      {
-        name: "मनिष तिवारी",
-        comment:
-          "एक अद्भुत पहल जो भक्तों को सनातन धर्म की शिक्षाओं, परंपराओं और मूल्यों से जोड़े रखने में मदद करती है।",
-      },
     ]
     : [
       {
         name: "Priya Sharma",
         comment:
           "I was impressed by how well-organized everything was. The temple information, darshan details and Sandesh section were very helpful. Highly valuable resource for devotees and visitors. 🌺🙏",
-      },
-      {
-        name: "Rajesh Mishra",
-        comment:
-          "A beautiful and spiritually uplifting place. The arrangements were excellent and the entire experience was smooth and memorable. I highly recommend visiting with family.",
-      },
-      {
-        name: "Manish Tiwari",
-        comment:
-          "A wonderful initiative that helps devotees stay connected with the teachings, traditions and values of Sanatan Dharma.",
       },
     ];
 
@@ -605,7 +587,14 @@ function HomePage() {
                   }`}
               >
                 {t("home.hero.title1")}{" "}
-                <span className={`text-gradient-gold ${hi ? "not-italic" : "italic"}`}>
+                <span
+                  className={`text-gradient-gold ${hi ? "not-italic" : "italic"}`}
+                  style={{
+                    boxDecorationBreak: "clone",
+                    WebkitBoxDecorationBreak: "clone",
+                    paddingRight: "0.15em",
+                  }}
+                >
                   {t("home.hero.title2")}
                 </span>
               </h1>
@@ -694,10 +683,10 @@ function HomePage() {
 
       {/* SHAKTI PITHA STORY */}
       <section className="bg-gradient-divine border-y border-border/60">
-        <div className="container mx-auto px-6 py-10 grid lg:grid-cols-2 gap-12 items-center">
+        <div className="container mx-auto px-6 py-10 grid lg:grid-cols-[0.8fr_1.2fr] gap-12 items-center">
           <div className="relative order-2 lg:order-1">
             <ScrollReveal direction="right" duration={900}>
-              <div className="aspect-[4/5] max-w-md mx-auto rounded-[2rem] overflow-hidden shadow-sacred border-4 border-gold/60 hover:shadow-gold transition-shadow duration-500">
+              <div className="aspect-[4/5] max-w-[260px] sm:max-w-xs md:max-w-sm lg:max-w-[340px] mx-auto rounded-[2rem] overflow-hidden shadow-sacred border-4 border-gold/60 hover:shadow-gold transition-shadow duration-500">
                 <img
                   src={maaImg2}
                   alt="Maa Vindhyavasini Devi Temple Vindhyachal Dham"
@@ -808,8 +797,8 @@ function HomePage() {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
             {[
               { src: gallery1, cap: hi ? "स्वर्ण श्रृंगार" : "Swarna Shringar" },
-              { src: maaImg2, cap: hi ? "प्रातः आरती" : "Mangala Aarti" },
-              { src: maaImg3, cap: hi ? "विशेष श्रृंगार" : "Vishesh Shringar" },
+              { src: gallery2, cap: hi ? "प्रातः आरती" : "Mangala Aarti" },
+              { src: gallery3, cap: hi ? "विशेष श्रृंगार" : "Vishesh Shringar" },
             ].map((p, i) => (
               <ScrollReveal key={i} direction="up" delay={(i % 3) * 120} duration={850}>
                 <figure
@@ -836,55 +825,6 @@ function HomePage() {
             ))}
           </div>
 
-
-        </div>
-      </section>
-
-      {/* DEVOTEE REVIEWS */}
-      <section className="container mx-auto px-6 py-10 pb-10">
-        <ScrollReveal direction="up" duration={800}>
-          <div className="flex items-end justify-between mb-12 flex-wrap gap-4">
-            <div>
-              <div className={`text-saffron text-xs uppercase tracking-[0.3em] mb-2 ${dev}`}>
-                {hi ? "श्रद्धालुओं के अनुभव" : "Devotee Experiences"}
-              </div>
-              <h2 className={`font-display text-4xl md:text-5xl text-maroon ${dev}`}>
-                {hi ? "भक्तों की समीक्षाएं" : "Devotee Reviews"}
-              </h2>
-            </div>
-            <Link
-              to="/reviews"
-              className={`inline-flex items-center gap-2 text-maroon font-medium hover:text-saffron transition-colors duration-300 ${dev}`}
-            >
-              {hi ? "श्रद्धालुओं के पावन अनुभव व समीक्षाएं पढ़ें" : "Read Maa Vindhyavasini Devotee Reviews"} <ArrowRight size={16} />
-            </Link>
-          </div>
-        </ScrollReveal>
-
-        {/* Mobile: vertical single column; Desktop: 3-column grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 md:items-start gap-4 md:gap-6">
-          {devoteeReviews.map((r, idx) => (
-            <ScrollReveal key={r.name} direction="up" delay={idx * 150} duration={800}>
-              <article className="relative rounded-2xl p-5 md:p-6 bg-card border border-gold/30 hover:border-gold/60 hover:shadow-sacred hover:-translate-y-1 transition-premium group">
-                <div className="absolute top-4 right-4 text-gold/10 group-hover:text-gold/20 transition-colors">
-                  <Quote size={36} strokeWidth={1.5} />
-                </div>
-
-                <p
-                  className={`relative text-foreground/80 leading-relaxed italic mb-4 text-sm ${dev}`}
-                >
-                  "{r.comment}"
-                </p>
-
-                <div className="flex items-center gap-2.5 border-t border-gold/10 pt-3">
-                  <div className="w-8 h-8 rounded-full bg-gradient-sacred flex items-center justify-center text-cream font-display text-sm shrink-0">
-                    {r.name.charAt(0).toUpperCase()}
-                  </div>
-                  <h3 className={`font-semibold text-maroon text-sm ${dev}`}>{r.name}</h3>
-                </div>
-              </article>
-            </ScrollReveal>
-          ))}
         </div>
       </section>
 
@@ -1010,6 +950,54 @@ function HomePage() {
           </div>
         </section>
       )}
+
+      {/* DEVOTEE REVIEWS */}
+      <section className="container mx-auto px-6 py-10 pb-10">
+        <ScrollReveal direction="up" duration={800}>
+          <div className="flex items-end justify-between mb-12 flex-wrap gap-4">
+            <div>
+              <div className={`text-saffron text-xs uppercase tracking-[0.3em] mb-2 ${dev}`}>
+                {hi ? "श्रद्धालुओं के अनुभव" : "Devotee Experiences"}
+              </div>
+              <h2 className={`font-display text-4xl md:text-5xl text-maroon ${dev}`}>
+                {hi ? "भक्तों की समीक्षाएं" : "Devotee Reviews"}
+              </h2>
+            </div>
+            <Link
+              to="/reviews"
+              className={`inline-flex items-center gap-2 text-maroon font-medium hover:text-saffron transition-colors duration-300 ${dev}`}
+            >
+              {hi ? "श्रद्धालुओं के पावन अनुभव व समीक्षाएं पढ़ें" : "Read Maa Vindhyavasini Devotee Reviews"} <ArrowRight size={16} />
+            </Link>
+          </div>
+        </ScrollReveal>
+
+        {/* Single testimonial card centered */}
+        <div className="max-w-2xl mx-auto">
+          {devoteeReviews.map((r, idx) => (
+            <ScrollReveal key={r.name} direction="up" delay={idx * 150} duration={800}>
+              <article className="relative rounded-2xl p-5 md:p-6 bg-card border border-gold/30 hover:border-gold/60 hover:shadow-sacred hover:-translate-y-1 transition-premium group">
+                <div className="absolute top-4 right-4 text-gold/10 group-hover:text-gold/20 transition-colors">
+                  <Quote size={36} strokeWidth={1.5} />
+                </div>
+
+                <p
+                  className={`relative text-foreground/80 leading-relaxed italic mb-4 text-sm ${dev}`}
+                >
+                  "{r.comment}"
+                </p>
+
+                <div className="flex items-center gap-2.5 border-t border-gold/10 pt-3">
+                  <div className="w-8 h-8 rounded-full bg-gradient-sacred flex items-center justify-center text-cream font-display text-sm shrink-0">
+                    {r.name.charAt(0).toUpperCase()}
+                  </div>
+                  <h3 className={`font-semibold text-maroon text-sm ${dev}`}>{r.name}</h3>
+                </div>
+              </article>
+            </ScrollReveal>
+          ))}
+        </div>
+      </section>
 
       {/* RICH SEO DEVOTIONAL CONTENT SECTION */}
       <section className="container mx-auto px-6 py-10 border-t border-gold/15 bg-cream/5 rounded-3xl mt-6">

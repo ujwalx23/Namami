@@ -74,21 +74,21 @@ export function PageHero({
         <circle cx="105" cy="60" r="3" fill="currentColor" />
       </svg>
 
-      <div className="container mx-auto px-6 py-20 relative text-center">
+      <div className="container mx-auto px-4 py-8 sm:py-12 md:py-16 lg:py-20 relative text-center">
         {sanskrit && (
-          <div className="font-devanagari text-saffron text-base md:text-lg mb-3 break-words leading-relaxed">
+          <div className="font-devanagari text-saffron text-sm sm:text-base md:text-lg mb-2 sm:mb-3 break-words leading-relaxed">
             {sanskrit}
           </div>
         )}
-        <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-maroon mb-4 break-words leading-tight">
+        <h1 className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-maroon mb-2 sm:mb-4 break-words leading-tight">
           {title}
         </h1>
         {subtitle && (
-          <p className="text-muted-foreground max-w-2xl mx-auto text-base md:text-lg break-words leading-relaxed">
+          <p className="text-muted-foreground max-w-2xl mx-auto text-xs sm:text-base md:text-lg break-words leading-relaxed">
             {subtitle}
           </p>
         )}
-        <div className="mx-auto mt-6 w-24 h-[2px] bg-gradient-sacred rounded-full" />
+        <div className="mx-auto mt-4 sm:mt-6 w-16 sm:w-24 h-[1.5px] sm:h-[2px] bg-gradient-sacred rounded-full" />
       </div>
     </section>
   );

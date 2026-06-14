@@ -13,7 +13,7 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
   children,
   className = "",
   delay = 0,
-  duration = 800,
+  duration = 400,
   direction = "up",
   distance = 30,
 }) => {
@@ -30,7 +30,7 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
       },
       {
         threshold: 0.05, // trigger when 5% of element is visible
-        rootMargin: "0px 0px -40px 0px", // trigger slightly early
+        rootMargin: "0px 0px 600px 0px", // trigger far in advance (600px) so content is ready
       },
     );
 

@@ -7,9 +7,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { useLang } from "@/i18n/LangProvider";
 import { Download, X, Share2, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
-import maaImg2 from "@/assets/maa-vindhyavasini-2.webp";
-import maaImg3 from "@/assets/maa-vindhyavasini-3.webp";
 import gallery1 from "@/assets/gallery-1.webp";
+import gallery2 from "@/assets/gallery-2.webp";
+import gallery3 from "@/assets/gallery-3.webp";
 import { JsonLd } from "@/components/JsonLd";
 import { ShareModal } from "@/components/ShareModal";
 import { addGalleryWatermark } from "@/lib/watermarkImage";
@@ -58,8 +58,8 @@ type GalleryRow = { id: string; image_url: string; caption: string | null; creat
 
 const defaults: { src: string; cap_en: string; cap_hi: string }[] = [
   { src: gallery1, cap_en: "Swarna Shringar", cap_hi: "स्वर्ण श्रृंगार" },
-  { src: maaImg2, cap_en: "Mangala Aarti", cap_hi: "प्रातः आरती" },
-  { src: maaImg3, cap_en: "Vishesh Shringar", cap_hi: "विशेष श्रृंगार" },
+  { src: gallery2, cap_en: "Mangala Aarti", cap_hi: "प्रातः आरती" },
+  { src: gallery3, cap_en: "Vishesh Shringar", cap_hi: "विशेष श्रृंगार" },
 ];
 
 

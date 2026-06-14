@@ -108,8 +108,8 @@ export function FloatingPlayer() {
       {!isExpanded && (
         <button
           onClick={handleClick}
-          className={`flex h-14 w-14 items-center justify-center rounded-full border border-gold/30 bg-card/90 shadow-sacred backdrop-blur-md text-maroon hover:text-saffron hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer ${
-            isPlaying ? "shadow-gold border-gold/50 animate-ripple" : "animate-ripple"
+          className={`flex h-14 w-14 items-center justify-center rounded-full border-2 border-gold bg-cream text-maroon hover:text-saffron hover:border-saffron hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer ${
+            isPlaying ? "shadow-gold animate-ripple" : "animate-ripple"
           }`}
           aria-label="Open Devotional Player"
         >
@@ -118,10 +118,10 @@ export function FloatingPlayer() {
       )}
 
       {/* Expanded Player View */}
-      {isExpanded && currentTrack && (
-        <div className="animate-fade-in w-[calc(100vw-32px)] max-w-[360px] rounded-3xl border border-gold/30 bg-card/95 p-5 md:p-6 shadow-sacred backdrop-blur-md transition-all duration-500 ease-expo">
+      {isExpanded && (
+        <div className="animate-fade-in w-[calc(100vw-32px)] max-w-[360px] rounded-3xl border-2 border-gold bg-cream p-5 md:p-6 shadow-sacred transition-all duration-500 ease-expo">
           {/* Header */}
-          <div className="flex items-center justify-between border-b border-border pb-3 mb-4">
+          <div className="flex items-center justify-between border-b border-gold/20 pb-3 mb-4">
             <span className="text-xs uppercase tracking-wider text-saffron font-bold">
               Divine Audio Player
             </span>
@@ -144,10 +144,12 @@ export function FloatingPlayer() {
           </div>
 
           {/* Track Detail Info */}
-          {!isPlaylistOpen ? (
+          {!currentTrack ? (
+            <div className="text-center py-6 text-muted-foreground text-sm">
+              Please select a track from the playlist.
+            </div>
+          ) : !isPlaylistOpen ? (
             <div className="text-center py-2">
-              {/* Compact title display with no image */}
-
               {/* Title & Artist */}
               <h3 className="text-lg font-bold text-maroon line-clamp-1">{currentTrack.title}</h3>
               <p className="text-xs text-muted-foreground mt-0.5 line-clamp-1">
@@ -170,23 +172,23 @@ export function FloatingPlayer() {
                 <div
                   key={track.id}
                   onClick={() => playTrack(track)}
-                  className={`flex items-center gap-3 p-2 rounded-xl border cursor-pointer hover:bg-gold/5 transition ${
-                    currentTrack.id === track.id
-                      ? "border-gold bg-gold/5 text-maroon font-semibold"
+                  className={`flex items-center gap-3 p-2 rounded-xl border cursor-pointer hover:bg-gold/10 transition ${
+                    currentTrack?.id === track.id
+                      ? "border-gold bg-gold/10 text-maroon font-semibold"
                       : "border-transparent text-foreground/80"
                   }`}
                 >
                   <Music
                     size={14}
                     className={
-                      currentTrack.id === track.id ? "text-saffron" : "text-muted-foreground"
+                      currentTrack?.id === track.id ? "text-saffron" : "text-muted-foreground"
                     }
                   />
                   <div className="text-left text-xs truncate flex-1">
                     <p className="truncate">{track.title}</p>
                     <p className="text-[10px] text-muted-foreground truncate">{track.artist}</p>
                   </div>
-                  {currentTrack.id === track.id && isPlaying && (
+                  {currentTrack?.id === track.id && isPlaying && (
                     <span className="flex gap-0.5 h-4 items-end pb-0.5 shrink-0">
                       <span
                         className="w-0.5 bg-saffron rounded-full animate-bar-grow"
@@ -212,20 +214,22 @@ export function FloatingPlayer() {
           )}
 
           {/* Progress Bar & Seek */}
-          <div className="mt-4">
-            <input
-              type="range"
-              min="0"
-              max="100"
-              value={progress}
-              onChange={handleProgressChange}
-              className="w-full accent-saffron h-1 bg-muted rounded-lg appearance-none cursor-pointer focus:outline-none"
-            />
-            <div className="flex justify-between text-[10px] text-muted-foreground mt-1">
-              <span>{formatTime(currentTime)}</span>
-              <span>{formatTime(duration)}</span>
+          {currentTrack && (
+            <div className="mt-4">
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={progress}
+                onChange={handleProgressChange}
+                className="w-full accent-saffron h-1 bg-muted rounded-lg appearance-none cursor-pointer focus:outline-none"
+              />
+              <div className="flex justify-between text-[10px] text-muted-foreground mt-1">
+                <span>{formatTime(currentTime)}</span>
+                <span>{formatTime(duration)}</span>
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Controls Bar */}
           <div className="flex items-center justify-center gap-6 my-4">
@@ -253,7 +257,7 @@ export function FloatingPlayer() {
           </div>
 
           {/* Volume control */}
-          <div className="flex items-center gap-2 justify-center border-t border-border pt-3">
+          <div className="flex items-center gap-2 justify-center border-t border-gold/20 pt-3">
             <button
               onClick={toggleMute}
               className="text-muted-foreground hover:text-maroon transition"
