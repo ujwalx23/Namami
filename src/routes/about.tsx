@@ -73,13 +73,13 @@ function Section({
   const dev = lang === "hi" ? "font-devanagari" : "";
   return (
     <section className={className}>
-      <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-5">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-3 sm:mb-5">
         <h2 className={`font-display text-2xl md:text-3xl lg:text-4xl text-maroon ${dev}`}>
           {title}
         </h2>
         <div className="h-[1.5px] flex-grow bg-gradient-to-r from-gold/50 via-gold/25 to-transparent rounded-full hidden sm:block" />
       </div>
-      <div className="space-y-4">{children}</div>
+      <div className="space-y-3 sm:space-y-4">{children}</div>
     </section>
   );
 }
@@ -181,8 +181,8 @@ function AboutPage() {
       <ScrollReveal direction="up" duration={800} delay={100}>
         <section className="bg-gradient-divine border-y border-border/60 relative overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.05)_0%,transparent_100%)] pointer-events-none" />
-          <div className="container mx-auto px-6 py-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            <div className="lg:col-span-5 aspect-[4/5] max-w-sm w-full mx-auto rounded-[2.5rem] overflow-hidden shadow-sacred border-4 border-gold/60 relative group">
+          <div className="container mx-auto px-6 py-8 md:py-16 grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-10 items-center">
+            <div className="lg:col-span-5 aspect-[4/3] sm:aspect-[4/5] max-w-sm w-full mx-auto rounded-[2.5rem] overflow-hidden shadow-sacred border-4 border-gold/60 relative group">
               <div className="absolute inset-0 bg-gradient-to-t from-maroon/40 to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-500" />
               <img
                 src={maaImg3}
@@ -194,7 +194,7 @@ function AboutPage() {
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 pointer-events-none select-none"
               />
             </div>
-            <div id="history" className="lg:col-span-7 space-y-6 scroll-mt-24">
+            <div id="history" className="lg:col-span-7 space-y-4 sm:space-y-6 scroll-mt-24">
               <Section title={t("about.history.title")}>
                 <div className="space-y-4">
                   <p className={`text-foreground/85 leading-relaxed text-lg ${dev}`}>
@@ -252,7 +252,7 @@ function AboutPage() {
                 </div>
 
                 {/* Scriptural Quote Block */}
-                <div className="p-6 rounded-2xl bg-card/60 backdrop-blur border-l-4 border-gold/80 border border-border mt-6 space-y-3 relative shadow-sm">
+                <div className="p-4 sm:p-6 rounded-2xl bg-card/60 backdrop-blur border-l-4 border-gold/80 border border-border mt-4 sm:mt-6 space-y-3 relative shadow-sm">
                   <p className="font-devanagari text-base md:text-lg lg:text-xl text-maroon text-center font-semibold leading-relaxed break-words">
                     {scripturalQuote.sanskrit}
                   </p>
@@ -272,7 +272,7 @@ function AboutPage() {
       </ScrollReveal>
 
       {/* TRIKONA PARIKRAMA */}
-      <section className="container mx-auto px-6 py-16">
+      <section className="container mx-auto px-6 py-8 md:py-16">
         <ScrollReveal direction="up" duration={800}>
           <Section title={t("about.trikona.title")}>
             <p className={`text-foreground/85 leading-relaxed text-lg max-w-4xl ${dev}`}>
@@ -281,13 +281,13 @@ function AboutPage() {
           </Section>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mt-6 sm:mt-10">
           {trikona.map((item, idx) => (
             <ScrollReveal key={item.tk} direction="up" delay={idx * 100} duration={700}>
               <div
-                className={`p-8 rounded-3xl bg-gradient-to-b ${item.color} border border-border/50 hover:border-gold/60 hover:shadow-gold hover:scale-[1.03] transition-all duration-300 h-full`}
+                className={`p-5 sm:p-6 md:p-8 rounded-3xl bg-gradient-to-b ${item.color} border border-border/50 hover:border-gold/60 hover:shadow-gold hover:scale-[1.03] transition-all duration-300 h-full`}
               >
-                <div className="flex justify-between items-start mb-6">
+                <div className="flex justify-between items-start mb-4 sm:mb-6">
                   <div className="w-14 h-14 rounded-2xl bg-gradient-sacred flex items-center justify-center text-cream shadow-md">
                     <item.icon size={24} />
                   </div>
@@ -308,15 +308,15 @@ function AboutPage() {
       {/* SANCTUM & MAHIMA */}
       <ScrollReveal direction="up" duration={800}>
         <section className="bg-gradient-divine border-y border-border/60">
-          <div className="container mx-auto px-6 py-16">
+          <div className="container mx-auto px-6 py-8 md:py-16">
             <Section title={t("about.sanctum.title")}>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center mt-4">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 items-center mt-2 sm:mt-4">
                 <div className="lg:col-span-2 space-y-4">
                   <p className={`text-foreground/85 leading-relaxed text-lg ${dev}`}>
                     {t("about.sanctum.text")}
                   </p>
                 </div>
-                <div className="p-6 rounded-2xl bg-card border border-border text-center space-y-4 shadow-sacred relative overflow-hidden">
+                <div className="p-5 sm:p-6 rounded-2xl bg-card border border-border text-center space-y-4 shadow-sacred relative overflow-hidden">
                   <div className="absolute top-0 left-0 w-full h-[4px] bg-gradient-sacred" />
                   <div
                     className={`text-xs uppercase tracking-[0.25em] text-saffron font-bold ${dev}`}
@@ -363,7 +363,7 @@ function AboutPage() {
 
       {/* SPIRITUAL IMPORTANCE */}
       <ScrollReveal direction="up" duration={800}>
-        <section className="container mx-auto px-6 py-16">
+        <section className="container mx-auto px-6 py-8 md:py-16">
           <Section title={t("about.importance.title")}>
             <p className={`text-foreground/85 leading-relaxed text-lg max-w-5xl ${dev}`}>
               {t("about.importance.text")}
@@ -375,9 +375,9 @@ function AboutPage() {
       {/* HOW TO REACH */}
       <ScrollReveal direction="up" duration={800}>
         <section className="bg-gradient-divine border-y border-border/60">
-          <div className="container mx-auto px-6 py-16">
+          <div className="container mx-auto px-6 py-8 md:py-16">
             <Section title={t("about.access.title")}>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mt-2 sm:mt-4">
                 {[
                   {
                     icon: Plane,
@@ -397,7 +397,7 @@ function AboutPage() {
                 ].map((r, i) => (
                   <div
                     key={i}
-                    className="p-6 rounded-2xl bg-card border border-border flex flex-col gap-4 hover:-translate-y-1 hover:shadow-gold/30 hover:border-gold/40 transition-all duration-300 h-full"
+                    className="p-5 sm:p-6 rounded-2xl bg-card border border-border flex flex-col gap-3 sm:gap-4 hover:-translate-y-1 hover:shadow-gold/30 hover:border-gold/40 transition-all duration-300 h-full"
                   >
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 rounded-xl bg-gradient-sacred flex items-center justify-center text-cream shadow-sm">
@@ -418,7 +418,7 @@ function AboutPage() {
 
       {/* SACRED KUNDS & GHATS */}
       <ScrollReveal direction="up" duration={800}>
-        <section className="container mx-auto px-6 py-16">
+        <section className="container mx-auto px-6 py-8 md:py-16">
           <Section title={t("about.kunds.title")}>
             <p className={`text-foreground/85 leading-relaxed text-lg max-w-5xl ${dev}`}>
               {t("about.kunds.text")}
@@ -428,10 +428,10 @@ function AboutPage() {
       </ScrollReveal>
 
       {/* LEGEND & KAJARI SECTIONS */}
-      <section className="container mx-auto px-6 py-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <section className="container mx-auto px-6 py-6 md:py-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
           <ScrollReveal direction="up" duration={800}>
-            <div className="p-8 rounded-3xl bg-gradient-to-br from-saffron/10 to-gold/5 border border-gold/30 hover:border-gold/50 shadow-sacred hover:shadow-gold/20 transition-all duration-300 h-full flex flex-col justify-between">
+            <div className="p-5 xs:p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-saffron/10 to-gold/5 border border-gold/30 hover:border-gold/50 shadow-sacred hover:shadow-gold/20 transition-all duration-300 h-full flex flex-col justify-between">
               <div>
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 rounded-xl bg-gradient-sacred flex items-center justify-center text-cream">
@@ -453,7 +453,7 @@ function AboutPage() {
           </ScrollReveal>
 
           <ScrollReveal direction="up" duration={800} delay={100}>
-            <div className="p-8 rounded-3xl bg-gradient-to-br from-indigo-950/20 to-purple-950/10 border border-indigo-900/30 hover:border-indigo-800/50 shadow-sacred hover:shadow-indigo-950/20 transition-all duration-300 h-full flex flex-col justify-between">
+            <div className="p-5 xs:p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-indigo-950/20 to-purple-950/10 border border-indigo-900/30 hover:border-indigo-800/50 shadow-sacred hover:shadow-indigo-950/20 transition-all duration-300 h-full flex flex-col justify-between">
               <div>
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 rounded-xl bg-gradient-sacred flex items-center justify-center text-cream">
@@ -477,7 +477,7 @@ function AboutPage() {
       </section>
 
       {/* FESTIVALS */}
-      <section className="container mx-auto px-6 py-16">
+      <section className="container mx-auto px-6 py-8 md:py-16">
         <ScrollReveal direction="up" duration={800}>
           <Section title={t("about.fest.title")}>
             <p className={`text-foreground/85 leading-relaxed text-lg max-w-4xl ${dev}`}>
@@ -486,7 +486,7 @@ function AboutPage() {
           </Section>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mt-6 sm:mt-10">
           {[
             {
               icon: Calendar,
@@ -504,7 +504,7 @@ function AboutPage() {
             },
           ].map((f, idx) => (
             <ScrollReveal key={f.n} direction="up" delay={idx * 100} duration={700}>
-              <div className="p-6 rounded-2xl bg-gradient-divine border border-gold/30 hover:border-gold flex items-center gap-5 hover:shadow-gold transition-all duration-300 h-full">
+              <div className="p-5 sm:p-6 rounded-2xl bg-gradient-divine border border-gold/30 hover:border-gold flex items-center gap-3 sm:gap-5 hover:shadow-gold transition-all duration-300 h-full">
                 <div className="w-14 h-14 rounded-2xl bg-gradient-sacred flex items-center justify-center text-cream shrink-0 shadow-md">
                   <f.icon size={24} />
                 </div>
@@ -519,7 +519,7 @@ function AboutPage() {
       </section>
 
       {/* OUR SANSTHAN & TRUST VALUES */}
-      <section className="container mx-auto px-6 py-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+      <section className="container mx-auto px-6 py-8 md:py-16 grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-10 items-start">
         <div className="lg:col-span-7">
           <ScrollReveal direction="up" duration={800}>
             <Section title={t("about.sansthan.title")}>
@@ -530,7 +530,7 @@ function AboutPage() {
           </ScrollReveal>
         </div>
 
-        <div className="lg:col-span-5 space-y-4">
+        <div className="lg:col-span-5 space-y-3 sm:space-y-4">
           {(
             [
               { tk: "about.values.vision.t", vk: "about.values.vision.v", icon: Heart },
@@ -543,7 +543,7 @@ function AboutPage() {
             }[]
           ).map((v, idx) => (
             <ScrollReveal key={v.tk} direction="up" delay={idx * 100} duration={700}>
-              <div className="p-6 rounded-2xl bg-card border border-border hover:border-gold/30 transition-all duration-300 flex items-start gap-4 h-full shadow-sm">
+              <div className="p-4 sm:p-6 rounded-2xl bg-card border border-border hover:border-gold/30 transition-all duration-300 flex items-start gap-3 sm:gap-4 h-full shadow-sm">
                 <div className="w-12 h-12 rounded-xl bg-gradient-sacred/10 border border-gold/20 flex items-center justify-center text-saffron shrink-0">
                   <v.icon size={20} />
                 </div>
