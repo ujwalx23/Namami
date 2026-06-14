@@ -89,6 +89,7 @@ function timeAgo(iso: string) {
 function ReviewsPage() {
   const { reviews } = Route.useLoaderData();
   const { t, lang } = useLang();
+  const hi = lang === "hi";
   const dev = lang === "hi" ? "font-devanagari" : "";
   const router = useRouter();
   const [name, setName] = useState("");

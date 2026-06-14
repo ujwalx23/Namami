@@ -119,7 +119,7 @@ function HeroSlider() {
   return (
     <div className="relative">
       <div className="absolute -inset-6 bg-gradient-sacred rounded-[2rem] blur-3xl opacity-30 animate-glow" />
-      <div className="relative aspect-[3/4] max-w-md mx-auto rounded-[2rem] overflow-hidden shadow-sacred border-4 border-gold/60 transition-premium hover:scale-[1.02] hover:border-gold/90 animate-gold-breath">
+      <div className="relative aspect-[3/4] max-w-[280px] sm:max-w-xs md:max-w-[340px] lg:max-w-[320px] mx-auto rounded-[2rem] overflow-hidden shadow-sacred border-4 border-gold/60 transition-premium hover:scale-[1.02] hover:border-gold/90 animate-gold-breath">
         {slides.map((s, idx) => (
           <div
             key={idx}
@@ -686,7 +686,7 @@ function HomePage() {
         <div className="container mx-auto px-6 py-8 md:py-12 grid lg:grid-cols-[0.8fr_1.2fr] gap-6 md:gap-12 items-center">
           <div className="relative order-2 lg:order-1">
             <ScrollReveal direction="right" duration={900}>
-              <div className="aspect-[4/5] max-w-[260px] sm:max-w-xs md:max-w-sm lg:max-w-[340px] mx-auto rounded-[2rem] overflow-hidden shadow-sacred border-4 border-gold/60 hover:shadow-gold transition-shadow duration-500">
+              <div className="aspect-[4/5] max-w-[260px] sm:max-w-xs md:max-w-sm lg:max-w-[280px] mx-auto rounded-[2rem] overflow-hidden shadow-sacred border-4 border-gold/60 hover:shadow-gold transition-shadow duration-500">
                 <img
                   src={maaImg2}
                   alt="Maa Vindhyavasini Devi Temple Vindhyachal Dham"
@@ -794,7 +794,7 @@ function HomePage() {
             </div>
           </ScrollReveal>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto">
             {[
               { src: gallery1, cap: hi ? "स्वर्ण श्रृंगार" : "Swarna Shringar" },
               { src: maaImg, cap: hi ? "दिव्य स्वरूप (कृपा)" : "Divine Grace" },
@@ -850,7 +850,7 @@ function HomePage() {
             </div>
           </ScrollReveal>
 
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-5xl mx-auto">
             {latestBlogs.slice(0, 1).map((post) => (
               <ScrollReveal key={post.id} direction="up" duration={800}>
                 <Link
@@ -861,7 +861,7 @@ function HomePage() {
                   {post.featured_image ? (
                     <>
                       {/* Featured Image on Left - Fully visible with object-contain */}
-                      <div className="relative w-full sm:w-[200px] md:w-[260px] lg:w-[280px] h-48 sm:h-full shrink-0 overflow-hidden bg-black/5 flex items-center justify-center border-b sm:border-b-0 sm:border-r border-border/40">
+                      <div className="relative w-full sm:w-[200px] md:w-[260px] lg:w-[350px] h-48 sm:h-full shrink-0 overflow-hidden bg-black/5 flex items-center justify-center border-b sm:border-b-0 sm:border-r border-border/40">
                         <img
                           src={post.featured_image}
                           alt={post.title}
@@ -973,16 +973,16 @@ function HomePage() {
         </ScrollReveal>
 
         {/* Single testimonial card centered */}
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           {devoteeReviews.map((r, idx) => (
             <ScrollReveal key={r.name} direction="up" delay={idx * 150} duration={800}>
-              <article className="relative rounded-2xl p-5 md:p-6 bg-card border border-gold/30 hover:border-gold/60 hover:shadow-sacred hover:-translate-y-1 transition-premium group">
+              <article className="relative rounded-2xl p-5 md:p-8 lg:p-10 bg-card border border-gold/30 hover:border-gold/60 hover:shadow-sacred hover:-translate-y-1 transition-premium group">
                 <div className="absolute top-4 right-4 text-gold/10 group-hover:text-gold/20 transition-colors">
                   <Quote size={36} strokeWidth={1.5} />
                 </div>
 
                 <p
-                  className={`relative text-foreground/80 leading-relaxed italic mb-4 text-sm ${dev}`}
+                  className={`relative text-foreground/80 leading-relaxed italic mb-4 text-sm md:text-base lg:text-lg ${dev}`}
                 >
                   "{r.comment}"
                 </p>
