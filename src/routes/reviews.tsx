@@ -147,6 +147,9 @@ function ReviewsPage() {
     ]
   };
 
+  const latestThree = reviews.slice(0, 3);
+  const remainingReviews = reviews.slice(3);
+
   return (
     <PageShell>
       <JsonLd data={webpageSchema} />
@@ -156,73 +159,112 @@ function ReviewsPage() {
         title={t("reviews.title")}
         subtitle={t("reviews.subtitle")}
       />
-      <section className="container mx-auto px-6 py-16 grid lg:grid-cols-5 gap-10">
+
+      {/* LATEST 3 REVIEWS */}
+      <section className="container mx-auto px-6 py-10">
+        <h2 className={`font-display text-2xl md:text-3xl text-maroon mb-6 text-center ${dev}`}>
+          {hi ? "नवीनतम पावन अनुभव" : "Latest Experiences"}
+        </h2>
+        {latestThree.length === 0 ? (
+          <p className={`text-muted-foreground text-center ${dev}`}>{t("reviews.first")}</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {latestThree.map((r: Review) => (
+              <article
+                key={r.id}
+                className="p-5 rounded-xl bg-card border border-gold/30 hover:border-gold hover:shadow-sacred transition-premium flex flex-col justify-between"
+              >
+                <p className="text-foreground/85 leading-relaxed text-sm italic mb-4">"{r.comment}"</p>
+                <div className="flex items-center gap-3 border-t border-gold/10 pt-3 mt-auto">
+                  <div className="w-8 h-8 rounded-full bg-gradient-sacred flex items-center justify-center text-cream font-display text-xs shrink-0">
+                    {r.name.charAt(0).toUpperCase()}
+                  </div>
+                  <div>
+                    <div className="font-semibold text-maroon text-xs">{r.name}</div>
+                    <div className="text-[10px] text-muted-foreground">{timeAgo(r.created_at)}</div>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
+      </section>
+
+      {/* WRITE A REVIEW FORM (COMPACT CONTAINER TAKING LESS SPACE) */}
+      <section className="container mx-auto px-6 py-6 max-w-md">
         <form
           onSubmit={submit}
-          className="lg:col-span-2 p-7 rounded-2xl bg-card border border-border shadow-gold/30 h-fit"
+          className="p-5 rounded-2xl bg-card border border-gold/30 shadow-sacred relative overflow-hidden"
         >
-          <h2 className={`font-display text-2xl text-maroon mb-5 ${dev}`}>{t("reviews.leave")}</h2>
-          <label className="block mb-4">
-            <span className={`text-sm font-medium text-foreground/80 ${dev}`}>
-              {t("reviews.name")}
-            </span>
-            <input
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              maxLength={80}
-              required
-              className="mt-1 w-full px-4 py-2.5 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold"
-              placeholder={t("reviews.name.ph")}
-            />
-          </label>
-          <label className="block mb-5">
-            <span className={`text-sm font-medium text-foreground/80 ${dev}`}>
-              {t("reviews.comment")}
-            </span>
-            <textarea
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-              rows={5}
-              minLength={3}
-              maxLength={1000}
-              required
-              className="mt-1 w-full px-4 py-2.5 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold resize-none"
-              placeholder={t("reviews.comment.ph")}
-            />
-          </label>
-          <button
-            type="submit"
-            disabled={submitting}
-            className={`w-full px-6 py-3 rounded-full bg-gradient-sacred text-cream font-medium shadow-gold hover:opacity-95 transition disabled:opacity-60 ${dev}`}
-          >
-            {submitting ? t("reviews.submitting") : t("reviews.submit")}
-          </button>
-        </form>
-
-        <div className="lg:col-span-3 space-y-4">
-          <h2 className={`font-display text-2xl text-maroon mb-2 ${dev}`}>{t("reviews.what")}</h2>
-          {reviews.length === 0 && (
-            <p className={`text-muted-foreground ${dev}`}>{t("reviews.first")}</p>
-          )}
-          {reviews.map((r: Review) => (
-            <article
-              key={r.id}
-              className="p-6 rounded-2xl bg-card border border-border hover:border-gold/50 transition"
+          <div className="absolute inset-0 mandala-bg opacity-10 pointer-events-none" />
+          <h3 className={`font-display text-lg text-maroon mb-3 relative z-10 ${dev}`}>{t("reviews.leave")}</h3>
+          <div className="space-y-3 relative z-10">
+            <div>
+              <label className={`block text-xs font-semibold text-foreground/80 mb-1 ${dev}`}>
+                {t("reviews.name")}
+              </label>
+              <input
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                maxLength={80}
+                required
+                className="w-full px-3 py-1.5 text-sm rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold"
+                placeholder={t("reviews.name.ph")}
+              />
+            </div>
+            <div>
+              <label className={`block text-xs font-semibold text-foreground/80 mb-1 ${dev}`}>
+                {t("reviews.comment")}
+              </label>
+              <textarea
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                rows={3}
+                minLength={3}
+                maxLength={1000}
+                required
+                className="w-full px-3 py-1.5 text-sm rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold resize-none"
+                placeholder={t("reviews.comment.ph")}
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={submitting}
+              className={`w-full px-4 py-2 text-sm rounded-full bg-gradient-sacred text-cream font-medium shadow-gold hover:opacity-95 transition disabled:opacity-60 ${dev}`}
             >
-              <div className="flex items-center gap-3 mb-2">
-                <div className="w-10 h-10 rounded-full bg-gradient-sacred flex items-center justify-center text-cream font-display">
-                  {r.name.charAt(0).toUpperCase()}
-                </div>
-                <div>
-                  <div className="font-medium text-maroon">{r.name}</div>
-                  <div className="text-xs text-muted-foreground">{timeAgo(r.created_at)}</div>
-                </div>
-              </div>
-              <p className="text-foreground/85 leading-relaxed">"{r.comment}"</p>
-            </article>
-          ))}
-        </div>
+              {submitting ? t("reviews.submitting") : t("reviews.submit")}
+            </button>
+          </div>
+        </form>
       </section>
+
+      {/* REMAINING REVIEWS */}
+      {remainingReviews.length > 0 && (
+        <section className="container mx-auto px-6 py-10 border-t border-gold/15">
+          <h3 className={`font-display text-xl md:text-2xl text-maroon mb-6 text-center ${dev}`}>
+            {hi ? "श्रद्धालुओं के पावन अनुभव" : "More Devotee Experiences"}
+          </h3>
+          <div className="max-w-2xl mx-auto space-y-4">
+            {remainingReviews.map((r: Review) => (
+              <article
+                key={r.id}
+                className="p-5 rounded-2xl bg-card border border-border hover:border-gold/50 transition-premium shadow-sm"
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-9 h-9 rounded-full bg-gradient-sacred flex items-center justify-center text-cream font-display text-sm shrink-0">
+                    {r.name.charAt(0).toUpperCase()}
+                  </div>
+                  <div>
+                    <div className="font-semibold text-maroon text-sm">{r.name}</div>
+                    <div className="text-[10px] text-muted-foreground">{timeAgo(r.created_at)}</div>
+                  </div>
+                </div>
+                <p className="text-foreground/85 leading-relaxed text-sm">"{r.comment}"</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
     </PageShell>
   );
 }

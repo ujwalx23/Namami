@@ -492,7 +492,7 @@ function SandeshPage() {
                       aria-label="Share Sandesh as Image"
                     >
                       <Share2 size={14} />
-                      {lang === "hi" ? "शेयर करें" : "Share Image"}
+                      {lang === "hi" ? "शेयर" : "Share"}
                     </button>
                   </div>
                   <div>

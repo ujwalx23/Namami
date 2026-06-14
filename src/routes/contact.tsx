@@ -129,16 +129,16 @@ function ContactPage() {
               ].map((c) => (
                 <div
                   key={c.label}
-                  className="flex items-start gap-3 sm:gap-4 p-4 sm:p-5 rounded-2xl bg-card border border-border"
+                  className="flex flex-col items-center text-center p-4 sm:p-5 rounded-2xl bg-card border border-border hover:border-gold/30 transition shadow-sm w-full"
                 >
-                  <div className="w-11 h-11 rounded-xl bg-gradient-sacred flex items-center justify-center text-cream shrink-0">
+                  <div className="w-11 h-11 rounded-xl bg-gradient-sacred flex items-center justify-center text-cream mb-2.5">
                     <c.icon size={18} />
                   </div>
                   <div>
                     <div className={`text-xs uppercase tracking-[0.2em] text-saffron ${dev}`}>
                       {c.label}
                     </div>
-                    <div className={`font-medium text-maroon mt-0.5 ${dev}`}>
+                    <div className={`font-medium text-maroon mt-1.5 ${dev}`}>
                       {c.href ? (
                         <a href={c.href} className="hover:text-saffron">
                           {c.value}
@@ -249,7 +249,7 @@ function ContactForm() {
 
   return (
     <form onSubmit={onSubmit} className="p-5 xs:p-6 sm:p-8 rounded-2xl bg-card border border-border">
-      <div className="flex items-center gap-2 mb-5">
+      <div className="flex flex-col items-center justify-center gap-2 mb-5 text-center">
         <Send size={18} className="text-saffron" />
         <h2 className={`font-display text-2xl text-maroon ${dev}`}>{t("ct.send.title")}</h2>
       </div>
@@ -383,7 +383,7 @@ function AppointmentForm() {
       onSubmit={onSubmit}
       className="p-5 xs:p-6 sm:p-8 rounded-2xl bg-gradient-divine border-2 border-gold/40"
     >
-      <div className="flex items-center gap-2 mb-5">
+      <div className="flex flex-col items-center justify-center gap-2 mb-5 text-center">
         <CalendarPlus size={18} className="text-saffron" />
         <h2 className={`font-display text-2xl text-maroon ${dev}`}>{t("ct.appt.title")}</h2>
       </div>

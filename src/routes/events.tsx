@@ -79,7 +79,7 @@ function formatDate(d: string) {
 
 function EventCard({ e, accent }: { e: EventRow; accent: "gold" | "muted" | "live" }) {
   return (
-    <article className="rounded-2xl overflow-hidden bg-card border border-border hover:-translate-y-1.5 hover:shadow-gold transition-all duration-300 relative">
+    <article className="rounded-2xl overflow-hidden bg-card border border-border hover:-translate-y-1.5 hover:shadow-gold transition-all duration-300 relative h-full flex flex-col">
       <div
         className={`h-1.5 ${
           accent === "live"
@@ -89,28 +89,30 @@ function EventCard({ e, accent }: { e: EventRow; accent: "gold" | "muted" | "liv
               : "bg-muted"
         }`}
       />
-      <div className="p-7">
-        <div className="flex justify-between items-start gap-4 mb-3">
-          <h3 className="font-display text-2xl text-maroon">{e.title}</h3>
-          {accent === "live" && (
-            <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-red-50 text-red-600 border border-red-200 dark:bg-red-950/30 dark:text-red-400 dark:border-red-900/50 shrink-0">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+      <div className="p-7 flex-1 flex flex-col justify-between">
+        <div>
+          <div className="flex justify-between items-start gap-4 mb-3">
+            <h3 className="font-display text-2xl text-maroon">{e.title}</h3>
+            {accent === "live" && (
+              <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-red-50 text-red-600 border border-red-200 dark:bg-red-950/30 dark:text-red-400 dark:border-red-900/50 shrink-0">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                </span>
+                LIVE
               </span>
-              LIVE
+            )}
+          </div>
+          <div className="flex flex-col gap-1.5 text-sm text-muted-foreground mb-4">
+            <span className="flex items-center gap-2">
+              <Calendar size={14} className="text-gold" /> {formatDate(e.event_date)}
             </span>
-          )}
+            <span className="flex items-center gap-2">
+              <MapPin size={14} className="text-gold" /> {e.location}
+            </span>
+          </div>
+          <p className="text-foreground/80">{e.description}</p>
         </div>
-        <div className="flex flex-col gap-1.5 text-sm text-muted-foreground mb-4">
-          <span className="flex items-center gap-2">
-            <Calendar size={14} className="text-gold" /> {formatDate(e.event_date)}
-          </span>
-          <span className="flex items-center gap-2">
-            <MapPin size={14} className="text-gold" /> {e.location}
-          </span>
-        </div>
-        <p className="text-foreground/80">{e.description}</p>
       </div>
     </article>
   );
@@ -213,7 +215,7 @@ function EventsPage() {
         {past.length === 0 ? (
           <p className={`text-muted-foreground ${dev}`}>{t("events.empty.past")}</p>
         ) : (
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-3 gap-6">
             {past.map((e: EventRow, idx) => (
               <ScrollReveal key={e.id} direction="up" delay={idx * 120} duration={800}>
                 <EventCard e={e} accent="muted" />
