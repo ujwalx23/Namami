@@ -182,7 +182,7 @@ function AboutPage() {
         <section className="bg-gradient-divine border-y border-border/60 relative overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.05)_0%,transparent_100%)] pointer-events-none" />
           <div className="container mx-auto px-6 py-8 md:py-16 grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-10 items-center">
-            <div className="lg:col-span-5 aspect-[4/3] sm:aspect-[4/5] max-w-sm w-full mx-auto rounded-[2.5rem] overflow-hidden shadow-sacred border-4 border-gold/60 relative group">
+            <div className="lg:col-span-5 aspect-[4/5] max-w-sm w-full mx-auto rounded-[2.5rem] overflow-hidden shadow-sacred border-4 border-gold/60 relative group">
               <div className="absolute inset-0 bg-gradient-to-t from-maroon/40 to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-500" />
               <img
                 src={maaImg3}
@@ -285,7 +285,7 @@ function AboutPage() {
           {trikona.map((item, idx) => (
             <ScrollReveal key={item.tk} direction="up" delay={idx * 100} duration={700}>
               <div
-                className={`p-5 sm:p-6 md:p-8 rounded-3xl bg-gradient-to-b ${item.color} border border-border/50 hover:border-gold/60 hover:shadow-gold hover:scale-[1.03] transition-all duration-300 h-full`}
+                className={`p-4 sm:p-5 md:p-6 lg:p-8 rounded-3xl bg-gradient-to-b ${item.color} border border-border/50 hover:border-gold/60 hover:shadow-gold hover:scale-[1.03] transition-all duration-300 h-full`}
               >
                 <div className="flex justify-between items-start mb-4 sm:mb-6">
                   <div className="w-14 h-14 rounded-2xl bg-gradient-sacred flex items-center justify-center text-cream shadow-md">
@@ -297,8 +297,8 @@ function AboutPage() {
                     {item.badge}
                   </span>
                 </div>
-                <h3 className={`font-display text-2xl text-maroon mb-3 ${dev}`}>{t(item.tk)}</h3>
-                <p className={`text-muted-foreground leading-relaxed ${dev}`}>{t(item.xk)}</p>
+                <h3 className={`font-display text-xl sm:text-2xl text-maroon mb-3 ${dev}`}>{t(item.tk)}</h3>
+                <p className={`text-muted-foreground leading-relaxed text-xs sm:text-sm md:text-base ${dev}`}>{t(item.xk)}</p>
               </div>
             </ScrollReveal>
           ))}
@@ -397,15 +397,15 @@ function AboutPage() {
                 ].map((r, i) => (
                   <div
                     key={i}
-                    className="p-5 sm:p-6 rounded-2xl bg-card border border-border flex flex-col gap-3 sm:gap-4 hover:-translate-y-1 hover:shadow-gold/30 hover:border-gold/40 transition-all duration-300 h-full"
+                    className="p-4 sm:p-5 md:p-6 rounded-2xl bg-card border border-border flex flex-col gap-3 sm:gap-4 hover:-translate-y-1 hover:shadow-gold/30 hover:border-gold/40 transition-all duration-300 h-full"
                   >
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 rounded-xl bg-gradient-sacred flex items-center justify-center text-cream shadow-sm">
                         <r.icon size={20} />
                       </div>
-                      <h4 className={`font-display text-lg text-maroon ${dev}`}>{r.title}</h4>
+                      <h4 className={`font-display text-base sm:text-lg text-maroon ${dev}`}>{r.title}</h4>
                     </div>
-                    <p className={`text-muted-foreground leading-relaxed text-sm ${dev}`}>
+                    <p className={`text-muted-foreground leading-relaxed text-xs sm:text-sm ${dev}`}>
                       {r.txt}
                     </p>
                   </div>
@@ -431,17 +431,17 @@ function AboutPage() {
       <section className="container mx-auto px-6 py-6 md:py-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
           <ScrollReveal direction="up" duration={800}>
-            <div className="p-5 xs:p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-saffron/10 to-gold/5 border border-gold/30 hover:border-gold/50 shadow-sacred hover:shadow-gold/20 transition-all duration-300 h-full flex flex-col justify-between">
+            <div className="p-4 xs:p-5 sm:p-6 md:p-8 rounded-3xl bg-gradient-to-br from-saffron/10 to-gold/5 border border-gold/30 hover:border-gold/50 shadow-sacred hover:shadow-gold/20 transition-all duration-300 h-full flex flex-col justify-between">
               <div>
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 rounded-xl bg-gradient-sacred flex items-center justify-center text-cream">
                     <Sparkles size={20} />
                   </div>
-                  <h3 className={`font-display text-2xl text-maroon ${dev}`}>
+                  <h3 className={`font-display text-lg sm:text-xl md:text-2xl text-maroon ${dev}`}>
                     {t("about.legend.title")}
                   </h3>
                 </div>
-                <p className={`text-foreground/80 leading-relaxed ${dev}`}>
+                <p className={`text-foreground/80 leading-relaxed text-xs sm:text-sm md:text-base ${dev}`}>
                   {t("about.legend.text")}
                 </p>
               </div>
@@ -453,17 +453,17 @@ function AboutPage() {
           </ScrollReveal>
 
           <ScrollReveal direction="up" duration={800} delay={100}>
-            <div className="p-5 xs:p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-indigo-950/20 to-purple-950/10 border border-indigo-900/30 hover:border-indigo-800/50 shadow-sacred hover:shadow-indigo-950/20 transition-all duration-300 h-full flex flex-col justify-between">
+            <div className="p-4 xs:p-5 sm:p-6 md:p-8 rounded-3xl bg-gradient-to-br from-indigo-950/20 to-purple-950/10 border border-indigo-900/30 hover:border-indigo-800/50 shadow-sacred hover:shadow-indigo-950/20 transition-all duration-300 h-full flex flex-col justify-between">
               <div>
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 rounded-xl bg-gradient-sacred flex items-center justify-center text-cream">
                     <Music size={20} />
                   </div>
-                  <h3 className={`font-display text-2xl text-maroon ${dev}`}>
+                  <h3 className={`font-display text-lg sm:text-xl md:text-2xl text-maroon ${dev}`}>
                     {t("about.kajari.title")}
                   </h3>
                 </div>
-                <p className={`text-foreground/80 leading-relaxed ${dev}`}>
+                <p className={`text-foreground/80 leading-relaxed text-xs sm:text-sm md:text-base ${dev}`}>
                   {t("about.kajari.text")}
                 </p>
               </div>
@@ -504,13 +504,13 @@ function AboutPage() {
             },
           ].map((f, idx) => (
             <ScrollReveal key={f.n} direction="up" delay={idx * 100} duration={700}>
-              <div className="p-5 sm:p-6 rounded-2xl bg-gradient-divine border border-gold/30 hover:border-gold flex items-center gap-3 sm:gap-5 hover:shadow-gold transition-all duration-300 h-full">
+              <div className="p-4 sm:p-5 md:p-6 rounded-2xl bg-gradient-divine border border-gold/30 hover:border-gold flex items-center gap-3 sm:gap-5 hover:shadow-gold transition-all duration-300 h-full">
                 <div className="w-14 h-14 rounded-2xl bg-gradient-sacred flex items-center justify-center text-cream shrink-0 shadow-md">
                   <f.icon size={24} />
                 </div>
                 <div>
-                  <h4 className={`font-display text-xl text-maroon mb-1 ${dev}`}>{f.n}</h4>
-                  <p className={`text-sm text-muted-foreground leading-relaxed ${dev}`}>{f.x}</p>
+                  <h4 className={`font-display text-lg sm:text-xl text-maroon mb-1 ${dev}`}>{f.n}</h4>
+                  <p className={`text-xs sm:text-sm text-muted-foreground leading-relaxed ${dev}`}>{f.x}</p>
                 </div>
               </div>
             </ScrollReveal>
@@ -543,7 +543,7 @@ function AboutPage() {
             }[]
           ).map((v, idx) => (
             <ScrollReveal key={v.tk} direction="up" delay={idx * 100} duration={700}>
-              <div className="p-4 sm:p-6 rounded-2xl bg-card border border-border hover:border-gold/30 transition-all duration-300 flex items-start gap-3 sm:gap-4 h-full shadow-sm">
+              <div className="p-3.5 sm:p-5 md:p-6 rounded-2xl bg-card border border-border hover:border-gold/30 transition-all duration-300 flex items-start gap-3 sm:gap-4 h-full shadow-sm">
                 <div className="w-12 h-12 rounded-xl bg-gradient-sacred/10 border border-gold/20 flex items-center justify-center text-saffron shrink-0">
                   <v.icon size={20} />
                 </div>
@@ -553,10 +553,10 @@ function AboutPage() {
                   >
                     {t(v.tk)}
                   </div>
-                  <p className={`text-foreground leading-snug font-medium text-lg mb-1 ${dev}`}>
+                  <p className={`text-foreground leading-snug font-medium text-sm sm:text-base md:text-lg mb-1 ${dev}`}>
                     {t(v.tk)}
                   </p>
-                  <p className={`text-muted-foreground text-sm leading-relaxed ${dev}`}>
+                  <p className={`text-muted-foreground text-xs sm:text-sm leading-relaxed ${dev}`}>
                     {t(v.vk)}
                   </p>
                 </div>
