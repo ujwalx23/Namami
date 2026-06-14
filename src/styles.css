@@ -122,10 +122,9 @@
 
 @layer base {
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
   }
   body {
-    scroll-behavior: smooth;
     overflow-x: hidden;
     max-width: 100%;
     -webkit-overflow-scrolling: touch;
