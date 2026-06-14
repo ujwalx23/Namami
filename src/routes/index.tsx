@@ -573,17 +573,17 @@ function HomePage() {
           <circle cx="105" cy="60" r="3" fill="currentColor" />
         </svg>
 
-        <div className="container mx-auto px-6 pt-16 pb-24 relative grid lg:grid-cols-2 gap-12 items-center">
+        <div className="container mx-auto px-6 pt-8 pb-12 sm:pt-16 sm:pb-24 relative grid lg:grid-cols-2 gap-6 sm:gap-12 items-center">
           <ScrollReveal direction="right" duration={1000}>
             <div className="text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cream border border-gold/40 text-maroon text-xs uppercase tracking-[0.25em] mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cream border border-gold/40 text-maroon text-xs uppercase tracking-[0.25em] mb-4 md:mb-6">
                 <Sparkles size={12} className="text-saffron" /> {t("home.badge")}
               </div>
-              <div className="font-devanagari text-saffron text-xl mb-3">
+              <div className="font-devanagari text-saffron text-base md:text-xl mb-2 md:mb-3">
                 ॥ नमामि विन्ध्यवासिनी ॥
               </div>
               <h1
-                className={`text-5xl md:text-6xl lg:text-7xl text-maroon mb-6 ${hi ? "leading-[1.4] font-devanagari py-2" : "font-display leading-[1.05]"
+                className={`text-3xl sm:text-4xl md:text-6xl lg:text-7xl text-maroon mb-4 md:mb-6 ${hi ? "leading-[1.3] font-devanagari py-1" : "font-display leading-[1.05]"
                   }`}
               >
                 {t("home.hero.title1")}{" "}
@@ -599,7 +599,7 @@ function HomePage() {
                 </span>
               </h1>
               <p
-                className={`text-lg text-foreground/75 max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed ${dev}`}
+                className={`text-sm sm:text-base md:text-lg text-foreground/75 max-w-xl mx-auto lg:mx-0 mb-5 md:mb-8 leading-relaxed ${dev}`}
               >
                 {t("home.hero.desc")}
               </p>
@@ -645,33 +645,33 @@ function HomePage() {
       </section>
 
       {/* INTRO */}
-      <section className="container mx-auto px-6 py-16">
+      <section className="container mx-auto px-6 py-10 md:py-16">
         <ScrollReveal direction="up" duration={800}>
-          <div className="text-center max-w-2xl mx-auto mb-14">
+          <div className="text-center max-w-2xl mx-auto mb-8 md:mb-14">
             <div className={`text-saffron text-xs uppercase tracking-[0.3em] mb-2 ${dev}`}>
               {t("home.intro.kicker")}
             </div>
-            <h2 className={`font-display text-4xl md:text-5xl text-maroon ${dev}`}>
+            <h2 className={`font-display text-2xl sm:text-3xl md:text-5xl text-maroon ${dev}`}>
               {t("home.intro.title")}
             </h2>
-            <div className="mx-auto mt-4 w-24 h-[2px] bg-gradient-sacred rounded-full" />
+            <div className="mx-auto mt-3 md:mt-4 w-16 md:w-24 h-[2px] bg-gradient-sacred rounded-full" />
           </div>
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-4 md:gap-6">
           {intro.map((c, idx) => (
             <ScrollReveal key={c.tk} direction="up" delay={idx * 150} duration={800}>
-              <div className="group tilt-card-hover p-8 rounded-2xl bg-card/75 backdrop-blur-md border border-gold/30 hover:border-gold hover:shadow-[0_10px_35px_rgba(212,175,55,0.15)] transition-premium h-full">
-                <div className="w-12 h-12 rounded-xl bg-gradient-sacred flex items-center justify-center text-cream mb-5 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-md">
-                  <c.icon size={20} />
+              <div className="group tilt-card-hover p-5 sm:p-6 md:p-8 rounded-2xl bg-card/75 backdrop-blur-md border border-gold/30 hover:border-gold hover:shadow-[0_10px_35px_rgba(212,175,55,0.15)] transition-premium h-full">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-sacred flex items-center justify-center text-cream mb-3 md:mb-5 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-md">
+                  <c.icon className="w-5 h-5 md:w-6 md:h-6" />
                 </div>
                 <h3
-                  className={`font-display text-2xl text-maroon mb-2 group-hover:text-saffron transition-colors duration-300 ${dev}`}
+                  className={`font-display text-lg sm:text-xl md:text-2xl text-maroon mb-1 md:mb-2 group-hover:text-saffron transition-colors duration-300 ${dev}`}
                 >
                   {t(c.tk)}
                 </h3>
                 <p
-                  className={`text-muted-foreground/90 leading-relaxed text-sm md:text-base ${dev}`}
+                  className={`text-muted-foreground/90 leading-relaxed text-xs sm:text-sm md:text-base ${dev}`}
                 >
                   {t(c.xk)}
                 </p>
@@ -683,7 +683,7 @@ function HomePage() {
 
       {/* SHAKTI PITHA STORY */}
       <section className="bg-gradient-divine border-y border-border/60">
-        <div className="container mx-auto px-6 py-10 grid lg:grid-cols-[0.8fr_1.2fr] gap-12 items-center">
+        <div className="container mx-auto px-6 py-8 md:py-12 grid lg:grid-cols-[0.8fr_1.2fr] gap-6 md:gap-12 items-center">
           <div className="relative order-2 lg:order-1">
             <ScrollReveal direction="right" duration={900}>
               <div className="aspect-[4/5] max-w-[260px] sm:max-w-xs md:max-w-sm lg:max-w-[340px] mx-auto rounded-[2rem] overflow-hidden shadow-sacred border-4 border-gold/60 hover:shadow-gold transition-shadow duration-500">
@@ -704,16 +704,16 @@ function HomePage() {
               <div className={`text-saffron text-xs uppercase tracking-[0.3em] mb-2 ${dev}`}>
                 {t("home.shakti.kicker")}
               </div>
-              <h2 className={`font-display text-4xl md:text-5xl text-maroon mb-6 ${dev}`}>
+              <h2 className={`font-display text-2xl sm:text-3xl md:text-5xl text-maroon mb-4 md:mb-6 ${dev}`}>
                 {t("home.shakti.title")}
               </h2>
-              <p className={`text-foreground/80 leading-relaxed text-lg ${dev}`}>
+              <p className={`text-foreground/80 leading-relaxed text-sm sm:text-base lg:text-lg ${dev}`}>
                 {t("home.shakti.text")}
               </p>
               <Link
                 to="/about"
                 hash="history"
-                className={`mt-6 inline-flex items-center gap-2 text-maroon font-medium hover:text-saffron transition-colors duration-300 ${dev}`}
+                className={`mt-4 md:mt-6 inline-flex items-center gap-2 text-maroon font-medium hover:text-saffron transition-colors duration-300 ${dev}`}
               >
                 {hi ? "माँ विन्ध्यवासिनी का विस्तृत पौराणिक इतिहास पढ़ें" : "Read the Detailed History of Maa Vindhyavasini"} <ArrowRight size={16} />
               </Link>
@@ -797,8 +797,8 @@ function HomePage() {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
             {[
               { src: gallery1, cap: hi ? "स्वर्ण श्रृंगार" : "Swarna Shringar" },
-              { src: gallery2, cap: hi ? "प्रातः आरती" : "Mangala Aarti" },
-              { src: gallery3, cap: hi ? "विशेष श्रृंगार" : "Vishesh Shringar" },
+              { src: maaImg, cap: hi ? "दिव्य स्वरूप (कृपा)" : "Divine Grace" },
+              { src: maaImg2, cap: hi ? "दिव्य दर्शन" : "Temple Darshan" },
             ].map((p, i) => (
               <ScrollReveal key={i} direction="up" delay={(i % 3) * 120} duration={850}>
                 <figure

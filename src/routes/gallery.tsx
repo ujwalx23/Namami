@@ -8,8 +8,8 @@ import { useLang } from "@/i18n/LangProvider";
 import { Download, X, Share2, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
 import gallery1 from "@/assets/gallery-1.webp";
-import gallery2 from "@/assets/gallery-2.webp";
-import gallery3 from "@/assets/gallery-3.webp";
+import maaImg from "@/assets/maa-vindhyavasini.webp";
+import maaImg2 from "@/assets/maa-vindhyavasini-2.webp";
 import { JsonLd } from "@/components/JsonLd";
 import { ShareModal } from "@/components/ShareModal";
 import { addGalleryWatermark } from "@/lib/watermarkImage";
@@ -58,8 +58,8 @@ type GalleryRow = { id: string; image_url: string; caption: string | null; creat
 
 const defaults: { src: string; cap_en: string; cap_hi: string }[] = [
   { src: gallery1, cap_en: "Swarna Shringar", cap_hi: "स्वर्ण श्रृंगार" },
-  { src: gallery2, cap_en: "Mangala Aarti", cap_hi: "प्रातः आरती" },
-  { src: gallery3, cap_en: "Vishesh Shringar", cap_hi: "विशेष श्रृंगार" },
+  { src: maaImg, cap_en: "Divine Grace", cap_hi: "दिव्य स्वरूप (कृपा)" },
+  { src: maaImg2, cap_en: "Temple Darshan", cap_hi: "दिव्य दर्शन" },
 ];
 
 
@@ -126,7 +126,7 @@ function GalleryPage() {
   }, [lightbox]);
 
   const dbItems = extra.map((r) => ({ src: r.image_url, cap: hi ? "माँ विंध्यवासिनी दर्शन" : "Maa Vindhyavasini Darshan" }));
-  const defaultItems = defaults.map((d) => ({ src: d.src, cap: hi ? "माँ विंध्यवासिनी दर्शन" : "Maa Vindhyavasini Darshan" }));
+  const defaultItems = defaults.map((d) => ({ src: d.src, cap: hi ? d.cap_hi : d.cap_en }));
   // System-bundled images first, then admin-uploaded URL images from database
   const items = [...defaultItems, ...dbItems];
 
@@ -157,7 +157,8 @@ function GalleryPage() {
   };
 
   const shareGalleryImage = async (imgUrl: string) => {
-    const caption = hi ? "माँ विंध्यवासिनी दर्शन" : "Maa Vindhyavasini Darshan";
+    const item = items.find((x) => x.src === imgUrl);
+    const caption = item ? item.cap : (hi ? "माँ विंध्यवासिनी दर्शन" : "Maa Vindhyavasini Darshan");
     const pageUrl = window.location.origin + "/gallery";
 
     // Fetch the raw image blob directly from the URL.

@@ -463,42 +463,46 @@ function SandeshPage() {
                   "{today.message}"
                 </p>
                 <div className={`mt-4 md:mt-6 text-sm text-muted-foreground ${dev}`}>— {today.author}</div>
-                <div className="mt-4 md:mt-6 flex flex-wrap items-center justify-center gap-4">
-                  {isHindiText(today.message) && (
+                <div className="mt-5 md:mt-6 flex flex-col items-center justify-center gap-4">
+                  <div className="flex flex-row items-center justify-center gap-3 w-full max-w-sm">
+                    {isHindiText(today.message) && (
+                      <button
+                        onClick={() => toggleSpeak(today.message, today.id)}
+                        className={`flex-1 inline-flex items-center justify-center gap-2 px-3 sm:px-4 py-2 rounded-full border border-gold/50 text-maroon hover:bg-gold/10 disabled:opacity-50 disabled:cursor-not-allowed transition text-xs sm:text-sm ${dev}`}
+                        disabled={loadingId !== null && loadingId !== today.id}
+                        aria-label="Listen to Sandesh"
+                      >
+                        {loadingId === today.id ? (
+                          <Loader2 size={14} className="animate-spin" />
+                        ) : speakingId === today.id ? (
+                          <Square size={14} />
+                        ) : (
+                          <Play size={14} />
+                        )}
+                        {loadingId === today.id
+                          ? t("sandesh.loading")
+                          : speakingId === today.id
+                            ? t("sandesh.stop")
+                            : t("sandesh.listen")}
+                      </button>
+                    )}
                     <button
-                      onClick={() => toggleSpeak(today.message, today.id)}
-                      className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gold/50 text-maroon hover:bg-gold/10 disabled:opacity-50 disabled:cursor-not-allowed transition text-sm ${dev}`}
-                      disabled={loadingId !== null && loadingId !== today.id}
-                      aria-label="Listen to Sandesh"
+                      onClick={() => shareSandesh(today.message, today.author)}
+                      className={`flex-1 inline-flex items-center justify-center gap-2 px-3 sm:px-4 py-2 rounded-full border border-saffron/50 text-saffron hover:bg-saffron/10 transition text-xs sm:text-sm ${dev}`}
+                      aria-label="Share Sandesh as Image"
                     >
-                      {loadingId === today.id ? (
-                        <Loader2 size={14} className="animate-spin" />
-                      ) : speakingId === today.id ? (
-                        <Square size={14} />
-                      ) : (
-                        <Play size={14} />
-                      )}
-                      {loadingId === today.id
-                        ? t("sandesh.loading")
-                        : speakingId === today.id
-                          ? t("sandesh.stop")
-                          : t("sandesh.listen")}
+                      <Share2 size={14} />
+                      {lang === "hi" ? "शेयर करें" : "Share Image"}
                     </button>
-                  )}
-                  <button
-                    onClick={() => shareSandesh(today.message, today.author)}
-                    className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border border-saffron/50 text-saffron hover:bg-saffron/10 transition text-sm ${dev}`}
-                    aria-label="Share Sandesh as Image"
-                  >
-                    <Share2 size={14} />
-                    {lang === "hi" ? "शेयर करें" : "Share Image"}
-                  </button>
-                  <button
-                    onClick={() => setSeed((s) => s + 1)}
-                    className={`inline-flex items-center gap-2 text-xs text-maroon hover:text-saffron transition ${dev}`}
-                  >
-                    <RefreshCw size={12} /> {t("sandesh.another")}
-                  </button>
+                  </div>
+                  <div>
+                    <button
+                      onClick={() => setSeed((s) => s + 1)}
+                      className={`inline-flex items-center gap-2 text-xs sm:text-sm text-maroon hover:text-saffron transition py-1.5 px-4 rounded-full border border-maroon/20 hover:border-gold/50 bg-cream/30 hover:bg-gold/10 ${dev}`}
+                    >
+                      <RefreshCw size={12} /> {t("sandesh.another")}
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

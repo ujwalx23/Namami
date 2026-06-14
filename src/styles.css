@@ -121,11 +121,14 @@
 }
 
 @layer base {
-  html,
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     scroll-behavior: smooth;
     overflow-x: hidden;
     max-width: 100%;
+    -webkit-overflow-scrolling: touch;
   }
   * {
     border-color: var(--color-border);
