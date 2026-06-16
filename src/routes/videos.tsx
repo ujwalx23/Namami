@@ -4,7 +4,7 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 import { useLang } from "@/i18n/LangProvider";
 import { Play, Smartphone } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { JsonLd } from "@/components/JsonLd";
 
 export const Route = createFileRoute("/videos")({
@@ -84,6 +84,13 @@ function VideoPlayer({
   onPlay: () => void;
 }) {
   const videoId = getYoutubeVideoId(v.embed);
+  const [iframeLoaded, setIframeLoaded] = useState(false);
+
+  useEffect(() => {
+    if (!isPlaying) {
+      setIframeLoaded(false);
+    }
+  }, [isPlaying]);
 
   if (videoId) {
     const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
@@ -91,42 +98,52 @@ function VideoPlayer({
       ? `${v.embed}&autoplay=1`
       : `${v.embed}?autoplay=1`;
 
-    if (isPlaying) {
-      return (
-        <iframe
-          className="w-full h-full border-0"
-          src={embedUrlWithAutoplay}
-          title={v.title}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        />
-      );
-    }
-
     return (
-      <button
-        onClick={onPlay}
-        className="relative w-full h-full group cursor-pointer focus:outline-none block overflow-hidden bg-black"
-        aria-label={`Play ${v.title}`}
-      >
-        <img
-          src={thumbnailUrl}
-          alt={v.title}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
-          loading="lazy"
-        />
-        <div className="absolute inset-0 bg-black/45 group-hover:bg-gradient-to-t group-hover:from-maroon/60 group-hover:to-black/40 transition-all duration-300 flex items-center justify-center">
-          <div className="w-16 h-16 rounded-full bg-cream text-maroon flex items-center justify-center shadow-gold group-hover:scale-110 transition-transform duration-300 border-2 border-gold/70">
-            <Play className="fill-maroon ml-1 text-maroon" size={26} />
-          </div>
-        </div>
-      </button>
+      <div className="relative w-full h-full bg-black overflow-hidden">
+        {(!isPlaying || !iframeLoaded) && (
+          <button
+            onClick={onPlay}
+            disabled={isPlaying}
+            className="absolute inset-0 z-10 w-full h-full group cursor-pointer focus:outline-none block overflow-hidden bg-black"
+            aria-label={`Play ${v.title}`}
+          >
+            <img
+              src={thumbnailUrl}
+              alt={v.title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-black/45 group-hover:bg-gradient-to-t group-hover:from-maroon/60 group-hover:to-black/40 transition-all duration-300 flex items-center justify-center">
+              <div className="w-16 h-16 rounded-full bg-cream text-maroon flex items-center justify-center shadow-gold group-hover:scale-110 transition-transform duration-300 border-2 border-gold/70">
+                {isPlaying ? (
+                  <div className="w-6 h-6 border-2 border-maroon border-t-transparent rounded-full animate-spin" />
+                ) : (
+                  <Play className="fill-maroon ml-1 text-maroon" size={26} />
+                )}
+              </div>
+            </div>
+          </button>
+        )}
+
+        {isPlaying && (
+          <iframe
+            className={`w-full h-full border-0 bg-black transition-opacity duration-300 ${
+              iframeLoaded ? "opacity-100" : "opacity-0"
+            }`}
+            src={embedUrlWithAutoplay}
+            title={v.title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            onLoad={() => setIframeLoaded(true)}
+          />
+        )}
+      </div>
     );
   }
 
   return (
     <iframe
-      className="w-full h-full border-0"
+      className="w-full h-full border-0 bg-black"
       src={v.embed}
       title={v.title}
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -193,7 +210,7 @@ function VideosPage() {
         subtitle={t("videos.subtitle")}
       />
 
-      <section className="container mx-auto px-6 py-10">
+      <section className="container mx-auto px-4 sm:px-6 py-10">
         {/* Toggle Tabs */}
         <div className="flex justify-center mb-10">
           <div className="inline-flex rounded-full bg-card border-2 border-gold/40 p-1 shadow-gold">
@@ -239,7 +256,7 @@ function VideosPage() {
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 max-w-4xl mx-auto">
             {list.map((s, idx) => (
               <ScrollReveal key={s.id} direction="up" delay={(idx % 3) * 100} duration={750}>
                 <div className="hover:-translate-y-1.5 transition-all duration-300">
@@ -251,7 +268,7 @@ function VideosPage() {
                       onPlay={() => setPlayingId(s.id)}
                     />
                   </div>
-                  <p className={`mt-3 text-muted-foreground text-sm text-center ${dev}`}>
+                  <p className={`mt-2 text-muted-foreground text-xs sm:text-sm text-center line-clamp-2 ${dev}`}>
                     {s.title}
                   </p>
                 </div>
