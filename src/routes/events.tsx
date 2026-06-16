@@ -77,6 +77,13 @@ function formatDate(d: string) {
   });
 }
 
+function formatDateRange(startDate: string, endDate: string | null) {
+  if (!endDate || startDate === endDate) {
+    return formatDate(startDate);
+  }
+  return `${formatDate(startDate)} - ${formatDate(endDate)}`;
+}
+
 function EventCard({ e, accent }: { e: EventRow; accent: "gold" | "muted" | "live" }) {
   return (
     <article className="rounded-2xl overflow-hidden bg-card border border-border hover:-translate-y-1.5 hover:shadow-gold transition-all duration-300 relative h-full flex flex-col">
@@ -105,7 +112,7 @@ function EventCard({ e, accent }: { e: EventRow; accent: "gold" | "muted" | "liv
           </div>
           <div className="flex flex-col gap-1.5 text-sm text-muted-foreground mb-4">
             <span className="flex items-center gap-2">
-              <Calendar size={14} className="text-gold" /> {formatDate(e.event_date)}
+              <Calendar size={14} className="text-gold" /> {formatDateRange(e.event_date, e.end_date)}
             </span>
             <span className="flex items-center gap-2">
               <MapPin size={14} className="text-gold" /> {e.location}
@@ -130,9 +137,15 @@ function EventsPage() {
   const day = String(today.getDate()).padStart(2, "0");
   const todayIso = `${year}-${month}-${day}`;
 
-  const todayEvents = events.filter((e: EventRow) => e.event_date === todayIso);
+  const todayEvents = events.filter((e: EventRow) => {
+    const end = e.end_date || e.event_date;
+    return e.event_date <= todayIso && end >= todayIso;
+  });
   const upcoming = events.filter((e: EventRow) => e.event_date > todayIso);
-  const past = events.filter((e: EventRow) => e.event_date < todayIso);
+  const past = events.filter((e: EventRow) => {
+    const end = e.end_date || e.event_date;
+    return end < todayIso;
+  });
 
   const webpageSchema = {
     "@context": "https://schema.org",
@@ -189,7 +202,7 @@ function EventsPage() {
               {t("events.today")}
             </h2>
             <div className="grid md:grid-cols-3 gap-6">
-              {todayEvents.map((e: EventRow, idx) => (
+              {todayEvents.map((e: EventRow, idx: number) => (
                 <ScrollReveal key={e.id} direction="up" delay={idx * 120} duration={800}>
                   <EventCard e={e} accent="live" />
                 </ScrollReveal>
@@ -203,7 +216,7 @@ function EventsPage() {
           <p className={`text-muted-foreground mb-12 ${dev}`}>{t("events.empty.up")}</p>
         ) : (
           <div className="grid md:grid-cols-3 gap-6 mb-16">
-            {upcoming.map((e: EventRow, idx) => (
+            {upcoming.map((e: EventRow, idx: number) => (
               <ScrollReveal key={e.id} direction="up" delay={idx * 120} duration={800}>
                 <EventCard e={e} accent="gold" />
               </ScrollReveal>
@@ -216,7 +229,7 @@ function EventsPage() {
           <p className={`text-muted-foreground ${dev}`}>{t("events.empty.past")}</p>
         ) : (
           <div className="grid md:grid-cols-3 gap-6">
-            {past.map((e: EventRow, idx) => (
+            {past.map((e: EventRow, idx: number) => (
               <ScrollReveal key={e.id} direction="up" delay={idx * 120} duration={800}>
                 <EventCard e={e} accent="muted" />
               </ScrollReveal>

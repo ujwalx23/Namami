@@ -126,6 +126,7 @@ export type Database = {
         Row: {
           created_at: string;
           description: string;
+          end_date: string | null;
           event_date: string;
           id: string;
           is_upcoming: boolean;
@@ -135,6 +136,7 @@ export type Database = {
         Insert: {
           created_at?: string;
           description: string;
+          end_date?: string | null;
           event_date: string;
           id?: string;
           is_upcoming?: boolean;
@@ -144,6 +146,7 @@ export type Database = {
         Update: {
           created_at?: string;
           description?: string;
+          end_date?: string | null;
           event_date?: string;
           id?: string;
           is_upcoming?: boolean;

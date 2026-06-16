@@ -461,6 +461,7 @@ function EventAdmin() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [eventDate, setEventDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [location, setLocation] = useState("");
   const [editingId, setEditingId] = useState<string | null>(null);
   const [loaded, setLoaded] = useState(false);
@@ -500,8 +501,9 @@ function EventAdmin() {
       title: title.trim(),
       description: description.trim(),
       event_date: eventDate.trim(),
+      end_date: endDate.trim() || null,
       location: location.trim(),
-      is_upcoming: eventDate.trim() >= todayIso,
+      is_upcoming: (endDate.trim() || eventDate.trim()) >= todayIso,
     };
     if (editingId) {
       const { data, error } = await supabase
@@ -525,6 +527,7 @@ function EventAdmin() {
     setTitle("");
     setDescription("");
     setEventDate("");
+    setEndDate("");
     setLocation("");
     await load();
   }
@@ -538,6 +541,7 @@ function EventAdmin() {
       setTitle("");
       setDescription("");
       setEventDate("");
+      setEndDate("");
       setLocation("");
     }
     await load();
@@ -548,6 +552,7 @@ function EventAdmin() {
     setTitle(ev.title);
     setDescription(ev.description);
     setEventDate(ev.event_date);
+    setEndDate(ev.end_date || "");
     setLocation(ev.location);
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
@@ -583,21 +588,36 @@ function EventAdmin() {
           className="w-full px-4 py-2.5 rounded-lg border border-input bg-background"
           required
         />
-        <div className="grid sm:grid-cols-2 gap-3">
-          <input
-            type="date"
-            value={eventDate}
-            onChange={(e) => setEventDate(e.target.value)}
-            className="w-full px-4 py-2.5 rounded-lg border border-input bg-background"
-            required
-          />
-          <input
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            placeholder="Location"
-            className="w-full px-4 py-2.5 rounded-lg border border-input bg-background"
-            required
-          />
+        <div className="grid sm:grid-cols-3 gap-3">
+          <div className="space-y-1">
+            <label className="text-[10px] font-semibold text-muted-foreground uppercase">Start Date</label>
+            <input
+              type="date"
+              value={eventDate}
+              onChange={(e) => setEventDate(e.target.value)}
+              className="w-full px-4 py-2.5 rounded-lg border border-input bg-background"
+              required
+            />
+          </div>
+          <div className="space-y-1">
+            <label className="text-[10px] font-semibold text-muted-foreground uppercase">End Date (Optional)</label>
+            <input
+              type="date"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+              className="w-full px-4 py-2.5 rounded-lg border border-input bg-background"
+            />
+          </div>
+          <div className="space-y-1">
+            <label className="text-[10px] font-semibold text-muted-foreground uppercase">Location</label>
+            <input
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              placeholder="Location"
+              className="w-full px-4 py-2.5 rounded-lg border border-input bg-background"
+              required
+            />
+          </div>
         </div>
         <div className="flex gap-2 pt-1">
           <button className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-sacred text-cream text-sm font-medium transition shadow-gold hover:opacity-95 cursor-pointer">
@@ -611,6 +631,7 @@ function EventAdmin() {
                 setTitle("");
                 setDescription("");
                 setEventDate("");
+                setEndDate("");
                 setLocation("");
               }}
               className="px-5 py-2 rounded-full border border-border text-muted-foreground text-sm font-medium transition hover:bg-muted/10"
@@ -623,7 +644,8 @@ function EventAdmin() {
 
       <div className="space-y-3">
         {list.map((ev) => {
-          const isLive = ev.event_date === todayIso;
+          const end = ev.end_date || ev.event_date;
+          const isLive = ev.event_date <= todayIso && end >= todayIso;
           const isFuture = ev.event_date > todayIso;
 
           return (
@@ -634,7 +656,7 @@ function EventAdmin() {
               <div>
                 <div className="flex items-center gap-2 flex-wrap mb-1">
                   <span className="text-[10px] font-semibold text-saffron bg-saffron/10 px-2 py-0.5 rounded">
-                    {ev.event_date}
+                    {ev.end_date && ev.end_date !== ev.event_date ? `${ev.event_date} to ${ev.end_date}` : ev.event_date}
                   </span>
 
                   {isLive ? (
