@@ -10,6 +10,8 @@ import { toast } from "sonner";
 import gallery1 from "@/assets/gallery-1.webp";
 import maaImg from "@/assets/maa-vindhyavasini.webp";
 import maaImg2 from "@/assets/maa-vindhyavasini-2.webp";
+import maaImg4 from "@/assets/maa-vindhyavasini-4.jpg";
+import maaImg5 from "@/assets/maa-vindhyavasini-5.jpg";
 import { JsonLd } from "@/components/JsonLd";
 import { ShareModal } from "@/components/ShareModal";
 import { addGalleryWatermark } from "@/lib/watermarkImage";
@@ -57,6 +59,8 @@ export const Route = createFileRoute("/gallery")({
 type GalleryRow = { id: string; image_url: string; caption: string | null; created_at: string };
 
 const defaults: { src: string; cap_en: string; cap_hi: string }[] = [
+  { src: maaImg4, cap_en: "Simha Vahana Darshan", cap_hi: "सिंह वाहन दर्शन" },
+  { src: maaImg5, cap_en: "Pushpa Shringar Darshan", cap_hi: "पुष्प श्रृंगार दर्शन" },
   { src: gallery1, cap_en: "Swarna Shringar", cap_hi: "स्वर्ण श्रृंगार" },
   { src: maaImg, cap_en: "Divine Grace", cap_hi: "दिव्य स्वरूप (कृपा)" },
   { src: maaImg2, cap_en: "Temple Darshan", cap_hi: "दिव्य दर्शन" },

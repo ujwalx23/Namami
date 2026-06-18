@@ -120,7 +120,7 @@ export function InboxProvider({ children }: { children: ReactNode }) {
   }, [messages]);
 
   const unreadCount = useMemo(() => {
-    const cutoff = Date.now() - 6 * 60 * 60 * 1000;
+    const cutoff = Date.now() - 24 * 60 * 60 * 1000;
     return messages.filter((m) => {
       if (readIds.has(m.id)) return false;
       const createdTime = new Date(m.created_at).getTime();
@@ -134,7 +134,7 @@ export function InboxProvider({ children }: { children: ReactNode }) {
       const msg = messages.find((m) => m.id === id);
       if (!msg) return false;
       const createdTime = new Date(msg.created_at).getTime();
-      const cutoff = Date.now() - 6 * 60 * 60 * 1000;
+      const cutoff = Date.now() - 24 * 60 * 60 * 1000;
       return createdTime > cutoff;
     },
     [messages, readIds],
