@@ -31,6 +31,9 @@ const filesToCopy = [
   "asht-bhuja.webp",
   "maa-vindhyavasini-simhasan-shringar.jpg",
   "maa-vindhyavasini-garland-shringar.jpg",
+  "maa-vindhyavasini-neel-shringar.jpg",
+  "maa-vindhyavasini-devi-mirzapur.jpg",
+  "maa-vindhyavasini-shakti-peeth.jpg",
 ];
 
 filesToCopy.forEach((file) => {
@@ -168,6 +171,11 @@ async function generateSitemap() {
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-5.jpg</image:loc>
+      <image:title>Maa Vindhyavasini Vishesh Pushpa Shringar History and Significance</image:title>
+      <image:caption>Vishesh Pushpa Shringar of Maa Vindhyavasini Devi adorned with divine flowers in Vindhyachal Dham</image:caption>
+    </image:image>
+    <image:image>
       <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.jpg</image:loc>
       <image:title>Maa Vindhyavasini Simhasan Shringar History and Significance</image:title>
       <image:caption>Detailed layout of the newly developed Vindhya Corridor and ancient temple architecture</image:caption>
@@ -224,6 +232,21 @@ async function generateSitemap() {
       <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-5.jpg</image:loc>
       <image:title>Maa Vindhyavasini Pushpa Shringar Darshan</image:title>
       <image:caption>Divine pushpa shringar alankar decoration of Maa Vindhyavasini</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-neel-shringar.jpg</image:loc>
+      <image:title>Maa Vindhyavasini Neel Pushpa Shringar</image:title>
+      <image:caption>Maa Vindhyavasini decorated with divine blue and red flower alankar</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-devi-mirzapur.jpg</image:loc>
+      <image:title>Maa Vindhyavasini Maha Aarti Darshan</image:title>
+      <image:caption>Daily prayers and sacred ritual maha aarti of Maa Vindhyavasini Devi</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-shakti-peeth.jpg</image:loc>
+      <image:title>Maa Vindhyavasini Shakti Peeth Darshan</image:title>
+      <image:caption>Goddess Vindhyavasini divine Shakti Peeth alankar inside Vindhyachal Temple</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://www.namamivindhyavasini.in/images/gallery-1.webp</image:loc>

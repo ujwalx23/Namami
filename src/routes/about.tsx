@@ -29,6 +29,7 @@ import maaImgGarland from "@/assets/maa-vindhyavasini-garland-shringar.jpg";
 import maaImgNeel from "@/assets/maa-vindhyavasini-neel-shringar.jpg";
 import maaImgDevi from "@/assets/maa-vindhyavasini-devi-mirzapur.jpg";
 import maaImgShakti from "@/assets/maa-vindhyavasini-shakti-peeth.jpg";
+import maaImg5 from "@/assets/maa-vindhyavasini-5.jpg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -107,6 +108,14 @@ function AboutSlider() {
 
   const slides = [
     {
+      img: maaImg5,
+      title: hi ? "विशेष पुष्प श्रृंगार" : "Maa Vindhyavasini Vishesh Pushpa Shringar",
+      caption: hi
+        ? "अलौकिक पुष्प और दिव्य आभूषणों से सुसज्जित माँ विंध्यवासिनी का विशेष श्रृंगार दर्शन।"
+        : "Vishesh Pushpa Shringar darshan of Maa Vindhyavasini adorned with divine flowers and ornaments.",
+      alt: "Maa Vindhyavasini Vishesh Pushpa Shringar Darshan in Vindhyachal Dham Uttar Pradesh",
+    },
+    {
       img: maaImgSimhasan,
       title: hi ? "सिंहासन श्रृंगार" : "Maa Vindhyavasini Simhasan Shringar",
       caption: hi
@@ -149,7 +158,7 @@ function AboutSlider() {
   ];
 
   useEffect(() => {
-    const tm = setInterval(() => setI((p) => (p + 1) % slides.length), 5000);
+    const tm = setInterval(() => setI((p) => (p + 1) % slides.length), 6000);
     return () => clearInterval(tm);
   }, [slides.length]);
 
