@@ -8,18 +8,28 @@
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini.webp</image:loc>
-      <image:title>Maa Vindhyavasini Darshan at Vindhyachal Dham</image:title>
-      <image:caption>Maa Vindhyavasini Darshan at Vindhyachal Dham</image:caption>
+      <image:title>Maa Vindhyavasini Divine Grace Darshan at Vindhyachal Dham</image:title>
+      <image:caption>Presiding deity Maa Vindhyavasini alankar shringar darshan at Vindhyachal Dham, Mirzapur</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-2.webp</image:loc>
       <image:title>Maa Vindhyavasini Shringar at Vindhyachal Temple</image:title>
-      <image:caption>Maa Vindhyavasini Shringar at Vindhyachal Temple</image:caption>
+      <image:caption>The golden alankar of Maa Vindhyavasini inside the sanctum sanctorum of Vindhyachal Temple</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-3.webp</image:loc>
-      <image:title>Maa Vindhyavasini Devotional Image</image:title>
-      <image:caption>Maa Vindhyavasini Devotional Image</image:caption>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.jpg</image:loc>
+      <image:title>Maa Vindhyavasini Simhasan Shringar at Vindhyachal Dham</image:title>
+      <image:caption>Maa Vindhyavasini sitting on her golden lion throne (Simhasan) in Vindhyachal Dham, Mirzapur</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-3.jpg</image:loc>
+      <image:title>Maa Vindhyavasini Beautiful Alankar Shringar at Vindhyachal Dham</image:title>
+      <image:caption>Beautiful daily shringar of Goddess Vindhyavasini at Vindhyachal Dham</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-garland-shringar.jpg</image:loc>
+      <image:title>Maa Vindhyavasini Garland Alankar at Vindhyachal Dham</image:title>
+      <image:caption>Goddess Vindhyavasini decorated with grand flower garlands during daily aarti</image:caption>
     </image:image>
   </url>
   <url>
@@ -28,19 +38,24 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-3.webp</image:loc>
-      <image:title>Maa Vindhyavasini Devotional history image</image:title>
-      <image:caption>Maa Vindhyavasini Devotional history image</image:caption>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.jpg</image:loc>
+      <image:title>Maa Vindhyavasini Simhasan Shringar History and Significance</image:title>
+      <image:caption>Detailed layout of the newly developed Vindhya Corridor and ancient temple architecture</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-garland-shringar.jpg</image:loc>
+      <image:title>Maa Vindhyavasini Garland Alankar Spiritual Guide</image:title>
+      <image:caption>Devotional details and history of Maa Vindhyavasini Devi Mirzapur UP</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://www.namamivindhyavasini.in/images/kali-koh.webp</image:loc>
       <image:title>Maa Kali Temple at Kali Khoh Vindhyachal</image:title>
-      <image:caption>Maa Kali Temple at Kali Khoh Vindhyachal</image:caption>
+      <image:caption>Maa Kali Temple at Kali Khoh representing the second point of the Trikona Parikrama</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://www.namamivindhyavasini.in/images/asht-bhuja.webp</image:loc>
       <image:title>Ashtabhuja Devi Temple hilltop shrine</image:title>
-      <image:caption>Ashtabhuja Devi Temple hilltop shrine</image:caption>
+      <image:caption>Ashtabhuja Devi Temple on the hilltop representing the third point of the Trikona Parikrama</image:caption>
     </image:image>
   </url>
   <url>
@@ -61,19 +76,39 @@
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.jpg</image:loc>
+      <image:title>Maa Vindhyavasini Simhasan Shringar Darshan</image:title>
+      <image:caption>Photograph of Maa Vindhyavasini sitting on her golden lion throne (Simhasan)</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-garland-shringar.jpg</image:loc>
+      <image:title>Maa Vindhyavasini Garland Alankar Darshan</image:title>
+      <image:caption>Presiding deity Maa Vindhyavasini Devi garland shringar alankar darshan</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-4.jpg</image:loc>
+      <image:title>Maa Vindhyavasini Simha Vahana Darshan</image:title>
+      <image:caption>Simha Vahana shringar alankar of Maa Vindhyavasini Devi</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-5.jpg</image:loc>
+      <image:title>Maa Vindhyavasini Pushpa Shringar Darshan</image:title>
+      <image:caption>Divine pushpa shringar alankar decoration of Maa Vindhyavasini</image:caption>
+    </image:image>
+    <image:image>
       <image:loc>https://www.namamivindhyavasini.in/images/gallery-1.webp</image:loc>
       <image:title>Swarna Shringar of Maa Vindhyavasini</image:title>
-      <image:caption>Swarna Shringar of Maa Vindhyavasini</image:caption>
+      <image:caption>Swarna alankar gold decoration of Maa Vindhyavasini</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini.webp</image:loc>
+      <image:title>Maa Vindhyavasini Divine Grace Darshan</image:title>
+      <image:caption>The facial alankar and expression of grace of Maa Vindhyavasini Devi</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-2.webp</image:loc>
-      <image:title>Mangala Aarti of Maa Vindhyavasini</image:title>
-      <image:caption>Mangala Aarti of Maa Vindhyavasini</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-3.webp</image:loc>
-      <image:title>Vishesh Shringar of Maa Vindhyavasini</image:title>
-      <image:caption>Vishesh Shringar of Maa Vindhyavasini</image:caption>
+      <image:title>Maa Vindhyavasini Temple Darshan</image:title>
+      <image:caption>Inside the garbhagriha showing daily alankar darshan of Maa Vindhyavasini</image:caption>
     </image:image>
   </url>
   <url>
@@ -117,6 +152,120 @@
     <lastmod>2026-06-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.namamivindhyavasini.in/learn</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.namamivindhyavasini.in/learn/temple-history</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.namamivindhyavasini.in/learn/temple-timings</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.namamivindhyavasini.in/learn/how-to-reach</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.namamivindhyavasini.in/learn/darshan-guide</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.namamivindhyavasini.in/learn/aarti</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.namamivindhyavasini.in/learn/chalisa</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.namamivindhyavasini.in/learn/temple-architecture</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.namamivindhyavasini.in/learn/temple-festivals</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.namamivindhyavasini.in/learn/navratri-guide</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.namamivindhyavasini.in/learn/tourism-guide</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.namamivindhyavasini.in/learn/shakti-peeth</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.namamivindhyavasini.in/learn/temple-photos</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.namamivindhyavasini.in/learn/hotels-near-temple</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.namamivindhyavasini.in/learn/ropeway-guide</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.namamivindhyavasini.in/learn/vindhyavasini-temple-mirzapur</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.namamivindhyavasini.in/learn/vindhyavasini-temple-uttar-pradesh</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.namamivindhyavasini.in/learn/vindhyavasini-temple-vindhyachal</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.namamivindhyavasini.in/learn/maa-vindhyavasini-mantra</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/blog/why-do-good-people-suffer</loc>

@@ -5,7 +5,7 @@ const ASSETS_TO_CACHE = [
   "/manifest.webmanifest",
   "/favicon.png",
   "/icon-192.png",
-  "/icon-512.png"
+  "/icon-512.png",
 ];
 
 // Install Event
@@ -65,7 +65,7 @@ self.addEventListener("fetch", (event) => {
         .catch(() => {
           // If network request fails (e.g. offline), fallback to cached index.html
           return caches.match("/index.html");
-        })
+        }),
     );
     return;
   }

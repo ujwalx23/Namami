@@ -22,7 +22,7 @@ import {
   Flame,
   ArrowRight,
   X,
-  Sparkle
+  Sparkle,
 } from "lucide-react";
 import { useLang } from "@/i18n/LangProvider";
 import { ScrollReveal } from "@/components/ScrollReveal";
@@ -51,7 +51,10 @@ export const Route = createFileRoute("/calendar")({
         content:
           "Calendar, Festival Guide, Ekadashi dates, Purnima vrats, Amavasya dates, Navratri calendar, Hindu festivals, calendar, त्योहार, व्रत, कैलेंडर",
       },
-      { property: "og:title", content: "Calendar & Festival Guide (2023-2029) | Namami Vindhyavasini Sansthan" },
+      {
+        property: "og:title",
+        content: "Calendar & Festival Guide (2023-2029) | Namami Vindhyavasini Sansthan",
+      },
       {
         property: "og:description",
         content:
@@ -64,14 +67,14 @@ export const Route = createFileRoute("/calendar")({
       { name: "twitter:title", content: "Calendar & Festival Guide (2023-2029)" },
       {
         name: "twitter:description",
-        content:
-          "Explore festivals, vrats, Ekadashi, Purnima, Amavasya, and sacred observances.",
+        content: "Explore festivals, vrats, Ekadashi, Purnima, Amavasya, and sacred observances.",
       },
-      { name: "twitter:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
+      {
+        name: "twitter:image",
+        content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png",
+      },
     ],
-    links: [
-      { rel: "canonical", href: "https://www.namamivindhyavasini.in/calendar" }
-    ]
+    links: [{ rel: "canonical", href: "https://www.namamivindhyavasini.in/calendar" }],
   }),
   component: HinduCalendarPage,
 });
@@ -86,156 +89,232 @@ const FESTIVALS_BY_YEAR: Record<number, any[]> = {
   2029: data2029,
 };
 
-const SPECIAL_FESTIVAL_DETAILS: Record<string, {
-  deity: string;
-  significance: string;
-  story: string;
-  rituals: string;
-  fasting: string;
-  celebration: string;
-  templeRelevance: string;
-  related: string;
-  banner: string;
-}> = {
+const SPECIAL_FESTIVAL_DETAILS: Record<
+  string,
+  {
+    deity: string;
+    significance: string;
+    story: string;
+    rituals: string;
+    fasting: string;
+    celebration: string;
+    templeRelevance: string;
+    related: string;
+    banner: string;
+  }
+> = {
   "Chaitra Navratri": {
     deity: "Maa Durga",
-    significance: "Marks the beginning of the Hindu New Year (Vikram Samvat) and celebrates the nine forms of Goddess Durga (Navadurga) during the spring season.",
-    story: "It is believed that Lord Rama worshipped Goddess Durga during this period to seek her blessings before his battle with Ravana.",
-    rituals: "Ghatasthapana (installation of sacred pot), fastings for nine days, chanting Durga Saptashati, and performing Kanya Pujan on Ashtami/Navami.",
-    fasting: "Observe strict fast. Avoid grains, wheat, rice, onions, garlic, and non-vegetarian food. Consume fruits, milk, buckwheat (Kuttu) flour, and water.",
-    celebration: "Homes and temples are decorated. Special prayers, kirtans, and pujas are organized daily.",
-    templeRelevance: "Vindhyachal Dham becomes a major pilgrimage hub, with lakhs of devotees performing the Trikona Parikrama and visiting Maa Vindhyavasini.",
+    significance:
+      "Marks the beginning of the Hindu New Year (Vikram Samvat) and celebrates the nine forms of Goddess Durga (Navadurga) during the spring season.",
+    story:
+      "It is believed that Lord Rama worshipped Goddess Durga during this period to seek her blessings before his battle with Ravana.",
+    rituals:
+      "Ghatasthapana (installation of sacred pot), fastings for nine days, chanting Durga Saptashati, and performing Kanya Pujan on Ashtami/Navami.",
+    fasting:
+      "Observe strict fast. Avoid grains, wheat, rice, onions, garlic, and non-vegetarian food. Consume fruits, milk, buckwheat (Kuttu) flour, and water.",
+    celebration:
+      "Homes and temples are decorated. Special prayers, kirtans, and pujas are organized daily.",
+    templeRelevance:
+      "Vindhyachal Dham becomes a major pilgrimage hub, with lakhs of devotees performing the Trikona Parikrama and visiting Maa Vindhyavasini.",
     related: "Ram Navami",
-    banner: "https://images.unsplash.com/photo-1561361513-2d000a50f0db?auto=format&fit=crop&q=80&w=1200"
+    banner:
+      "https://images.unsplash.com/photo-1561361513-2d000a50f0db?auto=format&fit=crop&q=80&w=1200",
   },
   "Sharad Navratri": {
     deity: "Maa Durga",
-    significance: "The most important Navratri of the year, celebrating the victory of Goddess Durga over the demon king Mahishasura.",
-    story: "Goddess Durga fought Mahishasura for nine nights and slew him on the tenth day, which is celebrated as Vijayadashami (Dussehra).",
-    rituals: "Daily shringar of the Devi, Akhand Jyoti lighting, Ramlila plays, and grand immersion of idols on Dussehra.",
-    fasting: "Sattvic diet, fasting from grains, wheat, and onions. Singhaare ka atta, Sabudana khichdi, and samak rice are consumed.",
+    significance:
+      "The most important Navratri of the year, celebrating the victory of Goddess Durga over the demon king Mahishasura.",
+    story:
+      "Goddess Durga fought Mahishasura for nine nights and slew him on the tenth day, which is celebrated as Vijayadashami (Dussehra).",
+    rituals:
+      "Daily shringar of the Devi, Akhand Jyoti lighting, Ramlila plays, and grand immersion of idols on Dussehra.",
+    fasting:
+      "Sattvic diet, fasting from grains, wheat, and onions. Singhaare ka atta, Sabudana khichdi, and samak rice are consumed.",
     celebration: "Garba and Dandiya dances, elaborate pandals, and community feasts.",
-    templeRelevance: "This is the flagship festival of Vindhyachal Temple. The entire temple town is illuminated, and special state-sponsored arrangements are made for darshan.",
+    templeRelevance:
+      "This is the flagship festival of Vindhyachal Temple. The entire temple town is illuminated, and special state-sponsored arrangements are made for darshan.",
     related: "Durga Ashtami, Dussehra",
-    banner: "https://images.unsplash.com/photo-1608958416715-c266946bf861?auto=format&fit=crop&q=80&w=1200"
+    banner:
+      "https://images.unsplash.com/photo-1608958416715-c266946bf861?auto=format&fit=crop&q=80&w=1200",
   },
   "Maha Shivratri": {
     deity: "Lord Shiva",
-    significance: "Celebrates the grand marriage of Lord Shiva and Goddess Parvati, and the night Shiva performed the Tandava dance.",
-    story: "Shiva saved the world by consuming the poison Halahala that emerged during Samudra Manthan, holding it in his throat making him Neelkanth.",
-    rituals: "Night-long vigil (Jagran), Maha Rudrabhishek with milk, honey, water, and belpatra offering.",
-    fasting: "Fasting on fruits and water. Many devotees observe a completely waterless (Nirjala) fast.",
-    celebration: "Grand processions of Shiva (Shobhayatras), temple visits, and continuous chanting of 'Om Namah Shivaya'.",
-    templeRelevance: "Devotees perform special Abhishek at the Kashi Vishwanath and Vindhyachal shrines.",
+    significance:
+      "Celebrates the grand marriage of Lord Shiva and Goddess Parvati, and the night Shiva performed the Tandava dance.",
+    story:
+      "Shiva saved the world by consuming the poison Halahala that emerged during Samudra Manthan, holding it in his throat making him Neelkanth.",
+    rituals:
+      "Night-long vigil (Jagran), Maha Rudrabhishek with milk, honey, water, and belpatra offering.",
+    fasting:
+      "Fasting on fruits and water. Many devotees observe a completely waterless (Nirjala) fast.",
+    celebration:
+      "Grand processions of Shiva (Shobhayatras), temple visits, and continuous chanting of 'Om Namah Shivaya'.",
+    templeRelevance:
+      "Devotees perform special Abhishek at the Kashi Vishwanath and Vindhyachal shrines.",
     related: "Pradosh Vrat",
-    banner: "https://images.unsplash.com/photo-1590050752117-238cb0612b1b?auto=format&fit=crop&q=80&w=1200"
+    banner:
+      "https://images.unsplash.com/photo-1590050752117-238cb0612b1b?auto=format&fit=crop&q=80&w=1200",
   },
   "Ram Navami": {
     deity: "Lord Rama",
-    significance: "Birth anniversary of Lord Sri Rama, the seventh avatar of Lord Vishnu, symbolizing the ideal human (Maryada Purushottam).",
-    story: "Lord Rama was born in Ayodhya to King Dasharatha and Queen Kausalya to destroy the demon king Ravana and establish Ramrajya.",
-    rituals: "Reading Ramayana, performing Ram Janmotsav at noon, special abhishek and offering panchamrit.",
+    significance:
+      "Birth anniversary of Lord Sri Rama, the seventh avatar of Lord Vishnu, symbolizing the ideal human (Maryada Purushottam).",
+    story:
+      "Lord Rama was born in Ayodhya to King Dasharatha and Queen Kausalya to destroy the demon king Ravana and establish Ramrajya.",
+    rituals:
+      "Reading Ramayana, performing Ram Janmotsav at noon, special abhishek and offering panchamrit.",
     fasting: "Observe fast till noon or throughout the day, eating only fruits and milk.",
-    celebration: "Chanting Rama Nama, organizing chariot processions (Rathayatras), and distributing panchamrit prasad.",
-    templeRelevance: "Vindhyachal temple is beautifully decorated and a special mid-day aarti is performed.",
+    celebration:
+      "Chanting Rama Nama, organizing chariot processions (Rathayatras), and distributing panchamrit prasad.",
+    templeRelevance:
+      "Vindhyachal temple is beautifully decorated and a special mid-day aarti is performed.",
     related: "Chaitra Navratri",
-    banner: "https://images.unsplash.com/photo-1620121692029-d088224ddc74?auto=format&fit=crop&q=80&w=1200"
+    banner:
+      "https://images.unsplash.com/photo-1620121692029-d088224ddc74?auto=format&fit=crop&q=80&w=1200",
   },
   "Krishna Janmashtami": {
     deity: "Lord Krishna",
-    significance: "Birth anniversary of Lord Sri Krishna, the eighth avatar of Lord Vishnu, born to eliminate Kansa.",
-    story: "Lord Krishna was born in the prison cell of Mathura to Devaki and Vasudeva. He was secretly transported to Gokul to be raised by Yashoda.",
-    rituals: "Fasting until midnight (the exact time of birth), decorating infant Krishna (Ladoo Gopal) in swing (Jhulan), and midnight aarti.",
-    fasting: "Phalahar fast until midnight. No grains. Singhaare ki puri, potato curry, and panjiri are consumed after breaking the fast.",
+    significance:
+      "Birth anniversary of Lord Sri Krishna, the eighth avatar of Lord Vishnu, born to eliminate Kansa.",
+    story:
+      "Lord Krishna was born in the prison cell of Mathura to Devaki and Vasudeva. He was secretly transported to Gokul to be raised by Yashoda.",
+    rituals:
+      "Fasting until midnight (the exact time of birth), decorating infant Krishna (Ladoo Gopal) in swing (Jhulan), and midnight aarti.",
+    fasting:
+      "Phalahar fast until midnight. No grains. Singhaare ki puri, potato curry, and panjiri are consumed after breaking the fast.",
     celebration: "Dahi Handi competitions, devotional dramas (Raslila), and singing bhajans.",
-    templeRelevance: "Grand midnight celebrations are held at the temple, featuring a unique shringar of Maa Vindhyavasini as Yogmaya.",
+    templeRelevance:
+      "Grand midnight celebrations are held at the temple, featuring a unique shringar of Maa Vindhyavasini as Yogmaya.",
     related: "Radhashtami",
-    banner: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&q=80&w=1200"
+    banner:
+      "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&q=80&w=1200",
   },
-  "Diwali": {
+  Diwali: {
     deity: "Maha Lakshmi & Lord Rama",
-    significance: "Festival of lights celebrating the return of Lord Rama to Ayodhya after 14 years of exile, and the worship of Goddess Lakshmi for prosperity.",
-    story: "Ayodhya citizens lit rows of clay lamps (diyas) to welcome Rama, Lakshmana, and Sita back home in the dark night of Kartika Amavasya.",
-    rituals: "Ganesh-Lakshmi Puja, lighting oil diyas around the house, making colorful rangoli, and distributing sweets.",
-    fasting: "Devotees observe a fast during the day and break it after performing the Lakshmi Puja in the evening.",
+    significance:
+      "Festival of lights celebrating the return of Lord Rama to Ayodhya after 14 years of exile, and the worship of Goddess Lakshmi for prosperity.",
+    story:
+      "Ayodhya citizens lit rows of clay lamps (diyas) to welcome Rama, Lakshmana, and Sita back home in the dark night of Kartika Amavasya.",
+    rituals:
+      "Ganesh-Lakshmi Puja, lighting oil diyas around the house, making colorful rangoli, and distributing sweets.",
+    fasting:
+      "Devotees observe a fast during the day and break it after performing the Lakshmi Puja in the evening.",
     celebration: "Decorating homes with lights, family gatherings, and sharing gifts.",
-    templeRelevance: "The main Vindhyavasini temple and surrounding ghats on the Ganges are lit with thousands of clay lamps.",
+    templeRelevance:
+      "The main Vindhyavasini temple and surrounding ghats on the Ganges are lit with thousands of clay lamps.",
     related: "Dhanteras, Bhai Dooj",
-    banner: "https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&q=80&w=1200"
+    banner:
+      "https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&q=80&w=1200",
   },
-  "Holi": {
+  Holi: {
     deity: "Lord Krishna & Vishnu",
-    significance: "Festival of colors celebrating the arrival of spring, victory of good over evil, and the divine love of Radha-Krishna.",
-    story: "Lord Vishnu saved his devotee Prahlada from the fire while the demoness Holika was burned, demonstrating that faith overcomes evil.",
-    rituals: "Lighting the Holika Dahan bonfire on the eve, throwing dry colors (Gulal), and preparation of special sweets.",
-    fasting: "No strict fasting is required, though some perform prayers in the morning before playing with colors.",
-    celebration: "Applying colors on friends and family, singing folk songs (Holi Geets), and sharing Gujiya.",
+    significance:
+      "Festival of colors celebrating the arrival of spring, victory of good over evil, and the divine love of Radha-Krishna.",
+    story:
+      "Lord Vishnu saved his devotee Prahlada from the fire while the demoness Holika was burned, demonstrating that faith overcomes evil.",
+    rituals:
+      "Lighting the Holika Dahan bonfire on the eve, throwing dry colors (Gulal), and preparation of special sweets.",
+    fasting:
+      "No strict fasting is required, though some perform prayers in the morning before playing with colors.",
+    celebration:
+      "Applying colors on friends and family, singing folk songs (Holi Geets), and sharing Gujiya.",
     templeRelevance: "A grand color-offering (Phoolon ki Holi) is made to Maa Vindhyavasini.",
     related: "Holika Dahan",
-    banner: "https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?auto=format&fit=crop&q=80&w=1200"
+    banner:
+      "https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?auto=format&fit=crop&q=80&w=1200",
   },
   "Guru Purnima": {
     deity: "Sage Vyasa & Gurus",
-    significance: "Honoring academic and spiritual teachers (Gurus) who guide us from darkness (Gu) to light (Ru).",
-    story: "Marks the birth anniversary of Sage Veda Vyasa, who classified the Vedas, wrote the Mahabharata, and compiled the Puranas.",
-    rituals: "Performing Guru Puja, seeking blessings from parents and elders, and studying spiritual texts.",
+    significance:
+      "Honoring academic and spiritual teachers (Gurus) who guide us from darkness (Gu) to light (Ru).",
+    story:
+      "Marks the birth anniversary of Sage Veda Vyasa, who classified the Vedas, wrote the Mahabharata, and compiled the Puranas.",
+    rituals:
+      "Performing Guru Puja, seeking blessings from parents and elders, and studying spiritual texts.",
     fasting: "Observe a light fast, consuming fruits and milk, or a single vegetarian meal.",
-    celebration: "Offering flowers and gifts to teachers, organizing satsangs, and chanting Guru mantras.",
-    templeRelevance: "Pilgrims visit Vindhyachal Dham to express gratitude to the lineage of gurus and Pujya Guru Ji.",
+    celebration:
+      "Offering flowers and gifts to teachers, organizing satsangs, and chanting Guru mantras.",
+    templeRelevance:
+      "Pilgrims visit Vindhyachal Dham to express gratitude to the lineage of gurus and Pujya Guru Ji.",
     related: "Vyas Puja",
-    banner: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=1200"
+    banner:
+      "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=1200",
   },
   "Hanuman Jayanti": {
     deity: "Lord Hanuman",
-    significance: "Birth anniversary of Lord Hanuman, the epitome of selfless service, strength, and unwavering devotion to Lord Rama.",
-    story: "Hanuman was born to Anjana and Kesari with the blessings of Pawan Dev (Wind God) as an incarnation of Lord Shiva.",
-    rituals: "Reciting Hanuman Chalisa, Sundarkand path, and offering orange sindoor and ladoos to Hanuman idols.",
+    significance:
+      "Birth anniversary of Lord Hanuman, the epitome of selfless service, strength, and unwavering devotion to Lord Rama.",
+    story:
+      "Hanuman was born to Anjana and Kesari with the blessings of Pawan Dev (Wind God) as an incarnation of Lord Shiva.",
+    rituals:
+      "Reciting Hanuman Chalisa, Sundarkand path, and offering orange sindoor and ladoos to Hanuman idols.",
     fasting: "Many observe a strict fast on this day, consuming only water or fruits.",
-    celebration: "Group chanting of Hanuman Chalisa at temples, distributing prasad, and organizing free community feasts (Bhandara).",
-    templeRelevance: "Special prayers are offered at the Ashtabhuja and Hanuman temples in the parikrama circuit.",
+    celebration:
+      "Group chanting of Hanuman Chalisa at temples, distributing prasad, and organizing free community feasts (Bhandara).",
+    templeRelevance:
+      "Special prayers are offered at the Ashtabhuja and Hanuman temples in the parikrama circuit.",
     related: "Bada Mangal",
-    banner: "https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?auto=format&fit=crop&q=80&w=1200"
+    banner:
+      "https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?auto=format&fit=crop&q=80&w=1200",
   },
   "Durga Ashtami": {
     deity: "Maa Durga",
-    significance: "The eighth day of Sharad Navratri, representing the manifestation of Maha Gauri, the eighth form of Navadurga.",
-    story: "On this day, Goddess Durga manifested in her full power to slay the demons Chanda and Munda, emerging as Chamunda.",
-    rituals: "Performing Sandhi Puja (at the transition of Ashtami and Navami), Kanya Pujan (worshipping nine young girls as forms of the Goddess).",
+    significance:
+      "The eighth day of Sharad Navratri, representing the manifestation of Maha Gauri, the eighth form of Navadurga.",
+    story:
+      "On this day, Goddess Durga manifested in her full power to slay the demons Chanda and Munda, emerging as Chamunda.",
+    rituals:
+      "Performing Sandhi Puja (at the transition of Ashtami and Navami), Kanya Pujan (worshipping nine young girls as forms of the Goddess).",
     fasting: "Strict fast for devotees. Feasts are prepared for Kanya Pujan and offered as prasad.",
-    celebration: "Grand aartis, offering red chunri and coconut, and performing Havan (fire ritual).",
-    templeRelevance: "This is the most popular day for devotees visiting Vindhyachal, with serpentine queues extending for kilometers.",
+    celebration:
+      "Grand aartis, offering red chunri and coconut, and performing Havan (fire ritual).",
+    templeRelevance:
+      "This is the most popular day for devotees visiting Vindhyachal, with serpentine queues extending for kilometers.",
     related: "Navami Puja",
-    banner: "https://images.unsplash.com/photo-1614082242765-7c98cdc0d2db?auto=format&fit=crop&q=80&w=1200"
+    banner:
+      "https://images.unsplash.com/photo-1614082242765-7c98cdc0d2db?auto=format&fit=crop&q=80&w=1200",
   },
   "Ganesh Chaturthi": {
     deity: "Lord Ganesha",
-    significance: "Birth celebration of Lord Ganesha, the lord of wisdom, prosperity, and the remover of obstacles (Vighnaharta).",
-    story: "Goddess Parvati created Ganesha out of clay to guard her door. Lord Shiva later bestowed him with an elephant head and declared him the leader of the Ganas.",
-    rituals: "Prana Pratishtha (bringing the deity to life), offering Modaks (sweet dumplings), durva grass, and red flowers.",
-    fasting: "Fast is observed during the day and broken in the evening after moonrise or after performing Ganesha Puja.",
-    celebration: "Installing Ganesha idols in homes and public pandals, followed by a grand immersion (Visarjan) procession after 1 to 11 days.",
-    templeRelevance: "Prayers are offered at Ganesha shrines in Vindhyachal before commencing the parikrama.",
+    significance:
+      "Birth celebration of Lord Ganesha, the lord of wisdom, prosperity, and the remover of obstacles (Vighnaharta).",
+    story:
+      "Goddess Parvati created Ganesha out of clay to guard her door. Lord Shiva later bestowed him with an elephant head and declared him the leader of the Ganas.",
+    rituals:
+      "Prana Pratishtha (bringing the deity to life), offering Modaks (sweet dumplings), durva grass, and red flowers.",
+    fasting:
+      "Fast is observed during the day and broken in the evening after moonrise or after performing Ganesha Puja.",
+    celebration:
+      "Installing Ganesha idols in homes and public pandals, followed by a grand immersion (Visarjan) procession after 1 to 11 days.",
+    templeRelevance:
+      "Prayers are offered at Ganesha shrines in Vindhyachal before commencing the parikrama.",
     related: "Anant Chaturdashi",
-    banner: "https://images.unsplash.com/photo-1567591906919-efe0c85ccb16?auto=format&fit=crop&q=80&w=1200"
+    banner:
+      "https://images.unsplash.com/photo-1567591906919-efe0c85ccb16?auto=format&fit=crop&q=80&w=1200",
   },
   "Raksha Bandhan": {
     deity: "Lord Krishna & Ganesha",
-    significance: "Celebrating the sacred bond of protection and love between brothers and sisters.",
-    story: "Draupadi tied a strip of her saree on Krishna's bleeding finger, and Krishna promised to protect her in times of distress.",
-    rituals: "Sisters tie a decorative thread (Rakhi) on their brothers' wrists, perform aarti, and pray for their long life.",
+    significance:
+      "Celebrating the sacred bond of protection and love between brothers and sisters.",
+    story:
+      "Draupadi tied a strip of her saree on Krishna's bleeding finger, and Krishna promised to protect her in times of distress.",
+    rituals:
+      "Sisters tie a decorative thread (Rakhi) on their brothers' wrists, perform aarti, and pray for their long life.",
     fasting: "Sisters fast until they tie the Rakhi on their brothers' wrists.",
     celebration: "Exchanging gifts, family dinners, and sharing traditional sweets like Ghevar.",
     templeRelevance: "Devotees tie Rakhis to Maa Vindhyavasini and pray for family protection.",
     related: "Shravani Upakarma",
-    banner: "https://images.unsplash.com/photo-1595062584113-e0bfc26f332d?auto=format&fit=crop&q=80&w=1200"
-  }
+    banner:
+      "https://images.unsplash.com/photo-1595062584113-e0bfc26f332d?auto=format&fit=crop&q=80&w=1200",
+  },
 };
 
 const FESTIVAL_TRANSLATIONS: Record<string, string> = {
   "Makar Sankranti": "मकर संक्रांति",
   "Vasant Panchami": "बसंत पंचमी",
   "Maha Shivratri": "महाशिवरात्रि",
-  "Holi": "होली",
+  Holi: "होली",
   "Chaitra Navratri Begins": "चैत्र नवरात्रि प्रारंभ",
   "Ram Navami": "राम नवमी",
   "Hanuman Jayanti": "हनुमान जयंती",
@@ -247,31 +326,31 @@ const FESTIVAL_TRANSLATIONS: Record<string, string> = {
   "Ganesh Chaturthi": "गणेश चतुर्थी",
   "Sharad Navratri Begins": "शरद नवरात्रि प्रारंभ",
   "Durga Ashtami": "दुर्गा अष्टमी",
-  "Dussehra": "दशहरा",
+  Dussehra: "दशहरा",
   "Karva Chauth": "करवा चौथ",
-  "Diwali": "दीपावली",
+  Diwali: "दीपावली",
   "Bhai Dooj": "भाई दूज",
   "Chhath Puja": "छठ पूजा",
   "Dev Deepawali": "देव दीपावली",
-  "Begins": "प्रारंभ",
-  "Kartika": "कार्तिक",
-  "Kartik": "कार्तिक",
-  "Margashirsha": "मार्गशीर्ष",
-  "Pausha": "पौष",
-  "Magha": "माघ",
-  "Phalguna": "फाल्गुन",
-  "Chaitra": "चैत्र",
-  "Vaishakha": "वैशाख",
-  "Jyeshtha": "ज्येष्ठ",
-  "Ashadha": "आषाढ़",
-  "Shravana": "श्रावण",
-  "Bhadrapada": "भाद्रपद",
-  "Ashwina": "आश्विन",
-  "Krishna": "कृष्ण",
-  "Shukla": "शुक्ल",
-  "Ekadashi": "एकादशी",
-  "Amavasya": "अमावस्या",
-  "Purnima": "पूर्णिमा"
+  Begins: "प्रारंभ",
+  Kartika: "कार्तिक",
+  Kartik: "कार्तिक",
+  Margashirsha: "मार्गशीर्ष",
+  Pausha: "पौष",
+  Magha: "माघ",
+  Phalguna: "फाल्गुन",
+  Chaitra: "चैत्र",
+  Vaishakha: "वैशाख",
+  Jyeshtha: "ज्येष्ठ",
+  Ashadha: "आषाढ़",
+  Shravana: "श्रावण",
+  Bhadrapada: "भाद्रपद",
+  Ashwina: "आश्विन",
+  Krishna: "कृष्ण",
+  Shukla: "शुक्ल",
+  Ekadashi: "एकादशी",
+  Amavasya: "अमावस्या",
+  Purnima: "पूर्णिमा",
 };
 
 const TEXT_TRANSLATIONS: Record<string, string> = {
@@ -284,7 +363,7 @@ const TEXT_TRANSLATIONS: Record<string, string> = {
   "Devi Durga": "माँ दुर्गा",
   "Lord Rama": "भगवान श्री राम",
   "Hanuman Ji": "हनुमान जी",
-  "Hanuman": "हनुमान जी",
+  Hanuman: "हनुमान जी",
   "Lord Ganesha": "भगवान गणेश",
   "Maha Lakshmi": "माँ महालक्ष्मी",
   "Yama & Yamuna": "यम और यमुना",
@@ -294,46 +373,75 @@ const TEXT_TRANSLATIONS: Record<string, string> = {
   "Maa Durga": "माँ दुर्गा",
   "Sanatan Devata": "सनातन देवता",
 
-  "Satyanarayan Vrat Katha, Ganga Snan, lighting diyas.": "श्री सत्यनारायण व्रत कथा, गंगा स्नान, दीपदान एवं महाआरती।",
-  "Pitru Tarpan, offering food to the needy, prayers to Lord Shiva.": "पितृ तर्पण, जरूरतमंदों को भोजन व दान, भगवान शिव की आराधना।",
-  "Worship of Lord Vishnu, reciting Vishnu Sahasranama, night vigil.": "भगवान श्री हरि विष्णु की पूजा, विष्णु सहस्रनाम का पाठ और रात्रि जागरण।",
-  "Ghatasthapana (installation of sacred pot), fastings for nine days, chanting Durga Saptashati, and performing Kanya Pujan on Ashtami/Navami.": "घटस्थापना, नौ दिनों का व्रत, दुर्गा सप्तशती का पाठ और अष्टमी/नवमी पर कन्या पूजन।",
-  "Daily shringar of the Devi, Akhand Jyoti lighting, Ramlila plays, and grand immersion of idols on Dussehra.": "देवी का दैनिक दिव्य श्रृंगार, अखंड ज्योति प्रज्वलन, रामलीला मंचन और दशहरा पर मूर्ति विसर्जन।",
-  "Night-long vigil (Jagran), Maha Rudrabhishek with milk, honey, water, and belpatra offering.": "रात्रि जागरण, दूध, शहद व जल से महारुद्राभिषेक एवं बेलपत्र अर्पण।",
-  "Reading Ramayana, performing Ram Janmotsav at noon, special abhishek and offering panchamrit.": "रामायण पाठ, दोपहर में राम जन्मोत्सव पूजन, विशेष अभिषेक व पंचामृत भोग।",
-  "Fasting until midnight (the exact time of birth), decorating infant Krishna (Ladoo Gopal) in swing (Jhulan), and midnight aarti.": "आधी रात तक व्रत, बाल कृष्ण (लड्डू गोपाल) का झूला श्रृंगार और मध्यरात्रि की महाआरती।",
-  "Ganesh-Lakshmi Puja, lighting oil diyas around the house, making colorful rangoli, and distributing sweets.": "गणेश-लक्ष्मी पूजन, घर में घी व तेल के दीपक जलाना, रंगोली बनाना और मिठाई बांटना।",
-  "Lighting the Holika Dahan bonfire on the eve, throwing dry colors (Gulal), and preparation of special sweets.": "होलिका दहन, अबीर-गुलाल से होली खेलना और पारंपरिक मिष्ठान (गुझिया) तैयार करना।",
-  "Performing Guru Puja, seeking blessings from parents and elders, and studying spiritual texts.": "गुरु पूजन, माता-पिता व बड़ों का आशीर्वाद लेना और आध्यात्मिक ग्रंथों का अध्ययन।",
-  "Reciting Hanuman Chalisa, Sundarkand path, and offering orange sindoor and ladoos to Hanuman idols.": "हनुमान चालीसा व सुंदरकांड का पाठ, हनुमान जी को चोला व लड्डू अर्पित करना।",
-  "Performing Sandhi Puja (at the transition of Ashtami and Navami), Kanya Pujan (worshipping nine young girls as forms of the Goddess).": "संधि पूजा, नौ कन्याओं का पूजन कर भोजन व उपहार प्रदान करना।",
-  "Prana Pratishtha (bringing the deity to life), offering Modaks (sweet dumplings), durva grass, and red flowers.": "प्राण प्रतिष्ठा पूजन, भगवान गणेश को मोदक भोग, दूर्वा घास और लाल पुष्प अर्पित करना।",
-  "Sisters tie a decorative thread (Rakhi) on their wrists, perform aarti, and pray for their long life.": "बहनें भाई की कलाई पर रक्षा सूत्र बांधती हैं, आरती करती हैं और दीर्घायु की कामना करती हैं।",
+  "Satyanarayan Vrat Katha, Ganga Snan, lighting diyas.":
+    "श्री सत्यनारायण व्रत कथा, गंगा स्नान, दीपदान एवं महाआरती।",
+  "Pitru Tarpan, offering food to the needy, prayers to Lord Shiva.":
+    "पितृ तर्पण, जरूरतमंदों को भोजन व दान, भगवान शिव की आराधना।",
+  "Worship of Lord Vishnu, reciting Vishnu Sahasranama, night vigil.":
+    "भगवान श्री हरि विष्णु की पूजा, विष्णु सहस्रनाम का पाठ और रात्रि जागरण।",
+  "Ghatasthapana (installation of sacred pot), fastings for nine days, chanting Durga Saptashati, and performing Kanya Pujan on Ashtami/Navami.":
+    "घटस्थापना, नौ दिनों का व्रत, दुर्गा सप्तशती का पाठ और अष्टमी/नवमी पर कन्या पूजन।",
+  "Daily shringar of the Devi, Akhand Jyoti lighting, Ramlila plays, and grand immersion of idols on Dussehra.":
+    "देवी का दैनिक दिव्य श्रृंगार, अखंड ज्योति प्रज्वलन, रामलीला मंचन और दशहरा पर मूर्ति विसर्जन।",
+  "Night-long vigil (Jagran), Maha Rudrabhishek with milk, honey, water, and belpatra offering.":
+    "रात्रि जागरण, दूध, शहद व जल से महारुद्राभिषेक एवं बेलपत्र अर्पण।",
+  "Reading Ramayana, performing Ram Janmotsav at noon, special abhishek and offering panchamrit.":
+    "रामायण पाठ, दोपहर में राम जन्मोत्सव पूजन, विशेष अभिषेक व पंचामृत भोग।",
+  "Fasting until midnight (the exact time of birth), decorating infant Krishna (Ladoo Gopal) in swing (Jhulan), and midnight aarti.":
+    "आधी रात तक व्रत, बाल कृष्ण (लड्डू गोपाल) का झूला श्रृंगार और मध्यरात्रि की महाआरती।",
+  "Ganesh-Lakshmi Puja, lighting oil diyas around the house, making colorful rangoli, and distributing sweets.":
+    "गणेश-लक्ष्मी पूजन, घर में घी व तेल के दीपक जलाना, रंगोली बनाना और मिठाई बांटना।",
+  "Lighting the Holika Dahan bonfire on the eve, throwing dry colors (Gulal), and preparation of special sweets.":
+    "होलिका दहन, अबीर-गुलाल से होली खेलना और पारंपरिक मिष्ठान (गुझिया) तैयार करना।",
+  "Performing Guru Puja, seeking blessings from parents and elders, and studying spiritual texts.":
+    "गुरु पूजन, माता-पिता व बड़ों का आशीर्वाद लेना और आध्यात्मिक ग्रंथों का अध्ययन।",
+  "Reciting Hanuman Chalisa, Sundarkand path, and offering orange sindoor and ladoos to Hanuman idols.":
+    "हनुमान चालीसा व सुंदरकांड का पाठ, हनुमान जी को चोला व लड्डू अर्पित करना।",
+  "Performing Sandhi Puja (at the transition of Ashtami and Navami), Kanya Pujan (worshipping nine young girls as forms of the Goddess).":
+    "संधि पूजा, नौ कन्याओं का पूजन कर भोजन व उपहार प्रदान करना।",
+  "Prana Pratishtha (bringing the deity to life), offering Modaks (sweet dumplings), durva grass, and red flowers.":
+    "प्राण प्रतिष्ठा पूजन, भगवान गणेश को मोदक भोग, दूर्वा घास और लाल पुष्प अर्पित करना।",
+  "Sisters tie a decorative thread (Rakhi) on their wrists, perform aarti, and pray for their long life.":
+    "बहनें भाई की कलाई पर रक्षा सूत्र बांधती हैं, आरती करती हैं और दीर्घायु की कामना करती हैं।",
 
   "Fasting from sunrise to moonrise.": "सूर्योदय से चंद्रोदय तक व्रत।",
-  "Fasting or consuming only light sattvic meals.": "व्रत अथवा केवल सात्विक व सुपाच्य भोजन का सेवन करें।",
-  "Strict fast avoiding grains and beans. Consuming fruits/milk allowed.": "अन्न व अनाज का पूर्ण परहेज, फलाहार, दूध और जल ग्रहण कर सकते हैं।",
-  "Observe strict fast. Avoid grains, wheat, rice, onions, garlic, and non-vegetarian food. Consume fruits, milk, buckwheat (Kuttu) flour, and water.": "अन्न, लहसुन, प्याज व तामसिक भोजन का पूर्ण त्याग। कुट्टू का आटा, सिंघाड़ा, फल व दूध का सेवन करें।",
-  "Sattvic diet, fasting from grains, wheat, and onions. Singhaare ka atta, Sabudana khichdi, and samak rice are consumed.": "सात्विक आहार, अन्न व प्याज का त्याग। सिंघाड़े का आटा, साबूदाना खिचड़ी व समा के चावल ग्रहण करें।",
-  "Fasting on fruits and water. Many devotees observe a completely waterless (Nirjala) fast.": "फलाहार या जलाहार। कई श्रद्धालु पूरी तरह से निर्जला व्रत रखते हैं।",
-  "Observe fast till noon or throughout the day, eating only fruits and milk.": "दोपहर तक या पूरे दिन व्रत रखें, केवल फल और दूध का सेवन करें।",
-  "Phalahar fast until midnight. No grains. Singhaare ki puri, potato curry, and panjiri are consumed after breaking the fast.": "मध्यरात्रि तक फलाहार व्रत। व्रत खोलने के बाद सिंघाड़े की पूरी, आलू की सब्जी व पंजीरी का भोग लगाएं।",
-  "Devotees observe a fast during the day and break it after performing the Lakshmi Puja in the evening.": "दिन में व्रत रखें और शाम को लक्ष्मी पूजन के बाद प्रसाद ग्रहण कर व्रत खोलें।",
-  "Observe a light fast, consuming fruits and milk, or a single vegetarian meal.": "हल्का उपवास रखें, फल व दूध का सेवन करें या केवल एक समय सात्विक भोजन करें।",
-  "Many observe a strict fast on this day, consuming only water or fruits.": "कई श्रद्धालु इस दिन केवल जल या फल ग्रहण कर कड़ा उपवास रखते हैं।",
-  "Strict fast for devotees. Feasts are prepared for Kanya Pujan and offered as prasad.": "श्रद्धालुओं के लिए व्रत, कन्या पूजन हेतु महाप्रसाद तैयार कर भोग लगाएं।",
-  "Fast is observed during the day and broken in the evening after moonrise or after performing Ganesha Puja.": "दिन भर व्रत रखें और शाम को चंद्रोदय या गणेश पूजन के बाद व्रत खोलें।",
-  "Sisters fast until they tie the Rakhi on their brothers' wrists.": "बहनें भाई को राखी बांधने तक उपवास रखती हैं।",
-  "Strict 36-hour waterless fast (Nirjala Vrat).": "३६ घंटे का अत्यंत कठिन निर्जला व्रत (छठ महाव्रत)।"
+  "Fasting or consuming only light sattvic meals.":
+    "व्रत अथवा केवल सात्विक व सुपाच्य भोजन का सेवन करें।",
+  "Strict fast avoiding grains and beans. Consuming fruits/milk allowed.":
+    "अन्न व अनाज का पूर्ण परहेज, फलाहार, दूध और जल ग्रहण कर सकते हैं।",
+  "Observe strict fast. Avoid grains, wheat, rice, onions, garlic, and non-vegetarian food. Consume fruits, milk, buckwheat (Kuttu) flour, and water.":
+    "अन्न, लहसुन, प्याज व तामसिक भोजन का पूर्ण त्याग। कुट्टू का आटा, सिंघाड़ा, फल व दूध का सेवन करें।",
+  "Sattvic diet, fasting from grains, wheat, and onions. Singhaare ka atta, Sabudana khichdi, and samak rice are consumed.":
+    "सात्विक आहार, अन्न व प्याज का त्याग। सिंघाड़े का आटा, साबूदाना खिचड़ी व समा के चावल ग्रहण करें।",
+  "Fasting on fruits and water. Many devotees observe a completely waterless (Nirjala) fast.":
+    "फलाहार या जलाहार। कई श्रद्धालु पूरी तरह से निर्जला व्रत रखते हैं।",
+  "Observe fast till noon or throughout the day, eating only fruits and milk.":
+    "दोपहर तक या पूरे दिन व्रत रखें, केवल फल और दूध का सेवन करें।",
+  "Phalahar fast until midnight. No grains. Singhaare ki puri, potato curry, and panjiri are consumed after breaking the fast.":
+    "मध्यरात्रि तक फलाहार व्रत। व्रत खोलने के बाद सिंघाड़े की पूरी, आलू की सब्जी व पंजीरी का भोग लगाएं।",
+  "Devotees observe a fast during the day and break it after performing the Lakshmi Puja in the evening.":
+    "दिन में व्रत रखें और शाम को लक्ष्मी पूजन के बाद प्रसाद ग्रहण कर व्रत खोलें।",
+  "Observe a light fast, consuming fruits and milk, or a single vegetarian meal.":
+    "हल्का उपवास रखें, फल व दूध का सेवन करें या केवल एक समय सात्विक भोजन करें।",
+  "Many observe a strict fast on this day, consuming only water or fruits.":
+    "कई श्रद्धालु इस दिन केवल जल या फल ग्रहण कर कड़ा उपवास रखते हैं।",
+  "Strict fast for devotees. Feasts are prepared for Kanya Pujan and offered as prasad.":
+    "श्रद्धालुओं के लिए व्रत, कन्या पूजन हेतु महाप्रसाद तैयार कर भोग लगाएं।",
+  "Fast is observed during the day and broken in the evening after moonrise or after performing Ganesha Puja.":
+    "दिन भर व्रत रखें और शाम को चंद्रोदय या गणेश पूजन के बाद व्रत खोलें।",
+  "Sisters fast until they tie the Rakhi on their brothers' wrists.":
+    "बहनें भाई को राखी बांधने तक उपवास रखती हैं।",
+  "Strict 36-hour waterless fast (Nirjala Vrat).":
+    "३६ घंटे का अत्यंत कठिन निर्जला व्रत (छठ महाव्रत)।",
 };
 
 function translateFestivalName(name: string, isHi: boolean): string {
   if (!isHi) return name;
   if (FESTIVAL_TRANSLATIONS[name]) return FESTIVAL_TRANSLATIONS[name];
-  
+
   let translated = name;
   Object.entries(FESTIVAL_TRANSLATIONS).forEach(([eng, hin]) => {
-    const regex = new RegExp(`\\b${eng}\\b`, 'g');
+    const regex = new RegExp(`\\b${eng}\\b`, "g");
     translated = translated.replace(regex, hin);
   });
   return translated;
@@ -342,13 +450,20 @@ function translateFestivalName(name: string, isHi: boolean): string {
 function getTranslatedCategory(cat: string, isHi: boolean): string {
   if (!isHi) return cat;
   switch (cat) {
-    case "Major Festival": return "प्रमुख त्योहार";
-    case "Ekadashi": return "एकादशी";
-    case "Purnima": return "पूर्णिमा";
-    case "Amavasya": return "अमावस्या";
-    case "Navratri": return "नवरात्रि";
-    case "Vrats": return "व्रत व उपवास";
-    default: return cat;
+    case "Major Festival":
+      return "प्रमुख त्योहार";
+    case "Ekadashi":
+      return "एकादशी";
+    case "Purnima":
+      return "पूर्णिमा";
+    case "Amavasya":
+      return "अमावस्या";
+    case "Navratri":
+      return "नवरात्रि";
+    case "Vrats":
+      return "व्रत व उपवास";
+    default:
+      return cat;
   }
 }
 
@@ -356,17 +471,26 @@ function translateText(text: string, isHi: boolean): string {
   if (!isHi) return text;
   if (!text) return "";
   if (TEXT_TRANSLATIONS[text]) return TEXT_TRANSLATIONS[text];
-  
+
   let translated = text;
   Object.entries(FESTIVAL_TRANSLATIONS).forEach(([eng, hin]) => {
-    const regex = new RegExp(`\\b${eng}\\b`, 'g');
+    const regex = new RegExp(`\\b${eng}\\b`, "g");
     translated = translated.replace(regex, hin);
   });
-  
+
   translated = translated
-    .replace(/Sacred full moon day in the month of (.*?), ideal for Satyanarayan Puja and fasting\./g, "$1 माह की पवित्र पूर्णिमा तिथि, श्री सत्यनारायण भगवान की पूजा और व्रत के लिए अत्यंत उत्तम।")
-    .replace(/New moon day in the month of (.*?), highly auspicious for ancestor prayers and charity\./g, "$1 माह की अमावस्या तिथि, पितृ तर्पण, दान-पुण्य और साधना के लिए अत्यंत शुभ।")
-    .replace(/Auspicious eleventh day of the lunar fortnight in the month of (.*?), dedicated to Lord Vishnu\./g, "$1 माह के पवित्र पक्ष की ग्यारस (एकादशी) तिथि, भगवान श्री विष्णु जी को समर्पित।");
+    .replace(
+      /Sacred full moon day in the month of (.*?), ideal for Satyanarayan Puja and fasting\./g,
+      "$1 माह की पवित्र पूर्णिमा तिथि, श्री सत्यनारायण भगवान की पूजा और व्रत के लिए अत्यंत उत्तम।",
+    )
+    .replace(
+      /New moon day in the month of (.*?), highly auspicious for ancestor prayers and charity\./g,
+      "$1 माह की अमावस्या तिथि, पितृ तर्पण, दान-पुण्य और साधना के लिए अत्यंत शुभ।",
+    )
+    .replace(
+      /Auspicious eleventh day of the lunar fortnight in the month of (.*?), dedicated to Lord Vishnu\./g,
+      "$1 माह के पवित्र पक्ष की ग्यारस (एकादशी) तिथि, भगवान श्री विष्णु जी को समर्पित।",
+    );
 
   return translated;
 }
@@ -378,18 +502,38 @@ const CATEGORIES = [
   { id: "purnima", label: "Purnima", hi: "पूर्णिमा" },
   { id: "amavasya", label: "Amavasya", hi: "अमावस्या" },
   { id: "navratri", label: "Navratri", hi: "नवरात्रि" },
-  { id: "vrats", label: "Vrats", hi: "व्रत व उपवास" }
+  { id: "vrats", label: "Vrats", hi: "व्रत व उपवास" },
 ];
 
 const YEARS = [2023, 2024, 2025, 2026, 2027, 2028, 2029];
 
 const MONTHS = [
-  "January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
 ];
 const MONTHS_HI = [
-  "जनवरी", "फ़रवरी", "मार्च", "अप्रैल", "मई", "जून",
-  "जुलाई", "अगस्त", "सितंबर", "अक्टूबर", "नवंबर", "दिसंबर"
+  "जनवरी",
+  "फ़रवरी",
+  "मार्च",
+  "अप्रैल",
+  "मई",
+  "जून",
+  "जुलाई",
+  "अगस्त",
+  "सितंबर",
+  "अक्टूबर",
+  "नवंबर",
+  "दिसंबर",
 ];
 
 function getHinduMonth(date: Date, yearData: any[]): string {
@@ -397,7 +541,7 @@ function getHinduMonth(date: Date, yearData: any[]): string {
     .filter((f) => f.category === "Purnima")
     .map((f) => ({
       dateStr: f.date,
-      monthName: f.festival.replace(" Purnima", "").replace(" Kartik", "Kartika")
+      monthName: f.festival.replace(" Purnima", "").replace(" Kartik", "Kartika"),
     }));
 
   purnimas.sort((a, b) => a.dateStr.localeCompare(b.dateStr));
@@ -426,18 +570,19 @@ function fmtTime(d: Date): string {
 }
 
 function downloadCalendarPdf(year: number, festivals: any[], isHi: boolean) {
-  const festRows = festivals.map((f) => {
-    const fDate = new Date(f.date + "T00:00:00");
-    const formattedDate = fDate.toLocaleDateString(isHi ? "hi-IN" : "en-IN", {
-      day: "numeric",
-      month: "short",
-      year: "numeric",
-      weekday: "short"
-    });
-    const translatedName = translateFestivalName(f.festival, isHi);
-    const translatedCat = getTranslatedCategory(f.category, isHi);
-    const translatedDesc = translateText(f.description, isHi);
-    return `
+  const festRows = festivals
+    .map((f) => {
+      const fDate = new Date(f.date + "T00:00:00");
+      const formattedDate = fDate.toLocaleDateString(isHi ? "hi-IN" : "en-IN", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+        weekday: "short",
+      });
+      const translatedName = translateFestivalName(f.festival, isHi);
+      const translatedCat = getTranslatedCategory(f.category, isHi);
+      const translatedDesc = translateText(f.description, isHi);
+      return `
       <tr>
         <td style="padding:8px 10px;border:1px solid #e2d2b4;font-weight:bold;width:20%;font-size:12px;">${formattedDate}</td>
         <td style="padding:8px 10px;border:1px solid #e2d2b4;font-weight:bold;color:#7a1e1e;width:28%;font-size:12px;">${translatedName}</td>
@@ -445,7 +590,8 @@ function downloadCalendarPdf(year: number, festivals: any[], isHi: boolean) {
         <td style="padding:8px 10px;border:1px solid #e2d2b4;font-size:11px;width:38%;">${translatedDesc}</td>
       </tr>
     `;
-  }).join("");
+    })
+    .join("");
 
   const htmlContent = `<!DOCTYPE html>
 <html>
@@ -532,7 +678,7 @@ function downloadCalendarPdf(year: number, festivals: any[], isHi: boolean) {
     toast.info(
       isHi
         ? "फ़ाइल डाउनलोड हो गई — ब्राउज़र में खोलकर Print > Save as PDF चुनें"
-        : "File downloaded — open in browser, then use Print > Save as PDF"
+        : "File downloaded — open in browser, then use Print > Save as PDF",
     );
   }
 }
@@ -583,14 +729,31 @@ export function HinduCalendarPage() {
 
       // Category match
       if (activeCategory === "all") return true;
-      if (activeCategory === "major") return f.category === "Major Festival" || f.importance === "High";
+      if (activeCategory === "major")
+        return f.category === "Major Festival" || f.importance === "High";
       if (activeCategory === "ekadashi") return f.category === "Ekadashi";
       if (activeCategory === "purnima") return f.category === "Purnima";
       if (activeCategory === "amavasya") return f.category === "Amavasya";
-      if (activeCategory === "navratri") return f.category === "Navratri" || f.festival.includes("Navratri");
+      if (activeCategory === "navratri")
+        return f.category === "Navratri" || f.festival.includes("Navratri");
       if (activeCategory === "vrats") {
-        const vratKeywords = ["vrat", "upavas", "fasting", "chaturthi", "pradosh", "sankashti", "karwa", "teej", "ahoi", "chhath", "somwar", "varalakshmi"];
-        return f.category === "Vrats" || vratKeywords.some(kw => f.festival.toLowerCase().includes(kw));
+        const vratKeywords = [
+          "vrat",
+          "upavas",
+          "fasting",
+          "chaturthi",
+          "pradosh",
+          "sankashti",
+          "karwa",
+          "teej",
+          "ahoi",
+          "chhath",
+          "somwar",
+          "varalakshmi",
+        ];
+        return (
+          f.category === "Vrats" || vratKeywords.some((kw) => f.festival.toLowerCase().includes(kw))
+        );
       }
 
       return true;
@@ -602,7 +765,7 @@ export function HinduCalendarPage() {
     const todayStr = todayDate.toISOString().split("T")[0];
     const currentYear = todayDate.getFullYear();
     const data = FESTIVALS_BY_YEAR[currentYear] || data2026;
-    
+
     const found = data.find((f) => f.date >= todayStr);
     if (found) return found;
 
@@ -631,8 +794,18 @@ export function HinduCalendarPage() {
   const timelineGroups = useMemo(() => {
     const groups: Record<string, any[]> = {};
     const months = [
-      "January", "February", "March", "April", "May", "June",
-      "July", "August", "September", "October", "November", "December"
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
     ];
 
     filteredFestivals.forEach((f) => {
@@ -650,15 +823,37 @@ export function HinduCalendarPage() {
   // Click festival handler
   const handleFestivalClick = (f: any) => {
     // Lookup extra static modal detail data if available
-    const extra = SPECIAL_FESTIVAL_DETAILS[f.festival] || SPECIAL_FESTIVAL_DETAILS[f.festival.replace(/ Begins$/, "")];
-    
+    const extra =
+      SPECIAL_FESTIVAL_DETAILS[f.festival] ||
+      SPECIAL_FESTIVAL_DETAILS[f.festival.replace(/ Begins$/, "")];
+
     const rawDeity = extra ? extra.deity : f.deity || "Sanatan Devata";
     const rawSignificance = extra ? extra.significance : f.description;
-    const rawStory = extra ? extra.story : (isHi ? "प्राचीन शास्त्रों और लोक कथाओं के अनुसार पूजनीय।" : "Venerated according to scriptural records and ancient traditions.");
-    const rawRituals = extra ? extra.rituals : f.rituals || (isHi ? "देवी-देवताओं का पूजन अर्चन एवं दीप प्रज्वलन।" : "Devotional worship, temple offerings, and lighting of lamps.");
-    const rawFasting = extra ? extra.fasting : f.fasting || (isHi ? "सत्त्विक भोजन का सेवन करें।" : "Observe light fast or consume sattvic food.");
-    const rawCelebration = extra ? extra.celebration : (isHi ? "घरों एवं मंदिरों में हर्षोल्लास से मनाया जाता है।" : "Celebrated with joy in homes and temples.");
-    const rawTempleRelevance = extra ? extra.templeRelevance : (isHi ? "माँ विन्ध्यवासिनी धाम में विशेष आरती एवं श्रृंगार दर्शन।" : "Special aarti, decorative shringar, and continuous darshan at Vindhyachal temple.");
+    const rawStory = extra
+      ? extra.story
+      : isHi
+        ? "प्राचीन शास्त्रों और लोक कथाओं के अनुसार पूजनीय।"
+        : "Venerated according to scriptural records and ancient traditions.";
+    const rawRituals = extra
+      ? extra.rituals
+      : f.rituals ||
+        (isHi
+          ? "देवी-देवताओं का पूजन अर्चन एवं दीप प्रज्वलन।"
+          : "Devotional worship, temple offerings, and lighting of lamps.");
+    const rawFasting = extra
+      ? extra.fasting
+      : f.fasting ||
+        (isHi ? "सत्त्विक भोजन का सेवन करें।" : "Observe light fast or consume sattvic food.");
+    const rawCelebration = extra
+      ? extra.celebration
+      : isHi
+        ? "घरों एवं मंदिरों में हर्षोल्लास से मनाया जाता है।"
+        : "Celebrated with joy in homes and temples.";
+    const rawTempleRelevance = extra
+      ? extra.templeRelevance
+      : isHi
+        ? "माँ विन्ध्यवासिनी धाम में विशेष आरती एवं श्रृंगार दर्शन।"
+        : "Special aarti, decorative shringar, and continuous darshan at Vindhyachal temple.";
 
     setSelectedFestival({
       ...f,
@@ -673,7 +868,9 @@ export function HinduCalendarPage() {
       extraCelebration: translateText(rawCelebration, isHi),
       extraTempleRelevance: translateText(rawTempleRelevance, isHi),
       extraRelated: extra ? extra.related : "Ekadashi Vrat",
-      bannerImage: extra ? extra.banner : "https://images.unsplash.com/photo-1602631985686-2bb0f3010ad5?auto=format&fit=crop&q=80&w=1200"
+      bannerImage: extra
+        ? extra.banner
+        : "https://images.unsplash.com/photo-1602631985686-2bb0f3010ad5?auto=format&fit=crop&q=80&w=1200",
     });
   };
 
@@ -681,33 +878,34 @@ export function HinduCalendarPage() {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "@id": "https://www.namamivindhyavasini.in/calendar#webpage",
-    "url": "https://www.namamivindhyavasini.in/calendar",
-    "name": "Hindu Calendar & Festival Guide (2023-2029) | Vindhyachal Timings",
-    "description": "Explore Hindu festivals, vrats, Ekadashi, Purnima, Amavasya, Navratri, and sacred observances from 2023–2029 with local spiritual timings for Vindhyachal Dham.",
-    "isPartOf": {
+    url: "https://www.namamivindhyavasini.in/calendar",
+    name: "Hindu Calendar & Festival Guide (2023-2029) | Vindhyachal Timings",
+    description:
+      "Explore Hindu festivals, vrats, Ekadashi, Purnima, Amavasya, Navratri, and sacred observances from 2023–2029 with local spiritual timings for Vindhyachal Dham.",
+    isPartOf: {
       "@type": "WebSite",
       "@id": "https://www.namamivindhyavasini.in/#website",
-      "url": "https://www.namamivindhyavasini.in"
-    }
+      url: "https://www.namamivindhyavasini.in",
+    },
   };
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": [
+    itemListElement: [
       {
         "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.namamivindhyavasini.in"
+        position: 1,
+        name: "Home",
+        item: "https://www.namamivindhyavasini.in",
       },
       {
         "@type": "ListItem",
-        "position": 2,
-        "name": "Hindu Calendar",
-        "item": "https://www.namamivindhyavasini.in/calendar"
-      }
-    ]
+        position: 2,
+        name: "Hindu Calendar",
+        item: "https://www.namamivindhyavasini.in/calendar",
+      },
+    ],
   };
 
   return (
@@ -755,7 +953,7 @@ export function HinduCalendarPage() {
                   <div className="text-sm text-cream/90 font-medium">
                     {new Date(upcomingFestival.date + "T00:00:00").toLocaleDateString(
                       isHi ? "hi-IN" : "en-IN",
-                      { day: "numeric", month: "long", year: "numeric", weekday: "short" }
+                      { day: "numeric", month: "long", year: "numeric", weekday: "short" },
                     )}
                   </div>
                 </div>
@@ -826,7 +1024,9 @@ export function HinduCalendarPage() {
                 className="flex items-center gap-2 px-6 py-2.5 rounded-xl border border-maroon/30 text-maroon hover:bg-maroon hover:text-cream text-xs font-semibold shadow-sm transition-premium cursor-pointer w-full justify-center h-[46px]"
               >
                 <Download className="w-4 h-4" />
-                {isHi ? `${selectedYear} कैलेंडर PDF डाउनलोड` : `Download ${selectedYear} Calendar PDF`}
+                {isHi
+                  ? `${selectedYear} कैलेंडर PDF डाउनलोड`
+                  : `Download ${selectedYear} Calendar PDF`}
               </button>
             </div>
           </div>
@@ -870,7 +1070,12 @@ export function HinduCalendarPage() {
                       {isHi ? MONTHS_HI[MONTHS.indexOf(monthName)] : monthName}
                     </h3>
                     <span className="text-xs font-bold bg-saffron/15 text-saffron px-3 py-1 rounded-full">
-                      {timelineGroups[monthName].length} {isHi ? "त्योहार" : timelineGroups[monthName].length === 1 ? "Festival" : "Festivals"}
+                      {timelineGroups[monthName].length}{" "}
+                      {isHi
+                        ? "त्योहार"
+                        : timelineGroups[monthName].length === 1
+                          ? "Festival"
+                          : "Festivals"}
                     </span>
                   </div>
 
@@ -879,7 +1084,7 @@ export function HinduCalendarPage() {
                     {timelineGroups[monthName].map((f) => {
                       const isHigh = f.importance === "High" || f.category === "Major Festival";
                       const fDate = new Date(f.date + "T00:00:00");
-                      
+
                       return (
                         <article
                           key={f.id + f.festival}
@@ -891,9 +1096,13 @@ export function HinduCalendarPage() {
                           <div className="flex items-center gap-4">
                             {/* Date Badge */}
                             <div className="w-14 h-14 rounded-xl border border-gold/30 bg-background flex flex-col items-center justify-center text-maroon group-hover:border-saffron group-hover:bg-saffron/5 transition-all shadow-sm shrink-0">
-                              <span className="text-xl font-bold font-display leading-none">{fDate.getDate()}</span>
+                              <span className="text-xl font-bold font-display leading-none">
+                                {fDate.getDate()}
+                              </span>
                               <span className="text-[9px] uppercase font-bold tracking-wider mt-1 text-saffron">
-                                {isHi ? fDate.toLocaleDateString("hi-IN", { month: "short" }) : fDate.toLocaleDateString("en-US", { month: "short" })}
+                                {isHi
+                                  ? fDate.toLocaleDateString("hi-IN", { month: "short" })
+                                  : fDate.toLocaleDateString("en-US", { month: "short" })}
                               </span>
                             </div>
 
@@ -902,9 +1111,11 @@ export function HinduCalendarPage() {
                                 <h4 className="font-semibold text-base text-foreground group-hover:text-maroon transition-colors">
                                   {translateFestivalName(f.festival, isHi)}
                                 </h4>
-                                <span className={`text-[9px] px-2 py-0.5 rounded-full uppercase tracking-wider font-bold ${
-                                  isHigh ? "bg-saffron text-cream" : "bg-gold/10 text-maroon"
-                                }`}>
+                                <span
+                                  className={`text-[9px] px-2 py-0.5 rounded-full uppercase tracking-wider font-bold ${
+                                    isHigh ? "bg-saffron text-cream" : "bg-gold/10 text-maroon"
+                                  }`}
+                                >
                                   {getTranslatedCategory(f.category, isHi)}
                                 </span>
                               </div>
@@ -927,8 +1138,6 @@ export function HinduCalendarPage() {
             ))
           )}
         </section>
-
-
       </div>
 
       {/* Festival Details Popup Modal */}
@@ -966,7 +1175,7 @@ export function HinduCalendarPage() {
                   <div className="font-bold text-maroon">
                     {new Date(selectedFestival.date + "T00:00:00").toLocaleDateString(
                       isHi ? "hi-IN" : "en-IN",
-                      { day: "numeric", month: "long", year: "numeric", weekday: "short" }
+                      { day: "numeric", month: "long", year: "numeric", weekday: "short" },
                     )}
                   </div>
                 </div>

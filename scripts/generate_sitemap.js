@@ -23,12 +23,17 @@ const filesToCopy = [
   "maa-vindhyavasini.webp",
   "maa-vindhyavasini-2.webp",
   "maa-vindhyavasini-3.webp",
+  "maa-vindhyavasini-3.jpg",
+  "maa-vindhyavasini-4.jpg",
+  "maa-vindhyavasini-5.jpg",
   "gallery-1.webp",
   "kali-koh.webp",
-  "asht-bhuja.webp"
+  "asht-bhuja.webp",
+  "maa-vindhyavasini-simhasan-shringar.jpg",
+  "maa-vindhyavasini-garland-shringar.jpg",
 ];
 
-filesToCopy.forEach(file => {
+filesToCopy.forEach((file) => {
   const srcPath = path.join(srcAssetsDir, file);
   const destPath = path.join(imagesPublicDir, file);
   if (fs.existsSync(srcPath)) {
@@ -56,7 +61,7 @@ function loadEnv() {
   const envPath = path.resolve(__dirname, "../.env");
   if (fs.existsSync(envPath)) {
     const lines = fs.readFileSync(envPath, "utf-8").split("\n");
-    lines.forEach(line => {
+    lines.forEach((line) => {
       const match = line.match(/^\s*([\w.-]+)\s*=\s*(.*)?\s*$/);
       if (match) {
         const key = match[1];
@@ -74,14 +79,20 @@ function loadEnv() {
 
 function escapeXml(unsafe) {
   if (!unsafe) return "";
-  return unsafe.replace(/[&<>\'"]/g, c => {
+  return unsafe.replace(/[&<>\'"]/g, (c) => {
     switch (c) {
-      case '<': return '&lt;';
-      case '>': return '&gt;';
-      case '&': return '&amp;';
-      case '\'': return '&apos;';
-      case '"': return '&quot;';
-      default: return c;
+      case "<":
+        return "&lt;";
+      case ">":
+        return "&gt;";
+      case "&":
+        return "&amp;";
+      case "'":
+        return "&apos;";
+      case '"':
+        return "&quot;";
+      default:
+        return c;
     }
   });
 }
@@ -91,7 +102,10 @@ async function generateSitemap() {
 
   const today = new Date().toISOString().split("T")[0];
   const supabaseUrl = process.env.VITE_SUPABASE_URL || "https://avmemxowlunhlyfntiqu.supabase.co";
-  const supabaseKey = process.env.VITE_SUPABASE_PUBLISHABLE_KEY || process.env.VITE_SUPABASE_ANON_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF2bWVteG93bHVuaGx5Zm50aXF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk2OTIyOTMsImV4cCI6MjA5NTI2ODI5M30.R5DwGPSWZH_PXmsEnUntYu7WyHK6VHXsEUkq8zISRkw";
+  const supabaseKey =
+    process.env.VITE_SUPABASE_PUBLISHABLE_KEY ||
+    process.env.VITE_SUPABASE_ANON_KEY ||
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF2bWVteG93bHVuaGx5Zm50aXF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk2OTIyOTMsImV4cCI6MjA5NTI2ODI5M30.R5DwGPSWZH_PXmsEnUntYu7WyHK6VHXsEUkq8zISRkw";
 
   const supabase = createClient(supabaseUrl, supabaseKey);
 
@@ -124,18 +138,28 @@ async function generateSitemap() {
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini.webp</image:loc>
-      <image:title>Maa Vindhyavasini Darshan at Vindhyachal Dham</image:title>
-      <image:caption>Maa Vindhyavasini Darshan at Vindhyachal Dham</image:caption>
+      <image:title>Maa Vindhyavasini Divine Grace Darshan at Vindhyachal Dham</image:title>
+      <image:caption>Presiding deity Maa Vindhyavasini alankar shringar darshan at Vindhyachal Dham, Mirzapur</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-2.webp</image:loc>
       <image:title>Maa Vindhyavasini Shringar at Vindhyachal Temple</image:title>
-      <image:caption>Maa Vindhyavasini Shringar at Vindhyachal Temple</image:caption>
+      <image:caption>The golden alankar of Maa Vindhyavasini inside the sanctum sanctorum of Vindhyachal Temple</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-3.webp</image:loc>
-      <image:title>Maa Vindhyavasini Devotional Image</image:title>
-      <image:caption>Maa Vindhyavasini Devotional Image</image:caption>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.jpg</image:loc>
+      <image:title>Maa Vindhyavasini Simhasan Shringar at Vindhyachal Dham</image:title>
+      <image:caption>Maa Vindhyavasini sitting on her golden lion throne (Simhasan) in Vindhyachal Dham, Mirzapur</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-3.jpg</image:loc>
+      <image:title>Maa Vindhyavasini Beautiful Alankar Shringar at Vindhyachal Dham</image:title>
+      <image:caption>Beautiful daily shringar of Goddess Vindhyavasini at Vindhyachal Dham</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-garland-shringar.jpg</image:loc>
+      <image:title>Maa Vindhyavasini Garland Alankar at Vindhyachal Dham</image:title>
+      <image:caption>Goddess Vindhyavasini decorated with grand flower garlands during daily aarti</image:caption>
     </image:image>
   </url>
   <url>
@@ -144,19 +168,24 @@ async function generateSitemap() {
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-3.webp</image:loc>
-      <image:title>Maa Vindhyavasini Devotional history image</image:title>
-      <image:caption>Maa Vindhyavasini Devotional history image</image:caption>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.jpg</image:loc>
+      <image:title>Maa Vindhyavasini Simhasan Shringar History and Significance</image:title>
+      <image:caption>Detailed layout of the newly developed Vindhya Corridor and ancient temple architecture</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-garland-shringar.jpg</image:loc>
+      <image:title>Maa Vindhyavasini Garland Alankar Spiritual Guide</image:title>
+      <image:caption>Devotional details and history of Maa Vindhyavasini Devi Mirzapur UP</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://www.namamivindhyavasini.in/images/kali-koh.webp</image:loc>
       <image:title>Maa Kali Temple at Kali Khoh Vindhyachal</image:title>
-      <image:caption>Maa Kali Temple at Kali Khoh Vindhyachal</image:caption>
+      <image:caption>Maa Kali Temple at Kali Khoh representing the second point of the Trikona Parikrama</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://www.namamivindhyavasini.in/images/asht-bhuja.webp</image:loc>
       <image:title>Ashtabhuja Devi Temple hilltop shrine</image:title>
-      <image:caption>Ashtabhuja Devi Temple hilltop shrine</image:caption>
+      <image:caption>Ashtabhuja Devi Temple on the hilltop representing the third point of the Trikona Parikrama</image:caption>
     </image:image>
   </url>
   <url>
@@ -177,19 +206,39 @@ async function generateSitemap() {
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.jpg</image:loc>
+      <image:title>Maa Vindhyavasini Simhasan Shringar Darshan</image:title>
+      <image:caption>Photograph of Maa Vindhyavasini sitting on her golden lion throne (Simhasan)</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-garland-shringar.jpg</image:loc>
+      <image:title>Maa Vindhyavasini Garland Alankar Darshan</image:title>
+      <image:caption>Presiding deity Maa Vindhyavasini Devi garland shringar alankar darshan</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-4.jpg</image:loc>
+      <image:title>Maa Vindhyavasini Simha Vahana Darshan</image:title>
+      <image:caption>Simha Vahana shringar alankar of Maa Vindhyavasini Devi</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-5.jpg</image:loc>
+      <image:title>Maa Vindhyavasini Pushpa Shringar Darshan</image:title>
+      <image:caption>Divine pushpa shringar alankar decoration of Maa Vindhyavasini</image:caption>
+    </image:image>
+    <image:image>
       <image:loc>https://www.namamivindhyavasini.in/images/gallery-1.webp</image:loc>
       <image:title>Swarna Shringar of Maa Vindhyavasini</image:title>
-      <image:caption>Swarna Shringar of Maa Vindhyavasini</image:caption>
+      <image:caption>Swarna alankar gold decoration of Maa Vindhyavasini</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini.webp</image:loc>
+      <image:title>Maa Vindhyavasini Divine Grace Darshan</image:title>
+      <image:caption>The facial alankar and expression of grace of Maa Vindhyavasini Devi</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-2.webp</image:loc>
-      <image:title>Mangala Aarti of Maa Vindhyavasini</image:title>
-      <image:caption>Mangala Aarti of Maa Vindhyavasini</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-3.webp</image:loc>
-      <image:title>Vishesh Shringar of Maa Vindhyavasini</image:title>
-      <image:caption>Vishesh Shringar of Maa Vindhyavasini</image:caption>
+      <image:title>Maa Vindhyavasini Temple Darshan</image:title>
+      <image:caption>Inside the garbhagriha showing daily alankar darshan of Maa Vindhyavasini</image:caption>
     </image:image>
   </url>
   <url>
@@ -236,8 +285,45 @@ async function generateSitemap() {
   </url>
 `;
 
+  // Add /learn main page
+  sitemapContent += `  <url>
+    <loc>https://www.namamivindhyavasini.in/learn</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>\n`;
+
+  // Dynamically append learn topics to sitemap
+  try {
+    const learnContentPath = path.resolve(__dirname, "../src/data/learnContent.ts");
+    if (fs.existsSync(learnContentPath)) {
+      const learnContentText = fs.readFileSync(learnContentPath, "utf-8");
+      const slugRegex = /slug:\s*["']([^"']+)["']/g;
+      const slugs = [];
+      let match;
+      while ((match = slugRegex.exec(learnContentText)) !== null) {
+        slugs.push(match[1]);
+      }
+      const uniqueSlugs = [...new Set(slugs)];
+      console.log(`[SEO] Found ${uniqueSlugs.length} learn slugs in learnContent.ts.`);
+      uniqueSlugs.forEach((slug) => {
+        const encodedSlug = encodeURIComponent(slug);
+        sitemapContent += `  <url>
+    <loc>https://www.namamivindhyavasini.in/learn/${encodedSlug}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>\n`;
+      });
+    } else {
+      console.warn("[SEO] Warning: learnContent.ts not found for sitemap generation.");
+    }
+  } catch (err) {
+    console.warn("[SEO] Warning: Failed to extract learn slugs for sitemap:", err);
+  }
+
   // Dynamically append blog posts to sitemap
-  blogPosts.forEach(post => {
+  blogPosts.forEach((post) => {
     const postDate = post.publish_date ? post.publish_date.split("T")[0] : today;
     const encodedSlug = encodeURIComponent(post.slug);
     sitemapContent += `  <url>

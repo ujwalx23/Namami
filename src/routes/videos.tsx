@@ -37,11 +37,12 @@ export const Route = createFileRoute("/videos")({
         content:
           "Watch daily aartis, bhajan, spiritual discourses, temple videos, and YouTube shorts celebrating the divine presence of Goddess Vindhyavasini.",
       },
-      { name: "twitter:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
+      {
+        name: "twitter:image",
+        content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png",
+      },
     ],
-    links: [
-      { rel: "canonical", href: "https://www.namamivindhyavasini.in/videos" }
-    ]
+    links: [{ rel: "canonical", href: "https://www.namamivindhyavasini.in/videos" }],
   }),
   loader: async () => {
     try {
@@ -65,7 +66,7 @@ export type Video = { type: "video" | "short"; id: string; title: string; embed:
 export const videos: Video[] = [];
 
 function getYoutubeVideoId(embedUrl: string): string | null {
-  const match = embedUrl.match(/(?:embed\/|v\/|watch\?v=|youtu\.be\/|shorts\/)([^#\&\?]*)/);
+  const match = embedUrl.match(/(?:embed\/|v\/|watch\?v=|youtu\.be\/|shorts\/)([^#&?]*)/);
   if (match && match[1] && match[1].length === 11) {
     return match[1];
   }
@@ -91,6 +92,7 @@ function VideoPlayer({
       setIframeLoaded(false);
     }
   }, [isPlaying]);
+
 
   if (videoId) {
     const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
@@ -156,10 +158,12 @@ function VideosPage() {
   const { fetchedVideos } = Route.useLoaderData();
   const { t, lang } = useLang();
   const dev = lang === "hi" ? "font-devanagari" : "";
-  const [activeTab, setActiveTab] = useState<"video" | "short">("video");
+  const [activeTab, setActiveTab] = useState<"video" | "short">("short");
   const [playingId, setPlayingId] = useState<string | null>(null);
 
-  const activeVideos: Video[] = (fetchedVideos as Video[]) || [];
+  const activeVideos: Video[] = ((fetchedVideos as Video[]) || []).filter(
+    (v) => !v.embed.includes("instagram.com")
+  );
   const list = activeVideos.filter((v) => v.type === activeTab);
 
   const handleTabChange = (tab: "video" | "short") => {
@@ -171,39 +175,64 @@ function VideosPage() {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "@id": "https://www.namamivindhyavasini.in/videos#webpage",
-    "url": "https://www.namamivindhyavasini.in/videos",
-    "name": "Devotional Videos, Aarti & Shorts | Maa Vindhyavasini",
-    "description": "Watch daily aartis, bhajan, spiritual discourses, temple videos, and YouTube shorts celebrating the divine presence of Goddess Vindhyavasini.",
-    "isPartOf": {
+    url: "https://www.namamivindhyavasini.in/videos",
+    name: "Devotional Videos, Aarti & Shorts | Maa Vindhyavasini",
+    description:
+      "Watch daily aartis, bhajan, spiritual discourses, temple videos, and YouTube shorts celebrating the divine presence of Goddess Vindhyavasini.",
+    isPartOf: {
       "@type": "WebSite",
       "@id": "https://www.namamivindhyavasini.in/#website",
-      "url": "https://www.namamivindhyavasini.in"
-    }
+      url: "https://www.namamivindhyavasini.in",
+    },
   };
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": [
+    itemListElement: [
       {
         "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.namamivindhyavasini.in"
+        position: 1,
+        name: "Home",
+        item: "https://www.namamivindhyavasini.in",
       },
       {
         "@type": "ListItem",
-        "position": 2,
-        "name": "Videos",
-        "item": "https://www.namamivindhyavasini.in/videos"
-      }
-    ]
+        position: 2,
+        name: "Videos",
+        item: "https://www.namamivindhyavasini.in/videos",
+      },
+    ],
+  };
+
+  const videosSchema = {
+    "@context": "https://schema.org",
+    "@graph": activeVideos.map((v, idx) => {
+      const ytId = getYoutubeVideoId(v.embed);
+      const thumbnail = ytId
+        ? `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg`
+        : "https://www.namamivindhyavasini.in/maa-vindhyavasini.png";
+
+      return {
+        "@type": "VideoObject",
+        "@id": `https://www.namamivindhyavasini.in/videos#video-${v.id || idx}`,
+        name: v.title,
+        description:
+          lang === "hi"
+            ? `नमामि विन्ध्यवासिनी संस्थान द्वारा प्रस्तुत माँ विन्ध्यवासिनी देवी का दिव्य भजन, आरती और वीडियो: ${v.title}`
+            : `Devotional bhajan, aarti, or short video of Maa Vindhyavasini: ${v.title}`,
+        thumbnailUrl: thumbnail,
+        uploadDate: "2025-01-01T00:00:00+05:30",
+        embedUrl: v.embed,
+      };
+    }),
   };
 
   return (
     <PageShell>
       <JsonLd data={webpageSchema} />
       <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={videosSchema} />
       <PageHero
         sanskrit={t("videos.sanskrit")}
         title={t("videos.title")}
@@ -268,7 +297,9 @@ function VideosPage() {
                       onPlay={() => setPlayingId(s.id)}
                     />
                   </div>
-                  <p className={`mt-2 text-muted-foreground text-xs sm:text-sm text-center line-clamp-2 ${dev}`}>
+                  <p
+                    className={`mt-2 text-muted-foreground text-xs sm:text-sm text-center line-clamp-2 ${dev}`}
+                  >
                     {s.title}
                   </p>
                 </div>

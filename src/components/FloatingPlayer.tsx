@@ -46,11 +46,7 @@ export function FloatingPlayer() {
   // Handle click outside to minimize
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (
-        isExpanded &&
-        playerRef.current &&
-        !playerRef.current.contains(event.target as Node)
-      ) {
+      if (isExpanded && playerRef.current && !playerRef.current.contains(event.target as Node)) {
         setIsExpanded(false);
       }
     }
@@ -68,12 +64,7 @@ export function FloatingPlayer() {
 
   const getMinimizedIcon = () => {
     if (isPlaying) {
-      return (
-        <Pause
-          className="hover:scale-110 transition-transform duration-300"
-          size={24}
-        />
-      );
+      return <Pause className="hover:scale-110 transition-transform duration-300" size={24} />;
     }
     return (
       <Music

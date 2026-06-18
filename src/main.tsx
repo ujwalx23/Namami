@@ -24,7 +24,9 @@ if (typeof window !== "undefined") {
     navigator.serviceWorker.addEventListener("controllerchange", () => {
       if (!refreshing) {
         refreshing = true;
-        console.log("[Service Worker] Controller changed. Reloading page to load latest version...");
+        console.log(
+          "[Service Worker] Controller changed. Reloading page to load latest version...",
+        );
         window.location.reload();
       }
     });

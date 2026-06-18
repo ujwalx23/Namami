@@ -32,7 +32,7 @@ function drawRoundRect(
   y: number,
   w: number,
   h: number,
-  r: number
+  r: number,
 ) {
   ctx.beginPath();
   ctx.moveTo(x + r, y);
@@ -50,7 +50,7 @@ function drawRoundRect(
 /** Adds diagonal + footer watermark for gallery / shared images. */
 export async function addGalleryWatermark(
   source: Blob | string,
-  hi = false
+  hi = false,
 ): Promise<{ blob: Blob; dataUrl: string }> {
   const img = await loadImage(source);
 

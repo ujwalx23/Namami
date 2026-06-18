@@ -23,7 +23,9 @@ import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LearnIndexRouteImport } from './routes/learn.index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as LearnSlugRouteImport } from './routes/learn.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
 
@@ -97,10 +99,20 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LearnIndexRoute = LearnIndexRouteImport.update({
+  id: '/learn/',
+  path: '/learn/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => BlogRoute,
+} as any)
+const LearnSlugRoute = LearnSlugRouteImport.update({
+  id: '/learn/$slug',
+  path: '/learn/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/$slug',
@@ -130,7 +142,9 @@ export interface FileRoutesByFullPath {
   '/videos': typeof VideosRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/learn/$slug': typeof LearnSlugRoute
   '/blog/': typeof BlogIndexRoute
+  '/learn/': typeof LearnIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -148,7 +162,9 @@ export interface FileRoutesByTo {
   '/videos': typeof VideosRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/learn/$slug': typeof LearnSlugRoute
   '/blog': typeof BlogIndexRoute
+  '/learn': typeof LearnIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -168,7 +184,9 @@ export interface FileRoutesById {
   '/videos': typeof VideosRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/learn/$slug': typeof LearnSlugRoute
   '/blog/': typeof BlogIndexRoute
+  '/learn/': typeof LearnIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -189,7 +207,9 @@ export interface FileRouteTypes {
     | '/videos'
     | '/auth/callback'
     | '/blog/$slug'
+    | '/learn/$slug'
     | '/blog/'
+    | '/learn/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -207,7 +227,9 @@ export interface FileRouteTypes {
     | '/videos'
     | '/auth/callback'
     | '/blog/$slug'
+    | '/learn/$slug'
     | '/blog'
+    | '/learn'
   id:
     | '__root__'
     | '/'
@@ -226,7 +248,9 @@ export interface FileRouteTypes {
     | '/videos'
     | '/auth/callback'
     | '/blog/$slug'
+    | '/learn/$slug'
     | '/blog/'
+    | '/learn/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -245,6 +269,8 @@ export interface RootRouteChildren {
   SandeshRoute: typeof SandeshRoute
   VideosRoute: typeof VideosRoute
   AuthCallbackRoute: typeof AuthCallbackRoute
+  LearnSlugRoute: typeof LearnSlugRoute
+  LearnIndexRoute: typeof LearnIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -347,12 +373,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/learn/': {
+      id: '/learn/'
+      path: '/learn'
+      fullPath: '/learn/'
+      preLoaderRoute: typeof LearnIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/': {
       id: '/blog/'
       path: '/'
       fullPath: '/blog/'
       preLoaderRoute: typeof BlogIndexRouteImport
       parentRoute: typeof BlogRoute
+    }
+    '/learn/$slug': {
+      id: '/learn/$slug'
+      path: '/learn/$slug'
+      fullPath: '/learn/$slug'
+      preLoaderRoute: typeof LearnSlugRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/blog/$slug': {
       id: '/blog/$slug'
@@ -399,6 +439,8 @@ const rootRouteChildren: RootRouteChildren = {
   SandeshRoute: SandeshRoute,
   VideosRoute: VideosRoute,
   AuthCallbackRoute: AuthCallbackRoute,
+  LearnSlugRoute: LearnSlugRoute,
+  LearnIndexRoute: LearnIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

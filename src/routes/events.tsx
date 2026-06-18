@@ -23,7 +23,10 @@ export const Route = createFileRoute("/events")({
         content:
           "Vindhyachal temple events, Navratri celebration schedule, satsang dates, temple bhandara, spiritual events",
       },
-      { property: "og:title", content: "Spiritual Events, Navratri Pujas & Satsangs | Namami Vindhyavasini" },
+      {
+        property: "og:title",
+        content: "Spiritual Events, Navratri Pujas & Satsangs | Namami Vindhyavasini",
+      },
       {
         property: "og:description",
         content:
@@ -39,11 +42,12 @@ export const Route = createFileRoute("/events")({
         content:
           "Stay updated on upcoming spiritual events, Navratri celebrations, regular satsangs, and special pujas.",
       },
-      { name: "twitter:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
+      {
+        name: "twitter:image",
+        content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png",
+      },
     ],
-    links: [
-      { rel: "canonical", href: "https://www.namamivindhyavasini.in/events" }
-    ]
+    links: [{ rel: "canonical", href: "https://www.namamivindhyavasini.in/events" }],
   }),
   loader: async () => {
     const { data, error } = await supabase
@@ -112,7 +116,8 @@ function EventCard({ e, accent }: { e: EventRow; accent: "gold" | "muted" | "liv
           </div>
           <div className="flex flex-col gap-1.5 text-sm text-muted-foreground mb-4">
             <span className="flex items-center gap-2">
-              <Calendar size={14} className="text-gold" /> {formatDateRange(e.event_date, e.end_date)}
+              <Calendar size={14} className="text-gold" />{" "}
+              {formatDateRange(e.event_date, e.end_date)}
             </span>
             <span className="flex items-center gap-2">
               <MapPin size={14} className="text-gold" /> {e.location}
@@ -151,33 +156,34 @@ function EventsPage() {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "@id": "https://www.namamivindhyavasini.in/events#webpage",
-    "url": "https://www.namamivindhyavasini.in/events",
-    "name": "Spiritual Events, Navratri Pujas & Satsangs | Namami Vindhyavasini",
-    "description": "Stay updated on upcoming spiritual events, Navratri celebrations, regular satsangs, bhandaras, and special pujas organized at Maa Vindhyavasini Dham.",
-    "isPartOf": {
+    url: "https://www.namamivindhyavasini.in/events",
+    name: "Spiritual Events, Navratri Pujas & Satsangs | Namami Vindhyavasini",
+    description:
+      "Stay updated on upcoming spiritual events, Navratri celebrations, regular satsangs, bhandaras, and special pujas organized at Maa Vindhyavasini Dham.",
+    isPartOf: {
       "@type": "WebSite",
       "@id": "https://www.namamivindhyavasini.in/#website",
-      "url": "https://www.namamivindhyavasini.in"
-    }
+      url: "https://www.namamivindhyavasini.in",
+    },
   };
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": [
+    itemListElement: [
       {
         "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.namamivindhyavasini.in"
+        position: 1,
+        name: "Home",
+        item: "https://www.namamivindhyavasini.in",
       },
       {
         "@type": "ListItem",
-        "position": 2,
-        "name": "Events",
-        "item": "https://www.namamivindhyavasini.in/events"
-      }
-    ]
+        position: 2,
+        name: "Events",
+        item: "https://www.namamivindhyavasini.in/events",
+      },
+    ],
   };
 
   return (

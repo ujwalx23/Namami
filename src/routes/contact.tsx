@@ -23,7 +23,10 @@ export const Route = createFileRoute("/contact")({
         content:
           "Vindhyavasini contact details, contact number, temple address, booking appointment with Gurudev, Vindhyachal Dham office, संपर्क",
       },
-      { property: "og:title", content: "Contact Namami Vindhyavasini Sansthan | Address & Location Map" },
+      {
+        property: "og:title",
+        content: "Contact Namami Vindhyavasini Sansthan | Address & Location Map",
+      },
       {
         property: "og:description",
         content:
@@ -39,11 +42,12 @@ export const Route = createFileRoute("/contact")({
         content:
           "Get in touch with Namami Vindhyavasini Sansthan. Find address, contact, and map locations.",
       },
-      { name: "twitter:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
+      {
+        name: "twitter:image",
+        content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png",
+      },
     ],
-    links: [
-      { rel: "canonical", href: "https://www.namamivindhyavasini.in/contact" }
-    ]
+    links: [{ rel: "canonical", href: "https://www.namamivindhyavasini.in/contact" }],
   }),
   component: ContactPage,
 });
@@ -73,33 +77,34 @@ function ContactPage() {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "@id": "https://www.namamivindhyavasini.in/contact#webpage",
-    "url": "https://www.namamivindhyavasini.in/contact",
-    "name": "Contact Namami Vindhyavasini Sansthan | Address & Location Map",
-    "description": "Get in touch with Namami Vindhyavasini Sansthan. Find office address, contact number, email, and Google Map location for visiting Vindhyachal Dham.",
-    "isPartOf": {
+    url: "https://www.namamivindhyavasini.in/contact",
+    name: "Contact Namami Vindhyavasini Sansthan | Address & Location Map",
+    description:
+      "Get in touch with Namami Vindhyavasini Sansthan. Find office address, contact number, email, and Google Map location for visiting Vindhyachal Dham.",
+    isPartOf: {
       "@type": "WebSite",
       "@id": "https://www.namamivindhyavasini.in/#website",
-      "url": "https://www.namamivindhyavasini.in"
-    }
+      url: "https://www.namamivindhyavasini.in",
+    },
   };
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": [
+    itemListElement: [
       {
         "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.namamivindhyavasini.in"
+        position: 1,
+        name: "Home",
+        item: "https://www.namamivindhyavasini.in",
       },
       {
         "@type": "ListItem",
-        "position": 2,
-        "name": "Contact",
-        "item": "https://www.namamivindhyavasini.in/contact"
-      }
-    ]
+        position: 2,
+        name: "Contact",
+        item: "https://www.namamivindhyavasini.in/contact",
+      },
+    ],
   };
 
   return (
@@ -109,13 +114,14 @@ function ContactPage() {
       <PageHero sanskrit={t("ct.sanskrit")} title={t("ct.title")} subtitle={t("ct.subtitle")} />
 
       <section className="w-full py-16 px-4 xs:px-6 flex flex-col items-center gap-14">
-        {/* Row 1: Contact Form */}
-        <div className="w-full max-w-xl">
+        {/* Row 1: Forms Grid (Side-by-side on desktop) */}
+        <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
           <ContactForm />
+          <AppointmentForm />
         </div>
 
         {/* Row 2: Info Cards & Google Map */}
-        <div className="w-full max-w-4xl grid md:grid-cols-2 gap-8 items-stretch">
+        <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
           {/* Info Cards */}
           <div className="flex flex-col gap-4 justify-between h-full w-full">
             {[
@@ -169,11 +175,6 @@ function ContactPage() {
               height="100%"
             />
           </div>
-        </div>
-
-        {/* Row 3: Appointment Form */}
-        <div className="w-full max-w-xl">
-          <AppointmentForm />
         </div>
       </section>
     </PageShell>
@@ -256,7 +257,10 @@ function ContactForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="p-5 xs:p-6 sm:p-8 rounded-2xl bg-card border border-border">
+    <form
+      onSubmit={onSubmit}
+      className="p-5 xs:p-6 sm:p-8 rounded-2xl bg-card border border-border w-full max-w-sm lg:max-w-full mx-auto"
+    >
       <div className="flex flex-col items-center justify-center gap-2 mb-5 text-center">
         <Send size={18} className="text-saffron" />
         <h2 className={`font-display text-2xl text-maroon ${dev}`}>{t("ct.send.title")}</h2>
@@ -389,7 +393,7 @@ function AppointmentForm() {
   return (
     <form
       onSubmit={onSubmit}
-      className="p-5 xs:p-6 sm:p-8 rounded-2xl bg-gradient-divine border-2 border-gold/40"
+      className="p-5 xs:p-6 sm:p-8 rounded-2xl bg-gradient-divine border-2 border-gold/40 w-full max-w-sm lg:max-w-full mx-auto"
     >
       <div className="flex flex-col items-center justify-center gap-2 mb-5 text-center">
         <CalendarPlus size={18} className="text-saffron" />

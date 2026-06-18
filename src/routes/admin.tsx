@@ -261,10 +261,11 @@ function AdminPage() {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`w-full lg:w-auto px-2 py-2 lg:px-5 lg:py-2.5 rounded-lg font-medium text-[11px] sm:text-xs lg:text-sm transition flex items-center justify-center text-center leading-tight shrink-0 lg:shrink cursor-pointer ${activeTab === tab.id
+              className={`w-full lg:w-auto px-2 py-2 lg:px-5 lg:py-2.5 rounded-lg font-medium text-[11px] sm:text-xs lg:text-sm transition flex items-center justify-center text-center leading-tight shrink-0 lg:shrink cursor-pointer ${
+                activeTab === tab.id
                   ? "bg-gradient-sacred text-cream shadow-gold font-semibold"
                   : "text-muted-foreground hover:bg-card"
-                }`}
+              }`}
             >
               {tab.label}
             </button>
@@ -590,7 +591,9 @@ function EventAdmin() {
         />
         <div className="grid sm:grid-cols-3 gap-3">
           <div className="space-y-1">
-            <label className="text-[10px] font-semibold text-muted-foreground uppercase">Start Date</label>
+            <label className="text-[10px] font-semibold text-muted-foreground uppercase">
+              Start Date
+            </label>
             <input
               type="date"
               value={eventDate}
@@ -600,7 +603,9 @@ function EventAdmin() {
             />
           </div>
           <div className="space-y-1">
-            <label className="text-[10px] font-semibold text-muted-foreground uppercase">End Date (Optional)</label>
+            <label className="text-[10px] font-semibold text-muted-foreground uppercase">
+              End Date (Optional)
+            </label>
             <input
               type="date"
               value={endDate}
@@ -609,7 +614,9 @@ function EventAdmin() {
             />
           </div>
           <div className="space-y-1">
-            <label className="text-[10px] font-semibold text-muted-foreground uppercase">Location</label>
+            <label className="text-[10px] font-semibold text-muted-foreground uppercase">
+              Location
+            </label>
             <input
               value={location}
               onChange={(e) => setLocation(e.target.value)}
@@ -656,7 +663,9 @@ function EventAdmin() {
               <div>
                 <div className="flex items-center gap-2 flex-wrap mb-1">
                   <span className="text-[10px] font-semibold text-saffron bg-saffron/10 px-2 py-0.5 rounded">
-                    {ev.end_date && ev.end_date !== ev.event_date ? `${ev.event_date} to ${ev.end_date}` : ev.event_date}
+                    {ev.end_date && ev.end_date !== ev.event_date
+                      ? `${ev.event_date} to ${ev.end_date}`
+                      : ev.event_date}
                   </span>
 
                   {isLive ? (
@@ -1005,7 +1014,7 @@ function ContactAdmin({ onUpdate }: { onUpdate?: () => void }) {
 }
 
 function extractYoutubeId(url: string): string | null {
-  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|shorts\/)([^#\&\?]*).*/;
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=|shorts\/)([^#&?]*).*/;
   const match = url.match(regExp);
   if (match && match[2].length === 11) {
     return match[2];
@@ -1013,6 +1022,14 @@ function extractYoutubeId(url: string): string | null {
   const clean = url.trim();
   if (clean.length === 11 && /^[a-zA-Z0-9_-]{11}$/.test(clean)) {
     return clean;
+  }
+  return null;
+}
+
+function extractInstagramId(url: string): string | null {
+  const match = url.match(/(?:instagram\.com)\/(?:reel|p)\/([a-zA-Z0-9_-]+)/i);
+  if (match && match[1]) {
+    return match[1];
   }
   return null;
 }
@@ -1052,28 +1069,41 @@ function VideoAdmin() {
     if (!form.title.trim() || !form.embed.trim())
       return toast.error("Title and video link/ID required");
 
-    const isShortsLink = form.embed.toLowerCase().includes("shorts");
+    const isInstagram = form.embed.toLowerCase().includes("instagram.com");
+    const isShortsLink = form.embed.toLowerCase().includes("shorts") || isInstagram;
+
     if (videoTab === "short" && !isShortsLink) {
-      return toast.error(
-        "Only YouTube Shorts links (containing 'shorts') are allowed in this section.",
-      );
+      return toast.error("Only YouTube Shorts or Instagram Reels are allowed in this section.");
     }
     if (videoTab === "video" && isShortsLink) {
       return toast.error(
-        "YouTube Shorts links must be added under the Shorts tab, not the Videos section.",
+        "YouTube Shorts and Instagram Reels must be added under the Shorts tab, not the Videos section.",
       );
     }
 
-    const youtubeId = extractYoutubeId(form.embed);
-    if (!youtubeId) {
-      return toast.error(
-        "Invalid YouTube URL or Video ID. Please enter a valid YouTube link or 11-char ID.",
-      );
+    let videoId = "";
+    let embedUrl = "";
+
+    if (isInstagram) {
+      const instaId = extractInstagramId(form.embed);
+      if (!instaId) {
+        return toast.error("Invalid Instagram Reel URL. Please enter a valid reel or post link.");
+      }
+      videoId = `ig_${instaId}`;
+      embedUrl = `https://www.instagram.com/reel/${instaId}/embed/`;
+    } else {
+      const youtubeId = extractYoutubeId(form.embed);
+      if (!youtubeId) {
+        return toast.error(
+          "Invalid YouTube URL or Video ID. Please enter a valid YouTube link or 11-char ID.",
+        );
+      }
+      videoId = youtubeId;
+      embedUrl = `https://www.youtube.com/embed/${youtubeId}`;
     }
-    const embedUrl = `https://www.youtube.com/embed/${youtubeId}`;
 
     const { error } = await supabase.from("youtube_videos").insert({
-      id: youtubeId,
+      id: videoId,
       title: form.title.trim(),
       embed: embedUrl,
       type: videoTab,
@@ -1088,32 +1118,45 @@ function VideoAdmin() {
     if (!editForm.title.trim() || !editForm.embed.trim())
       return toast.error("Title and video link/ID required");
 
-    const isShortsLink = editForm.embed.toLowerCase().includes("shorts");
+    const isInstagram = editForm.embed.toLowerCase().includes("instagram.com");
+    const isShortsLink = editForm.embed.toLowerCase().includes("shorts") || isInstagram;
+
     if (editForm.type === "short" && !isShortsLink) {
-      return toast.error(
-        "Only YouTube Shorts links (containing 'shorts') are allowed in this section.",
-      );
+      return toast.error("Only YouTube Shorts or Instagram Reels are allowed in this section.");
     }
     if (editForm.type === "video" && isShortsLink) {
       return toast.error(
-        "YouTube Shorts links must be added under the Shorts tab, not the Videos section.",
+        "YouTube Shorts and Instagram Reels must be added under the Shorts tab, not the Videos section.",
       );
     }
 
-    const youtubeId = extractYoutubeId(editForm.embed);
-    if (!youtubeId) {
-      return toast.error(
-        "Invalid YouTube URL or Video ID. Please enter a valid YouTube link or 11-char ID.",
-      );
-    }
-    const embedUrl = `https://www.youtube.com/embed/${youtubeId}`;
+    let videoId = "";
+    let embedUrl = "";
 
-    if (youtubeId !== id) {
+    if (isInstagram) {
+      const instaId = extractInstagramId(editForm.embed);
+      if (!instaId) {
+        return toast.error("Invalid Instagram Reel URL. Please enter a valid reel or post link.");
+      }
+      videoId = `ig_${instaId}`;
+      embedUrl = `https://www.instagram.com/reel/${instaId}/embed/`;
+    } else {
+      const youtubeId = extractYoutubeId(editForm.embed);
+      if (!youtubeId) {
+        return toast.error(
+          "Invalid YouTube URL or Video ID. Please enter a valid YouTube link or 11-char ID.",
+        );
+      }
+      videoId = youtubeId;
+      embedUrl = `https://www.youtube.com/embed/${youtubeId}`;
+    }
+
+    if (videoId !== id) {
       const { error: delError } = await supabase.from("youtube_videos").delete().eq("id", id);
       if (delError) return toast.error(delError.message);
 
       const { error: insError } = await supabase.from("youtube_videos").insert({
-        id: youtubeId,
+        id: videoId,
         title: editForm.title.trim(),
         embed: embedUrl,
         type: editForm.type,
@@ -1163,10 +1206,11 @@ function VideoAdmin() {
               setVideoTab("video");
               setEditingId(null);
             }}
-            className={`pb-2 px-1 font-medium border-b-2 transition ${videoTab === "video"
+            className={`pb-2 px-1 font-medium border-b-2 transition ${
+              videoTab === "video"
                 ? "border-maroon text-maroon font-semibold"
                 : "border-transparent text-muted-foreground hover:text-foreground"
-              }`}
+            }`}
           >
             🎥 Videos
           </button>
@@ -1175,10 +1219,11 @@ function VideoAdmin() {
               setVideoTab("short");
               setEditingId(null);
             }}
-            className={`pb-2 px-1 font-medium border-b-2 transition ${videoTab === "short"
+            className={`pb-2 px-1 font-medium border-b-2 transition ${
+              videoTab === "short"
                 ? "border-maroon text-maroon font-semibold"
                 : "border-transparent text-muted-foreground hover:text-foreground"
-              }`}
+            }`}
           >
             📱 Shorts
           </button>
@@ -1206,10 +1251,11 @@ function VideoAdmin() {
         <input
           value={form.embed}
           onChange={(e) => setForm({ ...form, embed: e.target.value })}
-          placeholder={`YouTube Link or Video ID (e.g. ${videoTab === "short"
-              ? "https://youtube.com/shorts/A8Vv3V-d7rg"
+          placeholder={`YouTube Link/Video ID or Instagram Reel Link (e.g. ${
+            videoTab === "short"
+              ? "https://instagram.com/reel/C8C8a2hI7-v or https://youtube.com/shorts/A8Vv3V-d7rg"
               : "https://www.youtube.com/watch?v=i3W9AOFhJAI"
-            })`}
+          })`}
           className="w-full px-4 py-2 rounded-lg border border-input bg-background text-xs"
         />
         <button className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-sacred text-cream text-sm">
@@ -1331,8 +1377,9 @@ function VideoAdmin() {
                   </div>
                 </div>
                 <div
-                  className={`${v.type === "short" ? "aspect-[9/16] w-full" : "aspect-video w-full"
-                    } bg-black rounded-lg overflow-hidden border border-border shadow-sm`}
+                  className={`${
+                    v.type === "short" ? "aspect-[9/16] w-full" : "aspect-video w-full"
+                  } bg-black rounded-lg overflow-hidden border border-border shadow-sm`}
                 >
                   <iframe
                     className="w-full h-full"
@@ -1434,8 +1481,8 @@ function NotificationAdmin() {
         if (insertError) {
           toast.error(
             "Could not send: " +
-            insertError.message +
-            ". Run migration 20260528200000_inbox_messages.sql in Supabase SQL Editor.",
+              insertError.message +
+              ". Run migration 20260528200000_inbox_messages.sql in Supabase SQL Editor.",
           );
           setLoading(false);
           return;
@@ -2124,8 +2171,8 @@ function GalleryAdmin() {
         if (error) {
           toast.error(
             "Could not add: " +
-            error.message +
-            ". Run the gallery table SQL migration in your Supabase SQL Editor.",
+              error.message +
+              ". Run the gallery table SQL migration in your Supabase SQL Editor.",
           );
           setLoading(false);
           return;
@@ -2281,7 +2328,7 @@ function BlogAdmin() {
   const [list, setList] = useState<Tables<"blog_posts">[]>([]);
   const [loaded, setLoaded] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
-  
+
   // Form state
   const [editingId, setEditingId] = useState<string | null>(null);
   const [title, setTitle] = useState("");
@@ -2295,7 +2342,7 @@ function BlogAdmin() {
   const [author, setAuthor] = useState("Pujya Guru Ji");
   const [publishDate, setPublishDate] = useState("");
   const [status, setStatus] = useState("draft");
-  
+
   const [search, setSearch] = useState("");
 
   const categories = [
@@ -2303,7 +2350,7 @@ function BlogAdmin() {
     "Guruji Messages",
     "Spiritual Knowledge",
     "Devotional Articles",
-    "Maa Vindhyavasini Stories"
+    "Maa Vindhyavasini Stories",
   ];
 
   async function load() {
@@ -2336,7 +2383,6 @@ function BlogAdmin() {
     }
   };
 
-
   const save = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim() || !slug.trim() || !content.trim()) {
@@ -2344,13 +2390,15 @@ function BlogAdmin() {
     }
 
     if (/[^a-z0-9-]/.test(slug)) {
-      return toast.error("Slug can only contain English lowercase letters, numbers, and hyphens (a-z, 0-9, -)");
+      return toast.error(
+        "Slug can only contain English lowercase letters, numbers, and hyphens (a-z, 0-9, -)",
+      );
     }
 
     const parsedTags = tags
       .split(",")
-      .map(t => t.trim())
-      .filter(t => t.length > 0);
+      .map((t) => t.trim())
+      .filter((t) => t.length > 0);
 
     const payload = {
       title: title.trim(),
@@ -2364,7 +2412,7 @@ function BlogAdmin() {
       author: author.trim() || "Pujya Guru Ji",
       publish_date: publishDate ? new Date(publishDate).toISOString() : new Date().toISOString(),
       status,
-      updated_at: new Date().toISOString()
+      updated_at: new Date().toISOString(),
     };
 
     if (editingId) {
@@ -2424,12 +2472,12 @@ function BlogAdmin() {
     setFeaturedImage(post.featured_image || "");
     setContent(post.content);
     setAuthor(post.author);
-    
+
     // Format ISO string to datetime-local input format (YYYY-MM-DDTHH:MM)
     if (post.publish_date) {
       const date = new Date(post.publish_date);
       const tzOffset = date.getTimezoneOffset() * 60000; // offset in milliseconds
-      const localISOTime = (new Date(date.getTime() - tzOffset)).toISOString().slice(0, 16);
+      const localISOTime = new Date(date.getTime() - tzOffset).toISOString().slice(0, 16);
       setPublishDate(localISOTime);
     } else {
       setPublishDate("");
@@ -2438,9 +2486,10 @@ function BlogAdmin() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  const filtered = list.filter(p => 
-    p.title.toLowerCase().includes(search.toLowerCase()) || 
-    p.category.toLowerCase().includes(search.toLowerCase())
+  const filtered = list.filter(
+    (p) =>
+      p.title.toLowerCase().includes(search.toLowerCase()) ||
+      p.category.toLowerCase().includes(search.toLowerCase()),
   );
 
   if (!loaded) return <AdminTabLoader />;
@@ -2477,9 +2526,7 @@ function BlogAdmin() {
             <input
               value={slug}
               onChange={(e) => {
-                const val = e.target.value
-                  .toLowerCase()
-                  .replace(/[^a-z0-9-]/g, "");
+                const val = e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, "");
                 setSlug(val);
               }}
               placeholder="e.g. maa-vindhyavasini-temple-history"
@@ -2491,7 +2538,9 @@ function BlogAdmin() {
 
         <div className="grid md:grid-cols-2 gap-4">
           <div className="space-y-1">
-            <label className="text-xs font-semibold text-muted-foreground uppercase">SEO Meta Title</label>
+            <label className="text-xs font-semibold text-muted-foreground uppercase">
+              SEO Meta Title
+            </label>
             <input
               value={seoTitle}
               onChange={(e) => setSeoTitle(e.target.value)}
@@ -2500,7 +2549,9 @@ function BlogAdmin() {
             />
           </div>
           <div className="space-y-1">
-            <label className="text-xs font-semibold text-muted-foreground uppercase">SEO Meta Description</label>
+            <label className="text-xs font-semibold text-muted-foreground uppercase">
+              SEO Meta Description
+            </label>
             <input
               value={seoDescription}
               onChange={(e) => setSeoDescription(e.target.value)}
@@ -2512,19 +2563,25 @@ function BlogAdmin() {
 
         <div className="grid md:grid-cols-3 gap-4">
           <div className="space-y-1">
-            <label className="text-xs font-semibold text-muted-foreground uppercase">Category</label>
+            <label className="text-xs font-semibold text-muted-foreground uppercase">
+              Category
+            </label>
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
               className="w-full px-4 py-2 rounded-lg border border-input bg-background text-sm focus:ring-2 focus:ring-gold focus:outline-none"
             >
-              {categories.map(cat => (
-                <option key={cat} value={cat}>{cat}</option>
+              {categories.map((cat) => (
+                <option key={cat} value={cat}>
+                  {cat}
+                </option>
               ))}
             </select>
           </div>
           <div className="space-y-1">
-            <label className="text-xs font-semibold text-muted-foreground uppercase">Tags (comma-separated)</label>
+            <label className="text-xs font-semibold text-muted-foreground uppercase">
+              Tags (comma-separated)
+            </label>
             <input
               value={tags}
               onChange={(e) => setTags(e.target.value)}
@@ -2533,7 +2590,9 @@ function BlogAdmin() {
             />
           </div>
           <div className="space-y-1">
-            <label className="text-xs font-semibold text-muted-foreground uppercase">Featured Image URL</label>
+            <label className="text-xs font-semibold text-muted-foreground uppercase">
+              Featured Image URL
+            </label>
             <input
               value={featuredImage}
               onChange={(e) => setFeaturedImage(e.target.value)}
@@ -2554,7 +2613,9 @@ function BlogAdmin() {
             />
           </div>
           <div className="space-y-1">
-            <label className="text-xs font-semibold text-muted-foreground uppercase">Publish Date & Time (UTC/Local)</label>
+            <label className="text-xs font-semibold text-muted-foreground uppercase">
+              Publish Date & Time (UTC/Local)
+            </label>
             <input
               type="datetime-local"
               value={publishDate}
@@ -2563,7 +2624,9 @@ function BlogAdmin() {
             />
           </div>
           <div className="space-y-1">
-            <label className="text-xs font-semibold text-muted-foreground uppercase">Publish Status</label>
+            <label className="text-xs font-semibold text-muted-foreground uppercase">
+              Publish Status
+            </label>
             <select
               value={status}
               onChange={(e) => setStatus(e.target.value)}
@@ -2578,7 +2641,9 @@ function BlogAdmin() {
 
         {/* Large Clean Content Editor */}
         <div className="space-y-1">
-          <label className="text-xs font-semibold text-muted-foreground uppercase">Article Content</label>
+          <label className="text-xs font-semibold text-muted-foreground uppercase">
+            Article Content
+          </label>
           <textarea
             id="content-editor"
             value={content}
@@ -2649,13 +2714,15 @@ function BlogAdmin() {
                     <span className="text-[10px] font-semibold text-saffron bg-saffron/10 px-2 py-0.5 rounded">
                       {post.category}
                     </span>
-                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase ${
-                      post.status === "published"
-                        ? "bg-green-100 text-green-700 dark:bg-green-950/20 dark:text-green-400"
-                        : post.status === "scheduled"
-                        ? "bg-amber-100 text-amber-700 dark:bg-amber-950/20 dark:text-amber-400"
-                        : "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-400"
-                    }`}>
+                    <span
+                      className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase ${
+                        post.status === "published"
+                          ? "bg-green-100 text-green-700 dark:bg-green-950/20 dark:text-green-400"
+                          : post.status === "scheduled"
+                            ? "bg-amber-100 text-amber-700 dark:bg-amber-950/20 dark:text-amber-400"
+                            : "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-400"
+                      }`}
+                    >
                       {post.status}
                     </span>
                     <span className="text-[10px] text-muted-foreground">
@@ -2664,7 +2731,8 @@ function BlogAdmin() {
                   </div>
                   <div className="font-semibold text-maroon text-sm">{post.title}</div>
                   <div className="text-xs text-muted-foreground mt-0.5">
-                    Author: {post.author} &middot; Slug: <span className="font-mono text-muted-foreground/70">{post.slug}</span>
+                    Author: {post.author} &middot; Slug:{" "}
+                    <span className="font-mono text-muted-foreground/70">{post.slug}</span>
                   </div>
                 </div>
                 <div className="flex gap-1 shrink-0">

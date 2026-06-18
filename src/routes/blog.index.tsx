@@ -24,7 +24,10 @@ export const Route = createFileRoute("/blog/")({
         content:
           "Namami Vindhyavasini enlightenment, Vindhyavasini temple history, Guruji messages, Vindhyachal stories, spiritual knowledge, Maa Vindhyavasini story, temple festivals, विंध्यवासिनी ब्लॉग, विंध्याचल इतिहास",
       },
-      { property: "og:title", content: "Spiritual Enlightenment & Articles | Namami Vindhyavasini Sansthan" },
+      {
+        property: "og:title",
+        content: "Spiritual Enlightenment & Articles | Namami Vindhyavasini Sansthan",
+      },
       {
         property: "og:description",
         content:
@@ -34,17 +37,21 @@ export const Route = createFileRoute("/blog/")({
       { property: "og:url", content: "https://www.namamivindhyavasini.in/blog" },
       { property: "og:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Spiritual Enlightenment & Articles | Namami Vindhyavasini Sansthan" },
+      {
+        name: "twitter:title",
+        content: "Spiritual Enlightenment & Articles | Namami Vindhyavasini Sansthan",
+      },
       {
         name: "twitter:description",
         content:
           "Read spiritual enlightenment articles, temple history, Guruji messages, Maa Vindhyavasini stories, and festivals at Vindhyachal Dham.",
       },
-      { name: "twitter:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
+      {
+        name: "twitter:image",
+        content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png",
+      },
     ],
-    links: [
-      { rel: "canonical", href: "https://www.namamivindhyavasini.in/blog" }
-    ],
+    links: [{ rel: "canonical", href: "https://www.namamivindhyavasini.in/blog" }],
   }),
   loader: async () => {
     const { data, error } = await supabase
@@ -72,7 +79,7 @@ const categoryTranslations: Record<string, { en: string; hi: string }> = {
   "Guruji Messages": { en: "Guruji Messages", hi: "गुरुजी संदेश" },
   "Spiritual Knowledge": { en: "Spiritual Knowledge", hi: "आध्यात्मिक ज्ञान" },
   "Devotional Articles": { en: "Devotional Articles", hi: "भक्ति लेख" },
-  "Maa Vindhyavasini Stories": { en: "Maa Vindhyavasini Stories", hi: "माँ विंध्यवासिनी कथाएँ" }
+  "Maa Vindhyavasini Stories": { en: "Maa Vindhyavasini Stories", hi: "माँ विंध्यवासिनी कथाएँ" },
 };
 
 function calculateReadingTime(text: string): number {
@@ -87,7 +94,7 @@ function formatDate(isoString: string, lang: string) {
   return date.toLocaleDateString(lang === "hi" ? "hi-IN" : "en-IN", {
     day: "numeric",
     month: "long",
-    year: "numeric"
+    year: "numeric",
   });
 }
 
@@ -117,12 +124,13 @@ function BlogPage() {
 
   // Filter posts based on search query and category selection
   const filteredPosts = useMemo(() => {
-    return posts.filter(post => {
-      const matchesSearch = !searchQuery.trim() || (
+    return posts.filter((post) => {
+      const matchesSearch =
+        !searchQuery.trim() ||
         post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         post.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (post.seo_description && post.seo_description.toLowerCase().includes(searchQuery.toLowerCase()))
-      );
+        (post.seo_description &&
+          post.seo_description.toLowerCase().includes(searchQuery.toLowerCase()));
       const matchesCategory = selectedCategory === "All" || post.category === selectedCategory;
       return matchesSearch && matchesCategory;
     });
@@ -140,32 +148,33 @@ function BlogPage() {
     "@context": "https://schema.org",
     "@type": "Blog",
     "@id": "https://www.namamivindhyavasini.in/blog/#blog",
-    "name": "Spiritual Enlightenment - Namami Vindhyavasini Sansthan",
-    "url": "https://www.namamivindhyavasini.in/blog",
-    "description": "Explore spiritual articles, temple history, messages from Pujya Guruji, Maa Vindhyavasini stories, and festivals at Vindhyachal Dham.",
-    "publisher": {
+    name: "Spiritual Enlightenment - Namami Vindhyavasini Sansthan",
+    url: "https://www.namamivindhyavasini.in/blog",
+    description:
+      "Explore spiritual articles, temple history, messages from Pujya Guruji, Maa Vindhyavasini stories, and festivals at Vindhyachal Dham.",
+    publisher: {
       "@type": "Organization",
-      "@id": "https://www.namamivindhyavasini.in/#organization"
-    }
+      "@id": "https://www.namamivindhyavasini.in/#organization",
+    },
   };
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": [
+    itemListElement: [
       {
         "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.namamivindhyavasini.in"
+        position: 1,
+        name: "Home",
+        item: "https://www.namamivindhyavasini.in",
       },
       {
         "@type": "ListItem",
-        "position": 2,
-        "name": "Enlightenment",
-        "item": "https://www.namamivindhyavasini.in/blog"
-      }
-    ]
+        position: 2,
+        name: "Enlightenment",
+        item: "https://www.namamivindhyavasini.in/blog",
+      },
+    ],
   };
 
   return (
@@ -201,14 +210,20 @@ function BlogPage() {
                 className="bg-transparent text-xs text-transparent sm:text-maroon font-semibold pr-6 sm:pr-7 pl-2 py-1.5 focus:outline-none cursor-pointer appearance-none relative select-none w-9 sm:w-auto"
                 style={{
                   backgroundImage: `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23800000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='m3 5 3 3 3-3'/></svg>")`,
-                  backgroundPosition: 'right 8px center',
-                  backgroundRepeat: 'no-repeat',
-                  backgroundSize: '10px 10px',
+                  backgroundPosition: "right 8px center",
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "10px 10px",
                 }}
               >
-                <option value="All" className="bg-card text-foreground text-xs font-medium">{lang === "hi" ? "सभी श्रेणियां" : "All Categories"}</option>
+                <option value="All" className="bg-card text-foreground text-xs font-medium">
+                  {lang === "hi" ? "सभी श्रेणियां" : "All Categories"}
+                </option>
                 {Object.entries(categoryTranslations).map(([key, trans]) => (
-                  <option key={key} value={key} className="bg-card text-foreground text-xs font-medium">
+                  <option
+                    key={key}
+                    value={key}
+                    className="bg-card text-foreground text-xs font-medium"
+                  >
                     {trans[lang]}
                   </option>
                 ))}
@@ -251,31 +266,38 @@ function BlogPage() {
                             {categoryTranslations[post.category]?.[lang] || post.category}
                           </span>
                           <span className="flex items-center gap-1">
-                            <Calendar size={10} className="text-gold" /> {formatDate(post.publish_date, lang)}
+                            <Calendar size={10} className="text-gold" />{" "}
+                            {formatDate(post.publish_date, lang)}
                           </span>
                           <span className="flex items-center gap-1">
-                            <Clock size={10} className="text-gold" /> {calculateReadingTime(post.content)} {t("blog.read_time")}
+                            <Clock size={10} className="text-gold" />{" "}
+                            {calculateReadingTime(post.content)} {t("blog.read_time")}
                           </span>
                           <span className="flex items-center gap-1">
                             <User size={10} className="text-gold" /> {post.author}
                           </span>
                         </div>
 
-                        <h3 className={`font-display text-lg sm:text-xl text-maroon group-hover:text-saffron transition-colors duration-300 leading-snug line-clamp-1 sm:line-clamp-2 ${dev} group-hover:underline`}>
+                        <h3
+                          className={`font-display text-lg sm:text-xl text-maroon group-hover:text-saffron transition-colors duration-300 leading-snug line-clamp-1 sm:line-clamp-2 ${dev} group-hover:underline`}
+                        >
                           {post.title}
                         </h3>
 
-                        <p className={`text-muted-foreground text-xs sm:text-sm leading-relaxed line-clamp-2 sm:line-clamp-3 ${dev}`}>
+                        <p
+                          className={`text-muted-foreground text-xs sm:text-sm leading-relaxed line-clamp-2 sm:line-clamp-3 ${dev}`}
+                        >
                           {getExcerpt(post.content, 180)}
                         </p>
                       </div>
 
                       <div className="pt-2 border-t border-border/40 flex items-center justify-end mt-2 shrink-0">
-                        <span
-                          className="inline-flex items-center gap-1 text-xs text-maroon font-semibold group-hover:text-saffron transition-colors"
-                        >
+                        <span className="inline-flex items-center gap-1 text-xs text-maroon font-semibold group-hover:text-saffron transition-colors">
                           {t("blog.read_more")}
-                          <ArrowRight size={12} className="transform group-hover:translate-x-1 transition-transform" />
+                          <ArrowRight
+                            size={12}
+                            className="transform group-hover:translate-x-1 transition-transform"
+                          />
                         </span>
                       </div>
                     </div>
@@ -289,31 +311,38 @@ function BlogPage() {
                           {categoryTranslations[post.category]?.[lang] || post.category}
                         </span>
                         <span className="flex items-center gap-1">
-                          <Calendar size={10} className="text-gold" /> {formatDate(post.publish_date, lang)}
+                          <Calendar size={10} className="text-gold" />{" "}
+                          {formatDate(post.publish_date, lang)}
                         </span>
                         <span className="flex items-center gap-1">
-                          <Clock size={10} className="text-gold" /> {calculateReadingTime(post.content)} {t("blog.read_time")}
+                          <Clock size={10} className="text-gold" />{" "}
+                          {calculateReadingTime(post.content)} {t("blog.read_time")}
                         </span>
                         <span className="flex items-center gap-1">
                           <User size={10} className="text-gold" /> {post.author}
                         </span>
                       </div>
 
-                      <h3 className={`font-display text-lg sm:text-xl text-maroon group-hover:text-saffron transition-colors duration-300 leading-snug line-clamp-1 sm:line-clamp-2 ${dev} group-hover:underline`}>
+                      <h3
+                        className={`font-display text-lg sm:text-xl text-maroon group-hover:text-saffron transition-colors duration-300 leading-snug line-clamp-1 sm:line-clamp-2 ${dev} group-hover:underline`}
+                      >
                         {post.title}
                       </h3>
 
-                      <p className={`text-muted-foreground text-xs sm:text-sm leading-relaxed line-clamp-2 sm:line-clamp-3 ${dev}`}>
+                      <p
+                        className={`text-muted-foreground text-xs sm:text-sm leading-relaxed line-clamp-2 sm:line-clamp-3 ${dev}`}
+                      >
                         {getExcerpt(post.content, 220)}
                       </p>
                     </div>
 
                     <div className="pt-2 border-t border-border/40 flex items-center justify-end mt-2 shrink-0">
-                      <span
-                        className="inline-flex items-center gap-1 text-xs text-maroon font-semibold group-hover:text-saffron transition-colors"
-                      >
+                      <span className="inline-flex items-center gap-1 text-xs text-maroon font-semibold group-hover:text-saffron transition-colors">
                         {t("blog.read_more")}
-                        <ArrowRight size={12} className="transform group-hover:translate-x-1 transition-transform" />
+                        <ArrowRight
+                          size={12}
+                          className="transform group-hover:translate-x-1 transition-transform"
+                        />
                       </span>
                     </div>
                   </div>
@@ -331,9 +360,7 @@ function BlogPage() {
               <h3 className={`font-display text-xl text-maroon ${dev}`}>
                 {lang === "hi" ? "कोई लेख उपलब्ध नहीं है" : "No Articles Available"}
               </h3>
-              <p className="text-sm text-muted-foreground mt-2 px-6">
-                {t("blog.no_posts")}
-              </p>
+              <p className="text-sm text-muted-foreground mt-2 px-6">{t("blog.no_posts")}</p>
             </div>
           </ScrollReveal>
         )}
@@ -345,7 +372,7 @@ function BlogPage() {
               <button
                 disabled={currentPage === 1}
                 onClick={() => {
-                  setCurrentPage(prev => Math.max(1, prev - 1));
+                  setCurrentPage((prev) => Math.max(1, prev - 1));
                   window.scrollTo({ top: 400, behavior: "smooth" });
                 }}
                 className="px-4 py-2 rounded-full border border-gold/30 text-xs font-semibold text-maroon hover:border-gold hover:bg-cream/40 transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
@@ -353,7 +380,7 @@ function BlogPage() {
                 ← {t("blog.prev")}
               </button>
 
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                 <button
                   key={page}
                   onClick={() => {
@@ -373,7 +400,7 @@ function BlogPage() {
               <button
                 disabled={currentPage === totalPages}
                 onClick={() => {
-                  setCurrentPage(prev => Math.min(totalPages, prev + 1));
+                  setCurrentPage((prev) => Math.min(totalPages, prev + 1));
                   window.scrollTo({ top: 400, behavior: "smooth" });
                 }}
                 className="px-4 py-2 rounded-full border border-gold/30 text-xs font-semibold text-maroon hover:border-gold hover:bg-cream/40 transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"

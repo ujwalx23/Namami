@@ -52,11 +52,38 @@ export const translations = {
 
   "home.slide.vindhya.title": { en: "Namami Vindhyavasini", hi: "नमामि विन्ध्यवासिनी" },
   "home.slide.vindhya.sub": { en: "Vindhyachal Dham", hi: "विन्ध्याचल धाम" },
-  "home.slide.vindhya.alt": { en: "Maa Vindhyavasini Darshan at Vindhyachal Dham Temple", hi: "विन्ध्याचल धाम मंदिर में माँ विन्ध्यवासिनी के दिव्य दर्शन" },
+  "home.slide.vindhya.alt": {
+    en: "Maa Vindhyavasini Darshan at Vindhyachal Dham Temple",
+    hi: "विन्ध्याचल धाम मंदिर में माँ विन्ध्यवासिनी के दिव्य दर्शन",
+  },
   "home.slide.darshan.title": { en: "Divine Darshan", hi: "दिव्य दर्शन" },
-  "home.slide.darshan.alt": { en: "Maa Vindhyavasini Shringar and Aarti at Vindhyachal Dham", hi: "विन्ध्याचल धाम में माँ विन्ध्यवासिनी के दिव्य श्रृंगार और आरती" },
+  "home.slide.darshan.alt": {
+    en: "Maa Vindhyavasini Shringar and Aarti at Vindhyachal Dham",
+    hi: "विन्ध्याचल धाम में माँ विन्ध्यवासिनी के दिव्य श्रृंगार और आरती",
+  },
   "home.slide.shringar.title": { en: "Maa ka Shringar", hi: "माँ का श्रृंगार" },
-  "home.slide.shringar.alt": { en: "Namami Vindhyavasini Devotional Image and Sacred Alankar", hi: "नमामि विन्ध्यवासिनी का पावन चित्र और दिव्य अलंकार" },
+  "home.slide.shringar.alt": {
+    en: "Namami Vindhyavasini Devotional Image and Sacred Alankar",
+    hi: "नमामि विन्ध्यवासिनी का पावन चित्र और दिव्य अलंकार",
+  },
+  "home.slide.temple.title": { en: "Maa Vindhyavasini Temple", hi: "माँ विन्ध्यवासिनी मंदिर" },
+  "home.slide.temple.alt": {
+    en: "Maa Vindhyavasini Temple in Vindhyachal Mirzapur Uttar Pradesh",
+    hi: "विन्ध्याचल मिर्जापुर उत्तर प्रदेश में माँ विन्ध्यवासिनी मंदिर",
+  },
+  "home.slide.shakti.title": { en: "Sacred Shakti Peeth", hi: "पावन शक्तिपीठ" },
+  "home.slide.shakti.alt": {
+    en: "Maa Vindhyavasini Shakti Peeth in Vindhyachal Mirzapur",
+    hi: "विन्ध्याचल मिर्जापुर में माँ विन्ध्यवासिनी शक्तिपीठ",
+  },
+  "home.slide.darshan_new.title": {
+    en: "Maa Vindhyavasini Darshan",
+    hi: "माँ विन्ध्यवासिनी दर्शन",
+  },
+  "home.slide.darshan_new.alt": {
+    en: "Sacred Darshan of Maa Vindhyavasini Devi",
+    hi: "माँ विन्ध्यवासिनी देवी के पावन दर्शन",
+  },
 
   "home.intro.kicker": { en: "🌺 SANATAN PARAMPARA", hi: "🌺 सनातन परम्परा" },
   "home.intro.title": { en: "A Legacy of Faith and Seva", hi: "श्रद्धा और सेवा की विरासत" },
@@ -582,7 +609,10 @@ export const translations = {
   // Blog Section
   "blog.sanskrit": { en: "॥ ज्ञानं परमं बलम् ॥", hi: "॥ ज्ञानं परमं बलम् ॥" },
   "blog.title": { en: "Spiritual Enlightenment", hi: "आध्यात्मिक ज्ञान" },
-  "blog.subtitle": { en: "Explore sacred teachings, history, messages, and stories of Maa Vindhyavasini.", hi: "माँ विन्ध्यवासिनी की दिव्य गाथाएँ, इतिहास, संदेश एवं आध्यात्मिक ज्ञान के लेख पढ़ें।" },
+  "blog.subtitle": {
+    en: "Explore sacred teachings, history, messages, and stories of Maa Vindhyavasini.",
+    hi: "माँ विन्ध्यवासिनी की दिव्य गाथाएँ, इतिहास, संदेश एवं आध्यात्मिक ज्ञान के लेख पढ़ें।",
+  },
   "blog.featured": { en: "Featured Article", hi: "मुख्य लेख" },
   "blog.latest": { en: "Latest Articles", hi: "नवीनतम लेख" },
   "blog.categories": { en: "Categories", hi: "श्रेणियाँ" },
@@ -595,7 +625,10 @@ export const translations = {
   "blog.author": { en: "Author", hi: "लेखक" },
   "blog.view_all": { en: "View All Articles", hi: "सभी लेख देखें" },
   "blog.read_more": { en: "Read More", hi: "और पढ़ें" },
-  "blog.no_posts": { en: "No articles found matching your search.", hi: "खोज से मेल खाता कोई लेख नहीं मिला।" },
+  "blog.no_posts": {
+    en: "No articles found matching your search.",
+    hi: "खोज से मेल खाता कोई लेख नहीं मिला।",
+  },
   "blog.prev": { en: "Previous", hi: "पिछला" },
   "blog.next": { en: "Next", hi: "अगला" },
 } as const;

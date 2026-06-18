@@ -20,7 +20,10 @@ export const Route = createFileRoute("/donation")({
         content:
           "Vindhyavasini temple donation, online seva booking, trust support, support Vindhyachal bhandara, donation details, दान, सेवा",
       },
-      { property: "og:title", content: "Support & Donate | Online Seva Contributions — Namami Vindhyavasini" },
+      {
+        property: "og:title",
+        content: "Support & Donate | Online Seva Contributions — Namami Vindhyavasini",
+      },
       {
         property: "og:description",
         content:
@@ -36,11 +39,12 @@ export const Route = createFileRoute("/donation")({
         content:
           "Support the spiritual and social initiatives of Namami Vindhyavasini Sansthan. Contribute online.",
       },
-      { name: "twitter:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
+      {
+        name: "twitter:image",
+        content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png",
+      },
     ],
-    links: [
-      { rel: "canonical", href: "https://www.namamivindhyavasini.in/donation" }
-    ]
+    links: [{ rel: "canonical", href: "https://www.namamivindhyavasini.in/donation" }],
   }),
   component: DonationPage,
 });
@@ -59,33 +63,34 @@ function DonationPage() {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "@id": "https://www.namamivindhyavasini.in/donation#webpage",
-    "url": "https://www.namamivindhyavasini.in/donation",
-    "name": "Support & Donate | Online Seva Contributions — Namami Vindhyavasini",
-    "description": "Support the spiritual and social initiatives of Namami Vindhyavasini Sansthan. Contribute to bhandara, path, Gau Seva, and temple development online.",
-    "isPartOf": {
+    url: "https://www.namamivindhyavasini.in/donation",
+    name: "Support & Donate | Online Seva Contributions — Namami Vindhyavasini",
+    description:
+      "Support the spiritual and social initiatives of Namami Vindhyavasini Sansthan. Contribute to bhandara, path, Gau Seva, and temple development online.",
+    isPartOf: {
       "@type": "WebSite",
       "@id": "https://www.namamivindhyavasini.in/#website",
-      "url": "https://www.namamivindhyavasini.in"
-    }
+      url: "https://www.namamivindhyavasini.in",
+    },
   };
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": [
+    itemListElement: [
       {
         "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.namamivindhyavasini.in"
+        position: 1,
+        name: "Home",
+        item: "https://www.namamivindhyavasini.in",
       },
       {
         "@type": "ListItem",
-        "position": 2,
-        "name": "Donation",
-        "item": "https://www.namamivindhyavasini.in/donation"
-      }
-    ]
+        position: 2,
+        name: "Donation",
+        item: "https://www.namamivindhyavasini.in/donation",
+      },
+    ],
   };
 
   return (
@@ -126,12 +131,20 @@ function DonationPage() {
 
                 <div className="w-full space-y-3 bg-gradient-divine border border-gold/30 rounded-xl p-3 sm:p-4 text-left">
                   <div className="flex flex-col xs:flex-row justify-between items-start xs:items-center text-sm border-b border-gold/20 pb-2 gap-1 xs:gap-0">
-                    <span className="text-muted-foreground font-medium text-xs sm:text-sm">Verified UPI ID</span>
-                    <span className="font-mono text-maroon font-bold text-xs xs:text-sm">yugal.roy.one@okicici</span>
+                    <span className="text-muted-foreground font-medium text-xs sm:text-sm">
+                      Verified UPI ID
+                    </span>
+                    <span className="font-mono text-maroon font-bold text-xs xs:text-sm">
+                      yugal.roy.one@okicici
+                    </span>
                   </div>
                   <div className="flex flex-col xs:flex-row justify-between items-start xs:items-center text-sm gap-1 xs:gap-0">
-                    <span className="text-muted-foreground font-medium text-xs sm:text-sm">UPI Number</span>
-                    <span className="font-mono text-maroon font-bold text-xs xs:text-sm">9334339505</span>
+                    <span className="text-muted-foreground font-medium text-xs sm:text-sm">
+                      UPI Number
+                    </span>
+                    <span className="font-mono text-maroon font-bold text-xs xs:text-sm">
+                      9334339505
+                    </span>
                   </div>
                 </div>
 
@@ -148,8 +161,8 @@ function DonationPage() {
                 ॥ सेवा परमो धर्मः ॥
               </div>
               <p className="text-xs text-muted-foreground italic leading-relaxed">
-                "Service to others is the ultimate duty. Your support aids the temple's daily rituals,
-                devotee feeding and preservation of eternal values."
+                "Service to others is the ultimate duty. Your support aids the temple's daily
+                rituals, devotee feeding and preservation of eternal values."
               </p>
             </div>
 
@@ -173,7 +186,9 @@ function DonationPage() {
                   </a>
                   .
                 </li>
-                <li>QR code scans reflect instantly; direct bank transfers may take 24-48 hours.</li>
+                <li>
+                  QR code scans reflect instantly; direct bank transfers may take 24-48 hours.
+                </li>
               </ul>
             </div>
           </div>
@@ -184,8 +199,12 @@ function DonationPage() {
               <div className={`text-saffron text-xs uppercase tracking-[0.3em] mb-2 ${dev}`}>
                 {t("don.kicker")}
               </div>
-              <h2 className={`font-display text-3xl sm:text-4xl text-maroon mb-5 ${dev}`}>{t("don.h2")}</h2>
-              <p className={`text-foreground/80 leading-relaxed mb-6 max-w-md ${dev}`}>{t("don.text")}</p>
+              <h2 className={`font-display text-3xl sm:text-4xl text-maroon mb-5 ${dev}`}>
+                {t("don.h2")}
+              </h2>
+              <p className={`text-foreground/80 leading-relaxed mb-6 max-w-md ${dev}`}>
+                {t("don.text")}
+              </p>
             </div>
 
             {/* Trust badges and direct bank transfer section */}
@@ -219,19 +238,27 @@ function DonationPage() {
                 </div>
                 <div className="flex flex-col xs:flex-row justify-between border-b border-gold/15 pb-2 gap-1 xs:gap-0">
                   <span className="text-muted-foreground">Bank Name</span>
-                  <span className="font-medium text-foreground text-left xs:text-right">Not Available</span>
+                  <span className="font-medium text-foreground text-left xs:text-right">
+                    Not Available
+                  </span>
                 </div>
                 <div className="flex flex-col xs:flex-row justify-between border-b border-gold/15 pb-2 gap-1 xs:gap-0">
                   <span className="text-muted-foreground">Account Number</span>
-                  <span className="font-medium text-foreground text-left xs:text-right">Not Available</span>
+                  <span className="font-medium text-foreground text-left xs:text-right">
+                    Not Available
+                  </span>
                 </div>
                 <div className="flex flex-col xs:flex-row justify-between border-b border-gold/15 pb-2 gap-1 xs:gap-0">
                   <span className="text-muted-foreground">IFSC Code</span>
-                  <span className="font-medium text-foreground text-left xs:text-right">Not Available</span>
+                  <span className="font-medium text-foreground text-left xs:text-right">
+                    Not Available
+                  </span>
                 </div>
                 <div className="flex flex-col xs:flex-row justify-between gap-1 xs:gap-0">
                   <span className="text-muted-foreground">Branch</span>
-                  <span className="font-medium text-foreground text-left xs:text-right">Not Available</span>
+                  <span className="font-medium text-foreground text-left xs:text-right">
+                    Not Available
+                  </span>
                 </div>
               </div>
             </div>

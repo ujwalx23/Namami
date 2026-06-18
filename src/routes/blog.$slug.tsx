@@ -28,9 +28,13 @@ type BlogPost = Tables<"blog_posts">;
 export const Route = createFileRoute("/blog/$slug")({
   head: ({ loaderData }) => {
     const post = loaderData?.post;
-    const title = post ? `${post.seo_title || post.title} | Namami Vindhyavasini` : "Enlightenment | Namami Vindhyavasini";
+    const title = post
+      ? `${post.seo_title || post.title} | Namami Vindhyavasini`
+      : "Enlightenment | Namami Vindhyavasini";
     const desc = post?.seo_description || "Read this article on Namami Vindhyavasini.";
-    const url = post ? `https://www.namamivindhyavasini.in/blog/${post.slug}` : "https://www.namamivindhyavasini.in/blog";
+    const url = post
+      ? `https://www.namamivindhyavasini.in/blog/${post.slug}`
+      : "https://www.namamivindhyavasini.in/blog";
     const img = post?.featured_image || "https://www.namamivindhyavasini.in/maa-vindhyavasini.png";
 
     return {
@@ -47,9 +51,7 @@ export const Route = createFileRoute("/blog/$slug")({
         { name: "twitter:description", content: desc },
         { name: "twitter:image", content: img },
       ],
-      links: [
-        { rel: "canonical", href: url }
-      ]
+      links: [{ rel: "canonical", href: url }],
     };
   },
   loader: async ({ params }) => {
@@ -68,7 +70,11 @@ export const Route = createFileRoute("/blog/$slug")({
     if (!post) {
       const targetHindiSlug = "जब-जीवन-स्वयं-उपदेश-बन-जाए";
       const encodedHindiSlug = encodeURIComponent(targetHindiSlug);
-      if (slug === targetHindiSlug || slug === encodedHindiSlug || decodeURIComponent(slug) === targetHindiSlug) {
+      if (
+        slug === targetHindiSlug ||
+        slug === encodedHindiSlug ||
+        decodeURIComponent(slug) === targetHindiSlug
+      ) {
         throw redirect({
           to: "/blog/life-itself-a-teaching",
           statusCode: 301,
@@ -96,12 +102,15 @@ export const Route = createFileRoute("/blog/$slug")({
       <PageShell>
         <PageHero title="Article Not Found" subtitle="We couldn't find the requested article." />
         <div className="container mx-auto px-6 py-16 text-center space-y-6">
-          <p className="text-muted-foreground">{error.message || "The article might have been draft or deleted."}</p>
+          <p className="text-muted-foreground">
+            {error.message || "The article might have been draft or deleted."}
+          </p>
           <Link
             to="/blog"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-sacred text-cream font-medium"
           >
-            <ArrowLeft size={16} /> {lang === "hi" ? "आध्यात्मिक ज्ञान पर वापस जाएं" : "Back to Enlightenment"}
+            <ArrowLeft size={16} />{" "}
+            {lang === "hi" ? "आध्यात्मिक ज्ञान पर वापस जाएं" : "Back to Enlightenment"}
           </Link>
         </div>
       </PageShell>
@@ -115,7 +124,7 @@ const categoryTranslations: Record<string, { en: string; hi: string }> = {
   "Guruji Messages": { en: "Guruji Messages", hi: "गुरुजी संदेश" },
   "Spiritual Knowledge": { en: "Spiritual Knowledge", hi: "आध्यात्मिक ज्ञान" },
   "Devotional Articles": { en: "Devotional Articles", hi: "भक्ति लेख" },
-  "Maa Vindhyavasini Stories": { en: "Maa Vindhyavasini Stories", hi: "माँ विंध्यवासिनी कथाएँ" }
+  "Maa Vindhyavasini Stories": { en: "Maa Vindhyavasini Stories", hi: "माँ विंध्यवासिनी कथाएँ" },
 };
 
 function calculateReadingTime(text: string): number {
@@ -130,7 +139,7 @@ function formatDate(isoString: string, lang: string) {
   return date.toLocaleDateString(lang === "hi" ? "hi-IN" : "en-IN", {
     day: "numeric",
     month: "long",
-    year: "numeric"
+    year: "numeric",
   });
 }
 
@@ -210,49 +219,49 @@ function BlogDetailPage() {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "@id": `${shareUrl}#article`,
-    "headline": post.title,
-    "image": [post.featured_image || "https://www.namamivindhyavasini.in/maa-vindhyavasini.png"],
-    "datePublished": post.publish_date,
-    "dateModified": post.updated_at || post.publish_date,
-    "author": {
+    headline: post.title,
+    image: [post.featured_image || "https://www.namamivindhyavasini.in/maa-vindhyavasini.png"],
+    datePublished: post.publish_date,
+    dateModified: post.updated_at || post.publish_date,
+    author: {
       "@type": "Person",
-      "name": post.author
+      name: post.author,
     },
-    "publisher": {
+    publisher: {
       "@type": "Organization",
       "@id": "https://www.namamivindhyavasini.in/#organization",
-      "name": "Namami Vindhyavasini Sansthan",
-      "logo": {
+      name: "Namami Vindhyavasini Sansthan",
+      logo: {
         "@type": "ImageObject",
-        "url": "https://www.namamivindhyavasini.in/favicon.png"
-      }
+        url: "https://www.namamivindhyavasini.in/favicon.png",
+      },
     },
-    "description": post.seo_description || "Spiritual article about Maa Vindhyavasini and Sansthan."
+    description: post.seo_description || "Spiritual article about Maa Vindhyavasini and Sansthan.",
   };
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": [
+    itemListElement: [
       {
         "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.namamivindhyavasini.in"
+        position: 1,
+        name: "Home",
+        item: "https://www.namamivindhyavasini.in",
       },
       {
         "@type": "ListItem",
-        "position": 2,
-        "name": "Enlightenment",
-        "item": "https://www.namamivindhyavasini.in/blog"
+        position: 2,
+        name: "Enlightenment",
+        item: "https://www.namamivindhyavasini.in/blog",
       },
       {
         "@type": "ListItem",
-        "position": 3,
-        "name": post.title,
-        "item": shareUrl
-      }
-    ]
+        position: 3,
+        name: post.title,
+        item: shareUrl,
+      },
+    ],
   };
 
   const shareText = encodeURIComponent(`${post.title} - Read on Namami Vindhyavasini:`);
@@ -283,90 +292,90 @@ function BlogDetailPage() {
 
         {/* Metadata info panel */}
         <div className="flex flex-wrap items-center justify-between gap-6 p-4 rounded-xl bg-card border border-border/50 mb-10 text-sm text-muted-foreground">
-            <div className="flex flex-wrap items-center gap-6">
-              <span className="flex items-center gap-1.5">
-                <Calendar size={14} className="text-gold" /> {formattedDate}
-              </span>
-              <span className="flex items-center gap-1.5">
-                <User size={14} className="text-gold" /> {t("blog.author")}: {post.author}
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Clock size={14} className="text-gold" /> {readingTime} {t("blog.read_time")}
-              </span>
-              {isHi && isHindiText(post.content) && (
-                <button
-                  onClick={() => toggleSpeak(post.content, post.id)}
-                  className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-gold/50 text-maroon hover:bg-gold/10 disabled:opacity-50 disabled:cursor-not-allowed transition text-xs font-semibold ${dev}`}
-                  disabled={loadingId !== null && loadingId !== post.id}
-                  aria-label="Listen to Article"
-                >
-                  {loadingId === post.id ? (
-                    <Loader2 size={12} className="animate-spin" />
-                  ) : speakingId === post.id ? (
-                    <Square size={12} />
-                  ) : (
-                    <Play size={12} />
-                  )}
-                  {loadingId === post.id
-                    ? t("sandesh.loading")
-                    : speakingId === post.id
-                      ? t("sandesh.stop")
-                      : t("sandesh.listen")}
-                </button>
-              )}
-            </div>
-
-            {/* Sharing list */}
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-semibold text-maroon uppercase tracking-wider flex items-center gap-1">
-                <Share2 size={12} /> Share:
-              </span>
-              <a
-                href={`https://wa.me/?text=${shareText}%20${encodeURIComponent(shareUrl)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:bg-green-500 hover:text-white hover:border-transparent transition-colors"
-                title="Share on WhatsApp"
-              >
-                <svg
-                  className="w-4 h-4 fill-current"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.455 5.703 1.456h.008c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                </svg>
-              </a>
-              <a
-                href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:bg-blue-600 hover:text-white hover:border-transparent transition-colors"
-                title="Share on Facebook"
-              >
-                <Facebook size={14} />
-              </a>
-              <a
-                href={`https://twitter.com/intent/tweet?text=${shareText}&url=${encodeURIComponent(shareUrl)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:bg-black hover:text-white hover:border-transparent transition-colors"
-                title="Share on Twitter"
-              >
-                <Twitter size={14} />
-              </a>
+          <div className="flex flex-wrap items-center gap-6">
+            <span className="flex items-center gap-1.5">
+              <Calendar size={14} className="text-gold" /> {formattedDate}
+            </span>
+            <span className="flex items-center gap-1.5">
+              <User size={14} className="text-gold" /> {t("blog.author")}: {post.author}
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Clock size={14} className="text-gold" /> {readingTime} {t("blog.read_time")}
+            </span>
+            {isHi && isHindiText(post.content) && (
               <button
-                onClick={copyToClipboard}
-                className="w-8 h-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:bg-gold hover:text-cream hover:border-transparent transition-colors cursor-pointer"
-                title="Copy Link"
+                onClick={() => toggleSpeak(post.content, post.id)}
+                className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-gold/50 text-maroon hover:bg-gold/10 disabled:opacity-50 disabled:cursor-not-allowed transition text-xs font-semibold ${dev}`}
+                disabled={loadingId !== null && loadingId !== post.id}
+                aria-label="Listen to Article"
               >
-                <Copy size={14} />
+                {loadingId === post.id ? (
+                  <Loader2 size={12} className="animate-spin" />
+                ) : speakingId === post.id ? (
+                  <Square size={12} />
+                ) : (
+                  <Play size={12} />
+                )}
+                {loadingId === post.id
+                  ? t("sandesh.loading")
+                  : speakingId === post.id
+                    ? t("sandesh.stop")
+                    : t("sandesh.listen")}
               </button>
-            </div>
+            )}
           </div>
+
+          {/* Sharing list */}
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-semibold text-maroon uppercase tracking-wider flex items-center gap-1">
+              <Share2 size={12} /> Share:
+            </span>
+            <a
+              href={`https://wa.me/?text=${shareText}%20${encodeURIComponent(shareUrl)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-8 h-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:bg-green-500 hover:text-white hover:border-transparent transition-colors"
+              title="Share on WhatsApp"
+            >
+              <svg
+                className="w-4 h-4 fill-current"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.455 5.703 1.456h.008c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+              </svg>
+            </a>
+            <a
+              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-8 h-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:bg-blue-600 hover:text-white hover:border-transparent transition-colors"
+              title="Share on Facebook"
+            >
+              <Facebook size={14} />
+            </a>
+            <a
+              href={`https://twitter.com/intent/tweet?text=${shareText}&url=${encodeURIComponent(shareUrl)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-8 h-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:bg-black hover:text-white hover:border-transparent transition-colors"
+              title="Share on Twitter"
+            >
+              <Twitter size={14} />
+            </a>
+            <button
+              onClick={copyToClipboard}
+              className="w-8 h-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:bg-gold hover:text-cream hover:border-transparent transition-colors cursor-pointer"
+              title="Copy Link"
+            >
+              <Copy size={14} />
+            </button>
+          </div>
+        </div>
 
         {/* Content body */}
         <div
-            className={`prose max-w-none text-foreground/90 leading-relaxed text-base md:text-lg space-y-6 pb-4 border-b border-border/40 ${dev} 
+          className={`prose max-w-none text-foreground/90 leading-relaxed text-base md:text-lg space-y-6 pb-4 border-b border-border/40 ${dev} 
               [&_h2]:font-display [&_h2]:text-2xl [&_h2]:md:text-3xl [&_h2]:text-maroon [&_h2]:mt-8 [&_h2]:mb-4
               [&_h3]:font-display [&_h3]:text-xl [&_h3]:md:text-2xl [&_h3]:text-maroon [&_h3]:mt-6 [&_h3]:mb-3
               [&_p]:mb-4 [&_p]:leading-relaxed
@@ -377,8 +386,8 @@ function BlogDetailPage() {
               [&_th]:bg-cream/50 [&_th]:border [&_th]:border-border [&_th]:p-2 [&_th]:text-left [&_th]:font-semibold [&_th]:text-maroon
               [&_td]:border [&_td]:border-border [&_td]:p-2
               [&_iframe]:w-full [&_iframe]:aspect-video [&_iframe]:rounded-xl [&_iframe]:border [&_iframe]:border-gold/30 [&_iframe]:my-6`}
-            dangerouslySetInnerHTML={{ __html: post.content }}
-          />
+          dangerouslySetInnerHTML={{ __html: post.content }}
+        />
 
         {/* Related Posts Section */}
         {related.length > 0 && (
@@ -406,7 +415,9 @@ function BlogDetailPage() {
                       <span className="text-[9px] font-bold text-saffron bg-saffron/10 px-2 py-0.5 rounded uppercase">
                         {categoryTranslations[relPost.category]?.[lang] || relPost.category}
                       </span>
-                      <h4 className={`font-display text-sm text-maroon group-hover:text-saffron transition-colors line-clamp-2 ${dev}`}>
+                      <h4
+                        className={`font-display text-sm text-maroon group-hover:text-saffron transition-colors line-clamp-2 ${dev}`}
+                      >
                         {relPost.title}
                       </h4>
                     </div>

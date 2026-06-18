@@ -23,7 +23,10 @@ export const Route = createFileRoute("/reviews")({
         content:
           "Maa Vindhyavasini reviews, Vindhyachal temple testimonials, Namami Vindhyavasini comments, devotee feedback, reviews, विंध्यवासिनी फीडबैक, विंध्याचल भक्त अनुभव",
       },
-      { property: "og:title", content: "Devotee Reviews & Feedback | Namami Vindhyavasini Sansthan" },
+      {
+        property: "og:title",
+        content: "Devotee Reviews & Feedback | Namami Vindhyavasini Sansthan",
+      },
       {
         property: "og:description",
         content:
@@ -33,17 +36,21 @@ export const Route = createFileRoute("/reviews")({
       { property: "og:url", content: "https://www.namamivindhyavasini.in/reviews" },
       { property: "og:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Devotee Reviews & Feedback | Namami Vindhyavasini Sansthan" },
+      {
+        name: "twitter:title",
+        content: "Devotee Reviews & Feedback | Namami Vindhyavasini Sansthan",
+      },
       {
         name: "twitter:description",
         content:
           "Read reviews, testimonials, and experiences shared by devotees of Maa Vindhyavasini.",
       },
-      { name: "twitter:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
+      {
+        name: "twitter:image",
+        content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png",
+      },
     ],
-    links: [
-      { rel: "canonical", href: "https://www.namamivindhyavasini.in/reviews" }
-    ],
+    links: [{ rel: "canonical", href: "https://www.namamivindhyavasini.in/reviews" }],
   }),
   loader: async () => {
     const { data, error } = await supabase
@@ -119,33 +126,34 @@ function ReviewsPage() {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "@id": "https://www.namamivindhyavasini.in/reviews#webpage",
-    "url": "https://www.namamivindhyavasini.in/reviews",
-    "name": "Devotee Reviews & Feedback | Namami Vindhyavasini Sansthan",
-    "description": "Read reviews, testimonials, and experiences shared by devotees of Maa Vindhyavasini. Share your feedback, comments, and spiritual experiences with the Sansthan.",
-    "isPartOf": {
+    url: "https://www.namamivindhyavasini.in/reviews",
+    name: "Devotee Reviews & Feedback | Namami Vindhyavasini Sansthan",
+    description:
+      "Read reviews, testimonials, and experiences shared by devotees of Maa Vindhyavasini. Share your feedback, comments, and spiritual experiences with the Sansthan.",
+    isPartOf: {
       "@type": "WebSite",
       "@id": "https://www.namamivindhyavasini.in/#website",
-      "url": "https://www.namamivindhyavasini.in"
-    }
+      url: "https://www.namamivindhyavasini.in",
+    },
   };
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": [
+    itemListElement: [
       {
         "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.namamivindhyavasini.in"
+        position: 1,
+        name: "Home",
+        item: "https://www.namamivindhyavasini.in",
       },
       {
         "@type": "ListItem",
-        "position": 2,
-        "name": "Reviews",
-        "item": "https://www.namamivindhyavasini.in/reviews"
-      }
-    ]
+        position: 2,
+        name: "Reviews",
+        item: "https://www.namamivindhyavasini.in/reviews",
+      },
+    ],
   };
 
   const latestThree = reviews.slice(0, 3);
@@ -175,7 +183,9 @@ function ReviewsPage() {
                 key={r.id}
                 className="p-5 rounded-xl bg-card border border-gold/30 hover:border-gold hover:shadow-sacred transition-premium flex flex-col justify-between"
               >
-                <p className="text-foreground/85 leading-relaxed text-sm italic mb-4">"{r.comment}"</p>
+                <p className="text-foreground/85 leading-relaxed text-sm italic mb-4">
+                  "{r.comment}"
+                </p>
                 <div className="flex items-center gap-3 border-t border-gold/10 pt-3 mt-auto">
                   <div className="w-8 h-8 rounded-full bg-gradient-sacred flex items-center justify-center text-cream font-display text-xs shrink-0">
                     {r.name.charAt(0).toUpperCase()}
@@ -198,7 +208,9 @@ function ReviewsPage() {
           className="p-5 rounded-2xl bg-card border border-gold/30 shadow-sacred relative overflow-hidden"
         >
           <div className="absolute inset-0 mandala-bg opacity-10 pointer-events-none" />
-          <h3 className={`font-display text-lg text-maroon mb-3 relative z-10 ${dev}`}>{t("reviews.leave")}</h3>
+          <h3 className={`font-display text-lg text-maroon mb-3 relative z-10 ${dev}`}>
+            {t("reviews.leave")}
+          </h3>
           <div className="space-y-3 relative z-10">
             <div>
               <label className={`block text-xs font-semibold text-foreground/80 mb-1 ${dev}`}>

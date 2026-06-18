@@ -12,6 +12,8 @@ import maaImg from "@/assets/maa-vindhyavasini.webp";
 import maaImg2 from "@/assets/maa-vindhyavasini-2.webp";
 import maaImg4 from "@/assets/maa-vindhyavasini-4.jpg";
 import maaImg5 from "@/assets/maa-vindhyavasini-5.jpg";
+import maaImgSimhasan from "@/assets/maa-vindhyavasini-simhasan-shringar.jpg";
+import maaImgGarland from "@/assets/maa-vindhyavasini-garland-shringar.jpg";
 import { JsonLd } from "@/components/JsonLd";
 import { ShareModal } from "@/components/ShareModal";
 import { addGalleryWatermark } from "@/lib/watermarkImage";
@@ -31,7 +33,10 @@ export const Route = createFileRoute("/gallery")({
         content:
           "Maa Vindhyavasini photo gallery, shringar photos, Vindhyachal temple images, divine darshan pictures, माँ विंध्यवासिनी फोटो",
       },
-      { property: "og:title", content: "Maa Vindhyavasini Darshan Gallery | Divine Shringar & Photos" },
+      {
+        property: "og:title",
+        content: "Maa Vindhyavasini Darshan Gallery | Divine Shringar & Photos",
+      },
       {
         property: "og:description",
         content:
@@ -47,11 +52,12 @@ export const Route = createFileRoute("/gallery")({
         content:
           "Browse premium high-resolution images of Maa Vindhyavasini, sacred shringar darshan, and spiritual events in Vindhyachal Dham.",
       },
-      { name: "twitter:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
+      {
+        name: "twitter:image",
+        content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png",
+      },
     ],
-    links: [
-      { rel: "canonical", href: "https://www.namamivindhyavasini.in/gallery" }
-    ]
+    links: [{ rel: "canonical", href: "https://www.namamivindhyavasini.in/gallery" }],
   }),
   component: GalleryPage,
 });
@@ -59,13 +65,22 @@ export const Route = createFileRoute("/gallery")({
 type GalleryRow = { id: string; image_url: string; caption: string | null; created_at: string };
 
 const defaults: { src: string; cap_en: string; cap_hi: string }[] = [
+  {
+    src: maaImgSimhasan,
+    cap_en: "Maa Vindhyavasini Simhasan Shringar",
+    cap_hi: "माँ विन्ध्यवासिनी सिंहासन श्रृंगार",
+  },
+  {
+    src: maaImgGarland,
+    cap_en: "Maa Vindhyavasini Garland Alankar",
+    cap_hi: "माँ विन्ध्यवासिनी माला श्रृंगार",
+  },
   { src: maaImg4, cap_en: "Simha Vahana Darshan", cap_hi: "सिंह वाहन दर्शन" },
   { src: maaImg5, cap_en: "Pushpa Shringar Darshan", cap_hi: "पुष्प श्रृंगार दर्शन" },
   { src: gallery1, cap_en: "Swarna Shringar", cap_hi: "स्वर्ण श्रृंगार" },
   { src: maaImg, cap_en: "Divine Grace", cap_hi: "दिव्य स्वरूप (कृपा)" },
   { src: maaImg2, cap_en: "Temple Darshan", cap_hi: "दिव्य दर्शन" },
 ];
-
 
 function GalleryPage() {
   const { lang } = useLang();
@@ -129,10 +144,20 @@ function GalleryPage() {
     };
   }, [lightbox]);
 
-  const dbItems = extra.map((r) => ({ src: r.image_url, cap: hi ? "माँ विंध्यवासिनी दर्शन" : "Maa Vindhyavasini Darshan" }));
+  const dbItems = extra.map((r) => ({
+    src: r.image_url,
+    cap: hi ? "माँ विंध्यवासिनी दर्शन" : "Maa Vindhyavasini Darshan",
+  }));
   const defaultItems = defaults.map((d) => ({ src: d.src, cap: hi ? d.cap_hi : d.cap_en }));
   // System-bundled images first, then admin-uploaded URL images from database
   const items = [...defaultItems, ...dbItems];
+
+  const activeLightboxItem = items.find((x) => x.src === lightbox);
+  const activeLightboxCap = activeLightboxItem
+    ? activeLightboxItem.cap
+    : hi
+      ? "माँ विंध्यवासिनी दर्शन"
+      : "Maa Vindhyavasini Darshan";
 
   const handleDownload = async (url: string, title: string) => {
     const filename = `${title.toLowerCase().replace(/\s+/g, "_")}.jpg`;
@@ -155,19 +180,21 @@ function GalleryPage() {
         hi
           ? "💡 फोटो नई टैब में खुली — राइट-क्लिक → 'Save Image As' चुनें"
           : "💡 Photo opened — right-click and 'Save Image As'",
-        { duration: 5000 }
+        { duration: 5000 },
       );
     }
   };
 
   const shareGalleryImage = async (imgUrl: string) => {
     const item = items.find((x) => x.src === imgUrl);
-    const caption = item ? item.cap : (hi ? "माँ विंध्यवासिनी दर्शन" : "Maa Vindhyavasini Darshan");
+    const caption = item ? item.cap : hi ? "माँ विंध्यवासिनी दर्शन" : "Maa Vindhyavasini Darshan";
     const pageUrl = window.location.origin + "/gallery";
 
     // Fetch the raw image blob directly from the URL.
     // This avoids the canvas CORS taint issue that blocks external (Supabase) URLs.
-    toast.loading(lang === "hi" ? "छवि तैयार की जा रही है..." : "Preparing image...", { id: "share-gallery" });
+    toast.loading(lang === "hi" ? "छवि तैयार की जा रही है..." : "Preparing image...", {
+      id: "share-gallery",
+    });
 
     let imageBlob: Blob | null = null;
     try {
@@ -222,39 +249,62 @@ function GalleryPage() {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "@id": "https://www.namamivindhyavasini.in/gallery#webpage",
-    "url": "https://www.namamivindhyavasini.in/gallery",
-    "name": "Maa Vindhyavasini Darshan Gallery | Divine Shringar & Photos",
-    "description": "Browse premium high-resolution images of Maa Vindhyavasini, sacred shringar darshan, temple architecture, and spiritual events in Vindhyachal Dham.",
-    "isPartOf": {
+    url: "https://www.namamivindhyavasini.in/gallery",
+    name: "Maa Vindhyavasini Darshan Gallery | Divine Shringar & Photos",
+    description:
+      "Browse premium high-resolution images of Maa Vindhyavasini, sacred shringar darshan, temple architecture, and spiritual events in Vindhyachal Dham.",
+    isPartOf: {
       "@type": "WebSite",
       "@id": "https://www.namamivindhyavasini.in/#website",
-      "url": "https://www.namamivindhyavasini.in"
-    }
+      url: "https://www.namamivindhyavasini.in",
+    },
   };
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": [
+    itemListElement: [
       {
         "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.namamivindhyavasini.in"
+        position: 1,
+        name: "Home",
+        item: "https://www.namamivindhyavasini.in",
       },
       {
         "@type": "ListItem",
-        "position": 2,
-        "name": "Gallery",
-        "item": "https://www.namamivindhyavasini.in/gallery"
-      }
-    ]
+        position: 2,
+        name: "Gallery",
+        item: "https://www.namamivindhyavasini.in/gallery",
+      },
+    ],
+  };
+
+  const cleanAbsUrl = (src: string) => {
+    if (src.startsWith("http")) return src;
+    const cleanSrc = src.startsWith("/") ? src : `/${src}`;
+    return `https://www.namamivindhyavasini.in${cleanSrc}`;
+  };
+
+  const imagesSchema = {
+    "@context": "https://schema.org",
+    "@graph": items.map((p, idx) => ({
+      "@type": "ImageObject",
+      "@id": `https://www.namamivindhyavasini.in/gallery#image-${idx}`,
+      url: cleanAbsUrl(p.src),
+      name: p.cap,
+      caption: p.cap,
+      description: hi
+        ? `विन्ध्याचल धाम से माँ विन्ध्यवासिनी देवी का पावन और दिव्य दर्शन चित्र - ${p.cap}`
+        : `Divine darshan and shringar photograph of Maa Vindhyavasini Devi from Vindhyachal Dham - ${p.cap}`,
+      contentUrl: cleanAbsUrl(p.src),
+    })),
   };
 
   return (
     <PageShell>
       <JsonLd data={webpageSchema} />
       <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={imagesSchema} />
       <PageHero
         sanskrit="॥ दर्शनं देवि कारुणिके ॥"
         title={hi ? "दिव्य दर्शन गैलरी" : "Sacred Darshan Gallery"}
@@ -275,8 +325,8 @@ function GalleryPage() {
               >
                 <img
                   src={p.src}
-                  alt="Maa Vindhyavasini Darshan"
-                  title="Maa Vindhyavasini Darshan"
+                  alt={p.cap}
+                  title={p.cap}
                   width={350}
                   height={460}
                   loading="lazy"
@@ -315,77 +365,78 @@ function GalleryPage() {
         </div>
       </section>
 
-      {lightbox && createPortal(
-        <div
-          className="fixed inset-0 z-[100] bg-black/95 flex flex-col items-center justify-center p-4 overflow-hidden select-none transition-all duration-300 animate-fade-in"
-          onClick={closeLightbox}
-        >
-          {/* Top navigation/close bar for mobile & desktop */}
-          <div className="absolute top-4 left-4 right-4 flex justify-between items-center z-[110] pointer-events-none">
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                closeLightbox();
-              }}
-              className="pointer-events-auto flex items-center gap-2 px-4 py-2.5 rounded-full bg-black/60 text-white hover:bg-black/80 hover:scale-105 border border-white/20 shadow-lg transition-all duration-300 cursor-pointer text-sm font-semibold select-none"
-              aria-label="Go back"
-            >
-              <ArrowLeft size={18} />
-              <span>{hi ? "वापस" : "Back"}</span>
-            </button>
-            
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                closeLightbox();
-              }}
-              className="pointer-events-auto p-2.5 rounded-full bg-black/60 text-white hover:bg-black/80 hover:scale-105 border border-white/20 shadow-lg transition-all duration-300 cursor-pointer select-none"
-              aria-label="Close lightbox"
-            >
-              <X size={20} />
-            </button>
-          </div>
-
+      {lightbox &&
+        createPortal(
           <div
-            className="relative w-full max-w-lg md:max-w-2xl px-4 flex flex-col items-center justify-center transition-all duration-500 ease-spring animate-fade-in"
-            onClick={(e) => e.stopPropagation()}
+            className="fixed inset-0 z-[100] bg-black/95 flex flex-col items-center justify-center p-4 overflow-hidden select-none transition-all duration-300 animate-fade-in"
+            onClick={closeLightbox}
           >
-            <img
-              src={lightbox}
-              alt="Maa Vindhyavasini Darshan Full Size"
-              title="Maa Vindhyavasini Darshan View"
-              width={800}
-              height={1000}
-              className="max-h-[calc(100dvh-180px)] md:max-h-[calc(100vh-220px)] max-w-full rounded-xl shadow-2xl object-contain border border-gold/25 hover:scale-[1.01] transition-transform duration-300 pointer-events-none select-none"
-            />
-
-            <div className="mt-4 flex flex-wrap justify-center gap-3 shrink-0">
-              {/* Download Button in Lightbox */}
+            {/* Top navigation/close bar for mobile & desktop */}
+            <div className="absolute top-4 left-4 right-4 flex justify-between items-center z-[110] pointer-events-none">
               <button
-                onClick={() => {
-                  handleDownload(lightbox, "Maa Vindhyavasini Darshan");
+                onClick={(e) => {
+                  e.stopPropagation();
+                  closeLightbox();
                 }}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-sacred text-cream font-medium shadow-gold hover:scale-[1.03] active:scale-95 transition-all duration-300 text-sm cursor-pointer"
+                className="pointer-events-auto flex items-center gap-2 px-4 py-2.5 rounded-full bg-black/60 text-white hover:bg-black/80 hover:scale-105 border border-white/20 shadow-lg transition-all duration-300 cursor-pointer text-sm font-semibold select-none"
+                aria-label="Go back"
               >
-                <Download size={14} />
-                {hi ? "डाउनलोड" : "Download"}
+                <ArrowLeft size={18} />
+                <span>{hi ? "वापस" : "Back"}</span>
               </button>
 
-              {/* Share Button in Lightbox */}
               <button
-                onClick={() => {
-                  shareGalleryImage(lightbox);
+                onClick={(e) => {
+                  e.stopPropagation();
+                  closeLightbox();
                 }}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border-2 border-gold text-gold font-medium hover:bg-gold/10 hover:scale-[1.03] active:scale-95 transition-all duration-300 text-sm cursor-pointer animate-pulse"
+                className="pointer-events-auto p-2.5 rounded-full bg-black/60 text-white hover:bg-black/80 hover:scale-105 border border-white/20 shadow-lg transition-all duration-300 cursor-pointer select-none"
+                aria-label="Close lightbox"
               >
-                <Share2 size={14} />
-                {hi ? "शेयर" : "Share"}
+                <X size={20} />
               </button>
             </div>
-          </div>
-        </div>,
-        document.body
-      )}
+
+            <div
+              className="relative w-full max-w-lg md:max-w-2xl px-4 flex flex-col items-center justify-center transition-all duration-500 ease-spring animate-fade-in"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={lightbox}
+                alt={`${activeLightboxCap} Full Size`}
+                title={`${activeLightboxCap} View`}
+                width={800}
+                height={1000}
+                className="max-h-[calc(100dvh-180px)] md:max-h-[calc(100vh-220px)] max-w-full rounded-xl shadow-2xl object-contain border border-gold/25 hover:scale-[1.01] transition-transform duration-300 pointer-events-none select-none"
+              />
+
+              <div className="mt-4 flex flex-wrap justify-center gap-3 shrink-0">
+                {/* Download Button in Lightbox */}
+                <button
+                  onClick={() => {
+                    handleDownload(lightbox, "Maa Vindhyavasini Darshan");
+                  }}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-sacred text-cream font-medium shadow-gold hover:scale-[1.03] active:scale-95 transition-all duration-300 text-sm cursor-pointer"
+                >
+                  <Download size={14} />
+                  {hi ? "डाउनलोड" : "Download"}
+                </button>
+
+                {/* Share Button in Lightbox */}
+                <button
+                  onClick={() => {
+                    shareGalleryImage(lightbox);
+                  }}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border-2 border-gold text-gold font-medium hover:bg-gold/10 hover:scale-[1.03] active:scale-95 transition-all duration-300 text-sm cursor-pointer animate-pulse"
+                >
+                  <Share2 size={14} />
+                  {hi ? "शेयर" : "Share"}
+                </button>
+              </div>
+            </div>
+          </div>,
+          document.body,
+        )}
       <ShareModal
         isOpen={shareModalOpen}
         onClose={() => setShareModalOpen(false)}

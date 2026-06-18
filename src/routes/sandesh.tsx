@@ -28,7 +28,10 @@ export const Route = createFileRoute("/sandesh")({
         content:
           "Daily spiritual sandesh, Vindhyavasini quotes, Pujya Guru Ji wisdom, Hindu spiritual messages, दैनिक संदेश, आध्यात्मिक विचार, विंध्यवासिनी",
       },
-      { property: "og:title", content: "Daily Spiritual Sandesh & Quotes | Namami Vindhyavasini Sansthan" },
+      {
+        property: "og:title",
+        content: "Daily Spiritual Sandesh & Quotes | Namami Vindhyavasini Sansthan",
+      },
       {
         property: "og:description",
         content:
@@ -41,14 +44,14 @@ export const Route = createFileRoute("/sandesh")({
       { name: "twitter:title", content: "Daily Spiritual Sandesh & Quotes" },
       {
         name: "twitter:description",
-        content:
-          "Receive daily spiritual sandesh, divine quotes, and wisdom from Pujya Guru Ji.",
+        content: "Receive daily spiritual sandesh, divine quotes, and wisdom from Pujya Guru Ji.",
       },
-      { name: "twitter:image", content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png" },
+      {
+        name: "twitter:image",
+        content: "https://www.namamivindhyavasini.in/maa-vindhyavasini.png",
+      },
     ],
-    links: [
-      { rel: "canonical", href: "https://www.namamivindhyavasini.in/sandesh" }
-    ],
+    links: [{ rel: "canonical", href: "https://www.namamivindhyavasini.in/sandesh" }],
   }),
   loader: async () => {
     const { data, error } = await supabase
@@ -226,7 +229,7 @@ function SandeshPage() {
 
     // 3.5 Draw background watermark "namamivindhyavasini.in" repeated diagonally
     ctx.save();
-    ctx.rotate(-25 * Math.PI / 180);
+    ctx.rotate((-25 * Math.PI) / 180);
     ctx.fillStyle = "rgba(217, 56, 30, 0.085)"; // Darker saffron/red watermark
     ctx.font = "bold 32px sans-serif";
     ctx.textAlign = "left";
@@ -365,7 +368,9 @@ function SandeshPage() {
           text: `"${message}" — ${author}\nwww.namamivindhyavasini.in`,
         });
         if (result === "shared") {
-          toast.success(lang === "hi" ? "सफलतापूर्वक साझा किया गया!" : "Image shared successfully!");
+          toast.success(
+            lang === "hi" ? "सफलतापूर्वक साझा किया गया!" : "Image shared successfully!",
+          );
           return;
         }
         if (result === "cancelled") return;
@@ -403,33 +408,34 @@ function SandeshPage() {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "@id": "https://www.namamivindhyavasini.in/sandesh#webpage",
-    "url": "https://www.namamivindhyavasini.in/sandesh",
-    "name": "Daily Spiritual Sandesh & Quotes | Namami Vindhyavasini Sansthan",
-    "description": "Receive daily spiritual sandesh, divine quotes, and wisdom from Pujya Guru Ji. Get blessings and spiritual guidance for devotees of Maa Vindhyavasini.",
-    "isPartOf": {
+    url: "https://www.namamivindhyavasini.in/sandesh",
+    name: "Daily Spiritual Sandesh & Quotes | Namami Vindhyavasini Sansthan",
+    description:
+      "Receive daily spiritual sandesh, divine quotes, and wisdom from Pujya Guru Ji. Get blessings and spiritual guidance for devotees of Maa Vindhyavasini.",
+    isPartOf: {
       "@type": "WebSite",
       "@id": "https://www.namamivindhyavasini.in/#website",
-      "url": "https://www.namamivindhyavasini.in"
-    }
+      url: "https://www.namamivindhyavasini.in",
+    },
   };
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": [
+    itemListElement: [
       {
         "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.namamivindhyavasini.in"
+        position: 1,
+        name: "Home",
+        item: "https://www.namamivindhyavasini.in",
       },
       {
         "@type": "ListItem",
-        "position": 2,
-        "name": "Sandesh",
-        "item": "https://www.namamivindhyavasini.in/sandesh"
-      }
-    ]
+        position: 2,
+        name: "Sandesh",
+        item: "https://www.namamivindhyavasini.in/sandesh",
+      },
+    ],
   };
 
   return (
@@ -454,7 +460,9 @@ function SandeshPage() {
             <div className="max-w-3xl mx-auto rounded-3xl bg-gradient-sacred p-1 shadow-sacred mb-8 md:mb-14">
               <div className="rounded-[1.4rem] bg-card p-6 sm:p-10 md:p-14 text-center relative">
                 <Quote className="mx-auto text-gold mb-3 md:mb-4 w-6 h-6 md:w-8 md:h-8" />
-                <div className={`text-xs uppercase tracking-[0.3em] text-saffron mb-2 md:mb-3 ${dev}`}>
+                <div
+                  className={`text-xs uppercase tracking-[0.3em] text-saffron mb-2 md:mb-3 ${dev}`}
+                >
                   {t("sandesh.today")}
                 </div>
                 <p
@@ -462,7 +470,9 @@ function SandeshPage() {
                 >
                   "{today.message}"
                 </p>
-                <div className={`mt-4 md:mt-6 text-sm text-muted-foreground ${dev}`}>— {today.author}</div>
+                <div className={`mt-4 md:mt-6 text-sm text-muted-foreground ${dev}`}>
+                  — {today.author}
+                </div>
                 <div className="mt-5 md:mt-6 flex flex-col items-center justify-center gap-4">
                   <div className="flex flex-row items-center justify-center gap-3 w-full max-w-sm">
                     {isHindiText(today.message) && (
