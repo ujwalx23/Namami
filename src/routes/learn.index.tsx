@@ -256,12 +256,12 @@ function LearnIndexPage() {
     },
     {
       step: "03",
-      title_en: "Plan Your Darshan",
-      title_hi: "दर्शन पास व नियम जानें",
-      desc_en: "Read rules of conduct, dress codes, queue tickets, and Prasad.",
-      desc_hi: "ड्रेस कोड, कतार प्रणाली और पारंपरिक प्रसाद के नियमों को समझें।",
-      icon: CheckCircle,
-      slug: "darshan-guide",
+      title_en: "Chant Beej Mantras",
+      title_hi: "मंत्र साधना जानें",
+      desc_en: "Learn powerful Beej and Gayatri mantras of Maa Vindhyavasini and their benefits.",
+      desc_hi: "माँ विन्ध्यवासिनी के सिद्ध बीज मंत्रों और साधना विधि के बारे में जानें।",
+      icon: Heart,
+      slug: "maa-vindhyavasini-mantra",
     },
     {
       step: "04",

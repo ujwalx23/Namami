@@ -84,7 +84,7 @@ export const learnContent: Record<string, LearnTopic> = {
         a_hi: "यद्यपि मंदिर का इतिहास अनादि है, लेकिन आधुनिक पत्थर की संरचनाओं का निर्माण कांतित राजवंश के राजाओं और स्थानीय शासकों द्वारा कराया गया था, जिसे अब विन्ध्य कॉरिडोर के रूप में विस्तृत किया गया है।"
       },
     ],
-    related: ["shakti-peeth", "temple-timings", "darshan-guide", "vindhyavasini-temple-vindhyachal", "aarti"]
+    related: ["shakti-peeth", "temple-timings", "vindhyavasini-temple-vindhyachal", "aarti"]
   },
   "temple-timings": {
     slug: "temple-timings",
@@ -191,7 +191,7 @@ export const learnContent: Record<string, LearnTopic> = {
         a_hi: "नहीं, बाहरी परिसर या कॉरिडोर से आरती दर्शन करने के लिए सभी भक्तों के लिए प्रवेश बिल्कुल निःशुल्क है।"
       },
     ],
-    related: ["darshan-guide", "temple-history", "how-to-reach", "aarti", "hotels-near-temple"]
+    related: ["temple-history", "how-to-reach", "aarti"]
   },
   "how-to-reach": {
     slug: "how-to-reach",
@@ -276,66 +276,7 @@ export const learnContent: Record<string, LearnTopic> = {
         a_hi: "हाँ, वाराणसी कैंट बस स्टैंड से हर घंटे विन्ध्याचल के लिए सीधी सरकारी बसें और मिनी-बसें चलती हैं।"
       },
     ],
-    related: ["hotels-near-temple", "ropeway-guide", "tourism-guide", "vindhyavasini-temple-mirzapur", "temple-timings"]
-  },
-  "darshan-guide": {
-    slug: "darshan-guide",
-    category: "Guide",
-    title_en: "Maa Vindhyavasini Darshan Guide - Passes & Rules",
-    title_hi: "माँ विन्ध्यवासिनी दर्शन गाइड - पास, नियम और प्रसाद",
-    metaTitle_en: "Darshan Guide - VIP Entry, Queue Timing & Rules",
-    metaTitle_hi: "विन्ध्याचल मंदिर दर्शन गाइड - सुगम दर्शन पास और नियम",
-    metaDesc_en: "Plan your pilgrimage with the complete Maa Vindhyavasini Darshan Guide. Learn about queue types, paid entry passes, dress code, and local services.",
-    metaDesc_hi: "माँ विन्ध्यवासिनी दर्शन के लिए संपूर्ण यात्रा मार्गदर्शिका। निःशुल्क कतार, सुगम दर्शन वीआईपी पास बुकिंग, ड्रेस कोड और मंदिर के नियम जानें।",
-    keywords_en: "darshan guide, Vindhyachal entry queues, VIP pass online, dress code for temple, Prasad details, locker facilities",
-    keywords_hi: "दर्शन नियम, विन्ध्याचल वीआईपी पास, मंदिर ड्रेस कोड, नारियल प्रसाद नियम, लॉकर सुविधा, सुगम दर्शन बुकिंग",
-    content_en: `<h2>Ultimate Guide to Having a Peaceful Darshan</h2>
-            <p>Visiting the inner sanctum of Maa Vindhyavasini is a deeply spiritual experience. With the development of the Vindhya Dham Corridor, the entry and queue management systems have been modernized to ensure safety and convenience for all pilgrims.</p>
-            <h3>Types of Entry Queues</h3>
-            <ul>
-                <li><strong>General Darshan (Free Queue):</strong> This queue enters the temple through the main Eastern Gate. It is completely free. On regular weekdays, the queue movement is swift, taking 30 to 45 minutes. During weekends and Navratris, wait times can extend to several hours.</li>
-                <li><strong>Sugam Darshan (Paid Special Pass):</strong> To assist senior citizens, families, and those with tight travel plans, special passes are issued. Devotees can book these passes online via the official portal or purchase them at the counters near the Northern Gate. This queue has a dedicated pathway leading directly to the outer chamber of the sanctum.</li>
-            </ul>
-            <h3>Rules of Conduct and Dress Code</h3>
-            <p>Pilgrims are expected to maintain the sanctity of the shrine by adhering to the following rules:</p>
-            <p><strong>Dress Code:</strong> Devotees should wear decent, traditional attire. Dhotis, Kurtas, or trousers for men; sarees, salwar-suits, or decent traditional dresses for women are recommended. Western beachwear, short skirts, or ripped clothing are not allowed inside the main courtyard.</p>
-            <p><strong>Prohibited Items:</strong> Mobile phones, cameras, leather items (belts, wallets), and large luggage bags are strictly prohibited inside the inner temple boundaries. You must leave these items at your hotel or in the secure lockers available outside the corridor entry gates.</p>
-            <h3>Offering Prasad</h3>
-            <p>The traditional offerings to Maa Vindhyavasini consist of coconut, red chunri (scarf), fresh red hibiscus flowers, and sweets like peda or elaichi dana. Many small shops line the corridor walkways where you can purchase these baskets at reasonable, fixed rates.</p>`,
-    content_hi: `<h2>सुखद और सुगम दर्शन के लिए संपूर्ण मार्गदर्शिका</h2>
-            <p>माँ विन्ध्यवासिनी के गर्भगृह में दर्शन करना परम सौभाग्य का विषय माना जाता है। नवनिर्मित विन्ध्य कॉरिडोर के कारण अब मंदिर में कतारों की व्यवस्था अत्यंत व्यवस्थित, स्वच्छ और सुरक्षित हो चुकी है।</p>
-            <h3>दर्शन के लिए उपलब्ध कतारें</h3>
-            <ul>
-                <li><strong>सामान्य दर्शन (निःशुल्क कतार):</strong> यह कतार पूर्वी मुख्य द्वार से शुरू होती है और सभी के लिए निःशुल्क है। सामान्य दिनों में इसमें दर्शन करने में ३० से ४५ मिनट लगते हैं। शनिवार, रविवार और त्योहारों पर समय अधिक लग सकता है।</li>
-                <li><strong>सुगम दर्शन (सशुल्क विशेष पास):</strong> वरिष्ठ नागरिकों, परिवारों और कम समय वाले तीर्थयात्रियों के लिए विशेष पास की व्यवस्था है। इसे भक्त ऑनलाइन या उत्तरी द्वार के समीप बने काउंटर से ले सकते हैं। इस पास के माध्यम से उत्तरी द्वार से त्वरित प्रवेश मिलता है।</li>
-            </ul>
-            <h3>मंदिर के मर्यादा नियम और ड्रेस कोड</h3>
-            <p>मंदिर की पवित्रता बनाए रखने के लिए सभी श्रद्धालुओं को नियमों का पालन करना अनिवार्य है:</p>
-            <p><strong>ड्रेस कोड:</strong> मंदिर परिसर में पारम्परिक और शालीन वस्त्र ही पहनें। पुरुषों के लिए धोती-कुर्ता या पायजामा-कुर्ता और महिलाओं के लिए साड़ी या सलवार-सूट उत्तम है। छोटे या अमर्यादित वस्त्र पहनकर गर्भगृह में प्रवेश वर्जित है।</p>
-            <p><strong>प्रतिबंधित वस्तुएं:</strong> मोबाइल फोन, कैमरा, चमड़े के बेल्ट, बटुआ और बड़े बैग मंदिर परिसर के भीतर ले जाना पूर्णतः प्रतिबंधित है। प्रवेश द्वारों पर निशुल्क जूता स्टॉल और सुरक्षित लॉकर की सुविधा उपलब्ध है जहाँ आप अपनी वस्तुएं रख सकते हैं।</p>
-            <h3>पूजा सामग्री और प्रसाद</h3>
-            <p>माता को नारियल, लाल चुनरी, सिन्दूर, गुड़हल का फूल और पेड़ा चढ़ाया जाता है। कॉरिडोर के चारों तरफ बनी दुकानों से आप निर्धारित कीमतों पर सुंदर प्रसाद की थाली प्राप्त कर सकते हैं।</p>`,
-    faqs: [
-      {
-        q_en: "Are there locker facilities available at the temple?",
-        a_en: "Yes, official free locker rooms are available near the corridor entry points where devotees can safely store their phones and wallets.",
-        q_hi: "क्या मंदिर में लॉकर की सुविधा उपलब्ध है?",
-        a_hi: "हाँ, कॉरिडोर के मुख्य प्रवेश द्वारों के पास सरकारी लॉकर रूम की सुविधा है जहाँ आप फोन और बटुआ सुरक्षित रख सकते हैं।"
-      },
-      {
-        q_en: "Can we take pictures inside the temple?",
-        a_en: "No, photography and video recording are strictly prohibited inside the inner courtyard and the sanctum sanctorum.",
-        q_hi: "क्या हम मंदिर के भीतर तस्वीरें ले सकते हैं?",
-        a_hi: "नहीं, गर्भगृह और मुख्य मंदिर परिसर के अंदर फोटो खींचना या वीडियो बनाना पूरी तरह से वर्जित है।"
-      },
-      {
-        q_en: "Is there a wheelchair facility for disabled pilgrims?",
-        a_en: "Yes, wheelchairs and ramp access are provided. Devotees can request assistance at the main administrative office at the Eastern gate.",
-        q_hi: "क्या विकलांगों के लिए व्हीलचेयर की सुविधा है?",
-        a_hi: "हाँ, मंदिर कॉरिडोर में रैंप और व्हीलचेयर की सुविधा उपलब्ध है। पूर्वी द्वार पर बने सहायता केंद्र से इसके लिए मदद ली जा सकती है।"
-      },
-    ],
-    related: ["temple-timings", "aarti", "shakti-peeth", "temple-history", "ropeway-guide"]
+    related: ["ropeway-guide", "tourism-guide", "vindhyavasini-temple-mirzapur", "temple-timings"]
   },
   "aarti": {
     slug: "aarti",
@@ -406,7 +347,7 @@ export const learnContent: Record<string, LearnTopic> = {
         a_hi: "आरती दर्शन के लिए कॉरिडोर में खड़े होकर दर्शन करने की व्यवस्था है। विशेष पूजा स्लॉट की जानकारी हेतु संस्थान की वेबसाइट पर संपर्क करें।"
       },
     ],
-    related: ["chalisa", "maa-vindhyavasini-mantra", "temple-timings", "darshan-guide", "shakti-peeth"]
+    related: ["chalisa", "maa-vindhyavasini-mantra", "temple-timings", "shakti-peeth"]
   },
   "chalisa": {
     slug: "chalisa",
@@ -491,64 +432,7 @@ export const learnContent: Record<string, LearnTopic> = {
         a_hi: "साधारण किशमिश, मिश्री या पीले रंग की मिठाई का भोग लगाना पर्याप्त माना जाता है।"
       },
     ],
-    related: ["aarti", "maa-vindhyavasini-mantra", "shakti-peeth", "temple-history", "darshan-guide"]
-  },
-  "temple-architecture": {
-    slug: "temple-architecture",
-    category: "Guide",
-    title_en: "Vindhyavasini Temple Architecture & Vindhya Corridor Layout",
-    title_hi: "विन्ध्याचल मंदिर वास्तुकला और नए कॉरिडोर का स्थापत्य",
-    metaTitle_en: "Vindhyavasini Architecture - Shikhara & Pink Sandstone Corridor",
-    metaTitle_hi: "विन्ध्याचल मंदिर की वास्तुकला - नागर शैली एवं कॉरिडोर डिजाइन",
-    metaDesc_en: "Read about the architecture of Maa Vindhyavasini Temple. Discover the Nagara style shikhara, carved stone pillars, and the Vindhya Dham Corridor layout.",
-    metaDesc_hi: "माँ विन्ध्यवासिनी मंदिर के स्थापत्य का अध्ययन। नागर वास्तुकला, स्वर्ण कलश और नवनिर्मित विन्ध्य कॉरिडोर के नक्काशीदार बलुआ पत्थरों की जानकारी।",
-    keywords_en: "temple architecture, Nagara style temple, shikhara design, Vindhya Corridor stone carvings, Mirzapur pink sandstone",
-    keywords_hi: "मंदिर वास्तुकला, नागर शैली मंदिर, मंदिर शिखर कलश, विन्ध्य कॉरिडोर नक्काशी, मिर्जापुर बलुआ पत्थर, स्थापत्य कला",
-    content_en: `<h2>Architectural Marvel of the Vindhyas</h2>
-            <p>The Maa Vindhyavasini Temple is a magnificent representative of the <strong>Nagara style</strong> of architecture, which is the traditional temple-building system of Northern India. The temple structures emphasize verticality, built to direct the eyes and mind of the devotee upwards toward the heavens.</p>
-            <h3>The Core Garbhagriha and Shikhara</h3>
-            <p>The innermost chamber, or the <strong>Garbhagriha</strong> (Sanctum Sanctorum), is a square room housing the ancient deity of Maa Vindhyavasini. The deity is carved from solid black stone, seated on a golden throne. Above the Garbhagriha rises the main <strong>Shikhara</strong> (spire), a pyramid-like structure built of stone layers, topped with a large gold-plated <strong>Kalash</strong> (sacred pot) and the spiritual flag (dhwaja) that can be seen from miles away.</p>
-            <h3>The Grand Vindhya Dham Corridor Project</h3>
-            <p>In recent years, the Government of Uttar Pradesh, with active design coordinates from Namami Vindhyavasini Sansthan, completed the expansion of the temple premises. The design reflects ancient heritage while incorporating modern crowd facilities:</p>
-            <ul>
-                <li><strong>Mirzapur Pink Sandstone:</strong> The entire corridor structure is built using durable, locally quarried pink sandstone, which develops a beautiful shine under natural sunlight.</li>
-                <li><strong>Carved Pillars:</strong> Hundreds of stone pillars line the walkways, each featuring intricate relief carvings of lions (the vehicle of Goddess Durga), lotus motifs, and traditional patterns of Sanatana Dharma.</li>
-                <li><strong>Parikrama Path:</strong> A wide, double-storied circumambulation balcony wraps around the core temple, enabling thousands of pilgrims to perform parikrama without congestion.</li>
-                <li><strong>Ganges Connectivity:</strong> The corridor directly links the temple complex to the nearby Ganges bathing ghats, allowing pilgrims to take a holy dip and walk directly to the shrine.</li>
-            </ul>`,
-    content_hi: `<h2>विन्ध्याचल धाम की अद्भुत स्थापत्य और शिल्प कला</h2>
-            <p>माँ विन्ध्यवासिनी मंदिर उत्तर भारतीय <strong>नागर शैली</strong> का एक बेजोड़ उदाहरण है। इस शैली में बने मंदिरों में ऊर्ध्वाधर (vertical) रेखाओं और गुंबदों को प्राथमिकता दी जाती है, जो साधक की चेतना को ब्रह्मांडीय ऊर्जा की ओर आकर्षित करती हैं।</p>
-            <h3>मुख्य गर्भगृह और स्वर्ण शिखर</h3>
-            <p>मंदिर का हृदय स्थल <strong>गर्भगृह</strong> है, जहाँ माता विन्ध्यवासिनी की प्राचीन पाषाण प्रतिमा स्थापित है। माता गर्भगृह में स्वर्ण सिंहासन पर विराजमान हैं। गर्भगृह के ठीक ऊपर मुख्य <strong>शिखर</strong> उठता है। यह पत्थरों की परतों से निर्मित है, जिसके शिखर पर सोने का भव्य <strong>कलश</strong> और देवी का पावन ध्वज स्थापित है, जो दूर से ही दिखाई देता है।</p>
-            <h3>नवनिर्मित विन्ध्य धाम कॉरिडोर</h3>
-            <p>उत्तर प्रदेश सरकार द्वारा नमामि विन्ध्यवासिनी संस्थान के समन्वय से हाल ही में विन्ध्य कॉरिडोर का निर्माण पूर्ण किया गया है। यह स्थापत्य कला की एक आधुनिक और ऐतिहासिक उपलब्धि है:</p>
-            <ul>
-                <li><strong>गुलाबी बलुआ पत्थर:</strong> पूरे कॉरिडोर का निर्माण मिर्जापुर के प्रसिद्ध चुनार के गुलाबी बलुआ पत्थरों से हुआ है, जो धूप में चमकते हैं।</li>
-                <li><strong>नक्काशीदार स्तंभ:</strong> कॉरिडोर के रास्तों पर सैकड़ों नक्काशीदार खंभे लगाए गए हैं, जिन पर माँ दुर्गा के वाहन सिंह, कमल के फूल और वैदिक मांगलिक प्रतीकों को उकेरा गया है।</li>
-                <li><strong>दो मंजिला परिक्रमा पथ:</strong> मंदिर के चारों ओर एक विशाल, दो मंजिला परिक्रमा मार्ग बनाया गया है, जिससे श्रद्धालु बिना किसी व्यवधान के परिक्रमा कर सकते हैं।</li>
-                <li><strong>गंगा घाटों से सीधा जुड़ाव:</strong> कॉरिडोर मंदिर परिसर को सीधे गंगा नदी के पक्के घाटों से जोड़ता है, जिससे भक्त स्नान करके सीधे गर्भगृह आ सकते हैं।</li>
-            </ul>`,
-    faqs: [
-      {
-        q_en: "What architectural style is used in the temple?",
-        a_en: "The temple is constructed in the North Indian Nagara style of architecture, featuring a stepped shikhara and square sanctum.",
-        q_hi: "मंदिर के निर्माण में किस वास्तुकला शैली का उपयोग किया गया है?",
-        a_hi: "यह मंदिर उत्तर भारतीय नागर शैली में निर्मित है, जिसमें सीढ़ीदार शिखर और वर्गाकार गर्भगृह है।"
-      },
-      {
-        q_en: "Where does the sandstone for the corridor come from?",
-        a_en: "The pink sandstone is sourced from the historical quarries of Mirzapur and Chunar, famous for their durability.",
-        q_hi: "कॉरिडोर के लिए बलुआ पत्थर कहाँ से लाया गया है?",
-        a_hi: "कॉरिडोर के निर्माण में प्रयुक्त गुलाबी बलुआ पत्थर मिर्जापुर और चुनार की ऐतिहासिक खदानों से मंगाया गया है।"
-      },
-      {
-        q_en: "Are there elevators or escalators in the corridor?",
-        a_en: "Yes, elevators are integrated at key points in the double-storied corridor to assist disabled and elderly pilgrims.",
-        q_hi: "क्या कॉरिडोर में लिफ्ट या स्वचालित सीढ़ियों की व्यवस्था है?",
-        a_hi: "हाँ, दिव्यांगों और बुजुर्गों के लिए दो मंजिला कॉरिडोर के मुख्य स्थानों पर लिफ्ट लगाई गई हैं।"
-      },
-    ],
-    related: ["temple-history", "vindhyavasini-temple-mirzapur", "tourism-guide", "how-to-reach", "shakti-peeth"]
+    related: ["aarti", "maa-vindhyavasini-mantra", "shakti-peeth", "temple-history"]
   },
   "temple-festivals": {
     slug: "temple-festivals",
@@ -664,7 +548,7 @@ export const learnContent: Record<string, LearnTopic> = {
         a_hi: "कॉरिडोर के बाहर स्थित कई प्रमुख भोजनालयों में शुद्ध फलाहारी भोजन (साबूदाना खिचड़ी, कुट्टू की पूरी और फलों के सलाद) की उत्तम व्यवस्था होती है।"
       },
     ],
-    related: ["temple-festivals", "tourism-guide", "hotels-near-temple", "darshan-guide", "how-to-reach"]
+    related: ["temple-festivals", "tourism-guide", "how-to-reach"]
   },
   "tourism-guide": {
     slug: "tourism-guide",
@@ -731,7 +615,7 @@ export const learnContent: Record<string, LearnTopic> = {
         a_hi: "हाँ, पूर्वी द्वार के पास से स्थानीय गाइड मिल जाते हैं। हालांकि, पूरा परिक्रमा मार्ग दिशा-निर्देश बोर्डों से अच्छी तरह चिह्नित है।"
       },
     ],
-    related: ["ropeway-guide", "hotels-near-temple", "how-to-reach", "vindhyavasini-temple-mirzapur", "shakti-peeth"]
+    related: ["ropeway-guide", "how-to-reach", "vindhyavasini-temple-mirzapur", "shakti-peeth"]
   },
   "shakti-peeth": {
     slug: "shakti-peeth",
@@ -788,7 +672,7 @@ export const learnContent: Record<string, LearnTopic> = {
         a_hi: "हाँ, मंदिर परिसर के शांत कोनों में और कॉरिडोर में साधक रात्रि के समय मंत्र जप और ध्यान साधना करते हैं।"
       },
     ],
-    related: ["temple-history", "vindhyavasini-temple-mirzapur", "tourism-guide", "darshan-guide", "maa-vindhyavasini-mantra"]
+    related: ["temple-history", "vindhyavasini-temple-mirzapur", "tourism-guide", "maa-vindhyavasini-mantra"]
   },
   "temple-photos": {
     slug: "temple-photos",
@@ -843,60 +727,7 @@ export const learnContent: Record<string, LearnTopic> = {
         a_hi: "हाँ, मंदिर के बाहर स्थित दुकानों से आप माता के विभिन्न शृंगारों के सुंदर लैमिनेटेड फोटो और फ्रेम खरीद सकते हैं।"
       },
     ],
-    related: ["gallery", "temple-architecture", "tourism-guide", "darshan-guide", "shakti-peeth"]
-  },
-  "hotels-near-temple": {
-    slug: "hotels-near-temple",
-    category: "Travel",
-    title_en: "Hotels & Dharamshalas near Vindhyachal Temple - Stay Guide",
-    title_hi: "विन्ध्याचल में ठहरने के स्थान - होटल और धर्मशाला गाइड",
-    metaTitle_en: "Hotels near Vindhyachal Temple - Dharamshala & Stays",
-    metaTitle_hi: "विन्ध्याचल में होटल और धर्मशाला बुकिंग - सस्ते और अच्छे कमरे",
-    metaDesc_en: "Find clean stays near Maa Vindhyavasini Temple. Read about trust dharamshalas, UP Tourism guest houses, and private hotels.",
-    metaDesc_hi: "विन्ध्याचल मंदिर के समीप होटल, धर्मशाला और यूपी पर्यटन आवासों की विस्तृत गाइड। किराए, सुविधाओं और बुकिंग की जानकारी।",
-    keywords_en: "hotels in Vindhyachal, dharamshala near temple, UP tourism guest house, Mirzapur accommodation, cheap family rooms",
-    keywords_hi: "विन्ध्याचल होटल, मंदिर के पास धर्मशाला, यूपी टूरिज्म गेस्ट हाउस, मिर्जापुर में रुकने की जगह, सस्ते कमरे",
-    content_en: `<h2>Where to Stay in Vindhyachal Dham</h2>
-            <p>To experience the early morning Aartis or the night environment, staying overnight in Vindhyachal is highly recommended. The town offers a range of stays suited for families, solo travelers, and groups.</p>
-            <h3>1. Temple and Community Dharamshalas</h3>
-            <p>Dharamshalas run by community trusts offer clean rooms with basic amenities. They are located within 300 to 500 meters of the main corridor. They are affordable, costing around Rs 300 to Rs 800 per night, and often have dining halls serving simple satvik meals.</p>
-            <h3>2. Rahi Tourist Bungalow (UP Tourism)</h3>
-            <p>Operated by the Uttar Pradesh State Tourism Corporation, this property is situated about 1 km from the temple. It features large gardens, clean air-conditioned rooms, secure parking, and an in-house restaurant serving clean vegetarian food. It is ideal for families travelling by car.</p>
-            <h3>3. Private Hotels and Guest Houses</h3>
-            <p>Several newly constructed private hotels are located near the Vindhyachal railway station and along the main highway connection to Mirzapur. They offer air-conditioned rooms, room service, and travel desks to arrange local sightseeing cabs.</p>
-            <h3>Tips for Booking Stays</h3>
-            <p>During the Navratri festivals, the town receives millions of visitors, and almost all lodging places are booked months in advance. Always book your rooms well ahead of time during peak seasons. Verify the check-in times and look for hotels that provide hot water and secure locker keys.</p>`,
-    content_hi: `<h2>विन्ध्याचल धाम में ठहरने के सर्वोत्तम विकल्प</h2>
-            <p>यदि आप सुबह की मंगला आरती (०४:०० बजे) या रात के शांत वातावरण का अनुभव करना चाहते हैं, तो विन्ध्याचल में रात्रि विश्राम की योजना अवश्य बनाएं। यहाँ सभी बजट के अनुसार ठहरने की उत्तम व्यवस्थाएँ हैं।</p>
-            <h3>१. ट्रस्ट और सामाजिक धर्मशालाएँ</h3>
-            <p>विभिन्न समाजों और संस्थाओं द्वारा संचालित धर्मशालाएँ मंदिर से ३००-५०० मीटर की दूरी पर स्थित हैं। यहाँ ३०० से ८०० रुपये प्रति रात्रि के बीच साफ-सुथरे कमरे मिल जाते हैं। कई धर्मशालाओं में भोजन के लिए निशुल्क या कम मूल्य पर सात्विक रसोई की सुविधा भी होती है।</p>
-            <h3>२. राही टूरिस्ट बंगला (यूपी टूरिज्म)</h3>
-            <p>उत्तर प्रदेश पर्यटन विभाग द्वारा संचालित यह होटल मंदिर से १ किमी दूर स्थित है। यहाँ बड़े बगीचे, सुरक्षित कार पार्किंग, एयर-कंडीशनर कमरे और शुद्ध शाकाहारी भोजन परोसने वाला भोजनालय उपलब्ध है। सपरिवार आने वाले लोगों के लिए यह एक उत्तम और सुरक्षित विकल्प है।</p>
-            <h3>३. निजी होटल और गेस्ट हाउस</h3>
-            <p>रेलवे स्टेशन और मुख्य सड़क पर कई निजी होटल बने हैं। ये होटल रूम सर्विस, वाई-फाई और स्थानीय पर्यटन के लिए गाड़ियां उपलब्ध कराने वाली ट्रैवल डेस्क की सुविधा देते हैं।</p>
-            <h3>बुकिंग से जुड़ी महत्वपूर्ण सलाह</h3>
-            <p>चैत्र और शारदीय नवरात्रि के मेलों के समय विन्ध्याचल में भारी भीड़ होती है, इसलिए इन दिनों के लिए कई महीने पहले बुकिंग करना जरूरी है। होटल का चुनाव करते समय गर्म पानी, भोजन व्यवस्था और मंदिर से दूरी का विशेष ध्यान रखें।</p>`,
-    faqs: [
-      {
-        q_en: "What is the average cost of a room near the temple?",
-        a_en: "Standard non-AC rooms cost Rs 500-1000, while AC hotel rooms range from Rs 1500 to Rs 3500 per night.",
-        q_hi: "मंदिर के पास कमरों का औसत किराया कितना है?",
-        a_hi: "साधारण नॉन-एसी कमरों का किराया ५००-१००० रुपये और एसी कमरों का किराया १५०० से ३५०० रुपये प्रति रात्रि के बीच होता है।"
-      },
-      {
-        q_en: "Do hotels serve pure vegetarian food?",
-        a_en: "Yes, by local religious guidelines, all hotels and restaurants in Vindhyachal town serve strictly vegetarian (satvik) food without onion or garlic near the temple zone.",
-        q_hi: "क्या यहाँ होटलों में शुद्ध शाकाहारी भोजन मिलता है?",
-        a_hi: "हाँ, धार्मिक नियमों के कारण विन्ध्याचल कस्बे के सभी होटलों और भोजनालयों में शुद्ध शाकाहारी (सात्विक) भोजन ही परोसा जाता है।"
-      },
-      {
-        q_en: "Is parking available at the dharamshalas?",
-        a_en: "Some large dharamshalas have inner courtyards for parking, but others rely on the municipal parking zones near the corridor.",
-        q_hi: "क्या धर्मशालाओं में पार्किंग की व्यवस्था होती है?",
-        a_hi: "कुछ बड़ी धर्मशालाओं के पास अपना पार्किंग स्थल है, अन्यथा आपको वाहन कॉरिडोर के पास बने सरकारी पार्किंग जोन में खड़े करने होंगे।"
-      },
-    ],
-    related: ["how-to-reach", "tourism-guide", "ropeway-guide", "temple-timings", "darshan-guide"]
+    related: ["gallery", "tourism-guide", "shakti-peeth"]
   },
   "ropeway-guide": {
     slug: "ropeway-guide",
@@ -953,7 +784,7 @@ export const learnContent: Record<string, LearnTopic> = {
         a_hi: "सुरक्षा कारणों से तेज आंधी या तूफान के समय संचालन को कुछ समय के लिए रोक दिया जाता है और मौसम सामान्य होने पर दोबारा शुरू किया जाता है।"
       },
     ],
-    related: ["how-to-reach", "tourism-guide", "hotels-near-temple", "darshan-guide", "temple-architecture"]
+    related: ["how-to-reach", "tourism-guide"]
   },
   "vindhyavasini-temple-mirzapur": {
     slug: "vindhyavasini-temple-mirzapur",
@@ -1008,7 +839,7 @@ export const learnContent: Record<string, LearnTopic> = {
         a_hi: "हाँ, विन्ध्याचल में सामुदायिक स्वास्थ्य केंद्र है और बड़ा जिला अस्पताल मिर्जापुर शहर में ९ किमी की दूरी पर स्थित है।"
       },
     ],
-    related: ["how-to-reach", "tourism-guide", "hotels-near-temple", "temple-architecture", "shakti-peeth"]
+    related: ["how-to-reach", "tourism-guide", "shakti-peeth"]
   },
   "vindhyavasini-temple-uttar-pradesh": {
     slug: "vindhyavasini-temple-uttar-pradesh",
@@ -1059,7 +890,7 @@ export const learnContent: Record<string, LearnTopic> = {
         a_hi: "हाँ, विन्ध्य धाम कॉरिडोर के मुख्य चरणों का निर्माण कार्य पूरा हो चुका है और यह जनता के लिए खोल दिया गया है।"
       },
     ],
-    related: ["how-to-reach", "tourism-guide", "hotels-near-temple", "temple-architecture", "shakti-peeth"]
+    related: ["how-to-reach", "tourism-guide", "shakti-peeth"]
   },
   "vindhyavasini-temple-vindhyachal": {
     slug: "vindhyavasini-temple-vindhyachal",
@@ -1114,7 +945,7 @@ export const learnContent: Record<string, LearnTopic> = {
         a_hi: "पूर्वी प्रवेश द्वार पर बने पुलिस सहायता केंद्र में तुरंत रिपोर्ट करें, जहाँ से लाउडस्पीकर द्वारा घोषणा की सुविधा उपलब्ध है।"
       },
     ],
-    related: ["how-to-reach", "tourism-guide", "hotels-near-temple", "temple-architecture", "shakti-peeth"]
+    related: ["how-to-reach", "tourism-guide", "shakti-peeth"]
   },
   "maa-vindhyavasini-mantra": {
     slug: "maa-vindhyavasini-mantra",
@@ -1183,6 +1014,6 @@ export const learnContent: Record<string, LearnTopic> = {
         a_hi: "यह मन को एकाग्र करता है, तनाव और अवसाद को दूर करता है और साधक को आत्म-साक्षात्कार की ओर ले जाता है।"
       },
     ],
-    related: ["aarti", "chalisa", "shakti-peeth", "temple-history", "darshan-guide"]
+    related: ["aarti", "chalisa", "shakti-peeth", "temple-history"]
   }
 };
