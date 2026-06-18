@@ -404,13 +404,19 @@ function BlogDetailPage() {
                   className="group flex flex-col justify-between h-full bg-card rounded-xl border border-gold/20 hover:border-gold hover:shadow-gold transition-all duration-300 overflow-hidden"
                 >
                   <div>
-                    <div className="relative aspect-[16/10] overflow-hidden">
-                      <img
-                        src={relPost.featured_image || "/images/maa-vindhyavasini-2.webp"}
-                        alt={relPost.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 pointer-events-none select-none"
-                      />
-                    </div>
+                    {relPost.featured_image ? (
+                      <div className="relative aspect-[16/10] overflow-hidden">
+                        <img
+                          src={relPost.featured_image}
+                          alt={relPost.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 pointer-events-none select-none"
+                        />
+                      </div>
+                    ) : (
+                      <div className="relative aspect-[16/10] bg-gradient-to-br from-maroon/20 via-saffron/10 to-gold/5 flex items-center justify-center border-b border-border/40">
+                        <BookOpen size={32} className="text-saffron/40 group-hover:scale-110 transition-transform duration-300" />
+                      </div>
+                    )}
                     <div className="p-4 space-y-2">
                       <span className="text-[9px] font-bold text-saffron bg-saffron/10 px-2 py-0.5 rounded uppercase">
                         {categoryTranslations[relPost.category]?.[lang] || relPost.category}

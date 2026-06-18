@@ -268,16 +268,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.namamivindhyavasini.in/blog/why-do-good-people-suffer</loc>
-    <lastmod>2026-06-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://i.pinimg.com/736x/f3/f4/55/f3f455819095f27be448366e20609756.jpg</image:loc>
-      <image:title>Why Do Good People Suffer?</image:title>
-    </image:image>
-  </url>
-  <url>
     <loc>https://www.namamivindhyavasini.in/blog/kajali-mahotsav-history-and-significance</loc>
     <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
@@ -288,6 +278,10 @@
     <lastmod>2026-06-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://i.pinimg.com/736x/65/5d/77/655d77bf71d7d966aac872794c2e95e7.jpg</image:loc>
+      <image:title>जब जीवन स्वयं उपदेश बन जाए</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/blog/living-truth-in-daily-life</loc>
@@ -362,6 +356,16 @@
     <lastmod>2026-03-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.namamivindhyavasini.in/blog/why-do-good-people-suffer</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://i.pinimg.com/736x/f3/f4/55/f3f455819095f27be448366e20609756.jpg</image:loc>
+      <image:title>Why Do Good People Suffer?</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/blog/maa-vindhyavasini-chalisa-meaning-and-benefits</loc>
