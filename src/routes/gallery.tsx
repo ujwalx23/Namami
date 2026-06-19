@@ -10,7 +10,6 @@ import { toast } from "sonner";
 import gallery1 from "@/assets/gallery-1.webp";
 import maaImg from "@/assets/maa-vindhyavasini.webp";
 import maaImg2 from "@/assets/maa-vindhyavasini-2.webp";
-import maaImg4 from "@/assets/maa-vindhyavasini-4.jpg";
 import maaImg5 from "@/assets/maa-vindhyavasini-5.jpg";
 import maaImgSimhasan from "@/assets/maa-vindhyavasini-simhasan-shringar.jpg";
 import maaImgGarland from "@/assets/maa-vindhyavasini-garland-shringar.jpg";
@@ -78,7 +77,6 @@ export const defaults: { src: string; cap_en: string; cap_hi: string }[] = [
     cap_en: "Maa Vindhyavasini Garland Alankar",
     cap_hi: "माँ विन्ध्यवासिनी माला श्रृंगार",
   },
-  { src: maaImg4, cap_en: "Simha Vahana Darshan", cap_hi: "सिंह वाहन दर्शन" },
   { src: maaImg5, cap_en: "Pushpa Shringar Darshan", cap_hi: "पुष्प श्रृंगार दर्शन" },
   { src: maaImgNeel, cap_en: "Neel Pushpa Shringar", cap_hi: "नील पुष्प श्रृंगार" },
   { src: maaImgDevi, cap_en: "Maha Aarti Darshan", cap_hi: "महाआरती दर्शन" },
