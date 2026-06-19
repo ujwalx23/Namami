@@ -8,6 +8,7 @@ import { useLang } from "@/i18n/LangProvider";
 import { Download, X, Share2, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
 import gallery1 from "@/assets/gallery-1.webp";
+import maaImg from "@/assets/maa-vindhyavasini.webp";
 import maaImg2 from "@/assets/maa-vindhyavasini-2.webp";
 import maaImg4 from "@/assets/maa-vindhyavasini-4.jpg";
 import maaImg5 from "@/assets/maa-vindhyavasini-5.jpg";
@@ -15,7 +16,6 @@ import maaImgSimhasan from "@/assets/maa-vindhyavasini-simhasan-shringar.jpg";
 import maaImgGarland from "@/assets/maa-vindhyavasini-garland-shringar.jpg";
 import maaImgNeel from "@/assets/maa-vindhyavasini-neel-shringar.jpg";
 import maaImgDevi from "@/assets/maa-vindhyavasini-devi-mirzapur.jpg";
-import maaImgShakti from "@/assets/maa-vindhyavasini-shakti-peeth.jpg";
 import { JsonLd } from "@/components/JsonLd";
 import { ShareModal } from "@/components/ShareModal";
 import { addGalleryWatermark } from "@/lib/watermarkImage";
@@ -81,8 +81,8 @@ export const defaults: { src: string; cap_en: string; cap_hi: string }[] = [
   { src: maaImg5, cap_en: "Pushpa Shringar Darshan", cap_hi: "पुष्प श्रृंगार दर्शन" },
   { src: maaImgNeel, cap_en: "Neel Pushpa Shringar", cap_hi: "नील पुष्प श्रृंगार" },
   { src: maaImgDevi, cap_en: "Maha Aarti Darshan", cap_hi: "महाआरती दर्शन" },
-  { src: maaImgShakti, cap_en: "Shakti Peeth Darshan", cap_hi: "शक्तिपीठ दर्शन" },
   { src: gallery1, cap_en: "Swarna Shringar", cap_hi: "स्वर्ण श्रृंगार" },
+  { src: maaImg, cap_en: "Divine Grace", cap_hi: "दिव्य स्वरूप (कृपा)" },
   { src: maaImg2, cap_en: "Temple Darshan", cap_hi: "दिव्य दर्शन" },
 ];
 
