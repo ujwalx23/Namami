@@ -57,6 +57,16 @@ const formatAdminDate = (dateString: string) => {
   return `${day}-${month}-${year}`;
 };
 
+const formatLockDuration = (seconds: number): string => {
+  if (seconds < 60) return `${seconds}s`;
+  if (seconds < 3600) {
+    const min = Math.ceil(seconds / 60);
+    return `${min}m`;
+  }
+  const hr = Math.ceil(seconds / 3600);
+  return `${hr}h`;
+};
+
 function AdminPage() {
   const [session, setSession] = useState<any>(null);
   const [loadingSession, setLoadingSession] = useState(true);
@@ -64,6 +74,60 @@ function AdminPage() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loggingIn, setLoggingIn] = useState(false);
+
+  // Lockout states
+  const [attempts, setAttempts] = useState(() => {
+    try {
+      const savedAttempts = localStorage.getItem("admin_lockout_attempts");
+      const lastTime = localStorage.getItem("admin_lockout_last_attempt_time");
+      if (savedAttempts && lastTime) {
+        const timeDiff = Date.now() - Number(lastTime);
+        // Reset count to 0 if 2 days (2 * 24 * 60 * 60 * 1000) of inactivity have passed
+        if (timeDiff > 2 * 24 * 60 * 60 * 1000) {
+          localStorage.setItem("admin_lockout_attempts", "0");
+          return 0;
+        }
+        return Number(savedAttempts);
+      }
+    } catch {}
+    return 0;
+  });
+
+  const [lockUntil, setLockUntil] = useState<number>(() => {
+    try {
+      const savedLock = localStorage.getItem("admin_lockout_until");
+      if (savedLock) {
+        const lockTime = Number(savedLock);
+        if (lockTime > Date.now()) {
+          return lockTime;
+        }
+      }
+    } catch {}
+    return 0;
+  });
+
+  const [lockRemaining, setLockRemaining] = useState(0);
+
+  useEffect(() => {
+    if (lockUntil <= Date.now()) {
+      setLockRemaining(0);
+      return;
+    }
+
+    setLockRemaining(Math.ceil((lockUntil - Date.now()) / 1000));
+
+    const interval = setInterval(() => {
+      const diff = lockUntil - Date.now();
+      if (diff <= 0) {
+        setLockRemaining(0);
+        clearInterval(interval);
+      } else {
+        setLockRemaining(Math.ceil(diff / 1000));
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [lockUntil]);
 
   const [activeTab, setActiveTab] = useState<
     | "sandesh"
@@ -137,6 +201,9 @@ function AdminPage() {
   if (!session) {
     async function handleLogin(e: React.FormEvent) {
       e.preventDefault();
+      if (lockRemaining > 0) {
+        return toast.error(`Locked out. Please wait ${formatLockDuration(lockRemaining)}.`);
+      }
       if (!email.trim() || !password.trim()) {
         return toast.error("Please enter email and password");
       }
@@ -148,7 +215,39 @@ function AdminPage() {
       setLoggingIn(false);
       if (error) {
         toast.error(error.message);
+
+        // Lockout progression logic
+        const newAttempts = attempts + 1;
+        setAttempts(newAttempts);
+        localStorage.setItem("admin_lockout_attempts", newAttempts.toString());
+        localStorage.setItem("admin_lockout_last_attempt_time", Date.now().toString());
+
+        let lockDuration = 0; // in seconds
+        if (newAttempts === 3) {
+          lockDuration = 30; // 3 failures -> 30 seconds
+          toast.error("Too many failed attempts. Security lock active for 30 seconds.");
+        } else if (newAttempts === 5) {
+          lockDuration = 120; // 5 failures -> 2 minutes
+          toast.error("Too many failed attempts. Security lock active for 2 minutes.");
+        } else if (newAttempts === 7) {
+          lockDuration = 900; // 7 failures -> 15 minutes
+          toast.error("Too many failed attempts. Security lock active for 15 minutes.");
+        } else if (newAttempts > 7) {
+          lockDuration = 3600; // each failure after 7 -> 1 hour
+          toast.error("Too many failed attempts. Security lock active for 1 hour.");
+        }
+
+        if (lockDuration > 0) {
+          const until = Date.now() + lockDuration * 1000;
+          setLockUntil(until);
+          localStorage.setItem("admin_lockout_until", until.toString());
+        }
       } else {
+        // Reset lockout values on successful login
+        setAttempts(0);
+        localStorage.setItem("admin_lockout_attempts", "0");
+        localStorage.removeItem("admin_lockout_until");
+        localStorage.removeItem("admin_lockout_last_attempt_time");
         toast.success("Welcome back, Administrator!");
       }
     }
@@ -175,8 +274,9 @@ function AdminPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="contact@namamivindhyavasini.in"
-                className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold"
+                className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold disabled:opacity-60"
                 required
+                disabled={lockRemaining > 0}
               />
             </div>
 
@@ -190,14 +290,16 @@ function AdminPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your password"
-                  className="w-full pl-4 pr-11 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold"
+                  className="w-full pl-4 pr-11 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-gold disabled:opacity-60"
                   required
+                  disabled={lockRemaining > 0}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 p-1.5 rounded-md hover:bg-muted/15 text-muted-foreground hover:text-foreground transition-colors cursor-pointer flex items-center justify-center"
                   aria-label={showPassword ? "Hide password" : "Show password"}
+                  disabled={lockRemaining > 0}
                 >
                   {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
@@ -205,10 +307,14 @@ function AdminPage() {
             </div>
 
             <button
-              disabled={loggingIn}
+              disabled={loggingIn || lockRemaining > 0}
               className="w-full px-6 py-3 rounded-full bg-gradient-sacred text-cream font-medium shadow-gold hover:opacity-95 hover:scale-[1.01] transition-all disabled:opacity-50 cursor-pointer"
             >
-              {loggingIn ? "Signing In..." : "Sign In"}
+              {loggingIn
+                ? "Signing In..."
+                : lockRemaining > 0
+                  ? `Locked out (${formatLockDuration(lockRemaining)})`
+                  : "Sign In"}
             </button>
           </form>
         </section>
