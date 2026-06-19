@@ -1926,8 +1926,8 @@ function AnalyticsAdmin() {
     {
       icon: Image,
       label: "Gallery Images",
-      value: formatAnalyticsCount(data.gallery + 3),
-      sub: `3 local (GitHub) + ${formatAnalyticsCount(data.gallery)} custom (Admin)`,
+      value: formatAnalyticsCount(data.gallery + 10),
+      sub: `10 local (GitHub) + ${formatAnalyticsCount(data.gallery)} custom (Admin)`,
     },
   ];
 
