@@ -7,7 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useLang } from "@/i18n/LangProvider";
 import { Download, X, Share2, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
-import maaImg from "@/assets/maa-vindhyavasini.webp";
+import gallery1 from "@/assets/gallery-1.webp";
 import maaImg2 from "@/assets/maa-vindhyavasini-2.webp";
 import maaImg4 from "@/assets/maa-vindhyavasini-4.jpg";
 import maaImg5 from "@/assets/maa-vindhyavasini-5.jpg";
@@ -82,7 +82,7 @@ export const defaults: { src: string; cap_en: string; cap_hi: string }[] = [
   { src: maaImgNeel, cap_en: "Neel Pushpa Shringar", cap_hi: "नील पुष्प श्रृंगार" },
   { src: maaImgDevi, cap_en: "Maha Aarti Darshan", cap_hi: "महाआरती दर्शन" },
   { src: maaImgShakti, cap_en: "Shakti Peeth Darshan", cap_hi: "शक्तिपीठ दर्शन" },
-  { src: maaImg, cap_en: "Divine Grace", cap_hi: "दिव्य स्वरूप (कृपा)" },
+  { src: gallery1, cap_en: "Swarna Shringar", cap_hi: "स्वर्ण श्रृंगार" },
   { src: maaImg2, cap_en: "Temple Darshan", cap_hi: "दिव्य दर्शन" },
 ];
 
