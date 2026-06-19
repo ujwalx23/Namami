@@ -67,7 +67,7 @@ export const Route = createFileRoute("/gallery")({
 
 type GalleryRow = { id: string; image_url: string; caption: string | null; created_at: string };
 
-const defaults: { src: string; cap_en: string; cap_hi: string }[] = [
+export const defaults: { src: string; cap_en: string; cap_hi: string }[] = [
   {
     src: maaImgSimhasan,
     cap_en: "Maa Vindhyavasini Simhasan Shringar",

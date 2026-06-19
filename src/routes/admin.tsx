@@ -22,6 +22,7 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import type { Tables } from "@/integrations/supabase/types";
+import { defaults as galleryDefaults } from "./gallery";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
@@ -1926,8 +1927,8 @@ function AnalyticsAdmin() {
     {
       icon: Image,
       label: "Gallery Images",
-      value: formatAnalyticsCount(data.gallery + 10),
-      sub: `10 local (GitHub) + ${formatAnalyticsCount(data.gallery)} custom (Admin)`,
+      value: formatAnalyticsCount(data.gallery + galleryDefaults.length),
+      sub: `${galleryDefaults.length} local (GitHub) + ${formatAnalyticsCount(data.gallery)} custom (Admin)`,
     },
   ];
 
