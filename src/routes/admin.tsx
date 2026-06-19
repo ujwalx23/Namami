@@ -1750,7 +1750,6 @@ function AnalyticsAdmin() {
   const [data, setData] = useState<AnalyticsSnapshot | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [liveCount, setLiveCount] = useState(0);
   const [refreshing, setRefreshing] = useState(false);
 
   async function handleRefresh() {
@@ -1758,58 +1757,6 @@ function AnalyticsAdmin() {
     await load();
     setTimeout(() => setRefreshing(false), 600);
   }
-
-  // Realtime updates for live visitors and page views
-  useEffect(() => {
-    const fetchLive = async () => {
-      try {
-        const twoMinAgo = new Date(Date.now() - 2 * 60 * 1000).toISOString();
-        const { count, error } = await supabase
-          .from("visitor_heartbeats" as any)
-          .select("session_id", { count: "exact", head: true })
-          .gte("last_seen", twoMinAgo);
-        if (error) {
-          console.error("[Live Visitors] Fetch failed:", error);
-        } else if (count !== null) {
-          console.log("[Live Visitors] Fetched count:", count);
-          setLiveCount(count);
-        }
-      } catch (err) {
-        console.error("[Live Visitors] Fetch exception:", err);
-      }
-    };
-
-    void fetchLive();
-
-    console.log("[Realtime] Setting up subscriptions...");
-
-    // Subscribe to postgres changes for visitor_heartbeats (live count updates)
-    const heartbeatChannel = supabase
-      .channel("admin-heartbeats")
-      .on(
-        "postgres_changes",
-        { event: "*", schema: "public", table: "visitor_heartbeats" },
-        (payload) => {
-          console.log("[Realtime] Heartbeat change detected:", payload);
-          void fetchLive();
-        },
-      )
-      .subscribe((status) => {
-        console.log("[Realtime] Heartbeat channel status:", status);
-      });
-
-    // Fallback interval check to prune expired sessions (every 15 seconds)
-    const iv = setInterval(() => {
-      console.log("[Fallback] Polling live visitors...");
-      void fetchLive();
-    }, 15_000);
-
-    return () => {
-      console.log("[Realtime] Unsubscribing channels...");
-      void heartbeatChannel.unsubscribe();
-      clearInterval(iv);
-    };
-  }, []);
 
   async function load() {
     setLoading(true);
@@ -1959,11 +1906,6 @@ function AnalyticsAdmin() {
   );
 
   const statCards = [
-    {
-      icon: Activity,
-      label: "Live Visitors (online)",
-      value: formatAnalyticsCount(liveCount),
-    },
     { icon: MessageSquare, label: "Sandesh (total)", value: formatAnalyticsCount(data.sandesh) },
     {
       icon: Calendar,
@@ -2088,10 +2030,6 @@ function AnalyticsAdmin() {
         </div>
       </div>
 
-      <div className="p-4 rounded-xl bg-cream/30 border border-gold/20 text-xs text-muted-foreground">
-        <strong className="text-maroon">Realtime Tracking:</strong> Active live user sessions are
-        captured automatically.
-      </div>
     </div>
   );
 }
