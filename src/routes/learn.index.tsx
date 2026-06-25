@@ -196,6 +196,7 @@ function LearnIndexPage() {
       img: maaImg,
       alt: "Maa Vindhyavasini Temple Swaroop Vindhyachal Dham",
       slug: "temple-history",
+      imgClass: "object-top",
     },
     {
       title_en: "Kali Khoh Mandir",
@@ -207,7 +208,7 @@ function LearnIndexPage() {
       icon: Mountain,
       img: kaliKohImg,
       alt: "Kali Khoh Temple Swaroop Vindhyachal",
-      slug: "tourism-guide",
+      slug: "kali-khoh-temple",
     },
     {
       title_en: "Ashtabhuja Devi Mandir",
@@ -219,7 +220,7 @@ function LearnIndexPage() {
       icon: Compass,
       img: ashtBhujaImg,
       alt: "Ashtabhuja Devi Temple Swaroop Vindhyachal",
-      slug: "ropeway-guide",
+      slug: "ashtabhuja-devi-temple",
     },
   ];
 
@@ -388,7 +389,7 @@ function LearnIndexPage() {
                   <img
                     src={item.img}
                     alt={item.alt}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 ${item.imgClass || ""}`}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute bottom-3 left-4 flex items-center gap-2 text-cream">

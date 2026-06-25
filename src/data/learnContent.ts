@@ -1011,9 +1011,518 @@ export const learnContent: Record<string, LearnTopic> = {
         q_en: "What are the benefits of the Gayatri Mantra?",
         a_en: "It improves concentration, reduces memory loss, and brings peace to the nervous system.",
         q_hi: "मन्त्र जप से प्राप्त होने वाले मुख्य लाभ क्या हैं?",
-        a_hi: "यह मन को एकाग्र करता है, तनाव और अवसाद को दूर करता है और साधक को आत्म-साक्षात्कार की ओर ले जाता है।"
+        a_hi: "यह मन को एकाग्र करता है, तनाव और अवсад को दूर करता है और साधक को आत्म-साक्षात्कार की ओर ले जाता है।"
       },
     ],
     related: ["aarti", "chalisa", "shakti-peeth", "temple-history"]
+  },
+  "kali-khoh-temple": {
+    slug: "kali-khoh-temple",
+    category: "Darshan",
+    title_en: "Kali Khoh Cave Temple Vindhyachal - Darshan & History",
+    title_hi: "काली खोह गुफा मंदिर विन्ध्याचल - दर्शन, कथा और इतिहास",
+    metaTitle_en: "Kali Khoh Temple Vindhyachal - Cave Shrine of Maha Kali",
+    metaTitle_hi: "काली खोह मंदिर विन्ध्याचल - महाकाली गुफा दर्शन और इतिहास",
+    metaDesc_en: "Discover the secrets of the ancient Kali Khoh Cave Temple in Vindhyachal, dedicated to Maha Kali. Find out details about the cave, ropeway, and historical origins.",
+    metaDesc_hi: "विन्ध्याचल की पहाड़ियों में स्थित प्राचीन काली खोह गुफा मंदिर की पूरी जानकारी। माँ काली का इतिहास, गुफा दर्शन, रोपवे और आरती समय सारणी।",
+    keywords_en: "Kali Khoh temple, Vindhyachal cave temple, Maha Kali Vindhyachal, Trikona Parikrama second point, Kali Khoh ropeway, Mirzapur temples",
+    keywords_hi: "काली खोह मंदिर, विन्ध्याचल गुफा मंदिर, महाकाली विन्ध्याचल, त्रिकोण परिक्रमा, काली खोह रोपवे, मिर्जापुर दर्शनीय स्थल",
+    content_en: `<h2>The Cave Shrine of Goddess Maha Kali</h2>
+            <p><strong>Kali Khoh Temple</strong> is the second stop on the sacred Trikona Parikrama of Vindhyachal. Situated at the base of the Vindhya hills, approximately 3 kilometers from the main Vindhyavasini Temple, this shrine is uniquely located inside an ancient, natural cave. The deity worshipped here represents <strong>Maha Kali</strong> (representing Tamas Guna), the slayer of demons and the embodiment of cosmic strength.</p>
+            <h3>Mythological Origin: The Battle with Raktabija</h3>
+            <p>According to the <em>Devi Purana</em>, after Goddess Durga took the form of Maha Kali to slay the demon general Raktabija, whose drops of blood produced duplicate demons upon hitting the ground, she consumed the blood before it touched the earth. After her victory, she took rest in this cave in the Vindhya mountains. The idol inside the cave shows the mouth of Goddess Kali wide open, receiving offerings from devotees. It is believed that chanting the name of Maha Kali here instantly cures skin diseases and removes obstacles caused by enemies or black energy.</p>
+            <h3>How to Visit and Explore the Cave</h3>
+            <p>The cave is dark and narrow, creating a powerful, mystical atmosphere. Devotees have to bend slightly to enter the core sanctum and receive the blessings of the Goddess. E-rickshaws, autos, and taxis connect the main Vindhyavasini temple directly to the base of the Kali Khoh hills. To reach the hilltop from here, visitors can use either the stone steps or the modern cable car (ropeway) system.</p>`,
+    content_hi: `<h2>देवी महाकाली का प्राचीन गुफा मंदिर</h2>
+            <p><strong>काली खोह मंदिर</strong> विन्ध्याचल की पावन त्रिकोण परिक्रमा का दूसरा मुख्य पड़ाव है। मुख्य विन्ध्यवासिनी मंदिर से लगभग ३ किलोमीटर दूर विन्ध्य पर्वत की तलहटी में स्थित यह मंदिर एक प्राकृतिक गुफा के भीतर बना हुआ है। यहाँ पूजी जाने वाली देवी <strong>महाकाली</strong> (तमोगुण स्वरूप) हैं, जो दुष्टों का संहार करने वाली और भक्तों को अभय प्रदान करने वाली शक्ति हैं।</p>
+            <h3>पौराणिक कथा: रक्तबीज वध प्रसंग</h3>
+            <p><em>देवी पुराण</em> के अनुसार, जब रक्तबीज नामक महाबलशाली असुर के साथ युद्ध के समय उसके रक्त की बूंदें भूमि पर गिरने से नए असुर उत्पन्न हो रहे थे, तब माँ दुर्गा ने महाकाली का रूप धारण कर उसका रक्त भूमि पर गिरने से पहले ही पी लिया। रक्तबीज के संहार के उपरांत देवी ने शांत होने के लिए विन्ध्य पर्वत की इस शांत गुफा को अपना विश्राम स्थल बनाया। गुफा के भीतर स्थापित प्रतिमा में माँ काली का मुख खुला हुआ है। मान्यता है कि यहाँ श्रद्धापूर्वक दर्शन और पूजा करने से त्वचा रोगों से मुक्ति मिलती है और शत्रुओं के भय का नाश होता है।</p>
+            <h3>दर्शन और गुफा मार्गदर्शिका</h3>
+            <p>गुफा का भीतरी भाग संकरा और अंधकारमय है, जहाँ कपूर की सुगंध और घंटियों की आवाज से एक अद्भुत ऊर्जा का अनुभव होता है। भक्तों को गर्भगृह में प्रवेश करने के लिए थोड़ा झुकना पड़ता है। मुख्य मंदिर से यहाँ तक पहुँचने के लिए नियमित रूप से ई-रिक्शा और ऑटो उपलब्ध रहते हैं। पहाड़ी पर स्थित माँ काली के दर्शन के लिए भक्त सीढ़ियों का मार्ग चुन सकते हैं या रोपवे का उपयोग कर सकते हैं।</p>`,
+    faqs: [
+      {
+        q_en: "What are the timings for Kali Khoh Temple?",
+        a_en: "The temple is open daily from 06:00 AM to 09:00 PM. It is highly active during the evening Sandhya Aarti.",
+        q_hi: "काली खोह मंदिर के दर्शन का समय क्या है?",
+        a_hi: "यह मंदिर प्रतिदिन सुबह ०६:०० बजे से रात ०९:०० बजे तक खुला रहता है। शाम की संध्या आरती के समय यहाँ विशेष भीड़ होती है।"
+      },
+      {
+        q_en: "Can senior citizens easily enter the cave?",
+        a_en: "Yes, though the entrance is narrow, the queue is managed by temple priests, and handrails are installed to assist elderly pilgrims.",
+        q_hi: "क्या बुजुर्ग आसानी से गुफा में प्रवेश कर सकते हैं?",
+        a_hi: "हाँ, प्रवेश मार्ग थोड़ा संकरा जरूर है, लेकिन वहाँ पुजारियों और सुरक्षाकर्मियों द्वारा सहायता की जाती है और रैलिंग लगाई गई हैं।"
+      }
+    ],
+    related: ["ashtabhuja-devi-temple", "tourism-guide", "ropeway-guide", "shakti-peeth"]
+  },
+  "ashtabhuja-devi-temple": {
+    slug: "ashtabhuja-devi-temple",
+    category: "Darshan",
+    title_en: "Ashtabhuja Devi Temple Vindhyachal - Hilltop Shrine Guide",
+    title_hi: "अष्टभुजा देवी मंदिर विन्ध्याचल - पर्वत शिखर मंदिर मार्गदर्शिका",
+    metaTitle_en: "Ashtabhuja Devi Temple Vindhyachal - Maha Saraswati Shrine",
+    metaTitle_hi: "अष्टभुजा देवी मंदिर विन्ध्याचल - महासरस्वती स्वरूप और दर्शन मार्ग",
+    metaDesc_en: "A complete visitor's guide to Ashtabhuja Devi Temple in Vindhyachal. Read about the history of Krishna's sister Yogmaya, hilltop views, and ropeway access.",
+    metaDesc_hi: "विन्ध्याचल पर्वत पर स्थित अष्टभुजा देवी मंदिर की संपूर्ण जानकारी। भगवान कृष्ण की बहन योगमाया की कथा, रोपवे टिकट, दर्शन समय और इतिहास।",
+    keywords_en: "Ashtabhuja Devi temple, Vindhyachal hilltop temple, Maha Saraswati Vindhyachal, Krishna sister Yogmaya, Trikona Parikrama third point",
+    keywords_hi: "अष्टभुजा देवी मंदिर, विन्ध्याचल पहाड़ी मंदिर, महासरस्वती विन्ध्याचल, कृष्ण की बहन योगमाया, त्रिकोण परिक्रमा तीसरा मंदिर",
+    content_en: `<h2>The Hilltop Temple of Goddess Maha Saraswati</h2>
+            <p><strong>Ashtabhuja Devi Temple</strong> represents the third and final vertex of the Trikona Parikrama in Vindhyachal. Located atop the scenic Vindhya mountain range, approximately 4.5 kilometers from the main temple, it is dedicated to Goddess <strong>Maha Saraswati</strong> (representing Sattva Guna), the ruler of intellect, learning, and fine arts.</p>
+            <h3>Scriptural Legend: The Eighth Child of Yashoda</h3>
+            <p>The temple marks the spot where the divine daughter of Yashoda, who was swapped with Lord Krishna in Mathura, flew away from the hands of the demon king Kansa. As she escaped into the heavens, she assumed her majestic, eight-armed form (holding a shell, discus, mace, lotus, bow, arrow, sword, and shield) and warned Kansa of his impending doom. She then settled on this hill to protect devotees. A natural stone cave inside the temple houses the sacred face of the Goddess, where devotees offer red flags, coconuts, and chunaris.</p>
+            <h3>Surroundings and Tourist Appeal</h3>
+            <p>The temple is surrounded by lush green forests and offers a panoramic, birds-eye view of the river Ganges and the town of Mirzapur below. Nearby sites like <strong>Sita Rasoi</strong> and <strong>Sita Kund</strong> make it a popular spot for both spiritual seekers and nature photographers. The hill can be scaled by climbing 150 well-paved stone stairs or via the modern ropeway (cable car) system.</p>`,
+    content_hi: `<h2>विन्ध्य पर्वत शिखर पर स्थित अष्टभुजा मंदिर</h2>
+            <p><strong>अष्टभुजा देवी मंदिर</strong> विन्ध्याचल की पावन त्रिकोण परिक्रमा का तीसरा और अंतिम मुख्य केंद्र है। यह पवित्र मंदिर विन्ध्य पर्वत श्रेणी की चोटी पर स्थित है और मुख्य मंदिर से इसकी दूरी लगभग ४.५ किलोमीटर है। यहाँ आदि शक्ति देवी को <strong>महासरस्वती</strong> (सत्त्वगुण स्वरूप) के रूप में पूजा जाता है, जो बुद्धि, ज्ञान और कला की प्रदाता हैं।</p>
+            <h3>पौराणिक संदर्भ: यशोदा जी की योगमाया कन्या</h3>
+            <p>इस स्थान का इतिहास सीधे भगवान कृष्ण के जन्म प्रसंग से जुड़ा है। कंस ने कारागार में जब देवकी की आठवीं संतान समझकर यशोदा की इस पुत्री को मारने का प्रयास किया, तो वे उसके हाथों से छूटकर आकाश में विलीन हो गईं। आकाश में उन्होंने अपना दिव्य अष्टभुज (आठ हाथों वाला) रूप धारण किया और कंस के वध की घोषणा की। इसके बाद वे सदा के लिए विन्ध्य पर्वत पर विराजित हो गईं। मंदिर के भीतर एक प्राकृतिक पाषाण शिला में माँ का मुखमंडल विराजमान है, जहाँ श्रद्धालु नारियल, चुनरी और लाल पताका चढ़ाते हैं।</p>
+            <h3>पर्यटन और प्राकृतिक सुंदरता</h3>
+            <p>अष्टभुजा पहाड़ी का पूरा क्षेत्र घने जंगलों से घिरा हुआ है, जहाँ से नीचे बहती पतली गंगा की धारा और मीलों दूर तक फैले हरियाली के मैदान दिखाई देते हैं। मंदिर के पास ही <strong>सीता रसोई</strong> और <strong>सती कुंड</strong> जैसे ऐतिहासिक स्थल हैं, जो पर्यटकों के आकर्षण का मुख्य केंद्र हैं। पहाड़ी पर चढ़ने के लिए १५० चौड़ी सीढ़ियाँ बनी हुई हैं, तथा रोपवे की सुविधा भी उपलब्ध है।</p>`,
+    faqs: [
+      {
+        q_en: "What is the best time to visit Ashtabhuja Temple?",
+        a_en: "Morning hours between 07:00 AM and 11:00 AM are best to enjoy the cool breeze and avoid the midday sun.",
+        q_hi: "अष्टभुजा मंदिर जाने का सबसे अच्छा समय क्या है?",
+        a_hi: "सुबह ०७:०० से ११:०० बजे के बीच का समय सबसे उत्तम है, जब मौसम ठंडा रहता है और धूप तेज नहीं होती।"
+      },
+      {
+        q_en: "Is parking available at the base of Ashtabhuja hill?",
+        a_en: "Yes, ample paid parking spaces are managed by the local authorities at the base station of the ropeway.",
+        q_hi: "क्या अष्टभुजा पहाड़ी के नीचे पार्किंग उपलब्ध है?",
+        a_hi: "हाँ, रोपवे के बेस स्टेशन के पास नगर पालिका द्वारा सुरक्षित पार्किंग स्थल की व्यवस्था की गई है।"
+      }
+    ],
+    related: ["kali-khoh-temple", "ropeway-guide", "sita-kund-sita-rasoi", "tourism-guide"]
+  },
+  "lakhaniya-dari-waterfall": {
+    slug: "lakhaniya-dari-waterfall",
+    category: "Travel",
+    title_en: "Lakhaniya Dari Waterfall Mirzapur - Trekking & Picnic Guide",
+    title_hi: "लखनिया दरी जलप्रपात मिर्जापुर - ट्रेकिंग और पिकनिक गाइड",
+    metaTitle_en: "Lakhaniya Dari Waterfall Mirzapur - Route & Trekking Tips",
+    metaTitle_hi: "लखनिया दरी जलप्रपात मिर्जापुर - मार्ग, दूरी और पिकनिक नियम",
+    metaDesc_en: "Plan your trip to Lakhaniya Dari Waterfall in Mirzapur. Get directions, trekking maps, entry tickets, best times to visit during monsoon, and safety guidelines.",
+    metaDesc_hi: "मिर्जापुर के प्रसिद्ध लखनिया दरी जलप्रपात की यात्रा गाइड। वाराणसी से दूरी, ट्रेकिंग मार्ग, प्रवेश शुल्क और मानसून में सुरक्षा नियमों का विवरण।",
+    keywords_en: "Lakhaniya Dari waterfall, waterfalls in Mirzapur, Lakhaniya Dari distance from Varanasi, Mirzapur tourism, monsoon trekking Varanasi",
+    keywords_hi: "लखनिया दरी जलप्रपात, मिर्जापुर के झरने, लखनिया दरी वाराणसी से दूरी, मिर्जापुर पिकनिक स्पॉट, मानसून ट्रेकिंग",
+    content_en: `<h2>The Adventure Destination of Mirzapur: Lakhaniya Dari</h2>
+            <p>If you are looking to balance your spiritual pilgrimage with some adventure, <strong>Lakhaniya Dari Waterfall</strong> is the best natural getaway in the Vindhya ranges. Located in the Ahraura region of Mirzapur district, approximately 45 kilometers from Varanasi and 55 kilometers from Vindhyachal, it is a magnificent waterfall flowing through deep rocky gorges and dense forests.</p>
+            <h3>Trekking Through the Rocky River Bed</h3>
+            <p>Unlike standard waterfalls where you can drive up to the viewpoint, Lakhaniya Dari requires an exciting <strong>1.5-kilometer trek</strong> along a rocky riverbed filled with massive boulders and small pools. The trek takes about 45 minutes each way. During the monsoon season (July to October), the water flows heavily, transforming the valley into a lush green forest paradise. The main fall drops from a height of over 100 meters into a pool below.</p>
+            <h3>Important Safety and Travel Tips</h3>
+            <p>While Lakhaniya Dari is extremely beautiful, visitors must exercise caution:</p>
+            <ul>
+                <li><strong>Heavy Currents:</strong> Avoid swimming near the main pool during heavy rainfall, as undercurrents can be dangerous.</li>
+                <li><strong>Footwear:</strong> Wear sturdy sports shoes with good grip, as the boulders are slippery.</li>
+                <li><strong>Timing:</strong> The entry closes by 04:00 PM. Start early in the morning so you can return before sunset.</li>
+                <li><strong>Food & Water:</strong> Carry sufficient water and snacks, as there are no food stalls inside the valley.</li>
+            </ul>`,
+    content_hi: `<h2>मिर्जापुर का साहसिक प्राकृतिक स्थल: लखनिया दरी</h2>
+            <p>यदि आप अपनी आध्यात्मिक यात्रा के साथ-साथ प्राकृतिक रोमांच का अनुभव करना चाहते हैं, तो <strong>लखनिया दरी जलप्रपात</strong> एक बेहतरीन स्थल है। यह जलप्रपात मिर्जापुर जिले के अहरौरा क्षेत्र में स्थित है, जिसकी दूरी वाराणसी से लगभग ४५ किमी और विन्ध्याचल से ५५ किमी है। यह जलप्रपात ऊंचे पहाड़ों और घने जंगलों के बीच से बहने वाली जलधारा के लिए प्रसिद्ध है।</p>
+            <h3>चट्टानी रास्तों पर रोमांचक ट्रेकिंग</h3>
+            <p>अन्य झरनों के विपरीत, जहाँ गाड़ियाँ सीधे मुख्य फॉल तक पहुँच जाती हैं, लखनिया दरी में मुख्य झरने तक पहुँचने के लिए बड़ी चट्टानों और छोटे जलाशयों के बीच से <strong>१.५ किलोमीटर की पैदल ट्रेकिंग</strong> करनी पड़ती है। इस ट्रेकिंग में लगभग ४५ मिनट का समय लगता है। वर्षा ऋतु (जुलाई से अक्टूबर) के दौरान झरने में पानी का बहाव चरम पर होता है, जिससे पूरी घाटी हरी-भरी हो जाती है। मुख्य झरना १०० मीटर से अधिक की ऊंचाई से गिरता है।</p>
+            <h3>सुरक्षा और यात्रा से जुड़ी महत्वपूर्ण सावधानियां</h3>
+            <p>लखनिया दरी सुंदर होने के साथ-साथ थोड़ा दुर्गम भी है, इसलिए इन बातों का ध्यान रखें:</p>
+            <ul>
+                <li><strong>गहरे पानी से बचें:</strong> मुख्य कुंड के पास पानी का बहाव बहुत तेज होता है, इसलिए वहाँ तैरने या नहाने का प्रयास न करें।</li>
+                <li><strong>उचित जूते पहनें:</strong> चट्टानों पर काई जमी होने के कारण फिसलन बहुत होती है, इसलिए केवल ग्रिप वाले स्पोर्ट्स जूते ही पहनें।</li>
+                <li><strong>समय का ध्यान रखें:</strong> शाम को ०४:०० बजे के बाद प्रवेश बंद कर दिया जाता है। सुबह जल्दी निकलें ताकि सूर्यास्त से पहले लौट सकें।</li>
+                <li><strong>खाद्य सामग्री:</strong> घाटी के भीतर खाने-पीने की दुकानें नहीं हैं, इसलिए पानी की बोतल और हल्का नाश्ता अपने साथ रखें।</li>
+            </ul>`,
+    faqs: [
+      {
+        q_en: "What is the best month to visit Lakhaniya Dari?",
+        a_en: "The best months are August, September, and October, when the monsoon water is plentiful and the weather is pleasant.",
+        q_hi: "लखनिया दरी जाने का सबसे अच्छा महीना कौन सा है?",
+        a_hi: "अगस्त से अक्टूबर के बीच का समय सबसे उत्तम होता है, जब झरने में पानी भरपूर होता है और प्रकृति खिली होती है।"
+      },
+      {
+        q_en: "Is there an entry fee for Lakhaniya Dari?",
+        a_en: "Yes, a minor ticket fee of around Rs 20-30 per head is collected at the entrance gate by the forest department.",
+        q_hi: "क्या लखनिया दरी में प्रवेश शुल्क लगता है?",
+        a_hi: "हाँ, वन विभाग द्वारा प्रवेश द्वार पर प्रति व्यक्ति लगभग २०-३० रुपये का मामूली टिकट शुल्क लिया जाता है।"
+      }
+    ],
+    related: ["tourism-guide", "sita-kund-sita-rasoi", "how-to-reach"]
+  },
+  "sita-kund-sita-rasoi": {
+    slug: "sita-kund-sita-rasoi",
+    category: "Darshan",
+    title_en: "Sita Kund & Sita Rasoi Vindhyachal - Ramayana History",
+    title_hi: "सीता कुंड और सीता रसोई विन्ध्याचल - रामायण कालीन इतिहास",
+    metaTitle_en: "Sita Kund & Sita Rasoi Vindhyachal - Sacred Spring Details",
+    metaTitle_hi: "सीता कुंड व सीता रसोई विन्ध्याचल - रामायण कालीन तीर्थ इतिहास",
+    metaDesc_en: "Explore the ancient site of Sita Kund and Sita Rasoi on Vindhyachal hills. Learn about the natural fresh spring and its references in Ramayana.",
+    metaDesc_hi: "विन्ध्याचल पर्वत पर स्थित सीता कुण्ड और सीता रसोई का संपूर्ण इतिहास। प्राकृतिक मीठे पानी का स्रोत, पौराणिक कथा और पर्यटकों के लिए जानकारी।",
+    keywords_en: "Sita Kund Vindhyachal, Sita Rasoi temple, Ramayana sites Mirzapur, Trikona Parikrama historical spots, Vindhyachal hills tour",
+    keywords_hi: "सीता कुण्ड विन्ध्याचल, सीता रसोई मंदिर, रामायण कालीन स्थल मिर्जापुर, त्रिकोण परिक्रमा इतिहास, विन्ध्याचल पहाड़ी",
+    content_en: `<h2>Ramayana Era Heritage: Sita Kund and Sita Rasoi</h2>
+            <p>Located on the hills of Ashtabhuja, <strong>Sita Kund</strong> and <strong>Sita Rasoi</strong> are two deeply revered historical spots connected directly to the Treta Yuga and the exile period of Lord Rama, Goddess Sita, and Lakshmana. These sites are situated along the Trikona Parikrama route, making them essential additions to a devotee's spiritual tour.</p>
+            <h3>Sita Kund: The Natural Spring Created by Lakshmana</h3>
+            <p>According to local legends, while walking through the dry forests of the Vindhya mountains during their exile, Goddess Sita felt extremely thirsty. With no river nearby, Lord Rama instructed Lakshmana to find water. Lakshmana immediately shot a powerful arrow (Bana) into the rocky ground. Instantly, a sweet, crystal-clear spring of water burst forth, which came to be known as Sita Kund. Even today, the water level in the kund remains constant throughout the year, and pilgrims take some water as holy drops (charanamrit).</p>
+            <h3>Sita Rasoi: The Ancient Kitchen</h3>
+            <p>A few steps away from the Kund lies the **Sita Rasoi** (Sita's Kitchen). It is a small, cave-like stone structure containing an ancient clay fireplace (chulha) and symbolic stone utensils. Devotees believe that Goddess Sita cooked meals here using local wild grains and roots for Lord Rama and Lakshmana during their brief halt on these hills. The temple nearby houses beautiful idols of Ram, Sita, Lakshman, and Hanuman.</p>`,
+    content_hi: `<h2>रामायण कालीन धरोहर: सीता कुंड और सीता रसोई</h2>
+            <p>अष्टभुजा पहाड़ी पर स्थित <strong>सीता कुंड</strong> और <strong>सीता रसोई</strong> त्रेतायुग से जुड़े अत्यंत पवित्र पौराणिक स्थल हैं। भगवान श्रीराम, माता सीता और लक्ष्मण जी के वनवास काल के दौरान यहाँ विश्राम करने के प्रमाण मिलते हैं। यह स्थान त्रिकोण परिक्रमा पथ पर स्थित होने के कारण श्रद्धालुओं के आकर्षण का प्रमुख केंद्र है।</p>
+            <h3>सीता कुंड: लक्ष्मण जी के बाण से उत्पन्न जल स्रोत</h3>
+            <p>पौराणिक कथाओं के अनुसार, वनवास काल में जब श्रीराम, लक्ष्मण और माता सीता विन्ध्य पर्वतों से गुजर रहे थे, तब माता सीता को तीव्र प्यास लगी। आसपास कोई जलाशय न देखकर लक्ष्मण जी ने पृथ्वी पर एक शक्तिशाली बाण चलाया। बाण के प्रहार से पत्थर की चट्टान को चीरते हुए मीठे जल की एक धारा फूट पड़ी, जिसने एक कुंड का रूप ले लिया। इसी कुंड को सीता कुंड कहा जाता है। आज भी इस कुंड का पानी कभी नहीं सूखता और श्रद्धालु इसे पवित्र मानकर ग्रहण करते हैं।</p>
+            <h3>सीता रसोई: वनवास काल की रसोई</h3>
+            <p>सीता कुंड से कुछ ही कदमों की दूरी पर पहाड़ी पर **सीता रसोई** स्थित है। यह एक छोटी गुफा जैसी पत्थर की संरचना है, जहाँ प्राचीन काल का चूल्हा और सिल-बट्टा (मसाला पीसने का पाषाण) आज भी संरक्षित है। मान्यता है कि माता सीता ने यहाँ वन के कंद-मूल और फलों से भगवान श्रीराम और लक्ष्मण के लिए भोजन तैयार किया था। इसके पास ही एक मंदिर है जिसमें राम, सीता और लक्ष्मण की सुंदर मूर्तियां स्थापित हैं।</p>`,
+    faqs: [
+      {
+        q_en: "Are Sita Kund and Sita Rasoi close to the ropeway?",
+        a_en: "Yes, both sites are located just 500 meters from the Ashtabhuja hilltop ropeway station and can be easily reached on foot.",
+        q_hi: "क्या सीता कुंड और सीता रसोई रोपवे के पास हैं?",
+        a_hi: "हाँ, ये दोनों स्थल अष्टभुजा पहाड़ी के रोपवे स्टेशन से मात्र ५०० मीटर की दूरी पर स्थित हैं और पैदल आसानी से पहुँचा जा सकता है।"
+      },
+      {
+        q_en: "Is the water in Sita Kund clean enough to touch?",
+        a_en: "Yes, the water is naturally filtered by the rocks and is considered sacred, though visitors are advised not to bathe inside the small pool to maintain cleanliness.",
+        q_hi: "क्या सीता कुंड का पानी छूने योग्य साफ है?",
+        a_hi: "हाँ, पहाड़ों से आने वाला यह पानी प्राकृतिक रूप से शुद्ध होता है। हालांकि, स्वच्छता बनाए रखने के लिए कुंड में नहाने की अनुमति नहीं है।"
+      }
+    ],
+    related: ["ashtabhuja-devi-temple", "tourism-guide", "ropeway-guide"]
+  },
+  "bhairav-temples-vindhyachal": {
+    slug: "bhairav-temples-vindhyachal",
+    category: "Darshan",
+    title_en: "Bhairav Temples in Vindhyachal - Lal Bhairav & Kal Bhairav",
+    title_hi: "विन्ध्याचल के भैरव मंदिर - लाल भैरव और काल भैरव का रहस्य",
+    metaTitle_en: "Bhairav Temples in Vindhyachal - Mandatory Pilgrimage Shrines",
+    metaTitle_hi: "विन्ध्याचल भैरव मंदिर - लाल भैरव, काल भैरव और आनंद भैरव दर्शन गाइड",
+    metaDesc_en: "Guide to the famous Bhairav temples in Vindhyachal. Learn about Lal Bhairav, Kal Bhairav, and Anand Bhairav, and why their darshan completes the Trikona Parikrama.",
+    metaDesc_hi: "विन्ध्याचल धाम के रक्षक भैरव मंदिरों की जानकारी। लाल भैरव, काल भैरव और आनंद भैरव का इतिहास और त्रिकोण परिक्रमा में इनका महत्व।",
+    keywords_en: "Bhairav temples in Vindhyachal, Lal Bhairav temple, Kal Bhairav Mirzapur, Bhairav Kotwal of Vindhyachal, Trikona Parikrama completion rules",
+    keywords_hi: "विन्ध्याचल के भैरव मंदिर, लाल भैरव, काल भैरव मिर्जापुर, विन्ध्याचल के कोतवाल भैरव, त्रिकोण परिक्रमा पूर्ण करने के नियम",
+    content_en: `<h2>The Guardians of the Dham: Bhairav Shrines</h2>
+            <p>In Sanatan tradition, every Shakti Peeth is spiritually protected by Lord Shiva in his fierce manifestation as **Bhairav**. In Vindhyachal Dham, there are multiple historic Bhairav temples that act as the spiritual guard (Kotwal) of the city. A pilgrim's journey to Vindhyachal is scripturally considered complete only after paying respects to these guardian deities.</p>
+            <h3>1. Kal Bhairav Temple (The Spiritual Police)</h3>
+            <p>Located on the outskirts of the town near the railway line, the **Kal Bhairav Temple** is dedicated to the time-controlling form of Shiva. Devotees visit this shrine to seek protection from planetary blockages (especially Rahu and Saturn defects) and evil energies. The deity is offered mustard oil lamps and coconuts.</p>
+            <h3>2. Lal Bhairav Temple (The Hilltop Guardian)</h3>
+            <p>Situated on the road connecting Kali Khoh and Ashtabhuja, the **Lal Bhairav Temple** features a striking vermillion-colored idol of Lord Bhairav. This shrine is highly revered by local sadhakas of the tantric path, who believe that offering red flowers here brings mental strength and clears long-standing legal problems.</p>
+            <h3>3. Anand Bhairav Temple</h3>
+            <p>Located close to the main Vindhyavasini corridor, this peaceful temple represents the blissful form of Bhairav. Devotees visit here at the very end of their pilgrimage to thank the lord for a smooth journey and seek prosperity for their families.</p>`,
+    content_hi: `<h2>धाम के रक्षक: विन्ध्याचल के प्रमुख भैरव मंदिर</h2>
+            <p>सनातन परंपरा में प्रत्येक शक्तिपीठ की सुरक्षा और व्यवस्था के लिए भगवान शिव अपने उग्र रूप **भैरव** के रूप में विराजमान रहते हैं। विन्ध्याचल धाम में भी नगर के कोतवाल के रूप में तीन प्रसिद्ध भैरव मंदिर स्थापित हैं। धार्मिक मान्यताओं के अनुसार, इन भैरव देवों के दर्शन के बिना विन्ध्याचल की त्रिकोण यात्रा अधूरी मानी जाती है।</p>
+            <h3>१. काल भैरव मंदिर (ग्रह बाधा निवारक)</h3>
+            <p>रेलवे स्टेशन के समीप नगर के बाहरी हिस्से में स्थित **काल भैरव मंदिर** समय और न्याय के देवता काल भैरव को समर्पित है। श्रद्धालु अपनी कुंडली के शनि दोष, राहु-केतु की महादशा और नकारात्मक शक्तियों से मुक्ति पाने के लिए यहाँ आकर तेल का दीपक जलाते हैं और काले तिल अर्पित करते हैं।</p>
+            <h3>२. लाल भैरव मंदिर (सिंदूरी प्रतिमा)</h3>
+            <p>काली खोह से अष्टभुजा पहाड़ी की ओर जाने वाले मार्ग पर **लाल भैरव मंदिर** स्थित है। यहाँ भगवान भैरव की एक विशाल और भव्य लाल (सिंदूरी) रंग की प्रतिमा स्थापित है। यह मंदिर विशेष रूप से तंत्र साधना करने वाले साधकों के लिए आकर्षण का केंद्र है। मान्यता है कि यहाँ गुड़हल के लाल फूल चढ़ाने से आत्मविश्वास में वृद्धि होती है।</p>
+            <h3>३. आनंद भैरव मंदिर</h3>
+            <p>मुख्य विन्ध्यवासिनी मंदिर कॉरिडोर के समीप स्थित यह शांत मंदिर भैरव जी के सौम्य और आनंदमयी रूप को दर्शाता है। परिक्रमा पूरी करने के बाद भक्त यहाँ आकर यात्रा की सफलता के लिए धन्यवाद देते हैं।</p>`,
+    faqs: [
+      {
+        q_en: "Is alcohol offered at the Bhairav temples in Vindhyachal?",
+        a_en: "Unlike Ujjain, the Bhairav temples here primarily accept satvik offerings like coconuts, sweets, milk, and mustard oil, though some tantric sadhakas perform personal rituals privately.",
+        q_hi: "क्या विन्ध्याचल के भैरव मंदिरों में मदिरा चढ़ाई जाती है?",
+        a_hi: "उज्जैन के विपरीत, यहाँ के भैरव मंदिरों में मुख्य रूप से नारियल, मिष्ठान, दूध और सरसों का तेल ही चढ़ाया जाता है। यह पूर्णतः सात्विक पूजा स्थल है।"
+      },
+      {
+        q_en: "How far is Kal Bhairav from the main temple?",
+        a_en: "Kal Bhairav Temple is about 3.5 kilometers from the Vindhyavasini Temple and is easily reachable via auto-rickshaws in 10 minutes.",
+        q_hi: "काल भैरव मंदिर मुख्य कॉरिडोर से कितनी दूर है?",
+        a_hi: "काल भैरव मंदिर मुख्य मंदिर से लगभग ३.५ किलोमीटर की दूरी पर स्थित है और ऑटो से १० मिनट में पहुँचा जा सकता है।"
+      }
+    ],
+    related: ["shakti-peeth", "tourism-guide", "temple-history", "kali-khoh-temple"]
+  },
+  "vindhyachal-corridor-guide": {
+    slug: "vindhyachal-corridor-guide",
+    category: "Guide",
+    title_en: "Vindhyachal Corridor Project - Parking, Entry Gates & Rules",
+    title_hi: "विन्ध्याचल कॉरिडोर प्रोजेक्ट - पार्किंग, प्रवेश द्वार और नए नियम",
+    metaTitle_en: "Vindhyachal Corridor Guide - New Entrance Gates & Parking",
+    metaTitle_hi: "विन्ध्याचल धाम कॉरिडोर यात्रा गाइड - पार्किंग और वीआईपी दर्शन नियम",
+    metaDesc_en: "Get the latest updates on the Vindhya Dham Corridor project in Mirzapur. Find out about parking areas, entry gates, VIP pass rules, and security facilities.",
+    metaDesc_hi: "नवनिर्मित भव्य विन्ध्य कॉरिडोर की पूरी जानकारी। चारों मुख्य द्वारों का विवरण, वाहन पार्किंग स्थल, जूता स्टैंड, लॉकर रूम और दर्शन की नई व्यवस्था।",
+    keywords_en: "Vindhyachal Corridor project updates, Vindhya Dham Corridor parking, entry gates Vindhyachal, VIP darshan rules Mirzapur, tourist facilities",
+    keywords_hi: "विन्ध्याचल कॉरिडोर अपडेट, विन्ध्य कॉरिडोर पार्किंग, प्रवेश द्वार कॉरिडोर, वीआईपी पास विन्ध्याचल, यात्री सुविधाएं",
+    content_en: `<h2>The Grand Transformation: Vindhya Dham Corridor</h2>
+            <p>To provide a world-class spiritual experience and manage the millions of pilgrims visiting annually, the State Government and Namami Vindhyavasini Sansthan have built the grand **Vindhya Dham Corridor**. Constructed using finely carved pink sandstones from Chunar, Mirzapur, this corridor encircles the core Vindhyavasini Temple, replacing the old, narrow streets with spacious walkways.</p>
+            <h3>The Four Majestic Entry Gates</h3>
+            <p>The corridor features four main entrance gates (Dwars), named after local historical and spiritual milestones:</p>
+            <ul>
+                <li><strong>Ganga Dwar (Northern Gate):</strong> Directly connects the holy river Ganges (via stairs from Jaipuria Ghat) to the temple, allowing pilgrims to walk straight in after taking a holy dip.</li>
+                <li><strong>Sangharsh Dwar (Southern Gate):</strong> Located near the main administrative offices, primarily used for general queues during busy weekend hours.</li>
+                <li><strong>Yogmaya Dwar (Eastern Gate):</strong> The main entrance for travelers coming from the railway station and bus stands. Houses the main VIP reception.</li>
+                <li><strong>Bhagirath Dwar (Western Gate):</strong> Connects directly to the main local markets and shopping lanes.</li>
+            </ul>
+            <h3>Important Traffic and Parking Guidelines</h3>
+            <p>To keep the corridor zone pedestrian-friendly, all vehicles are stopped at the outer parking barriers. Devotees should park their cars at the official **Ganga Darshan Parking** or **Kantit Parking** (approx. 1 km from the temple). E-rickshaws run continuously from these parkings to the corridor gates for a fixed fare of Rs 10 per head. Free lockers and shoe stands are available at the eastern gate.</p>`,
+    content_hi: `<h2>भव्य विन्ध्य धाम कॉरिडोर: नए नियम और सुविधाएं</h2>
+            <p>लाखों श्रद्धालुओं की सुरक्षा और सुगम दर्शन के लिए उत्तर प्रदेश सरकार और स्थानीय प्रशासन द्वारा भव्य **विन्ध्य धाम कॉरिडोर** का निर्माण किया गया है। मिर्जापुर के प्रसिद्ध चुनार के गुलाबी बलुआ पत्थरों से तराशे गए खंभों और मेहराबों से निर्मित यह कॉरिडोर मुख्य मंदिर के चारों ओर फैला हुआ है, जिसने पुरानी संकरी गलियों को एक भव्य परिक्रमा मार्ग में बदल दिया है।</p>
+            <h3>कॉरिडोर के चार भव्य प्रवेश द्वार</h3>
+            <p>कॉरिडोर में प्रवेश करने के लिए चार मुख्य द्वार बनाए गए हैं, जिनका अपना आध्यात्मिक महत्व है:</p>
+            <ul>
+                <li><strong>गंगा द्वार (उत्तरी द्वार):</strong> यह द्वार सीधे पतित-पावनी गंगा नदी (जयपुरिया घाट) से मंदिर को जोड़ता है। भक्त गंगा स्नान कर सीधे दर्शन हेतु आ सकते हैं।</li>
+                <li><strong>संघर्ष द्वार (दक्षिणी द्वार):</strong> मुख्य प्रशासनिक कार्यालयों और वीआईपी सुरक्षा विंग के समीप स्थित है।</li>
+                <li><strong>योगमाया द्वार (पूर्वी द्वार):</strong> रेलवे स्टेशन और बसों से आने वाले यात्रियों के लिए यह मुख्य प्रवेश द्वार है। यहाँ मुख्य प्रशासनिक सहायता केंद्र स्थित है।</li>
+                <li><strong>भगीरथ द्वार (पश्चिमी द्वार):</strong> यह पश्चिमी द्वार स्थानीय बाजारों और प्रसाद की दुकानों की ओर खुलता है।</li>
+            </ul>
+            <h3>वाहन पार्किंग और यातायात व्यवस्था</h3>
+            <p>कॉरिडोर क्षेत्र को पूरी तरह से पैदल यात्रियों के लिए सुरक्षित रखने के लिए सभी वाहनों को १ किमी पहले रोक दिया जाता है। श्रद्धालुओं को अपने वाहन **गंगा दर्शन पार्किंग** या **कांतित पार्किंग** में पार्क करने होंगे। इन पार्किंग स्थलों से मंदिर के द्वारों तक जाने के लिए ई-रिक्शा चलते हैं, जिनका किराया १० रुपये प्रति सवारी है। पूर्वी द्वार पर निःशुल्क लॉकर और जूता स्टैंड उपलब्ध हैं।</p>`,
+    faqs: [
+      {
+        q_en: "Are there lockers available inside the corridor?",
+        a_en: "Yes, free secure locker services to keep mobile phones, purses, and bags are situated at the Eastern (Yogmaya) Gate helper desk.",
+        q_hi: "क्या कॉरिडोर के भीतर मोबाइल और बैग रखने के लिए लॉकर हैं?",
+        a_hi: "हाँ, पूर्वी (योगमाया) द्वार के पास बने सहायता केंद्र पर मोबाइल, पर्स और बैग रखने के लिए निःशुल्क लॉकर काउंटर उपलब्ध हैं।"
+      },
+      {
+        q_en: "Is the corridor wheelchair accessible?",
+        a_en: "Yes, ramps and smooth stone floors are constructed across all four gates to make it fully accessible for wheelchairs and strollers.",
+        q_hi: "क्या कॉरिडोर में व्हीलचेयर ले जाने की व्यवस्था है?",
+        a_hi: "हाँ, बुजुर्गों और दिव्यांगों के लिए कॉरिडोर के सभी प्रवेश द्वारों पर रैम्प और समतल फर्श बनाया गया है, जहाँ व्हीलचेयर आसानी से जा सकती है।"
+      }
+    ],
+    related: ["temple-timings", "how-to-reach", "tourism-guide"]
+  },
+  "varanasi-to-vindhyachal-tour": {
+    slug: "varanasi-to-vindhyachal-tour",
+    category: "Travel",
+    title_en: "Varanasi to Vindhyachal One Day Tour - Route & Itinerary",
+    title_hi: "वाराणसी से विन्ध्याचल एक दिवसीय यात्रा - मार्ग और समय सारणी",
+    metaTitle_en: "Varanasi to Vindhyachal Day Trip - Complete Travel Itinerary",
+    metaTitle_hi: "वाराणसी से विन्ध्याचल वन डे टूर - दूरी, किराया और यात्रा रूट",
+    metaDesc_en: "The ultimate Varanasi to Vindhyachal day trip guide. Learn about travel options, distances, taxi fares, and a step-by-step itinerary to cover all major temples.",
+    metaDesc_hi: "वाराणसी से विन्ध्याचल की एक दिवसीय यात्रा की पूरी योजना। दूरी, टैक्सी किराया, बस रूट और त्रिकोण परिक्रमा को एक दिन में पूरा करने की समय सारणी।",
+    keywords_en: "Varanasi to Vindhyachal distance, Varanasi to Vindhyachal taxi fare, one day tour Varanasi to Vindhyachal, Vindhyachal tour package",
+    keywords_hi: "वाराणसी से विन्ध्याचल की दूरी, वाराणसी से विन्ध्याचल टैक्सी किराया, वन डे टूर विन्ध्याचल, विन्ध्याचल यात्रा रूट",
+    content_en: `<h2>The Perfect Day Trip: Varanasi to Vindhyachal</h2>
+            <p>Many pilgrims visiting the spiritual capital of Kashi (Varanasi) also plan a day trip to seek the blessings of Maa Vindhyavasini. Located just 80 kilometers apart, the journey from **Varanasi to Vindhyachal** is extremely smooth and can be covered comfortably within a single day.</p>
+            <h3>Travel Route Options & Distance</h3>
+            <p>The distance between Varanasi and Vindhyachal is approximately <strong>80 kilometers</strong>. Depending on your budget, you can choose from these options:</p>
+            <ul>
+                <li><strong>By Private Taxi:</strong> The most comfortable way. It takes about 1.5 to 2 hours via the national highway (NH-19). A round-trip taxi fare ranges from Rs 2,500 to Rs 3,500.</li>
+                <li><strong>By Train:</strong> Multiple daily trains connect Varanasi Junction (BSB) to Vindhyachal (BDL) or Mirzapur (MZP), taking roughly 1.5 hours.</li>
+                <li><strong>By Bus:</strong> Government buses run every hour from Varanasi Cantt Bus Stand to Vindhyachal, costing around Rs 120-150 per seat.</li>
+            </ul>
+            <h3>Recommended One-Day Itinerary</h3>
+            <p>To maximize your day, follow this tested itinerary:</p>
+            <p><strong>07:00 AM:</strong> Start from Varanasi via NH-19. Stop at local highway dhabas for breakfast.</p>
+            <p><strong>09:00 AM:</strong> Reach Vindhyachal. Head to Ram Gaya Ghat for a holy dip in the Ganges.</p>
+            <p><strong>10:00 AM:</strong> Enter the Vindhya Corridor via Ganga Dwar for the main Darshan of Maa Vindhyavasini.</p>
+            <p><strong>12:00 PM:</strong> Hire a local auto-rickshaw to start the Trikona Parikrama (visit Kali Khoh Cave and Ashtabhuja Hilltop).</p>
+            <p><strong>03:00 PM:</strong> Have a traditional North Indian lunch at a local restaurant near the corridor.</p>
+            <p><strong>04:30 PM:</strong> Visit the Sita Kund spring and enjoy the sunset from the Ashtabhuja hill viewpoints.</p>
+            <p><strong>06:00 PM:</strong> Depart for Varanasi, reaching Kashi by 08:00 PM.</p>`,
+    content_hi: `<h2>वाराणसी से विन्ध्याचल: एक दिवसीय यात्रा गाइड</h2>
+            <p>काशी (वाराणसी) आने वाले अधिकांश श्रद्धालु माँ विन्ध्यवासिनी का आशीर्वाद लेने के लिए विन्ध्याचल की यात्रा अवश्य करते हैं। दोनों शहरों के बीच की दूरी मात्र ८० किलोमीटर है, जिसे एक ही दिन में बहुत आसानी और आरामदायक तरीके से पूरा किया जा सकता है।</p>
+            <h3>यातायात मार्ग और दूरी का विवरण</h3>
+            <p>वाराणसी से विन्ध्याचल की दूरी लगभग <strong>८० किलोमीटर</strong> है। यात्रा के लिए निम्न साधनों का उपयोग किया जा सकता है:</p>
+            <ul>
+                <li><strong>निजी टैक्सी द्वारा:</strong> सबसे सुगम साधन। वाराणसी-प्रयागराज हाईवे (NH-19) के रास्ते यात्रा में १.५ से २ घंटे लगते हैं। राउंड-ट्रिप टैक्सी का किराया लगभग २५०० से ३५०० रुपये होता है।</li>
+                <li><strong>ट्रेन द्वारा:</strong> वाराणसी जंक्शन से विन्ध्याचल रेलवे स्टेशन (BDL) के लिए प्रतिदिन कई एक्सप्रेस ट्रेनें चलती हैं, जो १.५ घंटे में पहुँचा देती हैं।</li>
+                <li><strong>बस द्वारा:</strong> वाराणसी के कैंट बस स्टैंड से प्रत्येक घंटे सरकारी बसें चलती हैं, जिनका किराया लगभग १२०-१५० रुपये है।</li>
+            </ul>
+            <h3>एक दिवसीय यात्रा की आदर्श समय सारणी</h3>
+            <p>एक दिन में सभी प्रमुख स्थलों को कवर करने के लिए इस टाइम टेबल का पालन करें:</p>
+            <p><strong>सुबह ०७:०० बजे:</strong> वाराणसी से प्रस्थान। रास्ते में हाईवे के ढाबों पर नाश्ता करें।</p>
+            <p><strong>सुबह ०९:०० बजे:</strong> विन्ध्याचल आगमन। राम गया घाट पर गंगा स्नान करें।</p>
+            <p><strong>सुबह १०:०० बजे:</strong> गंगा द्वार से कॉरिडोर में प्रवेश कर माँ विन्ध्यवासिनी के मुख्य दर्शन करें।</p>
+            <p><strong>दोपहर १२:०० बजे:</strong> स्थानीय ऑटो बुक कर त्रिकोण परिक्रमा (काली खोह गुफा मंदिर और अष्टभुजा मंदिर) प्रारंभ करें।</p>
+            <p><strong>दोपहर ०३:०० बजे:</strong> कॉरिडोर के पास किसी स्थानीय भोजनालय में शुद्ध शाकाहारी भोजन करें।</p>
+            <p><strong>शाम ०४:३० बजे:</strong> सीता कुंड का दर्शन करें और अष्टभुजा पहाड़ी से सूर्यास्त के विहंगम दृश्य का आनंद लें।</p>
+            <p><strong>शाम ०६:०० बजे:</strong> वाराणसी के लिए वापसी यात्रा शुरू करें, रात ०८:०० बजे तक काशी पहुँचें।</p>`,
+    faqs: [
+      {
+        q_en: "Can we cover Vindhyachal and Mirzapur waterfalls in one day?",
+        a_en: "Yes, if you start early (around 06:00 AM) and complete the temple darshan by noon, you can easily visit Windham Falls or Lakhaniya Dari in the afternoon.",
+        q_hi: "क्या हम एक दिन में विन्ध्याचल और मिर्जापुर के झरने दोनों घूम सकते हैं?",
+        a_hi: "हाँ, यदि आप सुबह जल्दी (०६:०० बजे) निकलें और दोपहर तक मंदिर दर्शन पूर्ण कर लें, तो दोपहर बाद विंढम फॉल्स या लखनिया दरी जा सकते हैं।"
+      },
+      {
+        q_en: "Are there tolls on the road from Varanasi?",
+        a_en: "Yes, there is one toll plaza on the NH-19 route between Varanasi and Mirzapur, costing around Rs 90 for a one-way trip.",
+        q_hi: "क्या वाराणसी से विन्ध्याचल मार्ग पर टोल टैक्स लगता है?",
+        a_hi: "हाँ, NH-19 मार्ग पर वाराणसी और मिर्जापुर के बीच एक टोल प्लाजा पड़ता है, जहाँ कार का एक तरफ का शुल्क लगभग ९० रुपये है।"
+      }
+    ],
+    related: ["how-to-reach", "tourism-guide", "lakhaniya-dari-waterfall", "temple-timings"]
+  },
+  "hotels-dharamshalas-vindhyachal": {
+    slug: "hotels-dharamshalas-vindhyachal",
+    category: "Travel",
+    title_en: "Hotels & Dharamshalas near Vindhyavasini Temple",
+    title_hi: "विन्ध्याचल मंदिर के पास होटल और धर्मशालाएं - ठहरने की व्यवस्था",
+    metaTitle_en: "Best Stays in Vindhyachal - Hotels near Vindhyavasini Temple",
+    metaTitle_hi: "विन्ध्याचल होटल और धर्मशाला - मंदिर के पास रुकने के सबसे अच्छे विकल्प",
+    metaDesc_en: "Looking for stay options in Vindhyachal? Find the best hotels, budget guest houses, and religious Dharamshalas near the main Vindhyavasini Temple.",
+    metaDesc_hi: "विन्ध्याचल में ठहरने के उत्तम विकल्प। माँ विन्ध्यवासिनी मंदिर के पास बजट होटल, वीआईपी गेस्ट हाउस और सस्ती धर्मशालाओं की सूची।",
+    keywords_en: "hotels near Vindhyavasini temple, Vindhyachal Dharamshala booking, places to stay in Vindhyachal, guest house Mirzapur, budget hotels",
+    keywords_hi: "विन्ध्याचल मंदिर के पास होटल, विन्ध्याचल धर्मशाला बुकिंग, विन्ध्याचल में रुकने की जगह, यात्री निवास, बजट होटल",
+    content_en: `<h2>Where to Stay in Vindhyachal: Hotels & Dharamshalas</h2>
+            <p>As the footfall of pilgrims continues to rise, the hotel and accommodation infrastructure in Vindhyachal has developed significantly. Whether you are looking for a pocket-friendly religious **Dharamshala** (community inn) or a modern hotel with AC rooms, there are several choices located close to the main temple corridor.</p>
+            <h3>1. Traditional Dharamshalas (Budget Stays)</h3>
+            <p>For budget travelers and families, Dharamshalas run by local trusts offer clean, secure rooms at highly economical prices (ranging from Rs 300 to Rs 800 per night):</p>
+            <ul>
+                <li><strong>Maa Vindhyavasini Yatri Niwas:</strong> Run by local authorities, located close to the bus stand. Offers dormitories and double beds.</li>
+                <li><strong>Birla Dharamshala:</strong> A historic and very clean property with spacious courtyards, located just 500 meters from the temple.</li>
+                <li><strong>Jaipuria Dharamshala:</strong> Known for its peaceful location near the Ganges ghats and excellent dining hall serving satvik meals.</li>
+            </ul>
+            <h3>2. Modern Hotels and Guest Houses (Comfort Stays)</h3>
+            <p>If you prefer air-conditioned rooms, room service, and modern bathrooms, several hotels have opened up along the main Mirzapur-Vindhyachal road (rates range from Rs 1,500 to Rs 3,500 per night):</p>
+            <p>These properties offer online booking, free Wi-Fi, in-house restaurants, and help arrange local tourist autos and guides. It is highly recommended to book rooms at least 2 weeks in advance if you are visiting during the Navratri fair or long weekends.</p>`,
+    content_hi: `<h2>विन्ध्याचल में कहाँ ठहरें: होटल और धर्मशालाएं</h2>
+            <p>श्रद्धालुओं की बढ़ती संख्या को देखते हुए विन्ध्याचल में ठहरने की उत्तम व्यवस्थाएँ विकसित हो गई हैं। यहाँ सस्ते बजट वाली धार्मिक **धर्मशालाओं** से लेकर आधुनिक सुख-सुविधाओं से युक्त वातानुकूलित होटल उपलब्ध हैं, जो मुख्य मंदिर कॉरिडोर के बिल्कुल समीप स्थित हैं।</p>
+            <h3>१. प्रमुख धर्मशालाएं (बजट स्टे)</h3>
+            <p>यदि आप अपने परिवार के साथ कम बजट में सुरक्षित स्थान पर रुकना चाहते हैं, तो स्थानीय ट्रस्टों द्वारा संचालित धर्मशालाएं सबसे अच्छा विकल्प हैं (किराया: ३०० से ८०० रुपये प्रति रात्रि):</p>
+            <ul>
+                <li><strong>माँ विन्ध्यवासिनी यात्री निवास:</strong> बस स्टैंड के पास स्थित सरकारी यात्री निवास, जहाँ कमरों और डॉरमेटरी की अच्छी व्यवस्था है।</li>
+                <li><strong>बिड़ला धर्मशाला:</strong> मंदिर से मात्र ५०० मीटर दूर स्थित एक ऐतिहासिक और बेहद साफ-सुथरी धर्मशाला।</li>
+                <li><strong>जयपुरिया धर्मशाला:</strong> गंगा घाट के किनारे शांत वातावरण में स्थित, जो अपने शुद्ध सात्विक भोजन के लिए प्रसिद्ध है।</li>
+            </ul>
+            <h3>२. आधुनिक होटल और गेस्ट हाउस (सुविधाजनक स्टे)</h3>
+            <p>यदि आप एसी रूम, रूम सर्विस और आधुनिक टॉयलेट्स जैसी सुविधाएं चाहते हैं, तो मिर्जापुर रोड पर कई होटल उपलब्ध हैं (किराया: १५०० से ३५०० रुपये):</p>
+            <p>इन होटलों में ऑनलाइन बुकिंग, वाई-फाई और रेस्टोरेंट की सुविधा होती है। यदि आप नवरात्रि मेले या वीकेंड के दौरान आ रहे हैं, तो कम से कम २ सप्ताह पहले बुकिंग कराने की सलाह दी जाती है ताकि मौके पर परेशानी न हो।</p>`,
+    faqs: [
+      {
+        q_en: "Are there hotels overlooking the Ganges?",
+        a_en: "Yes, a few hotels and ashrams near the Jaipuria Ghat offer rooms with direct balconies overlooking the holy river.",
+        q_hi: "क्या गंगा जी के किनारे वाले होटल उपलब्ध हैं?",
+        a_hi: "हाँ, जयपुरिया घाट के समीप बने कुछ होटलों और आश्रमों से गंगा जी के विहंगम दृश्य वाले कमरे मिल जाते हैं।"
+      },
+      {
+        q_en: "Is hot water available in winter?",
+        a_en: "Most modern hotels provide geysers, while Dharamshalas arrange hot water buckets for a nominal fee of Rs 10-20 during cold months.",
+        q_hi: "क्या सर्दियों में गर्म पानी की व्यवस्था मिलती है?",
+        a_hi: "अधिकांश होटलों में गीज़र की सुविधा है, तथा धर्मशालाओं में सर्दियों के दिनों में गर्म पानी की बाल्टी उपलब्ध कराई जाती है।"
+      }
+    ],
+    related: ["how-to-reach", "tourism-guide", "varanasi-to-vindhyachal-tour"]
+  },
+  "vindhyavasini-beej-mantra": {
+    slug: "vindhyavasini-beej-mantra",
+    category: "Mantras",
+    title_en: "Maa Vindhyavasini Beej Mantra - Chanting & Sadhana Vidhi",
+    title_hi: "माँ विन्ध्यवासिनी बीज मंत्र - साधना विधि और जप नियम",
+    metaTitle_en: "Vindhyavasini Beej Mantra - Powerful Spiritual Chants",
+    metaTitle_hi: "माँ विन्ध्यवासिनी सिद्ध बीज मंत्र - जप विधि और चमत्कारी लाभ",
+    metaDesc_en: "Learn the powerful Beej Mantra of Maa Vindhyavasini. Understand the correct pronunciation, chanting rules, spiritual benefits, and best times to chant.",
+    metaDesc_hi: "माँ विन्ध्यवासिनी के अत्यंत कल्याणकारी बीज मंत्रों की जानकारी। मंत्र जाप के नियम, उच्चारण विधि, माला का चयन और साधना से होने वाले लाभ।",
+    keywords_en: "Vindhyavasini Beej Mantra, how to chant Vindhyavasini mantra, Chamunda beej mantra, spiritual sadhana rules, Gayatri mantra lyrics",
+    keywords_hi: "विन्ध्यवासिनी बीज मंत्र, मंत्र जाप विधि, चामुण्डा बीज मंत्र, विन्ध्याचल मंत्र साधना, माँ विन्ध्यवासिनी गायत्री मंत्र",
+    content_en: `<h2>The Power of Sound: Maa Vindhyavasini Beej Mantra</h2>
+            <p>In the tantric and Vedic paths, a **Beej Mantra** (Seed Mantra) is considered the most concentrated form of cosmic energy. It bypasses intellectual thinking and directly connects the practitioner's soul to the divine frequency of the deity. The presiding Goddess of Vindhyachal is worshipped as a living form of Adi Parashakti, and her mantras possess immense spiritual power.</p>
+            <h3>The Sacred Beej Mantras</h3>
+            <p>The primary and most powerful mantra chanted by the sadhakas of Vindhyachal is the <strong>Chamunda Beej Mantra</strong>, which incorporates the energies of Maha Lakshmi, Maha Kali, and Maha Saraswati:</p>
+            <blockquote>
+                <strong>“ॐ ऐं ह्रीं क्लीं चामुण्डायै विच्चे॥”</strong>
+            </blockquote>
+            <p>Each syllable in this mantra carries a specific energy vibration:</p>
+            <ul>
+                <li><strong>ऐं (Aim):</strong> The sound of Maha Saraswati, representing knowledge, wisdom, and speech.</li>
+                <li><strong>ह्रीं (Hreem):</strong> The sound of Maha Lakshmi, representing wealth, beauty, and sustenance.</li>
+                <li><strong>क्लीं (Kleem):</strong> The sound of Maha Kali/Yogmaya, representing transformation, focus, and victory over desires.</li>
+                <li><strong>चामुण्डायै विच्चे (Chamundayai Vicche):</strong> Untie the knot of ignorance and bless us with ultimate liberation.</li>
+            </ul>
+            <h3>The Vindhyavasini Gayatri Mantra</h3>
+            <p>For householder devotees, the daily chanting of the Gayatri form is highly recommended:</p>
+            <blockquote>
+                <strong>“ॐ विन्ध्यवासिन्यै विद्महे सिंहवाहिन्यै धीमहि तन्नो देवी प्रचोदयात्॥”</strong>
+            </blockquote>
+            <p><em>Translation: "We meditate upon the Goddess who resides in the Vindhya mountains and rides a lion. May that Divine Mother illuminate our intellect."</em></p>`,
+    content_hi: `<h2>ध्वनि की असीम शक्ति: माँ विन्ध्यवासिनी बीज मंत्र</h2>
+            <p>तंत्र और वेद शास्त्रों में **बीज मंत्र** को देवी-देवताओं की ऊर्जा का सबसे सघन रूप माना गया है। यह मंत्र सीधे साधक की चेतना को माता की दिव्य चेतना से जोड़ता है। विन्ध्याचल की अधिष्ठात्री देवी माँ विन्ध्यवासिनी महालक्ष्मी, महाकाली और महासरस्वती का साक्षात स्वरूप हैं, इसलिए इनके मंत्रों का प्रभाव अत्यंत तीव्र और कल्याणकारी होता है।</p>
+            <h3>सिद्ध बीज मंत्र और उसका अर्थ</h3>
+            <p>विन्ध्याचल के साधकों द्वारा जपा जाने वाला सबसे प्रसिद्ध और सिद्ध नवार्ण मंत्र चामुण्डा बीज मंत्र ही है:</p>
+            <blockquote>
+                <strong>“ॐ ऐं ह्रीं क्लीं चामुण्डायै विच्चे॥”</strong>
+            </blockquote>
+            <p>इस मंत्र का प्रत्येक अक्षर तीन महाशक्तियों की ऊर्जा को समाहित किए हुए है:</p>
+            <ul>
+                <li><strong>ऐं:</strong> महासरस्वती का बीज मंत्र है, जो बुद्धि, ज्ञान और कला प्रदान करता है।</li>
+                <li><strong>ह्रीं:</strong> महालक्ष्मी का बीज मंत्र है, जो ऐश्वर्य, समृद्धि और स्वास्थ्य देता है।</li>
+                <li><strong>क्लीं:</strong> महाकाली का बीज मंत्र है, जो शत्रुओं का नाश, आकर्षण और निर्भयता प्रदान करता है।</li>
+                <li><strong>चामुण्डायै विच्चे:</strong> अज्ञानता के बंधनों को काटकर साधक को परम मोक्ष की ओर ले जाता है।</li>
+            </ul>
+            <h3>माँ विन्ध्यवासिनी गायत्री मंत्र</h3>
+            <p>सामान्य गृहस्थ जीवन जीने वाले भक्तों के लिए प्रतिदिन इस गायत्री मंत्र का जाप करना अत्यंत लाभकारी माना जाता है:</p>
+            <blockquote>
+                <strong>“ॐ विन्ध्यवासिन्यै विद्महे सिंहवाहिन्यै धीमहि तन्नो देवी प्रचोदयात्॥”</strong>
+            </blockquote>
+            <p><em>अर्थ: "हम विन्ध्य पर्वत पर निवास करने वाली और सिंह की सवारी करने वाली देवी का ध्यान करते हैं। वे जगदम्बा हमारी बुद्धि को सन्मार्ग की ओर प्रेरित करें।"</em></p>`,
+    faqs: [
+      {
+        q_en: "What is the best mala for chanting these mantras?",
+        a_en: "A pure Rudraksha mala or Spatik (quartz crystal) mala with 108 beads is highly recommended for chanting.",
+        q_hi: "मंत्र जाप के लिए कौन सी माला सबसे अच्छी है?",
+        a_hi: "१०८ मनकों वाली शुद्ध रुद्राक्ष की माला या स्फटिक की माला मंत्र जाप के लिए सर्वोत्तम मानी जाती है।"
+      },
+      {
+        q_en: "Should we sit facing a specific direction?",
+        a_en: "Yes, sit on a red wool woolen mat (Asana) facing either the East or North direction while chanting.",
+        q_hi: "क्या मंत्र जप करते समय किसी विशेष दिशा में बैठना चाहिए?",
+        a_hi: "हाँ, लाल रंग के ऊनी आसन पर बैठकर अपना मुख पूर्व या उत्तर दिशा की ओर रखें।"
+      }
+    ],
+    related: ["maa-vindhyavasini-mantra", "chalisa", "aarti"]
+  },
+  "vindhyavasini-stotram-lyrics": {
+    slug: "vindhyavasini-stotram-lyrics",
+    category: "Mantras",
+    title_en: "Maa Vindhyavasini Stotram - Complete Lyrics & Hindi Meaning",
+    title_hi: "श्री विन्ध्यवासिनी स्तोत्रम - संपूर्ण संस्कृत श्लोक और हिन्दी अनुवाद",
+    metaTitle_en: "Vindhyavasini Stotram Lyrics - Sacred Prayers of Adi Shakti",
+    metaTitle_hi: "श्री विन्ध्यवासिनी स्तोत्रम पाठ - संस्कृत श्लोक, अर्थ और लाभ",
+    metaDesc_en: "Read the complete lyrics of Maa Vindhyavasini Stotram in Sanskrit, English transliteration, and Hindi. Learn about the benefits of daily stotra recitation.",
+    metaDesc_hi: "श्री विन्ध्यवासिनी स्तोत्रम के संपूर्ण श्लोक, हिन्दी अनुवाद सहित। सुख-समृद्धि, रोग नाश और शत्रुओं पर विजय प्राप्त करने हेतु दैनिक पाठ के नियम।",
+    keywords_en: "Vindhyavasini Stotram lyrics, Sanskrit stotram Vindhyachal, spiritual hymns Vindhyavasini, Durga stotra Sanskrit meaning, daily prayers",
+    keywords_hi: "विन्ध्यवासिनी स्तोत्रम लिरिक्स, संस्कृत स्तोत्र पाठ, विन्ध्येश्वरी स्तोत्र अर्थ, दैनिक दुर्गा पाठ, मंत्र श्लोक",
+    content_en: `<h2>The Sacred Hymn of Praise: Vindhyavasini Stotram</h2>
+            <p>The **Vindhyavasini Stotram** is an ancient Sanskrit hymn composed in praise of the Goddess of Vindhyachal. Written in classical Sanskrit meters, this stotram glorifies the divine attributes of the mother, describing her as the creator, protector, and destroyer of the universe. Reciting this stotram daily brings peace, removes domestic disputes, and fills the home with positive energy.</p>
+            <h3>Stotram Lyrics (Sanskrit Devanagari)</h3>
+            <p>Here are the key verses of the sacred stotram:</p>
+            <blockquote>
+                <em>कमलासनपूजिते देवि विन्ध्यवासिनि नमोऽस्तु ते।<br/>
+                महिषासुरमर्दिनि देवि विन्ध्यवासिनि नमोऽस्तु ते॥१॥<br/>
+                शंखचक्रगदाधरे देवि विन्ध्यवासिनि नमोऽस्तु ते।<br/>
+                शरण्ये वरदे देवि विन्ध्यवासिनि नमोऽस्तु ते॥२॥<br/>
+                सिंहवाहिनि गर्जिते देवि विन्ध्यवासिनि Nमोऽस्तु ते।<br/>
+                त्रिभुवनव्यापिनि देवि विन्ध्यवासिनि नमोऽस्तु ते॥३॥<br/>
+                अष्टबाहुधरे देवि विन्ध्यवासिनि नमोऽस्तु ते।<br/>
+                भक्तार्तिहारिणि देवि विन्ध्यवासिनि नमोऽस्तु ते॥४॥</em>
+            </blockquote>
+            <h3>English Transliteration & Meaning</h3>
+            <p><strong>Verse 1:</strong> <em>"Kamalasana Poojite Devi Vindhyavasini Namostu Te.<br/>
+            Mahishasura Mardini Devi Vindhyavasini Namostu Te."</em><br/>
+            <strong>Meaning:</strong> Salutations to Thee, O Goddess Vindhyavasini, who is worshipped by Lord Brahma sitting on a lotus, and who destroyed the demon Mahishasura.</p>
+            <p><strong>Verse 2:</strong> <em>"Shankha Chakra Gada Dhare Devi Vindhyavasini Namostu Te.<br/>
+            Sharanye Varade Devi Vindhyavasini Namostu Te."</em><br/>
+            <strong>Meaning:</strong> Salutations to Thee, O Goddess who holds the holy conch, discus, and mace. You are the ultimate refuge and giver of boons.</p>`,
+    content_hi: `<h2>श्री विन्ध्यवासिनी स्तोत्रम का आध्यात्मिक महत्व</h2>
+            <p><strong>श्री विन्ध्यवासिनी स्तोत्रम</strong> माँ विन्ध्यवासिनी की स्तुति का एक अत्यंत प्राचीन और शक्तिशाली संस्कृत मंत्र संग्रह है। इस स्तोत्र में देवी के अलौकिक रूपों, जैसे दुष्टों का नाश करने वाली महिषासुरमर्दिनी और तीनों लोकों में व्याप्त आदि शक्ति के रूप में उनकी स्तुति की गई है। मान्यता है कि इसका दैनिक पाठ करने से मानसिक अशांति दूर होती है और घर में सुख-समृद्धि का वास होता है।</p>
+            <h3>स्तोत्रम के मूल संस्कृत श्लोक</h3>
+            <p>दैनिक पूजा में पाठ किए जाने वाले मुख्य श्लोक निम्नलिखित हैं:</p>
+            <blockquote>
+                <em>कमलासनपूजिते देवि विन्ध्यवासिनि नमोऽस्तु ते।<br/>
+                महिषासुरमर्दिनि देवि विन्ध्यवासिनि नमोऽस्तु ते॥१॥<br/>
+                शंखचक्रगदाधरे देवि विन्ध्यवासिनि नमोऽस्तु ते।<br/>
+                शरण्ये वरदे देवि विन्ध्यवासिनि नमोऽस्तु ते॥२॥<br/>
+                सिंहवाहिनि गर्जिते देवि विन्ध्यवासिनि नमोऽस्तु ते।<br/>
+                त्रिभुवनव्यापिनि देवि विन्ध्यवासिनि नमोऽस्तु ते॥३॥<br/>
+                अष्टबाहुधरे देवि विन्ध्यवासिनि नमोऽस्तु ते।<br/>
+                भक्तार्तिहारिणि देवि विन्ध्यवासिनि नमोऽस्तु ते॥४॥</em>
+            </blockquote>
+            <h3>संस्कृत श्लोकों का सरल हिन्दी अनुवाद</h3>
+            <p><strong>श्लोक १:</strong> कमल के आसन पर विराजमान ब्रह्मा जी द्वारा पूजित और महिषासुर का वध करने वाली हे विन्ध्यवासिनी माता! आपको बारम्बार नमस्कार है।</p>
+            <p><strong>श्लोक २:</strong> अपने हाथों में शंख, चक्र और गदा धारण करने वाली, भक्तों को शरण देने वाली और अभीष्ट वरदान प्रदान करने वाली हे विन्ध्यवासिनी माता! आपको बारम्बार नमस्कार है।</p>`,
+    faqs: [
+      {
+        q_en: "What are the benefits of reciting Vindhyavasini Stotram?",
+        a_en: "It helps remove financial distress, brings domestic harmony, and creates a strong protective shield around the devotee.",
+        q_hi: "विन्ध्यवासिनी स्तोत्रम का पाठ करने से क्या लाभ होता है?",
+        a_hi: "यह पाठ आर्थिक तंगी को दूर करता है, पारिवारिक कलह शांत करता है और साधक के चारों ओर एक सकारात्मक रक्षा कवच का निर्माण करता है।"
+      },
+      {
+        q_en: "Do we need guru initiation to recite this stotram?",
+        a_en: "No, since this is a prayer (stotram), any devotee can recite it with pure devotion without needing any formal initiation.",
+        q_hi: "क्या इस स्तोत्र का पाठ करने के लिए गुरु दीक्षा की आवश्यकता है?",
+        a_hi: "नहीं, चूंकि यह एक स्तुति प्रार्थना है, इसलिए कोई भी श्रद्धालु बिना किसी दीक्षा के पूर्ण श्रद्धा भाव से इसका पाठ कर सकता है।"
+      }
+    ],
+    related: ["aarti", "chalisa", "vindhyavasini-beej-mantra", "shakti-peeth"]
   }
 };
+

@@ -44,7 +44,8 @@ export const Route = createFileRoute("/learn/$slug")({
   },
   loader: async ({ params }) => {
     const { slug } = params;
-    const topic = learnContent[slug];
+    const normalizedSlug = decodeURIComponent(slug).replace(/[\s_]+/g, "-");
+    const topic = learnContent[normalizedSlug] || learnContent[slug];
     if (!topic) {
       throw notFound();
     }
