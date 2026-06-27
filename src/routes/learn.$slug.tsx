@@ -263,7 +263,7 @@ function LearnDetailPage() {
 
                 const relTitle = hi ? relTopic.title_hi : relTopic.title_en;
                 const relDesc = hi ? relTopic.metaDesc_hi : relTopic.metaDesc_en;
-                const relImg = relTopic.image || "/images/maa-vindhyavasini.webp";
+                const relImg = relTopic.image || "/images/kali-khoh-darshan.jpg";
 
                 return (
                   <Link
@@ -276,7 +276,7 @@ function LearnDetailPage() {
                       <img
                         src={relImg}
                         alt={`${relTitle} - Related Guide`}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                       <span className={`absolute bottom-2 left-3 text-[9px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-black/45 border border-gold/30 text-cream ${dev}`}>
