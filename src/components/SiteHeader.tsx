@@ -181,7 +181,7 @@ export function SiteHeader() {
           </button>
         </div>
 
-        <nav className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-1 scrollbar-custom">
+        <nav className="flex-1 overflow-y-scroll px-4 py-4 flex flex-col gap-1 scrollbar-custom">
           {links.map((l, idx) => {
             const Icon = l.icon;
             return (

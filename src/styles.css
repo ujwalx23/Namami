@@ -459,23 +459,26 @@ html {
 
 /* Elegant visible scrollbar for scrollable drawers and lists */
 .scrollbar-custom::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  -webkit-appearance: none;
+  width: 6px !important;
+  height: 6px !important;
+  display: block !important;
 }
 .scrollbar-custom::-webkit-scrollbar-track {
-  background: rgba(128, 0, 0, 0.05);
-  border-radius: 10px;
+  background: rgba(128, 0, 0, 0.08) !important;
+  border-radius: 10px !important;
 }
 .scrollbar-custom::-webkit-scrollbar-thumb {
-  background: var(--maroon);
-  border-radius: 10px;
+  background-color: var(--maroon) !important;
+  border-radius: 10px !important;
+  border: 1px solid var(--cream) !important;
 }
 .scrollbar-custom::-webkit-scrollbar-thumb:hover {
-  background: var(--saffron);
+  background-color: var(--saffron) !important;
 }
 .scrollbar-custom {
-  scrollbar-width: thin;
-  scrollbar-color: var(--maroon) rgba(128, 0, 0, 0.05);
+  scrollbar-width: thin !important;
+  scrollbar-color: var(--maroon) rgba(128, 0, 0, 0.08) !important;
 }
 
 @keyframes spin-once {
