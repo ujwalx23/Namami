@@ -15,6 +15,7 @@ import {
   Phone,
   ArrowRight,
   BookOpen,
+  Book,
 } from "lucide-react";
 import { useLang } from "@/i18n/LangProvider";
 import { SiteInbox } from "@/components/SiteInbox";
@@ -27,8 +28,9 @@ const links = [
   { to: "/videos", key: "nav.videos" as TKey, icon: Video },
   { to: "/blog", key: "nav.blog" as TKey, icon: BookOpen },
   { to: "/calendar", key: "nav.calendar" as TKey, icon: CalendarDays },
-  { to: "/reviews", key: "nav.reviews" as TKey, icon: MessageSquare },
+  { to: "/learn", key: "nav.learn" as TKey, icon: Book },
   { to: "/gallery", key: "nav.gallery" as TKey, icon: Image },
+  { to: "/reviews", key: "nav.reviews" as TKey, icon: MessageSquare },
   { to: "/events", key: "nav.events" as TKey, icon: Calendar },
   { to: "/contact", key: "nav.contact" as TKey, icon: Phone },
 ];
@@ -179,7 +181,7 @@ export function SiteHeader() {
           </button>
         </div>
 
-        <nav className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-1 scrollbar-none">
+        <nav className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-1 scrollbar-custom">
           {links.map((l, idx) => {
             const Icon = l.icon;
             return (

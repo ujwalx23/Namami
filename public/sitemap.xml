@@ -424,12 +424,6 @@
     </image:image>
   </url>
   <url>
-    <loc>https://www.namamivindhyavasini.in/blog/complete-faq-guide-to-maa-vindhyavasini-temple</loc>
-    <lastmod>2026-06-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.namamivindhyavasini.in/blog/kajali-mahotsav-history-and-significance</loc>
     <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
@@ -464,6 +458,12 @@
   <url>
     <loc>https://www.namamivindhyavasini.in/blog/mundan-sanskar-at-vindhyachal-dham</loc>
     <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.namamivindhyavasini.in/blog/complete-faq-guide-to-maa-vindhyavasini-temple</loc>
+    <lastmod>2026-05-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

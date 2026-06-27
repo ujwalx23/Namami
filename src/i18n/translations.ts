@@ -22,6 +22,7 @@ export const translations = {
   "nav.contact": { en: "Contact", hi: "संपर्क" },
   "nav.donate_btn": { en: "Donate", hi: "दान करें" },
   "nav.menu": { en: "Menu", hi: "मेनू" },
+  "nav.learn": { en: "Learn", hi: "जानें" },
   "lang.toggle": { en: "हिंदी", hi: "EN" },
 
   "footer.tagline": {

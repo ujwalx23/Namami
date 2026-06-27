@@ -457,6 +457,27 @@ html {
   scrollbar-width: none;
 }
 
+/* Elegant visible scrollbar for scrollable drawers and lists */
+.scrollbar-custom::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+.scrollbar-custom::-webkit-scrollbar-track {
+  background: rgba(128, 0, 0, 0.05);
+  border-radius: 10px;
+}
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background: var(--maroon);
+  border-radius: 10px;
+}
+.scrollbar-custom::-webkit-scrollbar-thumb:hover {
+  background: var(--saffron);
+}
+.scrollbar-custom {
+  scrollbar-width: thin;
+  scrollbar-color: var(--maroon) rgba(128, 0, 0, 0.05);
+}
+
 @keyframes spin-once {
   from {
     transform: rotate(0deg);
