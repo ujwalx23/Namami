@@ -272,6 +272,7 @@ function BlogDetailPage() {
       <JsonLd data={breadcrumbSchema} />
 
       <PageHero
+        compact
         sanskrit="॥ श्रीमद् विन्ध्यवासिनी विजयतेतराम् ॥"
         title={post.title}
         subtitle={`${categoryTranslations[post.category]?.[lang] || post.category} · ${formattedDate}`}

@@ -321,22 +321,51 @@ async function generateSitemap() {
     const learnContentPath = path.resolve(__dirname, "../src/data/learnContent.ts");
     if (fs.existsSync(learnContentPath)) {
       const learnContentText = fs.readFileSync(learnContentPath, "utf-8");
-      const slugRegex = /slug:\s*["']([^"']+)["']/g;
-      const slugs = [];
-      let match;
-      while ((match = slugRegex.exec(learnContentText)) !== null) {
-        slugs.push(match[1]);
+      const lines = learnContentText.split("\n");
+      const topics = [];
+      let currentTopic = null;
+      for (let line of lines) {
+        line = line.trim();
+        if (line.match(/^"([^"]+)"\s*:\s*\{/)) {
+          currentTopic = {};
+        }
+        if (currentTopic) {
+          const slugMatch = line.match(/slug:\s*["']([^"']+)["']/);
+          if (slugMatch) currentTopic.slug = slugMatch[1];
+
+          const titleMatch = line.match(/title_en:\s*["']([^"']+)["']/);
+          if (titleMatch) currentTopic.title = titleMatch[1];
+
+          const imageMatch = line.match(/image:\s*["']([^"']+)["']/);
+          if (imageMatch) currentTopic.image = imageMatch[1];
+
+          if (line === "}," || line === "}" || line === "};") {
+            if (currentTopic.slug) {
+              topics.push(currentTopic);
+            }
+            currentTopic = null;
+          }
+        }
       }
-      const uniqueSlugs = [...new Set(slugs)];
-      console.log(`[SEO] Found ${uniqueSlugs.length} learn slugs in learnContent.ts.`);
-      uniqueSlugs.forEach((slug) => {
-        const encodedSlug = encodeURIComponent(slug);
+
+      console.log(`[SEO] Found ${topics.length} learn topics in learnContent.ts.`);
+      topics.forEach((topic) => {
+        const encodedSlug = encodeURIComponent(topic.slug);
         sitemapContent += `  <url>
     <loc>https://www.namamivindhyavasini.in/learn/${encodedSlug}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>\n`;
+    <priority>0.8</priority>\n`;
+
+        if (topic.image) {
+          const imageTitle = topic.title || `${topic.slug.replace(/-/g, " ")} guide`;
+          sitemapContent += `    <image:image>
+      <image:loc>${escapeXml(topic.image)}</image:loc>
+      <image:title>${escapeXml(imageTitle)}</image:title>
+    </image:image>\n`;
+        }
+
+        sitemapContent += `  </url>\n`;
       });
     } else {
       console.warn("[SEO] Warning: learnContent.ts not found for sitemap generation.");

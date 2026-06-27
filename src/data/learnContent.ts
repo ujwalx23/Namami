@@ -24,6 +24,7 @@ export interface LearnTopic {
   content_hi: string;
   faqs: { q_en: string; a_en: string; q_hi: string; a_hi: string }[];
   related: string[];
+  image?: string;
 }
 
 export const learnContent: Record<string, LearnTopic> = {
@@ -972,7 +973,7 @@ export const learnContent: Record<string, LearnTopic> = {
             <p>To gain the maximum spiritual benefits from the mantras, follow these traditional rules:</p>
             <ul>
                 <li><strong>Rosary Selection:</strong> Use a pure rosary made of <strong>Rudraksha</strong> or <strong>Sphatik (crystal)</strong> beads, consisting of 108 beads.</li>
-                <li><strong>Direction:</strong> Sit facing the **East** or the **North** direction on a clean woolen mat (Asana).</li>
+                <li><strong>Direction:</strong> Sit facing the <strong>East</strong> or the <strong>North</strong> direction on a clean woolen mat (Asana).</li>
                 <li><strong>Timing:</strong> Chanting is most effective during the morning hours (04:00 AM to 06:00 AM) or after sunset.</li>
                 <li><strong>Cleanliness:</strong> Always maintain physical cleanliness and mental focus. Keep a small copper vessel of fresh water in front of you.</li>
             </ul>`,
@@ -1161,13 +1162,13 @@ export const learnContent: Record<string, LearnTopic> = {
             <h3>Sita Kund: The Natural Spring Created by Lakshmana</h3>
             <p>According to local legends, while walking through the dry forests of the Vindhya mountains during their exile, Goddess Sita felt extremely thirsty. With no river nearby, Lord Rama instructed Lakshmana to find water. Lakshmana immediately shot a powerful arrow (Bana) into the rocky ground. Instantly, a sweet, crystal-clear spring of water burst forth, which came to be known as Sita Kund. Even today, the water level in the kund remains constant throughout the year, and pilgrims take some water as holy drops (charanamrit).</p>
             <h3>Sita Rasoi: The Ancient Kitchen</h3>
-            <p>A few steps away from the Kund lies the **Sita Rasoi** (Sita's Kitchen). It is a small, cave-like stone structure containing an ancient clay fireplace (chulha) and symbolic stone utensils. Devotees believe that Goddess Sita cooked meals here using local wild grains and roots for Lord Rama and Lakshmana during their brief halt on these hills. The temple nearby houses beautiful idols of Ram, Sita, Lakshman, and Hanuman.</p>`,
+            <p>A few steps away from the Kund lies the <strong>Sita Rasoi</strong> (Sita's Kitchen). It is a small, cave-like stone structure containing an ancient clay fireplace (chulha) and symbolic stone utensils. Devotees believe that Goddess Sita cooked meals here using local wild grains and roots for Lord Rama and Lakshmana during their brief halt on these hills. The temple nearby houses beautiful idols of Ram, Sita, Lakshman, and Hanuman.</p>`,
     content_hi: `<h2>रामायण कालीन धरोहर: सीता कुंड और सीता रसोई</h2>
             <p>अष्टभुजा पहाड़ी पर स्थित <strong>सीता कुंड</strong> और <strong>सीता रसोई</strong> त्रेतायुग से जुड़े अत्यंत पवित्र पौराणिक स्थल हैं। भगवान श्रीराम, माता सीता और लक्ष्मण जी के वनवास काल के दौरान यहाँ विश्राम करने के प्रमाण मिलते हैं। यह स्थान त्रिकोण परिक्रमा पथ पर स्थित होने के कारण श्रद्धालुओं के आकर्षण का प्रमुख केंद्र है।</p>
             <h3>सीता कुंड: लक्ष्मण जी के बाण से उत्पन्न जल स्रोत</h3>
             <p>पौराणिक कथाओं के अनुसार, वनवास काल में जब श्रीराम, लक्ष्मण और माता सीता विन्ध्य पर्वतों से गुजर रहे थे, तब माता सीता को तीव्र प्यास लगी। आसपास कोई जलाशय न देखकर लक्ष्मण जी ने पृथ्वी पर एक शक्तिशाली बाण चलाया। बाण के प्रहार से पत्थर की चट्टान को चीरते हुए मीठे जल की एक धारा फूट पड़ी, जिसने एक कुंड का रूप ले लिया। इसी कुंड को सीता कुंड कहा जाता है। आज भी इस कुंड का पानी कभी नहीं सूखता और श्रद्धालु इसे पवित्र मानकर ग्रहण करते हैं।</p>
             <h3>सीता रसोई: वनवास काल की रसोई</h3>
-            <p>सीता कुंड से कुछ ही कदमों की दूरी पर पहाड़ी पर **सीता रसोई** स्थित है। यह एक छोटी गुफा जैसी पत्थर की संरचना है, जहाँ प्राचीन काल का चूल्हा और सिल-बट्टा (मसाला पीसने का पाषाण) आज भी संरक्षित है। मान्यता है कि माता सीता ने यहाँ वन के कंद-मूल और फलों से भगवान श्रीराम और लक्ष्मण के लिए भोजन तैयार किया था। इसके पास ही एक मंदिर है जिसमें राम, सीता और लक्ष्मण की सुंदर मूर्तियां स्थापित हैं।</p>`,
+            <p>सीता कुंड से कुछ ही कदमों की दूरी पर पहाड़ी पर <strong>सीता रसोई</strong> स्थित है। यह एक छोटी गुफा जैसी पत्थर की संरचना है, जहाँ प्राचीन काल का चूल्हा और सिल-बट्टा (मसाला पीसने का पाषाण) आज भी संरक्षित है। मान्यता है कि माता सीता ने यहाँ वन के कंद-मूल और फलों से भगवान श्रीराम और लक्ष्मण के लिए भोजन तैयार किया था। इसके पास ही एक मंदिर है जिसमें राम, सीता और लक्ष्मण की सुंदर मूर्तियां स्थापित हैं।</p>`,
     faqs: [
       {
         q_en: "Are Sita Kund and Sita Rasoi close to the ropeway?",
@@ -1196,19 +1197,19 @@ export const learnContent: Record<string, LearnTopic> = {
     keywords_en: "Bhairav temples in Vindhyachal, Lal Bhairav temple, Kal Bhairav Mirzapur, Bhairav Kotwal of Vindhyachal, Trikona Parikrama completion rules",
     keywords_hi: "विन्ध्याचल के भैरव मंदिर, लाल भैरव, काल भैरव मिर्जापुर, विन्ध्याचल के कोतवाल भैरव, त्रिकोण परिक्रमा पूर्ण करने के नियम",
     content_en: `<h2>The Guardians of the Dham: Bhairav Shrines</h2>
-            <p>In Sanatan tradition, every Shakti Peeth is spiritually protected by Lord Shiva in his fierce manifestation as **Bhairav**. In Vindhyachal Dham, there are multiple historic Bhairav temples that act as the spiritual guard (Kotwal) of the city. A pilgrim's journey to Vindhyachal is scripturally considered complete only after paying respects to these guardian deities.</p>
+            <p>In Sanatan tradition, every Shakti Peeth is spiritually protected by Lord Shiva in his fierce manifestation as <strong>Bhairav</strong>. In Vindhyachal Dham, there are multiple historic Bhairav temples that act as the spiritual guard (Kotwal) of the city. A pilgrim's journey to Vindhyachal is scripturally considered complete only after paying respects to these guardian deities.</p>
             <h3>1. Kal Bhairav Temple (The Spiritual Police)</h3>
-            <p>Located on the outskirts of the town near the railway line, the **Kal Bhairav Temple** is dedicated to the time-controlling form of Shiva. Devotees visit this shrine to seek protection from planetary blockages (especially Rahu and Saturn defects) and evil energies. The deity is offered mustard oil lamps and coconuts.</p>
+            <p>Located on the outskirts of the town near the railway line, the <strong>Kal Bhairav Temple</strong> is dedicated to the time-controlling form of Shiva. Devotees visit this shrine to seek protection from planetary blockages (especially Rahu and Saturn defects) and evil energies. The deity is offered mustard oil lamps and coconuts.</p>
             <h3>2. Lal Bhairav Temple (The Hilltop Guardian)</h3>
-            <p>Situated on the road connecting Kali Khoh and Ashtabhuja, the **Lal Bhairav Temple** features a striking vermillion-colored idol of Lord Bhairav. This shrine is highly revered by local sadhakas of the tantric path, who believe that offering red flowers here brings mental strength and clears long-standing legal problems.</p>
+            <p>Situated on the road connecting Kali Khoh and Ashtabhuja, the <strong>Lal Bhairav Temple</strong> features a striking vermillion-colored idol of Lord Bhairav. This shrine is highly revered by local sadhakas of the tantric path, who believe that offering red flowers here brings mental strength and clears long-standing legal problems.</p>
             <h3>3. Anand Bhairav Temple</h3>
             <p>Located close to the main Vindhyavasini corridor, this peaceful temple represents the blissful form of Bhairav. Devotees visit here at the very end of their pilgrimage to thank the lord for a smooth journey and seek prosperity for their families.</p>`,
     content_hi: `<h2>धाम के रक्षक: विन्ध्याचल के प्रमुख भैरव मंदिर</h2>
-            <p>सनातन परंपरा में प्रत्येक शक्तिपीठ की सुरक्षा और व्यवस्था के लिए भगवान शिव अपने उग्र रूप **भैरव** के रूप में विराजमान रहते हैं। विन्ध्याचल धाम में भी नगर के कोतवाल के रूप में तीन प्रसिद्ध भैरव मंदिर स्थापित हैं। धार्मिक मान्यताओं के अनुसार, इन भैरव देवों के दर्शन के बिना विन्ध्याचल की त्रिकोण यात्रा अधूरी मानी जाती है।</p>
+            <p>सनातन परंपरा में प्रत्येक शक्तिपीठ की सुरक्षा और व्यवस्था के लिए भगवान शिव अपने उग्र रूप <strong>भैरव</strong> के रूप में विराजमान रहते हैं। विन्ध्याचल धाम में भी नगर के कोतवाल के रूप में तीन प्रसिद्ध भैरव मंदिर स्थापित हैं। धार्मिक मान्यताओं के अनुसार, इन भैरव देवों के दर्शन के बिना विन्ध्याचल की त्रिकोण यात्रा अधूरी मानी जाती है।</p>
             <h3>१. काल भैरव मंदिर (ग्रह बाधा निवारक)</h3>
-            <p>रेलवे स्टेशन के समीप नगर के बाहरी हिस्से में स्थित **काल भैरव मंदिर** समय और न्याय के देवता काल भैरव को समर्पित है। श्रद्धालु अपनी कुंडली के शनि दोष, राहु-केतु की महादशा और नकारात्मक शक्तियों से मुक्ति पाने के लिए यहाँ आकर तेल का दीपक जलाते हैं और काले तिल अर्पित करते हैं।</p>
+            <p>रेलवे स्टेशन के समीप नगर के बाहरी हिस्से में स्थित <strong>काल भैरव मंदिर</strong> समय और न्याय के देवता काल भैरव को समर्पित है। श्रद्धालु अपनी कुंडली के शनि दोष, राहु-केतु की महादशा और नकारात्मक शक्तियों से मुक्ति पाने के लिए यहाँ आकर तेल का दीपक जलाते हैं और काले तिल अर्पित करते हैं।</p>
             <h3>२. लाल भैरव मंदिर (सिंदूरी प्रतिमा)</h3>
-            <p>काली खोह से अष्टभुजा पहाड़ी की ओर जाने वाले मार्ग पर **लाल भैरव मंदिर** स्थित है। यहाँ भगवान भैरव की एक विशाल और भव्य लाल (सिंदूरी) रंग की प्रतिमा स्थापित है। यह मंदिर विशेष रूप से तंत्र साधना करने वाले साधकों के लिए आकर्षण का केंद्र है। मान्यता है कि यहाँ गुड़हल के लाल फूल चढ़ाने से आत्मविश्वास में वृद्धि होती है।</p>
+            <p>काली खोह से अष्टभुजा पहाड़ी की ओर जाने वाले मार्ग पर <strong>लाल भैरव मंदिर</strong> स्थित है। यहाँ भगवान भैरव की एक विशाल और भव्य लाल (सिंदूरी) रंग की प्रतिमा स्थापित है। यह मंदिर विशेष रूप से तंत्र साधना करने वाले साधकों के लिए आकर्षण का केंद्र है। मान्यता है कि यहाँ गुड़हल के लाल फूल चढ़ाने से आत्मविश्वास में वृद्धि होती है।</p>
             <h3>३. आनंद भैरव मंदिर</h3>
             <p>मुख्य विन्ध्यवासिनी मंदिर कॉरिडोर के समीप स्थित यह शांत मंदिर भैरव जी के सौम्य और आनंदमयी रूप को दर्शाता है। परिक्रमा पूरी करने के बाद भक्त यहाँ आकर यात्रा की सफलता के लिए धन्यवाद देते हैं।</p>`,
     faqs: [
@@ -1239,7 +1240,7 @@ export const learnContent: Record<string, LearnTopic> = {
     keywords_en: "Vindhyachal Corridor project updates, Vindhya Dham Corridor parking, entry gates Vindhyachal, VIP darshan rules Mirzapur, tourist facilities",
     keywords_hi: "विन्ध्याचल कॉरिडोर अपडेट, विन्ध्य कॉरिडोर पार्किंग, प्रवेश द्वार कॉरिडोर, वीआईपी पास विन्ध्याचल, यात्री सुविधाएं",
     content_en: `<h2>The Grand Transformation: Vindhya Dham Corridor</h2>
-            <p>To provide a world-class spiritual experience and manage the millions of pilgrims visiting annually, the State Government and Namami Vindhyavasini Sansthan have built the grand **Vindhya Dham Corridor**. Constructed using finely carved pink sandstones from Chunar, Mirzapur, this corridor encircles the core Vindhyavasini Temple, replacing the old, narrow streets with spacious walkways.</p>
+            <p>To provide a world-class spiritual experience and manage the millions of pilgrims visiting annually, the State Government and Namami Vindhyavasini Sansthan have built the grand <strong>Vindhya Dham Corridor</strong>. Constructed using finely carved pink sandstones from Chunar, Mirzapur, this corridor encircles the core Vindhyavasini Temple, replacing the old, narrow streets with spacious walkways.</p>
             <h3>The Four Majestic Entry Gates</h3>
             <p>The corridor features four main entrance gates (Dwars), named after local historical and spiritual milestones:</p>
             <ul>
@@ -1249,9 +1250,9 @@ export const learnContent: Record<string, LearnTopic> = {
                 <li><strong>Bhagirath Dwar (Western Gate):</strong> Connects directly to the main local markets and shopping lanes.</li>
             </ul>
             <h3>Important Traffic and Parking Guidelines</h3>
-            <p>To keep the corridor zone pedestrian-friendly, all vehicles are stopped at the outer parking barriers. Devotees should park their cars at the official **Ganga Darshan Parking** or **Kantit Parking** (approx. 1 km from the temple). E-rickshaws run continuously from these parkings to the corridor gates for a fixed fare of Rs 10 per head. Free lockers and shoe stands are available at the eastern gate.</p>`,
+            <p>To keep the corridor zone pedestrian-friendly, all vehicles are stopped at the outer parking barriers. Devotees should park their cars at the official <strong>Ganga Darshan Parking</strong> or <strong>Kantit Parking</strong> (approx. 1 km from the temple). E-rickshaws run continuously from these parkings to the corridor gates for a fixed fare of Rs 10 per head. Free lockers and shoe stands are available at the eastern gate.</p>`,
     content_hi: `<h2>भव्य विन्ध्य धाम कॉरिडोर: नए नियम और सुविधाएं</h2>
-            <p>लाखों श्रद्धालुओं की सुरक्षा और सुगम दर्शन के लिए उत्तर प्रदेश सरकार और स्थानीय प्रशासन द्वारा भव्य **विन्ध्य धाम कॉरिडोर** का निर्माण किया गया है। मिर्जापुर के प्रसिद्ध चुनार के गुलाबी बलुआ पत्थरों से तराशे गए खंभों और मेहराबों से निर्मित यह कॉरिडोर मुख्य मंदिर के चारों ओर फैला हुआ है, जिसने पुरानी संकरी गलियों को एक भव्य परिक्रमा मार्ग में बदल दिया है।</p>
+            <p>लाखों श्रद्धालुओं की सुरक्षा और सुगम दर्शन के लिए उत्तर प्रदेश सरकार और स्थानीय प्रशासन द्वारा भव्य <strong>विन्ध्य धाम कॉरिडोर</strong> का निर्माण किया गया है। मिर्जापुर के प्रसिद्ध चुनार के गुलाबी बलुआ पत्थरों से तराशे गए खंभों और मेहराबों से निर्मित यह कॉरिडोर मुख्य मंदिर के चारों ओर फैला हुआ है, जिसने पुरानी संकरी गलियों को एक भव्य परिक्रमा मार्ग में बदल दिया है।</p>
             <h3>कॉरिडोर के चार भव्य प्रवेश द्वार</h3>
             <p>कॉरिडोर में प्रवेश करने के लिए चार मुख्य द्वार बनाए गए हैं, जिनका अपना आध्यात्मिक महत्व है:</p>
             <ul>
@@ -1261,7 +1262,7 @@ export const learnContent: Record<string, LearnTopic> = {
                 <li><strong>भगीरथ द्वार (पश्चिमी द्वार):</strong> यह पश्चिमी द्वार स्थानीय बाजारों और प्रसाद की दुकानों की ओर खुलता है।</li>
             </ul>
             <h3>वाहन पार्किंग और यातायात व्यवस्था</h3>
-            <p>कॉरिडोर क्षेत्र को पूरी तरह से पैदल यात्रियों के लिए सुरक्षित रखने के लिए सभी वाहनों को १ किमी पहले रोक दिया जाता है। श्रद्धालुओं को अपने वाहन **गंगा दर्शन पार्किंग** या **कांतित पार्किंग** में पार्क करने होंगे। इन पार्किंग स्थलों से मंदिर के द्वारों तक जाने के लिए ई-रिक्शा चलते हैं, जिनका किराया १० रुपये प्रति सवारी है। पूर्वी द्वार पर निःशुल्क लॉकर और जूता स्टैंड उपलब्ध हैं।</p>`,
+            <p>कॉरिडोर क्षेत्र को पूरी तरह से पैदल यात्रियों के लिए सुरक्षित रखने के लिए सभी वाहनों को १ किमी पहले रोक दिया जाता है। श्रद्धालुओं को अपने वाहन <strong>गंगा दर्शन पार्किंग</strong> या <strong>कांतित पार्किंग</strong> में पार्क करने होंगे। इन पार्किंग स्थलों से मंदिर के द्वारों तक जाने के लिए ई-रिक्शा चलते हैं, जिनका किराया १० रुपये प्रति सवारी है। पूर्वी द्वार पर निःशुल्क लॉकर और जूता स्टैंड उपलब्ध हैं।</p>`,
     faqs: [
       {
         q_en: "Are there lockers available inside the corridor?",
@@ -1290,7 +1291,7 @@ export const learnContent: Record<string, LearnTopic> = {
     keywords_en: "Varanasi to Vindhyachal distance, Varanasi to Vindhyachal taxi fare, one day tour Varanasi to Vindhyachal, Vindhyachal tour package",
     keywords_hi: "वाराणसी से विन्ध्याचल की दूरी, वाराणसी से विन्ध्याचल टैक्सी किराया, वन डे टूर विन्ध्याचल, विन्ध्याचल यात्रा रूट",
     content_en: `<h2>The Perfect Day Trip: Varanasi to Vindhyachal</h2>
-            <p>Many pilgrims visiting the spiritual capital of Kashi (Varanasi) also plan a day trip to seek the blessings of Maa Vindhyavasini. Located just 80 kilometers apart, the journey from **Varanasi to Vindhyachal** is extremely smooth and can be covered comfortably within a single day.</p>
+            <p>Many pilgrims visiting the spiritual capital of Kashi (Varanasi) also plan a day trip to seek the blessings of Maa Vindhyavasini. Located just 80 kilometers apart, the journey from <strong>Varanasi to Vindhyachal</strong> is extremely smooth and can be covered comfortably within a single day.</p>
             <h3>Travel Route Options & Distance</h3>
             <p>The distance between Varanasi and Vindhyachal is approximately <strong>80 kilometers</strong>. Depending on your budget, you can choose from these options:</p>
             <ul>
@@ -1353,7 +1354,7 @@ export const learnContent: Record<string, LearnTopic> = {
     keywords_en: "hotels near Vindhyavasini temple, Vindhyachal Dharamshala booking, places to stay in Vindhyachal, guest house Mirzapur, budget hotels",
     keywords_hi: "विन्ध्याचल मंदिर के पास होटल, विन्ध्याचल धर्मशाला बुकिंग, विन्ध्याचल में रुकने की जगह, यात्री निवास, बजट होटल",
     content_en: `<h2>Where to Stay in Vindhyachal: Hotels & Dharamshalas</h2>
-            <p>As the footfall of pilgrims continues to rise, the hotel and accommodation infrastructure in Vindhyachal has developed significantly. Whether you are looking for a pocket-friendly religious **Dharamshala** (community inn) or a modern hotel with AC rooms, there are several choices located close to the main temple corridor.</p>
+            <p>As the footfall of pilgrims continues to rise, the hotel and accommodation infrastructure in Vindhyachal has developed significantly. Whether you are looking for a pocket-friendly religious <strong>Dharamshala</strong> (community inn) or a modern hotel with AC rooms, there are several choices located close to the main temple corridor.</p>
             <h3>1. Traditional Dharamshalas (Budget Stays)</h3>
             <p>For budget travelers and families, Dharamshalas run by local trusts offer clean, secure rooms at highly economical prices (ranging from Rs 300 to Rs 800 per night):</p>
             <ul>
@@ -1365,7 +1366,7 @@ export const learnContent: Record<string, LearnTopic> = {
             <p>If you prefer air-conditioned rooms, room service, and modern bathrooms, several hotels have opened up along the main Mirzapur-Vindhyachal road (rates range from Rs 1,500 to Rs 3,500 per night):</p>
             <p>These properties offer online booking, free Wi-Fi, in-house restaurants, and help arrange local tourist autos and guides. It is highly recommended to book rooms at least 2 weeks in advance if you are visiting during the Navratri fair or long weekends.</p>`,
     content_hi: `<h2>विन्ध्याचल में कहाँ ठहरें: होटल और धर्मशालाएं</h2>
-            <p>श्रद्धालुओं की बढ़ती संख्या को देखते हुए विन्ध्याचल में ठहरने की उत्तम व्यवस्थाएँ विकसित हो गई हैं। यहाँ सस्ते बजट वाली धार्मिक **धर्मशालाओं** से लेकर आधुनिक सुख-सुविधाओं से युक्त वातानुकूलित होटल उपलब्ध हैं, जो मुख्य मंदिर कॉरिडोर के बिल्कुल समीप स्थित हैं।</p>
+            <p>श्रद्धालुओं की बढ़ती संख्या को देखते हुए विन्ध्याचल में ठहरने की उत्तम व्यवस्थाएँ विकसित हो गई हैं। यहाँ सस्ते बजट वाली धार्मिक <strong>धर्मशालाओं</strong> से लेकर आधुनिक सुख-सुविधाओं से युक्त वातानुकूलित होटल उपलब्ध हैं, जो मुख्य मंदिर कॉरिडोर के बिल्कुल समीप स्थित हैं।</p>
             <h3>१. प्रमुख धर्मशालाएं (बजट स्टे)</h3>
             <p>यदि आप अपने परिवार के साथ कम बजट में सुरक्षित स्थान पर रुकना चाहते हैं, तो स्थानीय ट्रस्टों द्वारा संचालित धर्मशालाएं सबसे अच्छा विकल्प हैं (किराया: ३०० से ८०० रुपये प्रति रात्रि):</p>
             <ul>
@@ -1404,7 +1405,7 @@ export const learnContent: Record<string, LearnTopic> = {
     keywords_en: "Vindhyavasini Beej Mantra, how to chant Vindhyavasini mantra, Chamunda beej mantra, spiritual sadhana rules, Gayatri mantra lyrics",
     keywords_hi: "विन्ध्यवासिनी बीज मंत्र, मंत्र जाप विधि, चामुण्डा बीज मंत्र, विन्ध्याचल मंत्र साधना, माँ विन्ध्यवासिनी गायत्री मंत्र",
     content_en: `<h2>The Power of Sound: Maa Vindhyavasini Beej Mantra</h2>
-            <p>In the tantric and Vedic paths, a **Beej Mantra** (Seed Mantra) is considered the most concentrated form of cosmic energy. It bypasses intellectual thinking and directly connects the practitioner's soul to the divine frequency of the deity. The presiding Goddess of Vindhyachal is worshipped as a living form of Adi Parashakti, and her mantras possess immense spiritual power.</p>
+            <p>In the tantric and Vedic paths, a <strong>Beej Mantra</strong> (Seed Mantra) is considered the most concentrated form of cosmic energy. It bypasses intellectual thinking and directly connects the practitioner's soul to the divine frequency of the deity. The presiding Goddess of Vindhyachal is worshipped as a living form of Adi Parashakti, and her mantras possess immense spiritual power.</p>
             <h3>The Sacred Beej Mantras</h3>
             <p>The primary and most powerful mantra chanted by the sadhakas of Vindhyachal is the <strong>Chamunda Beej Mantra</strong>, which incorporates the energies of Maha Lakshmi, Maha Kali, and Maha Saraswati:</p>
             <blockquote>
@@ -1424,7 +1425,7 @@ export const learnContent: Record<string, LearnTopic> = {
             </blockquote>
             <p><em>Translation: "We meditate upon the Goddess who resides in the Vindhya mountains and rides a lion. May that Divine Mother illuminate our intellect."</em></p>`,
     content_hi: `<h2>ध्वनि की असीम शक्ति: माँ विन्ध्यवासिनी बीज मंत्र</h2>
-            <p>तंत्र और वेद शास्त्रों में **बीज मंत्र** को देवी-देवताओं की ऊर्जा का सबसे सघन रूप माना गया है। यह मंत्र सीधे साधक की चेतना को माता की दिव्य चेतना से जोड़ता है। विन्ध्याचल की अधिष्ठात्री देवी माँ विन्ध्यवासिनी महालक्ष्मी, महाकाली और महासरस्वती का साक्षात स्वरूप हैं, इसलिए इनके मंत्रों का प्रभाव अत्यंत तीव्र और कल्याणकारी होता है।</p>
+            <p>तंत्र और वेद शास्त्रों में <strong>बीज मंत्र</strong> को देवी-देवताओं की ऊर्जा का सबसे सघन रूप माना गया है। यह मंत्र सीधे साधक की चेतना को माता की दिव्य चेतना से जोड़ता है। विन्ध्याचल की अधिष्ठात्री देवी माँ विन्ध्यवासिनी महालक्ष्मी, महाकाली और महासरस्वती का साक्षात स्वरूप हैं, इसलिए इनके मंत्रों का प्रभाव अत्यंत तीव्र और कल्याणकारी होता है।</p>
             <h3>सिद्ध बीज मंत्र और उसका अर्थ</h3>
             <p>विन्ध्याचल के साधकों द्वारा जपा जाने वाला सबसे प्रसिद्ध और सिद्ध नवार्ण मंत्र चामुण्डा बीज मंत्र ही है:</p>
             <blockquote>
@@ -1471,7 +1472,7 @@ export const learnContent: Record<string, LearnTopic> = {
     keywords_en: "Vindhyavasini Stotram lyrics, Sanskrit stotram Vindhyachal, spiritual hymns Vindhyavasini, Durga stotra Sanskrit meaning, daily prayers",
     keywords_hi: "विन्ध्यवासिनी स्तोत्रम लिरिक्स, संस्कृत स्तोत्र पाठ, विन्ध्येश्वरी स्तोत्र अर्थ, दैनिक दुर्गा पाठ, मंत्र श्लोक",
     content_en: `<h2>The Sacred Hymn of Praise: Vindhyavasini Stotram</h2>
-            <p>The **Vindhyavasini Stotram** is an ancient Sanskrit hymn composed in praise of the Goddess of Vindhyachal. Written in classical Sanskrit meters, this stotram glorifies the divine attributes of the mother, describing her as the creator, protector, and destroyer of the universe. Reciting this stotram daily brings peace, removes domestic disputes, and fills the home with positive energy.</p>
+            <p>The <strong>Vindhyavasini Stotram</strong> is an ancient Sanskrit hymn composed in praise of the Goddess of Vindhyachal. Written in classical Sanskrit meters, this stotram glorifies the divine attributes of the mother, describing her as the creator, protector, and destroyer of the universe. Reciting this stotram daily brings peace, removes domestic disputes, and fills the home with positive energy.</p>
             <h3>Stotram Lyrics (Sanskrit Devanagari)</h3>
             <p>Here are the key verses of the sacred stotram:</p>
             <blockquote>
@@ -1523,6 +1524,434 @@ export const learnContent: Record<string, LearnTopic> = {
       }
     ],
     related: ["aarti", "chalisa", "vindhyavasini-beej-mantra", "shakti-peeth"]
+  },
+  "vaishno-devi-guide": {
+    slug: "vaishno-devi-guide",
+    category: "Guide",
+    title_en: "Maa Vaishno Devi Temple Katra - Yatra & Booking Guide",
+    title_hi: "माँ वैष्णो देवी मंदिर कटड़ा - यात्रा, ऑनलाइन बुकिंग और मार्ग गाइड",
+    metaTitle_en: "Maa Vaishno Devi Yatra Guide 2026 - Booking & Timings",
+    metaTitle_hi: "माँ वैष्णो देवी यात्रा २०२६ - पर्ची बुकिंग, दूरी और नियम",
+    metaDesc_en: "Complete travel guide to Maa Vaishno Devi Temple in Katra. Find online registration instructions, helicopter tickets, trekking distances, and weather tips.",
+    metaDesc_hi: "कटड़ा से माँ वैष्णो देवी भवन की यात्रा की पूरी जानकारी। ऑनलाइन यात्रा पर्ची, हेलीकॉप्टर टिकट बुकिंग, अर्धकुंवारी गुफा और मौसम की जानकारी।",
+    keywords_en: "Vaishno Devi yatra guide, Katra to Bhawan distance, Vaishno Devi helicopter booking, online yatra parchi, Ardhkuwari temple, Vaishno Devi timings",
+    keywords_hi: "वैष्णो देवी यात्रा गाइड, कटड़ा से भवन की दूरी, वैष्णो देवी हेलीकॉप्टर बुकिंग, यात्रा पर्ची ऑनलाइन, अर्धकुंवारी गुफा, वैष्णो देवी दर्शन नियम",
+    content_en: `<h2>Planning Your Sacred Pilgrimage to Maa Vaishno Devi</h2>
+            <p>Nestled in the Trikuta Mountains of Jammu & Kashmir, the holy cave of <strong>Maa Vaishno Devi</strong> is one of the most revered Shakti Peethas in India. Millions of devotees undertake the <strong>13-kilometer trek</strong> from Katra base camp to the Bhawan every year to receive the blessings of the mother goddess, who resides here in the form of three natural rock formations known as the Pindis (Maha Kali, Maha Lakshmi, and Maha Saraswati).</p>
+            <h3>Important Travel Metrics & Distances</h3>
+            <ul>
+                <li><strong>Base Camp:</strong> Katra (accessible by train directly via SVDK railway station).</li>
+                <li><strong>Katra to Bhawan Distance:</strong> 13 km (via Ban Ganga route) or 12.5 km (via Tarakote Marg bypass).</li>
+                <li><strong>Bhawan to Bhairon Ghati:</strong> 1.5 km (steep ascent, ropeway available).</li>
+            </ul>
+            <h3>Online Registration & Helicopter Booking</h3>
+            <p>All pilgrims must obtain a <strong>Yatra Registration Slip (Yatra Parchi)</strong>. This can be booked for free online on the official website of the Shri Mata Vaishno Devi Shrine Board or obtained at the counter in Katra. Helicopter bookings (Katra to Sanjichhat) must be done weeks in advance due to high demand.</p>`,
+    content_hi: `<h2>माँ वैष्णो देवी पावन यात्रा की संपूर्ण जानकारी</h2>
+            <p>जम्मू और कश्मीर की सुंदर त्रिकुटा पहाड़ियों में स्थित <strong>माँ वैष्णो देवी</strong> की पवित्र गुफा भारत के सबसे जागृत और पूजनीय शक्तिपीठों में से एक है। हर वर्ष लाखों श्रद्धालु कटड़ा बेस कैंप से भवन तक की <strong>१३ किलोमीटर की कठिन चढ़ाई</strong> पूरी करके माता के दर्शन के लिए आते हैं। गुफा के भीतर माता वैष्णो देवी तीन प्राकृतिक पिंडियों (महाकाली, महालक्ष्मी और महासरस्वती) के रूप में विराजमान हैं।</p>
+            <h3>यात्रा के प्रमुख दूरी मार्ग</h3>
+            <ul>
+                <li><strong>प्रस्थान बिंदु:</strong> कटड़ा (रेलवे स्टेशन SVDK तक सीधी ट्रेन सेवा उपलब्ध है)।</li>
+                <li><strong>कटड़ा से भवन की दूरी:</strong> १३ किमी (बाणगंगा मार्ग से) या १२.५ किमी (ताराकोट मार्ग से)।</li>
+                <li><strong>भवन से भैरव घाटी:</strong> १.५ किमी (खड़ी चढ़ाई, रोपवे सेवा उपलब्ध है)।</li>
+            </ul>
+            <h3>ऑनलाइन यात्रा पर्ची और हेलीकॉप्टर बुकिंग</h3>
+            <p>प्रत्येक यात्री के लिए <strong>यात्रा रजिस्ट्रेशन पर्ची (यात्रा पर्ची)</strong> अनिवार्य है। इसे श्राइन बोर्ड की आधिकारिक वेबसाइट से बिल्कुल निःशुल्क ऑनलाइन बुक किया जा सकता है। भारी भीड़ के कारण हेलीकॉप्टर टिकट (कटड़ा से सांझीछत) की बुकिंग यात्रा तिथि से काफी पहले कर लेनी चाहिए।</p>`,
+    faqs: [
+      {
+        q_en: "How long does it take to walk from Katra to the Bhawan?",
+        a_en: "It usually takes about 5 to 6 hours for a standard walking pace. Helicopter transit takes only 8 minutes.",
+        q_hi: "कटड़ा से भवन तक पैदल चलने में कितना समय लगता है?",
+        a_hi: "सामान्य गति से पैदल चलने वाले श्रद्धालुओं को ५ से ६ घंटे का समय लगता है। हेलीकॉप्टर से केवल ८ मिनट लगते हैं।"
+      },
+      {
+        q_en: "What is the cost of the Bhawan to Bhairon temple ropeway?",
+        a_en: "A standard return ropeway ticket costs Rs 100 per passenger and takes about 3 minutes each way.",
+        q_hi: "भवन से भैरव मंदिर रोपवे का किराया कितना है?",
+        a_hi: "प्रति यात्री दोनो तरफ का रोपवे टिकट मूल्य १०० रुपये है, जिसमें लगभग ३ मिनट का समय लगता है।"
+      }
+    ],
+    related: ["shakti-peeth", "ropeway-guide", "tourism-guide"],
+    image: "/images/maa-reveal.png"
+  },
+  "kedarnath-temple-guide": {
+    slug: "kedarnath-temple-guide",
+    category: "Guide",
+    title_en: "Kedarnath Temple Uttarakhand - Trek, Registration & Guide",
+    title_hi: "केदारनाथ मंदिर उत्तराखंड - ट्रेक, ऑनलाइन रजिस्ट्रेशन और यात्रा नियम",
+    metaTitle_en: "Kedarnath Yatra Guide 2026 - Registration & Trek Route",
+    metaTitle_hi: "केदारनाथ यात्रा २०२६ - हेलीकॉप्टर बुकिंग, दूरी और नियम",
+    metaDesc_en: "Planning a trip to Kedarnath Temple. Get detailed information on the 16 km trek from Gaurikund, biometric registration, helicopter bookings, and weather guidelines.",
+    metaDesc_hi: "उत्तराखंड के पवित्र केदारनाथ धाम की यात्रा गाइड। गौरीकुंड से १६ किमी का ट्रेक, आवश्यक बायोमेट्रिक रजिस्ट्रेशन, हेलीकॉप्टर बुकिंग और मौसम संबंधी सावधानियां।",
+    keywords_en: "Kedarnath yatra guide, Kedarnath trek distance, Kedarnath registration, helicopter tickets Kedarnath, how to reach Kedarnath, Char Dham Uttarakhand",
+    keywords_hi: "केदारनाथ यात्रा गाइड, गौरीकुंड से केदारनाथ की दूरी, केदारनाथ रजिस्ट्रेशन, केदारनाथ हेलीकॉप्टर टिकट, चार धाम यात्रा",
+    content_en: `<h2>The Sacred Peak of Lord Shiva: Kedarnath Dham</h2>
+            <p>Situated at an altitude of 3,583 meters in the Garhwal Himalayas of Uttarakhand, <strong>Kedarnath Temple</strong> is one of the most sacred shrines of Lord Shiva. It is a key part of the Char Dham pilgrimage circuit and the highest of the 12 Jyotirlingas. Due to heavy snowfall, the temple is only accessible from late April or early May until November.</p>
+            <h3>Trekking from Gaurikund to Kedarnath</h3>
+            <p>The journey to Kedarnath requires a challenging <strong>16-kilometer trek</strong> starting from the base camp of Gaurikund. The trail is well-paved, but the steep incline and thin air make it demanding. Mules, palanquins, and helicopter services are available for assistance.</p>
+            <h3>Mandatory Biometric Registration</h3>
+            <p>All pilgrims must complete the Char Dham Registration online through the Uttarakhand government portal before heading to the shrine. Helicopter tickets must be booked through the official IRCTC portal.</p>`,
+    content_hi: `<h2>महादेव का दिव्य शिखर धाम: केदारनाथ</h2>
+            <p>उत्तराखंड के गढ़वाल हिमालय में ३,५८३ मीटर की ऊंचाई पर स्थित <strong>केदारनाथ मंदिर</strong> भगवान शिव के सबसे पवित्र ज्योतिर्लिंगों में से एक है। यह चार धाम यात्रा का एक अत्यंत महत्वपूर्ण हिस्सा है और १२ ज्योतिर्लिंगों में सबसे ऊंचाई पर स्थित है। अत्यधिक बर्फबारी के कारण यह मंदिर केवल अप्रैल के अंत से नवंबर की शुरुआत तक ही खुलता है।</p>
+            <h3>गौरीकुंड से केदारनाथ की चढ़ाई</h3>
+            <p>केदारनाथ पहुँचने के लिए बेस कैंप गौरीकुंड से <strong>१६ किलोमीटर का कठिन पैदल ट्रेक</strong> पूरा करना पड़ता है। मार्ग पक्का है, लेकिन खड़ी ऊंचाई और कम ऑक्सीजन के कारण यह यात्रा शारीरिक रूप से चुनौतीपूर्ण होती है। भक्तों की सुविधा के लिए खच्चर, पालकी और हेलीकॉप्टर सेवाएँ उपलब्ध हैं।</p>
+            <h3>अनिवार्य चार धाम रजिस्ट्रेशन</h3>
+            <p>यात्रा शुरू करने से पहले प्रत्येक श्रद्धालु को उत्तराखंड सरकार के पोर्टल पर चार धाम यात्रा पंजीकरण करना अनिवार्य है। हेलीकॉप्टर की बुकिंग केवल आईआरसीटीसी (IRCTC) के आधिकारिक हेली-यात्रा पोर्टल के माध्यम से की जाती है।</p>`,
+    faqs: [
+      {
+        q_en: "What is the nearest railway station to Kedarnath?",
+        a_en: "Yog Nagari Rishikesh (YNRK) is the nearest railway station, located about 215 km from Gaurikund base camp.",
+        q_hi: "केदारनाथ का निकटतम रेलवे स्टेशन कौन सा है?",
+        a_hi: "योग नगरी ऋषिकेश (YNRK) निकटतम रेलवे स्टेशन है, जो गौरीकुंड बेस कैंप से लगभग २१५ किमी दूर है।"
+      },
+      {
+        q_en: "Can we stay overnight at Kedarnath Bhawan?",
+        a_en: "Yes, GMVN guest houses, tents, and local Dharamshalas are available, but they must be booked well in advance.",
+        q_hi: "क्या हम केदारनाथ भवन में रात बिता सकते हैं?",
+        a_hi: "हाँ, जीएमवीएन (GMVN) गेस्ट हाउस, टेंट और स्थानीय धर्मशालाएँ उपलब्ध हैं, लेकिन इनकी पहले से बुकिंग करना आवश्यक है।"
+      }
+    ],
+    related: ["how-to-reach", "tourism-guide"],
+    image: "/images/maa-vindhyavasini-simhasan-shringar.jpg"
+  },
+  "kashi-vishwanath-guide": {
+    slug: "kashi-vishwanath-guide",
+    category: "Guide",
+    title_en: "Kashi Vishwanath Temple Varanasi - Darshan & Corridor",
+    title_hi: "काशी विश्वनाथ मंदिर वाराणसी - दर्शन और कॉरिडोर जानकारी",
+    metaTitle_en: "Kashi Vishwanath Temple Varanasi - Timings & Booking Guide",
+    metaTitle_hi: "काशी विश्वनाथ मंदिर - आरती टिकट, दर्शन समय और कॉरिडोर गाइड",
+    metaDesc_en: "Detailed visitor guide to Kashi Vishwanath Temple in Varanasi. Learn about dynamic darshan timings, online tickets for Sugam Darshan, and the newly built Kashi Corridor.",
+    metaDesc_hi: "वाराणसी के प्रसिद्ध श्री काशी विश्वनाथ मंदिर की यात्रा गाइड। मंगला आरती टिकट बुकिंग, सुगम दर्शन पास, नए भव्य कॉरिडोर की जानकारी और दर्शन का समय।",
+    keywords_en: "Kashi Vishwanath temple, Varanasi jyotirlinga, Kashi corridor, Mangala aarti booking Kashi, how to reach Varanasi, Varanasi tourism",
+    keywords_hi: "काशी विश्वनाथ मंदिर, वाराणसी ज्योतिर्लिंग, काशी कॉरिडोर दर्शन, मंगला आरती बुकिंग, बनारस टूरिज्म",
+    content_en: `<h2>The Eternal City and its Presiding Deity: Lord Vishwanath</h2>
+            <p>Located on the western bank of the holy river Ganges in Varanasi (Kashi), Uttar Pradesh, the <strong>Kashi Vishwanath Temple</strong> is one of the most famous Hindu temples dedicated to Lord Shiva. It is revered as one of the twelve Jyotirlingas. Reciting prayers here is believed to lead to liberation (Moksha). The temple complex was recently transformed by the grand <strong>Kashi Vishwanath Dham Corridor</strong>, which connects the temple directly to the Lalita Ghat on the Ganges.</p>
+            <h3>Daily Aarti Timings</h3>
+            <ul>
+                <li><strong>Mangala Aarti:</strong> 03:00 AM - 04:00 AM (Requires advance booking)</li>
+                <li><strong>Bhog Aarti:</strong> 11:15 AM - 12:20 PM</li>
+                <li><strong>Sandhya Aarti:</strong> 07:00 PM - 08:15 PM</li>
+                <li><strong>Shayan Aarti:</strong> 10:30 PM - 11:00 PM</li>
+            </ul>
+            <p>Devotees can book VIP Sugam Darshan passes and Aarti tickets online via the official portal to bypass long queues.</p>`,
+    content_hi: `<h2>मोक्ष की नगरी काशी के स्वामी: बाबा विश्वनाथ</h2>
+            <p>उत्तर प्रदेश के पवित्र शहर वाराणसी (काशी) में गंगा नदी के पश्चिमी तट पर स्थित <strong>काशी विश्वनाथ मंदिर</strong> हिंदू धर्म के सबसे पावन तीर्थों में से एक है। यह भगवान शिव के प्रमुख १२ ज्योतिर्लिंगों में गिना जाता है। माना जाता है कि काशी में प्राण त्यागने से मोक्ष की प्राप्ति होती है। हाल ही में निर्मित <strong>काशी विश्वनाथ धाम कॉरिडोर</strong> ने मंदिर को सीधे गंगा तट (ललिता घाट) से जोड़ दिया है, जिससे गंगा स्नान के बाद जल सीधे बाबा को चढ़ाया जा सकता है।</p>
+            <h3>दैनिक आरती समय सारणी</h3>
+            <ul>
+                <li><strong>मंगला आरती:</strong> सुबह ०३:०० से ०४:०० (अग्रिम बुकिंग आवश्यक है)</li>
+                <li><strong>भोग आरती:</strong> दोपहर ११:१५ से १२:२०</li>
+                <li><strong>संध्या आरती:</strong> शाम ०७:०० से रात ०८:१५</li>
+                <li><strong>शयन आरती:</strong> रात १०:३० से ११:००</li>
+            </ul>
+            <p>श्रद्धालु लंबी कतारों से बचने के लिए मंदिर की आधिकारिक वेबसाइट से सुगम दर्शन (VIP पास) और दैनिक आरतियों के टिकट ऑनलाइन बुक कर सकते हैं।</p>`,
+    faqs: [
+      {
+        q_en: "Is traditional dress mandatory for Kashi Vishwanath Mangala Aarti?",
+        a_en: "Yes, traditional Indian wear (Dhoti-Kurta for men, Saree/Salwar for women) is mandatory inside the sanctum sanctorum during Mangala Aarti.",
+        q_hi: "क्या काशी विश्वनाथ मंगला आरती के लिए पारंपरिक पोशाक अनिवार्य है?",
+        a_hi: "हाँ, मंगला आरती के दौरान गर्भगृह के भीतर जाने के लिए पारंपरिक भारतीय पोशाक (पुरुषों के लिए धोती-कुर्ता और महिलाओं के लिए साड़ी) अनिवार्य है।"
+      },
+      {
+        q_en: "How far is Varanasi from Vindhyachal?",
+        a_en: "Varanasi is approximately 80 kilometers away, easily accessible via road (NH 19) in around 2 hours.",
+        q_hi: "वाराणसी से विन्ध्याचल कितनी दूर है?",
+        a_hi: "वाराणसी से विन्ध्याचल की दूरी लगभग ८० किलोमीटर है, जिसे राष्ट्रीय राजमार्ग १९ द्वारा २ घंटे में आसानी से पूरा किया जा सकता है।"
+      }
+    ],
+    related: ["how-to-reach", "tourism-guide", "temple-timings"],
+    image: "/images/maa-vindhyavasini-neel-shringar.jpg"
+  },
+  "mahakaleshwar-temple-guide": {
+    slug: "mahakaleshwar-temple-guide",
+    category: "Guide",
+    title_en: "Mahakaleshwar Temple Ujjain - Bhasma Aarti Booking & Timings",
+    title_hi: "महाकालेश्वर मंदिर उज्जैन - भस्म आरती ऑनलाइन बुकिंग और दर्शन समय",
+    metaTitle_en: "Mahakaleshwar Temple Ujjain - Bhasma Aarti & Travel Guide",
+    metaTitle_hi: "महाकाल मंदिर उज्जैन - भस्म आरती बुकिंग, समय सारणी और नियम",
+    metaDesc_en: "Complete guide to Mahakaleshwar Temple in Ujjain. Find details on Bhasma Aarti online booking, darshan timings, Mahakal Lok corridor, and travel directions.",
+    metaDesc_hi: "उज्जैन के प्रसिद्ध श्री महाकालेश्वर ज्योतिर्लिंग की यात्रा गाइड। भस्म आरती ऑनलाइन बुकिंग विधि, दर्शन समय, महाकाल लोक कॉरिडोर और पहुँचने का मार्ग।",
+    keywords_en: "Mahakaleshwar temple, Ujjain jyotirlinga, Bhasma Aarti booking, Mahakal lok corridor, Ujjain temple timings, how to reach Ujjain",
+    keywords_hi: "महाकालेश्वर मंदिर, उज्जैन ज्योतिर्लिंग, भस्म आरती बुकिंग, महाकाल लोक, उज्जैन मंदिर समय, उज्जैन कैसे पहुंचे",
+    content_en: `<h2>The Sacred Abode of Mahakal: Lord of Time and Death</h2>
+            <p>Located on the banks of the holy Shipra River in Ujjain, Madhya Pradesh, the <strong>Mahakaleshwar Temple</strong> is one of the most famous and sacred Jyotirlingas of Lord Shiva. It is unique as the only south-facing Jyotirlinga (Dakshinmukhi), which holds immense spiritual significance in Tantric traditions. Devotees visit this shrine to seek liberation from the cycle of death and birth.</p>
+            <h3>The Miraculous Bhasma Aarti</h3>
+            <p>The most famous ritual at the temple is the <strong>Bhasma Aarti</strong>, performed daily in the early morning hours from <strong>04:00 AM to 06:00 AM</strong>. During this aarti, the Shivling is bathed and offered fresh ash (traditionally from cremation pyres, now sacred wood ash). Due to extreme popularity, Bhasma Aarti passes must be booked online months in advance via the official temple website.</p>
+            <h3>The Grand Mahakal Lok Corridor</h3>
+            <p>The recently built <strong>Shri Mahakal Lok Corridor</strong> is a magnificent plaza surrounding the temple. It is nearly 900 meters long and features over 100 sandstone pillars depicting various stories from the Shiva Purana. Walking through the corridor offers a highly rich cultural and spiritual experience.</p>`,
+    content_hi: `<h2>काल के स्वामी का पावन धाम: श्री महाकालेश्वर ज्योतिर्लिंग</h2>
+            <p>मध्य प्रदेश की पावन शिप्रा नदी के तट पर उज्जैन (अवंतिका) नगरी में स्थित <strong>महाकालेश्वर मंदिर</strong> भगवान शिव के १२ ज्योतिर्लिंगों में से एक है। यह देश का एकमात्र दक्षिणमुखी ज्योतिर्लिंग है, जिसका तंत्र साधना में अत्यधिक महत्व है। मान्यता है कि जो भक्त बाबा महाकाल के चरणों में शीश नवाता है, उसे अकाल मृत्यु का भय कभी नहीं सताता।</p>
+            <h3>अलौकिक भस्म आरती का नियम</h3>
+            <p>महाकाल मंदिर की सबसे प्रसिद्ध परंपरा <strong>भस्म आरती</strong> है, जो प्रतिदिन भोर में <strong>सुबह ०४:०० से ०६:०० बजे</strong> के बीच आयोजित की जाती है। इस आरती में बाबा का ताजी चिता-भस्म या पवित्र काष्ठ भस्म से शृंगार किया जाता है। भारी भीड़ के कारण भस्म आरती दर्शन के लिए मंदिर की आधिकारिक वेबसाइट से पहले ही ऑनलाइन टिकट बुक करना पड़ता है।</p>
+            <h3>भव्य श्री महाकाल लोक कॉरिडोर</h3>
+            <p>हाल ही में निर्मित <strong>श्री महाकाल लोक कॉरिडोर</strong> भारत के सबसे बड़े धार्मिक कॉरिडोरों में से एक है। यह लगभग ९०० मीटर लंबा परिसर है, जिसमें शिव पुराण की कथाओं को दर्शाने वाले सैकड़ों सुंदर स्तंभ और मूर्तियाँ स्थापित हैं। शाम के समय रंग-बिरंगी रोशनी में इसका दृश्य अलौकिक लगता है।</p>`,
+    faqs: [
+      {
+        q_en: "What is the dress code for Mahakaleshwar Bhasma Aarti?",
+        a_en: "To enter the inner sanctum during Bhasma Aarti, men must wear a traditional cotton Dhoti and women must wear a traditional Saree.",
+        q_hi: "महाकालेश्वर भस्म आरती के लिए क्या ड्रेस कोड है?",
+        a_hi: "भस्म आरती के दौरान गर्भगृह में प्रवेश के लिए पुरुषों को सूती धोती-सोला और महिलाओं को पारंपरिक साड़ी पहनना अनिवार्य है।"
+      },
+      {
+        q_en: "How far is Ujjain from Indore Airport?",
+        a_en: "Ujjain is approximately 55 kilometers away from Devi Ahilyabai Holkar Airport in Indore, accessible in 1 hour via NH 52.",
+        q_hi: "इन्दौर एयरपोर्ट से उज्जैन कितनी दूर है?",
+        a_hi: "देवी अहिल्याबाई होल्कर एयरपोर्ट इंदौर से उज्जैन लगभग ५५ किलोमीटर की दूरी पर है, जिसे कार द्वारा १ घंटे में पूरा किया जा सकता है।"
+      }
+    ],
+    related: ["how-to-reach", "tourism-guide", "temple-timings"],
+    image: "/images/maa-vindhyavasini-garland-shringar.jpg"
+  },
+  "kamakhya-temple-guide": {
+    slug: "kamakhya-temple-guide",
+    category: "Guide",
+    title_en: "Kamakhya Temple Guwahati - Shakti Peeth History & Timings",
+    title_hi: "कामाख्या मंदिर गुवाहाटी - कामाख्या शक्तिपीठ का इतिहास और दर्शन नियम",
+    metaTitle_en: "Kamakhya Temple Guwahati - Shakti Peeth Yatra Guide",
+    metaTitle_hi: "कामाख्या मंदिर गुवाहाटी - इतिहास, मंदिर का समय और अंबुबाची मेला",
+    metaDesc_en: "Comprehensive visitor guide to Kamakhya Temple in Guwahati, Assam. Learn about the sacred bleeding hill myth, VIP passes, daily opening hours, and Ambubachi Mela.",
+    metaDesc_hi: "गुवाहाटी के प्रसिद्ध कामाख्या देवी मंदिर की यात्रा गाइड। तांत्रिक साधना की पीठ कामाख्या देवी का इतिहास, अंबुबाची मेला नियम और दर्शन बुकिंग की जानकारी।",
+    keywords_en: "Kamakhya temple Guwahati, Kamakhya shakti peeth, Ambubachi mela dates, Kamakhya temple timings, Assam tourism guide, Kamakhya entry fees",
+    keywords_hi: "कामाख्या मंदिर गुवाहाटी, कामाख्या शक्तिपीठ इतिहास, अंबुबाची मेला, कामाख्या मंदिर समय, असम पर्यटन",
+    content_en: `<h2>The Center of Tantric Devotion: Kamakhya Devalaya</h2>
+            <p>Perched atop the Nilachal Hills in Guwahati, Assam, the <strong>Kamakhya Temple</strong> is the oldest and one of the most powerful of the 51 Shakti Peethas in Hindu tradition. Unlike traditional temples, there is no stone idol of the Goddess here; instead, the deity is worshipped in the form of a natural stone fissure (Yoni) through which a natural spring flows, situated inside a dark cave sanctuary.</p>
+            <h3>The Miraculous Ambubachi Mela</h3>
+            <p>Every year in mid-June, the temple hosts the world-famous <strong>Ambubachi Mela</strong>. It is believed that the Goddess undergoes her annual menstrual cycle during these three days. The temple remains completely closed to the public. On the fourth day, the gates open with grand festivities, and devotees receive a red cloth soaked in the spring water (called Angodak or Raktavastra) as a highly sacred blessing.</p>
+            <h3>Visiting and Ticket Guidelines</h3>
+            <p>General entry is free, but queues can take 4 to 6 hours. Devotees can purchase Special Entry Passes (VIP Darshan) for Rs 501 at the counter or pre-book online to complete their darshan within 1 to 2 hours. The best hours to visit are early in the morning before 07:00 AM.</p>`,
+    content_hi: `<h2>तंत्र साधना का केंद्र: माँ कामाख्या महापीठ</h2>
+            <p>असम की राजधानी गुवाहाटी में नीलाचल पहाड़ी के शिखर पर स्थित <strong>कामाख्या देवी मंदिर</strong> हिंदू धर्म के ५१ शक्तिपीठों में सबसे प्राचीन और रहस्यों से परिपूर्ण है। यहाँ माता की कोई मूर्ति स्थापित नहीं है, बल्कि गर्भगृह में एक प्राकृतिक जल स्रोत वाली शिला (योनि स्वरूप) की पूजा की जाती है, जो एक अंधेरी गुफा के भीतर स्थित है।</p>
+            <h3>अद्भुत वार्षिक अंबुबाची मेला</h3>
+            <p>प्रत्येक वर्ष जून के मध्य में यहाँ <strong>अंबुबाची मेले</strong> का आयोजन होता है। ऐसी मान्यता है कि इन तीन दिनों में माता कामाख्या रजस्वला होती हैं, जिसके कारण तीन दिनों तक मंदिर के कपाट पूरी तरह बंद रहते हैं। चौथे दिन मंदिर खुलने पर भक्तों को लाल वस्त्र (रक्त वस्त्र) प्रसाद के रूप में दिया जाता है, जिसे बेहद चमत्कारी माना जाता है।</p>
+            <h3>दर्शन नियम और पास टिकट</h3>
+            <p>मंदिर में सामान्य दर्शन निःशुल्क है, लेकिन लंबी कतारों के कारण ४ से ६ घंटे लग सकते हैं। ५०१ रुपये का विशेष दर्शन पास (VIP पास) खरीदकर भक्त १ से २ घंटे में दर्शन पूरे कर सकते हैं। सुबह ०७:०० बजे से पहले पहुँचना सबसे उपयुक्त रहता है।</p>`,
+    faqs: [
+      {
+        q_en: "Is Kamakhya Temple open all year round?",
+        a_en: "Yes, but the temple remains closed to pilgrims for 3 days during the annual Ambubachi Mela in June.",
+        q_hi: "क्या कामाख्या मंदिर साल भर खुला रहता है?",
+        a_hi: "हाँ, लेकिन जून में वार्षिक अंबुबाची मेले के दौरान ३ दिनों के लिए मंदिर श्रद्धालुओं के लिए बंद रहता है।"
+      },
+      {
+        q_en: "Is cameras or mobile phones allowed inside the temple?",
+        a_en: "Photography and mobile phones are strictly prohibited inside the inner cave (Garbhagriha) of the temple.",
+        q_hi: "क्या मंदिर के भीतर कैमरा या मोबाइल फोन ले जाने की अनुमति है?",
+        a_hi: "मंदिर के मुख्य गर्भगृह (गुफा) के भीतर फोटोग्राफी और मोबाइल फोन का उपयोग सख्त वर्जित है।"
+      }
+    ],
+    related: ["shakti-peeth", "tourism-guide"],
+    image: "/images/maa-vindhyavasini-devi-mirzapur.jpg"
+  },
+  "somnath-temple-guide": {
+    slug: "somnath-temple-guide",
+    category: "Guide",
+    title_en: "Somnath Temple Gujarat - History, Sound Show & Timings",
+    title_hi: "सोमनाथ मंदिर गुजरात - इतिहास, आरती और लाइट एंड साउंड शो गाइड",
+    metaTitle_en: "Somnath Jyotirlinga Temple - Sound Show & Travel Guide",
+    metaTitle_hi: "सोमनाथ मंदिर गुजरात - इतिहास, आरती समय और दर्शनीय स्थल",
+    metaDesc_en: "Complete visitor guide to Shree Somnath Jyotirlinga Temple in Gujarat. Explore temple history of reconstruction, daily sound show timings, and how to reach.",
+    metaDesc_hi: "गुजरात के प्रसिद्ध श्री सोमनाथ ज्योतिर्लिंग की यात्रा गाइड। मंदिर का गौरवशाली इतिहास, दैनिक आरती समय सारणी, शाम का लाइट एंड साउंड शो और मार्ग विवरण।",
+    keywords_en: "Somnath temple Gujarat, Somnath light and sound show, first jyotirlinga history, Somnath darshan timings, Veraval railway station, Gujarat tourism",
+    keywords_hi: "सोमनाथ मंदिर गुजरात, सोमनाथ लाइट शो, प्रथम ज्योतिर्लिंग इतिहास, सोमनाथ दर्शन समय, वेरावल स्टेशन, गुजरात टूरिज्म",
+    content_en: `<h2>The First of the Twelve Sacred Jyotirlingas</h2>
+            <p>Situated on the coast of the Arabian Sea in Prabhas Patan near Veraval in Gujarat, the grand <strong>Somnath Temple</strong> is revered as the first of the twelve holy Jyotirlingas of Lord Shiva. The name 'Somnath' means 'Lord of the Moon' (Soma). According to Hindu scriptures, the temple was originally built of gold by the Moon God himself, then rebuilt in silver by Ravana, in wood by Lord Krishna, and in stone by King Bhimdev.</p>
+            <h3>A Symbol of Resilience and Reconstruction</h3>
+            <p>The temple is historically famous for its resilience. It was destroyed and plundered by foreign invaders (including Mahmud of Ghazni) multiple times over the centuries. Each time, it was rebuilt with greater grandness. The current temple, designed in the magnificent Chalukya style of architecture, was commissioned by Sardar Vallabhbhai Patel and completed in 1951.</p>
+            <h3>The Light and Sound Show</h3>
+            <p>Every evening, the temple hosts a spectacular <strong>Light and Sound Show (Jay Somnath)</strong> from <strong>08:00 PM to 09:00 PM</strong>. The narration against the backdrop of the illuminated temple and roaring sea waves details the rich history of the shrine.</p>`,
+    content_hi: `<h2>द्वादश ज्योतिर्लिंगों में प्रथम: श्री सोमनाथ महादेव</h2>
+            <p>गुजरात के वेरावल बंदरगाह के निकट प्रभास पाटन में अरब सागर के तट पर स्थित भव्य <strong>सोमनाथ मंदिर</strong> भगवान शिव के १२ ज्योतिर्लिंगों में प्रथम माना जाता है। शास्त्रों के अनुसार इस मंदिर की स्थापना चंद्रदेव (सोम) ने स्वयं की थी। ऐसी मान्यता है कि सबसे पहले चंद्रदेव ने यहाँ स्वर्ण मंदिर, रावण ने रजत मंदिर, श्रीकृष्ण ने चंदन की लकड़ी का मंदिर और अंत में भीमदेव ने पाषाण मंदिर बनवाया था।</p>
+            <h3>आस्था और पुनर्निर्माण का प्रतीक</h3>
+            <p>सोमनाथ मंदिर का इतिहास इसके बार-बार टूटने और पुनः खड़े होने की गौरवशाली गाथा है। विदेशी आक्रांताओं (महमूद गजनवी सहित) ने इसे कई बार लूटा और नष्ट किया, लेकिन हर बार हिंदुओं की अदम्य आस्था ने इसे फिर से खड़ा कर दिया। वर्तमान भव्य मंदिर का निर्माण सरदार वल्लभभाई पटेल के प्रयासों से शुरू होकर १९५१ में संपन्न हुआ था।</p>
+            <h3>लाइट एंड साउंड (ध्वनि एवं प्रकाश) शो</h3>
+            <p>प्रतिदिन शाम <strong>रात ०८:०० से ०९:०० बजे</strong> मंदिर परिसर में एक शानदार लाइट एंड साउंड शो आयोजित किया जाता है। समुद्र की लहरों की गर्जना और रोशन मंदिर के बीच सोमनाथ का गौरवशाली इतिहास प्रस्तुत किया जाता है।</p>`,
+    faqs: [
+      {
+        q_en: "What are the daily Darshan timings at Somnath?",
+        a_en: "The temple is open for Darshan from 06:00 AM to 09:30 PM daily. Aartis are held at 07:00 AM, 12:00 PM, and 07:00 PM.",
+        q_hi: "सोमनाथ में दर्शन का दैनिक समय क्या है?",
+        a_hi: "मंदिर प्रतिदिन सुबह ०६:०० से रात ०९:३० बजे तक दर्शन के लिए खुला रहता है। दैनिक आरती सुबह ०७:००, दोपहर १२:०० और शाम ०७:०० बजे होती है।"
+      },
+      {
+        q_en: "Which is the nearest railway station to Somnath?",
+        a_en: "Veraval Junction (VRL) is the closest railway station, located just 5 km from the Somnath Temple.",
+        q_hi: "सोमनाथ का निकटतम रेलवे स्टेशन कौन सा है?",
+        a_hi: "वेरावल जंक्शन (VRL) निकटतम रेलवे स्टेशन है, जो सोमनाथ मंदिर से केवल ५ किमी की दूरी पर स्थित है।"
+      }
+    ],
+    related: ["how-to-reach", "tourism-guide", "temple-timings"],
+    image: "/images/maa-vindhyavasini-shakti-peeth.jpg"
+  },
+  "badrinath-temple-guide": {
+    slug: "badrinath-temple-guide",
+    category: "Guide",
+    title_en: "Badrinath Temple Uttarakhand - Darshan, Opening Dates & Guide",
+    title_hi: "बद्रीनाथ मंदिर उत्तराखंड - दर्शन, खुलने की तिथि और यात्रा गाइड",
+    metaTitle_en: "Badrinath Temple Yatra Guide 2026 - Registration & Route",
+    metaTitle_hi: "बद्रीनाथ धाम यात्रा २०२६ - कपाट खुलने की तिथि, दूरी और नियम",
+    metaDesc_en: "Planning a pilgrimage to Badrinath Temple in Uttarakhand. Find opening dates, online registration steps, hot springs (Tapt Kund), and travel details.",
+    metaDesc_hi: "उत्तराखंड के प्रसिद्ध श्री बद्रीनाथ धाम की यात्रा गाइड। कपाट खुलने की सही तिथि, आवश्यक चार धाम पंजीकरण, तप्त कुंड (गर्म पानी का झरना) और मार्ग का विवरण।",
+    keywords_en: "Badrinath temple guide, Badrinath opening date 2026, Char Dham Uttarakhand registration, Haridwar to Badrinath distance, Mana village guide, Badrinath weather",
+    keywords_hi: "बद्रीनाथ धाम यात्रा, badrinath खुलने की तिथि, चार धाम पंजीकरण, हरिद्वार से बद्रीनाथ की दूरी, माणा गाँव, बद्रीनाथ का मौसम",
+    content_en: `<h2>The Holy Seat of Lord Vishnu: Badrinath Dham</h2>
+            <p>Nestled between the Nar and Narayana mountain ranges in Chamoli district of Uttarakhand, the sacred <strong>Badrinath Temple</strong> is dedicated to Lord Vishnu in his form as Badrinarayan. It sits on the banks of the Alaknanda River at an altitude of 3,133 meters. Badrinath is the most visited shrine in Uttarakhand's Char Dham circuit and is highly unique as the only temple that is part of both the national Char Dham and Uttarakhand's Char Dham.</p>
+            <h3>Tapt Kund: The Natural Hot Springs</h3>
+            <p>Before entering the temple, pilgrims traditionally take a holy dip in the <strong>Tapt Kund</strong>, a natural sulfur hot spring located just below the temple entrance. Despite freezing atmospheric temperatures, the water in the spring remains consistently hot at around 45 degrees Celsius, offering medicinal relief to tired travelers.</p>
+            <h3>The Last Indian Village: Mana</h3>
+            <p>Just 3 kilometers beyond Badrinath Temple lies <strong>Mana Village</strong>, officially recognized as the 'First Indian Village' sharing a border with Tibet. Devotees visit Mana to see Vyas Gufa (where Sage Vyas is believed to have composed the Mahabharata) and Bhim Pul, a massive stone bridge across the Saraswati River.</p>`,
+    content_hi: `<h2>भगवान विष्णु का पावन परमधाम: बद्रीनाथ</h2>
+            <p>उत्तराखंड के चमोली जिले में नर और नारायण पर्वत श्रेणियों के मध्य अलकनंदा नदी के तट पर स्थित <strong>बद्रीनाथ मंदिर</strong> भगवान विष्णु (बद्रीनारायण रूप) को समर्पित है। समुद्र तल से ३,१३३ मीटर की ऊंचाई पर स्थित यह धाम भारत के राष्ट्रीय चार धामों में से एक है। ऐसी मान्यता है कि सतयुग में यह भगवान शिव का निवास था, जिसे बाद में उन्होंने भगवान विष्णु को सौंप दिया था।</p>
+            <h3>तप्त कुंड: कड़ाके की ठंड में गर्म जल स्रोत</h3>
+            <p>बद्रीनाथ मंदिर में प्रवेश करने से पहले प्रत्येक श्रद्धालु अलकनंदा नदी के किनारे स्थित <strong>तप्त कुंड</strong> में स्नान करते हैं। यह एक प्राकृतिक सल्फर युक्त गर्म पानी का झरना है। बाहर हाड़ कंपाने वाली ठंड होने के बावजूद इस कुंड का तापमान लगभग ४५ डिग्री सेल्सियस रहता है, जिसमें स्नान करने से त्वचा रोग ठीक हो जाते हैं।</p>
+            <h3>भारत का पहला गाँव: माणा</h3>
+            <p>बद्रीनाथ मंदिर से मात्र ३ किमी आगे स्थित <strong>माणा गाँव</strong> को भारत सरकार द्वारा 'भारत का प्रथम गाँव' घोषित किया गया है। यह तिब्बत सीमा के निकट है। यहाँ प्रसिद्ध व्यास गुफा (जहाँ महाभारत की रचना हुई थी) और सरस्वती नदी पर बना भीम पुल देखने लायक पर्यटन स्थल हैं।</p>`,
+    faqs: [
+      {
+        q_en: "When does Badrinath Temple close for winter?",
+        a_en: "The temple closes in November on Yama Dwitiya (Bhai Dooj) or shortly after, reopening in April/May.",
+        q_hi: "बद्रीनाथ मंदिर सर्दियों के लिए कब बंद होता है?",
+        a_hi: "मंदिर आमतौर पर नवंबर में यम द्वितीया (भैयादूज) के अवसर पर या उसके तुरंत बाद बंद होता है और पुनः अप्रैल/मई में खुलता है।"
+      },
+      {
+        q_en: "What is the distance between Badrinath and Mana village?",
+        a_en: "Mana village is located just 3 km north of Badrinath temple, easily accessible by walking or hiring a local taxi.",
+        q_hi: "बद्रीनाथ से माणा गाँव की दूरी कितनी है?",
+        a_hi: "माणा गाँव बद्रीनाथ मंदिर से उत्तर में केवल ३ किमी की दूरी पर है, जहाँ पैदल या स्थानीय टैक्सी द्वारा पहुँचा जा सकता है।"
+      }
+    ],
+    related: ["kedarnath-temple-guide", "how-to-reach"],
+    image: "/images/maa-vindhyavasini-devi-mirzapur.jpg"
+  },
+  "jagannath-temple-guide": {
+    slug: "jagannath-temple-guide",
+    category: "Guide",
+    title_en: "Jagannath Temple Puri - Rath Yatra & Temple Mysteries",
+    title_hi: "जगन्नाथ मंदिर पुरी - रथ यात्रा नियम और मंदिर के अनसुलझे रहस्य",
+    metaTitle_en: "Jagannath Temple Puri - Yatra Guide & Mysteries",
+    metaTitle_hi: "जगन्नाथ मंदिर पुरी - रथ यात्रा, समय सारणी और अनसुलझे रहस्य",
+    metaDesc_en: "Complete travel guide to Shree Jagannath Temple in Puri, Odisha. Read about dynamic temple timings, mysteries of the flag and wind, and Rath Yatra booking.",
+    metaDesc_hi: "ओडिशा के पुरी में स्थित प्रसिद्ध श्री जगन्नाथ मंदिर की संपूर्ण मार्गदर्शिका। मंदिर के दैनिक दर्शन का समय, हवा के विपरीत ध्वज फहराने जैसे चमत्कार और रथ यात्रा की जानकारी।",
+    keywords_en: "Jagannath temple Puri, Puri Rath Yatra dates, Jagannath temple mysteries, Mahaprasad details, Bhubaneswar to Puri distance, Puri beach tourism",
+    keywords_hi: "जगन्नाथ मंदिर पुरी, jagannath रथ यात्रा, जगन्नाथ मंदिर के रहस्य, महाप्रसाद का नियम, भुवनेश्वर से पुरी दूरी, पुरी पर्यटन",
+    content_en: `<h2>The Abode of the Lord of the Universe: Jagannath Puri</h2>
+            <p>Located in the coastal town of Puri, Odisha, the grand <strong>Shree Jagannath Temple</strong> is dedicated to Lord Jagannath, a form of Lord Vishnu, along with his siblings Balabhadra and Subhadra. It is one of the four holy Char Dham shrines of India. The idols of this temple are unique as they are carved from sacred neem logs (Daru) and are replaced every 12 to 19 years in a ritual called Nabakalebara.</p>
+            <h3>The Unresolved Mysteries of the Shrine</h3>
+            <p>Devotees and scientists alike are mystified by several occurrences at the temple:</p>
+            <ul>
+                <li><strong>The Defying Flag:</strong> The flag atop the temple dome always flutters in the direction opposite to the wind.</li>
+                <li><strong>No Shadow:</strong> The main dome of the temple never casts a shadow on the ground at any time of the day.</li>
+                <li><strong>The Cooking Mystery:</strong> In the temple kitchen, Mahaprasad is cooked in 7 earthen pots stacked on top of each other. The pot at the very top always cooks first, and the pot at the bottom cooks last.</li>
+                <li><strong>No Birds:</strong> No birds or airplanes are ever seen flying above the temple dome.</li>
+            </ul>
+            <h3>The Grand Rath Yatra</h3>
+            <p>The annual <strong>Rath Yatra</strong> (Chariot Festival) held in June/July attracts millions of devotees worldwide. During this festival, the three deities are pulled in massive, wooden chariots from the temple to the Gundicha Temple.</p>`,
+    content_hi: `<h2>ब्रह्मांड के स्वामी का विग्रह: श्री जगन्नाथ मंदिर पुरी</h2>
+            <p>ओडिशा के तटीय शहर पुरी में स्थित <strong>श्री जगन्नाथ मंदिर</strong> भगवान विष्णु के एक रूप श्रीकृष्ण (जगन्नाथ), उनके भाई बलभद्र और बहन सुभद्रा को समर्पित है। यह हिंदुओं के पवित्र चार धामों में से एक है। इस मंदिर की मूर्तियां किसी धातु या पत्थर की नहीं बल्कि पवित्र नीम की लकड़ी (दारु) से बनी हैं, जिन्हें प्रत्येक १२ से १९ वर्ष में बदला जाता है (नवबलेवर उत्सव)।</p>
+            <h3>मंदिर के अनसुलझे रहस्य और चमत्कार</h3>
+            <p>जगन्नाथ मंदिर अपने अनेक रहस्यों के लिए प्रसिद्ध है, जिनका जवाब विज्ञान के पास भी नहीं है:</p>
+            <ul>
+                <li><strong>विपरीत दिशा में बहता ध्वज:</strong> मंदिर के शिखर पर लगा लाल ध्वज हमेशा हवा की विपरीत दिशा में लहराता है।</li>
+                <li><strong>मुख्य शिखर की परछाई:</strong> दिन के किसी भी समय मंदिर के मुख्य गुंबद की परछाई जमीन पर नहीं गिरती।</li>
+                <li><strong>प्रसाद पकने का अनोखा नियम:</strong> यहाँ महाप्रसाद बनाने के लिए मिट्टी के ७ बर्तनों को एक के ऊपर एक रखा जाता है। सबसे ऊपर रखे बर्तन का खाना पहले पकता है, और नीचे वाले का सबसे बाद में।</li>
+                <li><strong>पक्षी नहीं उड़ते:</strong> मंदिर के ऊपर से आज तक कोई पक्षी या विमान उड़ता हुआ नहीं देखा गया है।</li>
+            </ul>
+            <h3>भव्य रथ यात्रा महोत्सव</h3>
+            <p>प्रत्येक वर्ष जून या जुलाई में आयोजित होने वाली <strong>जगन्नाथ रथ यात्रा</strong> में शामिल होने के लिए देश-विदेश से लाखों श्रद्धालु आते हैं। तीन विशालकाय लकड़ी के रथों में भगवान जगन्नाथ, बलभद्र और सुभद्रा मौसी के घर (गुंडिचा मंदिर) जाते हैं।</p>`,
+    faqs: [
+      {
+        q_en: "What is Jagannath Mahaprasad?",
+        a_en: "The daily food cooked in the temple kitchen in clay pots and offered to Lord Jagannath, which feeds over 20,000 people daily.",
+        q_hi: "जगन्नाथ महाप्रसाद क्या है?",
+        a_hi: "मंदिर की रसोई में मिट्टी के बर्तनों में पकाया गया भोजन, जिसे भगवान जगन्नाथ को भोग लगाने के बाद दैनिक २०,००० से अधिक लोगों को खिलाया जाता है।"
+      },
+      {
+        q_en: "Which is the nearest airport to Puri?",
+        a_en: "Biju Patnaik International Airport (BBI) in Bhubaneswar, located approximately 60 km from Puri.",
+        q_hi: "पुरी का निकटतम हवाई अड्डा कौन सा है?",
+        a_hi: "भुवनेश्वर में स्थित बीजू पटनायक अंतर्राष्ट्रीय हवाई अड्डा (BBI) पुरी से लगभग ६० किमी दूर है।"
+      }
+    ],
+    related: ["how-to-reach", "tourism-guide"],
+    image: "/images/gallery-1.webp"
+  },
+  "hanuman-chalisa-lyrics": {
+    slug: "hanuman-chalisa-lyrics",
+    category: "Chalisa",
+    title_en: "Hanuman Chalisa Lyrics - Hindi & English Translation",
+    title_hi: "हनुमान चालीसा पाठ - हिंदी, अंग्रेजी अनुवाद और अर्थ सहित",
+    metaTitle_en: "Hanuman Chalisa Lyrics - Pure Hindi & English Translation",
+    metaTitle_hi: "श्री हनुमान चालीसा - हिन्दी अनुवाद, बोल और पाठ विधि",
+    metaDesc_en: "Complete Hanuman Chalisa lyrics in Hindi (Devanagari) and English. Find step-by-step translation, chanting rules, and spiritual benefits.",
+    metaDesc_hi: "गोस्वामी तुलसीदास कृत श्री हनुमान चालीसा के मूल दोहे और चौपाइयां। हिंदी और अंग्रेजी अर्थ, पाठ करने के नियम और महत्व का पूरा विवरण।",
+    keywords_en: "Hanuman Chalisa lyrics, Hanuman Chalisa Hindi, Hanuman chalisa translation, read hanuman chalisa online, Tulsidas devotional path",
+    keywords_hi: "हनुमान चालीसा, हनुमान चालीसा हिंदी में, हनुमान चालीसा लिरिक्स, हनुमान चालीसा अर्थ सहित, हनुमान चालीसा पाठ",
+    content_en: `<h2>The Sacred Chant of Lord Hanuman: Sri Hanuman Chalisa</h2>
+            <p>Written by the legendary poet-saint <strong>Goswami Tulsidas</strong> in the 16th century, the <strong>Hanuman Chalisa</strong> is a 40-verse devotional hymn dedicated to Lord Hanuman. Reciting it is believed to bring immense courage, peace, and protection from all negative energies and obstacles.</p>
+            <h3>Chanting Benefits & Best Practices</h3>
+            <ul>
+                <li><strong>Timing:</strong> Best recited in the morning after bathing or during evening prayers. Reciting it on Tuesday and Saturday is considered highly auspicious.</li>
+                <li><strong>Number of Times:</strong> Traditional practice encourages reciting it 1, 3, 7, 11, or 100 times depending on dedication.</li>
+                <li><strong>Mental Focus:</strong> Light a ghee lamp (diya) and sit facing East or North while chanting.</li>
+            </ul>`,
+    content_hi: `<h2>श्री हनुमान जी की पावन स्तुति: श्री हनुमान चालीसा</h2>
+            <p>१६वीं शताब्दी में महाकवि गोस्वामी तुलसीदास जी द्वारा रचित <strong>हनुमान चालीसा</strong> संकटमोचन भगवान हनुमान को समर्पित ४० चौपाइयों का एक अत्यंत कल्याणकारी और चमत्कारी संग्रह है। मान्यता है कि इसका नित्य पाठ करने से भय दूर होता है, बल-बुद्धि की प्राप्ति होती है और जीवन के समस्त संकटों का नाश होता है।</p>
+            <h3>हनुमान चालीसा पाठ करने के नियम और लाभ</h3>
+            <ul>
+                <li><strong>शुभ दिन:</strong> हनुमान चालीसा का पाठ प्रतिदिन किया जा सकता है, परंतु मंगलवार और शनिवार को इसका विशेष महत्व है।</li>
+                <li><strong>पाठ संख्या:</strong> श्रद्धा अनुसार इसे १, ३, ७, ११ या १०८ बार पढ़ा जा सकता है।</li>
+                <li><strong>विधि:</strong> पाठ शुरू करने से पहले हनुमान जी के सामने तेल या घी का दीपक जलाएं और लाल आसन पर बैठकर पाठ करें।</li>
+            </ul>`,
+    faqs: [
+      {
+        q_en: "Who wrote the Hanuman Chalisa?",
+        a_en: "It was composed by Goswami Tulsidas in the Awadhi language during the 16th century.",
+        q_hi: "हनुमान चालीसा किसने लिखी थी?",
+        a_hi: "इसकी रचना १६वीं शताब्दी में गोस्वामी तुलसीदास जी ने अवधी भाषा में की थी।"
+      },
+      {
+        q_en: "Why is it called 'Chalisa'?",
+        a_en: "The word 'Chalisa' is derived from 'chalis', which means forty in Hindi, as the hymn contains 40 verses (excluding the introductory and concluding dohas).",
+        q_hi: "इसे 'चालीसा' क्यों कहा जाता है?",
+        a_hi: "शब्द 'चालीसा' हिंदी के 'चालीस' से बना है, क्योंकि इस स्तुति में मुख्य रूप से ४० चौपाइयां शामिल हैं।"
+      }
+    ],
+    related: ["aarti", "chalisa", "maa-vindhyavasini-mantra"],
+    image: "/images/maa-reveal.png"
+  },
+  "shiv-tandav-stotram-lyrics": {
+    slug: "shiv-tandav-stotram-lyrics",
+    category: "Mantras",
+    title_en: "Shiv Tandav Stotram Lyrics - Sanskrit & English Translation",
+    title_hi: "शिव ताण्डव स्तोत्रम् - मूल संस्कृत श्लोक और हिन्दी अर्थ",
+    metaTitle_en: "Shiv Tandav Stotram - Sanskrit Lyrics & English Meaning",
+    metaTitle_hi: "शिव ताण्डव स्तोत्र - मूल श्लोक, हिंदी अनुवाद और लाभ",
+    metaDesc_en: "Read the complete Shiv Tandav Stotram composed by King Ravana. Find Sanskrit Devanagari verses, English translations, meaning, and benefits of chanting.",
+    metaDesc_hi: "लंकापति रावण द्वारा रचित दिव्य शिव ताण्डव स्तोत्रम्। संस्कृत श्लोक, शुद्ध हिंदी अनुवाद, पाठ विधि और इसके चमत्कारी लाभों की पूरी जानकारी।",
+    keywords_en: "Shiv Tandav Stotram lyrics, Shiva Tandav Sanskrit, Ravana Shiva stotram translation, Shiva energy chant, Tandav benefits",
+    keywords_hi: "शिव ताण्डव स्तोत्र, शिव तांडव स्तोत्रम संस्कृत, रावण रचित शिव स्तोत्र, शिव तांडव लिरिक्स, शिव तांडव अर्थ",
+    content_en: `<h2>The Cosmic Dance of Shiva: Shiv Tandav Stotram</h2>
+            <p>The <strong>Shiv Tandav Stotram</strong> is a magnificent Sanskrit hymn describing the power, beauty, and cosmic dance (Tandava) of Lord Shiva. It was composed by <strong>King Ravana</strong>, the king of Lanka, who was one of the greatest devotees of Shiva. The hymn is set in the complex Panchachamara meter, creating a rhythmic, drum-like flow when chanted.</p>
+            <h3>Chanting Benefits & Spiritual Power</h3>
+            <p>Reciting this stotram is known to align your bodily energy and remove negative astral planetary placements (especially Saturn/Shani transit problems). It increases mental concentration, builds inner power, and brings absolute peace of mind.</p>`,
+    content_hi: `<h2>शिव का अलौकिक तांडव नृत्य: शिव ताण्डव स्तोत्रम्</h2>
+            <p><strong>शिव ताण्डव स्तोत्रम्</strong> भगवान शिव की शक्ति, सौंदर्य और उनके ब्रह्मांडीय तांडव नृत्य का वर्णन करने वाला एक अत्यंत शक्तिशाली और लयबद्ध संस्कृत स्तोत्र है। इसकी रचना लंकापति <strong>रावण</strong> ने की थी, जो महादेव का परम भक्त था। इस स्तोत्र पंचचामर छंद में रचा गया है, जिसके कारण इसके उच्चारण से एक दिव्य ऊर्जा तरंग उत्पन्न होती है।</p>
+            <h3>तांडव स्तोत्र के लाभ और ऊर्जा</h3>
+            <p>माना जाता है कि इस स्तोत्र का पाठ करने से साधक के जीवन में आत्मविश्वास और मानसिक शक्ति का संचार होता है। यह कुंडली के शनि दोष और ग्रहों के बुरे प्रभावों को कम करने में भी सहायक माना जाता है।</p>`,
+    faqs: [
+      {
+        q_en: "Who composed the Shiv Tandav Stotram?",
+        a_en: "It was composed by Ravana, the king of Lanka, to seek forgiveness and please Lord Shiva.",
+        q_hi: "शिव ताण्डव स्तोत्र की रचना किसने की थी?",
+        a_hi: "इसकी रचना लंका के राजा रावण ने महादेव को प्रसन्न करने और क्षमा याचना के लिए की थी।"
+      },
+      {
+        q_en: "What is the benefit of listening to Shiv Tandav Stotram?",
+        a_en: "Listening or chanting it removes obstacles, builds positive vibrations, and brings success and mental clarity.",
+        q_hi: "शिव ताण्डव स्तोत्र सुनने का क्या लाभ है?",
+        a_hi: "इसे सुनने या जपने से जीवन की बाधाएं दूर होती हैं, सकारात्मक तरंगों का संचार होता है और सफलता मिलती है।"
+      }
+    ],
+    related: ["maa-vindhyavasini-mantra", "how-to-reach"],
+    image: "/images/maa-vindhyavasini-neel-shringar.jpg"
   }
 };
 

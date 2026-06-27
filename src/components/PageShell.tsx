@@ -16,10 +16,12 @@ export function PageHero({
   title,
   subtitle,
   sanskrit,
+  compact = false,
 }: {
   title: string;
   subtitle?: string;
   sanskrit?: string;
+  compact?: boolean;
 }) {
   return (
     <section className="relative bg-gradient-divine border-b border-border/60 overflow-hidden">
@@ -59,7 +61,7 @@ export function PageHero({
       >
         <circle cx="60" cy="60" r="54" />
         <circle cx="60" cy="60" r="48" strokeDasharray="3 3" />
-        <circle cx="60" cy="60" r="36" />
+        <circle cx="60" cy="36" r="36" />
         <circle cx="60" cy="60" r="24" />
         <circle cx="60" cy="60" r="12" />
         <path d="M60 6 L60 114 M6 60 L114 60" />
@@ -74,7 +76,7 @@ export function PageHero({
         <circle cx="105" cy="60" r="3" fill="currentColor" />
       </svg>
 
-      <div className="container mx-auto px-4 py-8 sm:py-12 md:py-16 lg:py-20 relative text-center">
+      <div className={`container mx-auto px-4 ${compact ? "py-4 sm:py-6 md:py-8 lg:py-10" : "py-8 sm:py-12 md:py-16 lg:py-20"} relative text-center`}>
         {sanskrit && (
           <div className="font-devanagari text-saffron text-sm sm:text-base md:text-lg mb-2 sm:mb-3 break-words leading-relaxed">
             {sanskrit}

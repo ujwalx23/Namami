@@ -183,6 +183,7 @@ function BlogPage() {
       <JsonLd data={breadcrumbSchema} />
 
       <PageHero
+        compact
         sanskrit={t("blog.sanskrit")}
         title={t("blog.title")}
         subtitle={t("blog.subtitle")}

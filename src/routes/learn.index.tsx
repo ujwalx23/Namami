@@ -315,6 +315,7 @@ function LearnIndexPage() {
       <JsonLd data={breadcrumbSchema} />
 
       <PageHero
+        compact
         sanskrit="॥ ज्ञानं परं ध्येयम् ॥"
         title={hi ? "माँ विन्ध्यवासिनी ज्ञान हब" : "Vindhyavasini Knowledge Hub"}
         subtitle={

@@ -5,16 +5,6 @@
   "framework": null,
   "redirects": [
     {
-      "source": "/panchang",
-      "destination": "/calendar",
-      "permanent": true
-    },
-    {
-      "source": "/hindu-calendar",
-      "destination": "/calendar",
-      "permanent": true
-    },
-    {
       "source": "/blog/%E0%A4%9C%E0%A4%AC-%E0%A4%9C%E0%A5%80%E0%A4%B5%E0%A4%A8-%E0%A4%B8%E0%A5%8D%E0%A4%B5%E0%A4%AF%E0%A4%82-%E0%A4%89%E0%A4%AA%E0%A4%A6%E0%A5%87%E0%A4%B6-%E0%A4%AC%E0%A4%A8-%E0%A4%9C%E0%A4%BE%E0%A4%8F",
       "destination": "/blog/life-itself-a-teaching",
       "permanent": true

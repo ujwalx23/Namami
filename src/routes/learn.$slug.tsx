@@ -15,6 +15,7 @@ export const Route = createFileRoute("/learn/$slug")({
     const title = topic.metaTitle_en;
     const desc = topic.metaDesc_en;
     const kw = topic.keywords_en;
+    const imageUrl = topic.image || "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-temple-vindhyachal.jpg";
 
     return {
       meta: [
@@ -27,16 +28,14 @@ export const Route = createFileRoute("/learn/$slug")({
         { property: "og:url", content: `https://www.namamivindhyavasini.in/learn/${topic.slug}` },
         {
           property: "og:image",
-          content:
-            "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-temple-vindhyachal.jpg",
+          content: imageUrl,
         },
         { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:title", content: title },
         { name: "twitter:description", content: desc },
         {
           name: "twitter:image",
-          content:
-            "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-temple-vindhyachal.jpg",
+          content: imageUrl,
         },
       ],
       links: [{ rel: "canonical", href: `https://www.namamivindhyavasini.in/learn/${topic.slug}` }],
@@ -131,6 +130,7 @@ function LearnDetailPage() {
       {faqSchema && <JsonLd data={faqSchema} />}
 
       <PageHero
+        compact
         sanskrit="॥ विन्ध्येश्वरी विजयतेतराम् ॥"
         title={title}
         subtitle={`${topic.category} Guide`}
@@ -149,6 +149,17 @@ function LearnDetailPage() {
           <ChevronRight size={12} />
           <span className="text-foreground font-medium truncate max-w-[200px]">{title}</span>
         </div>
+
+        {/* Featured Image */}
+        {topic.image && (
+          <div className="relative w-full rounded-3xl overflow-hidden border border-gold/30 mb-8 bg-black/5 flex items-center justify-center max-h-[360px] md:max-h-[440px] shadow-sm">
+            <img
+              src={topic.image}
+              alt={`${title} Guide - Namami Vindhyavasini`}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        )}
 
         {/* Article Body */}
         <div
@@ -218,27 +229,46 @@ function LearnDetailPage() {
               <BookOpen size={20} className="text-saffron" />
               {hi ? "सम्बंधित मार्गदर्शिकाएँ" : "Related Guides & Info"}
             </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {topic.related.map((relSlug) => {
                 const relTopic = learnContent[relSlug];
                 if (!relTopic) return null;
+
+                const relTitle = hi ? relTopic.title_hi : relTopic.title_en;
+                const relDesc = hi ? relTopic.metaDesc_hi : relTopic.metaDesc_en;
+                const relImg = relTopic.image || "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-temple-vindhyachal.jpg";
 
                 return (
                   <Link
                     key={relSlug}
                     to="/learn/$slug"
                     params={{ slug: relSlug }}
-                    className="p-4 rounded-xl bg-card border border-gold/20 hover:border-gold hover:shadow-gold transition-all duration-300 h-full flex flex-col justify-between cursor-pointer hover:no-underline"
+                    className="group relative rounded-2xl bg-card border border-border/50 hover:border-gold/60 hover:shadow-[0_10px_30px_rgba(212,175,55,0.08)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between h-full overflow-hidden shadow-sm hover:no-underline"
                   >
-                    <h4 className={`font-display text-sm text-maroon ${dev} line-clamp-1`}>
-                      {hi ? relTopic.title_hi : relTopic.title_en}
-                    </h4>
-                    <p className={`text-muted-foreground text-[11px] line-clamp-2 mt-1 ${dev}`}>
-                      {hi ? relTopic.metaDesc_hi : relTopic.metaDesc_en}
-                    </p>
-                    <span className="text-[10px] text-saffron font-bold mt-3 block text-right">
-                      Read &rarr;
-                    </span>
+                    <div className="h-28 overflow-hidden relative">
+                      <img
+                        src={relImg}
+                        alt={`${relTitle} - Related Guide`}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                      <span className={`absolute bottom-2 left-3 text-[9px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-black/45 border border-gold/30 text-cream ${dev}`}>
+                        {relTopic.category}
+                      </span>
+                    </div>
+                    <div className="p-4 flex-grow flex flex-col justify-between">
+                      <div>
+                        <h4 className={`font-display text-sm sm:text-base text-maroon group-hover:text-saffron transition-colors mb-1 ${dev} line-clamp-1`}>
+                          {relTitle}
+                        </h4>
+                        <p className={`text-muted-foreground text-xs leading-relaxed line-clamp-2 ${dev}`}>
+                          {relDesc}
+                        </p>
+                      </div>
+                      <span className="text-[10px] text-saffron font-bold mt-3 block text-right group-hover:underline">
+                        {hi ? "मार्गदर्शिका पढ़ें" : "Read Guide"} &rarr;
+                      </span>
+                    </div>
                   </Link>
                 );
               })}

@@ -1333,6 +1333,97 @@ function HomePage() {
         </div>
       </section>
 
+      {/* POPULAR SACRED GUIDES & SHRINES (LINK JUICE / INTERLINKING SETUP) */}
+      <section className="container mx-auto px-6 py-12 md:py-16 max-w-6xl">
+        <ScrollReveal direction="up" duration={850}>
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <h2 className={`font-display text-2xl sm:text-3xl text-maroon ${dev}`}>
+              {hi ? "लोकप्रिय तीर्थयात्रा मार्गदर्शिकाएँ" : "Popular Spiritual Shrines & Yatra Guides"}
+            </h2>
+            <p className={`text-muted-foreground text-sm mt-2 ${dev}`}>
+              {hi
+                ? "भारत के सबसे जागृत और प्रसिद्ध देव स्थानों की संपूर्ण मार्गदर्शिका, आरती, नियम और दूरी विवरण पढ़ें।"
+                : "Explore detailed yatra guides, timing schedules, online bookings, and rituals for India's most sacred temples."}
+            </p>
+            <div className="mx-auto mt-4 w-20 h-[2px] bg-gradient-sacred rounded-full" />
+          </div>
+        </ScrollReveal>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[
+            {
+              title_en: "Maa Vaishno Devi Yatra Guide",
+              title_hi: "माँ वैष्णो देवी यात्रा मार्गदर्शिका",
+              desc_en: "Complete guide on online yatra slip registration, helicopter tickets, and Ardhkuwari trek details.",
+              desc_hi: "ऑनलाइन यात्रा पर्ची बुकिंग, हेलीकॉप्टर टिकट और अर्धकुंवारी गुफा मार्ग की पूरी जानकारी।",
+              slug: "vaishno-devi-guide",
+              img: maaImgShakti,
+              category: hi ? "शक्तिपीठ" : "Shakti Peeth",
+            },
+            {
+              title_en: "Kedarnath Temple Trek & Travel",
+              title_hi: "केदारनाथ धाम यात्रा गाइड",
+              desc_en: "Detailed gaurikund to Kedarnath trek guide, biometric registration portal, and weather updates.",
+              desc_hi: "गौरीकुंड से केदारनाथ १६ किमी ट्रेक मार्ग, आवश्यक बायोमेट्रिक रजिस्ट्रेशन और हेलीकॉप्टर बुकिंग।",
+              slug: "kedarnath-temple-guide",
+              img: maaImgSimhasan,
+              category: hi ? "ज्योतिर्लिंग" : "Jyotirlinga",
+            },
+            {
+              title_en: "Kashi Vishwanath Corridor & Aarti",
+              title_hi: "काशी विश्वनाथ मंदिर और कॉरिडोर",
+              desc_en: "Varanasi temple timings, Mangala Aarti booking passes, and details of the grand Ganga Corridor.",
+              desc_hi: "बाबा विश्वनाथ की दैनिक आरती समय सारणी, मंगला आरती पास बुकिंग और गंगा कॉरिडोर दर्शन नियम।",
+              slug: "kashi-vishwanath-guide",
+              img: maaImgNeel,
+              category: hi ? "ज्योतिर्लिंग" : "Jyotirlinga",
+            },
+            {
+              title_en: "Mahakaleshwar Ujjain Bhasma Aarti",
+              title_hi: "महाकालेश्वर उज्जैन भस्म आरती",
+              desc_en: "Dakshinmukhi Jyotirlinga daily darshan rules, Bhasma Aarti online booking and corridor guidelines.",
+              desc_hi: "दक्षिणमुखी ज्योतिर्लिंग दर्शन नियम, प्रसिद्ध भस्म आरती ऑनलाइन बुकिंग और महाकाल लोक गाइड।",
+              slug: "mahakaleshwar-temple-guide",
+              img: maaImgGarland,
+              category: hi ? "ज्योतिर्लिंग" : "Jyotirlinga",
+            },
+          ].map((item, idx) => (
+            <ScrollReveal key={idx} direction="up" delay={idx * 100} duration={800}>
+              <Link
+                to="/learn/$slug"
+                params={{ slug: item.slug }}
+                className="group relative rounded-3xl bg-card border border-border/50 hover:border-gold/60 hover:shadow-[0_15px_45px_rgba(212,175,55,0.1)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between h-full overflow-hidden shadow-sm hover:no-underline"
+              >
+                <div className="h-40 overflow-hidden relative">
+                  <img
+                    src={item.img}
+                    alt={item.title_en}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <span className={`absolute bottom-3 left-4 text-[9px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-black/45 border border-gold/30 text-cream ${dev}`}>
+                    {item.category}
+                  </span>
+                </div>
+                <div className="p-5 flex-grow flex flex-col justify-between">
+                  <div>
+                    <h3 className={`font-display text-base sm:text-lg text-maroon group-hover:text-saffron transition-colors mb-2 ${dev} line-clamp-1`}>
+                      {hi ? item.title_hi : item.title_en}
+                    </h3>
+                    <p className={`text-muted-foreground text-xs leading-relaxed line-clamp-2 ${dev}`}>
+                      {hi ? item.desc_hi : item.desc_en}
+                    </p>
+                  </div>
+                  <span className="text-xs font-semibold text-saffron mt-4 flex items-center gap-1 group-hover:underline">
+                    {hi ? "मार्गदर्शिका पढ़ें" : "Read Guide"} &rarr;
+                  </span>
+                </div>
+              </Link>
+            </ScrollReveal>
+          ))}
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="container mx-auto px-6 pb-20">
         <ScrollReveal direction="up" duration={900}>
