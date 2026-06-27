@@ -1837,7 +1837,10 @@ export const learnContent: Record<string, LearnTopic> = {
             </ul>
 
             <h3>Darshan Passes & Ticket Options</h3>
-            <p>While general entry is free, the queue can take anywhere between 4 to 6 hours. To save time, pilgrims can purchase a <strong>Special Entry Pass (VIP Darshan)</strong> for ₹501 at the counter or pre-book online, allowing them to complete their darshan within 1 to 2 hours. The best hours to visit are early in the morning before 07:00 AM.</p>`,
+            <p>While general entry is free, the queue can take anywhere between 4 to 6 hours. To save time, pilgrims can purchase a <strong>Special Entry Pass (VIP Darshan)</strong> for ₹501 at the counter or pre-book online, allowing them to complete their darshan within 1 to 2 hours. The best hours to visit are early in the morning before 07:00 AM.</p>
+            
+            <h3>Nearby Sacred Places to Visit</h3>
+            <p>While visiting Kamakhya, pilgrims also visit the surrounding temples on the Nilachal hill: the <strong>Bhuvaneshwari Temple</strong> (offering a breathtaking panoramic view of the Brahmaputra River) and the shrines of the Dasa Mahavidyas (the ten aspects of the Great Cosmic Mother).</p>`,
     content_hi: `<h2>तंत्र साधना का महान केंद्र: माँ कामाख्या महापीठ गुवाहाटी</h2>
             <p>असम की राजधानी गुवाहाटी में नीलाचल पहाड़ी के शिखर पर स्थित <strong>कामाख्या देवी मंदिर</strong> हिंदू धर्म के ५१ शक्तिपीठों में सबसे प्राचीन और रहस्यमयी है। यहाँ माता की कोई पारंपरिक मूर्ति स्थापित नहीं है, बल्कि गर्भगृह में एक प्राकृतिक भूमिगत जल स्रोत वाली शिला (योनि स्वरूप) की पूजा की जाती है, जो एक अंधेरी गुफा के भीतर स्थित है।</p>
             
@@ -1851,7 +1854,10 @@ export const learnContent: Record<string, LearnTopic> = {
             </ul>
 
             <h3>दर्शन नियम और पास टिकट</h3>
-            <p>मंदिर में सामान्य दर्शन निःशुल्क है, लेकिन लंबी कतारों के कारण ४ से ६ घंटे लग सकते हैं। ५०१ रुपये का विशेष दर्शन पास (VIP पास) खरीदकर भक्त १ से २ घंटे में दर्शन पूरे कर सकते हैं। सुबह ०७:०० बजे से पहले पहुँचना सबसे उपयुक्त रहता है।</p>`,
+            <p>मंदिर में सामान्य दर्शन निःशुल्क है, लेकिन लंबी कतारों के कारण ४ से ६ घंटे लग सकते हैं। ५०१ रुपये का विशेष दर्शन पास (VIP पास) खरीदकर भक्त १ से २ घंटे में दर्शन पूरे कर सकते हैं। सुबह ०७:०० बजे से पहले पहुँचना सबसे उपयुक्त रहता है।</p>
+            
+            <h3>नीलाचल पहाड़ी पर स्थित अन्य दर्शनीय स्थल</h3>
+            <p>कामाख्या दर्शन के साथ-साथ श्रद्धालु पहाड़ी की ऊंचाई पर स्थित <strong>भुवनेश्वरी मंदिर</strong> के दर्शन करते हैं, जहाँ से ब्रह्मपुत्र नदी का अद्भुत नज़ारा दिखाई देता है। इसके अलावा पहाड़ी पर माँ के १० महाविद्या स्वरूपों के छोटे मंदिर भी बने हुए हैं।</p>`,
     faqs: [
       {
         q_en: "Is Kamakhya Temple open all year round?",
@@ -1905,9 +1911,12 @@ export const learnContent: Record<string, LearnTopic> = {
             <ul>
                 <li><strong>By Air:</strong> Diu Airport is 85 km from Somnath. Rajkot Airport is 200 km away.</li>
                 <li><strong>By Train:</strong> Veraval Junction (VRL) is the closest railway station, located just 5 km from the Somnath Temple, with direct connectivity to major cities in Gujarat.</li>
-            </ul>`,
+            </ul>
+            
+            <h3>Bhalka Tirth: Krishna's Departure Point</h3>
+            <p>Just 4 kilometers from Somnath Temple is the sacred <strong>Bhalka Tirth</strong>. This is the historic spot where Lord Krishna was resting under a banyan tree when a hunter named Jara accidentally shot an arrow at his foot, leading to his departure from the earthly realm.</p>`,
     content_hi: `<h2>द्वादश ज्योतिर्लिंगों में प्रथम: श्री सोमनाथ महादेव गुजरात</h2>
-            <p>गुजरात के वेरावल बंदरगाह के निकट प्रभास पाटन में अरब सागर के तट पर स्थित भव्य <strong>सोमनाथ मंदिर</strong> भगवान शिव के १२ ज्योतिर्लिंगों में प्रथम माना जाता है। शास्त्रों के अनुसार इस मंदिर की स्थापना चंद्रदेव (सोम) ने स्वयं की थी। ऐसी मान्यता है कि सबसे पहले चंद्रदेव ने यहाँ स्वर्ण मंदिर, रावण ने रजत मंदिर, श्रीकृष्ण ने चंदन की लकड़ी का मंदिर और अंत में भीमदेव ने पाषाण मंदिर बनवाया था।</p>
+            <p>गुजरात के वेरावल बंदरगाह के निकट प्रभास पाटन में अरब सागर के तट पर स्थित <strong>सोमनाथ मंदिर</strong> भगवान शिव के १२ ज्योतिर्लिंगों में प्रथम माना जाता है। शास्त्रों के अनुसार इस मंदिर की स्थापना चंद्रदेव (सोम) ने स्वयं की थी। ऐसी मान्यता है कि सबसे पहले चंद्रदेव ने यहाँ स्वर्ण मंदिर, रावण ने रजत मंदिर, श्रीकृष्ण ने चंदन की लकड़ी का मंदिर और अंत में भीमदेव ने पाषाण मंदिर बनवाया था।</p>
             
             <h3>आस्था और पुनर्निर्माण का प्रतीक</h3>
             <p>सोमनाथ मंदिर का इतिहास इसके बार-बार टूटने और पुनः खड़े होने की गौरवशाली गाथा है। विदेशी आक्रांताओं (महमूद गजनवी सहित) ने इसे कई बार लूटा और नष्ट किया, लेकिन हर बार हिंदुओं की अदम्य आस्था ने इसे फिर से खड़ा कर दिया। वर्तमान भव्य मंदिर का निर्माण सरदार वल्लभभाई पटेल के प्रयासों से शुरू होकर १९५१ में संपन्न हुआ था।</p>
@@ -1919,7 +1928,10 @@ export const learnContent: Record<string, LearnTopic> = {
             <ul>
                 <li><strong>हवाई मार्ग:</strong> दीव हवाई अड्डा सोमनाथ से लगभग ८५ किमी और राजकोट हवाई अड्डा लगभग २०० किमी दूर स्थित है।</li>
                 <li><strong>रेल मार्ग:</strong> वेरावल जंक्शन (VRL) निकटतम रेलवे स्टेशन है, जो सोमनाथ मंदिर से केवल ५ किमी की दूरी पर स्थित है। यहाँ से ऑटो आसानी से उपलब्ध हैं।</li>
-            </ul>`,
+            </ul>
+            
+            <h3>भालका तीर्थ: श्रीकृष्ण की देहोत्सर्ग स्थली</h3>
+            <p>सोमनाथ मंदिर से मात्र ४ किमी की दूरी पर पवित्र <strong>भालका तीर्थ</strong> स्थित है। यह वही ऐतिहासिक स्थान है जहाँ पीपल के वृक्ष के नीचे विश्राम करते समय भगवान श्रीकृष्ण के चरणों में जरा नामक शिकारी का तीर लगा था और उन्होंने पृथ्वी लोक त्याग कर बैकुंठ गमन किया था।</p>`,
     faqs: [
       {
         q_en: "What are the daily Darshan timings at Somnath?",
@@ -1973,7 +1985,10 @@ export const learnContent: Record<string, LearnTopic> = {
             <ul>
                 <li><strong>By Air:</strong> Jolly Grant Airport in Dehradun is the nearest airport, located about 310 km away.</li>
                 <li><strong>By Train:</strong> Yog Nagari Rishikesh (YNRK) is the nearest railway station (295 km). Regular taxi services and state buses operate from Rishikesh via NH-7 to Joshimath and Badrinath.</li>
-            </ul>`,
+            </ul>
+            
+            <h3>The Legend of Badri Forest</h3>
+            <p>According to Puranic legends, Lord Vishnu performed intense penance in this cold region. To shield him from the harsh snow, his consort Goddess Lakshmi assumed the form of a Badri (jujube/berry) tree. Pleased by her devotion, Vishnu named the spot <strong>Badrikashram</strong>.</p>`,
     content_hi: `<h2>भगवान विष्णु का पावन परमधाम: बद्रीनाथ</h2>
             <p>उत्तराखंड के चमोली जिले में नर और नारायण पर्वत श्रेणियों के मध्य अलकनंदा नदी के तट पर स्थित <strong>बद्रीनाथ मंदिर</strong> भगवान विष्णु (बद्रीनारायण रूप) को समर्पित है। समुद्र तल से ३,१३३ मीटर की ऊंचाई पर स्थित यह धाम भारत के राष्ट्रीय चार धामों में से एक है। ऐसी मान्यता है कि सतयुग में यह भगवान शिव का निवास था, जिसे बाद में उन्होंने भगवान विष्णु को सौंप दिया था।</p>
             
@@ -1987,7 +2002,10 @@ export const learnContent: Record<string, LearnTopic> = {
             <ul>
                 <li><strong>हवाई मार्ग:</strong> जॉली ग्रांट हवाई अड्डा देहरादून लगभग ३१० किमी की दूरी पर है।</li>
                 <li><strong>रेल मार्ग:</strong> योग नगरी ऋषिकेश (२९५ किमी) निकटतम रेलवे स्टेशन है। यहाँ से राष्ट्रीय राजमार्ग ७ (NH-7) द्वारा देवप्रयाग, रुद्रप्रयाग, जोशीमठ होते हुए बद्रीनाथ धाम तक बसें और टैक्सियाँ चलती हैं।</li>
-            </ul>`,
+            </ul>
+            
+            <h3>बद्री वन की पौराणिक कथा</h3>
+            <p>पौराणिक कथा के अनुसार, भगवान विष्णु ने जब इस बर्फीले क्षेत्र में तपस्या शुरू की, तब माँ लक्ष्मी ने उन्हें बर्फीली हवाओं से बचाने के लिए स्वयं 'बद्री' (बेर) के पेड़ का रूप धारण कर लिया था। माँ लक्ष्मी के इस समर्पण से प्रसन्न होकर विष्णु जी ने इस स्थान का नाम <strong>बद्रीनाथ</strong> रखा।</p>`,
     faqs: [
       {
         q_en: "When does Badrinath Temple close for winter?",
@@ -2047,7 +2065,10 @@ export const learnContent: Record<string, LearnTopic> = {
             <ul>
                 <li><strong>By Air:</strong> Biju Patnaik International Airport (BBI) in Bhubaneswar is the nearest airport, located 60 km away. Devotees can hire pre-paid taxis or board direct state buses from the airport to Puri.</li>
                 <li><strong>By Train:</strong> Puri Railway Station (PURI) is extremely close to the temple (approx. 2.8 km), with direct express trains connecting to major Indian cities.</li>
-            </ul>`,
+            </ul>
+            
+            <h3>The Temple Kitchen: Rosaghara</h3>
+            <p>The temple features the largest kitchen in the world (<strong>Rosaghara</strong>). Over 500 cooks prepare more than 56 food offerings (Chhappan Bhog) daily using firewood, feeding over 50,000 to 100,000 devotees. The food is cooked exclusively in clay pots.</p>`,
     content_hi: `<h2>ब्रह्मांड के स्वामी का विग्रह: श्री जगन्नाथ मंदिर पुरी</h2>
             <p>ओडिशा के तटीय शहर पुरी में स्थित <strong>श्री जगन्नाथ मंदिर</strong> भगवान विष्णु के एक रूप श्रीकृष्ण (जगन्नाथ), उनके भाई बलभद्र और बहन सुभद्रा को समर्पित है। यह हिंदुओं के पवित्र चार धामों में से एक है। इस मंदिर की मूर्तियां किसी धातु या पत्थर की नहीं बल्कि पवित्र नीम की लकड़ी (दारु) से बनी हैं, जिन्हें प्रत्येक १२ से १९ वर्ष में बदला जाता है (नवबलेवर उत्सव)।</p>
             
@@ -2067,7 +2088,10 @@ export const learnContent: Record<string, LearnTopic> = {
             <ul>
                 <li><strong>हवाई मार्ग:</strong> भुवनेश्वर में स्थित बीजू पटनायक अंतर्राष्ट्रीय हवाई अड्डा (BBI) पुरी से लगभग ६० किमी दूर है, जहाँ से सीधी टैक्सियाँ और सरकारी बसें मिलती हैं।</li>
                 <li><strong>रेल मार्ग:</strong> पुरी रेलवे स्टेशन (PURI) मुख्य मंदिर से मात्र २.८ किमी दूर है और सभी बड़े भारतीय शहरों से सीधे जुड़ा हुआ है।</li>
-            </ul>`,
+            </ul>
+            
+            <h3>विश्व की सबसे बड़ी रसोई: रोसघरा</h3>
+            <p>जगन्नाथ मंदिर में स्थित <strong>रोसघरा</strong> विश्व की सबसे बड़ी रसोई है। यहाँ प्रतिदिन लगभग ५०० रसोइये और उनके सहयोगी मिट्टी के चूल्हों पर महाप्रसाद तैयार करते हैं। ५६ प्रकार के भोग (छप्पन भोग) रोज़ लाखों भक्तों में बांटे जाते हैं।</p>`,
     faqs: [
       {
         q_en: "Puri Rath Yatra is held in which months?",
@@ -2110,20 +2134,45 @@ export const learnContent: Record<string, LearnTopic> = {
     keywords_hi: "हनुमान चालीसा, हनुमान चालीसा हिंदी में, हनुमान चालीसा लिरिक्स, हनुमान चालीसा अर्थ सहित, हनुमान चालीसा पाठ",
     content_en: `<h2>The Sacred Chant of Lord Hanuman: Sri Hanuman Chalisa</h2>
             <p>Written by the legendary poet-saint <strong>Goswami Tulsidas</strong> in the 16th century, the <strong>Hanuman Chalisa</strong> is a 40-verse devotional hymn dedicated to Lord Hanuman. Reciting it is believed to bring immense courage, peace, and protection from all negative energies and obstacles.</p>
-            <h3>Chanting Benefits & Best Practices</h3>
-            <ul>
-                <li><strong>Timing:</strong> Best recited in the morning after bathing or during evening prayers. Reciting it on Tuesday and Saturday is considered highly auspicious.</li>
-                <li><strong>Number of Times:</strong> Traditional practice encourages reciting it 1, 3, 7, 11, or 100 times depending on dedication.</li>
-                <li><strong>Mental Focus:</strong> Light a ghee lamp (diya) and sit facing East or North while chanting.</li>
-            </ul>`,
+            
+            <h3>Popular Dohas & Opening Verses</h3>
+            <p>The Chalisa begins with two introductory Dohas (couplets):</p>
+            <blockquote>
+                <strong>Doha:</strong><br/>
+                <em>Shri Guru Charan Saroj Raj, Nij Manu Mukur Sudhari.<br/>
+                Baranau Raghuvar Bimal Jasu, Jo Dayaku Phal Chari.</em><br/>
+                <small><strong>Meaning:</strong> Having cleansed the mirror of my mind with the dust of the lotus feet of Sri Guru, I describe the pure glory of Lord Rama, which bestows the four fruits of life (Dharma, Artha, Kama, and Moksha).</small>
+            </blockquote>
+            
+            <blockquote>
+                <strong>Chaupai 1:</strong><br/>
+                <em>Jai Hanuman Gyan Gun Sagar, Jai Kapis Tihun Lok Ujagar.<br/>
+                Ram Doot Atulit Bal Dhama, Anjani Putra Pavan Sut Nama.</em><br/>
+                <small><strong>Meaning:</strong> Victory to Lord Hanuman who is the ocean of wisdom and virtues. Victory to the Lord of Monkeys who illuminates the three worlds. You are the messenger of Rama, the abode of immeasurable strength, son of Anjani, and known as the Son of the Wind (Pavanputra).</small>
+            </blockquote>
+
+            <h3>Chanting Benefits & Astrological Shield</h3>
+            <p>Reciting Hanuman Chalisa regularly acts as a powerful shield against negative planetary movements of <strong>Shani (Saturn)</strong> and <strong>Rahu</strong>. Tulsidas mentions in verse 38: <em>"Jo sat bar path kare koi, chutahi bandhi maha sukh hoi"</em> (Whoever recites this one hundred times will be freed from all bonds and attain supreme bliss).</p>`,
     content_hi: `<h2>श्री हनुमान जी की पावन स्तुति: श्री हनुमान चालीसा</h2>
             <p>१६वीं शताब्दी में महाकवि गोस्वामी तुलसीदास जी द्वारा रचित <strong>हनुमान चालीसा</strong> संकटमोचन भगवान हनुमान को समर्पित ४० चौपाइयों का एक अत्यंत कल्याणकारी और चमत्कारी संग्रह है। मान्यता है कि इसका नित्य पाठ करने से भय दूर होता है, बल-बुद्धि की प्राप्ति होती है और जीवन के समस्त संकटों का नाश होता है।</p>
-            <h3>हनुमान चालीसा पाठ करने के नियम और लाभ</h3>
-            <ul>
-                <li><strong>शुभ दिन:</strong> हनुमान चालीसा का पाठ प्रतिदिन किया जा सकता है, परंतु मंगलवार और शनिवार को इसका विशेष महत्व है।</li>
-                <li><strong>पाठ संख्या:</strong> श्रद्धा अनुसार इसे १, ३, ७, ११ या १०८ बार पढ़ा जा सकता है।</li>
-                <li><strong>विधि:</strong> पाठ शुरू करने से पहले हनुमान जी के सामने तेल या घी का दीपक जलाएं और लाल आसन पर बैठकर पाठ करें।</li>
-            </ul>`,
+            
+            <h3>मुख्य दोहे और चौपाइयां (अर्थ सहित)</h3>
+            <blockquote>
+                <strong>प्रारंभिक दोहा:</strong><br/>
+                <em>श्रीगुरु चरन सरोज रज, निज मनु मुकुर सुधारि।<br/>
+                बरनउँ रघुबर बिमल जसु, जो दायकु फल चारि॥</em><br/>
+                <small><strong>अर्थ:</strong> श्री गुरु महाराज के चरण कमलों की धूलि से अपने मन रूपी दर्पण को पवित्र करके, मैं श्री रघुवीर के निर्मल यश का वर्णन करता हूँ, जो चारों फल (धर्म, अर्थ, काम और मोक्ष) देने वाला है।</small>
+            </blockquote>
+
+            <blockquote>
+                <strong>चौपाई १:</strong><br/>
+                <em>जय हनुमान ज्ञान गुन सागर। जय कपीस तिहुँ लोक उजागर॥<br/>
+                राम दूत अतुलित बल धामा। अंजनि पुत्र पवनसुत नामा॥</em><br/>
+                <small><strong>अर्थ:</strong> ज्ञान और गुणों के सागर श्री हनुमान जी की जय हो। तीनों लोकों को अपने यश से प्रकाशित करने वाले कपीश्वर की जय हो। आप भगवान श्रीराम के अनन्य दूत, असीम बल के धाम, माता अंजनी के पुत्र और पवनसुत नाम से पूजे जाते हैं।</small>
+            </blockquote>
+
+            <h3>आध्यात्मिक महत्व एवं शनि-राहु दोष निवारण</h3>
+            <p>हनुमान चालीसा का नियमित पाठ ज्योतिष शास्त्र में <strong>शनि देव (साढ़े साती/ढैय्या)</strong> और <strong>राहु-केतु</strong> के अशुभ प्रभावों को दूर करने का अचूक उपाय माना गया है। तुलसीदास जी चौपाई में लिखते हैं: <em>"जो सत बार पाठ कर कोई, छूटहि बंदि महा सुख होई।"</em> अर्थात जो इसका १०० बार पाठ करता है, वह सभी बंधनों से मुक्त होकर परम सुख को प्राप्त करता है।</p>`,
     faqs: [
       {
         q_en: "Who wrote the Hanuman Chalisa?",
@@ -2164,14 +2213,34 @@ export const learnContent: Record<string, LearnTopic> = {
     metaDesc_hi: "लंकापति रावण द्वारा रचित दिव्य शिव ताण्डव स्तोत्रम्। संस्कृत श्लोक, शुद्ध हिंदी अनुवाद, पाठ विधि और इसके चमत्कारी लाभों की पूरी जानकारी।",
     keywords_en: "Shiv Tandav Stotram lyrics, Shiva Tandav Sanskrit, Ravana Shiva stotram translation, Shiva energy chant, Tandav benefits",
     keywords_hi: "शिव ताण्डव स्तोत्र, शिव तांडव स्तोत्रम संस्कृत, रावण रचित शिव स्तोत्र, शिव तांडव लिरिक्स, शिव तांडव अर्थ",
-    content_en: `<h2>The Cosmic Dance of Shiva: Shiv Tandav Stotram</h2>
-            <p>The <strong>Shiv Tandav Stotram</strong> is a magnificent Sanskrit hymn describing the power, beauty, and cosmic dance (Tandava) of Lord Shiva. It was composed by <strong>King Ravana</strong>, the king of Lanka, who was one of the greatest devotees of Shiva. The hymn is set in the complex Panchachamara meter, creating a rhythmic, drum-like flow when chanted.</p>
-            <h3>Chanting Benefits & Spiritual Power</h3>
-            <p>Reciting this stotram is known to align your bodily energy and remove negative astral planetary placements (especially Saturn/Shani transit problems). It increases mental concentration, builds inner power, and brings absolute peace of mind.</p>`,
-    content_hi: `<h2>शिव का अलौकिक तांडव नृत्य: शिव ताण्डव स्तोत्रम्</h2>
-            <p><strong>शिव ताण्डव स्तोत्रम्</strong> भगवान शिव की शक्ति, सौंदर्य और उनके ब्रह्मांडीय तांडव नृत्य का वर्णन करने वाला एक अत्यंत शक्तिशाली और लयबद्ध संस्कृत स्तोत्र है। इसकी रचना लंकापति <strong>रावण</strong> ने की थी, जो महादेव का परम भक्त था। इस स्तोत्र पंचचामर छंद में रचा गया है, जिसके कारण इसके उच्चारण से एक दिव्य ऊर्जा तरंग उत्पन्न होती है।</p>
-            <h3>तांडव स्तोत्र के लाभ और ऊर्जा</h3>
-            <p>माना जाता है कि इस स्तोत्र का पाठ करने से साधक के जीवन में आत्मविश्वास और मानसिक शक्ति का संचार होता है। यह कुंडली के शनि दोष और ग्रहों के बुरे प्रभावों को कम करने में भी सहायक माना जाता है।</p>`,
+    content_en: `<h2>Cosmic Devotion of Ravana: Shiv Tandav Stotram</h2>
+            <p>The <strong>Shiv Tandav Stotram</strong> is a majestic, high-vibration Sanskrit hymn composed by <strong>King Ravana</strong> of Lanka, the greatest devotee of Lord Shiva. It describes Shiva's divine and powerful dance of creation, preservation, and destruction (Tandava) and captures his unmatched glory, third eye, and crescent moon.</p>
+            
+            <h3>The Cosmic Opening Verse</h3>
+            <blockquote>
+                <strong>Verse 1:</strong><br/>
+                <em>Jatata-vigalaj-jala-pravaha-pavitasthale<br/>
+                Gale-valambya lambitam bhujanga-tunga-malikam.<br/>
+                Damad-damad-damad-daman-ninadavadamar-vayam<br/>
+                Chakara tanda-vantanotnah sivah sivam shivham.</em><br/>
+                <small><strong>Meaning:</strong> From the forest of his matted hair flows the holy water of the Ganges, purifying his neck, around which hangs the snake coiled like a garland. Accompanied by the intense sound of his damru (damad-damad), Lord Shiva performs his auspicious cosmic dance of Tandava.</small>
+            </blockquote>
+
+            <h3>The Legend Behind the Stotram</h3>
+            <p>According to Shiv Purana, Ravana attempted to lift the holy <strong>Mount Kailash</strong> (the abode of Shiva) to bring it to Lanka. To crush his pride, Shiva gently pressed the mountain down with his big toe, trapping Ravana's fingers underneath. Realizing his mistake and in extreme pain, Ravana composed this stotram on the spot to praise Shiva. Pleased by the cosmic rhythm of the hymn, Shiva released him and gifted him the divine sword Chandrahas.</p>`,
+    content_hi: `<h2>रावण कृत अद्भुत स्तुति: शिव ताण्डव स्तोत्र</h2>
+            <p><strong>शिव ताण्डव स्तोत्र</strong> भगवान शिव की महिमा का वर्णन करने वाला एक अत्यंत शक्तिशाली और लयबद्ध संस्कृत स्तोत्र है, जिसकी रचना लंकाधिपति <strong>रावण</strong> ने की थी। इस स्तोत्र में शिवजी के सृष्टि चक्र के दिव्य नृत्य (तांडव) का वर्णन है, जो उनके त्रिनेत्र, चंद्रकला, और गंगा जी को धारण करने वाले महाकाल स्वरूप को प्रकट करता है।</p>
+            
+            <h3>प्रथम दिव्य श्लोक (अर्थ सहित)</h3>
+            <blockquote>
+                <strong>श्लोक १:</strong><br/>
+                <em>जटाटवीगलज्जलप्रवाहपावितस्थले गलेऽवलम्ब्य लम्बितां भुजङ्गतुङ्गमलिकाम्।<br/>
+                डमड्डमड्डमड्डमन्निनादवड्डमर्वयं चकार चण्डताण्डवं तनोतु नः शिवः शिवम्॥</em><br/>
+                <small><strong>अर्थ:</strong> जिन शिवजी की घनी जटाओं से बहती हुई गंगा जी की धाराएं उनके कंठ प्रदेश को पवित्र करती हैं, जिनके गले में सांपों की विशाल माला लटकी है, और जो अपने डमरू से डम-डम की ध्वनि करते हुए अलौकिक तांडव नृत्य करते हैं, वे कल्याणकारी शिव हमारे जीवन में मंगल करें।</small>
+            </blockquote>
+
+            <h3>स्तोत्र की उत्पत्ति की पौराणिक कथा</h3>
+            <p>शिव पुराण के अनुसार, रावण को अपनी शक्ति पर अहंकार हो गया था और उसने भगवान शिव के धाम <strong>कैलाश पर्वत</strong> को उखाड़ने का प्रयास किया। शिवजी ने अपने पैर के अंगूठे से कैलाश को थोड़ा दबाया, जिससे रावण का हाथ पर्वत के नीचे दब गया। अपनी भूल का अहसास होने पर और दर्द से मुक्ति के लिए रावण ने तुरंत जटाओं वाले नटराज की आराधना में इस तांडव स्तोत्र की रचना की। इसकी उत्कृष्ट ध्वनि तरंगों से प्रसन्न होकर शिवजी ने उसे 'रावण' (तेज़ रोने वाला) नाम दिया और चंद्रहास खड्ग प्रदान किया।</p>`,
     faqs: [
       {
         q_en: "Who wrote the Shiv Tandav Stotram?",
@@ -2213,13 +2282,47 @@ export const learnContent: Record<string, LearnTopic> = {
     keywords_en: "Om jai jagdish hare lyrics, jagdish aarti Hindi, Vishnu aarti translation, daily family aarti lyrics, evening aarti song",
     keywords_hi: "जय जगदीश हरे आरती, ओम जय जगदीश हरे लिरिक्स, विष्णु आरती, दैनिक आरती बोल, जय जगदीश हरे अर्थ सहित",
     content_en: `<h2>The Universal Aarti: Om Jai Jagdish Hare</h2>
-            <p>Composed in the late 19th century by the renowned writer <strong>Shraddha Ram Phillauri</strong> in Punjab, <strong>Om Jai Jagdish Hare</strong> is the most widely sung evening prayer across Hindu families in India and globally. It is dedicated to Lord Vishnu (the preserver of the universe) in his form as Jagannath or Jagdish.</p>
-            <h3>Spiritual Significance & Daily Practice</h3>
-            <p>Singing this aarti daily at sunset helps clear negative vibrations from the household, instills humility, and invokes peace, abundance, and prosperity. It is traditionally performed with a lighted lamp containing ghee or camphor, accompanied by the ringing of bells and clapping.</p>`,
-    content_hi: `<h2>सार्वभौमिक संध्या आरती: ॐ जय जगदीश हरे</h2>
-            <p>१९वीं शताब्दी के उत्तरार्ध में प्रसिद्ध साहित्यकार <strong>पंडित श्रद्धाराम फिल्लौरी</strong> द्वारा रचित <strong>ॐ जय जगदीश हरे</strong> सनातन धर्म की सबसे लोकप्रिय और गाई जाने वाली आरती है। यह भगवान विष्णु (जगत के पालनहार) के स्वरूप 'जगदीश' को समर्पित है।</p>
-            <h3>दैनिक आरती का महत्व और विधि</h3>
-            <p>प्रतिदिन संध्या काल में इस आरती का गान करने से घर में सकारात्मक ऊर्जा का संचार होता है, पारिवारिक कलह शांत होते हैं और सुख-समृद्धि आती है। इसे कपूर या शुद्ध घी के दीपक से शंख और घंटियों की ध्वनि के साथ सामूहिक रूप से गाया जाता है।</p>`,
+            <p>Chanted at the end of almost every Hindu religious ceremony, <strong>Om Jai Jagdish Hare</strong> is the most popular devotional Aarti in India. Written in the late 19th century by the reformist writer <strong>Pandit Shardha Ram Phillauri</strong>, it is dedicated to Lord Vishnu (Jagdish - Lord of the Universe) and his incarnations (Krishna and Rama).</p>
+            
+            <h3>Opening Stanzas of the Aarti</h3>
+            <blockquote>
+                <strong>Verse 1:</strong><br/>
+                <em>Om Jai Jagdish Hare, Swami Jai Jagdish Hare.<br/>
+                Bhakta Jano Ke Sankat, Kshan Mein Door Kare.<br/>
+                Om Jai Jagdish Hare.</em><br/>
+                <small><strong>Translation:</strong> O Lord of the Universe, victory to You! You remove the pain, sorrows, and obstacles of your devotees in an instant. Glory to You, Lord.</small>
+            </blockquote>
+
+            <blockquote>
+                <strong>Verse 2:</strong><br/>
+                <em>Jo Dhyave Phal Pave, Dukh Binse Man Ka.<br/>
+                Sukh Sampati Ghar Aave, Kasht Mite Tan Ka.<br/>
+                Om Jai Jagdish Hare.</em><br/>
+                <small><strong>Translation:</strong> The one who meditates on You attains fruits of peace, and the sorrow of their mind disappears. Joy, health, and prosperity fill their home, and all physical ailments are cured.</small>
+            </blockquote>
+
+            <h3>How to Sing & Perform Aarti at Home</h3>
+            <p>Aarti represents the final offering of love to God. Place a camphor (kapoor) or a ghee lamp on a metal plate, stand comfortably facing the altar, and rotate the plate clockwise in circular paths around the deity while singing the Aarti in a soft, meditative rhythm.</p>`,
+    content_hi: `<h2>सृष्टि के पालनहार की आरती: ॐ जय जगदीश हरे</h2>
+            <p>हिंदू धर्म में लगभग प्रत्येक पूजा, व्रत और धार्मिक अनुष्ठान के समापन पर गाई जाने वाली <strong>ॐ जय जगदीश हरे</strong> भारत की सबसे लोकप्रिय और प्राचीन आरती है। इसकी रचना १८७० के दशक में पंजाब के प्रसिद्ध कवि <strong>पंडित श्रद्धा राम फिल्लौरी</strong> ने की थी। यह संपूर्ण जगत के स्वामी भगवान विष्णु और उनके अवतारों (श्रीकृष्ण एवं श्रीराम) को समर्पित है।</p>
+            
+            <h3>आरती के मुख्य पद (अर्थ सहित)</h3>
+            <blockquote>
+                <strong>प्रथम पद:</strong><br/>
+                <em>ॐ जय जगदीश हरे, स्वामी जय जगदीश हरे।<br/>
+                भक्त जनों के संकट, क्षण में दूर करे॥ ॐ जय जगदीश हरे।</em><br/>
+                <small><strong>अर्थ:</strong> हे संपूर्ण ब्रह्मांड के स्वामी! आपकी जय हो। आप अपने भक्तों के दुखों, संकटों और बाधाओं को एक पल में दूर कर देते हैं।</small>
+            </blockquote>
+
+            <blockquote>
+                <strong>द्वितीय पद:</strong><br/>
+                <em>जो ध्यावे फल पावे, दुःख बिनसे मन का।<br/>
+                सुख सम्पत्ति घर आवे, कष्ट मिटे तन का॥ ॐ जय जगदीश हरे।</em><br/>
+                <small><strong>अर्थ:</strong> जो भी आपका ध्यान करता है, उसके मन के सारे दुख दूर हो जाते हैं। उसके घर में सुख, शांति और समृद्धि का वास होता है और शरीर के सारे कष्ट नष्ट हो जाते हैं।</small>
+            </blockquote>
+
+            <h3>घर में आरती करने के नियम और लाभ</h3>
+            <p>आरती ईश्वर के प्रति कृतज्ञता प्रकट करने का माध्यम है। आरती की थाल में कर्पूर या घी का दीया जलाएं, सीधे खड़े होकर थाली को भगवान के विग्रह के सामने घड़ी की दिशा में गोल घुमाएं। आरती गाने से घर का वास्तु दोष समाप्त होता है और मन शांत होता है।</p>`,
     faqs: [
       {
         q_en: "Who wrote the Aarti 'Om Jai Jagdish Hare'?",
@@ -2260,28 +2363,49 @@ export const learnContent: Record<string, LearnTopic> = {
     metaDesc_hi: "ऋग्वेद के सबसे शक्तिशाली महामंत्र 'गायत्री मंत्र' का अर्थ। संस्कृत श्लोक, शुद्ध हिंदी अनुवाद, जपने की सही विधि, माला गणना नियम और मानसिक एकाग्रता लाभ।",
     keywords_en: "Gayatri mantra lyrics, Gayatri mantra translation, Rig veda gayatri mantra, daily morning chants, gayatri mantra meaning, surya worship",
     keywords_hi: "गायत्री मंत्र का अर्थ, गायत्री मंत्र लिरिक्स, गायत्री मंत्र संस्कृत, गायत्री महामंत्र जप विधि, गायत्री मंत्र का महत्व",
-    content_en: `<h2>The Mother of all Vedas: The Gayatri Mantra</h2>
-            <p>The <strong>Gayatri Mantra</strong> is a highly revered chant from the <strong>Rig Veda</strong> (Mandala 3.62.10), dedicated to <strong>Savitr</strong>, the solar deity representing the source of life and light. It is composed in the 24-syllable Gayatri meter and is considered the supreme mantra for wisdom, intellect, and spiritual awakening.</p>
-            <h3>The Sanskrit Verse & Word Meaning</h3>
-            <p className="font-devanagari text-center font-bold text-lg text-maroon">ॐ भूर्भुवः स्वः । तत्सवितुर्वरेण्यं । भर्गो देवस्य धीमहि । धियो यो नः प्रचोदयात् ॥</p>
-            <p><strong>English Transliteration:</strong> Om Bhur Bhuvah Svah | Tat Savitur Varenyam | Bhargo Devasya Dhimahi | Dhiyo Yo Nah Prachodayat</p>
-            <h3>Daily Chanting Rules & Benefits</h3>
+    content_en: `<h2>The Sacred Gayatri Mantra: Wisdom and Light</h2>
+            <p>The <strong>Gayatri Mantra</strong> is the most sacred and ancient mantra of the Vedas, found in the Rigveda (Mandala 3.62.10). Dedicated to **Savitr** (the Solar Deity representing the creator of life and source of intellect), it is believed to activate the crown chakra and fill the chanter with divine light and intellect.</p>
+            
+            <h3>The Sacred Sanskrit Syllables</h3>
+            <blockquote>
+                <strong>Mantra:</strong><br/>
+                <em>ॐ भूर्भुवः स्वः तत्सवितुर्वरेण्यं भर्गो देवस्य धीमहि धियो यो नः प्रचोदयात् ॥</em><br/>
+                <strong>Transliteration:</strong><br/>
+                <em>Om Bhur Bhuvah Svah, Tat Savitur Varenyam,<br/>
+                Bhargo Devasya Dheemahi, Dhiyo Yo Nah Prachodayat.</em>
+            </blockquote>
+
+            <h3>Syllable-by-Syllable Translation</h3>
             <ul>
-                <li><strong>Timing:</strong> Best chanted during the transition hours of the day (Sandhyas) - sunrise, noon, and sunset.</li>
-                <li><strong>Count:</strong> Traditionally chanted 108 times using a Rudraksha or Tulsi mala.</li>
-                <li><strong>Mental Impact:</strong> Chanting it improves memory, focus, and cleanses the mind of stress and anxiety.</li>
-            </ul>`,
-    content_hi: `<h2>वेदों की जननी: गायत्री महामंत्र</h2>
-            <p>सनातन धर्म में <strong>गायत्री मंत्र</strong> को सभी मंत्रों में सर्वश्रेष्ठ माना गया है। यह <strong>ऋग्वेद</strong> के तीसरे मंडल से लिया गया है और बुद्धि के प्रदाता सूर्यदेव (सविता) को समर्पित है। २४ अक्षरों से बना यह महामंत्र मन की एकाग्रता, बुद्धि के विकास और आंतरिक प्रकाश को जाग्रत करने का मुख्य स्रोत है।</p>
-            <h3>मूल मंत्र और उसका सरल अनुवाद</h3>
-            <p className="font-devanagari text-center font-bold text-lg text-maroon">ॐ भूर्भुवः स्वः । तत्सवितुर्वरेण्यं । भर्गो देवस्य धीमहि । धियो यो नः प्रचोदयात् ॥</p>
-            <p><strong>सरल अर्थ:</strong> हम सृष्टि के उत्पत्तिकर्ता उस दिव्य प्रकाशमान सूर्यदेव के तेज का ध्यान करते हैं, जो हमारी बुद्धि को सन्मार्ग की ओर प्रेरित करे।</p>
-            <h3>गायत्री मंत्र जप की सही विधि</h3>
+                <li><strong>Om:</strong> The primordial sound of the universe.</li>
+                <li><strong>Bhur, Bhuvah, Svah:</strong> The three planes of existence (Physical Earth, Astral Space, and Celestial Heaven).</li>
+                <li><strong>Tat Savitur Varenyam:</strong> Adoration to that divine source of light (Savitr) who is most adorable.</li>
+                <li><strong>Bhargo Devasya Dheemahi:</strong> We meditate upon that self-luminous divine light to destroy our ignorance.</li>
+                <li><strong>Dhiyo Yo Nah Prachodayat:</strong> May that divine light guide and illuminate our intellect.</li>
+            </ul>
+
+            <h3>Scientific Benefits of Chanting</h3>
+            <p>Scientific studies show that chanting the Gayatri Mantra produces structured acoustic vibrations that stimulate the hypothalamus, improving concentration, relieving stress, and balancing the nervous system.</p>`,
+    content_hi: `<h2>ऋग्वेद का महामंत्र: श्री गायत्री मंत्र (अर्थ और महत्व)</h2>
+            <p><strong>गायत्री मंत्र</strong> हिंदू संस्कृति का सबसे श्रेष्ठ और महाशक्तिशाली मंत्र है, जिसका उल्लेख ऋग्वेद (मण्डल ३, सूक्त ६२, श्लोक १०) में मिलता है। यह आदि शक्ति माता गायत्री और सूर्य देवता (सविता) को समर्पित है, जो संपूर्ण ब्रह्मांड के बुद्धिदाता और प्राणदाता हैं। इसे जपने से बुद्धि का तीव्र विकास होता है।</p>
+            
+            <h3>गायत्री महामंत्र (संस्कृत)</h3>
+            <blockquote>
+                <strong>मूल मंत्र:</strong><br/>
+                <em>ॐ भूर्भुवः स्वः तत्सवितुर्वरेण्यं भर्गो देवस्य धीमहि धियो यो नः प्रचोदयात् ॥</em>
+            </blockquote>
+
+            <h3>शब्द-दर-शब्द सरल हिंदी अर्थ</h3>
             <ul>
-                <li><strong>सर्वश्रेष्ठ समय:</strong> तीन संधिकालों में जप सर्वोत्तम माना जाता है— प्रातः काल (सूर्योदय से पूर्व), दोपहर काल और सायंकाल (सूर्यास्त से पहले)।</li>
-                <li><strong>जप संख्या:</strong> प्रतिदिन कम से कम १०८ बार (एक माला) जप करना अत्यंत फलदायी होता है।</li>
-                <li><strong>आसन:</strong> पूर्व या उत्तर दिशा की ओर मुख करके कुशा या ऊनी आसन पर बैठकर जप करें।</li>
-            </ul>`,
+                <li><strong>ॐ (ओम्):</strong> परब्रह्म परमेश्वर का मुख्य प्रणव नाद।</li>
+                <li><strong>भूर्भुवः स्वः:</strong> प्राणस्वरूप (भूः), दुःखनाशक (भुवः), सुखस्वरूप (स्वः) तीनों लोक।</li>
+                <li><strong>तत् सवितुर्वरेण्यं:</strong> उस सृष्टिकर्ता सूर्य देव (सविता) के सर्वश्रेष्ठ तेज का हम वरण करते हैं।</li>
+                <li><strong>भर्गो देवस्य धीमहि:</strong> उस दिव्य परमात्मा के पापनाशक तेज का हम ध्यान करते हैं।</li>
+                <li><strong>धियो यो नः प्रचोदयात्:</strong> जो हमारी बुद्धि (धियो) को सन्मार्ग की ओर प्रेरित (प्रचोदयात्) करे।</li>
+            </ul>
+
+            <h3>गायत्री मंत्र जाप के वैज्ञानिक एवं मानसिक लाभ</h3>
+            <p>वैज्ञानिक शोधों के अनुसार, गायत्री मंत्र के अक्षरों के उच्चारण से गले, जीभ और मस्तिष्क के २४ विशेष केंद्रों में कंपन होता है, जिससे एकाग्रता बढ़ती है, फेफड़ों की कार्यक्षमता सुधरती है और मानसिक तनाव पूरी तरह शांत होता है।</p>`,
     faqs: [
       {
         q_en: "Who revealed the Gayatri Mantra?",
@@ -2322,20 +2446,57 @@ export const learnContent: Record<string, LearnTopic> = {
     metaDesc_hi: "भगवान शिव के संकटमोचक 'महामृत्युंजय मंत्र' का हिंदी और अंग्रेजी अर्थ। शुद्ध संस्कृत श्लोक, रोग मुक्ति जाप नियम और दीर्घायु लाभ का पूरा विवरण।",
     keywords_en: "Maha mrityunjaya mantra, Rig veda death defeating chant, Shiva protection mantra, mrityunjaya mantra translation, daily health chants",
     keywords_hi: "महामृत्युंजय मंत्र, महामृत्युंजय मंत्र का अर्थ, मृत्युंजय मंत्र संस्कृत, शिव मंत्र रोग मुक्ति, महामृत्युंजय जाप नियम",
-    content_en: `<h2>The Death-Defeating Hymn: Maha Mrityunjaya Mantra</h2>
-            <p>Found in the <strong>Rig Veda</strong> (7.59.12), the <strong>Maha Mrityunjaya Mantra</strong> (also known as the Rudra Mantra or Tryambakam Mantra) is one of the oldest and most powerful healing mantras in Hindu scriptures. It is dedicated to Tryambaka (the three-eyed Lord Shiva) and is resorted to for protection from premature death, severe illness, and fear.</p>
-            <h3>The Sanskrit Verse & Transliteration</h3>
-            <p className="font-devanagari text-center font-bold text-lg text-maroon">ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम् । उर्वारुकमिव बन्धनान्मृत्योर्मुक्षीय माऽमृतात् ॥</p>
-            <p><strong>English Transliteration:</strong> Om Tryambakam Yajamahe Sugandhim Pushti-Vardhanam | Urvarukam-Iva Bandhanan Mrityor-Mukshiya Maamritat</p>
-            <h3>Daily Chanting Guide</h3>
-            <p>Chanting this mantra early in the morning creates a powerful protective shield around the body, aids recovery from chronic illnesses, and promotes mental tranquility. Using a Rudraksha mala to count 108 repetitions is highly recommended.</p>`,
-    content_hi: `<h2>अकाल मृत्यु नाशक कवच: महामृत्युंजय मंत्र</h2>
-            <p><strong>ऋग्वेद</strong> (७.५९.१२) में वर्णित <strong>महामृत्युंजय मंत्र</strong> (जिसे त्रयम्बकम मंत्र भी कहा जाता है) भगवान शिव को समर्पित सबसे शक्तिशाली कल्याणकारी और रक्षात्मक मंत्र है। यह मंत्र अकाल मृत्यु के भय को मिटाने, गंभीर बीमारियों से मुक्ति दिलाने और साधक की रक्षा करने के लिए अचूक माना जाता है।</p>
-            <h3>मूल मंत्र और उसका शब्दार्थ</h3>
-            <p className="font-devanagari text-center font-bold text-lg text-maroon">ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम् । उर्वारुकमिव बन्धनान्मृत्योर्मुक्षीय माऽमृतात् ॥</p>
-            <p><strong>सरल अर्थ:</strong> हम तीन नेत्रों वाले भगवान शिव की आराधना करते हैं, जो पूरे संसार में सुगंध फैलाते हैं और हमारा पोषण करते हैं। जैसे ककड़ी पकने के बाद बेल के बंधन से मुक्त हो जाती है, वैसे ही हमें मृत्यु के बंधन से मुक्ति मिले, परंतु मोक्ष (अमरता) से विमुख न हों।</p>
-            <h3>नित्य जाप करने की विधि और नियम</h3>
-            <p>नित्य प्रातः काल सूर्योदय के समय पूर्व दिशा की ओर मुख करके इस मंत्र का रुद्राक्ष की माला से १०८ बार जाप करने से शारीरिक और मानसिक कष्ट दूर होते हैं। इसे अत्यंत शुद्धता और एकाग्रता के साथ जपना चाहिए।</p>`,
+    content_en: `<h2>The Great Victory Over Death: Maha Mrityunjaya Mantra</h2>
+            <p>The <strong>Maha Mrityunjaya Mantra</strong> (also known as the Rudra Mantra or Tryambakam Mantra) is a life-restoring verse from the Rigveda (7.59.12) dedicated to Lord Shiva. It is chanted for physical healing, protection from accidents, and overcoming the fear of death.</p>
+            
+            <h3>The Sacred Sanskrit Verse</h3>
+            <blockquote>
+                <strong>Mantra:</strong><br/>
+                <em>ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम्।<br/>
+                उर्वारुकमिव बन्धनान्मृत्योर्मुक्षीय माऽमृतात् ॥</em><br/>
+                <strong>Transliteration:</strong><br/>
+                <em>Om Tryambakam Yajamahe Sugandhim Pushti-Vardhanam,<br/>
+                Urvarukamiva Bandhanan Mrityor Mukshiya Maamritat.</em>
+            </blockquote>
+
+            <h3>Word-by-Word Spiritual Meaning</h3>
+            <ul>
+                <li><strong>Tryambakam:</strong> The three-eyed Lord Shiva (who sees past, present, and future).</li>
+                <li><strong>Yajamahe:</strong> We worship and adore.</li>
+                <li><strong>Sugandhim:</strong> The fragrant one (representing the fragrance of virtues and life energy).</li>
+                <li><strong>Pushti-Vardhanam:</strong> The one who nourishes and sustains our life.</li>
+                <li><strong>Urvarukam-iva:</strong> Like a ripe cucumber (that easily separates from the vine).</li>
+                <li><strong>Bandhanan:</strong> From the bondage of the vine/attachment.</li>
+                <li><strong>Mrityor-mukshiya:</strong> May we be liberated from death.</li>
+                <li><strong>Ma-amritat:</strong> But never separated from immortality (divine truth).</li>
+            </ul>
+
+            <h3>How to Use the Chanted Water for Healing</h3>
+            <p>A popular Vedic healing practice is to keep a copper vessel filled with fresh water in front of you while chanting the mantra 108 times. The water absorbs the sound vibrations of the mantra. Consuming this water (as Charanamrit) is believed to help cure chronic health ailments.</p>`,
+    content_hi: `<h2>अकाल मृत्यु नाशक कवच: महामृत्युंजय मंत्र (अर्थ एवं विधि)</h2>
+            <p>ऋग्वेद में वर्णित <strong>महामृत्युंजय मंत्र</strong> भगवान शिव को प्रसन्न करने और शारीरिक कष्टों से मुक्ति पाने का सबसे अचूक महामंत्र है। इसे संजीवनी मंत्र भी कहा जाता है क्योंकि इसका श्रद्धापूर्वक जाप करने से बड़ी से बड़ी बीमारियाँ, दुर्घटना के योग और अकाल मृत्यु का भय टल जाता है।</p>
+            
+            <h3>महामृत्युंजय महामंत्र (संस्कृत बोल)</h3>
+            <blockquote>
+                <strong>मूल श्लोक:</strong><br/>
+                <em>ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम्।<br/>
+                उर्वारुकमिव बन्धनान्मृत्योर्मुक्षीय माऽमृतात् ॥</em>
+            </blockquote>
+
+            <h3>सरल शब्द-दर-शब्द अर्थ</h3>
+            <ul>
+                <li><strong>त्र्यम्बकम्:</strong> तीन नेत्रों वाले महादेव (भूत, वर्तमान और भविष्य के ज्ञाता)।</li>
+                <li><strong>यजामहे:</strong> हम आदरपूर्वक पूजन और वंदन करते हैं।</li>
+                <li><strong>सुगन्धिम्:</strong> दिव्य गुणों की सुगंध से परिपूर्ण।</li>
+                <li><strong>पुष्टिवर्धनम्:</strong> हमारे स्वास्थ्य, बल और जीवन को समृद्ध करने वाले।</li>
+                <li><strong>उर्वारुकमिव:</strong> पके हुए खरबूजे या ककड़ी की भांति।</li>
+                <li><strong>बन्धनान्:</strong> लता के बंधन (संसार के मोह-माया) से।</li>
+                <li><strong>मृत्योर्मुक्षीय:</strong> हमें मृत्यु और जन्म के चक्र से मुक्ति मिले।</li>
+                <li><strong>माऽमृतात्:</strong> लेकिन कभी भी अमृत तत्व (परमात्मा) से दूरी न हो।</li>
+            </ul>
+
+            <h3>स्वास्थ्य लाभ हेतु जल अभिमंत्रित करने की विधि</h3>
+            <p>यदि कोई व्यक्ति बीमार है, तो तांबे के लोटे में साफ जल भरकर अपने सामने रखें और रुद्राक्ष की माला से १०८ बार महामृत्युंजय मंत्र का जप करें। जप के बाद इस अभिमंत्रित जल को रोगी को पिलाने से उसके स्वास्थ्य में तीव्रता से सुधार होता है।</p>`,
     faqs: [
       {
         q_en: "What is the main benefit of chanting the Maha Mrityunjaya Mantra?",
@@ -2376,14 +2537,46 @@ export const learnContent: Record<string, LearnTopic> = {
     metaDesc_hi: "भगवान भोलेनाथ की प्रिय 'शिव चालीसा' के संपूर्ण बोल। शुद्ध हिंदी अनुवाद, नित्य पाठ करने की विधि, सोमवार व्रत पूजा नियम और शिव कृपा लाभ।",
     keywords_en: "Shiv chalisa lyrics, Shiv chalisa Hindi, Shiva prayer translation, Monday shiv puja, read shiv chalisa online, Shiv chalisa meaning",
     keywords_hi: "शिव चालीसा, शिव चालीसा हिंदी में, शिव चालीसा लिरिक्स, सोमवार शिव पूजा, शिव चालीसा का अर्थ, शिव चालीसा पाठ",
-    content_en: `<h2>The Hymn of Lord Shiva: Sri Shiv Chalisa</h2>
-            <p>Dedicated to Lord Shiva (Mahadeva), the <strong>Shiv Chalisa</strong> is a 40-verse prayer describing Shiva's forms, attributes, and victories over demons. It is composed in simple Hindi (Braj Bhasha) allowing all devotees to easily chant and express their devotion to Shiva.</p>
-            <h3>Chanting Benefits & Monday Vrat</h3>
-            <p>Reciting the Shiv Chalisa weekly, especially on Mondays or during Shravan Maas, is believed to fulfill all pure desires of devotees, remove obstacles, and bless the household with inner peace, good health, and longevity.</p>`,
-    content_hi: `<h2>भोलेनाथ की परम प्रिय प्रार्थना: श्री शिव चालीसा</h2>
-            <p>भगवान शिव (महादेव) को समर्पित <strong>शिव चालीसा</strong> ४० चौपाइयों की एक अत्यंत सरल और प्रभावशाली प्रार्थना है। इसमें शिव जी के विभिन्न रूपों, उनके निवास (कैलाश), और उनके परोपकारी स्वभाव का वर्णन है। यह सरल ब्रजभाषा में है, जिससे हर भक्त इसे आसानी से समझ और गा सकता है।</p>
-            <h3>सोमवार व्रत और शिव चालीसा पाठ के लाभ</h3>
-            <p>प्रतिदिन या विशेष रूप से प्रत्येक सोमवार और सावन के महीने में शिव चालीसा का पाठ करने से भक्तों के बिगड़े काम बन जाते हैं, कर्ज से मुक्ति मिलती है और घर में सुख-शांति का वास होता है।</p>`,
+    content_en: `<h2>The Divine Stanzas of Shiva: Sri Shiv Chalisa</h2>
+            <p>The <strong>Shiv Chalisa</strong> is a 40-verse prayer dedicated to Lord Shiva, detailing his serene mountain form, third eye, poison-drinking neck (Neelkanth), and boundless mercy. Reciting it daily brings mental peace, destroys negative karma, and builds positive spiritual vibrations in the home.</p>
+            
+            <h3>Opening Doha & Verses</h3>
+            <blockquote>
+                <strong>Doha:</strong><br/>
+                <em>Jai Ganesh Girija Suvan, Mangal Mool Sujan.<br/>
+                Kahat Ayodhya Das Tum, Dehu Abhay Var Dan.</em><br/>
+                <small><strong>Meaning:</strong> Victory to Lord Ganesha, the son of Goddess Parvati, the source of all auspiciousness. Ayodhya Das prays to You, O Lord, please grant the boon of fearlessness and protect me.</small>
+            </blockquote>
+
+            <blockquote>
+                <strong>Chaupai 1:</strong><br/>
+                <em>Jai Girijapati Dinadayala, Sada Karat Santan Pratipala.<br/>
+                Bhala Chandrama Sohat Neeke, Kanan Kundal Shobhit Neeke.</em><br/>
+                <small><strong>Meaning:</strong> Victory to the Lord of Parvati, who is merciful to the poor and always protects his devotees. The beautiful crescent moon shines on your forehead, and divine earrings adorn your ears.</small>
+            </blockquote>
+
+            <h3>The Spiritual Power of Monday Worship</h3>
+            <p>Monday (Somvar) is spiritually dedicated to Lord Shiva. Performing a simple Shivling puja (pouring milk or water with honey) followed by a peaceful recitation of the Shiv Chalisa is believed to resolve domestic disputes, bring mental stability, and remove financial debts.</p>`,
+    content_hi: `<h2>भोलेनाथ की पावन चालीसा: श्री शिव चालीसा पाठ</h2>
+            <p><strong>श्री शिव चालीसा</strong> भगवान भोलेनाथ को प्रसन्न करने के लिए रचित ४० चौपाइयों का एक अत्यंत सरल और प्रभावशाली पाठ है। इसमें भगवान शिव के रूप, जटा में गंगा, मस्तक पर चंद्रमा, नीलकंठ स्वरूप और भक्तों के प्रति उनकी असीम दया का सुंदर वर्णन है। इसका पाठ करने से गृह क्लेश शांत होता है और मानसिक तनाव दूर होता है।</p>
+            
+            <h3>प्रारंभिक दोहा और चौपाइयां (अर्थ सहित)</h3>
+            <blockquote>
+                <strong>दोहा:</strong><br/>
+                <em>जय गणेश गिरिजा सुवन, मंगल मूल सुजान।<br/>
+                कहत अयोध्यादास तुम, देहु अभय वरदान॥</em><br/>
+                <small><strong>अर्थ:</strong> माता पार्वती के लाडले भगवान गणेश जी की जय हो, जो सभी मंगलों के मूल हैं। अयोध्यादास प्रार्थना करते हैं कि हे प्रभु! आप मुझे निर्भयता का वरदान प्रदान करें।</small>
+            </blockquote>
+
+            <blockquote>
+                <strong>चौपाई १:</strong><br/>
+                <em>जय गिरिजापति दीनदयाला। सदा करत सन्तन प्रतिपाला॥<br/>
+                भाल चन्द्रमा सोहत नीके। कानन कुण्डल शोभित नीके॥</em><br/>
+                <small><strong>अर्थ:</strong> माता पार्वती के पति, दीनों पर दया करने वाले सदाशिव की जय हो। वे हमेशा संतों और भक्तों का पालन करते हैं। उनके मस्तक पर सुंदर अर्धचंद्र सुशोभित है और कानों में दिव्य कुंडल शोभा दे रहे हैं।</small>
+            </blockquote>
+
+            <h3>सोमवार व्रत और शिव चालीसा पाठ का महत्व</h3>
+            <p>सोमवार का दिन भगवान शिव की पूजा के लिए समर्पित है। सोमवार को शिवलिंग पर जल, दूध, बेलपत्र चढ़ाकर शांत मन से शिव चालीसा का पाठ करने से घर में खुशहाली आती है, कुंडली के ग्रह शांत होते हैं और कर्ज से मुक्ति मिलती है।</p>`,
     faqs: [
       {
         q_en: "What is traditionally offered to Shiva during this puja?",
