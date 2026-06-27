@@ -15,7 +15,7 @@ export const Route = createFileRoute("/learn/$slug")({
     const title = topic.metaTitle_en;
     const desc = topic.metaDesc_en;
     const kw = topic.keywords_en;
-    const imageUrl = topic.image || "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-temple-vindhyachal.webp";
+    const imageUrl = topic.image || "https://www.namamivindhyavasini.in/images/maa-vindhyavasini.webp";
 
     return {
       meta: [
@@ -132,7 +132,7 @@ function LearnDetailPage() {
     image: [
       topic.image
         ? `https://www.namamivindhyavasini.in${topic.image}`
-        : "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-temple-vindhyachal.webp",
+        : "https://www.namamivindhyavasini.in/images/maa-vindhyavasini.webp",
     ],
     author: {
       "@type": "Organization",
@@ -263,7 +263,7 @@ function LearnDetailPage() {
 
                 const relTitle = hi ? relTopic.title_hi : relTopic.title_en;
                 const relDesc = hi ? relTopic.metaDesc_hi : relTopic.metaDesc_en;
-                const relImg = relTopic.image || "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-temple-vindhyachal.webp";
+                const relImg = relTopic.image || "/images/maa-vindhyavasini.webp";
 
                 return (
                   <Link

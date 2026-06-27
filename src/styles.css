@@ -457,28 +457,34 @@ html {
   scrollbar-width: none;
 }
 
-/* Elegant visible scrollbar for scrollable drawers and lists */
+/* Thin, always-visible elegant scrollbar for mobile nav drawer */
 .scrollbar-custom::-webkit-scrollbar {
   -webkit-appearance: none;
-  width: 6px !important;
-  height: 6px !important;
+  width: 3px !important;
+  height: 3px !important;
   display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 .scrollbar-custom::-webkit-scrollbar-track {
-  background: rgba(128, 0, 0, 0.08) !important;
+  background: rgba(128, 0, 0, 0.12) !important;
   border-radius: 10px !important;
+  /* Always show the track so user sees drawer is scrollable */
+  visibility: visible !important;
 }
 .scrollbar-custom::-webkit-scrollbar-thumb {
-  background-color: var(--maroon) !important;
+  background-color: rgba(128, 0, 0, 0.65) !important;
   border-radius: 10px !important;
-  border: 1px solid var(--cream) !important;
+  min-height: 32px !important;
 }
 .scrollbar-custom::-webkit-scrollbar-thumb:hover {
   background-color: var(--saffron) !important;
 }
+/* Firefox: thin always-visible */
 .scrollbar-custom {
   scrollbar-width: thin !important;
-  scrollbar-color: var(--maroon) rgba(128, 0, 0, 0.08) !important;
+  scrollbar-color: rgba(128, 0, 0, 0.65) rgba(128, 0, 0, 0.12) !important;
+  overflow-y: scroll !important;
 }
 
 @keyframes spin-once {
