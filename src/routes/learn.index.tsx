@@ -385,14 +385,18 @@ function LearnIndexPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {trikona.map((item, idx) => (
             <ScrollReveal key={idx} direction="up" delay={idx * 100} duration={700}>
-              <div className="group relative rounded-3xl bg-card border border-border/50 hover:border-gold/60 hover:shadow-[0_15px_45px_rgba(212,175,55,0.1)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between h-full overflow-hidden shadow-sm">
-                <div className="h-48 overflow-hidden relative">
+              <Link
+                to="/learn/$slug"
+                params={{ slug: item.slug }}
+                className="group relative rounded-3xl bg-card border border-border/50 hover:border-gold/60 hover:shadow-[0_15px_45px_rgba(212,175,55,0.1)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between h-full overflow-hidden shadow-sm cursor-pointer hover:no-underline block"
+              >
+                <div className="h-52 overflow-hidden relative">
                   <img
                     src={item.img}
                     alt={item.alt}
-                    className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 ${item.imgClass || ""}`}
+                    className={`w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105 ${item.imgClass || ""}`}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent" />
                   <div className="absolute bottom-3 left-4 flex items-center gap-2 text-cream">
                     <div className="w-8 h-8 rounded-lg bg-gradient-sacred flex items-center justify-center">
                       <item.icon size={16} />
@@ -404,23 +408,19 @@ function LearnIndexPage() {
                 </div>
                 <div className="p-5 flex-grow flex flex-col justify-between">
                   <div>
-                    <h3 className={`font-display text-lg sm:text-xl text-maroon mb-2 ${dev}`}>
+                    <h3 className={`font-display text-lg sm:text-xl text-maroon group-hover:text-saffron transition-colors mb-2 ${dev}`}>
                       {hi ? item.title_hi : item.title_en}
                     </h3>
                     <p className={`text-muted-foreground text-xs sm:text-sm leading-relaxed mb-4 ${dev}`}>
                       {hi ? item.text_hi : item.text_en}
                     </p>
                   </div>
-                  <Link
-                    to="/learn/$slug"
-                    params={{ slug: item.slug }}
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-saffron hover:text-maroon transition-colors hover:no-underline"
-                  >
+                  <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-saffron group-hover:text-maroon transition-colors">
                     <span>{hi ? "मार्गदर्शिका पढ़ें" : "Read Guide"}</span>
                     <ArrowRight size={12} className="transform group-hover:translate-x-1 transition-transform" />
-                  </Link>
+                  </span>
                 </div>
-              </div>
+              </Link>
             </ScrollReveal>
           ))}
         </div>
