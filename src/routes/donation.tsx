@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell, PageHero } from "@/components/PageShell";
-import qrImg from "@/assets/donation-qr.png";
+import qrImg from "@/assets/donation-qr.webp";
 import { Heart, Building2, Utensils, BookOpen, Sparkles } from "lucide-react";
 import { useLang } from "@/i18n/LangProvider";
 import type { TKey } from "@/i18n/translations";

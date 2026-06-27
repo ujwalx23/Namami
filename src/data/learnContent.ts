@@ -1591,7 +1591,7 @@ export const learnContent: Record<string, LearnTopic> = {
       }
     ],
     related: ["shakti-peeth", "ropeway-guide", "tourism-guide"],
-    image: "/images/vaishno-devi-shrine.png"
+    image: "/images/vaishno-devi-shrine.webp"
   },
   "kedarnath-temple-guide": {
     slug: "kedarnath-temple-guide",
@@ -1653,7 +1653,7 @@ export const learnContent: Record<string, LearnTopic> = {
       }
     ],
     related: ["how-to-reach", "tourism-guide"],
-    image: "/images/kedarnath-temple.png"
+    image: "/images/kedarnath-temple.webp"
   },
   "kashi-vishwanath-guide": {
     slug: "kashi-vishwanath-guide",
@@ -1703,7 +1703,7 @@ export const learnContent: Record<string, LearnTopic> = {
       }
     ],
     related: ["how-to-reach", "tourism-guide", "temple-timings"],
-    image: "/images/kashi-vishwanath.png"
+    image: "/images/kashi-vishwanath.webp"
   },
   "mahakaleshwar-temple-guide": {
     slug: "mahakaleshwar-temple-guide",
@@ -1763,7 +1763,7 @@ export const learnContent: Record<string, LearnTopic> = {
       }
     ],
     related: ["how-to-reach", "tourism-guide", "temple-timings"],
-    image: "/images/mahakaleshwar-temple.png"
+    image: "/images/mahakaleshwar-temple.webp"
   },
   "kamakhya-temple-guide": {
     slug: "kamakhya-temple-guide",
@@ -1819,7 +1819,7 @@ export const learnContent: Record<string, LearnTopic> = {
       }
     ],
     related: ["shakti-peeth", "tourism-guide"],
-    image: "/images/kamakhya-temple.png"
+    image: "/images/kamakhya-temple.webp"
   },
   "somnath-temple-guide": {
     slug: "somnath-temple-guide",
@@ -1875,7 +1875,7 @@ export const learnContent: Record<string, LearnTopic> = {
       }
     ],
     related: ["how-to-reach", "tourism-guide", "temple-timings"],
-    image: "/images/somnath-temple.png"
+    image: "/images/somnath-temple.webp"
   },
   "badrinath-temple-guide": {
     slug: "badrinath-temple-guide",
@@ -1931,7 +1931,7 @@ export const learnContent: Record<string, LearnTopic> = {
       }
     ],
     related: ["kedarnath-temple-guide", "how-to-reach"],
-    image: "/images/badrinath-temple.png"
+    image: "/images/badrinath-temple.webp"
   },
   "jagannath-temple-guide": {
     slug: "jagannath-temple-guide",
@@ -1999,7 +1999,7 @@ export const learnContent: Record<string, LearnTopic> = {
       }
     ],
     related: ["how-to-reach", "tourism-guide"],
-    image: "/images/jagannath-puri.png"
+    image: "/images/jagannath-puri.webp"
   },
   "hanuman-chalisa-lyrics": {
     slug: "hanuman-chalisa-lyrics",
@@ -2043,7 +2043,7 @@ export const learnContent: Record<string, LearnTopic> = {
       }
     ],
     related: ["aarti", "chalisa", "maa-vindhyavasini-mantra"],
-    image: "/images/hanuman-chalisa.png"
+    image: "/images/hanuman-chalisa.webp"
   },
   "shiv-tandav-stotram-lyrics": {
     slug: "shiv-tandav-stotram-lyrics",
@@ -2079,7 +2079,7 @@ export const learnContent: Record<string, LearnTopic> = {
       }
     ],
     related: ["maa-vindhyavasini-mantra", "how-to-reach"],
-    image: "/images/shiv-tandav.png"
+    image: "/images/shiv-tandav.webp"
   },
   "om-jai-jagdish-hare-lyrics": {
     slug: "om-jai-jagdish-hare-lyrics",
@@ -2115,7 +2115,7 @@ export const learnContent: Record<string, LearnTopic> = {
       }
     ],
     related: ["aarti", "chalisa", "hanuman-chalisa-lyrics"],
-    image: "/images/lord-vishnu.png"
+    image: "/images/lord-vishnu.webp"
   },
   "gayatri-mantra-meaning": {
     slug: "gayatri-mantra-meaning",
@@ -2165,7 +2165,7 @@ export const learnContent: Record<string, LearnTopic> = {
       }
     ],
     related: ["maa-vindhyavasini-mantra", "shiv-tandav-stotram-lyrics", "hanuman-chalisa-lyrics"],
-    image: "/images/gayatri-devi.png"
+    image: "/images/gayatri-devi.webp"
   },
   "maha-mrityunjaya-mantra-meaning": {
     slug: "maha-mrityunjaya-mantra-meaning",
@@ -2207,7 +2207,7 @@ export const learnContent: Record<string, LearnTopic> = {
       }
     ],
     related: ["maa-vindhyavasini-mantra", "shiv-tandav-stotram-lyrics", "gayatri-mantra-meaning"],
-    image: "/images/shiv-meditating.png"
+    image: "/images/shiv-meditating.webp"
   },
   "shiv-chalisa-lyrics": {
     slug: "shiv-chalisa-lyrics",
@@ -2243,7 +2243,7 @@ export const learnContent: Record<string, LearnTopic> = {
       }
     ],
     related: ["shiv-tandav-stotram-lyrics", "hanuman-chalisa-lyrics", "aarti"],
-    image: "/images/shiv-kailash.png"
+    image: "/images/shiv-kailash.webp"
   }
 };
 

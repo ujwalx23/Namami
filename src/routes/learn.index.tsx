@@ -26,11 +26,11 @@ import {
 import kaliKohImg from "@/assets/kali-koh.webp";
 import ashtBhujaImg from "@/assets/asht-bhuja.webp";
 import maaImg from "@/assets/maa-vindhyavasini.webp";
-import maaImgSimhasan from "@/assets/maa-vindhyavasini-simhasan-shringar.jpg";
-import maaImgGarland from "@/assets/maa-vindhyavasini-garland-shringar.jpg";
-import maaImgNeel from "@/assets/maa-vindhyavasini-neel-shringar.jpg";
-import maaImgDevi from "@/assets/maa-vindhyavasini-devi-mirzapur.jpg";
-import maaImgShakti from "@/assets/maa-vindhyavasini-shakti-peeth.jpg";
+import maaImgSimhasan from "@/assets/maa-vindhyavasini-simhasan-shringar.webp";
+import maaImgGarland from "@/assets/maa-vindhyavasini-garland-shringar.webp";
+import maaImgNeel from "@/assets/maa-vindhyavasini-neel-shringar.webp";
+import maaImgDevi from "@/assets/maa-vindhyavasini-devi-mirzapur.webp";
+import maaImgShakti from "@/assets/maa-vindhyavasini-shakti-peeth.webp";
 
 export const Route = createFileRoute("/learn/")({
   head: () => ({
@@ -60,14 +60,14 @@ export const Route = createFileRoute("/learn/")({
       {
         property: "og:image",
         content:
-          "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.jpg",
+          "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.webp",
       },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Ultimate Maa Vindhyavasini Temple Guide" },
       {
         name: "twitter:image",
         content:
-          "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.jpg",
+          "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.webp",
       },
     ],
     links: [{ rel: "canonical", href: "https://www.namamivindhyavasini.in/learn" }],

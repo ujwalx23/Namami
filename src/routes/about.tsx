@@ -24,12 +24,12 @@ import { aboutContent } from "./-about.content";
 import kaliKohImg from "@/assets/kali-koh.webp";
 import ashtBhujaImg from "@/assets/asht-bhuja.webp";
 import maaImg from "@/assets/maa-vindhyavasini.webp";
-import maaImgSimhasan from "@/assets/maa-vindhyavasini-simhasan-shringar.jpg";
-import maaImgGarland from "@/assets/maa-vindhyavasini-garland-shringar.jpg";
-import maaImgNeel from "@/assets/maa-vindhyavasini-neel-shringar.jpg";
-import maaImgDevi from "@/assets/maa-vindhyavasini-devi-mirzapur.jpg";
-import maaImgShakti from "@/assets/maa-vindhyavasini-shakti-peeth.jpg";
-import maaImg5 from "@/assets/maa-vindhyavasini-5.jpg";
+import maaImgSimhasan from "@/assets/maa-vindhyavasini-simhasan-shringar.webp";
+import maaImgGarland from "@/assets/maa-vindhyavasini-garland-shringar.webp";
+import maaImgNeel from "@/assets/maa-vindhyavasini-neel-shringar.webp";
+import maaImgDevi from "@/assets/maa-vindhyavasini-devi-mirzapur.webp";
+import maaImgShakti from "@/assets/maa-vindhyavasini-shakti-peeth.webp";
+import maaImg5 from "@/assets/maa-vindhyavasini-5.webp";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -56,7 +56,7 @@ export const Route = createFileRoute("/about")({
       {
         property: "og:image",
         content:
-          "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.jpg",
+          "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.webp",
       },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Maa Vindhyavasini Temple History & Significance" },
@@ -68,7 +68,7 @@ export const Route = createFileRoute("/about")({
       {
         name: "twitter:image",
         content:
-          "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.jpg",
+          "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.webp",
       },
     ],
     links: [{ rel: "canonical", href: "https://www.namamivindhyavasini.in/about" }],
@@ -308,24 +308,24 @@ function AboutPage() {
       {
         "@type": "ImageObject",
         "@id": "https://www.namamivindhyavasini.in/about#image-simhasan",
-        url: "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.jpg",
+        url: "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.webp",
         name: "Maa Vindhyavasini Simhasan Shringar",
         caption: "Maa Vindhyavasini sitting on her golden lion throne (Simhasan) in Vindhyachal Dham",
         description: hi
           ? "विन्ध्याचल धाम से माँ विन्ध्यवासिनी देवी का पावन सिंहासन श्रृंगार दिव्य दर्शन चित्र।"
           : "Sacred and divine Simhasan Shringar darshan of Goddess Vindhyavasini on her golden throne in Vindhyachal.",
-        contentUrl: "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.jpg",
+        contentUrl: "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.webp",
       },
       {
         "@type": "ImageObject",
         "@id": "https://www.namamivindhyavasini.in/about#image-garland",
-        url: "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-garland-shringar.jpg",
+        url: "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-garland-shringar.webp",
         name: "Maa Vindhyavasini Garland Alankar",
         caption: "Maa Vindhyavasini decorated with grand flower garlands during daily aarti",
         description: hi
           ? "विन्ध्याचल मंदिर से माँ विन्ध्यवासिनी देवी का दिव्य पुष्प माला श्रृंगार दर्शन।"
           : "Divine flower garland alankar of Maa Vindhyavasini inside Vindhyachal temple.",
-        contentUrl: "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-garland-shringar.jpg",
+        contentUrl: "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-garland-shringar.webp",
       },
       {
         "@type": "ImageObject",

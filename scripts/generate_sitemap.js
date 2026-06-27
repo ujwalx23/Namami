@@ -23,31 +23,31 @@ const filesToCopy = [
   "maa-vindhyavasini.webp",
   "maa-vindhyavasini-2.webp",
   "maa-vindhyavasini-3.webp",
-  "maa-vindhyavasini-3.jpg",
-  "maa-vindhyavasini-4.jpg",
-  "maa-vindhyavasini-5.jpg",
+  "maa-vindhyavasini-3.webp",
+  "maa-vindhyavasini-4.webp",
+  "maa-vindhyavasini-5.webp",
   "gallery-1.webp",
   "kali-koh.webp",
   "asht-bhuja.webp",
-  "maa-vindhyavasini-simhasan-shringar.jpg",
-  "maa-vindhyavasini-garland-shringar.jpg",
-  "maa-vindhyavasini-neel-shringar.jpg",
-  "maa-vindhyavasini-devi-mirzapur.jpg",
-  "maa-vindhyavasini-shakti-peeth.jpg",
-  "vaishno-devi-shrine.png",
-  "kedarnath-temple.png",
-  "kashi-vishwanath.png",
-  "mahakaleshwar-temple.png",
-  "kamakhya-temple.png",
-  "somnath-temple.png",
-  "badrinath-temple.png",
-  "jagannath-puri.png",
-  "hanuman-chalisa.png",
-  "shiv-tandav.png",
-  "lord-vishnu.png",
-  "gayatri-devi.png",
-  "shiv-meditating.png",
-  "shiv-kailash.png",
+  "maa-vindhyavasini-simhasan-shringar.webp",
+  "maa-vindhyavasini-garland-shringar.webp",
+  "maa-vindhyavasini-neel-shringar.webp",
+  "maa-vindhyavasini-devi-mirzapur.webp",
+  "maa-vindhyavasini-shakti-peeth.webp",
+  "vaishno-devi-shrine.webp",
+  "kedarnath-temple.webp",
+  "kashi-vishwanath.webp",
+  "mahakaleshwar-temple.webp",
+  "kamakhya-temple.webp",
+  "somnath-temple.webp",
+  "badrinath-temple.webp",
+  "jagannath-puri.webp",
+  "hanuman-chalisa.webp",
+  "shiv-tandav.webp",
+  "lord-vishnu.webp",
+  "gayatri-devi.webp",
+  "shiv-meditating.webp",
+  "shiv-kailash.webp",
 ];
 
 filesToCopy.forEach((file) => {
@@ -164,17 +164,17 @@ async function generateSitemap() {
       <image:caption>The golden alankar of Maa Vindhyavasini inside the sanctum sanctorum of Vindhyachal Temple</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.jpg</image:loc>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.webp</image:loc>
       <image:title>Maa Vindhyavasini Simhasan Shringar at Vindhyachal Dham</image:title>
       <image:caption>Maa Vindhyavasini sitting on her golden lion throne (Simhasan) in Vindhyachal Dham, Mirzapur</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-3.jpg</image:loc>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-3.webp</image:loc>
       <image:title>Maa Vindhyavasini Beautiful Alankar Shringar at Vindhyachal Dham</image:title>
       <image:caption>Beautiful daily shringar of Goddess Vindhyavasini at Vindhyachal Dham</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-garland-shringar.jpg</image:loc>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-garland-shringar.webp</image:loc>
       <image:title>Maa Vindhyavasini Garland Alankar at Vindhyachal Dham</image:title>
       <image:caption>Goddess Vindhyavasini decorated with grand flower garlands during daily aarti</image:caption>
     </image:image>
@@ -185,17 +185,17 @@ async function generateSitemap() {
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-5.jpg</image:loc>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-5.webp</image:loc>
       <image:title>Maa Vindhyavasini Vishesh Pushpa Shringar History and Significance</image:title>
       <image:caption>Vishesh Pushpa Shringar of Maa Vindhyavasini Devi adorned with divine flowers in Vindhyachal Dham</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.jpg</image:loc>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.webp</image:loc>
       <image:title>Maa Vindhyavasini Simhasan Shringar History and Significance</image:title>
       <image:caption>Detailed layout of the newly developed Vindhya Corridor and ancient temple architecture</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-garland-shringar.jpg</image:loc>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-garland-shringar.webp</image:loc>
       <image:title>Maa Vindhyavasini Garland Alankar Spiritual Guide</image:title>
       <image:caption>Devotional details and history of Maa Vindhyavasini Devi Mirzapur UP</image:caption>
     </image:image>
@@ -228,37 +228,37 @@ async function generateSitemap() {
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.jpg</image:loc>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.webp</image:loc>
       <image:title>Maa Vindhyavasini Simhasan Shringar Darshan</image:title>
       <image:caption>Photograph of Maa Vindhyavasini sitting on her golden lion throne (Simhasan)</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-garland-shringar.jpg</image:loc>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-garland-shringar.webp</image:loc>
       <image:title>Maa Vindhyavasini Garland Alankar Darshan</image:title>
       <image:caption>Presiding deity Maa Vindhyavasini Devi garland shringar alankar darshan</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-4.jpg</image:loc>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-4.webp</image:loc>
       <image:title>Maa Vindhyavasini Simha Vahana Darshan</image:title>
       <image:caption>Simha Vahana shringar alankar of Maa Vindhyavasini Devi</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-5.jpg</image:loc>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-5.webp</image:loc>
       <image:title>Maa Vindhyavasini Pushpa Shringar Darshan</image:title>
       <image:caption>Divine pushpa shringar alankar decoration of Maa Vindhyavasini</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-neel-shringar.jpg</image:loc>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-neel-shringar.webp</image:loc>
       <image:title>Maa Vindhyavasini Neel Pushpa Shringar</image:title>
       <image:caption>Maa Vindhyavasini decorated with divine blue and red flower alankar</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-devi-mirzapur.jpg</image:loc>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-devi-mirzapur.webp</image:loc>
       <image:title>Maa Vindhyavasini Maha Aarti Darshan</image:title>
       <image:caption>Daily prayers and sacred ritual maha aarti of Maa Vindhyavasini Devi</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-shakti-peeth.jpg</image:loc>
+      <image:loc>https://www.namamivindhyavasini.in/images/maa-vindhyavasini-shakti-peeth.webp</image:loc>
       <image:title>Maa Vindhyavasini Shakti Peeth Darshan</image:title>
       <image:caption>Goddess Vindhyavasini divine Shakti Peeth alankar inside Vindhyachal Temple</image:caption>
     </image:image>

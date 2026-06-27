@@ -5,15 +5,15 @@ import { supabase } from "@/integrations/supabase/client";
 import type { Tables } from "@/integrations/supabase/types";
 import maaImg from "@/assets/maa-vindhyavasini.webp";
 import maaImg2 from "@/assets/maa-vindhyavasini-2.webp";
-import maaImg3 from "@/assets/maa-vindhyavasini-3.jpg";
-import maaImgSimhasan from "@/assets/maa-vindhyavasini-simhasan-shringar.jpg";
-import maaImgGarland from "@/assets/maa-vindhyavasini-garland-shringar.jpg";
-import maaImgNeel from "@/assets/maa-vindhyavasini-neel-shringar.jpg";
-import maaImgShakti from "@/assets/maa-vindhyavasini-shakti-peeth.jpg";
-import vaishnoDeviImg from "@/assets/vaishno-devi-shrine.png";
-import kedarnathImg from "@/assets/kedarnath-temple.png";
-import kashiVishwanathImg from "@/assets/kashi-vishwanath.png";
-import mahakaleshwarImg from "@/assets/mahakaleshwar-temple.png";
+import maaImg3 from "@/assets/maa-vindhyavasini-3.webp";
+import maaImgSimhasan from "@/assets/maa-vindhyavasini-simhasan-shringar.webp";
+import maaImgGarland from "@/assets/maa-vindhyavasini-garland-shringar.webp";
+import maaImgNeel from "@/assets/maa-vindhyavasini-neel-shringar.webp";
+import maaImgShakti from "@/assets/maa-vindhyavasini-shakti-peeth.webp";
+import vaishnoDeviImg from "@/assets/vaishno-devi-shrine.webp";
+import kedarnathImg from "@/assets/kedarnath-temple.webp";
+import kashiVishwanathImg from "@/assets/kashi-vishwanath.webp";
+import mahakaleshwarImg from "@/assets/mahakaleshwar-temple.webp";
 import gallery1 from "@/assets/gallery-1.webp";
 import gallery2 from "@/assets/gallery-2.webp";
 import gallery3 from "@/assets/gallery-3.webp";
@@ -72,7 +72,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:image",
         content:
-          "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.jpg",
+          "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.webp",
       },
       { property: "og:site_name", content: "Namami Vindhyavasini Sansthan" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -85,7 +85,7 @@ export const Route = createFileRoute("/")({
       {
         name: "twitter:image",
         content:
-          "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.jpg",
+          "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.webp",
       },
       { name: "theme-color", content: "#7a1e1e" },
     ],
@@ -644,13 +644,13 @@ function HomePage() {
       {
         "@type": "ImageObject",
         "@id": "https://www.namamivindhyavasini.in/#image-simhasan",
-        url: "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.jpg",
+        url: "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.webp",
         name: "Maa Vindhyavasini Simhasan Shringar",
         caption: "Goddess Vindhyavasini sitting on her golden lion throne (Simhasan)",
         description: hi
           ? "विन्ध्याचल मंदिर से माँ विन्ध्यवासिनी देवी का दिव्य सिंहासन श्रृंगार चित्र।"
           : "Golden throne (Simhasan) alankar of Maa Vindhyavasini in Vindhyachal temple.",
-        contentUrl: "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.jpg",
+        contentUrl: "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.webp",
       },
       {
         "@type": "ImageObject",
@@ -666,24 +666,24 @@ function HomePage() {
       {
         "@type": "ImageObject",
         "@id": "https://www.namamivindhyavasini.in/#image-shringar",
-        url: "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-3.jpg",
+        url: "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-3.webp",
         name: "Maa Vindhyavasini Alankar Shringar",
         caption: "Beautiful divine shringar of Goddess Vindhyavasini at Vindhyachal Dham",
         description: hi
           ? "विन्ध्याचल धाम में माँ विन्ध्यवासिनी देवी का सुंदर श्रृंगार और दिव्य दर्शन।"
           : "Beautiful divine alankar shringar photo of Maa Vindhyavasini Devi at Vindhyachal Dham.",
-        contentUrl: "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-3.jpg",
+        contentUrl: "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-3.webp",
       },
       {
         "@type": "ImageObject",
         "@id": "https://www.namamivindhyavasini.in/#image-garland",
-        url: "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-garland-shringar.jpg",
+        url: "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-garland-shringar.webp",
         name: "Maa Vindhyavasini Garland Alankar",
         caption: "Devotees' offerings of flower garlands (mala alankar) to Maa Vindhyavasini",
         description: hi
           ? "विन्ध्याचल मंदिर में दिव्य पुष्पमाला अलौकिक श्रृंगार में सजी माँ विन्ध्यवासिनी।"
           : "Flower garland decoration of Maa Vindhyavasini inside Vindhyachal temple.",
-        contentUrl: "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-garland-shringar.jpg",
+        contentUrl: "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-garland-shringar.webp",
       },
       {
         "@type": "ImageObject",
