@@ -209,6 +209,7 @@ function LearnIndexPage() {
       img: kaliKohImg,
       alt: "Kali Khoh Temple Swaroop Vindhyachal",
       slug: "kali-khoh-temple",
+      imgClass: "object-center",
     },
     {
       title_en: "Ashtabhuja Devi Mandir",
@@ -394,7 +395,7 @@ function LearnIndexPage() {
                   <img
                     src={item.img}
                     alt={item.alt}
-                    className={`w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105 ${item.imgClass || ""}`}
+                    className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 ${item.imgClass || "object-center"}`}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent" />
                   <div className="absolute bottom-3 left-4 flex items-center gap-2 text-cream">
