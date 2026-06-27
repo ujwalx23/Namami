@@ -1528,34 +1528,54 @@ export const learnContent: Record<string, LearnTopic> = {
   "vaishno-devi-guide": {
     slug: "vaishno-devi-guide",
     category: "Guide",
-    title_en: "Maa Vaishno Devi Temple Katra - Yatra & Booking Guide",
-    title_hi: "माँ वैष्णो देवी मंदिर कटड़ा - यात्रा, ऑनलाइन बुकिंग और मार्ग गाइड",
-    metaTitle_en: "Maa Vaishno Devi Yatra Guide 2026 - Booking & Timings",
-    metaTitle_hi: "माँ वैष्णो देवी यात्रा २०२६ - पर्ची बुकिंग, दूरी और नियम",
-    metaDesc_en: "Complete travel guide to Maa Vaishno Devi Temple in Katra. Find online registration instructions, helicopter tickets, trekking distances, and weather tips.",
-    metaDesc_hi: "कटड़ा से माँ वैष्णो देवी भवन की यात्रा की पूरी जानकारी। ऑनलाइन यात्रा पर्ची, हेलीकॉप्टर टिकट बुकिंग, अर्धकुंवारी गुफा और मौसम की जानकारी।",
-    keywords_en: "Vaishno Devi yatra guide, Katra to Bhawan distance, Vaishno Devi helicopter booking, online yatra parchi, Ardhkuwari temple, Vaishno Devi timings",
-    keywords_hi: "वैष्णो देवी यात्रा गाइड, कटड़ा से भवन की दूरी, वैष्णो देवी हेलीकॉप्टर बुकिंग, यात्रा पर्ची ऑनलाइन, अर्धकुंवारी गुफा, वैष्णो देवी दर्शन नियम",
+    title_en: "Maa Vaishno Devi Temple Katra - Yatra, RFID & Booking Guide",
+    title_hi: "माँ वैष्णो देवी मंदिर कटड़ा - यात्रा, RFID पर्ची, ऑनलाइन बुकिंग और मार्ग गाइड",
+    metaTitle_en: "Maa Vaishno Devi Yatra Guide 2026 - Registration, RFID & Route Details",
+    metaTitle_hi: "माँ वैष्णो देवी यात्रा २०२६ - RFID पर्ची, हेलीकॉप्टर बुकिंग, दूरी और नियम",
+    metaDesc_en: "Complete travel guide to Maa Vaishno Devi Temple in Katra. Learn about Tarakote Marg vs Ban Ganga, online RFID registration, helicopter tickets, and Bhairon ropeway.",
+    metaDesc_hi: "कटड़ा से माँ वैष्णो देवी भवन की यात्रा की पूरी जानकारी। RFID यात्रा पर्ची, हेलीकॉप्टर टिकट बुकिंग, ताराकोट मार्ग बनाम बाणगंगा, और भैयादूज दर्शन नियम।",
+    keywords_en: "Vaishno Devi yatra guide, RFID yatra card, Katra to Bhawan distance, Vaishno Devi helicopter booking, Tarakote Marg trek, Ardhkuwari temple, Bhairon ropeway",
+    keywords_hi: "वैष्णो देवी यात्रा गाइड, RFID यात्रा कार्ड, कटड़ा से भवन की दूरी, वैष्णो देवी हेलीकॉप्टर बुकिंग, ताराकोट मार्ग, अर्धकुंवारी गुफा, भैरव बाबा रोपवे",
     content_en: `<h2>Planning Your Sacred Pilgrimage to Maa Vaishno Devi</h2>
-            <p>Nestled in the Trikuta Mountains of Jammu & Kashmir, the holy cave of <strong>Maa Vaishno Devi</strong> is one of the most revered Shakti Peethas in India. Millions of devotees undertake the <strong>13-kilometer trek</strong> from Katra base camp to the Bhawan every year to receive the blessings of the mother goddess, who resides here in the form of three natural rock formations known as the Pindis (Maha Kali, Maha Lakshmi, and Maha Saraswati).</p>
-            <h3>Important Travel Metrics & Distances</h3>
+            <p>Nestled in the Trikuta Mountains of Jammu & Kashmir, the holy cave of <strong>Maa Vaishno Devi</strong> is one of the most revered Shakti Peethas in India. Millions of devotees undertake the trek from Katra base camp to the Bhawan every year to receive the blessings of the mother goddess, who resides here in the form of three natural rock formations known as the Pindis (Maha Kali, Maha Lakshmi, and Maha Saraswati).</p>
+            
+            <h3>Trek Route Options: Ban Ganga vs. Tarakote Marg</h3>
             <ul>
-                <li><strong>Base Camp:</strong> Katra (accessible by train directly via SVDK railway station).</li>
-                <li><strong>Katra to Bhawan Distance:</strong> 13 km (via Ban Ganga route) or 12.5 km (via Tarakote Marg bypass).</li>
-                <li><strong>Bhawan to Bhairon Ghati:</strong> 1.5 km (steep ascent, ropeway available).</li>
+                <li><strong>Ban Ganga Route (Traditional - 13 km):</strong> Passes through Charan Paduka, Adhkuwari, and Himkoti. It is steeper and shared with ponies/horses. Highly vibrant with shops, but can be crowded.</li>
+                <li><strong>Tarakote Marg (New Alternative - 12.5 km):</strong> A modern, wider, and less steep route that bypasses ponies entirely. It is cleaner, has ramp-like slopes, and is highly recommended for walkers and senior citizens.</li>
             </ul>
-            <h3>Online Registration & Helicopter Booking</h3>
-            <p>All pilgrims must obtain a <strong>Yatra Registration Slip (Yatra Parchi)</strong>. This can be booked for free online on the official website of the Shri Mata Vaishno Devi Shrine Board or obtained at the counter in Katra. Helicopter bookings (Katra to Sanjichhat) must be done weeks in advance due to high demand.</p>`,
-    content_hi: `<h2>माँ वैष्णो देवी पावन यात्रा की संपूर्ण जानकारी</h2>
-            <p>जम्मू और कश्मीर की सुंदर त्रिकुटा पहाड़ियों में स्थित <strong>माँ वैष्णो देवी</strong> की पवित्र गुफा भारत के सबसे जागृत और पूजनीय शक्तिपीठों में से एक है। हर वर्ष लाखों श्रद्धालु कटड़ा बेस कैंप से भवन तक की <strong>१३ किलोमीटर की कठिन चढ़ाई</strong> पूरी करके माता के दर्शन के लिए आते हैं। गुफा के भीतर माता वैष्णो देवी तीन प्राकृतिक पिंडियों (महाकाली, महालक्ष्मी और महासरस्वती) के रूप में विराजमान हैं।</p>
-            <h3>यात्रा के प्रमुख दूरी मार्ग</h3>
+
+            <h3>Mandatory RFID Access Cards</h3>
+            <p>The traditional paper Yatra Slip has been replaced with mandatory <strong>RFID (Radio Frequency Identification) cards</strong>. All pilgrims must collect their RFID card at Katra railway station or bus stand before starting the trek. The card is scanned at multiple checkpoints (Ban Ganga and Tarakote gates) and must be returned at Katra after the yatra to avoid penalty.</p>
+
+            <h3>Helicopter Tickets & Bhairon Ghati Ropeway</h3>
             <ul>
-                <li><strong>प्रस्थान बिंदु:</strong> कटड़ा (रेलवे स्टेशन SVDK तक सीधी ट्रेन सेवा उपलब्ध है)।</li>
-                <li><strong>कटड़ा से भवन की दूरी:</strong> १३ किमी (बाणगंगा मार्ग से) या १२.५ किमी (ताराकोट मार्ग से)।</li>
-                <li><strong>भवन से भैरव घाटी:</strong> १.५ किमी (खड़ी चढ़ाई, रोपवे सेवा उपलब्ध है)।</li>
+                <li><strong>Helicopters:</strong> Operate between Katra and Sanjichhat (approx. 8 minutes flight). Devotees must walk 2.5 km from Sanjichhat to reach the Bhawan. Bookings open 60 days in advance on the official shrine board website.</li>
+                <li><strong>Bhairon Ropeway:</strong> A visit to Bhairon Nath temple (1.5 km above Bhawan) is mandatory to complete the yatra. A highly convenient cabin ropeway operates from Bhawan to Bhairon Ghati, costing Rs 100 per head (return ticket), taking just 3 minutes.</li>
             </ul>
-            <h3>ऑनलाइन यात्रा पर्ची और हेलीकॉप्टर बुकिंग</h3>
-            <p>प्रत्येक यात्री के लिए <strong>यात्रा रजिस्ट्रेशन पर्ची (यात्रा पर्ची)</strong> अनिवार्य है। इसे श्राइन बोर्ड की आधिकारिक वेबसाइट से बिल्कुल निःशुल्क ऑनलाइन बुक किया जा सकता है। भारी भीड़ के कारण हेलीकॉप्टर टिकट (कटड़ा से सांझीछत) की बुकिंग यात्रा तिथि से काफी पहले कर लेनी चाहिए।</p>`,
+
+            <h3>Approved Rates for Ponies, Palkis, and Porters</h3>
+            <p>To prevent scams, the Shrine Board sets fixed government approved rates. Always hire licensed porters (pithoos) or pony handlers carrying ID badges, and pay the fixed fee at the booking counters in Katra or Adhkuwari.</p>`,
+    content_hi: `<h2>माँ वैष्णो देवी पावन यात्रा की संपूर्ण एवं सटीक मार्गदर्शिका</h2>
+            <p>जम्मू और कश्मीर की सुंदर त्रिकुटा पहाड़ियों में स्थित <strong>माँ वैष्णो देवी</strong> की पवित्र गुफा भारत के सबसे जागृत और पूजनीय शक्तिपीठों में से एक है। हर वर्ष लाखों श्रद्धालु कटड़ा बेस कैंप से भवन तक की पैदल चढ़ाई पूरी करके माता के दर्शन के लिए आते हैं। गुफा के भीतर माता वैष्णो देवी तीन प्राकृतिक पिंडियों (महालक्ष्मी, महाकाली और महासरस्वती) के रूप में विराजमान हैं।</p>
+            
+            <h3>मार्ग विकल्प: बाणगंगा बनाम ताराकोट मार्ग</h3>
+            <ul>
+                <li><strong>बाणगंगा मार्ग (पारंपरिक - १३ किमी):</strong> यह मार्ग चरण पादुका, अर्धकुंवारी और हिमकोटी से होकर गुजरता है। इस मार्ग पर खच्चर और घोड़े चलते हैं। मार्ग पर खाने-पीने की दुकानें और श्रद्धालुओं की चहल-पहल अधिक रहती है।</li>
+                <li><strong>ताराकोट मार्ग (नया मार्ग - १२.५ किमी):</strong> यह आधुनिक, ऊँचा और कम ढलान वाला मार्ग है, जहाँ खच्चरों का प्रवेश पूरी तरह वर्जित है। यह मार्ग अत्यधिक साफ-सुथरा है और बुजुर्गों एवं पैदल चलने वालों के लिए सर्वोत्तम है।</li>
+            </ul>
+
+            <h3>अनिवार्य RFID यात्रा कार्ड</h3>
+            <p>पारंपरिक कागज की यात्रा पर्ची को अब पूरी तरह बंद कर दिया गया है। इसके स्थान पर अब <strong>RFID (रेडियो फ्रीक्वेंसी आइडेंटिफिकेशन) कार्ड</strong> अनिवार्य कर दिया गया है। यात्रियों को कटड़ा रेलवे स्टेशन या बस स्टैंड के काउंटर से इसे प्राप्त करना होता है। यात्रा शुरू करने से पहले बाणगंगा प्रवेश द्वार पर इसकी जांच की जाती है, तथा वापसी पर इसे कटड़ा में जमा करना आवश्यक है।</p>
+
+            <h3>हेलीकॉप्टर सेवा और भैरव बाबा रोपवे</h3>
+            <ul>
+                <li><strong>हेलीकॉप्टर सेवा:</strong> हेलीकॉप्टर कटड़ा से सांझीछत के बीच चलते हैं (यात्रा समय लगभग ८ मिनट)। सांझीछत से भवन की दूरी लगभग २.५ किमी है। बुकिंग ६० दिन पहले माता वैष्णो देवी श्राइन बोर्ड की आधिकारिक वेबसाइट से करनी चाहिए।</li>
+                <li><strong>भैरव मंदिर रोपवे:</strong> वैष्णो देवी दर्शन तब तक पूर्ण नहीं माने जाते जब तक भैरवनाथ जी के दर्शन न किए जाएं। भवन से भैरव मंदिर (१.५ किमी चढ़ाई) के लिए रोप-वे की सुविधा उपलब्ध है, जिसका टिकट केवल १०० रुपये है और यह यात्रा ३ मिनट में पूरी हो जाती है।</li>
+            </ul>
+
+            <h3>खच्चर, पालकी और पिट्ठू के निर्धारित सरकारी रेट</h3>
+            <p>धोखाधड़ी से बचने के लिए, श्राइन बोर्ड द्वारा खच्चर, पिट्ठू और पालकी के रेट तय किए गए हैं। हमेशा कटड़ा या अर्धकुंवारी के आधिकारिक बुकिंग काउंटर से रसीद कटवाकर ही लाइसेंसधारी सहायकों की सेवा लें।</p>`,
     faqs: [
       {
         q_en: "How long does it take to walk from Katra to the Bhawan?",
@@ -1576,26 +1596,48 @@ export const learnContent: Record<string, LearnTopic> = {
   "kedarnath-temple-guide": {
     slug: "kedarnath-temple-guide",
     category: "Guide",
-    title_en: "Kedarnath Temple Uttarakhand - Trek, Registration & Guide",
-    title_hi: "केदारनाथ मंदिर उत्तराखंड - ट्रेक, ऑनलाइन रजिस्ट्रेशन और यात्रा नियम",
-    metaTitle_en: "Kedarnath Yatra Guide 2026 - Registration & Trek Route",
-    metaTitle_hi: "केदारनाथ यात्रा २०२६ - हेलीकॉप्टर बुकिंग, दूरी और नियम",
-    metaDesc_en: "Planning a trip to Kedarnath Temple. Get detailed information on the 16 km trek from Gaurikund, biometric registration, helicopter bookings, and weather guidelines.",
-    metaDesc_hi: "उत्तराखंड के पवित्र केदारनाथ धाम की यात्रा गाइड। गौरीकुंड से १६ किमी का ट्रेक, आवश्यक बायोमेट्रिक रजिस्ट्रेशन, हेलीकॉप्टर बुकिंग और मौसम संबंधी सावधानियां।",
-    keywords_en: "Kedarnath yatra guide, Kedarnath trek distance, Kedarnath registration, helicopter tickets Kedarnath, how to reach Kedarnath, Char Dham Uttarakhand",
-    keywords_hi: "केदारनाथ यात्रा गाइड, गौरीकुंड से केदारनाथ की दूरी, केदारनाथ रजिस्ट्रेशन, केदारनाथ हेलीकॉप्टर टिकट, चार धाम यात्रा",
+    title_en: "Kedarnath Temple Uttarakhand - Trek, Registration & Travel Guide",
+    title_hi: "केदारनाथ मंदिर उत्तराखंड - १६ किमी ट्रेक, ऑनलाइन रजिस्ट्रेशन और यात्रा नियम",
+    metaTitle_en: "Kedarnath Yatra Guide 2026 - Registration, Trek Route & Helicopter Booking",
+    metaTitle_hi: "केदारनाथ यात्रा २०२६ - हेलीकॉप्टर बुकिंग, सोनप्रयाग से दूरी और नियम",
+    metaDesc_en: "Expert travel guide to Kedarnath Temple in Uttarakhand. Find complete details on Gaurikund to Kedarnath trek, biometric registration, helicopter bookings, and winter closing dates.",
+    metaDesc_hi: "उत्तराखंड के पवित्र केदारनाथ धाम की विस्तृत यात्रा गाइड। गौरीकुंड से १६ किमी का ट्रेक मार्ग, आवश्यक बायोमेट्रिक रजिस्ट्रेशन, सोनप्रयाग बस रूट और विंटर क्लोजिंग डेट्स।",
+    keywords_en: "Kedarnath yatra guide, Kedarnath trek route, Kedarnath registration portal, helicopter tickets IRCTC, Rishikesh to Kedarnath, Char Dham Uttarakhand, winter Ukhimath",
+    keywords_hi: "केदारनाथ यात्रा गाइड, गौरीकुंड से केदारनाथ की दूरी, केदारनाथ रजिस्ट्रेशन वेबसाइट, हेलीकॉप्टर टिकट बुकिंग, ऊखीमठ मंदिर, चार धाम यात्रा",
     content_en: `<h2>The Sacred Peak of Lord Shiva: Kedarnath Dham</h2>
-            <p>Situated at an altitude of 3,583 meters in the Garhwal Himalayas of Uttarakhand, <strong>Kedarnath Temple</strong> is one of the most sacred shrines of Lord Shiva. It is a key part of the Char Dham pilgrimage circuit and the highest of the 12 Jyotirlingas. Due to heavy snowfall, the temple is only accessible from late April or early May until November.</p>
-            <h3>Trekking from Gaurikund to Kedarnath</h3>
-            <p>The journey to Kedarnath requires a challenging <strong>16-kilometer trek</strong> starting from the base camp of Gaurikund. The trail is well-paved, but the steep incline and thin air make it demanding. Mules, palanquins, and helicopter services are available for assistance.</p>
+            <p>Situated at an altitude of 3,583 meters in the Garhwal Himalayas of Uttarakhand, <strong>Kedarnath Temple</strong> is one of the most sacred shrines of Lord Shiva. It is a key part of the Char Dham pilgrimage circuit and the highest of the 12 Jyotirlingas. Due to heavy snowfall, the temple is only accessible from late April or early May (Akshaya Tritiya) until November (Bhai Dooj). During winter, the deity is shifted to the Omkareshwar Temple in Ukhimath for daily worship.</p>
+            
+            <h3>How to Reach: Route & Travel Details</h3>
+            <p>The journey starts from Haridwar or Rishikesh (nearest railway stations) to Sonprayag via road (approx. 215 km, 8-9 hours drive). From Sonprayag, local shuttle jeeps operate for 5 km to Gaurikund, which is the starting point of the trek.</p>
+
+            <h3>The 16-Kilometer Trek from Gaurikund</h3>
+            <p>The trek from Gaurikund to Kedarnath is a challenging <strong>16-kilometer ascent</strong>. The trail features key milestones: Bheembali, Rambara (new bridge crossing), Jungle Chatti, Lincholi, and the Kedarnath Base Camp. For pilgrims unable to walk, government-approved horse handlers, porters, and palanquin (dandi) services can be booked at Gaurikund.</p>
+
             <h3>Mandatory Biometric Registration</h3>
-            <p>All pilgrims must complete the Char Dham Registration online through the Uttarakhand government portal before heading to the shrine. Helicopter tickets must be booked through the official IRCTC portal.</p>`,
-    content_hi: `<h2>महादेव का दिव्य शिखर धाम: केदारनाथ</h2>
-            <p>उत्तराखंड के गढ़वाल हिमालय में ३,५८३ मीटर की ऊंचाई पर स्थित <strong>केदारनाथ मंदिर</strong> भगवान शिव के सबसे पवित्र ज्योतिर्लिंगों में से एक है। यह चार धाम यात्रा का एक अत्यंत महत्वपूर्ण हिस्सा है और १२ ज्योतिर्लिंगों में सबसे ऊंचाई पर स्थित है। अत्यधिक बर्फबारी के कारण यह मंदिर केवल अप्रैल के अंत से नवंबर की शुरुआत तक ही खुलता है।</p>
-            <h3>गौरीकुंड से केदारनाथ की चढ़ाई</h3>
-            <p>केदारनाथ पहुँचने के लिए बेस कैंप गौरीकुंड से <strong>१६ किलोमीटर का कठिन पैदल ट्रेक</strong> पूरा करना पड़ता है। मार्ग पक्का है, लेकिन खड़ी ऊंचाई और कम ऑक्सीजन के कारण यह यात्रा शारीरिक रूप से चुनौतीपूर्ण होती है। भक्तों की सुविधा के लिए खच्चर, पालकी और हेलीकॉप्टर सेवाएँ उपलब्ध हैं।</p>
-            <h3>अनिवार्य चार धाम रजिस्ट्रेशन</h3>
-            <p>यात्रा शुरू करने से पहले प्रत्येक श्रद्धालु को उत्तराखंड सरकार के पोर्टल पर चार धाम यात्रा पंजीकरण करना अनिवार्य है। हेलीकॉप्टर की बुकिंग केवल आईआरसीटीसी (IRCTC) के आधिकारिक हेली-यात्रा पोर्टल के माध्यम से की जाती है।</p>`,
+            <p>All pilgrims must complete the <strong>Char Dham Biometric Registration</strong> on the official Uttarakhand tourist portal before arrival. The registration slip is scanned at Sonprayag. Helicopter bookings must be done strictly via the official IRCTC heli-yatra portal to avoid counterfeit tickets.</p>
+            
+            <h3>Essential Packing & High-Altitude Tips</h3>
+            <ul>
+                <li><strong>Weather:</strong> Extremely unpredictable. Temperatures drop below freezing even in summer. Carry high-quality thermals, a windproof jacket, and a rain poncho.</li>
+                <li><strong>Altitude Sickness:</strong> Due to low oxygen, walk slowly, stay hydrated, and carry camphor (kapoor) tablets or small portable oxygen canisters.</li>
+            </ul>`,
+    content_hi: `<h2>महादेव का दिव्य शिखर धाम: केदारनाथ यात्रा मार्गदर्शिका</h2>
+            <p>उत्तराखंड के गढ़वाल  हिमालय में ३,५८३ मीटर की ऊंचाई पर स्थित <strong>केदारनाथ मंदिर</strong> भगवान शिव के सबसे पवित्र ज्योतिर्लिंगों में से एक है। यह चार धाम यात्रा का एक अत्यंत महत्वपूर्ण हिस्सा है और १२ ज्योतिर्लिंगों में सबसे ऊंचाई पर स्थित है। अत्यधिक बर्फबारी के कारण यह मंदिर केवल अप्रैल के अंत (अक्षय तृतीया) से नवंबर की शुरुआत (भैयादूज) तक ही खुलता है। सर्दियों में बाबा के विग्रह को ऊखीमठ के ओंकारेश्वर मंदिर में लाकर पूजा की जाती है।</p>
+            
+            <h3>यात्रा का रूट और पहुँचने का माध्यम</h3>
+            <p>ऋषिकेश या हरिद्वार (निकटतम रेलवे स्टेशन) से सड़क मार्ग द्वारा लगभग २१५ किमी (८-९ घंटे की यात्रा) तय करके सोनप्रयाग पहुँचना होता है। सोनप्रयाग से सरकारी शटल जीपों द्वारा ५ किमी आगे गौरीकुंड पहुँचाया जाता है, जो पैदल यात्रा का प्रस्थान बिंदु है।</p>
+
+            <h3>गौरीकुंड से केदारनाथ १६ किमी ट्रेक मार्ग</h3>
+            <p>गौरीकुंड से केदारनाथ धाम की <strong>१६ किलोमीटर की कठिन पैदल यात्रा</strong> शुरू होती है। इस मार्ग पर भीमबली, जंगलचट्टी, लिनचोली और केदारनाथ बेस कैंप मुख्य पड़ाव हैं। चलने में असमर्थ श्रद्धालुओं के लिए गौरीकुंड पर सरकारी पर्ची कटवाकर घोड़ा, खच्चर, डंडी या कंडी (पिट्ठू) की सुविधा ली जा सकती है।</p>
+
+            <h3>अनिवार्य चार धाम यात्रा पंजीकरण</h3>
+            <p>यात्रा शुरू करने से पहले प्रत्येक श्रद्धालु को उत्तराखंड सरकार के आधिकारिक पोर्टल पर चार धाम पंजीकरण करना अनिवार्य है। हेलीकॉप्टर की बुकिंग केवल आईआरसीटीसी (IRCTC) के आधिकारिक हेली-यात्रा पोर्टल से ही मान्य है।</p>
+            
+            <h3>मौसम और स्वास्थ्य संबंधी आवश्यक सावधानियां</h3>
+            <ul>
+                <li><strong>सामग्री:</strong> पहाड़ों पर मौसम बहुत तेज़ी से बदलता है। जून में भी रातें बर्फीली होती हैं। वॉटरप्रूफ जूते, थर्मल्स, गर्म जैकेट और रेनकोट साथ रखना अनिवार्य है।</li>
+                <li><strong>ऑक्सीजन की कमी:</strong> ऊंचाई पर कम ऑक्सीजन के कारण चढ़ाई धीरे-धीरे करें। अपने साथ कपूर (कपूर सूंघने से राहत मिलती है) और ओआरएस (ORS) अवश्य रखें।</li>
+            </ul>`,
     faqs: [
       {
         q_en: "What is the nearest railway station to Kedarnath?",
@@ -1616,46 +1658,48 @@ export const learnContent: Record<string, LearnTopic> = {
   "kashi-vishwanath-guide": {
     slug: "kashi-vishwanath-guide",
     category: "Guide",
-    title_en: "Kashi Vishwanath Temple Varanasi - Darshan & Corridor",
-    title_hi: "काशी विश्वनाथ मंदिर वाराणसी - दर्शन और कॉरिडोर जानकारी",
-    metaTitle_en: "Kashi Vishwanath Temple Varanasi - Timings & Booking Guide",
-    metaTitle_hi: "काशी विश्वनाथ मंदिर - आरती टिकट, दर्शन समय और कॉरिडोर गाइड",
-    metaDesc_en: "Detailed visitor guide to Kashi Vishwanath Temple in Varanasi. Learn about dynamic darshan timings, online tickets for Sugam Darshan, and the newly built Kashi Corridor.",
-    metaDesc_hi: "वाराणसी के प्रसिद्ध श्री काशी विश्वनाथ मंदिर की यात्रा गाइड। मंगला आरती टिकट बुकिंग, सुगम दर्शन पास, नए भव्य कॉरिडोर की जानकारी और दर्शन का समय।",
-    keywords_en: "Kashi Vishwanath temple, Varanasi jyotirlinga, Kashi corridor, Mangala aarti booking Kashi, how to reach Varanasi, Varanasi tourism",
-    keywords_hi: "काशी विश्वनाथ मंदिर, वाराणसी ज्योतिर्लिंग, काशी कॉरिडोर दर्शन, मंगला आरती बुकिंग, बनारस टूरिज्म",
-    content_en: `<h2>The Eternal City and its Presiding Deity: Lord Vishwanath</h2>
-            <p>Located on the western bank of the holy river Ganges in Varanasi (Kashi), Uttar Pradesh, the <strong>Kashi Vishwanath Temple</strong> is one of the most famous Hindu temples dedicated to Lord Shiva. It is revered as one of the twelve Jyotirlingas. Reciting prayers here is believed to lead to liberation (Moksha). The temple complex was recently transformed by the grand <strong>Kashi Vishwanath Dham Corridor</strong>, which connects the temple directly to the Lalita Ghat on the Ganges.</p>
-            <h3>Daily Aarti Timings</h3>
-            <ul>
-                <li><strong>Mangala Aarti:</strong> 03:00 AM - 04:00 AM (Requires advance booking)</li>
-                <li><strong>Bhog Aarti:</strong> 11:15 AM - 12:20 PM</li>
-                <li><strong>Sandhya Aarti:</strong> 07:00 PM - 08:15 PM</li>
-                <li><strong>Shayan Aarti:</strong> 10:30 PM - 11:00 PM</li>
-            </ul>
-            <p>Devotees can book VIP Sugam Darshan passes and Aarti tickets online via the official portal to bypass long queues.</p>`,
-    content_hi: `<h2>मोक्ष की नगरी काशी के स्वामी: बाबा विश्वनाथ</h2>
-            <p>उत्तर प्रदेश के पवित्र शहर वाराणसी (काशी) में गंगा नदी के पश्चिमी तट पर स्थित <strong>काशी विश्वनाथ मंदिर</strong> हिंदू धर्म के सबसे पावन तीर्थों में से एक है। यह भगवान शिव के प्रमुख १२ ज्योतिर्लिंगों में गिना जाता है। माना जाता है कि काशी में प्राण त्यागने से मोक्ष की प्राप्ति होती है। हाल ही में निर्मित <strong>काशी विश्वनाथ धाम कॉरिडोर</strong> ने मंदिर को सीधे गंगा तट (ललिता घाट) से जोड़ दिया है, जिससे गंगा स्नान के बाद जल सीधे बाबा को चढ़ाया जा सकता है।</p>
-            <h3>दैनिक आरती समय सारणी</h3>
-            <ul>
-                <li><strong>मंगला आरती:</strong> सुबह ०३:०० से ०४:०० (अग्रिम बुकिंग आवश्यक है)</li>
-                <li><strong>भोग आरती:</strong> दोपहर ११:१५ से १२:२०</li>
-                <li><strong>संध्या आरती:</strong> शाम ०७:०० से रात ०८:१५</li>
-                <li><strong>शयन आरती:</strong> रात १०:३० से ११:००</li>
-            </ul>
-            <p>श्रद्धालु लंबी कतारों से बचने के लिए मंदिर की आधिकारिक वेबसाइट से सुगम दर्शन (VIP पास) और दैनिक आरतियों के टिकट ऑनलाइन बुक कर सकते हैं।</p>`,
+    title_en: "Kashi Vishwanath Temple Varanasi - Darshan, Tickets & Corridor Guide",
+    title_hi: "काशी विश्वनाथ मंदिर वाराणसी - दर्शन नियम, विशेष टिकट और कॉरिडोर गाइड",
+    metaTitle_en: "Kashi Vishwanath Temple Varanasi Yatra 2026 - Sugam Darshan & Timings",
+    metaTitle_hi: "काशी विश्वनाथ मंदिर वाराणसी - सुगम दर्शन टिकट, घाट प्रवेश और आरती समय",
+    metaDesc_en: "Complete visitor guide to Shree Kashi Vishwanath Temple in Varanasi. Learn about Sugam Darshan (VIP pass) booking, entering via Lalita Ghat boat, and nearby temples.",
+    metaDesc_hi: "वाराणसी के भव्य श्री काशी विश्वनाथ मंदिर की यात्रा मार्गदर्शिका। ३०० रु विशेष सुगम दर्शन टिकट, ललिता घाट से नाव मार्ग, आरती दर्शन समय और धार्मिक नियम।",
+    keywords_en: "Kashi Vishwanath temple, Kashi Vishwanath corridor, Sugam Darshan Varanasi, VIP darshan Kashi, Lalita Ghat entrance, Varanasi ghat boat ride, Kaal Bhairav temple",
+    keywords_hi: "काशी विश्वनाथ मंदिर, काशी विश्वनाथ कॉरिडोर, सुगम दर्शन वाराणसी, वीआईपी दर्शन काशी, ललिता घाट प्रवेश द्वार, वाराणसी घाट बोट राइड, काल भैरव मंदिर",
+    content_en: `<h2>The Golden Corridor of Lord Shiva: Kashi Vishwanath</h2>
+            <p>Located in the heart of Varanasi (Kashi), Uttar Pradesh, on the western bank of the sacred River Ganges, the majestic <strong>Kashi Vishwanath Temple</strong> is one of the most prominent of the 12 Jyotirlingas. Under the Kashi Vishwanath Corridor project, the temple is directly connected to the Ganga ghats, allowing devotees to walk seamlessly from the river to the temple sanctum.</p>
+            
+            <h3>Sugam Darshan: VIP Ticket Booking</h3>
+            <p>To avoid massive lines on festival days and Mondays, pilgrims can book a <strong>Sugam Darshan (VIP Entry)</strong> pass online or at the help desk. It costs Rs 300 per passenger, allowing direct entry from a dedicated queue and bypassing the general waiting areas.</p>
+
+            <h3>The Lalita Ghat Gateway: Access by Boat</h3>
+            <p>A highly recommended way to visit the temple is to take a boat ride from Dashashwamedh Ghat or Assi Ghat directly to <strong>Lalita Ghat</strong>. Devotees can step off the boat onto the ghat, take a holy dip in the Ganges, and enter the grand temple corridor directly through the majestic gates without having to navigate Varanasi's crowded, narrow lanes.</p>
+
+            <h3>Mandatory Kashi Custom: Visiting Kaal Bhairav</h3>
+            <p>According to ancient Kashi traditions, a pilgrimage to Kashi Vishwanath is considered incomplete without visiting the temple of <strong>Lord Kaal Bhairav</strong>, who is revered as the divine Kotwal (guardian) of Varanasi. Devotees visit this temple to receive divine permission to stay in Kashi.</p>`,
+    content_hi: `<h2>बाबा विश्वनाथ की पावन नगरी: काशी विश्वनाथ धाम कॉरिडोर</h2>
+            <p>उत्तर प्रदेश की पवित्र नगरी वाराणसी (काशी) में गंगा नदी के पश्चिमी तट पर स्थित <strong>श्री काशी विश्वनाथ मंदिर</strong> भगवान शिव के १२ ज्योतिर्लिंगों में सबसे प्रमुख माना जाता है। नवनिर्मित काशी विश्वनाथ कॉरिडोर परियोजना के बाद यह धाम सीधे गंगा घाटों से जुड़ चुका है, जिससे श्रद्धालु गंगा स्नान के बाद सीधे गर्भगृह में दर्शन के लिए जा सकते हैं।</p>
+            
+            <h3>विशेष दर्शन पास: सुगम दर्शन नियम</h3>
+            <p>भीड़ से बचने और दर्शन जल्दी पूरा करने के लिए श्रद्धालु <strong>सुगम दर्शन (VIP पास)</strong> सेवा का उपयोग कर सकते हैं। इसका टिकट प्रति यात्री ३०० रुपये है, जिसे ऑनलाइन या मंदिर काउंटर से बुक किया जा सकता है। इससे विशेष कतार द्वारा कुछ ही समय में दर्शन हो जाते हैं।</p>
+
+            <h3>गंगा घाट से प्रवेश: ललिता घाट बोट रूट</h3>
+            <p>बाबा के दर्शन के लिए सबसे सुंदर मार्ग यह है कि आप अस्सी घाट या दशाश्वमेध घाट से नाव (बोट) द्वारा सीधे <strong>ललिता घाट</strong> पहुँचें। घाट पर नाव से उतरकर सीधे कॉरिडोर के मुख्य द्वार से भव्य प्रांगण में प्रवेश किया जा सकता है, जिससे शहर की तंग और भीड़भाड़ वाली गलियों से बचा जा सकता है।</p>
+
+            <h3>अनिवार्य काशी नियम: काल भैरव मंदिर दर्शन</h3>
+            <p>काशी की पौराणिक मान्यता के अनुसार, बाबा विश्वनाथ के दर्शन के बाद काशी के कोतवाल कहे जाने वाले <strong>भगवान काल भैरव</strong> के दर्शन करना अनिवार्य है। माना जाता है कि काशी यात्रा की पूर्णता के लिए काल भैरव बाबा से आज्ञा ली जाती है।</p>`,
     faqs: [
       {
-        q_en: "Is traditional dress mandatory for Kashi Vishwanath Mangala Aarti?",
-        a_en: "Yes, traditional Indian wear (Dhoti-Kurta for men, Saree/Salwar for women) is mandatory inside the sanctum sanctorum during Mangala Aarti.",
-        q_hi: "क्या काशी विश्वनाथ मंगला आरती के लिए पारंपरिक पोशाक अनिवार्य है?",
-        a_hi: "हाँ, मंगला आरती के दौरान गर्भगृह के भीतर जाने के लिए पारंपरिक भारतीय पोशाक (पुरुषों के लिए धोती-कुर्ता और महिलाओं के लिए साड़ी) अनिवार्य है।"
+        q_en: "What is the cost of general entry to Kashi Vishwanath?",
+        a_en: "General entry to the temple is completely free. VIP entry (Sugam Darshan) tickets cost Rs 300.",
+        q_hi: "काशी विश्वनाथ मंदिर में सामान्य प्रवेश का शुल्क क्या है?",
+        a_hi: "मंदिर में सामान्य दर्शन पूरी तरह निःशुल्क है। वीआईपी (सुगम दर्शन) का टिकट ३०० रुपये है।"
       },
       {
-        q_en: "How far is Varanasi from Vindhyachal?",
-        a_en: "Varanasi is approximately 80 kilometers away, easily accessible via road (NH 19) in around 2 hours.",
-        q_hi: "वाराणसी से विन्ध्याचल कितनी दूर है?",
-        a_hi: "वाराणसी से विन्ध्याचल की दूरी लगभग ८० किलोमीटर है, जिसे राष्ट्रीय राजमार्ग १९ द्वारा २ घंटे में आसानी से पूरा किया जा सकता है।"
+        q_en: "What is the distance between Varanasi Cantt railway station and the temple?",
+        a_en: "The temple is located approximately 4.5 km from Varanasi Cantt (BSB) railway station, easily accessible by auto-rickshaw or e-rickshaw.",
+        q_hi: "वाराणसी कैंट रेलवे स्टेशन से मंदिर की दूरी कितनी है?",
+        a_hi: "वाराणसी कैंट (BSB) स्टेशन से मंदिर की दूरी लगभग ४.५ किमी है, जहाँ ई-रिक्शा या ऑटो द्वारा आसानी से जाया जा सकता है।"
       }
     ],
     related: ["how-to-reach", "tourism-guide", "temple-timings"],
@@ -1664,38 +1708,58 @@ export const learnContent: Record<string, LearnTopic> = {
   "mahakaleshwar-temple-guide": {
     slug: "mahakaleshwar-temple-guide",
     category: "Guide",
-    title_en: "Mahakaleshwar Temple Ujjain - Bhasma Aarti Booking & Timings",
-    title_hi: "महाकालेश्वर मंदिर उज्जैन - भस्म आरती ऑनलाइन बुकिंग और दर्शन समय",
-    metaTitle_en: "Mahakaleshwar Temple Ujjain - Bhasma Aarti & Travel Guide",
-    metaTitle_hi: "महाकाल मंदिर उज्जैन - भस्म आरती बुकिंग, समय सारणी और नियम",
-    metaDesc_en: "Complete guide to Mahakaleshwar Temple in Ujjain. Find details on Bhasma Aarti online booking, darshan timings, Mahakal Lok corridor, and travel directions.",
-    metaDesc_hi: "उज्जैन के प्रसिद्ध श्री महाकालेश्वर ज्योतिर्लिंग की यात्रा गाइड। भस्म आरती ऑनलाइन बुकिंग विधि, दर्शन समय, महाकाल लोक कॉरिडोर और पहुँचने का मार्ग।",
-    keywords_en: "Mahakaleshwar temple, Ujjain jyotirlinga, Bhasma Aarti booking, Mahakal lok corridor, Ujjain temple timings, how to reach Ujjain",
-    keywords_hi: "महाकालेश्वर मंदिर, उज्जैन ज्योतिर्लिंग, भस्म आरती बुकिंग, महाकाल लोक, उज्जैन मंदिर समय, उज्जैन कैसे पहुंचे",
-    content_en: `<h2>The Sacred Abode of Mahakal: Lord of Time and Death</h2>
-            <p>Located on the banks of the holy Shipra River in Ujjain, Madhya Pradesh, the <strong>Mahakaleshwar Temple</strong> is one of the most famous and sacred Jyotirlingas of Lord Shiva. It is unique as the only south-facing Jyotirlinga (Dakshinmukhi), which holds immense spiritual significance in Tantric traditions. Devotees visit this shrine to seek liberation from the cycle of death and birth.</p>
-            <h3>The Miraculous Bhasma Aarti</h3>
-            <p>The most famous ritual at the temple is the <strong>Bhasma Aarti</strong>, performed daily in the early morning hours from <strong>04:00 AM to 06:00 AM</strong>. During this aarti, the Shivling is bathed and offered fresh ash (traditionally from cremation pyres, now sacred wood ash). Due to extreme popularity, Bhasma Aarti passes must be booked online months in advance via the official temple website.</p>
-            <h3>The Grand Mahakal Lok Corridor</h3>
-            <p>The recently built <strong>Shri Mahakal Lok Corridor</strong> is a magnificent plaza surrounding the temple. It is nearly 900 meters long and features over 100 sandstone pillars depicting various stories from the Shiva Purana. Walking through the corridor offers a highly rich cultural and spiritual experience.</p>`,
-    content_hi: `<h2>काल के स्वामी का पावन धाम: श्री महाकालेश्वर ज्योतिर्लिंग</h2>
-            <p>मध्य प्रदेश की पावन शिप्रा नदी के तट पर उज्जैन (अवंतिका) नगरी में स्थित <strong>महाकालेश्वर मंदिर</strong> भगवान शिव के १२ ज्योतिर्लिंगों में से एक है। यह देश का एकमात्र दक्षिणमुखी ज्योतिर्लिंग है, जिसका तंत्र साधना में अत्यधिक महत्व है। मान्यता है कि जो भक्त बाबा महाकाल के चरणों में शीश नवाता है, उसे अकाल मृत्यु का भय कभी नहीं सताता।</p>
-            <h3>अलौकिक भस्म आरती का नियम</h3>
-            <p>महाकाल मंदिर की सबसे प्रसिद्ध परंपरा <strong>भस्म आरती</strong> है, जो प्रतिदिन भोर में <strong>सुबह ०४:०० से ०६:०० बजे</strong> के बीच आयोजित की जाती है। इस आरती में बाबा का ताजी चिता-भस्म या पवित्र काष्ठ भस्म से शृंगार किया जाता है। भारी भीड़ के कारण भस्म आरती दर्शन के लिए मंदिर की आधिकारिक वेबसाइट से पहले ही ऑनलाइन टिकट बुक करना पड़ता है।</p>
-            <h3>भव्य श्री महाकाल लोक कॉरिडोर</h3>
-            <p>हाल ही में निर्मित <strong>श्री महाकाल लोक कॉरिडोर</strong> भारत के सबसे बड़े धार्मिक कॉरिडोरों में से एक है। यह लगभग ९०० मीटर लंबा परिसर है, जिसमें शिव पुराण की कथाओं को दर्शाने वाले सैकड़ों सुंदर स्तंभ और मूर्तियाँ स्थापित हैं। शाम के समय रंग-बिरंगी रोशनी में इसका दृश्य अलौकिक लगता है।</p>`,
+    title_en: "Mahakaleshwar Temple Ujjain - Bhasma Aarti & Darshan Guide",
+    title_hi: "महाकालेश्वर मंदिर उज्जैन - भस्म आरती बुकिंग, नियम और यात्रा गाइड",
+    metaTitle_en: "Mahakaleshwar Jyotirlinga Ujjain - Bhasma Aarti Booking & Dress Code",
+    metaTitle_hi: "महाकालेश्वर मंदिर उज्जैन - भस्म आरती ऑनलाइन बुकिंग, गर्भगृह ड्रेस कोड और नियम",
+    metaDesc_en: "Ultimate travel guide to Shree Mahakaleshwar Temple in Ujjain. Learn about booking Bhasma Aarti online, strict inner sanctum dress code, and Mahakal Lok.",
+    metaDesc_hi: "उज्जैन के प्रसिद्ध श्री महाकालेश्वर ज्योतिर्लिंग की संपूर्ण यात्रा गाइड। भस्म आरती ऑनलाइन टिकट बुकिंग, गर्भगृह प्रवेश ड्रेस कोड नियम और महाकाल लोक कॉरिडोर।",
+    keywords_en: "Mahakaleshwar temple Ujjain, Bhasma Aarti booking, Mahakal dress code, Ujjain to Indore distance, Mahakal Lok corridor, Dakshinmukhi jyotirlinga",
+    keywords_hi: "महाकालेश्वर मंदिर उज्जैन, भस्म आरती बुकिंग वेबसाइट, महाकाल ड्रेस कोड धोती, उज्जैन से इंदौर दूरी, श्री महाकाल लोक कॉरिडोर, दक्षिणमुखी ज्योतिर्लिंग",
+    content_en: `<h2>The Lord of Death and Time: Mahakaleshwar Jyotirlinga</h2>
+            <p>Located on the banks of the holy Shipra River in Ujjain, Madhya Pradesh, the majestic <strong>Mahakaleshwar Temple</strong> is highly unique as the only south-facing (Dakshinmukhi) Jyotirlinga among the twelve. This direction is spiritually associated with power and liberation. Devotees from all over the world gather here to experience the legendary Bhasma Aarti (worship with holy ash).</p>
+            
+            <h3>The Divine Bhasma Aarti & Online Booking</h3>
+            <p>The iconic <strong>Bhasma Aarti</strong> takes place daily during the early morning hours from <strong>04:00 AM to 06:00 AM</strong>. Online booking opens exactly 30 days in advance at 08:00 AM on the temple's official portal. It requires identity verification. Offline tickets are distributed a day prior at the temple counter on a first-come, first-served basis with ID card verification.</p>
+
+            <h3>Strict Inner Sanctum Dress Code</h3>
+            <p>If you want to enter the inner sanctum (Garbhagriha) to perform Jalabhishek (pouring holy water) directly on the Jyotirlinga, you must adhere to the traditional dress code:</p>
+            <ul>
+                <li><strong>Men:</strong> Must wear a traditional Dhoti and Shola (cotton/silk stole). No jeans or shirts allowed.</li>
+                <li><strong>Women:</strong> Must wear a traditional Saree. Salwar suits are not allowed inside the inner sanctum.</li>
+            </ul>
+            <p>For normal darshan from the outer queue (without entering the Garbhagriha), there is no dress code; normal modest clothing is allowed.</p>
+
+            <h3>Shree Mahakal Lok Corridor</h3>
+            <p>The newly built <strong>Shree Mahakal Lok Corridor</strong> is a majestic pedestrian walkway double the size of the Kashi Vishwanath corridor. It features over 108 columns showcasing sculptures of Lord Shiva's stories, the holy Rudrasagar lake, and grand entrance plazas (Nandi Dwar & Pinaki Dwar).</p>`,
+    content_hi: `<h2>काल के काल महाकाल: श्री महाकालेश्वर ज्योतिर्लिंग उज्जैन</h2>
+            <p>मध्य प्रदेश के उज्जैन में शिप्रा नदी के तट पर स्थित <strong>महाकालेश्वर मंदिर</strong> भगवान शिव के १२ ज्योतिर्लिंगों में एकमात्र दक्षिणमुखी ज्योतिर्लिंग है। शास्त्रों के अनुसार दक्षिण दिशा मृत्यु के देवता यम की मानी जाती है, अतः यहाँ शिवजी 'महाकाल' (मृत्यु और समय के स्वामी) के रूप में विराजमान होकर भक्तों को भयमुक्त करते हैं।</p>
+            
+            <h3>विश्व प्रसिद्ध भस्म आरती और बुकिंग प्रक्रिया</h3>
+            <p>महाकाल की सबसे प्रसिद्ध पूजा <strong>भस्म आरती</strong> है, जो प्रतिदिन सुबह <strong>०४:०० से ०६:०० बजे</strong> के बीच होती है। इसकी बुकिंग ३० दिन पहले मंदिर की वेबसाइट पर सुबह ०८:०० बजे शुरू होती है। तत्काल काउंटर टिकट के लिए यात्रा से एक दिन पहले सुबह मंदिर जाना पड़ता है, जहाँ आधार कार्ड जमा करने पर सीमित संख्या में टिकट दिए जाते हैं।</p>
+
+            <h3>गर्भगृह प्रवेश हेतु अनिवार्य ड्रेस कोड (पोशाक नियम)</h3>
+            <p>यदि आप गर्भगृह के भीतर जाकर बाबा का जलाभिषेक करना चाहते हैं, तो पारंपरिक पोशाक पहनना अनिवार्य है:</p>
+            <ul>
+                <li><strong>पुरुषों के लिए:</strong> केवल सूती या रेशमी धोती और सोला पहनना अनिवार्य है। जींस, टी-शर्ट या पैंट-शर्ट पहनकर प्रवेश वर्जित है।</li>
+                <li><strong>महिलाओं के लिए:</strong> केवल पारंपरिक साड़ी पहनना अनिवार्य है। सलवार-सूट पहनकर गर्भगृह में प्रवेश की अनुमति नहीं है।</li>
+            </ul>
+            <p>यदि आप केवल बाहर की बैरिकेडिंग कतार से दर्शन करना चाहते हैं, तो सामान्य कपड़ों में प्रवेश की अनुमति है।</p>
+
+            <h3>श्री महाकाल लोक कॉरिडोर</h3>
+            <p>मंदिर परिसर में बना भव्य <strong>श्री महाकाल लोक</strong> पर्यटकों और भक्तों के लिए एक बड़ा आकर्षण है। रुद्रसागर झील के किनारे फैला यह कॉरिडोर बेहद भव्य है, जिसमें शिव लीलाओं को दर्शाने वाले १०८ नक्काशीदार स्तंभ, सुंदर फव्वारे और विशाल मुख्य द्वार (नंदी द्वार) शामिल हैं।</p>`,
     faqs: [
       {
-        q_en: "What is the dress code for Mahakaleshwar Bhasma Aarti?",
-        a_en: "To enter the inner sanctum during Bhasma Aarti, men must wear a traditional cotton Dhoti and women must wear a traditional Saree.",
-        q_hi: "महाकालेश्वर भस्म आरती के लिए क्या ड्रेस कोड है?",
-        a_hi: "भस्म आरती के दौरान गर्भगृह में प्रवेश के लिए पुरुषों को सूती धोती-सोला और महिलाओं को पारंपरिक साड़ी पहनना अनिवार्य है।"
+        q_en: "Is photography allowed inside Mahakaleshwar Temple?",
+        a_en: "Photography and carrying mobile phones inside the temple premises, especially the Garbhagriha, is strictly prohibited.",
+        q_hi: "क्या महाकालेश्वर मंदिर के भीतर फोटोग्राफी की अनुमति है?",
+        a_hi: "मंदिर परिसर और विशेष रूप से गर्भगृह के भीतर फोटोग्राफी करना और मोबाइल फोन ले जाना पूरी तरह प्रतिबंधित है।"
       },
       {
-        q_en: "How far is Ujjain from Indore Airport?",
-        a_en: "Ujjain is approximately 55 kilometers away from Devi Ahilyabai Holkar Airport in Indore, accessible in 1 hour via NH 52.",
-        q_hi: "इन्दौर एयरपोर्ट से उज्जैन कितनी दूर है?",
-        a_hi: "देवी अहिल्याबाई होल्कर एयरपोर्ट इंदौर से उज्जैन लगभग ५५ किलोमीटर की दूरी पर है, जिसे कार द्वारा १ घंटे में पूरा किया जा सकता है।"
+        q_en: "What is the distance between Indore airport and Ujjain?",
+        a_en: "Devi Ahilyabai Holkar Airport in Indore is the nearest airport, located approximately 55 km from Ujjain, reachable by taxi in 1 hour.",
+        q_hi: "इंदौर हवाई अड्डे से उज्जैन की दूरी कितनी है?",
+        a_hi: "देवी अहिल्याबाई होल्कर एयरपोर्ट इंदौर सबसे नजदीक है, जो उज्जैन से लगभग ५५ किमी दूर है। कार या टैक्सी द्वारा १ घंटे में पहुँचा जा सकता है।"
       }
     ],
     related: ["how-to-reach", "tourism-guide", "temple-timings"],
