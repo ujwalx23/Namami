@@ -34,6 +34,10 @@ const filesToCopy = [
   "maa-vindhyavasini-neel-shringar.jpg",
   "maa-vindhyavasini-devi-mirzapur.jpg",
   "maa-vindhyavasini-shakti-peeth.jpg",
+  "vaishno-devi-shrine.png",
+  "kedarnath-temple.png",
+  "kashi-vishwanath.png",
+  "mahakaleshwar-temple.png",
 ];
 
 filesToCopy.forEach((file) => {

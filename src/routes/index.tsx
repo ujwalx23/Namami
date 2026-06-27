@@ -10,6 +10,10 @@ import maaImgSimhasan from "@/assets/maa-vindhyavasini-simhasan-shringar.jpg";
 import maaImgGarland from "@/assets/maa-vindhyavasini-garland-shringar.jpg";
 import maaImgNeel from "@/assets/maa-vindhyavasini-neel-shringar.jpg";
 import maaImgShakti from "@/assets/maa-vindhyavasini-shakti-peeth.jpg";
+import vaishnoDeviImg from "@/assets/vaishno-devi-shrine.png";
+import kedarnathImg from "@/assets/kedarnath-temple.png";
+import kashiVishwanathImg from "@/assets/kashi-vishwanath.png";
+import mahakaleshwarImg from "@/assets/mahakaleshwar-temple.png";
 import gallery1 from "@/assets/gallery-1.webp";
 import gallery2 from "@/assets/gallery-2.webp";
 import gallery3 from "@/assets/gallery-3.webp";
@@ -1359,7 +1363,7 @@ function HomePage() {
               desc_en: "Complete guide on online yatra slip registration, helicopter tickets, and Ardhkuwari trek details.",
               desc_hi: "ऑनलाइन यात्रा पर्ची बुकिंग, हेलीकॉप्टर टिकट और अर्धकुंवारी गुफा मार्ग की पूरी जानकारी।",
               slug: "vaishno-devi-guide",
-              img: maaImgShakti,
+              img: vaishnoDeviImg,
               category: hi ? "शक्तिपीठ" : "Shakti Peeth",
             },
             {
@@ -1368,7 +1372,7 @@ function HomePage() {
               desc_en: "Detailed gaurikund to Kedarnath trek guide, biometric registration portal, and weather updates.",
               desc_hi: "गौरीकुंड से केदारनाथ १६ किमी ट्रेक मार्ग, आवश्यक बायोमेट्रिक रजिस्ट्रेशन और हेलीकॉप्टर बुकिंग।",
               slug: "kedarnath-temple-guide",
-              img: maaImgSimhasan,
+              img: kedarnathImg,
               category: hi ? "ज्योतिर्लिंग" : "Jyotirlinga",
             },
             {
@@ -1377,7 +1381,7 @@ function HomePage() {
               desc_en: "Varanasi temple timings, Mangala Aarti booking passes, and details of the grand Ganga Corridor.",
               desc_hi: "बाबा विश्वनाथ की दैनिक आरती समय सारणी, मंगला आरती पास बुकिंग और गंगा कॉरिडोर दर्शन नियम।",
               slug: "kashi-vishwanath-guide",
-              img: maaImgNeel,
+              img: kashiVishwanathImg,
               category: hi ? "ज्योतिर्लिंग" : "Jyotirlinga",
             },
             {
@@ -1386,7 +1390,7 @@ function HomePage() {
               desc_en: "Dakshinmukhi Jyotirlinga daily darshan rules, Bhasma Aarti online booking and corridor guidelines.",
               desc_hi: "दक्षिणमुखी ज्योतिर्लिंग दर्शन नियम, प्रसिद्ध भस्म आरती ऑनलाइन बुकिंग और महाकाल लोक गाइड।",
               slug: "mahakaleshwar-temple-guide",
-              img: maaImgGarland,
+              img: mahakaleshwarImg,
               category: hi ? "ज्योतिर्लिंग" : "Jyotirlinga",
             },
           ].map((item, idx) => (

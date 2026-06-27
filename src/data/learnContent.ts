@@ -1571,7 +1571,7 @@ export const learnContent: Record<string, LearnTopic> = {
       }
     ],
     related: ["shakti-peeth", "ropeway-guide", "tourism-guide"],
-    image: "/images/maa-reveal.png"
+    image: "/images/vaishno-devi-shrine.png"
   },
   "kedarnath-temple-guide": {
     slug: "kedarnath-temple-guide",
@@ -1611,7 +1611,7 @@ export const learnContent: Record<string, LearnTopic> = {
       }
     ],
     related: ["how-to-reach", "tourism-guide"],
-    image: "/images/maa-vindhyavasini-simhasan-shringar.jpg"
+    image: "/images/kedarnath-temple.png"
   },
   "kashi-vishwanath-guide": {
     slug: "kashi-vishwanath-guide",
@@ -1659,7 +1659,7 @@ export const learnContent: Record<string, LearnTopic> = {
       }
     ],
     related: ["how-to-reach", "tourism-guide", "temple-timings"],
-    image: "/images/maa-vindhyavasini-neel-shringar.jpg"
+    image: "/images/kashi-vishwanath.png"
   },
   "mahakaleshwar-temple-guide": {
     slug: "mahakaleshwar-temple-guide",
@@ -1699,7 +1699,7 @@ export const learnContent: Record<string, LearnTopic> = {
       }
     ],
     related: ["how-to-reach", "tourism-guide", "temple-timings"],
-    image: "/images/maa-vindhyavasini-garland-shringar.jpg"
+    image: "/images/mahakaleshwar-temple.png"
   },
   "kamakhya-temple-guide": {
     slug: "kamakhya-temple-guide",
