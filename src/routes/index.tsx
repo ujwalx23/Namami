@@ -8,6 +8,8 @@ import maaImg2 from "@/assets/maa-vindhyavasini-2.webp";
 import maaImg3 from "@/assets/maa-vindhyavasini-3.jpg";
 import maaImgSimhasan from "@/assets/maa-vindhyavasini-simhasan-shringar.jpg";
 import maaImgGarland from "@/assets/maa-vindhyavasini-garland-shringar.jpg";
+import maaImgNeel from "@/assets/maa-vindhyavasini-neel-shringar.jpg";
+import maaImgShakti from "@/assets/maa-vindhyavasini-shakti-peeth.jpg";
 import gallery1 from "@/assets/gallery-1.webp";
 import gallery2 from "@/assets/gallery-2.webp";
 import gallery3 from "@/assets/gallery-3.webp";
