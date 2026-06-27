@@ -1588,6 +1588,18 @@ export const learnContent: Record<string, LearnTopic> = {
         a_en: "A standard return ropeway ticket costs Rs 100 per passenger and takes about 3 minutes each way.",
         q_hi: "भवन से भैरव मंदिर रोपवे का किराया कितना है?",
         a_hi: "प्रति यात्री दोनो तरफ का रोपवे टिकट मूल्य १०० रुपये है, जिसमें लगभग ३ मिनट का समय लगता है।"
+      },
+      {
+        q_en: "How to book Ardhkuwari Darshan queue group number?",
+        a_en: "Online booking is not available for Ardhkuwari cave. Devotees must obtain a physical group slip from the queue counter at Ardhkuwari on arrival. Wait time can range from 12 to 24 hours.",
+        q_hi: "अर्धकुंवारी दर्शन कतार ग्रुप नंबर कैसे बुक करें?",
+        a_hi: "अर्धकुंवारी गुफा के लिए ऑनलाइन बुकिंग उपलब्ध नहीं है। श्रद्धालुओं को पहुँचने पर अर्धकुंवारी के काउंटर से ग्रुप नंबर पर्ची लेनी होगी, जिसमें १२ से २४ घंटे तक का समय लग सकता है।"
+      },
+      {
+        q_en: "Are leather items and bags allowed inside Vaishno Devi Bhawan?",
+        a_en: "No, leather belts, purses, bags, and electronic items (like cameras or power banks) are strictly prohibited inside the temple. Free lockers are provided at the Bhawan to store these.",
+        q_hi: "क्या वैष्णो देवी भवन के अंदर चमड़े की वस्तुएं और बैग ले जाने की अनुमति है?",
+        a_hi: "नहीं, मंदिर के भीतर चमड़े के बेल्ट, पर्स, बैग और इलेक्ट्रॉनिक सामान (जैसे कैमरा) ले जाना सख्त वर्जित है। इन्हें जमा करने के लिए भवन पर मुफ्त लॉकर उपलब्ध हैं।"
       }
     ],
     related: ["shakti-peeth", "ropeway-guide", "tourism-guide"],
@@ -1650,6 +1662,18 @@ export const learnContent: Record<string, LearnTopic> = {
         a_en: "Yes, GMVN guest houses, tents, and local Dharamshalas are available, but they must be booked well in advance.",
         q_hi: "क्या हम केदारनाथ भवन में रात बिता सकते हैं?",
         a_hi: "हाँ, जीएमवीएन (GMVN) गेस्ट हाउस, टेंट और स्थानीय धर्मशालाएँ उपलब्ध हैं, लेकिन इनकी पहले से बुकिंग करना आवश्यक है।"
+      },
+      {
+        q_en: "How can I avoid helicopter booking scams for Kedarnath?",
+        a_en: "Book helicopter tickets strictly through the official IRCTC website (heliyatra.irctc.co.in). Do not buy from local agents or random WhatsApp numbers as they are fraudulent.",
+        q_hi: "केदारनाथ हेलीकॉप्टर बुकिंग घोटाले से कैसे बचें?",
+        a_hi: "हेलीकॉप्टर टिकट केवल आधिकारिक IRCTC वेबसाइट (heliyatra.irctc.co.in) से बुक करें। किसी भी स्थानीय एजेंट या व्हाट्सएप नंबर से टिकट न खरीदें, वे फर्जी होते हैं।"
+      },
+      {
+        q_en: "Is oxygen available on the Gaurikund-Kedarnath trek route?",
+        a_en: "Yes, oxygen cylinders and medical camps are available at regular intervals (like Lincholi, Bhimbali). You can also buy small portable oxygen cans at Gaurikund.",
+        q_hi: "क्या गौरीकुंड-केदारनाथ ट्रेक मार्ग पर ऑक्सीजन उपलब्ध है?",
+        a_hi: "हाँ, मार्ग में नियमित दूरी पर (जैसे लिनचोली, भीमबली) मेडिकल कैंप और ऑक्सीजन सिलेंडर उपलब्ध हैं। गौरीकुंड से आप छोटे ऑक्सीजन केन भी खरीद सकते हैं।"
       }
     ],
     related: ["how-to-reach", "tourism-guide"],
@@ -1700,6 +1724,18 @@ export const learnContent: Record<string, LearnTopic> = {
         a_en: "The temple is located approximately 4.5 km from Varanasi Cantt (BSB) railway station, easily accessible by auto-rickshaw or e-rickshaw.",
         q_hi: "वाराणसी कैंट रेलवे स्टेशन से मंदिर की दूरी कितनी है?",
         a_hi: "वाराणसी कैंट (BSB) स्टेशन से मंदिर की दूरी लगभग ४.५ किमी है, जहाँ ई-रिक्शा या ऑटो द्वारा आसानी से जाया जा सकता है।"
+      },
+      {
+        q_en: "What are the daily Aarti timings at Kashi Vishwanath Temple?",
+        a_en: "Mangala Aarti is at 03:00 AM, Bhog Aarti at 11:30 AM, Saptarishi Aarti at 07:00 PM, and Shringar/Shayan Aarti at 09:00 PM. Passes must be booked in advance.",
+        q_hi: "काशी विश्वनाथ मंदिर में दैनिक आरती का समय क्या है?",
+        a_hi: "मंगला आरती सुबह ०३:०० बजे, भोग आरती दोपहर ११:३० बजे, सप्तर्षि आरती शाम ०७:०० बजे और शृंगार/शयन आरती रात ०९:०० बजे होती है। इनके पास पहले से बुक करने होते हैं।"
+      },
+      {
+        q_en: "Is there a dress code for general Darshan at Kashi Vishwanath?",
+        a_en: "No dress code is enforced for general queuing and outer darshan. However, to perform Sparsh Darshan (touching the Shivling), male devotees must wear Dhoti-Kurta and females must wear a Saree.",
+        q_hi: "क्या काशी विश्वनाथ में सामान्य दर्शन के लिए कोई ड्रेस कोड है?",
+        a_hi: "सामान्य कतार और बाहरी दर्शन के लिए कोई ड्रेस कोड नहीं है। हालांकि, स्पर्श दर्शन (शिवलिंग को छूने) के लिए पुरुषों को धोती-कुर्ता और महिलाओं को साड़ी पहनना अनिवार्य है।"
       }
     ],
     related: ["how-to-reach", "tourism-guide", "temple-timings"],
@@ -1760,6 +1796,18 @@ export const learnContent: Record<string, LearnTopic> = {
         a_en: "Devi Ahilyabai Holkar Airport in Indore is the nearest airport, located approximately 55 km from Ujjain, reachable by taxi in 1 hour.",
         q_hi: "इंदौर हवाई अड्डे से उज्जैन की दूरी कितनी है?",
         a_hi: "देवी अहिल्याबाई होल्कर एयरपोर्ट इंदौर सबसे नजदीक है, जो उज्जैन से लगभग ५५ किमी दूर है। कार या टैक्सी द्वारा १ घंटे में पहुँचा जा सकता है।"
+      },
+      {
+        q_en: "How to book Bhasma Aarti offline at Ujjain counter?",
+        a_en: "Devotees can obtain offline passes a day prior at 07:00 AM at the temple counter. You must stand in line early and present a copy of your Aadhaar card or passport.",
+        q_hi: "उज्जैन काउंटर से ऑफलाइन भस्म आरती कैसे बुक करें?",
+        a_hi: "श्रद्धालु यात्रा से एक दिन पहले सुबह ०७:०० बजे मंदिर काउंटर से ऑफलाइन पास ले सकते हैं। आपको कतार में जल्दी लगना होगा और आधार कार्ड या पासपोर्ट की प्रति देनी होगी।"
+      },
+      {
+        q_en: "What is the dress code for entering Ujjain Mahakal Garbhagriha?",
+        a_en: "For Garbhagriha entry, men must wear a traditional Dhoti and cotton stole (Shola), and women must wear a Saree. Jeans, shirts, and salwar suits are not permitted.",
+        q_hi: "उज्जैन महाकाल गर्भगृह में प्रवेश के लिए क्या ड्रेस कोड है?",
+        a_hi: "गर्भगृह प्रवेश के लिए पुरुषों को पारंपरिक धोती और सोला पहनना अनिवार्य है। जींस, शर्ट और सलवार सूट की अनुमति नहीं है।"
       }
     ],
     related: ["how-to-reach", "tourism-guide", "temple-timings"],
@@ -1816,6 +1864,18 @@ export const learnContent: Record<string, LearnTopic> = {
         a_en: "Photography and mobile phones are strictly prohibited inside the inner cave (Garbhagriha) of the temple.",
         q_hi: "क्या मंदिर के भीतर कैमरा या मोबाइल फोन ले जाने की अनुमति है?",
         a_hi: "मंदिर के मुख्य गर्भगृह (गुफा) के भीतर फोटोग्राफी और मोबाइल फोन का उपयोग सख्त वर्जित है।"
+      },
+      {
+        q_en: "What is the significance of the red cloth or Angodak at Kamakhya?",
+        a_en: "Angodak (red cloth) is the main prasad of Kamakhya temple, distributed after the Ambubachi Mela. It represents the sacred energy of the Goddess and is kept in home shrines for prosperity.",
+        q_hi: "कामाख्या में लाल वस्त्र या अंगोदक का क्या महत्व है?",
+        a_hi: "अंगोदक (लाल कपड़ा) कामाख्या मंदिर का मुख्य प्रसाद है, जिसे अंबुबाची मेले के बाद वितरित किया जाता है। यह देवी की दिव्य ऊर्जा का प्रतीक माना जाता है।"
+      },
+      {
+        q_en: "Are animal sacrifices still performed at Kamakhya Temple?",
+        a_en: "Yes, animal sacrifice (mainly goats) is practiced at the temple on specific days and during major festivals according to ancient Shaktism and Tantric customs.",
+        q_hi: "क्या कामाख्या मंदिर में अभी भी पशु बलि दी जाती है?",
+        a_hi: "हाँ, प्राचीन शक्ति परंपराओं और तांत्रिक रीति-रिवाजों के अनुसार विशिष्ट तिथियों और त्योहारों पर मंदिर में बकरों की बलि दी जाती है।"
       }
     ],
     related: ["shakti-peeth", "tourism-guide"],
@@ -1872,6 +1932,18 @@ export const learnContent: Record<string, LearnTopic> = {
         a_en: "Veraval Junction (VRL) is the closest railway station, located just 5 km from the Somnath Temple.",
         q_hi: "सोमनाथ का निकटतम रेलवे स्टेशन कौन सा है?",
         a_hi: "वेरावल जंक्शन (VRL) निकटतम रेलवे स्टेशन है, जो सोमनाथ मंदिर से केवल ५ किमी की दूरी पर स्थित है।"
+      },
+      {
+        q_en: "Is there a entry fee for Somnath Temple?",
+        a_en: "No, the general entry and darshan at Somnath temple is completely free. Only specific pujas and the evening laser light show have nominal tickets.",
+        q_hi: "क्या सोमनाथ मंदिर में कोई प्रवेश शुल्क है?",
+        a_hi: "नहीं, सोमनाथ मंदिर में सामान्य प्रवेश और दर्शन पूरी तरह निःशुल्क है। केवल विशिष्ट पूजाओं और शाम के लाइट शो का मामूली टिकट है।"
+      },
+      {
+        q_en: "Are mobile phones allowed inside Somnath Temple?",
+        a_en: "No, mobile phones, cameras, smartwatches, and leather items are strictly prohibited inside the main temple. Safe storage lockers are available outside.",
+        q_hi: "क्या सोमनाथ मंदिर के अंदर मोबाइल फोन की अनुमति है?",
+        a_hi: "नहीं, मुख्य मंदिर परिसर के भीतर मोबाइल, कैमरा, स्मार्टवॉच और चमड़े की वस्तुएं ले जाना वर्जित है। बाहर सुरक्षित लॉकर काउंटर उपलब्ध हैं।"
       }
     ],
     related: ["how-to-reach", "tourism-guide", "temple-timings"],
@@ -1928,6 +2000,18 @@ export const learnContent: Record<string, LearnTopic> = {
         a_en: "Mana village is located just 3 km north of Badrinath temple, easily accessible by walking or hiring a local taxi.",
         q_hi: "बद्रीनाथ से माणा गाँव की दूरी कितनी है?",
         a_hi: "माणा गाँव बद्रीनाथ मंदिर से उत्तर में केवल ३ किमी की दूरी पर है, जहाँ पैदल या स्थानीय टैक्सी द्वारा पहुँचा जा सकता है।"
+      },
+      {
+        q_en: "Why is the water in Tapt Kund hot?",
+        a_en: "Tapt Kund is a natural sulfur hot water spring. Devotees believe it contains the healing powers of Lord Agni, offering therapeutic relief before darshan.",
+        q_hi: "तप्त कुंड का पानी गर्म क्यों होता है?",
+        a_hi: "तप्त कुंड एक गंधक युक्त गर्म पानी का स्रोत है। श्रद्धालु इसे भगवान अग्नि देव का वरदान मानते हैं, जिसमें औषधीय गुण होते हैं।"
+      },
+      {
+        q_en: "Is registration mandatory for Badrinath Dham yatra?",
+        a_en: "Yes, Char Dham biometric registration is mandatory for all pilgrims. You can register online for free on the official Uttarakhand tourism portal.",
+        q_hi: "क्या बद्रीनाथ धाम यात्रा के लिए पंजीकरण अनिवार्य है?",
+        a_hi: "हाँ, सभी तीर्थयात्रियों के लिए उत्तराखंड सरकार के पर्यटन पोर्टल पर ऑनलाइन चार धाम पंजीकरण करना कानूनी रूप से अनिवार्य है।"
       }
     ],
     related: ["kedarnath-temple-guide", "how-to-reach"],
@@ -1996,6 +2080,18 @@ export const learnContent: Record<string, LearnTopic> = {
         a_en: "Biju Patnaik International Airport (BBI) in Bhubaneswar, located approximately 60 km from Puri.",
         q_hi: "पुरी का निकटतम हवाई अड्डा कौन सा है?",
         a_hi: "भुवनेश्वर में स्थित बीजू पटनायक अंतर्राष्ट्रीय हवाई अड्डा (BBI) पुरी से लगभग ६० किमी दूर है।"
+      },
+      {
+        q_en: "Are non-Hindus allowed inside Puri Jagannath Temple?",
+        a_en: "No, non-Hindus and foreign nationals are not permitted inside the main temple premises. They can view the temple flag and the Patitapabana image from the lion gate.",
+        q_hi: "क्या गैर-हिंदुओं को पुरी जगन्नाथ मंदिर के अंदर जाने की अनुमति है?",
+        a_hi: "नहीं, मुख्य मंदिर में गैर-हिंदुओं और विदेशी नागरिकों का प्रवेश वर्जित है। वे सिंह द्वार से पतितपावन के दर्शन कर सकते हैं।"
+      },
+      {
+        q_en: "What is Mahaprasad at Puri Temple and how is it cooked?",
+        a_en: "The Mahaprasad (Abadha) is prepared in the temple's massive kitchen using 7 stacked earthen pots over a wood fire. The pots cook sequentially from top to bottom.",
+        q_hi: "पुरी मंदिर का महाप्रसाद क्या है और इसे कैसे बनाया जाता है?",
+        a_hi: "यहाँ के महाप्रसाद (अबाधा) को मिट्टी के ७ बर्तनों को एक के ऊपर एक रखकर लकड़ी की आग पर पकाया जाता है। इसमें सबसे ऊपर का भोजन सबसे पहले पकता है।"
       }
     ],
     related: ["how-to-reach", "tourism-guide"],
@@ -2040,6 +2136,18 @@ export const learnContent: Record<string, LearnTopic> = {
         a_en: "The word 'Chalisa' is derived from 'chalis', which means forty in Hindi, as the hymn contains 40 verses (excluding the introductory and concluding dohas).",
         q_hi: "इसे 'चालीसा' क्यों कहा जाता है?",
         a_hi: "शब्द 'चालीसा' हिंदी के 'चालीस' से बना है, क्योंकि इस स्तुति में मुख्य रूप से ४० चौपाइयां शामिल हैं।"
+      },
+      {
+        q_en: "What is the best time to chant Hanuman Chalisa?",
+        a_en: "It is highly auspicious to chant Hanuman Chalisa in the early morning (during Brahma Muhurta) or in the evening (during Sandhya Kaal) after lighting a ghee lamp.",
+        q_hi: "हनुमान चालीसा का पाठ करने का सबसे अच्छा समय क्या है?",
+        a_hi: "सुबह (ब्रह्म मुहूर्त) या शाम के समय घी या चमेली के तेल का दीपक जलाकर पाठ करना सबसे शुभ और फलदायी माना जाता है।"
+      },
+      {
+        q_en: "Can women read or chant Hanuman Chalisa?",
+        a_en: "Yes, women can absolutely chant and read Hanuman Chalisa with pure devotion. Lord Hanuman views all devotees as children of the divine mother.",
+        q_hi: "क्या महिलाएं हनुमान चालीसा का पाठ कर सकती हैं?",
+        a_hi: "हाँ, महिलाएं पूरे श्रद्धा भाव के साथ हनुमान चालीसा का पाठ कर सकती हैं। हनुमान जी सभी सच्चे भक्तों पर समान कृपा करते हैं।"
       }
     ],
     related: ["aarti", "chalisa", "maa-vindhyavasini-mantra"],
@@ -2066,16 +2174,28 @@ export const learnContent: Record<string, LearnTopic> = {
             <p>माना जाता है कि इस स्तोत्र का पाठ करने से साधक के जीवन में आत्मविश्वास और मानसिक शक्ति का संचार होता है। यह कुंडली के शनि दोष और ग्रहों के बुरे प्रभावों को कम करने में भी सहायक माना जाता है।</p>`,
     faqs: [
       {
-        q_en: "Who composed the Shiv Tandav Stotram?",
-        a_en: "It was composed by Ravana, the king of Lanka, to seek forgiveness and please Lord Shiva.",
-        q_hi: "शिव ताण्डव स्तोत्र की रचना किसने की थी?",
-        a_hi: "इसकी रचना लंका के राजा रावण ने महादेव को प्रसन्न करने और क्षमा याचना के लिए की थी।"
+        q_en: "Who wrote the Shiv Tandav Stotram?",
+        a_en: "It was composed by Ravana, the king of Lanka, who was an ardent devotee of Lord Shiva, to praise his divine power.",
+        q_hi: "शिव ताण्डव स्तोत्र किसने लिखा था?",
+        a_hi: "इसकी रचना लंकापति रावण ने की थी, जो भगवान शिव का परम भक्त था, ताकि वह शिव के तांडव स्वरूप की स्तुति कर सके।"
       },
       {
-        q_en: "What is the benefit of listening to Shiv Tandav Stotram?",
-        a_en: "Listening or chanting it removes obstacles, builds positive vibrations, and brings success and mental clarity.",
-        q_hi: "शिव ताण्डव स्तोत्र सुनने का क्या लाभ है?",
-        a_hi: "इसे सुनने या जपने से जीवन की बाधाएं दूर होती हैं, सकारात्मक तरंगों का संचार होता है और सफलता मिलती है।"
+        q_en: "Listening or chanting it removes what obstacles?",
+        a_en: "Chanting it helps build strong positive energy vibrations, removes financial problems, and brings mental clarity and focus.",
+        q_hi: "शिव ताण्डव स्तोत्र सुनने या जपने से क्या लाभ होता है?",
+        a_hi: "इसके जाप से भय और मानसिक तनाव दूर होता है, घर की दरिद्रता समाप्त होती है और साधक को आत्मबल प्राप्त होता है।"
+      },
+      {
+        q_en: "Can we chant Shiv Tandav Stotram daily?",
+        a_en: "Yes, you can chant it daily, preferably during Pradosh Kaal (sunset hours) or during your morning prayers.",
+        q_hi: "क्या हम रोज शिव तांडव स्तोत्र का पाठ कर सकते हैं?",
+        a_hi: "हाँ, इसका दैनिक पाठ किया जा सकता है। विशेष रूप से प्रदोष काल (सूर्यास्त का समय) में इसका पाठ सर्वोत्तम फल देता है।"
+      },
+      {
+        q_en: "Is there any restriction on reciting Shiv Tandav?",
+        a_en: "No, anyone with a clean body and pure heart can recite it. Correct pronunciation of the Sanskrit verses is recommended to feel the full vibration energy.",
+        q_hi: "क्या शिव तांडव स्तोत्र के पाठ पर कोई प्रतिबंध है?",
+        a_hi: "नहीं, कोई भी व्यक्ति शुद्ध होकर इसका पाठ कर सकता है। संस्कृत शब्दों का शुद्ध उच्चारण करने से इसकी ऊर्जा का पूर्ण अनुभव होता है।"
       }
     ],
     related: ["maa-vindhyavasini-mantra", "how-to-reach"],
@@ -2102,16 +2222,28 @@ export const learnContent: Record<string, LearnTopic> = {
             <p>प्रतिदिन संध्या काल में इस आरती का गान करने से घर में सकारात्मक ऊर्जा का संचार होता है, पारिवारिक कलह शांत होते हैं और सुख-समृद्धि आती है। इसे कपूर या शुद्ध घी के दीपक से शंख और घंटियों की ध्वनि के साथ सामूहिक रूप से गाया जाता है।</p>`,
     faqs: [
       {
-        q_en: "Who wrote Om Jai Jagdish Hare?",
-        a_en: "It was composed by Pandit Shraddha Ram Phillauri around 1870 in Awadhi/Hindi.",
-        q_hi: "ॐ जय जगदीश हरे किसने लिखी थी?",
-        a_hi: "इसे १८७० के आसपास पंडित श्रद्धाराम फिल्लौरी ने अवधी/हिंदी में लिखा था।"
+        q_en: "Who wrote the Aarti 'Om Jai Jagdish Hare'?",
+        a_en: "It was composed by Pandit Shardha Ram Phillauri in the Punjab region in the 1870s.",
+        q_hi: "आरती 'ओम जय जगदीश हरे' किसने लिखी थी?",
+        a_hi: "इस प्रसिद्ध आरती की रचना १८७० के दशक में पंजाब के प्रसिद्ध लेखक पंडित श्रद्धा राम फिल्लौरी जी ने की थी।"
       },
       {
-        q_en: "What are the main benefits of chanting it?",
-        a_en: "It develops devotion, surrender, and balances the household energy during sunset transitions.",
-        q_hi: "इसका गान करने के क्या लाभ हैं?",
-        a_hi: "यह समर्पण और श्रद्धा की भावना जगाता है, तथा सूर्यास्त के समय घर के वातावरण को संतुलित करता है।"
+        q_en: "Which deity is worshiped in this Aarti?",
+        a_en: "It is dedicated to Lord Vishnu (Jagdish - Lord of the Universe), a form of the supreme divine deity.",
+        q_hi: "इस आरती में किस देवता की पूजा की जाती है?",
+        a_hi: "यह आरती सृष्टि के पालनहार भगवान विष्णु (जगदीश) के स्वरूप को समर्पित है।"
+      },
+      {
+        q_en: "Why is Om Jai Jagdish Hare played at the end of puja?",
+        a_en: "It is sung at the conclusion of almost all Hindu puja rituals to seek forgiveness for mistakes and express gratitude to the Lord.",
+        q_hi: "पूजा के अंत में ओम जय जगदीश हरे क्यों गाया जाता है?",
+        a_hi: "इसे सभी पूजाओं के समापन पर भगवान की सामूहिक स्तुति करने, गलतियों की क्षमा मांगने और कृतज्ञता प्रकट करने के लिए गाया जाता है।"
+      },
+      {
+        q_en: "Can we sing this Aarti at home daily?",
+        a_en: "Yes, singing this Aarti daily in the evening after lighting a camphor or ghee lamp brings peace, harmony, and wealth to the household.",
+        q_hi: "क्या हम इस आरती को रोज घर पर गा सकते हैं?",
+        a_hi: "हाँ, प्रतिदिन संध्याकाल में घी या कपूर का दीपक जलाकर इस आरती को गाने से घर में शांति, समृद्धि और सकारात्मक ऊर्जा बनी रहती है।"
       }
     ],
     related: ["aarti", "chalisa", "hanuman-chalisa-lyrics"],
@@ -2162,6 +2294,18 @@ export const learnContent: Record<string, LearnTopic> = {
         a_en: "Yes, anyone with a pure heart and clear mind can chant it to obtain mental clarity, focus, and positive vibes.",
         q_hi: "क्या कोई भी गायत्री मंत्र का जाप कर सकता है?",
         a_hi: "हाँ, शुद्ध मन और तन से कोई भी भक्त मानसिक एकाग्रता और सकारात्मक ऊर्जा के लिए इसका जाप कर सकता है।"
+      },
+      {
+        q_en: "How many times should Gayatri Mantra be chanted?",
+        a_en: "Traditionally, it is recommended to chant it 108 times daily using a Tulsi or Rudraksha mala, or in smaller repetitions of 3, 11, or 24 times.",
+        q_hi: "गायत्री मंत्र का जाप कितनी बार करना चाहिए?",
+        a_hi: "आमतौर पर प्रतिदिन रुद्राक्ष या तुलसी की माला से १०८ बार जप करना श्रेष्ठ माना जाता है, या फिर ३, ११, अथवा २४ बार भी कर सकते हैं।"
+      },
+      {
+        q_en: "What is the best time for Gayatri Mantra jaap?",
+        a_en: "The best times are during the Sandhya periods: sunrise (morning sandhya), noon (madhyahna sandhya), and sunset (evening sandhya).",
+        q_hi: "गायत्री मंत्र जाप का सर्वोत्तम समय क्या है?",
+        a_hi: "इसका जाप तीन संध्याओं में करना सर्वश्रेष्ठ है: सूर्योदय से पहले (प्रातः काल), दोपहर के समय (मध्याह्न) और सूर्यास्त के समय (सायंकाल)।"
       }
     ],
     related: ["maa-vindhyavasini-mantra", "shiv-tandav-stotram-lyrics", "hanuman-chalisa-lyrics"],
@@ -2194,16 +2338,28 @@ export const learnContent: Record<string, LearnTopic> = {
             <p>नित्य प्रातः काल सूर्योदय के समय पूर्व दिशा की ओर मुख करके इस मंत्र का रुद्राक्ष की माला से १०८ बार जाप करने से शारीरिक और मानसिक कष्ट दूर होते हैं। इसे अत्यंत शुद्धता और एकाग्रता के साथ जपना चाहिए।</p>`,
     faqs: [
       {
-        q_en: "Who discovered the Maha Mrityunjaya Mantra?",
-        a_en: "It was revealed to Sage Markandeya, who defeated Yama (the Lord of Death) by chanting it when his life was threatened at age 16.",
-        q_hi: "महामृत्युंजय मंत्र की खोज किसने की थी?",
-        a_hi: "यह मंत्र ऋषि मार्कंडेय को प्रकट हुआ था, जिन्होंने १६ वर्ष की आयु में यमराज (मृत्यु के देवता) को पराजित किया था।"
+        q_en: "What is the main benefit of chanting the Maha Mrityunjaya Mantra?",
+        a_en: "It is chanted for health, healing, protection from chronic illnesses, and removing the fear of untimely death.",
+        q_hi: "महामृत्युंजय मंत्र के जाप का मुख्य लाभ क्या है?",
+        a_hi: "यह मंत्र आरोग्य, लंबी आयु, शारीरिक रोगों से मुक्ति और अकाल मृत्यु के भय को दूर करने के लिए जपा जाता है।"
       },
       {
-        q_en: "What is the difference between Gayatri and Mrityunjaya Mantra?",
-        a_en: "Gayatri is primarily for intellect and spiritual awakening; Mrityunjaya is for physical protection, healing, and overcoming the fear of death.",
+        q_en: "What is the difference between Gayatri and Maha Mrityunjaya Mantra?",
+        a_en: "Gayatri Mantra is for intellect and spiritual wisdom (seeking light), while Maha Mrityunjaya Mantra is for physical healing and protection (seeking health/immortality).",
         q_hi: "गायत्री और महामृत्युंजय मंत्र में क्या अंतर है?",
         a_hi: "गायत्री मंत्र बुद्धि के विकास और आध्यात्मिक चेतना के लिए है; महामृत्युंजय मंत्र शारीरिक सुरक्षा, स्वास्थ्य लाभ और मृत्यु के भय को दूर करने के लिए है।"
+      },
+      {
+        q_en: "What does the word 'Tryambakam' mean in the mantra?",
+        a_en: "Tryambakam refers to the three-eyed Lord Shiva, representing his vision across past, present, and future.",
+        q_hi: "मंत्र में 'त्र्यम्बकम्' शब्द का क्या अर्थ है?",
+        a_hi: "त्र्यम्बकम् का अर्थ है तीन आंखों वाले भगवान शिव, जो भूत, वर्तमान और भविष्य तीनों का ज्ञान रखते हैं।"
+      },
+      {
+        q_en: "How to chant Maha Mrityunjaya Mantra for healing?",
+        a_en: "Chant it early in the morning facing east, preferably using a Rudraksha mala, keeping a vessel of water nearby which can be consumed after.",
+        q_hi: "आरोग्य के लिए महामृत्युंजय मंत्र का जाप कैसे करें?",
+        a_hi: "सुबह पूर्व दिशा की ओर मुख करके रुद्राक्ष की माला से जप करें। पास में जल का पात्र रखें, जिसे जाप के बाद चरणामृत के रूप में पी सकते हैं।"
       }
     ],
     related: ["maa-vindhyavasini-mantra", "shiv-tandav-stotram-lyrics", "gayatri-mantra-meaning"],
@@ -2230,16 +2386,28 @@ export const learnContent: Record<string, LearnTopic> = {
             <p>प्रतिदिन या विशेष रूप से प्रत्येक सोमवार और सावन के महीने में शिव चालीसा का पाठ करने से भक्तों के बिगड़े काम बन जाते हैं, कर्ज से मुक्ति मिलती है और घर में सुख-शांति का वास होता है।</p>`,
     faqs: [
       {
-        q_en: "What is the best time to recite Shiv Chalisa?",
-        a_en: "Chanting it in the evening hours during Pradosh Kaal or morning during Shiva Puja is highly beneficial.",
-        q_hi: "शिव चालीसा पाठ करने का सर्वोत्तम समय क्या है?",
-        a_hi: "शाम को प्रदोष काल में या सुबह शिव पूजा के समय इसका पाठ करना अत्यंत फलदायी होता है।"
-      },
-      {
         q_en: "What is traditionally offered to Shiva during this puja?",
         a_en: "Devotees offer fresh Bilva leaves, water mixed with milk, honey, and white flowers to the Shivling while reciting.",
         q_hi: "इस पूजा के दौरान शिवजी को क्या अर्पित किया जाता है?",
         a_hi: "पाठ करते समय भक्त शिवलिंग पर बेलपत्र, दूध मिला जल, शहद और सफेद फूल अर्पित करते हैं।"
+      },
+      {
+        q_en: "What are the benefits of reading Shiv Chalisa?",
+        a_en: "It brings peace, reduces stress, resolves marital and family disputes, and helps overcome the fear of death.",
+        q_hi: "शिव चालीसा का पाठ करने के क्या फायदे हैं?",
+        a_hi: "शिव चालीसा का पाठ करने से भय से मुक्ति, जीवन में शांति और सकारात्मक ऊर्जा का संचार होता है।"
+      },
+      {
+        q_en: "How many times should Shiv Chalisa be read?",
+        a_en: "Reading it once daily is highly beneficial. For specific wishes or intense meditation, you can recite it 11 or 21 times on Mondays.",
+        q_hi: "शिव चालीसा का पाठ कितनी बार करना चाहिए?",
+        a_hi: "दैनिक रूप से एक बार पाठ करना बहुत लाभकारी है। सोमवार के दिन मनोकामना पूर्ति के लिए ११ या २१ बार भी पाठ किया जा सकता है।"
+      },
+      {
+        q_en: "Can we read Shiv Chalisa without a Shivling at home?",
+        a_en: "Yes, you can sit in a clean spot, place a picture or photo of Lord Shiva or family deities, light a diya, and read the Chalisa with pure devotion.",
+        q_hi: "क्या हम घर में शिवलिंग के बिना भी शिव चालीसा पढ़ सकते हैं?",
+        a_hi: "जी हाँ, आप किसी स्वच्छ स्थान पर बैठकर भगवान शिव के चित्र या मूर्ति के सामने दीपक जलाकर पूरे श्रद्धा भाव से पाठ कर सकते हैं।"
       }
     ],
     related: ["shiv-tandav-stotram-lyrics", "hanuman-chalisa-lyrics", "aarti"],
