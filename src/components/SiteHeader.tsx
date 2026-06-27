@@ -162,8 +162,8 @@ export function SiteHeader() {
         />
       )}
       <div
-        className={`fixed top-0 right-0 h-full w-[290px] bg-card/95 backdrop-blur-2xl border-l border-gold/30 shadow-sacred z-50 transition-all duration-500 ease-spring lg:hidden flex flex-col ${
-          open ? "translate-x-0 opacity-100" : "translate-x-full opacity-0 pointer-events-none"
+        className={`fixed top-0 left-0 h-full w-[240px] bg-card/95 backdrop-blur-2xl border-r border-gold/30 shadow-sacred z-50 transition-all duration-500 ease-spring lg:hidden flex flex-col ${
+          open ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0 pointer-events-none"
         }`}
       >
         <div className="p-5 border-b border-gold/20 flex items-center justify-between">
@@ -181,7 +181,11 @@ export function SiteHeader() {
           </button>
         </div>
 
-        <nav className="flex-1 overflow-y-scroll px-4 py-4 flex flex-col gap-1 scrollbar-custom">
+        <nav
+          className="flex-1 overflow-y-scroll py-2 flex flex-col gap-0.5 scrollbar-custom"
+          style={{ direction: "rtl" }}
+        >
+          <div style={{ direction: "ltr" }} className="flex flex-col gap-0.5 px-3">
           {links.map((l, idx) => {
             const Icon = l.icon;
             return (
@@ -189,25 +193,26 @@ export function SiteHeader() {
                 key={l.to}
                 to={l.to}
                 onClick={() => setOpen(false)}
-                className={`group flex items-center gap-3.5 px-4 py-2.5 rounded-xl text-foreground/80 hover:text-maroon hover:bg-gold/5 active:scale-[0.98] transition-all duration-300 ${
-                  lang === "hi" ? "font-devanagari text-base" : "text-sm"
+                className={`group flex items-center gap-2.5 px-3 py-2 rounded-xl text-foreground/80 hover:text-maroon hover:bg-gold/5 active:scale-[0.98] transition-all duration-300 ${
+                  lang === "hi" ? "font-devanagari text-sm" : "text-xs"
                 }`}
                 activeProps={{
-                  className: "text-maroon font-semibold bg-gold/10 border-r-4 border-maroon",
+                  className: "text-maroon font-semibold bg-gold/10 border-l-4 border-maroon",
                 }}
                 activeOptions={{ exact: l.to === "/" }}
               >
-                <div className="w-8 h-8 rounded-lg bg-gradient-sacred/10 text-saffron flex items-center justify-center shrink-0">
-                  <Icon size={16} />
+                <div className="w-7 h-7 rounded-lg bg-gradient-sacred/10 text-saffron flex items-center justify-center shrink-0">
+                  <Icon size={14} />
                 </div>
                 <span>{t(l.key)}</span>
                 <ArrowRight
-                  size={12}
+                  size={11}
                   className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-gold"
                 />
               </Link>
             );
           })}
+          </div>
         </nav>
 
         <div className="p-5 border-t border-gold/20 flex flex-col gap-3 bg-cream/10">
