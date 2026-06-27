@@ -1176,38 +1176,29 @@ function VideoAdmin() {
     if (!form.title.trim() || !form.embed.trim())
       return toast.error("Title and video link/ID required");
 
-    const isInstagram = form.embed.toLowerCase().includes("instagram.com");
-    const isShortsLink = form.embed.toLowerCase().includes("shorts") || isInstagram;
+    if (form.embed.toLowerCase().includes("instagram.com")) {
+      return toast.error("Instagram Reels are no longer supported. Please enter a YouTube link.");
+    }
+
+    const isShortsLink = form.embed.toLowerCase().includes("shorts");
 
     if (videoTab === "short" && !isShortsLink) {
-      return toast.error("Only YouTube Shorts or Instagram Reels are allowed in this section.");
+      return toast.error("Only YouTube Shorts are allowed in this section.");
     }
     if (videoTab === "video" && isShortsLink) {
       return toast.error(
-        "YouTube Shorts and Instagram Reels must be added under the Shorts tab, not the Videos section.",
+        "YouTube Shorts must be added under the Shorts tab, not the Videos section.",
       );
     }
 
-    let videoId = "";
-    let embedUrl = "";
-
-    if (isInstagram) {
-      const instaId = extractInstagramId(form.embed);
-      if (!instaId) {
-        return toast.error("Invalid Instagram Reel URL. Please enter a valid reel or post link.");
-      }
-      videoId = `ig_${instaId}`;
-      embedUrl = `https://www.instagram.com/reel/${instaId}/embed/`;
-    } else {
-      const youtubeId = extractYoutubeId(form.embed);
-      if (!youtubeId) {
-        return toast.error(
-          "Invalid YouTube URL or Video ID. Please enter a valid YouTube link or 11-char ID.",
-        );
-      }
-      videoId = youtubeId;
-      embedUrl = `https://www.youtube.com/embed/${youtubeId}`;
+    const youtubeId = extractYoutubeId(form.embed);
+    if (!youtubeId) {
+      return toast.error(
+        "Invalid YouTube URL or Video ID. Please enter a valid YouTube link or 11-char ID.",
+      );
     }
+    const videoId = youtubeId;
+    const embedUrl = `https://www.youtube.com/embed/${youtubeId}`;
 
     const { error } = await supabase.from("youtube_videos").insert({
       id: videoId,
@@ -1225,38 +1216,29 @@ function VideoAdmin() {
     if (!editForm.title.trim() || !editForm.embed.trim())
       return toast.error("Title and video link/ID required");
 
-    const isInstagram = editForm.embed.toLowerCase().includes("instagram.com");
-    const isShortsLink = editForm.embed.toLowerCase().includes("shorts") || isInstagram;
+    if (editForm.embed.toLowerCase().includes("instagram.com")) {
+      return toast.error("Instagram Reels are no longer supported. Please enter a YouTube link.");
+    }
+
+    const isShortsLink = editForm.embed.toLowerCase().includes("shorts");
 
     if (editForm.type === "short" && !isShortsLink) {
-      return toast.error("Only YouTube Shorts or Instagram Reels are allowed in this section.");
+      return toast.error("Only YouTube Shorts are allowed in this section.");
     }
     if (editForm.type === "video" && isShortsLink) {
       return toast.error(
-        "YouTube Shorts and Instagram Reels must be added under the Shorts tab, not the Videos section.",
+        "YouTube Shorts must be added under the Shorts tab, not the Videos section.",
       );
     }
 
-    let videoId = "";
-    let embedUrl = "";
-
-    if (isInstagram) {
-      const instaId = extractInstagramId(editForm.embed);
-      if (!instaId) {
-        return toast.error("Invalid Instagram Reel URL. Please enter a valid reel or post link.");
-      }
-      videoId = `ig_${instaId}`;
-      embedUrl = `https://www.instagram.com/reel/${instaId}/embed/`;
-    } else {
-      const youtubeId = extractYoutubeId(editForm.embed);
-      if (!youtubeId) {
-        return toast.error(
-          "Invalid YouTube URL or Video ID. Please enter a valid YouTube link or 11-char ID.",
-        );
-      }
-      videoId = youtubeId;
-      embedUrl = `https://www.youtube.com/embed/${youtubeId}`;
+    const youtubeId = extractYoutubeId(editForm.embed);
+    if (!youtubeId) {
+      return toast.error(
+        "Invalid YouTube URL or Video ID. Please enter a valid YouTube link or 11-char ID.",
+      );
     }
+    const videoId = youtubeId;
+    const embedUrl = `https://www.youtube.com/embed/${youtubeId}`;
 
     if (videoId !== id) {
       const { error: delError } = await supabase.from("youtube_videos").delete().eq("id", id);
@@ -1358,9 +1340,9 @@ function VideoAdmin() {
         <input
           value={form.embed}
           onChange={(e) => setForm({ ...form, embed: e.target.value })}
-          placeholder={`YouTube Link/Video ID or Instagram Reel Link (e.g. ${
+          placeholder={`YouTube Link or Video ID (e.g. ${
             videoTab === "short"
-              ? "https://instagram.com/reel/C8C8a2hI7-v or https://youtube.com/shorts/A8Vv3V-d7rg"
+              ? "https://youtube.com/shorts/A8Vv3V-d7rg"
               : "https://www.youtube.com/watch?v=i3W9AOFhJAI"
           })`}
           className="w-full px-4 py-2 rounded-lg border border-input bg-background text-xs"
