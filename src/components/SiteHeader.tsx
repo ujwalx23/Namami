@@ -162,8 +162,8 @@ export function SiteHeader() {
         />
       )}
       <div
-        className={`fixed top-0 left-0 h-full w-[240px] bg-card/95 backdrop-blur-2xl border-r border-gold/30 shadow-sacred z-50 transition-all duration-500 ease-spring lg:hidden flex flex-col ${
-          open ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0 pointer-events-none"
+        className={`fixed top-0 right-0 h-full w-[240px] bg-card/95 backdrop-blur-2xl border-l border-gold/30 shadow-sacred z-50 transition-all duration-500 ease-spring lg:hidden flex flex-col ${
+          open ? "translate-x-0 opacity-100" : "translate-x-full opacity-0 pointer-events-none"
         }`}
       >
         <div className="p-5 border-b border-gold/20 flex items-center justify-between">
