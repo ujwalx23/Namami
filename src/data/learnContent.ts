@@ -1768,24 +1768,40 @@ export const learnContent: Record<string, LearnTopic> = {
   "kamakhya-temple-guide": {
     slug: "kamakhya-temple-guide",
     category: "Guide",
-    title_en: "Kamakhya Temple Guwahati - Shakti Peeth History & Timings",
-    title_hi: "कामाख्या मंदिर गुवाहाटी - कामाख्या शक्तिपीठ का इतिहास और दर्शन नियम",
-    metaTitle_en: "Kamakhya Temple Guwahati - Shakti Peeth Yatra Guide",
-    metaTitle_hi: "कामाख्या मंदिर गुवाहाटी - इतिहास, मंदिर का समय और अंबुबाची मेला",
-    metaDesc_en: "Comprehensive visitor guide to Kamakhya Temple in Guwahati, Assam. Learn about the sacred bleeding hill myth, VIP passes, daily opening hours, and Ambubachi Mela.",
-    metaDesc_hi: "गुवाहाटी के प्रसिद्ध कामाख्या देवी मंदिर की यात्रा गाइड। तांत्रिक साधना की पीठ कामाख्या देवी का इतिहास, अंबुबाची मेला नियम और दर्शन बुकिंग की जानकारी।",
-    keywords_en: "Kamakhya temple Guwahati, Kamakhya shakti peeth, Ambubachi mela dates, Kamakhya temple timings, Assam tourism guide, Kamakhya entry fees",
-    keywords_hi: "कामाख्या मंदिर गुवाहाटी, कामाख्या शक्तिपीठ इतिहास, अंबुबाची मेला, कामाख्या मंदिर समय, असम पर्यटन",
-    content_en: `<h2>The Center of Tantric Devotion: Kamakhya Devalaya</h2>
-            <p>Perched atop the Nilachal Hills in Guwahati, Assam, the <strong>Kamakhya Temple</strong> is the oldest and one of the most powerful of the 51 Shakti Peethas in Hindu tradition. Unlike traditional temples, there is no stone idol of the Goddess here; instead, the deity is worshipped in the form of a natural stone fissure (Yoni) through which a natural spring flows, situated inside a dark cave sanctuary.</p>
+    title_en: "Kamakhya Temple Guwahati - Ambubachi Mela & Darshan Guide",
+    title_hi: "कामाख्या देवी मंदिर गुवाहाटी - अंबुबाची मेला नियम और दर्शन गाइड",
+    metaTitle_en: "Kamakhya Temple Guwahati Yatra - VIP Pass & Timings",
+    metaTitle_hi: "कामाख्या मंदिर गुवाहाटी - ५०१ रु वीआईपी दर्शन पास, अंबुबाची मेला तिथियां",
+    metaDesc_en: "Complete guide to Maa Kamakhya Temple in Guwahati, Assam. Learn about online VIP passes, Ambubachi Mela dates, history of the Shakti Peeth, and how to reach.",
+    metaDesc_hi: "गुवाहाटी असम के प्रसिद्ध कामाख्या देवी शक्तिपीठ की यात्रा गाइड। ५०१ रु वीआईपी पास बुकिंग, अंबुबाची मेला नियम, दर्शन समय सारणी और पौराणिक इतिहास।",
+    keywords_en: "Kamakhya temple Guwahati, Ambubachi Mela dates, Kamakhya VIP pass 501, Nilachal hills Guwahati, how to reach Kamakhya, Assam tourism",
+    keywords_hi: "कामाख्या मंदिर गुवाहाटी, अंबुबाची मेला कब है, कामाख्या वीआईपी पास ५०१, नीलाचल पहाड़ी गुवाहाटी, कामाख्या देवी दर्शन समय, असम टूरिज्म",
+    content_en: `<h2>The Mystical Center of Tantra: Maa Kamakhya Temple</h2>
+            <p>Situated atop the sacred Nilachal Hills in Guwahati, Assam, the ancient <strong>Kamakhya Temple</strong> is the most revered of the 51 Shakti Peethas. Unlike standard temples, there is no clay or stone idol of the deity inside the inner sanctum. Instead, devotees worship a natural stone fissure (symbolizing the yoni of Goddess Sati) through which a natural spring flows in a dark cave.</p>
+            
             <h3>The Miraculous Ambubachi Mela</h3>
-            <p>Every year in mid-June, the temple hosts the world-famous <strong>Ambubachi Mela</strong>. It is believed that the Goddess undergoes her annual menstrual cycle during these three days. The temple remains completely closed to the public. On the fourth day, the gates open with grand festivities, and devotees receive a red cloth soaked in the spring water (called Angodak or Raktavastra) as a highly sacred blessing.</p>
-            <h3>Visiting and Ticket Guidelines</h3>
-            <p>General entry is free, but queues can take 4 to 6 hours. Devotees can purchase Special Entry Passes (VIP Darshan) for Rs 501 at the counter or pre-book online to complete their darshan within 1 to 2 hours. The best hours to visit are early in the morning before 07:00 AM.</p>`,
-    content_hi: `<h2>तंत्र साधना का केंद्र: माँ कामाख्या महापीठ</h2>
-            <p>असम की राजधानी गुवाहाटी में नीलाचल पहाड़ी के शिखर पर स्थित <strong>कामाख्या देवी मंदिर</strong> हिंदू धर्म के ५१ शक्तिपीठों में सबसे प्राचीन और रहस्यों से परिपूर्ण है। यहाँ माता की कोई मूर्ति स्थापित नहीं है, बल्कि गर्भगृह में एक प्राकृतिक जल स्रोत वाली शिला (योनि स्वरूप) की पूजा की जाती है, जो एक अंधेरी गुफा के भीतर स्थित है।</p>
+            <p>Every year in mid-June, the temple hosts the legendary <strong>Ambubachi Mela</strong>. It is believed that the Goddess goes through her annual menstrual cycle during these three days. The temple doors remain strictly closed to all pilgrims, and the nearby Brahmaputra River is said to turn red. On the fourth day, the doors are opened, and devotees receive pieces of red cloth (called Angodak) soaked in the sacred water, believed to possess divine healing powers.</p>
+
+            <h3>How to Reach & Transport Guide</h3>
+            <ul>
+                <li><strong>By Air:</strong> Lokpriya Gopinath Bordoloi International Airport (GAU) is 20 km away. Devotees can hire pre-paid taxis to Nilachal hills.</li>
+                <li><strong>By Train:</strong> Guwahati Railway Station is only 6 km from the temple. Regular local buses and auto-rickshaws operate from the station.</li>
+            </ul>
+
+            <h3>Darshan Passes & Ticket Options</h3>
+            <p>While general entry is free, the queue can take anywhere between 4 to 6 hours. To save time, pilgrims can purchase a <strong>Special Entry Pass (VIP Darshan)</strong> for ₹501 at the counter or pre-book online, allowing them to complete their darshan within 1 to 2 hours. The best hours to visit are early in the morning before 07:00 AM.</p>`,
+    content_hi: `<h2>तंत्र साधना का महान केंद्र: माँ कामाख्या महापीठ गुवाहाटी</h2>
+            <p>असम की राजधानी गुवाहाटी में नीलाचल पहाड़ी के शिखर पर स्थित <strong>कामाख्या देवी मंदिर</strong> हिंदू धर्म के ५१ शक्तिपीठों में सबसे प्राचीन और रहस्यमयी है। यहाँ माता की कोई पारंपरिक मूर्ति स्थापित नहीं है, बल्कि गर्भगृह में एक प्राकृतिक भूमिगत जल स्रोत वाली शिला (योनि स्वरूप) की पूजा की जाती है, जो एक अंधेरी गुफा के भीतर स्थित है।</p>
+            
             <h3>अद्भुत वार्षिक अंबुबाची मेला</h3>
-            <p>प्रत्येक वर्ष जून के मध्य में यहाँ <strong>अंबुबाची मेले</strong> का आयोजन होता है। ऐसी मान्यता है कि इन तीन दिनों में माता कामाख्या रजस्वला होती हैं, जिसके कारण तीन दिनों तक मंदिर के कपाट पूरी तरह बंद रहते हैं। चौथे दिन मंदिर खुलने पर भक्तों को लाल वस्त्र (रक्त वस्त्र) प्रसाद के रूप में दिया जाता है, जिसे बेहद चमत्कारी माना जाता है।</p>
+            <p>प्रत्येक वर्ष जून के मध्य में यहाँ <strong>अंबुबाची मेले</strong> का आयोजन होता है। ऐसी मान्यता है कि इन तीन दिनों में माता कामाख्या रजस्वला होती हैं, जिसके कारण तीन दिनों तक मंदिर के कपाट श्रद्धालुओं के लिए पूरी तरह बंद रहते हैं। चौथे दिन मंदिर खुलने पर भक्तों को लाल वस्त्र (रक्त वस्त्र/अंगोदक) प्रसाद के रूप में दिया जाता है, जिसे परम चमत्कारी माना जाता है।</p>
+
+            <h3>कैसे पहुँचें: परिवहन एवं दूरी मार्ग</h3>
+            <ul>
+                <li><strong>हवाई मार्ग:</strong> लोकप्रिय गोपीनाथ बोरदोलोई अंतर्राष्ट्रीय हवाई अड्डा (GAU) मंदिर से २० किमी दूर है। यहाँ से टैक्सी आसानी से मिल जाती हैं।</li>
+                <li><strong>रेल मार्ग:</strong> गुवाहाटी रेलवे स्टेशन (GHY) मुख्य मंदिर से केवल ६ किमी की दूरी पर स्थित है, जहाँ से ऑटो और बसें चलती हैं।</li>
+            </ul>
+
             <h3>दर्शन नियम और पास टिकट</h3>
             <p>मंदिर में सामान्य दर्शन निःशुल्क है, लेकिन लंबी कतारों के कारण ४ से ६ घंटे लग सकते हैं। ५०१ रुपये का विशेष दर्शन पास (VIP पास) खरीदकर भक्त १ से २ घंटे में दर्शन पूरे कर सकते हैं। सुबह ०७:०० बजे से पहले पहुँचना सबसे उपयुक्त रहता है।</p>`,
     faqs: [
@@ -1809,7 +1825,7 @@ export const learnContent: Record<string, LearnTopic> = {
     slug: "somnath-temple-guide",
     category: "Guide",
     title_en: "Somnath Temple Gujarat - History, Sound Show & Timings",
-    title_hi: "सोमनाथ मंदिर गुजरात - इतिहास, आरती और लाइट एंड साउंड शो गाइड",
+    title_hi: "सोमनाथ मंदिर गुजरात - इतिहास, आरती और लाइट एंड SOUND शो गाइड",
     metaTitle_en: "Somnath Jyotirlinga Temple - Sound Show & Travel Guide",
     metaTitle_hi: "सोमनाथ मंदिर गुजरात - इतिहास, आरती समय और दर्शनीय स्थल",
     metaDesc_en: "Complete visitor guide to Shree Somnath Jyotirlinga Temple in Gujarat. Explore temple history of reconstruction, daily sound show timings, and how to reach.",
@@ -1818,16 +1834,32 @@ export const learnContent: Record<string, LearnTopic> = {
     keywords_hi: "सोमनाथ मंदिर गुजरात, सोमनाथ लाइट शो, प्रथम ज्योतिर्लिंग इतिहास, सोमनाथ दर्शन समय, वेरावल स्टेशन, गुजरात टूरिज्म",
     content_en: `<h2>The First of the Twelve Sacred Jyotirlingas</h2>
             <p>Situated on the coast of the Arabian Sea in Prabhas Patan near Veraval in Gujarat, the grand <strong>Somnath Temple</strong> is revered as the first of the twelve holy Jyotirlingas of Lord Shiva. The name 'Somnath' means 'Lord of the Moon' (Soma). According to Hindu scriptures, the temple was originally built of gold by the Moon God himself, then rebuilt in silver by Ravana, in wood by Lord Krishna, and in stone by King Bhimdev.</p>
+            
             <h3>A Symbol of Resilience and Reconstruction</h3>
             <p>The temple is historically famous for its resilience. It was destroyed and plundered by foreign invaders (including Mahmud of Ghazni) multiple times over the centuries. Each time, it was rebuilt with greater grandness. The current temple, designed in the magnificent Chalukya style of architecture, was commissioned by Sardar Vallabhbhai Patel and completed in 1951.</p>
-            <h3>The Light and Sound Show</h3>
-            <p>Every evening, the temple hosts a spectacular <strong>Light and Sound Show (Jay Somnath)</strong> from <strong>08:00 PM to 09:00 PM</strong>. The narration against the backdrop of the illuminated temple and roaring sea waves details the rich history of the shrine.</p>`,
-    content_hi: `<h2>द्वादश ज्योतिर्लिंगों में प्रथम: श्री सोमनाथ महादेव</h2>
+
+            <h3>The Light and Sound Show (Jay Somnath)</h3>
+            <p>Every evening, the temple hosts a spectacular <strong>Light and Sound Show</strong> from <strong>08:00 PM to 09:00 PM</strong>. The narration, set against the backdrop of the illuminated temple and roaring sea waves, details the rich history of the shrine. The ticket price is ₹25 per person.</p>
+
+            <h3>How to Reach: Train & Airport Routes</h3>
+            <ul>
+                <li><strong>By Air:</strong> Diu Airport is 85 km from Somnath. Rajkot Airport is 200 km away.</li>
+                <li><strong>By Train:</strong> Veraval Junction (VRL) is the closest railway station, located just 5 km from the Somnath Temple, with direct connectivity to major cities in Gujarat.</li>
+            </ul>`,
+    content_hi: `<h2>द्वादश ज्योतिर्लिंगों में प्रथम: श्री सोमनाथ महादेव गुजरात</h2>
             <p>गुजरात के वेरावल बंदरगाह के निकट प्रभास पाटन में अरब सागर के तट पर स्थित भव्य <strong>सोमनाथ मंदिर</strong> भगवान शिव के १२ ज्योतिर्लिंगों में प्रथम माना जाता है। शास्त्रों के अनुसार इस मंदिर की स्थापना चंद्रदेव (सोम) ने स्वयं की थी। ऐसी मान्यता है कि सबसे पहले चंद्रदेव ने यहाँ स्वर्ण मंदिर, रावण ने रजत मंदिर, श्रीकृष्ण ने चंदन की लकड़ी का मंदिर और अंत में भीमदेव ने पाषाण मंदिर बनवाया था।</p>
+            
             <h3>आस्था और पुनर्निर्माण का प्रतीक</h3>
             <p>सोमनाथ मंदिर का इतिहास इसके बार-बार टूटने और पुनः खड़े होने की गौरवशाली गाथा है। विदेशी आक्रांताओं (महमूद गजनवी सहित) ने इसे कई बार लूटा और नष्ट किया, लेकिन हर बार हिंदुओं की अदम्य आस्था ने इसे फिर से खड़ा कर दिया। वर्तमान भव्य मंदिर का निर्माण सरदार वल्लभभाई पटेल के प्रयासों से शुरू होकर १९५१ में संपन्न हुआ था।</p>
+
             <h3>लाइट एंड साउंड (ध्वनि एवं प्रकाश) शो</h3>
-            <p>प्रतिदिन शाम <strong>रात ०८:०० से ०९:०० बजे</strong> मंदिर परिसर में एक शानदार लाइट एंड साउंड शो आयोजित किया जाता है। समुद्र की लहरों की गर्जना और रोशन मंदिर के बीच सोमनाथ का गौरवशाली इतिहास प्रस्तुत किया जाता है।</p>`,
+            <p>प्रतिदिन शाम <strong>रात ०८:०० से ०९:०० बजे</strong> मंदिर परिसर में एक शानदार लाइट एंड साउंड शो आयोजित किया जाता है। समुद्र की लहरों की गर्जना और रोशन मंदिर के बीच सोमनाथ का गौरवशाली इतिहास प्रस्तुत किया जाता है। इसका टिकट शुल्क ₹२५ है।</p>
+
+            <h3>कैसे पहुँचें: निकटतम स्टेशन और मार्ग</h3>
+            <ul>
+                <li><strong>हवाई मार्ग:</strong> दीव हवाई अड्डा सोमनाथ से लगभग ८५ किमी और राजकोट हवाई अड्डा लगभग २०० किमी दूर स्थित है।</li>
+                <li><strong>रेल मार्ग:</strong> वेरावल जंक्शन (VRL) निकटतम रेलवे स्टेशन है, जो सोमनाथ मंदिर से केवल ५ किमी की दूरी पर स्थित है। यहाँ से ऑटो आसानी से उपलब्ध हैं।</li>
+            </ul>`,
     faqs: [
       {
         q_en: "What are the daily Darshan timings at Somnath?",
@@ -1858,16 +1890,32 @@ export const learnContent: Record<string, LearnTopic> = {
     keywords_hi: "बद्रीनाथ धाम यात्रा, badrinath खुलने की तिथि, चार धाम पंजीकरण, हरिद्वार से बद्रीनाथ की दूरी, माणा गाँव, बद्रीनाथ का मौसम",
     content_en: `<h2>The Holy Seat of Lord Vishnu: Badrinath Dham</h2>
             <p>Nestled between the Nar and Narayana mountain ranges in Chamoli district of Uttarakhand, the sacred <strong>Badrinath Temple</strong> is dedicated to Lord Vishnu in his form as Badrinarayan. It sits on the banks of the Alaknanda River at an altitude of 3,133 meters. Badrinath is the most visited shrine in Uttarakhand's Char Dham circuit and is highly unique as the only temple that is part of both the national Char Dham and Uttarakhand's Char Dham.</p>
+            
             <h3>Tapt Kund: The Natural Hot Springs</h3>
             <p>Before entering the temple, pilgrims traditionally take a holy dip in the <strong>Tapt Kund</strong>, a natural sulfur hot spring located just below the temple entrance. Despite freezing atmospheric temperatures, the water in the spring remains consistently hot at around 45 degrees Celsius, offering medicinal relief to tired travelers.</p>
+
             <h3>The Last Indian Village: Mana</h3>
-            <p>Just 3 kilometers beyond Badrinath Temple lies <strong>Mana Village</strong>, officially recognized as the 'First Indian Village' sharing a border with Tibet. Devotees visit Mana to see Vyas Gufa (where Sage Vyas is believed to have composed the Mahabharata) and Bhim Pul, a massive stone bridge across the Saraswati River.</p>`,
+            <p>Just 3 kilometers beyond Badrinath Temple lies <strong>Mana Village</strong>, officially recognized as the 'First Indian Village' sharing a border with Tibet. Devotees visit Mana to see Vyas Gufa (where Sage Vyas is believed to have composed the Mahabharata) and Bhim Pul, a massive stone bridge across the Saraswati River.</p>
+
+            <h3>How to Reach: Route & Travel Tips</h3>
+            <ul>
+                <li><strong>By Air:</strong> Jolly Grant Airport in Dehradun is the nearest airport, located about 310 km away.</li>
+                <li><strong>By Train:</strong> Yog Nagari Rishikesh (YNRK) is the nearest railway station (295 km). Regular taxi services and state buses operate from Rishikesh via NH-7 to Joshimath and Badrinath.</li>
+            </ul>`,
     content_hi: `<h2>भगवान विष्णु का पावन परमधाम: बद्रीनाथ</h2>
             <p>उत्तराखंड के चमोली जिले में नर और नारायण पर्वत श्रेणियों के मध्य अलकनंदा नदी के तट पर स्थित <strong>बद्रीनाथ मंदिर</strong> भगवान विष्णु (बद्रीनारायण रूप) को समर्पित है। समुद्र तल से ३,१३३ मीटर की ऊंचाई पर स्थित यह धाम भारत के राष्ट्रीय चार धामों में से एक है। ऐसी मान्यता है कि सतयुग में यह भगवान शिव का निवास था, जिसे बाद में उन्होंने भगवान विष्णु को सौंप दिया था।</p>
+            
             <h3>तप्त कुंड: कड़ाके की ठंड में गर्म जल स्रोत</h3>
             <p>बद्रीनाथ मंदिर में प्रवेश करने से पहले प्रत्येक श्रद्धालु अलकनंदा नदी के किनारे स्थित <strong>तप्त कुंड</strong> में स्नान करते हैं। यह एक प्राकृतिक सल्फर युक्त गर्म पानी का झरना है। बाहर हाड़ कंपाने वाली ठंड होने के बावजूद इस कुंड का तापमान लगभग ४५ डिग्री सेल्सियस रहता है, जिसमें स्नान करने से त्वचा रोग ठीक हो जाते हैं।</p>
+
             <h3>भारत का पहला गाँव: माणा</h3>
-            <p>बद्रीनाथ मंदिर से मात्र ३ किमी आगे स्थित <strong>माणा गाँव</strong> को भारत सरकार द्वारा 'भारत का प्रथम गाँव' घोषित किया गया है। यह तिब्बत सीमा के निकट है। यहाँ प्रसिद्ध व्यास गुफा (जहाँ महाभारत की रचना हुई थी) और सरस्वती नदी पर बना भीम पुल देखने लायक पर्यटन स्थल हैं।</p>`,
+            <p>बद्रीनाथ मंदिर से मात्र ३ किमी आगे स्थित <strong>माणा गाँव</strong> को भारत सरकार द्वारा 'भारत का प्रथम गाँव' घोषित किया गया है। यह तिब्बत सीमा के निकट है। यहाँ प्रसिद्ध व्यास गुफा (जहाँ महाभारत की रचना हुई थी) और सरस्वती नदी पर बना भीम पुल देखने लायक पर्यटन स्थल हैं।</p>
+
+            <h3>कैसे पहुँचें: सड़क मार्ग एवं निकटतम हवाई अड्डा</h3>
+            <ul>
+                <li><strong>हवाई मार्ग:</strong> जॉली ग्रांट हवाई अड्डा देहरादून लगभग ३१० किमी की दूरी पर है।</li>
+                <li><strong>रेल मार्ग:</strong> योग नगरी ऋषिकेश (२९५ किमी) निकटतम रेलवे स्टेशन है। यहाँ से राष्ट्रीय राजमार्ग ७ (NH-7) द्वारा देवप्रयाग, रुद्रप्रयाग, जोशीमठ होते हुए बद्रीनाथ धाम तक बसें और टैक्सियाँ चलती हैं।</li>
+            </ul>`,
     faqs: [
       {
         q_en: "When does Badrinath Temple close for winter?",
@@ -1895,9 +1943,10 @@ export const learnContent: Record<string, LearnTopic> = {
     metaDesc_en: "Complete travel guide to Shree Jagannath Temple in Puri, Odisha. Read about dynamic temple timings, mysteries of the flag and wind, and Rath Yatra booking.",
     metaDesc_hi: "ओडिशा के पुरी में स्थित प्रसिद्ध श्री जगन्नाथ मंदिर की संपूर्ण मार्गदर्शिका। मंदिर के दैनिक दर्शन का समय, हवा के विपरीत ध्वज फहराने जैसे चमत्कार और रथ यात्रा की जानकारी।",
     keywords_en: "Jagannath temple Puri, Puri Rath Yatra dates, Jagannath temple mysteries, Mahaprasad details, Bhubaneswar to Puri distance, Puri beach tourism",
-    keywords_hi: "जगन्नाथ मंदिर पुरी, jagannath रथ यात्रा, जगन्नाथ मंदिर के रहस्य, महाप्रसाद का नियम, भुवनेश्वर से पुरी दूरी, पुरी पर्यटन",
+    keywords_hi: "जगन्नाथ मंदिर पुरी, jagannath रथ यात्रा, jagन्नाथ मंदिर के रहस्य, महाप्रसाद का नियम, भुवनेश्वर से पुरी दूरी, पुरी पर्यटन",
     content_en: `<h2>The Abode of the Lord of the Universe: Jagannath Puri</h2>
             <p>Located in the coastal town of Puri, Odisha, the grand <strong>Shree Jagannath Temple</strong> is dedicated to Lord Jagannath, a form of Lord Vishnu, along with his siblings Balabhadra and Subhadra. It is one of the four holy Char Dham shrines of India. The idols of this temple are unique as they are carved from sacred neem logs (Daru) and are replaced every 12 to 19 years in a ritual called Nabakalebara.</p>
+            
             <h3>The Unresolved Mysteries of the Shrine</h3>
             <p>Devotees and scientists alike are mystified by several occurrences at the temple:</p>
             <ul>
@@ -1906,10 +1955,18 @@ export const learnContent: Record<string, LearnTopic> = {
                 <li><strong>The Cooking Mystery:</strong> In the temple kitchen, Mahaprasad is cooked in 7 earthen pots stacked on top of each other. The pot at the very top always cooks first, and the pot at the bottom cooks last.</li>
                 <li><strong>No Birds:</strong> No birds or airplanes are ever seen flying above the temple dome.</li>
             </ul>
-            <h3>The Grand Rath Yatra</h3>
-            <p>The annual <strong>Rath Yatra</strong> (Chariot Festival) held in June/July attracts millions of devotees worldwide. During this festival, the three deities are pulled in massive, wooden chariots from the temple to the Gundicha Temple.</p>`,
+
+            <h3>The Grand Rath Yatra Festival</h3>
+            <p>The annual <strong>Rath Yatra</strong> (Chariot Festival) held in June/July attracts millions of devotees worldwide. During this festival, the three deities are pulled in massive, wooden chariots (called Taladhwaja, Darpadaliana, and Nandighosa) from the main temple to the Gundicha Temple.</p>
+
+            <h3>How to Reach: Airport & Train Details</h3>
+            <ul>
+                <li><strong>By Air:</strong> Biju Patnaik International Airport (BBI) in Bhubaneswar is the nearest airport, located 60 km away. Devotees can hire pre-paid taxis or board direct state buses from the airport to Puri.</li>
+                <li><strong>By Train:</strong> Puri Railway Station (PURI) is extremely close to the temple (approx. 2.8 km), with direct express trains connecting to major Indian cities.</li>
+            </ul>`,
     content_hi: `<h2>ब्रह्मांड के स्वामी का विग्रह: श्री जगन्नाथ मंदिर पुरी</h2>
             <p>ओडिशा के तटीय शहर पुरी में स्थित <strong>श्री जगन्नाथ मंदिर</strong> भगवान विष्णु के एक रूप श्रीकृष्ण (जगन्नाथ), उनके भाई बलभद्र और बहन सुभद्रा को समर्पित है। यह हिंदुओं के पवित्र चार धामों में से एक है। इस मंदिर की मूर्तियां किसी धातु या पत्थर की नहीं बल्कि पवित्र नीम की लकड़ी (दारु) से बनी हैं, जिन्हें प्रत्येक १२ से १९ वर्ष में बदला जाता है (नवबलेवर उत्सव)।</p>
+            
             <h3>मंदिर के अनसुलझे रहस्य और चमत्कार</h3>
             <p>जगन्नाथ मंदिर अपने अनेक रहस्यों के लिए प्रसिद्ध है, जिनका जवाब विज्ञान के पास भी नहीं है:</p>
             <ul>
@@ -1918,14 +1975,21 @@ export const learnContent: Record<string, LearnTopic> = {
                 <li><strong>प्रसाद पकने का अनोखा नियम:</strong> यहाँ महाप्रसाद बनाने के लिए मिट्टी के ७ बर्तनों को एक के ऊपर एक रखा जाता है। सबसे ऊपर रखे बर्तन का खाना पहले पकता है, और नीचे वाले का सबसे बाद में।</li>
                 <li><strong>पक्षी नहीं उड़ते:</strong> मंदिर के ऊपर से आज तक कोई पक्षी या विमान उड़ता हुआ नहीं देखा गया है।</li>
             </ul>
+
             <h3>भव्य रथ यात्रा महोत्सव</h3>
-            <p>प्रत्येक वर्ष जून या जुलाई में आयोजित होने वाली <strong>जगन्नाथ रथ यात्रा</strong> में शामिल होने के लिए देश-विदेश से लाखों श्रद्धालु आते हैं। तीन विशालकाय लकड़ी के रथों में भगवान जगन्नाथ, बलभद्र और सुभद्रा मौसी के घर (गुंडिचा मंदिर) जाते हैं।</p>`,
+            <p>प्रत्येक वर्ष जून या जुलाई में आयोजित होने वाली <strong>जगन्नाथ रथ यात्रा</strong> में शामिल होने के लिए देश-विदेश से लाखों श्रद्धालु आते हैं। तीन विशालकाय लकड़ी के रथों (तालाध्वज, दर्पदलन और नंदीघोष) में भगवान जगन्नाथ, बलभद्र और सुभद्रा मौसी के घर (गुंडिचा मंदिर) जाते हैं।</p>
+
+            <h3>कैसे पहुँचें: ट्रेन रूट और हवाई मार्ग</h3>
+            <ul>
+                <li><strong>हवाई मार्ग:</strong> भुवनेश्वर में स्थित बीजू पटनायक अंतर्राष्ट्रीय हवाई अड्डा (BBI) पुरी से लगभग ६० किमी दूर है, जहाँ से सीधी टैक्सियाँ और सरकारी बसें मिलती हैं।</li>
+                <li><strong>रेल मार्ग:</strong> पुरी रेलवे स्टेशन (PURI) मुख्य मंदिर से मात्र २.८ किमी दूर है और सभी बड़े भारतीय शहरों से सीधे जुड़ा हुआ है।</li>
+            </ul>`,
     faqs: [
       {
-        q_en: "What is Jagannath Mahaprasad?",
-        a_en: "The daily food cooked in the temple kitchen in clay pots and offered to Lord Jagannath, which feeds over 20,000 people daily.",
-        q_hi: "जगन्नाथ महाप्रसाद क्या है?",
-        a_hi: "मंदिर की रसोई में मिट्टी के बर्तनों में पकाया गया भोजन, जिसे भगवान जगन्नाथ को भोग लगाने के बाद दैनिक २०,००० से अधिक लोगों को खिलाया जाता है।"
+        q_en: "Puri Rath Yatra is held in which months?",
+        a_en: "It is traditionally held in the Hindu month of Ashadha, which falls around June or July.",
+        q_hi: "पुरी रथ यात्रा किस महीने में आयोजित होती है?",
+        a_hi: "यह पारंपरिक रूप से आषाढ़ के हिंदू महीने में आयोजित की जाती है, जो जून या जुलाई के आसपास आती है।"
       },
       {
         q_en: "Which is the nearest airport to Puri?",

@@ -124,10 +124,37 @@ function LearnDetailPage() {
         }
       : null;
 
+  // Article schema for search engines
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: title,
+    image: [
+      topic.image
+        ? `https://www.namamivindhyavasini.in${topic.image}`
+        : "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-temple-vindhyachal.jpg",
+    ],
+    author: {
+      "@type": "Organization",
+      name: "Namami Vindhyavasini",
+      url: "https://www.namamivindhyavasini.in",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Namami Vindhyavasini",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://www.namamivindhyavasini.in/images/maa-reveal.png",
+      },
+    },
+    description: hi ? topic.metaDesc_hi : topic.metaDesc_en,
+  };
+
   return (
     <PageShell>
       <JsonLd data={breadcrumbSchema} />
       {faqSchema && <JsonLd data={faqSchema} />}
+      <JsonLd data={articleSchema} />
 
       <PageHero
         compact
