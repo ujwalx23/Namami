@@ -1952,6 +1952,170 @@ export const learnContent: Record<string, LearnTopic> = {
     ],
     related: ["maa-vindhyavasini-mantra", "how-to-reach"],
     image: "/images/maa-vindhyavasini-neel-shringar.jpg"
+  },
+  "om-jai-jagdish-hare-lyrics": {
+    slug: "om-jai-jagdish-hare-lyrics",
+    category: "Aarti",
+    title_en: "Om Jai Jagdish Hare Aarti - Lyrics & English Meaning",
+    title_hi: "ॐ जय जगदीश हरे आरती - बोल, अर्थ और महत्व",
+    metaTitle_en: "Om Jai Jagdish Hare Lyrics - Hindi & English Translation",
+    metaTitle_hi: "ॐ जय जगदीश हरे आरती - लिरिक्स, बोल और सरल हिंदी अर्थ",
+    metaDesc_en: "Complete lyrics of Om Jai Jagdish Hare Aarti in Sanskrit, Hindi (Devanagari), and English. Find the full word-by-word meaning and spiritual benefits of chanting.",
+    metaDesc_hi: "श्री जगदीश स्वामी की आरती 'ॐ जय जगदीश हरे' के मूल बोल। हिंदी और अंग्रेजी अर्थ, आरती गाने की विधि और आध्यात्मिक लाभ का पूरा विवरण।",
+    keywords_en: "Om jai jagdish hare lyrics, jagdish aarti Hindi, Vishnu aarti translation, daily family aarti lyrics, evening aarti song",
+    keywords_hi: "जय जगदीश हरे आरती, ओम जय जगदीश हरे लिरिक्स, विष्णु आरती, दैनिक आरती बोल, जय जगदीश हरे अर्थ सहित",
+    content_en: `<h2>The Universal Aarti: Om Jai Jagdish Hare</h2>
+            <p>Composed in the late 19th century by the renowned writer <strong>Shraddha Ram Phillauri</strong> in Punjab, <strong>Om Jai Jagdish Hare</strong> is the most widely sung evening prayer across Hindu families in India and globally. It is dedicated to Lord Vishnu (the preserver of the universe) in his form as Jagannath or Jagdish.</p>
+            <h3>Spiritual Significance & Daily Practice</h3>
+            <p>Singing this aarti daily at sunset helps clear negative vibrations from the household, instills humility, and invokes peace, abundance, and prosperity. It is traditionally performed with a lighted lamp containing ghee or camphor, accompanied by the ringing of bells and clapping.</p>`,
+    content_hi: `<h2>सार्वभौमिक संध्या आरती: ॐ जय जगदीश हरे</h2>
+            <p>१९वीं शताब्दी के उत्तरार्ध में प्रसिद्ध साहित्यकार <strong>पंडित श्रद्धाराम फिल्लौरी</strong> द्वारा रचित <strong>ॐ जय जगदीश हरे</strong> सनातन धर्म की सबसे लोकप्रिय और गाई जाने वाली आरती है। यह भगवान विष्णु (जगत के पालनहार) के स्वरूप 'जगदीश' को समर्पित है।</p>
+            <h3>दैनिक आरती का महत्व और विधि</h3>
+            <p>प्रतिदिन संध्या काल में इस आरती का गान करने से घर में सकारात्मक ऊर्जा का संचार होता है, पारिवारिक कलह शांत होते हैं और सुख-समृद्धि आती है। इसे कपूर या शुद्ध घी के दीपक से शंख और घंटियों की ध्वनि के साथ सामूहिक रूप से गाया जाता है।</p>`,
+    faqs: [
+      {
+        q_en: "Who wrote Om Jai Jagdish Hare?",
+        a_en: "It was composed by Pandit Shraddha Ram Phillauri around 1870 in Awadhi/Hindi.",
+        q_hi: "ॐ जय जगदीश हरे किसने लिखी थी?",
+        a_hi: "इसे १८७० के आसपास पंडित श्रद्धाराम फिल्लौरी ने अवधी/हिंदी में लिखा था।"
+      },
+      {
+        q_en: "What are the main benefits of chanting it?",
+        a_en: "It develops devotion, surrender, and balances the household energy during sunset transitions.",
+        q_hi: "इसका गान करने के क्या लाभ हैं?",
+        a_hi: "यह समर्पण और श्रद्धा की भावना जगाता है, तथा सूर्यास्त के समय घर के वातावरण को संतुलित करता है।"
+      }
+    ],
+    related: ["aarti", "chalisa", "hanuman-chalisa-lyrics"],
+    image: "/images/maa-vindhyavasini-simhasan-shringar.jpg"
+  },
+  "gayatri-mantra-meaning": {
+    slug: "gayatri-mantra-meaning",
+    category: "Mantras",
+    title_en: "Gayatri Mantra Lyrics - Translation & Pronunciation Guide",
+    title_hi: "गायत्री मंत्र का अर्थ - शुद्ध उच्चारण, विधि और लाभ",
+    metaTitle_en: "Gayatri Mantra - Sanskrit Lyrics & English Translation",
+    metaTitle_hi: "गायत्री महामंत्र - संस्कृत श्लोक, शुद्ध उच्चारण और हिंदी अर्थ",
+    metaDesc_en: "Read the complete Rig Veda Gayatri Mantra lyrics in Sanskrit, English, and Hindi. Find the word-by-word meaning, counting rules, and spiritual benefits.",
+    metaDesc_hi: "ऋग्वेद के सबसे शक्तिशाली महामंत्र 'गायत्री मंत्र' का अर्थ। संस्कृत श्लोक, शुद्ध हिंदी अनुवाद, जपने की सही विधि, माला गणना नियम और मानसिक एकाग्रता लाभ।",
+    keywords_en: "Gayatri mantra lyrics, Gayatri mantra translation, Rig veda gayatri mantra, daily morning chants, gayatri mantra meaning, surya worship",
+    keywords_hi: "गायत्री मंत्र का अर्थ, गायत्री मंत्र लिरिक्स, गायत्री मंत्र संस्कृत, गायत्री महामंत्र जप विधि, गायत्री मंत्र का महत्व",
+    content_en: `<h2>The Mother of all Vedas: The Gayatri Mantra</h2>
+            <p>The <strong>Gayatri Mantra</strong> is a highly revered chant from the <strong>Rig Veda</strong> (Mandala 3.62.10), dedicated to <strong>Savitr</strong>, the solar deity representing the source of life and light. It is composed in the 24-syllable Gayatri meter and is considered the supreme mantra for wisdom, intellect, and spiritual awakening.</p>
+            <h3>The Sanskrit Verse & Word Meaning</h3>
+            <p className="font-devanagari text-center font-bold text-lg text-maroon">ॐ भूर्भुवः स्वः । तत्सवितुर्वरेण्यं । भर्गो देवस्य धीमहि । धियो यो नः प्रचोदयात् ॥</p>
+            <p><strong>English Transliteration:</strong> Om Bhur Bhuvah Svah | Tat Savitur Varenyam | Bhargo Devasya Dhimahi | Dhiyo Yo Nah Prachodayat</p>
+            <h3>Daily Chanting Rules & Benefits</h3>
+            <ul>
+                <li><strong>Timing:</strong> Best chanted during the transition hours of the day (Sandhyas) - sunrise, noon, and sunset.</li>
+                <li><strong>Count:</strong> Traditionally chanted 108 times using a Rudraksha or Tulsi mala.</li>
+                <li><strong>Mental Impact:</strong> Chanting it improves memory, focus, and cleanses the mind of stress and anxiety.</li>
+            </ul>`,
+    content_hi: `<h2>वेदों की जननी: गायत्री महामंत्र</h2>
+            <p>सनातन धर्म में <strong>गायत्री मंत्र</strong> को सभी मंत्रों में सर्वश्रेष्ठ माना गया है। यह <strong>ऋग्वेद</strong> के तीसरे मंडल से लिया गया है और बुद्धि के प्रदाता सूर्यदेव (सविता) को समर्पित है। २४ अक्षरों से बना यह महामंत्र मन की एकाग्रता, बुद्धि के विकास और आंतरिक प्रकाश को जाग्रत करने का मुख्य स्रोत है।</p>
+            <h3>मूल मंत्र और उसका सरल अनुवाद</h3>
+            <p className="font-devanagari text-center font-bold text-lg text-maroon">ॐ भूर्भुवः स्वः । तत्सवितुर्वरेण्यं । भर्गो देवस्य धीमहि । धियो यो नः प्रचोदयात् ॥</p>
+            <p><strong>सरल अर्थ:</strong> हम सृष्टि के उत्पत्तिकर्ता उस दिव्य प्रकाशमान सूर्यदेव के तेज का ध्यान करते हैं, जो हमारी बुद्धि को सन्मार्ग की ओर प्रेरित करे।</p>
+            <h3>गायत्री मंत्र जप की सही विधि</h3>
+            <ul>
+                <li><strong>सर्वश्रेष्ठ समय:</strong> तीन संधिकालों में जप सर्वोत्तम माना जाता है— प्रातः काल (सूर्योदय से पूर्व), दोपहर काल और सायंकाल (सूर्यास्त से पहले)।</li>
+                <li><strong>जप संख्या:</strong> प्रतिदिन कम से कम १०८ बार (एक माला) जप करना अत्यंत फलदायी होता है।</li>
+                <li><strong>आसन:</strong> पूर्व या उत्तर दिशा की ओर मुख करके कुशा या ऊनी आसन पर बैठकर जप करें।</li>
+            </ul>`,
+    faqs: [
+      {
+        q_en: "Who revealed the Gayatri Mantra?",
+        a_en: "Sage Vishwamitra is the Rishi (seer) who revealed this sacred mantra to the world.",
+        q_hi: "गायत्री मंत्र की खोज किसने की थी?",
+        a_hi: "ऋषि विश्वामित्र वह ऋषि हैं जिन्होंने इस पवित्र मंत्र को लोक कल्याण के लिए प्रकट किया था।"
+      },
+      {
+        q_en: "Can anyone chant the Gayatri Mantra?",
+        a_en: "Yes, anyone with a pure heart and clear mind can chant it to obtain mental clarity, focus, and positive vibes.",
+        q_hi: "क्या कोई भी गायत्री मंत्र का जाप कर सकता है?",
+        a_hi: "हाँ, शुद्ध मन और तन से कोई भी भक्त मानसिक एकाग्रता और सकारात्मक ऊर्जा के लिए इसका जाप कर सकता है।"
+      }
+    ],
+    related: ["maa-vindhyavasini-mantra", "shiv-tandav-stotram-lyrics", "hanuman-chalisa-lyrics"],
+    image: "/images/maa-reveal.png"
+  },
+  "maha-mrityunjaya-mantra-meaning": {
+    slug: "maha-mrityunjaya-mantra-meaning",
+    category: "Mantras",
+    title_en: "Maha Mrityunjaya Mantra - Lyrics, Meaning & Benefits",
+    title_hi: "महामृत्युंजय मंत्र का अर्थ - बोल, जाप विधि और स्वास्थ्य लाभ",
+    metaTitle_en: "Maha Mrityunjaya Mantra - Sanskrit Lyrics & English Meaning",
+    metaTitle_hi: "महामृत्युंजय मंत्र - मूल संस्कृत श्लोक, शुद्ध जाप नियम और लाभ",
+    metaDesc_en: "Complete Maha Mrityunjaya Mantra lyrics from Rig Veda. Find word-by-word English translation, correct pronunciation, and benefits for health and longevity.",
+    metaDesc_hi: "भगवान शिव के संकटमोचक 'महामृत्युंजय मंत्र' का हिंदी और अंग्रेजी अर्थ। शुद्ध संस्कृत श्लोक, रोग मुक्ति जाप नियम और दीर्घायु लाभ का पूरा विवरण।",
+    keywords_en: "Maha mrityunjaya mantra, Rig veda death defeating chant, Shiva protection mantra, mrityunjaya mantra translation, daily health chants",
+    keywords_hi: "महामृत्युंजय मंत्र, महामृत्युंजय मंत्र का अर्थ, मृत्युंजय मंत्र संस्कृत, शिव मंत्र रोग मुक्ति, महामृत्युंजय जाप नियम",
+    content_en: `<h2>The Death-Defeating Hymn: Maha Mrityunjaya Mantra</h2>
+            <p>Found in the <strong>Rig Veda</strong> (7.59.12), the <strong>Maha Mrityunjaya Mantra</strong> (also known as the Rudra Mantra or Tryambakam Mantra) is one of the oldest and most powerful healing mantras in Hindu scriptures. It is dedicated to Tryambaka (the three-eyed Lord Shiva) and is resorted to for protection from premature death, severe illness, and fear.</p>
+            <h3>The Sanskrit Verse & Transliteration</h3>
+            <p className="font-devanagari text-center font-bold text-lg text-maroon">ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम् । उर्वारुकमिव बन्धनान्मृत्योर्मुक्षीय माऽमृतात् ॥</p>
+            <p><strong>English Transliteration:</strong> Om Tryambakam Yajamahe Sugandhim Pushti-Vardhanam | Urvarukam-Iva Bandhanan Mrityor-Mukshiya Maamritat</p>
+            <h3>Daily Chanting Guide</h3>
+            <p>Chanting this mantra early in the morning creates a powerful protective shield around the body, aids recovery from chronic illnesses, and promotes mental tranquility. Using a Rudraksha mala to count 108 repetitions is highly recommended.</p>`,
+    content_hi: `<h2>अकाल मृत्यु नाशक कवच: महामृत्युंजय मंत्र</h2>
+            <p><strong>ऋग्वेद</strong> (७.५९.१२) में वर्णित <strong>महामृत्युंजय मंत्र</strong> (जिसे त्रयम्बकम मंत्र भी कहा जाता है) भगवान शिव को समर्पित सबसे शक्तिशाली कल्याणकारी और रक्षात्मक मंत्र है। यह मंत्र अकाल मृत्यु के भय को मिटाने, गंभीर बीमारियों से मुक्ति दिलाने और साधक की रक्षा करने के लिए अचूक माना जाता है।</p>
+            <h3>मूल मंत्र और उसका शब्दार्थ</h3>
+            <p className="font-devanagari text-center font-bold text-lg text-maroon">ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम् । उर्वारुकमिव बन्धनान्मृत्योर्मुक्षीय माऽमृतात् ॥</p>
+            <p><strong>सरल अर्थ:</strong> हम तीन नेत्रों वाले भगवान शिव की आराधना करते हैं, जो पूरे संसार में सुगंध फैलाते हैं और हमारा पोषण करते हैं। जैसे ककड़ी पकने के बाद बेल के बंधन से मुक्त हो जाती है, वैसे ही हमें मृत्यु के बंधन से मुक्ति मिले, परंतु मोक्ष (अमरता) से विमुख न हों।</p>
+            <h3>नित्य जाप करने की विधि और नियम</h3>
+            <p>नित्य प्रातः काल सूर्योदय के समय पूर्व दिशा की ओर मुख करके इस मंत्र का रुद्राक्ष की माला से १०८ बार जाप करने से शारीरिक और मानसिक कष्ट दूर होते हैं। इसे अत्यंत शुद्धता और एकाग्रता के साथ जपना चाहिए।</p>`,
+    faqs: [
+      {
+        q_en: "Who discovered the Maha Mrityunjaya Mantra?",
+        a_en: "It was revealed to Sage Markandeya, who defeated Yama (the Lord of Death) by chanting it when his life was threatened at age 16.",
+        q_hi: "महामृत्युंजय मंत्र की खोज किसने की थी?",
+        a_hi: "यह मंत्र ऋषि मार्कंडेय को प्रकट हुआ था, जिन्होंने १६ वर्ष की आयु में यमराज (मृत्यु के देवता) को पराजित किया था।"
+      },
+      {
+        q_en: "What is the difference between Gayatri and Mrityunjaya Mantra?",
+        a_en: "Gayatri is primarily for intellect and spiritual awakening; Mrityunjaya is for physical protection, healing, and overcoming the fear of death.",
+        q_hi: "गायत्री और महामृत्युंजय मंत्र में क्या अंतर है?",
+        a_hi: "गायत्री मंत्र बुद्धि के विकास और आध्यात्मिक चेतना के लिए है; महामृत्युंजय मंत्र शारीरिक सुरक्षा, स्वास्थ्य लाभ और मृत्यु के भय को दूर करने के लिए है।"
+      }
+    ],
+    related: ["maa-vindhyavasini-mantra", "shiv-tandav-stotram-lyrics", "gayatri-mantra-meaning"],
+    image: "/images/maa-vindhyavasini-neel-shringar.jpg"
+  },
+  "shiv-chalisa-lyrics": {
+    slug: "shiv-chalisa-lyrics",
+    category: "Chalisa",
+    title_en: "Shiv Chalisa Lyrics - Hindi & English Meaning",
+    title_hi: "शिव चालीसा पाठ - हिंदी, अंग्रेजी अनुवाद और महत्व",
+    metaTitle_en: "Shiv Chalisa Lyrics - Sanskrit & English Translation",
+    metaTitle_hi: "श्री शिव चालीसा - मूल पाठ, बोल और हिंदी अर्थ",
+    metaDesc_en: "Read complete Shiv Chalisa lyrics in Hindi (Devanagari) and English. Find the full 40 verses, daily chanting rules, and spiritual benefits of Shiva worship.",
+    metaDesc_hi: "भगवान भोलेनाथ की प्रिय 'शिव चालीसा' के संपूर्ण बोल। शुद्ध हिंदी अनुवाद, नित्य पाठ करने की विधि, सोमवार व्रत पूजा नियम और शिव कृपा लाभ।",
+    keywords_en: "Shiv chalisa lyrics, Shiv chalisa Hindi, Shiva prayer translation, Monday shiv puja, read shiv chalisa online, Shiv chalisa meaning",
+    keywords_hi: "शिव चालीसा, शिव चालीसा हिंदी में, शिव चालीसा लिरिक्स, सोमवार शिव पूजा, शिव चालीसा का अर्थ, शिव चालीसा पाठ",
+    content_en: `<h2>The Hymn of Lord Shiva: Sri Shiv Chalisa</h2>
+            <p>Dedicated to Lord Shiva (Mahadeva), the <strong>Shiv Chalisa</strong> is a 40-verse prayer describing Shiva's forms, attributes, and victories over demons. It is composed in simple Hindi (Braj Bhasha) allowing all devotees to easily chant and express their devotion to Shiva.</p>
+            <h3>Chanting Benefits & Monday Vrat</h3>
+            <p>Reciting the Shiv Chalisa weekly, especially on Mondays or during Shravan Maas, is believed to fulfill all pure desires of devotees, remove obstacles, and bless the household with inner peace, good health, and longevity.</p>`,
+    content_hi: `<h2>भोलेनाथ की परम प्रिय प्रार्थना: श्री शिव चालीसा</h2>
+            <p>भगवान शिव (महादेव) को समर्पित <strong>शिव चालीसा</strong> ४० चौपाइयों की एक अत्यंत सरल और प्रभावशाली प्रार्थना है। इसमें शिव जी के विभिन्न रूपों, उनके निवास (कैलाश), और उनके परोपकारी स्वभाव का वर्णन है। यह सरल ब्रजभाषा में है, जिससे हर भक्त इसे आसानी से समझ और गा सकता है।</p>
+            <h3>सोमवार व्रत और शिव चालीसा पाठ के लाभ</h3>
+            <p>प्रतिदिन या विशेष रूप से प्रत्येक सोमवार और सावन के महीने में शिव चालीसा का पाठ करने से भक्तों के बिगड़े काम बन जाते हैं, कर्ज से मुक्ति मिलती है और घर में सुख-शांति का वास होता है।</p>`,
+    faqs: [
+      {
+        q_en: "What is the best time to recite Shiv Chalisa?",
+        a_en: "Chanting it in the evening hours during Pradosh Kaal or morning during Shiva Puja is highly beneficial.",
+        q_hi: "शिव चालीसा पाठ करने का सर्वोत्तम समय क्या है?",
+        a_hi: "शाम को प्रदोष काल में या सुबह शिव पूजा के समय इसका पाठ करना अत्यंत फलदायी होता है।"
+      },
+      {
+        q_en: "What is traditionally offered to Shiva during this puja?",
+        a_en: "Devotees offer fresh Bilva leaves, water mixed with milk, honey, and white flowers to the Shivling while reciting.",
+        q_hi: "इस पूजा के दौरान शिवजी को क्या अर्पित किया जाता है?",
+        a_hi: "पाठ करते समय भक्त शिवलिंग पर बेलपत्र, दूध मिला जल, शहद और सफेद फूल अर्पित करते हैं।"
+      }
+    ],
+    related: ["shiv-tandav-stotram-lyrics", "hanuman-chalisa-lyrics", "aarti"],
+    image: "/images/maa-vindhyavasini-garland-shringar.jpg"
   }
 };
 
