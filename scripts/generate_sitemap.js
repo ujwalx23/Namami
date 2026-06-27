@@ -38,6 +38,16 @@ const filesToCopy = [
   "kedarnath-temple.png",
   "kashi-vishwanath.png",
   "mahakaleshwar-temple.png",
+  "kamakhya-temple.png",
+  "somnath-temple.png",
+  "badrinath-temple.png",
+  "jagannath-puri.png",
+  "hanuman-chalisa.png",
+  "shiv-tandav.png",
+  "lord-vishnu.png",
+  "gayatri-devi.png",
+  "shiv-meditating.png",
+  "shiv-kailash.png",
 ];
 
 filesToCopy.forEach((file) => {

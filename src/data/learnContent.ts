@@ -1739,7 +1739,7 @@ export const learnContent: Record<string, LearnTopic> = {
       }
     ],
     related: ["shakti-peeth", "tourism-guide"],
-    image: "/images/maa-vindhyavasini-devi-mirzapur.jpg"
+    image: "/images/kamakhya-temple.png"
   },
   "somnath-temple-guide": {
     slug: "somnath-temple-guide",
@@ -1779,7 +1779,7 @@ export const learnContent: Record<string, LearnTopic> = {
       }
     ],
     related: ["how-to-reach", "tourism-guide", "temple-timings"],
-    image: "/images/maa-vindhyavasini-shakti-peeth.jpg"
+    image: "/images/somnath-temple.png"
   },
   "badrinath-temple-guide": {
     slug: "badrinath-temple-guide",
@@ -1819,7 +1819,7 @@ export const learnContent: Record<string, LearnTopic> = {
       }
     ],
     related: ["kedarnath-temple-guide", "how-to-reach"],
-    image: "/images/maa-vindhyavasini-devi-mirzapur.jpg"
+    image: "/images/badrinath-temple.png"
   },
   "jagannath-temple-guide": {
     slug: "jagannath-temple-guide",
@@ -1871,7 +1871,7 @@ export const learnContent: Record<string, LearnTopic> = {
       }
     ],
     related: ["how-to-reach", "tourism-guide"],
-    image: "/images/gallery-1.webp"
+    image: "/images/jagannath-puri.png"
   },
   "hanuman-chalisa-lyrics": {
     slug: "hanuman-chalisa-lyrics",
@@ -1915,7 +1915,7 @@ export const learnContent: Record<string, LearnTopic> = {
       }
     ],
     related: ["aarti", "chalisa", "maa-vindhyavasini-mantra"],
-    image: "/images/maa-reveal.png"
+    image: "/images/hanuman-chalisa.png"
   },
   "shiv-tandav-stotram-lyrics": {
     slug: "shiv-tandav-stotram-lyrics",
@@ -1951,7 +1951,7 @@ export const learnContent: Record<string, LearnTopic> = {
       }
     ],
     related: ["maa-vindhyavasini-mantra", "how-to-reach"],
-    image: "/images/maa-vindhyavasini-neel-shringar.jpg"
+    image: "/images/shiv-tandav.png"
   },
   "om-jai-jagdish-hare-lyrics": {
     slug: "om-jai-jagdish-hare-lyrics",
@@ -1987,7 +1987,7 @@ export const learnContent: Record<string, LearnTopic> = {
       }
     ],
     related: ["aarti", "chalisa", "hanuman-chalisa-lyrics"],
-    image: "/images/maa-vindhyavasini-simhasan-shringar.jpg"
+    image: "/images/lord-vishnu.png"
   },
   "gayatri-mantra-meaning": {
     slug: "gayatri-mantra-meaning",
@@ -2037,7 +2037,7 @@ export const learnContent: Record<string, LearnTopic> = {
       }
     ],
     related: ["maa-vindhyavasini-mantra", "shiv-tandav-stotram-lyrics", "hanuman-chalisa-lyrics"],
-    image: "/images/maa-reveal.png"
+    image: "/images/gayatri-devi.png"
   },
   "maha-mrityunjaya-mantra-meaning": {
     slug: "maha-mrityunjaya-mantra-meaning",
@@ -2079,7 +2079,7 @@ export const learnContent: Record<string, LearnTopic> = {
       }
     ],
     related: ["maa-vindhyavasini-mantra", "shiv-tandav-stotram-lyrics", "gayatri-mantra-meaning"],
-    image: "/images/maa-vindhyavasini-neel-shringar.jpg"
+    image: "/images/shiv-meditating.png"
   },
   "shiv-chalisa-lyrics": {
     slug: "shiv-chalisa-lyrics",
@@ -2115,7 +2115,7 @@ export const learnContent: Record<string, LearnTopic> = {
       }
     ],
     related: ["shiv-tandav-stotram-lyrics", "hanuman-chalisa-lyrics", "aarti"],
-    image: "/images/maa-vindhyavasini-garland-shringar.jpg"
+    image: "/images/shiv-kailash.png"
   }
 };
 
