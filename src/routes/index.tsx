@@ -43,6 +43,7 @@ import { toast } from "sonner";
 import type { TKey } from "@/i18n/translations";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { JsonLd } from "@/components/JsonLd";
+import { cleanHtmlContent } from "@/lib/utils";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -419,7 +420,13 @@ function HomePage() {
       .order("publish_date", { ascending: false })
       .limit(3)
       .then(({ data }) => {
-        if (data) setLatestBlogs(data as BlogPost[]);
+        if (data) {
+          const cleaned = data.map((post) => ({
+            ...post,
+            content: cleanHtmlContent(post.content),
+          }));
+          setLatestBlogs(cleaned as BlogPost[]);
+        }
       });
   }, []);
 

@@ -22,6 +22,7 @@ import {
   Loader2,
 } from "lucide-react";
 import { speakText, stopSpeech, isHindiText } from "@/lib/speech";
+import { cleanHtmlContent } from "@/lib/utils";
 
 type BlogPost = Tables<"blog_posts">;
 
@@ -94,7 +95,16 @@ export const Route = createFileRoute("/blog/$slug")({
       .order("publish_date", { ascending: false })
       .limit(3);
 
-    return { post: post as BlogPost, related: (related ?? []) as BlogPost[] };
+    const cleanedPost = {
+      ...post,
+      content: cleanHtmlContent(post.content),
+    };
+    const cleanedRelated = (related ?? []).map((r) => ({
+      ...r,
+      content: cleanHtmlContent(r.content),
+    }));
+
+    return { post: cleanedPost as BlogPost, related: cleanedRelated as BlogPost[] };
   },
   errorComponent: ({ error }) => {
     const { lang } = useLang();

@@ -7,6 +7,7 @@ import { useLang } from "@/i18n/LangProvider";
 import { JsonLd } from "@/components/JsonLd";
 import { Search, Calendar, User, Clock, ArrowRight, BookOpen } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { cleanHtmlContent } from "@/lib/utils";
 
 type BlogPost = Tables<"blog_posts">;
 
@@ -61,7 +62,11 @@ export const Route = createFileRoute("/blog/")({
       .lte("publish_date", new Date().toISOString())
       .order("publish_date", { ascending: false });
     if (error) throw error;
-    return { posts: (data ?? []) as BlogPost[] };
+    const cleaned = (data ?? []).map((post) => ({
+      ...post,
+      content: cleanHtmlContent(post.content),
+    }));
+    return { posts: cleaned as BlogPost[] };
   },
   errorComponent: ({ error }) => (
     <PageShell>
