@@ -6,7 +6,9 @@ export function PageShell({ children, hideHeader }: { children: ReactNode; hideH
   return (
     <div className="min-h-screen flex flex-col mandala-bg overflow-x-hidden">
       {!hideHeader && <SiteHeader />}
-      <main className="flex-1">{children}</main>
+      <main id="main-content" tabIndex={-1} className="flex-1 outline-none">
+        {children}
+      </main>
       <SiteFooter />
     </div>
   );

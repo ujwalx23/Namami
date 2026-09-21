@@ -3,7 +3,7 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.namamivindhyavasini.in/</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -34,7 +34,7 @@
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/about</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -65,19 +65,19 @@
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/calendar</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/events</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/gallery</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -133,289 +133,301 @@
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/videos</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/donation</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/contact</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/reviews</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/sandesh</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/inbox</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/blog</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://www.namamivindhyavasini.in/privacy</loc>
+    <lastmod>2026-09-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.namamivindhyavasini.in/terms</loc>
+    <lastmod>2026-09-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://www.namamivindhyavasini.in/learn</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/temple-history</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/temple-timings</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/how-to-reach</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/aarti</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/chalisa</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/temple-festivals</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/navratri-guide</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/tourism-guide</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/shakti-peeth</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/temple-photos</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/ropeway-guide</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/vindhyavasini-temple-mirzapur</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/vindhyavasini-temple-uttar-pradesh</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/vindhyavasini-temple-vindhyachal</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/maa-vindhyavasini-mantra</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/kali-khoh-temple</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/ashtabhuja-devi-temple</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/lakhaniya-dari-waterfall</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/sita-kund-sita-rasoi</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/bhairav-temples-vindhyachal</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/vindhyachal-corridor-guide</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/varanasi-to-vindhyachal-tour</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/hotels-dharamshalas-vindhyachal</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/vindhyavasini-beej-mantra</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/vindhyavasini-stotram-lyrics</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/vaishno-devi-guide</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/kedarnath-temple-guide</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/kashi-vishwanath-guide</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/mahakaleshwar-temple-guide</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/kamakhya-temple-guide</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/somnath-temple-guide</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/badrinath-temple-guide</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/jagannath-temple-guide</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/hanuman-chalisa-lyrics</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/shiv-tandav-stotram-lyrics</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/om-jai-jagdish-hare-lyrics</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/gayatri-mantra-meaning</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/maha-mrityunjaya-mantra-meaning</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/learn/shiv-chalisa-lyrics</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/blog/life-itself-a-teaching</loc>
-    <lastmod>2026-06-26</lastmod>
+    <lastmod>2026-08-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -425,13 +437,13 @@
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/blog/kajali-mahotsav-history-and-significance</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-07-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/blog/living-truth-in-daily-life</loc>
-    <lastmod>2026-06-09</lastmod>
+    <lastmod>2026-07-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -441,7 +453,7 @@
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/blog/maa-vindhyavasini-temple-history</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -451,7 +463,7 @@
   </url>
   <url>
     <loc>https://www.namamivindhyavasini.in/blog/maa-vindhyavasini-beej-mantra-and-spiritual-meaning</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

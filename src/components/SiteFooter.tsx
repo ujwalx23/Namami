@@ -149,15 +149,45 @@ export function SiteFooter() {
               </a>
             </li>
           </ul>
+
+          {/* Legal Links Sub-block */}
+          <div className="pt-6 border-t border-gold/15 mt-6 space-y-2 text-xs">
+            <h5 className="font-display text-gold/90 text-sm">{t("footer.legal")}</h5>
+            <div className="flex flex-col space-y-2 text-cream/70">
+              <Link to="/privacy" className="hover:text-gold transition-colors">
+                {t("nav.privacy")}
+              </Link>
+              <Link to="/terms" className="hover:text-gold transition-colors">
+                {t("nav.terms")}
+              </Link>
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new CustomEvent("reopen-cookie-settings"))}
+                className="text-left text-cream/70 hover:text-gold transition-colors cursor-pointer"
+              >
+                {t("footer.cookie_settings")}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Copyright Footer Bar */}
       <div className="border-t border-cream/10 py-6 text-center text-xs text-cream/50 bg-black/20">
         <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-3">
-          <span>
-            © {new Date().getFullYear()} {t("footer.copy")}
-          </span>
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4">
+            <span>
+              © {new Date().getFullYear()} {t("footer.copy")}
+            </span>
+            <span className="hidden sm:inline text-cream/30">|</span>
+            <Link to="/privacy" className="hover:text-gold transition-colors">
+              {t("nav.privacy")}
+            </Link>
+            <span className="text-cream/30">·</span>
+            <Link to="/terms" className="hover:text-gold transition-colors">
+              {t("nav.terms")}
+            </Link>
+          </div>
           <span className="text-[10px] text-cream/35 tracking-wider uppercase">
             {lang === "hi" ? "॥ जय माता दी ॥" : "॥ JAI MATA DI ॥"}
           </span>

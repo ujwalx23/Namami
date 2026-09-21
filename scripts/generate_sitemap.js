@@ -67,6 +67,33 @@ Allow: /
 Disallow: /admin
 Disallow: /auth
 
+# AI & Generative Search Engines (AEO / GEO)
+User-agent: GPTBot
+Allow: /
+Disallow: /admin
+Disallow: /auth
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
 Sitemap: https://www.namamivindhyavasini.in/sitemap.xml
 `;
 
@@ -319,6 +346,18 @@ async function generateSitemap() {
     <lastmod>${today}</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.namamivindhyavasini.in/privacy</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.namamivindhyavasini.in/terms</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
 `;
 

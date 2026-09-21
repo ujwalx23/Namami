@@ -186,32 +186,32 @@ export function SiteHeader() {
           style={{ direction: "rtl" }}
         >
           <div style={{ direction: "ltr" }} className="flex flex-col gap-0.5 px-3">
-          {links.map((l, idx) => {
-            const Icon = l.icon;
-            return (
-              <Link
-                key={l.to}
-                to={l.to}
-                onClick={() => setOpen(false)}
-                className={`group flex items-center gap-2.5 px-3 py-2 rounded-xl text-foreground/80 hover:text-maroon hover:bg-gold/5 active:scale-[0.98] transition-all duration-300 ${
-                  lang === "hi" ? "font-devanagari text-sm" : "text-xs"
-                }`}
-                activeProps={{
-                  className: "text-maroon font-semibold bg-gold/10 border-l-4 border-maroon",
-                }}
-                activeOptions={{ exact: l.to === "/" }}
-              >
-                <div className="w-7 h-7 rounded-lg bg-gradient-sacred/10 text-saffron flex items-center justify-center shrink-0">
-                  <Icon size={14} />
-                </div>
-                <span>{t(l.key)}</span>
-                <ArrowRight
-                  size={11}
-                  className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-gold"
-                />
-              </Link>
-            );
-          })}
+            {links.map((l, idx) => {
+              const Icon = l.icon;
+              return (
+                <Link
+                  key={l.to}
+                  to={l.to}
+                  onClick={() => setOpen(false)}
+                  className={`group flex items-center gap-2.5 px-3 py-2 rounded-xl text-foreground/80 hover:text-maroon hover:bg-gold/5 active:scale-[0.98] transition-all duration-300 ${
+                    lang === "hi" ? "font-devanagari text-sm" : "text-xs"
+                  }`}
+                  activeProps={{
+                    className: "text-maroon font-semibold bg-gold/10 border-l-4 border-maroon",
+                  }}
+                  activeOptions={{ exact: l.to === "/" }}
+                >
+                  <div className="w-7 h-7 rounded-lg bg-gradient-sacred/10 text-saffron flex items-center justify-center shrink-0">
+                    <Icon size={14} />
+                  </div>
+                  <span>{t(l.key)}</span>
+                  <ArrowRight
+                    size={11}
+                    className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-gold"
+                  />
+                </Link>
+              );
+            })}
           </div>
         </nav>
 
@@ -224,6 +224,15 @@ export function SiteHeader() {
             <Heart size={14} />
             {t("nav.donate_btn")}
           </Link>
+          <div className="flex items-center justify-center gap-3 text-[11px] text-muted-foreground pt-1">
+            <Link to="/privacy" onClick={() => setOpen(false)} className="hover:text-maroon">
+              {t("nav.privacy")}
+            </Link>
+            <span>·</span>
+            <Link to="/terms" onClick={() => setOpen(false)} className="hover:text-maroon">
+              {t("nav.terms")}
+            </Link>
+          </div>
         </div>
       </div>
     </>

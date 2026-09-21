@@ -20,6 +20,8 @@ export const translations = {
   "nav.donation": { en: "Donation", hi: "दान" },
   "nav.blog": { en: "Enlightenment", hi: "ज्ञान" },
   "nav.contact": { en: "Contact", hi: "संपर्क" },
+  "nav.privacy": { en: "Privacy Policy", hi: "गोपनीयता नीति" },
+  "nav.terms": { en: "Terms of Service", hi: "नियम एवं शर्तें" },
   "nav.donate_btn": { en: "Donate", hi: "दान करें" },
   "nav.menu": { en: "Menu", hi: "मेनू" },
   "nav.learn": { en: "Learn", hi: "जानें" },
@@ -31,6 +33,8 @@ export const translations = {
   },
   "footer.quick": { en: "Quick Links", hi: "त्वरित लिंक" },
   "footer.reach": { en: "Reach Us", hi: "हमसे संपर्क" },
+  "footer.legal": { en: "Legal & Policies", hi: "कानूनी एवं नीतियां" },
+  "footer.cookie_settings": { en: "Cookie Preferences", hi: "कुकी प्राथमिकताएं" },
   "footer.address": {
     en: "Vindhyachal Dham, Mirzapur, UP",
     hi: "विन्ध्याचल धाम, मिर्जापुर, उ.प्र.",
@@ -39,6 +43,26 @@ export const translations = {
     en: "Namami Vindhyavasini Sansthan ✦ Jai Maa Vindhyavasini",
     hi: "नमामि विन्ध्यवासिनी संस्थान ✦ जय माँ विन्ध्यवासिनी",
   },
+
+  // ---- Cookie Consent ----
+  "cookie.title": { en: "Cookie & Privacy Consent", hi: "कुकी एवं गोपनीयता सहमति" },
+  "cookie.desc": {
+    en: "We use essential cookies and anonymized analytics to enrich your spiritual experience, remember language choices, and serve devotees better.",
+    hi: "हम आपके भक्तिमय अनुभव को समृद्ध करने, भाषा प्राथमिकता सुरक्षित रखने और भक्तों की बेहतर सेवा के लिए आवश्यक कुकीज़ का उपयोग करते हैं।",
+  },
+  "cookie.accept": { en: "Accept All", hi: "सभी स्वीकार करें" },
+  "cookie.necessary": { en: "Essential Only", hi: "केवल आवश्यक" },
+  "cookie.policy": { en: "Privacy Policy", hi: "गोपनीयता नीति" },
+
+  // ---- 404 Page ----
+  "notFound.title": { en: "Page Not Found", hi: "पृष्ठ नहीं मिला" },
+  "notFound.desc": {
+    en: "Perhaps this path has changed, but Maa Vindhyavasini's eternal grace is always present. Return home or explore our sacred guides.",
+    hi: "संभवतः यह मार्ग उपलब्ध नहीं है, परन्तु माँ विन्ध्यवासिनी की नित्य कृपा सर्वत्र व्याप्त है। मुख्य पृष्ठ पर लौटें या पावन अनुभाग देखें।",
+  },
+  "notFound.goHome": { en: "Return to Home", hi: "मुख्य पृष्ठ पर लौटें" },
+  "notFound.darshan": { en: "Daily Darshan & Aarti", hi: "दैनिक दर्शन एवं आरती" },
+  "notFound.calendar": { en: "Hindu Calendar", hi: "हिंदू कैलेंडर" },
 
   // ---- Home page ----
   "home.badge": { en: "Jai Maa Vindhyavasini", hi: "जय माँ विन्ध्यवासिनी" },

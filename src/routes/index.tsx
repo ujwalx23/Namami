@@ -44,6 +44,7 @@ import type { TKey } from "@/i18n/translations";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { JsonLd } from "@/components/JsonLd";
 import { cleanHtmlContent } from "@/lib/utils";
+import { aboutContent } from "./-about.content";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -227,11 +228,17 @@ function PWAInstallCard() {
     // Check standalone mode
     const standalone =
       window.matchMedia("(display-mode: standalone)").matches ||
-      (window.navigator as any).standalone === true;
+      Boolean((window.navigator as Navigator & { standalone?: boolean }).standalone);
     setIsStandalone(standalone);
 
     // If deferredPrompt is already available
-    if ((window as any).deferredPrompt) {
+    const win = window as Window & {
+      deferredPrompt?: {
+        prompt: () => Promise<void>;
+        userChoice: Promise<{ outcome: string }>;
+      } | null;
+    };
+    if (win.deferredPrompt) {
       setInstallable(true);
     }
 
@@ -249,14 +256,20 @@ function PWAInstallCard() {
   }, []);
 
   const handleInstallClick = async () => {
-    const promptEvent = (window as any).deferredPrompt;
+    const win = window as Window & {
+      deferredPrompt?: {
+        prompt: () => Promise<void>;
+        userChoice: Promise<{ outcome: string }>;
+      } | null;
+    };
+    const promptEvent = win.deferredPrompt;
     if (!promptEvent) return;
 
-    promptEvent.prompt();
+    await promptEvent.prompt();
     const { outcome } = await promptEvent.userChoice;
     console.log(`[PWA] User choice outcome: ${outcome}`);
 
-    (window as any).deferredPrompt = null;
+    win.deferredPrompt = null;
     setInstallable(false);
   };
 
@@ -362,6 +375,64 @@ function MantraMarquee() {
           </span>
         ))}
       </div>
+    </div>
+  );
+}
+
+function HomeFAQAccordion({
+  faqs,
+}: {
+  faqs: Array<{ q_en: string; q_hi: string; a_en: string; a_hi: string }>;
+}) {
+  const { lang } = useLang();
+  const hi = lang === "hi";
+  const dev = hi ? "font-devanagari" : "";
+  const [openIdx, setOpenIdx] = useState<number | null>(0);
+
+  const toggle = (idx: number) => {
+    setOpenIdx(openIdx === idx ? null : idx);
+  };
+
+  return (
+    <div className="w-full space-y-3.5">
+      {faqs.map((faq, idx) => {
+        const isOpen = openIdx === idx;
+        const question = hi ? faq.q_hi : faq.q_en;
+        const answer = hi ? faq.a_hi : faq.a_en;
+
+        return (
+          <div
+            key={idx}
+            className="border border-gold/25 rounded-2xl bg-card/60 backdrop-blur-sm overflow-hidden hover:border-gold/50 transition-colors duration-300 shadow-sm"
+          >
+            <button
+              onClick={() => toggle(idx)}
+              className="w-full text-left px-5 py-4 flex items-center justify-between gap-4 font-semibold text-foreground hover:text-maroon transition-colors duration-200 cursor-pointer"
+              aria-expanded={isOpen}
+            >
+              <span className={`text-base sm:text-lg leading-snug ${dev}`}>{question}</span>
+              <div
+                className={`transition-transform duration-300 shrink-0 w-8 h-8 rounded-full bg-gold/10 flex items-center justify-center text-maroon ${
+                  isOpen ? "rotate-90 bg-gold/20" : ""
+                }`}
+              >
+                <ChevronRight size={18} />
+              </div>
+            </button>
+            <div
+              className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                isOpen ? "max-h-[360px] opacity-100 border-t border-gold/15" : "max-h-0 opacity-0"
+              }`}
+            >
+              <div
+                className={`px-5 py-4 text-muted-foreground leading-relaxed text-sm sm:text-base ${dev}`}
+              >
+                {answer}
+              </div>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 }
@@ -490,6 +561,10 @@ function HomePage() {
       "https://www.youtube.com/@astroyogiumesh",
       "https://www.youtube.com/@NamamiVindhyavasini",
     ],
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["#dham-quick-facts", "#home-faqs h2", "#home-faqs dt"],
+    },
   };
 
   const breadcrumbSchema = {
@@ -499,7 +574,7 @@ function HomePage() {
       {
         "@type": "ListItem",
         position: 1,
-        name: "Home",
+        name: hi ? "होम" : "Home",
         item: "https://www.namamivindhyavasini.in",
       },
     ],
@@ -508,42 +583,14 @@ function HomePage() {
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: hi
-          ? "माँ विंध्यवासिनी मंदिर कहाँ स्थित है?"
-          : "Where is Maa Vindhyavasini Temple located?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: hi
-            ? "माँ विंध्यवासिनी देवी का प्राचीन मंदिर उत्तर प्रदेश के मिर्जापुर जिले में पवित्र गंगा नदी के तट पर स्थित विंध्याचल धाम में है।"
-            : "Maa Vindhyavasini Temple is located in Vindhyachal Dham, Mirzapur district, Uttar Pradesh, India, on the banks of the sacred river Ganges.",
-        },
+    mainEntity: aboutContent.faqs.slice(0, 10).map((faq) => ({
+      "@type": "Question",
+      name: hi ? faq.q_hi : faq.q_en,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: hi ? faq.a_hi : faq.a_en,
       },
-      {
-        "@type": "Question",
-        name: hi
-          ? "त्रिकोण परिक्रमा का क्या महत्व है?"
-          : "What is the significance of the Trikona Parikrama?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: hi
-            ? "त्रिकोण परिक्रमा विंध्याचल का एक अत्यंत पवित्र परिक्रमा पथ है जिसमें आदि शक्ति के तीन रूपों के दर्शन होते हैं: माँ विंध्यवासिनी (महालक्ष्मी), काली खोह में माँ काली (महाकाली) और अष्टभुजा मंदिर में माँ अष्टभुजा (महासरस्वती)।"
-            : "Trikona Parikrama is a sacred pilgrimage circuit in Vindhyachal that includes visiting three key temples representing the three main forms of Adi Parashakti: Maa Vindhyavasini (Maha Lakshmi), Maa Kali at Kali Khoh (Maha Kali), and Maa Ashtabhuja (Maha Saraswati).",
-        },
-      },
-      {
-        "@type": "Question",
-        name: hi ? "नमामि विंध्यवासिनी संस्थान क्या है?" : "What is Namami Vindhyavasini Sansthan?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: hi
-            ? "नमामि विंध्यवासिनी संस्थान एक धार्मिक एवं आध्यात्मिक ट्रस्ट है जो भक्तों तक माँ विंध्यवासिनी की महिमा पहुँचाने, धार्मिक संसाधन, स्तोत्र और हिंदू कैलेंडर प्रकाशित करने के साथ-साथ मीडिया गैलरी, वीडियो और आध्यात्मिक संदेश प्रदान करने के लिए समर्पित है।"
-            : "Namami Vindhyavasini Sansthan is a spiritual trust dedicated to spreading the divine message of Maa Vindhyavasini, publishing devotional resources, stotram, and the Hindu calendar, while also providing a media gallery, videos and spiritual sandesha.",
-        },
-      },
-    ],
+    })),
   };
 
   const templePlaceSchema = {
@@ -657,7 +704,8 @@ function HomePage() {
         description: hi
           ? "विन्ध्याचल मंदिर से माँ विन्ध्यवासिनी देवी का दिव्य सिंहासन श्रृंगार चित्र।"
           : "Golden throne (Simhasan) alankar of Maa Vindhyavasini in Vindhyachal temple.",
-        contentUrl: "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.webp",
+        contentUrl:
+          "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-simhasan-shringar.webp",
       },
       {
         "@type": "ImageObject",
@@ -690,7 +738,8 @@ function HomePage() {
         description: hi
           ? "विन्ध्याचल मंदिर में दिव्य पुष्पमाला अलौकिक श्रृंगार में सजी माँ विन्ध्यवासिनी।"
           : "Flower garland decoration of Maa Vindhyavasini inside Vindhyachal temple.",
-        contentUrl: "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-garland-shringar.webp",
+        contentUrl:
+          "https://www.namamivindhyavasini.in/images/maa-vindhyavasini-garland-shringar.webp",
       },
       {
         "@type": "ImageObject",
@@ -702,8 +751,8 @@ function HomePage() {
           ? "माँ विन्ध्यवासिनी देवी का दिव्य स्वर्ण मुकुट एवं श्रृंगार दर्शन।"
           : "Divine gold crown and ornament shringar of Maa Vindhyavasini Devi at Vindhyachal temple.",
         contentUrl: "https://www.namamivindhyavasini.in/images/gallery-1.webp",
-      }
-    ]
+      },
+    ],
   };
 
   return (
@@ -777,17 +826,25 @@ function HomePage() {
               >
                 {t("home.hero.desc")}
               </p>
-              <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
+              <div className="flex flex-wrap gap-3.5 justify-center lg:justify-start">
                 <Link
-                  to="/about"
+                  to="/sandesh"
                   className="group relative overflow-hidden inline-flex items-center gap-2 px-7 py-3 rounded-full bg-gradient-sacred text-cream font-medium shadow-gold hover:opacity-95 hover:scale-[1.03] active:scale-95 transition-all duration-300"
                 >
                   <span className="btn-shine-overlay" />
-                  {hi ? "माँ के बारे में" : "About Maa"}{" "}
+                  <Sparkles size={16} className="text-gold" />
+                  {hi ? "दैनिक दर्शन एवं आरती" : "Daily Darshan & Aarti"}{" "}
                   <ArrowRight
                     size={16}
                     className="transform group-hover:translate-x-1 transition-transform"
                   />
+                </Link>
+                <Link
+                  to="/about"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-maroon/30 text-maroon hover:bg-maroon/5 hover:border-maroon active:scale-95 transition-all duration-300 font-medium text-sm"
+                >
+                  <Compass size={16} className="text-gold" />
+                  {hi ? "धाम व परिक्रमा मार्ग" : "Explore Dham & Parikrama"}
                 </Link>
               </div>
             </div>
@@ -1351,7 +1408,9 @@ function HomePage() {
         <ScrollReveal direction="up" duration={850}>
           <div className="text-center max-w-2xl mx-auto mb-10">
             <h2 className={`font-display text-2xl sm:text-3xl text-maroon ${dev}`}>
-              {hi ? "लोकप्रिय तीर्थयात्रा मार्गदर्शिकाएँ" : "Popular Spiritual Shrines & Yatra Guides"}
+              {hi
+                ? "लोकप्रिय तीर्थयात्रा मार्गदर्शिकाएँ"
+                : "Popular Spiritual Shrines & Yatra Guides"}
             </h2>
             <p className={`text-muted-foreground text-sm mt-2 ${dev}`}>
               {hi
@@ -1367,8 +1426,10 @@ function HomePage() {
             {
               title_en: "Maa Vaishno Devi Yatra Guide",
               title_hi: "माँ वैष्णो देवी यात्रा मार्गदर्शिका",
-              desc_en: "Complete guide on online yatra slip registration, helicopter tickets, and Ardhkuwari trek details.",
-              desc_hi: "ऑनलाइन यात्रा पर्ची बुकिंग, हेलीकॉप्टर टिकट और अर्धकुंवारी गुफा मार्ग की पूरी जानकारी।",
+              desc_en:
+                "Complete guide on online yatra slip registration, helicopter tickets, and Ardhkuwari trek details.",
+              desc_hi:
+                "ऑनलाइन यात्रा पर्ची बुकिंग, हेलीकॉप्टर टिकट और अर्धकुंवारी गुफा मार्ग की पूरी जानकारी।",
               slug: "vaishno-devi-guide",
               img: vaishnoDeviImg,
               category: hi ? "शक्तिपीठ" : "Shakti Peeth",
@@ -1376,8 +1437,10 @@ function HomePage() {
             {
               title_en: "Kedarnath Temple Trek & Travel",
               title_hi: "केदारनाथ धाम यात्रा गाइड",
-              desc_en: "Detailed gaurikund to Kedarnath trek guide, biometric registration portal, and weather updates.",
-              desc_hi: "गौरीकुंड से केदारनाथ १६ किमी ट्रेक मार्ग, आवश्यक बायोमेट्रिक रजिस्ट्रेशन और हेलीकॉप्टर बुकिंग।",
+              desc_en:
+                "Detailed gaurikund to Kedarnath trek guide, biometric registration portal, and weather updates.",
+              desc_hi:
+                "गौरीकुंड से केदारनाथ १६ किमी ट्रेक मार्ग, आवश्यक बायोमेट्रिक रजिस्ट्रेशन और हेलीकॉप्टर बुकिंग।",
               slug: "kedarnath-temple-guide",
               img: kedarnathImg,
               category: hi ? "ज्योतिर्लिंग" : "Jyotirlinga",
@@ -1385,8 +1448,10 @@ function HomePage() {
             {
               title_en: "Kashi Vishwanath Corridor & Aarti",
               title_hi: "काशी विश्वनाथ मंदिर और कॉरिडोर",
-              desc_en: "Varanasi temple timings, Mangala Aarti booking passes, and details of the grand Ganga Corridor.",
-              desc_hi: "बाबा विश्वनाथ की दैनिक आरती समय सारणी, मंगला आरती पास बुकिंग और गंगा कॉरिडोर दर्शन नियम।",
+              desc_en:
+                "Varanasi temple timings, Mangala Aarti booking passes, and details of the grand Ganga Corridor.",
+              desc_hi:
+                "बाबा विश्वनाथ की दैनिक आरती समय सारणी, मंगला आरती पास बुकिंग और गंगा कॉरिडोर दर्शन नियम।",
               slug: "kashi-vishwanath-guide",
               img: kashiVishwanathImg,
               category: hi ? "ज्योतिर्लिंग" : "Jyotirlinga",
@@ -1394,8 +1459,10 @@ function HomePage() {
             {
               title_en: "Mahakaleshwar Ujjain Bhasma Aarti",
               title_hi: "महाकालेश्वर उज्जैन भस्म आरती",
-              desc_en: "Dakshinmukhi Jyotirlinga daily darshan rules, Bhasma Aarti online booking and corridor guidelines.",
-              desc_hi: "दक्षिणमुखी ज्योतिर्लिंग दर्शन नियम, प्रसिद्ध भस्म आरती ऑनलाइन बुकिंग और महाकाल लोक गाइड।",
+              desc_en:
+                "Dakshinmukhi Jyotirlinga daily darshan rules, Bhasma Aarti online booking and corridor guidelines.",
+              desc_hi:
+                "दक्षिणमुखी ज्योतिर्लिंग दर्शन नियम, प्रसिद्ध भस्म आरती ऑनलाइन बुकिंग और महाकाल लोक गाइड।",
               slug: "mahakaleshwar-temple-guide",
               img: mahakaleshwarImg,
               category: hi ? "ज्योतिर्लिंग" : "Jyotirlinga",
@@ -1414,16 +1481,22 @@ function HomePage() {
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <span className={`absolute bottom-3 left-4 text-[9px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-black/45 border border-gold/30 text-cream ${dev}`}>
+                  <span
+                    className={`absolute bottom-3 left-4 text-[9px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-black/45 border border-gold/30 text-cream ${dev}`}
+                  >
                     {item.category}
                   </span>
                 </div>
                 <div className="p-5 flex-grow flex flex-col justify-between">
                   <div>
-                    <h3 className={`font-display text-base sm:text-lg text-maroon group-hover:text-saffron transition-colors mb-2 ${dev} line-clamp-1`}>
+                    <h3
+                      className={`font-display text-base sm:text-lg text-maroon group-hover:text-saffron transition-colors mb-2 ${dev} line-clamp-1`}
+                    >
                       {hi ? item.title_hi : item.title_en}
                     </h3>
-                    <p className={`text-muted-foreground text-xs leading-relaxed line-clamp-2 ${dev}`}>
+                    <p
+                      className={`text-muted-foreground text-xs leading-relaxed line-clamp-2 ${dev}`}
+                    >
                       {hi ? item.desc_hi : item.desc_en}
                     </p>
                   </div>
@@ -1435,6 +1508,161 @@ function HomePage() {
             </ScrollReveal>
           ))}
         </div>
+      </section>
+
+      {/* AEO KEY FACTS & DARSHAN SUMMARY SECTION */}
+      <section
+        id="dham-quick-facts"
+        aria-label="Vindhyachal Dham Key Facts"
+        className="container mx-auto px-6 py-12 md:py-16 scroll-mt-24 border-t border-gold/15"
+      >
+        <ScrollReveal direction="up" duration={800}>
+          <div className="bg-gradient-to-br from-card via-card/90 to-card/75 border border-gold/30 rounded-3xl p-6 sm:p-10 shadow-sacred relative overflow-hidden">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-gold/20 pb-6 mb-8">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 text-gold text-xs font-semibold uppercase tracking-wider mb-2">
+                  <Sparkles size={13} />
+                  {hi ? "त्वरित तथ्य एवं दर्शन संक्षेप" : "AEO Direct Reference & Quick Facts"}
+                </div>
+                <h2 className={`font-display text-2xl sm:text-3xl md:text-4xl text-maroon ${dev}`}>
+                  {hi
+                    ? "विन्ध्याचल धाम मुख्य जानकारी"
+                    : "Vindhyachal Dham Key Facts & Darshan Summary"}
+                </h2>
+              </div>
+              <div className="flex items-center gap-3">
+                <Link
+                  to="/about"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-maroon/10 text-maroon text-xs font-medium hover:bg-maroon hover:text-cream transition-all duration-300"
+                >
+                  <Compass size={14} className="text-gold" />
+                  {hi ? "विस्तृत इतिहास पढ़ें" : "Read Full History"}
+                </Link>
+                <Link
+                  to="/sandesh"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-sacred text-cream text-xs font-medium shadow-gold hover:opacity-95 transition-all duration-300"
+                >
+                  <Clock size={14} />
+                  {hi ? "आरती समय सारिणी" : "Aarti Schedule"}
+                </Link>
+              </div>
+            </div>
+
+            <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 text-sm">
+              <div className="p-4 rounded-2xl bg-background/60 border border-gold/15">
+                <dt className="text-xs uppercase tracking-wider text-muted-foreground flex items-center gap-1.5 font-semibold">
+                  <Mountain size={14} className="text-gold" />
+                  {hi ? "अधिष्ठात्री देवी" : "Presiding Deity"}
+                </dt>
+                <dd className={`mt-1.5 font-semibold text-foreground text-base ${dev}`}>
+                  {hi ? "माँ विन्ध्यवासिनी (काजल रानी)" : "Maa Vindhyavasini (Kajal Rani)"}
+                </dd>
+                <dd className="text-xs text-muted-foreground mt-0.5">
+                  {hi ? "जाग्रत सिद्ध शक्तिपीठ • योगमाया" : "Siddh Shakti Peeth • Yoga Maya"}
+                </dd>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-background/60 border border-gold/15">
+                <dt className="text-xs uppercase tracking-wider text-muted-foreground flex items-center gap-1.5 font-semibold">
+                  <Clock size={14} className="text-gold" />
+                  {hi ? "दैनिक दर्शन समय" : "Daily Darshan Hours"}
+                </dt>
+                <dd className={`mt-1.5 font-semibold text-foreground text-base ${dev}`}>
+                  {hi ? "प्रातः 04:00 से रात्रि 11:30" : "04:00 AM – 11:30 PM"}
+                </dd>
+                <dd className="text-xs text-gold font-medium mt-0.5">
+                  {hi ? "सामान्य दर्शन निःशुल्क है" : "General Entry is Free"}
+                </dd>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-background/60 border border-gold/15">
+                <dt className="text-xs uppercase tracking-wider text-muted-foreground flex items-center gap-1.5 font-semibold">
+                  <MapPin size={14} className="text-gold" />
+                  {hi ? "स्थान व पवित्र नदी" : "Location & River"}
+                </dt>
+                <dd className={`mt-1.5 font-semibold text-foreground text-base ${dev}`}>
+                  {hi ? "विन्ध्याचल, मिर्जापुर (उ.प्र.)" : "Vindhyachal, Mirzapur (UP)"}
+                </dd>
+                <dd className="text-xs text-muted-foreground mt-0.5">
+                  {hi ? "पवित्र उत्तरवाहिनी गंगा तट (231307)" : "Banks of Holy Ganga (Pin: 231307)"}
+                </dd>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-background/60 border border-gold/15">
+                <dt className="text-xs uppercase tracking-wider text-muted-foreground flex items-center gap-1.5 font-semibold">
+                  <Compass size={14} className="text-gold" />
+                  {hi ? "त्रिकोण परिक्रमा" : "Trikona Parikrama"}
+                </dt>
+                <dd className={`mt-1.5 font-semibold text-foreground text-base ${dev}`}>
+                  {hi ? "विन्ध्यवासिनी • काली • अष्टभुजा" : "Vindhyavasini • Kali • Ashtabhuja"}
+                </dd>
+                <dd className="text-xs text-muted-foreground mt-0.5">
+                  {hi ? "लगभग 14 किमी तीर्थ परिपथ (रोपवे उपलब्ध)" : "~14 km circuit with ropeway"}
+                </dd>
+              </div>
+            </dl>
+
+            {/* Quick Aarti Timings Row */}
+            <div className="mt-6 p-4 rounded-2xl bg-maroon/5 border border-maroon/15 flex flex-wrap items-center justify-between gap-4 text-xs">
+              <span className="font-semibold text-maroon flex items-center gap-1.5">
+                <Clock size={14} className="text-gold" />
+                {hi ? "चार मुख्य दैनिक आरतियां:" : "Four Primary Daily Aartis:"}
+              </span>
+              <div className="flex flex-wrap items-center gap-3 sm:gap-6 text-foreground/85">
+                <span>
+                  <strong>मंगला आरती:</strong> 04:00 AM – 05:00 AM
+                </span>
+                <span>
+                  <strong>राजभोग आरती:</strong> 12:00 PM – 01:30 PM
+                </span>
+                <span>
+                  <strong>संध्या आरती:</strong> 07:15 PM – 08:30 PM
+                </span>
+                <span>
+                  <strong>बड़ी आरती:</strong> 10:15 PM – 11:30 PM
+                </span>
+              </div>
+            </div>
+          </div>
+        </ScrollReveal>
+      </section>
+
+      {/* HOMEPAGE FAQ SECTION (AEO / FEATURED SNIPPETS) */}
+      <section
+        id="home-faqs"
+        aria-label="Frequently Asked Questions"
+        className="container mx-auto px-6 py-12 md:py-16 scroll-mt-24 border-t border-gold/15"
+      >
+        <ScrollReveal direction="up" duration={800}>
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-8 sm:mb-12">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 text-gold text-xs font-semibold uppercase tracking-wider mb-2">
+                <Sparkles size={13} />
+                {hi ? "भक्तों के सामान्य प्रश्न" : "Pilgrim FAQs"}
+              </div>
+              <h2 className={`font-display text-2xl sm:text-3xl md:text-4xl text-maroon ${dev}`}>
+                {hi ? "अक्सर पूछे जाने वाले प्रश्न (FAQs)" : "Frequently Asked Questions (FAQs)"}
+              </h2>
+              <p className={`mt-2 text-sm sm:text-base text-muted-foreground ${dev}`}>
+                {hi
+                  ? "विन्ध्याचल धाम दर्शन, आरती समय, पहुँचने के मार्ग एवं मंदिर नियमों से संबंधित प्रामाणिक उत्तर।"
+                  : "Authentic answers regarding temple darshan timings, aarti schedules, transit, and pilgrim guidelines."}
+              </p>
+            </div>
+
+            <HomeFAQAccordion faqs={aboutContent.faqs.slice(0, 8)} />
+
+            <div className="mt-8 text-center">
+              <Link
+                to="/about"
+                hash="faqs"
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-gold/40 text-maroon hover:bg-gold/10 text-sm font-medium transition-all duration-300"
+              >
+                {hi ? "सभी २० प्रश्न एवं उत्तर देखें →" : "View All 20 FAQs on Dham Guide →"}
+              </Link>
+            </div>
+          </div>
+        </ScrollReveal>
       </section>
 
       {/* CTA */}

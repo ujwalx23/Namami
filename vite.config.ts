@@ -29,5 +29,25 @@ export default defineConfig(() => ({
   build: {
     outDir: "dist",
     sourcemap: false,
+    chunkSizeWarningLimit: 800,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (
+            id.includes("node_modules/jspdf") ||
+            id.includes("node_modules/html2canvas") ||
+            id.includes("node_modules/jspdf-autotable")
+          ) {
+            return "vendor-pdf";
+          }
+          if (id.includes("node_modules/recharts")) {
+            return "vendor-charts";
+          }
+          if (id.includes("node_modules/@radix-ui")) {
+            return "vendor-radix";
+          }
+        },
+      },
+    },
   },
 }));

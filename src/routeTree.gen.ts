@@ -10,8 +10,10 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VideosRouteImport } from './routes/videos'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SandeshRouteImport } from './routes/sandesh'
 import { Route as ReviewsRouteImport } from './routes/reviews'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as InboxRouteImport } from './routes/inbox'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as EventsRouteImport } from './routes/events'
@@ -33,6 +35,11 @@ const VideosRoute = VideosRouteImport.update({
   path: '/videos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SandeshRoute = SandeshRouteImport.update({
   id: '/sandesh',
   path: '/sandesh',
@@ -41,6 +48,11 @@ const SandeshRoute = SandeshRouteImport.update({
 const ReviewsRoute = ReviewsRouteImport.update({
   id: '/reviews',
   path: '/reviews',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const InboxRoute = InboxRouteImport.update({
@@ -130,8 +142,10 @@ export interface FileRoutesByFullPath {
   '/events': typeof EventsRoute
   '/gallery': typeof GalleryRoute
   '/inbox': typeof InboxRoute
+  '/privacy': typeof PrivacyRoute
   '/reviews': typeof ReviewsRoute
   '/sandesh': typeof SandeshRoute
+  '/terms': typeof TermsRoute
   '/videos': typeof VideosRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -149,8 +163,10 @@ export interface FileRoutesByTo {
   '/events': typeof EventsRoute
   '/gallery': typeof GalleryRoute
   '/inbox': typeof InboxRoute
+  '/privacy': typeof PrivacyRoute
   '/reviews': typeof ReviewsRoute
   '/sandesh': typeof SandeshRoute
+  '/terms': typeof TermsRoute
   '/videos': typeof VideosRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -170,8 +186,10 @@ export interface FileRoutesById {
   '/events': typeof EventsRoute
   '/gallery': typeof GalleryRoute
   '/inbox': typeof InboxRoute
+  '/privacy': typeof PrivacyRoute
   '/reviews': typeof ReviewsRoute
   '/sandesh': typeof SandeshRoute
+  '/terms': typeof TermsRoute
   '/videos': typeof VideosRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -192,8 +210,10 @@ export interface FileRouteTypes {
     | '/events'
     | '/gallery'
     | '/inbox'
+    | '/privacy'
     | '/reviews'
     | '/sandesh'
+    | '/terms'
     | '/videos'
     | '/auth/callback'
     | '/blog/$slug'
@@ -211,8 +231,10 @@ export interface FileRouteTypes {
     | '/events'
     | '/gallery'
     | '/inbox'
+    | '/privacy'
     | '/reviews'
     | '/sandesh'
+    | '/terms'
     | '/videos'
     | '/auth/callback'
     | '/blog/$slug'
@@ -231,8 +253,10 @@ export interface FileRouteTypes {
     | '/events'
     | '/gallery'
     | '/inbox'
+    | '/privacy'
     | '/reviews'
     | '/sandesh'
+    | '/terms'
     | '/videos'
     | '/auth/callback'
     | '/blog/$slug'
@@ -252,8 +276,10 @@ export interface RootRouteChildren {
   EventsRoute: typeof EventsRoute
   GalleryRoute: typeof GalleryRoute
   InboxRoute: typeof InboxRoute
+  PrivacyRoute: typeof PrivacyRoute
   ReviewsRoute: typeof ReviewsRoute
   SandeshRoute: typeof SandeshRoute
+  TermsRoute: typeof TermsRoute
   VideosRoute: typeof VideosRoute
   AuthCallbackRoute: typeof AuthCallbackRoute
   LearnSlugRoute: typeof LearnSlugRoute
@@ -269,6 +295,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VideosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sandesh': {
       id: '/sandesh'
       path: '/sandesh'
@@ -281,6 +314,13 @@ declare module '@tanstack/react-router' {
       path: '/reviews'
       fullPath: '/reviews'
       preLoaderRoute: typeof ReviewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/inbox': {
@@ -414,8 +454,10 @@ const rootRouteChildren: RootRouteChildren = {
   EventsRoute: EventsRoute,
   GalleryRoute: GalleryRoute,
   InboxRoute: InboxRoute,
+  PrivacyRoute: PrivacyRoute,
   ReviewsRoute: ReviewsRoute,
   SandeshRoute: SandeshRoute,
+  TermsRoute: TermsRoute,
   VideosRoute: VideosRoute,
   AuthCallbackRoute: AuthCallbackRoute,
   LearnSlugRoute: LearnSlugRoute,
