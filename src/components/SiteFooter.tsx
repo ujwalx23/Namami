@@ -188,9 +188,6 @@ export function SiteFooter() {
               {t("nav.terms")}
             </Link>
           </div>
-          <span className="text-[10px] text-cream/35 tracking-wider uppercase">
-            {lang === "hi" ? "॥ जय माता दी ॥" : "॥ JAI MATA DI ॥"}
-          </span>
         </div>
       </div>
     </footer>
